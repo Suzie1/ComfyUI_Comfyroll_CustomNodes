@@ -15,7 +15,7 @@ They can be used in any ComfyUI workflow.
 
 # List of Custom Nodes
 
-Logic
+__Logic__
 * CR Image Input Switch
 * CR Image Input Switch (4 way)
 * CR Latent Input Switch
@@ -24,14 +24,14 @@ Logic
 * CR Model Input Switch
 * CR ControlNet Input Switch
 
-IO
+__IO__
 * CR Load LoRA
 * CR Image Size
 
-Maths
+__Maths__
 * CR Integer Multiple
    
-Number
+__Number__
 * CR Seed to Int
 
 # Credits
