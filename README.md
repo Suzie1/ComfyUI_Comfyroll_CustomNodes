@@ -36,7 +36,7 @@ Number
 
 # Credits
 
-ComfyUI/[ComfyUI](https://github.com/WASasquatch/was-node-suite-comfyui) - A powerful and modular stable diffusion GUI.
+comfyanonymous/[ComfyUI](https://github.com/comfyanonymous/ComfyUI) - A powerful and modular stable diffusion GUI.
 
-WASasquatch/[was-node-suite-comfyui](https://github.com/comfyanonymous/ComfyUI) - A powerful custom node extensions of ComfyUI.
+WASasquatch/[was-node-suite-comfyui](https://github.com/WASasquatch/was-node-suite-comfyui) - A powerful custom node extensions of ComfyUI.
 
