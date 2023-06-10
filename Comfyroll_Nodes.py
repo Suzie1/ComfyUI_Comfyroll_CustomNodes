@@ -11,8 +11,7 @@ import json
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
-
-class ComfyRoll_InputImages_Old:
+class ComfyRoll_InputImages:
     def __init__(self):
         pass
 
@@ -28,18 +27,19 @@ class ComfyRoll_InputImages_Old:
 
     RETURN_TYPES = ("IMAGE",)
     OUTPUT_NODE = True
-    FUNCTION = "InputImages_Old"
+    FUNCTION = "InputImages"
 
     CATEGORY = "Comfyroll/Logic"
 
-    def InputImages_Old(self, Input, image1, image2):
+    def InputImages(self, Input, image1, image2):
         if Input == 1:
             return (image1, )
         else:
             return (image2, )
 
 
-class ComfyRoll_InputImages_Old_4way:
+
+class ComfyRoll_InputImages_4way:
     def __init__(self):
         pass
 
@@ -59,11 +59,11 @@ class ComfyRoll_InputImages_Old_4way:
 
     RETURN_TYPES = ("IMAGE",)
     OUTPUT_NODE = True
-    FUNCTION = "InputImages_Old_4"
+    FUNCTION = "InputImages_4"
 
     CATEGORY = "Comfyroll/Logic"
 
-    def InputImages_Old_4(self, Input, image1, image2=None, image3=None, image4=None):
+    def InputImages_4(self, Input, image1, image2=None, image3=None, image4=None):
         if Input == 1:
             return (image1, )
         elif Input == 2:
@@ -75,7 +75,7 @@ class ComfyRoll_InputImages_Old_4way:
 
 
 
-class ComfyRoll_InputLatents_Old:
+class ComfyRoll_InputLatents:
     def __init__(self):
         pass
 
@@ -91,11 +91,11 @@ class ComfyRoll_InputLatents_Old:
 
     RETURN_TYPES = ("LATENT",)
     OUTPUT_NODE = True
-    FUNCTION = "InputLatents_Old"
+    FUNCTION = "InputLatents"
 
     CATEGORY = "Comfyroll/Logic"
 
-    def InputLatents_Old(self, Input, latent1, latent2):
+    def InputLatents(self, Input, latent1, latent2):
         if Input == 1:
             return (latent1, )
         else:
@@ -103,8 +103,7 @@ class ComfyRoll_InputLatents_Old:
 
 
 
-
-class ComfyRoll_InputConditioning_Old:
+class ComfyRoll_InputConditioning:
     def __init__(self):
         pass
 
@@ -120,11 +119,11 @@ class ComfyRoll_InputConditioning_Old:
 
     RETURN_TYPES = ("CONDITIONING",)
     OUTPUT_NODE = True
-    FUNCTION = "InputConditioning_Old"
+    FUNCTION = "InputConditioning"
 
     CATEGORY = "Comfyroll/Logic"
 
-    def InputConditioning_Old(self, Input, conditioning1, conditioning2):
+    def InputConditioning(self, Input, conditioning1, conditioning2):
         if Input == 1:
             return (conditioning1, )
         else:
@@ -132,7 +131,7 @@ class ComfyRoll_InputConditioning_Old:
 
 
 
-class ComfyRoll_InputClip_Old:
+class ComfyRoll_InputClip:
     def __init__(self):
         pass
 
@@ -148,19 +147,19 @@ class ComfyRoll_InputClip_Old:
 
     RETURN_TYPES = ("CLIP",)
     OUTPUT_NODE = True
-    FUNCTION = "InputClip_Old"
+    FUNCTION = "InputClip"
 
     CATEGORY = "Comfyroll/Logic"
 
-    def InputClip_Old(self, Input, clip1, clip2):
+    def InputClip(self, Input, clip1, clip2):
         if Input == 1:
             return (clip1, )
         else:
             return (clip2, )
 
-#("MODEL",)
 
-class ComfyRoll_InputModel_Old:
+
+class ComfyRoll_InputModel:
     def __init__(self):
         pass
 
@@ -176,18 +175,19 @@ class ComfyRoll_InputModel_Old:
 
     RETURN_TYPES = ("MODEL",)
     OUTPUT_NODE = True
-    FUNCTION = "InputModel_Old"
+    FUNCTION = "InputModel"
 
     CATEGORY = "Comfyroll/Logic"
 
-    def InputModel_Old(self, Input, model1, model2):
+    def InputModel(self, Input, model1, model2):
         if Input == 1:
             return (model1, )
         else:
             return (model2, )
 
 
-class ComfyRoll_InputControlNet_Old:
+
+class ComfyRoll_InputControlNet:
     def __init__(self):
         pass
 
@@ -203,20 +203,18 @@ class ComfyRoll_InputControlNet_Old:
         
     RETURN_TYPES = ("CONTROL_NET",)
     OUTPUT_NODE = True
-    FUNCTION = "InputControlNet_Old"
+    FUNCTION = "InputControlNet"
 
     CATEGORY = "Comfyroll/Logic"
 
-    def InputControlNet_Old(self, Input, control_net1, control_net2):
+    def InputControlNet(self, Input, control_net1, control_net2):
         if Input == 1:
             return (control_net1, )
         else:
             return (control_net2, )
-
-
-
-#1 = Do Nothing
-#2 = Load Lora
+            
+            
+            
 class ComfyRoll_LoraLoader:
     def __init__(self):
         pass
@@ -291,7 +289,7 @@ class ComfyRoll_ImageOutput:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "Comfyroll/IO"
+    CATEGORY = "Comfyroll/Test"
 
     def save_images(self, images, filename_prefix="ComfyUI", output_type = "Preview", prompt=None, extra_pnginfo=None):
         def map_filename(filename):
@@ -454,7 +452,7 @@ class ComfyRoll_SeedToInt:
     RETURN_TYPES = ("INT",)
     FUNCTION = "seed_to_int"
 
-    CATEGORY = "Comfyroll/Test"
+    CATEGORY = "Comfyroll/Number"
 
     def seed_to_int(self, seed):
         return (seed.get('seed'),)
@@ -462,13 +460,13 @@ class ComfyRoll_SeedToInt:
 
 
 NODE_CLASS_MAPPINGS = {
-    "CR Image Input Switch": ComfyRoll_InputImages_Old,
-    "CR Image Input Switch (4 way)":ComfyRoll_InputImages_Old_4way,
-    "CR Latent Input Switch": ComfyRoll_InputLatents_Old,
-    "CR Conditioning Input Switch": ComfyRoll_InputConditioning_Old,
-    "CR Clip Input Switch": ComfyRoll_InputClip_Old,
-    "CR Model Input Switch": ComfyRoll_InputModel_Old,
-    "CR ControlNet Input Switch": ComfyRoll_InputControlNet_Old,
+    "CR Image Input Switch": ComfyRoll_InputImages,
+    "CR Image Input Switch (4 way)":ComfyRoll_InputImages_4way,
+    "CR Latent Input Switch": ComfyRoll_InputLatents,
+    "CR Conditioning Input Switch": ComfyRoll_InputConditioning,
+    "CR Clip Input Switch": ComfyRoll_InputClip,
+    "CR Model Input Switch": ComfyRoll_InputModel,
+    "CR ControlNet Input Switch": ComfyRoll_InputControlNet,
     "CR Load LoRA": ComfyRoll_LoraLoader,
     "CR Image Size":ComfyRoll_ImageSize_Float,
     "CR Image Output": ComfyRoll_ImageOutput,
