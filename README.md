@@ -12,3 +12,24 @@ They can be used in any ComfyUI workflow.
 1. cd custom_nodes
 2. git clone https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes.git
 3. Restart ComfyUI
+
+# List of Custom Node
+
+Logic
+* CR Image Input Switch
+* CR Image Input Switch (4 way)
+* CR Latent Input Switch
+* CR Conditioning Input Switch
+* CR Clip Input Switch
+* CR Model Input Switch
+* CR ControlNet Input Switch
+
+IO
+* CR Load LoRA
+* CR Image Size
+
+Maths
+* CR Integer Multiple
+   
+Number
+* CR Seed to Int
