@@ -34,6 +34,8 @@ __Maths__
 __Number__
 * CR Seed to Int
 
+![Custom Nodes](custom_nodes_image1.png)
+
 # Credits
 
 comfyanonymous/[ComfyUI](https://github.com/comfyanonymous/ComfyUI) - A powerful and modular stable diffusion GUI.
