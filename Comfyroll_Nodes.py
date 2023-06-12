@@ -1,3 +1,8 @@
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+# Comfyroll Custom Nodes by RockOfFire                      https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             #
+# for ComfyUI                                               https://github.com/comfyanonymous/ComfyUI                                               #
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
 import torch
 import numpy as np
 from PIL import Image, ImageEnhance
@@ -474,3 +479,10 @@ NODE_CLASS_MAPPINGS = {
     "CR Image Size Test": ComfyRoll_AspectRatio,
     "CR Seed to Int": ComfyRoll_SeedToInt
 }
+
+print("\033[34mComfyroll Custom Nodes: \033[92mLoaded\033[0m")
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+# Credits                                                                                                                                           #
+# WASasquatch                             https://github.com/WASasquatch/was-node-suite-comfyui                                                     #
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
