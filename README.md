@@ -17,7 +17,7 @@ If you have a previous version of the Comfyroll nodes from the Comfyroll Worflow
 3. Restart ComfyUI
 
 You can also install the nodes using the following methods:
-* install using [ComfyUI Manager](https://github.com/comfyanonymous/ComfyUI)
+* install using [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager)
 * download from [CivitAI](https://civitai.com/models/87609/comfyroll-custom-nodes-for-comfyui)
 
 # List of Custom Nodes
