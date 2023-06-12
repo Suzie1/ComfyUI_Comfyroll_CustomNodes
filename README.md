@@ -34,7 +34,7 @@ __Maths__
 __Number__
 * CR Seed to Int
 
-![Custom Nodes](custom_nodes_image1.png)
+![Custom Nodes](/images/custom_nodes_image1.png)
 
 # Credits
 
