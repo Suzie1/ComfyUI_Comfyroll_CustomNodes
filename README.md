@@ -1,17 +1,24 @@
 # Comfyroll Custom Nodes
 
-These nodes were made for use in the Comfyroll Template Workflows.
+These nodes were originally made for use in the Comfyroll Template Workflows.
 
-https://civitai.com/models/59806/comfyroll-template-workflows
-https://civitai.com/models/85619/comfyroll-pro-template
+[ComfyUI Template Workflows](https://civitai.com/models/59806/comfyroll-template-workflows)
 
-They can be used in any ComfyUI workflow.
+[Comfyroll Pro Template](https://civitai.com/models/85619/comfyroll-pro-template)
+
+The nodes can be used in any ComfyUI workflow.
 
 # Installation
+
+If you have a previous version of the Comfyroll nodes from the Comfyroll Worflow Templates download, please delete this before installing these nodes.
 
 1. cd custom_nodes
 2. git clone https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes.git
 3. Restart ComfyUI
+
+You can also install the nodes using the following methods:
+* install using [ComfyUI Manager](https://github.com/comfyanonymous/ComfyUI)
+* download from [CivitAI](https://civitai.com/models/87609/comfyroll-custom-nodes-for-comfyui)
 
 # List of Custom Nodes
 
