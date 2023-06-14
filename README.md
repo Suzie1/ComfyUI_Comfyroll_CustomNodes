@@ -33,7 +33,13 @@ __Logic__
 
 __IO__
 * CR Load LoRA
+
+__Image__
 * CR Image Size
+* CR Aspect Ratio
+
+__Conditioning__
+* CR Apply ControlNet
 
 __Maths__
 * CR Integer Multiple
