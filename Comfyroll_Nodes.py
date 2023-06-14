@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire                      https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             #
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             #
 # for ComfyUI                                               https://github.com/comfyanonymous/ComfyUI                                               #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -15,6 +15,8 @@ import folder_paths
 import json
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_InputImages:
     def __init__(self):
@@ -42,7 +44,7 @@ class ComfyRoll_InputImages:
         else:
             return (image2, )
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_InputImages_4way:
     def __init__(self):
@@ -78,7 +80,7 @@ class ComfyRoll_InputImages_4way:
         else:
             return (image4, )
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_InputLatents:
     def __init__(self):
@@ -106,7 +108,7 @@ class ComfyRoll_InputLatents:
         else:
             return (latent2, )
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_InputConditioning:
     def __init__(self):
@@ -134,7 +136,7 @@ class ComfyRoll_InputConditioning:
         else:
             return (conditioning2, )
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_InputClip:
     def __init__(self):
@@ -162,7 +164,7 @@ class ComfyRoll_InputClip:
         else:
             return (clip2, )
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_InputModel:
     def __init__(self):
@@ -190,7 +192,7 @@ class ComfyRoll_InputModel:
         else:
             return (model2, )
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#        
 
 class ComfyRoll_InputControlNet:
     def __init__(self):
@@ -218,12 +220,12 @@ class ComfyRoll_InputControlNet:
         else:
             return (control_net2, )
             
-            
+#---------------------------------------------------------------------------------------------------------------------------------------------------#           
             
 class ComfyRoll_LoraLoader:
     def __init__(self):
         pass
-
+        
     @classmethod
     def INPUT_TYPES(s):
         return {"required": { "model": ("MODEL",),
@@ -231,7 +233,7 @@ class ComfyRoll_LoraLoader:
                               "switch": ([
                                 "On",
                                 "Off"],),
-                              "lora_name": (folder_paths.get_filename_list("loras"), ),
+                              "lora_name": (["None"] + folder_paths.get_filename_list("loras"), ),
                               "strength_model": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               "strength_clip": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               }}
@@ -241,13 +243,47 @@ class ComfyRoll_LoraLoader:
     CATEGORY = "Comfyroll/IO"
 
     def load_lora(self, model, clip, switch, lora_name, strength_model, strength_clip):
-        if switch == "Off":
+        if switch == "Off" or  lora_name == "None":
             return (model, clip)
         else:
             lora_path = folder_paths.get_full_path("loras", lora_name)
             model_lora, clip_lora = comfy.sd.load_lora_for_models(model, clip, lora_path, strength_model, strength_clip)
             return (model_lora, clip_lora)
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#           
+
+class ComfyRoll_ApplyControlNet:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"conditioning": ("CONDITIONING", ),
+                             "control_net": ("CONTROL_NET", ),
+                             "image": ("IMAGE", ),
+                             "switch": ([
+                                "On",
+                                "Off"],),
+                             "strength": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 10.0, "step": 0.01})
+                             }}
+    RETURN_TYPES = ("CONDITIONING",)
+    FUNCTION = "apply_controlnet"
+
+    CATEGORY = "Comfyroll/Conditioning"
+
+    def apply_controlnet(self, conditioning, control_net, image, switch, strength):
+        if strength == 0 or switch == "Off":
+            return (conditioning, )
+
+        c = []
+        control_hint = image.movedim(-1,1)
+        for t in conditioning:
+            n = [t[0], t[1].copy()]
+            c_net = control_net.copy().set_cond_hint(control_hint, strength)
+            if 'control' in t[1]:
+                c_net.set_previous_controlnet(t[1]['control'])
+            n[1]['control'] = c_net
+            c.append(n)
+        return (c, )
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_ImageSize_Float:
     def __init__(self):
@@ -266,14 +302,12 @@ class ComfyRoll_ImageSize_Float:
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "ImageSize_Float"
 
-    CATEGORY = "Comfyroll/IO"
+    CATEGORY = "Comfyroll/Image"
 
     def ImageSize_Float(self, width, height, upscale_factor):
         return(width, height, upscale_factor)
 
-
-
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_ImageOutput:
     def __init__(self):
@@ -359,6 +393,7 @@ class ComfyRoll_ImageOutput:
 
         return { "ui": { "images": results } }
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class CR_Int_Multiple_Of:
     def __init__(self):
@@ -384,6 +419,7 @@ class CR_Int_Multiple_Of:
         integer = integer * multiple
         return (int(integer), )
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_AspectRatio:
     def __init__(self):
@@ -397,16 +433,17 @@ class ComfyRoll_AspectRatio:
                 "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
                 "aspect_ratio": (["custom", "1:1 square 512x512", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000})
+                "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT")
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT")
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "Aspect_Ratio"
 
-    CATEGORY = "Comfyroll/Test"
+    CATEGORY = "Comfyroll/Image"
 
-    def Aspect_Ratio(self, width, height, aspect_ratio, upscale_factor, swap_dimensions):
+    def Aspect_Ratio(self, width, height, aspect_ratio, upscale_factor1, upscale_factor2, swap_dimensions):
         if swap_dimensions == "Off":
             if aspect_ratio == "2:3 portrait 512x768":
                 width, height = 512, 768
@@ -422,7 +459,7 @@ class ComfyRoll_AspectRatio:
                 width, height = 682, 512
             elif aspect_ratio == "2:1 cinema 1024x512":
                 width, height = 1024, 512
-            return(width, height, upscale_factor)
+            return(width, height, upscale_factor1, upscale_factor2)
         elif swap_dimensions == "On":
             if aspect_ratio == "2:3 portrait 512x768":
                 width, height = 512, 768
@@ -438,9 +475,9 @@ class ComfyRoll_AspectRatio:
                 width, height = 682, 512
             elif aspect_ratio == "2:1 cinema 1024x512":
                 width, height = 1024, 512
-            return(height, width, upscale_factor)
+            return(height, width, upscale_factor1, upscale_factor2)
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class ComfyRoll_SeedToInt:
     def __init__(self):
@@ -462,22 +499,23 @@ class ComfyRoll_SeedToInt:
     def seed_to_int(self, seed):
         return (seed.get('seed'),)
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": ComfyRoll_InputImages,
-    "CR Image Input Switch (4 way)":ComfyRoll_InputImages_4way,
+    "CR Image Input Switch (4 way)": ComfyRoll_InputImages_4way,
     "CR Latent Input Switch": ComfyRoll_InputLatents,
     "CR Conditioning Input Switch": ComfyRoll_InputConditioning,
     "CR Clip Input Switch": ComfyRoll_InputClip,
     "CR Model Input Switch": ComfyRoll_InputModel,
     "CR ControlNet Input Switch": ComfyRoll_InputControlNet,
     "CR Load LoRA": ComfyRoll_LoraLoader,
-    "CR Image Size":ComfyRoll_ImageSize_Float,
+    "CR Apply ControlNet": ComfyRoll_ApplyControlNet,
+    "CR Image Size": ComfyRoll_ImageSize_Float,
     "CR Image Output": ComfyRoll_ImageOutput,
     "CR Integer Multiple": CR_Int_Multiple_Of,
-    "CR Image Size Test": ComfyRoll_AspectRatio,
-    "CR Seed to Int": ComfyRoll_SeedToInt
+    "CR Aspect Ratio": ComfyRoll_AspectRatio,
+    "CR Seed to Int": ComfyRoll_SeedToInt,
 }
 
 print("\033[34mComfyroll Custom Nodes: \033[92mLoaded\033[0m")
