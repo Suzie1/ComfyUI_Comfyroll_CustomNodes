@@ -47,6 +47,15 @@ __Maths__
 __Number__
 * CR Seed to Int
 
+Module
+* CR Module Pipe Loader
+* CR Module Input
+* CR Module Output
+* CR Image Pipe In
+* CR Image Pipe Edit
+* CR Image Pipe Out
+* CR Pipe Switch
+
 ![Custom Nodes](/images/custom_nodes_image1.png)
 
 # Credits
@@ -54,5 +63,6 @@ __Number__
 comfyanonymous/[ComfyUI](https://github.com/comfyanonymous/ComfyUI) - A powerful and modular stable diffusion GUI.
 
 WASasquatch/[was-node-suite-comfyui](https://github.com/WASasquatch/was-node-suite-comfyui) - A powerful custom node extensions of ComfyUI.
+
 TinyTerra/[ComfyUI_tinyterraNodes](https://github.com/TinyTerra/ComfyUI_tinyterraNodes)
 
