@@ -254,6 +254,18 @@ class input_switch_pipe:
             return (pipe2, )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+'''
+NODE_CLASS_MAPPINGS_2 = {
+    "CR Module Pipe Loader": module_pipe_loader,
+    "CR Module Input": module_input,
+    "CR Module Output": module_output,
+    "CR Image Pipe In": image_pipe_in,
+    "CR Image Pipe Edit": image_pipe_edit,
+    "CR Image Pipe Out": image_pipe_out,
+    "CR Pipe Switch": input_switch_pipe,
+}
+'''
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 # Credits   
 # TinyTerra                               https://github.com/TinyTerra/ComfyUI_tinyterraNodes                                                       #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
