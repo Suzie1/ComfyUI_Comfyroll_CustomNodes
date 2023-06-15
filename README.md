@@ -47,7 +47,7 @@ __Maths__
 __Number__
 * CR Seed to Int
 
-Module
+__Module__
 * CR Module Pipe Loader
 * CR Module Input
 * CR Module Output
