@@ -500,7 +500,7 @@ class ComfyRoll_SeedToInt:
         return (seed.get('seed'),)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-
+'''
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": ComfyRoll_InputImages,
     "CR Image Input Switch (4 way)": ComfyRoll_InputImages_4way,
@@ -517,8 +517,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Aspect Ratio": ComfyRoll_AspectRatio,
     "CR Seed to Int": ComfyRoll_SeedToInt,
 }
-
-print("\033[34mComfyroll Custom Nodes: \033[92mLoaded\033[0m")
+'''
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # Credits                                                                                                                                           #
