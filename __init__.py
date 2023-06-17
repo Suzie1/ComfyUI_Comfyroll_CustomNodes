@@ -23,6 +23,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Integer Multiple": CR_Int_Multiple_Of,
     "CR Aspect Ratio": ComfyRoll_AspectRatio,
     "CR Seed to Int": ComfyRoll_SeedToInt,
+    "CR Color Tint": Comfyroll_Color_Tint,
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
