@@ -532,8 +532,8 @@ class Comfyroll_Color_Tint:
         sepia_weights = torch.tensor([0.2989, 0.5870, 0.1140]).view(1, 1, 1, 3).to(image.device)
       
         mode_filters = {
-			"white": torch.tensor([1.0, 1.0, 1.0]),
-			"black": torch.tensor([0, 0, 0]),
+	    "white": torch.tensor([1.0, 1.0, 1.0]),
+	    "black": torch.tensor([0, 0, 0]),
             "sepia": torch.tensor([1.0, 0.8, 0.6]),
             "red": torch.tensor([1.0, 0.6, 0.6]),
             "green": torch.tensor([0.6, 1.0, 0.6]),
@@ -556,12 +556,6 @@ class Comfyroll_Color_Tint:
             "olive": torch.tensor([0.6, 0.7, 0.4]),
         }
 
-        #random_key = random.choice(list(mode_filters.keys()))
-        #random_item = mode_filters[random_key]
-        
-        #if mode == "random":
-        #    scale_filter = random_item.view(1, 1, 1, 3).to(image.device)
-        #else:
         scale_filter = mode_filters[mode].view(1, 1, 1, 3).to(image.device)
 
         grayscale = torch.sum(image * sepia_weights, dim=-1, keepdim=True)
