@@ -58,6 +58,10 @@ __Module__
 
 ![Custom Nodes](/images/custom_nodes_image1.png)
 
+![Custom Nodes](/images/custom_nodes_image2.jpg)
+
+![Custom Nodes](/images/custom_nodes_image3.jpg)
+
 # Credits
 
 comfyanonymous/[ComfyUI](https://github.com/comfyanonymous/ComfyUI) - A powerful and modular stable diffusion GUI.
