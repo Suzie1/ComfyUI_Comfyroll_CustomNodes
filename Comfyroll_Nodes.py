@@ -9,12 +9,15 @@ from PIL import Image, ImageEnhance
 from PIL.PngImagePlugin import PngInfo
 import os
 import sys
-import comfy.sd
-import comfy.model_management
-import folder_paths
-import json
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
+
+import comfy.sd
+import comfy.utils
+import comfy.model_management
+
+import folder_paths
+import json
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -224,8 +227,8 @@ class ComfyRoll_InputControlNet:
             
 class ComfyRoll_LoraLoader:
     def __init__(self):
-        pass
-        
+        self.loaded_lora = None
+
     @classmethod
     def INPUT_TYPES(s):
         return {"required": { "model": ("MODEL",),
@@ -233,7 +236,7 @@ class ComfyRoll_LoraLoader:
                               "switch": ([
                                 "On",
                                 "Off"],),
-                              "lora_name": (["None"] + folder_paths.get_filename_list("loras"), ),
+                              "lora_name": (folder_paths.get_filename_list("loras"), ),
                               "strength_model": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               "strength_clip": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               }}
@@ -243,12 +246,26 @@ class ComfyRoll_LoraLoader:
     CATEGORY = "Comfyroll/IO"
 
     def load_lora(self, model, clip, switch, lora_name, strength_model, strength_clip):
+        if strength_model == 0 and strength_clip == 0:
+            return (model, clip)
+
         if switch == "Off" or  lora_name == "None":
             return (model, clip)
-        else:
-            lora_path = folder_paths.get_full_path("loras", lora_name)
-            model_lora, clip_lora = comfy.sd.load_lora_for_models(model, clip, lora_path, strength_model, strength_clip)
-            return (model_lora, clip_lora)
+
+        lora_path = folder_paths.get_full_path("loras", lora_name)
+        lora = None
+        if self.loaded_lora is not None:
+            if self.loaded_lora[0] == lora_path:
+                lora = self.loaded_lora[1]
+            else:
+                del self.loaded_lora
+
+        if lora is None:
+            lora = comfy.utils.load_torch_file(lora_path, safe_load=True)
+            self.loaded_lora = (lora_path, lora)
+
+        model_lora, clip_lora = comfy.sd.load_lora_for_models(model, clip, lora, strength_model, strength_clip)
+        return (model_lora, clip_lora)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#           
 
@@ -434,16 +451,17 @@ class ComfyRoll_AspectRatio:
                 "aspect_ratio": (["custom", "1:1 square 512x512", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
-                "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000})
+                "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT")
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT")
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "Aspect_Ratio"
 
     CATEGORY = "Comfyroll/Image"
 
-    def Aspect_Ratio(self, width, height, aspect_ratio, upscale_factor1, upscale_factor2, swap_dimensions):
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
         if swap_dimensions == "Off":
             if aspect_ratio == "2:3 portrait 512x768":
                 width, height = 512, 768
@@ -459,7 +477,7 @@ class ComfyRoll_AspectRatio:
                 width, height = 682, 512
             elif aspect_ratio == "2:1 cinema 1024x512":
                 width, height = 1024, 512
-            return(width, height, upscale_factor1, upscale_factor2)
+            return(width, height, upscale_factor1, upscale_factor2, batch_size)
         elif swap_dimensions == "On":
             if aspect_ratio == "2:3 portrait 512x768":
                 width, height = 512, 768
@@ -475,7 +493,7 @@ class ComfyRoll_AspectRatio:
                 width, height = 682, 512
             elif aspect_ratio == "2:1 cinema 1024x512":
                 width, height = 1024, 512
-            return(height, width, upscale_factor1, upscale_factor2)
+            return(height, width, upscale_factor1, upscale_factor2, batch_size)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
