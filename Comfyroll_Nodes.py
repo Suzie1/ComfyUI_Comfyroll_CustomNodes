@@ -231,12 +231,14 @@ class ComfyRoll_LoraLoader:
 
     @classmethod
     def INPUT_TYPES(s):
+        file_list = folder_paths.get_filename_list("loras")
+        file_list.insert(0, "None")
         return {"required": { "model": ("MODEL",),
                               "clip": ("CLIP", ),
                               "switch": ([
                                 "On",
                                 "Off"],),
-                              "lora_name": (folder_paths.get_filename_list("loras"), ),
+                              "lora_name": (file_list, ),
                               "strength_model": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               "strength_clip": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               }}
@@ -448,7 +450,7 @@ class ComfyRoll_AspectRatio:
             "required": {
                 "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
                 "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "1:1 square 512x512", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
+                "aspect_ratio": (["custom", "1:1 square 512x512", "1:1 square 1024x1024", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
                 "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
@@ -469,6 +471,8 @@ class ComfyRoll_AspectRatio:
                 width, height = 768, 512
             elif aspect_ratio == "1:1 square 512x512":
                 width, height = 512, 512
+            elif aspect_ratio == "1:1 square 1024x1024":
+                width, height = 1024, 1024
             elif aspect_ratio == "16:9 cinema 910x512":
                 width, height = 910, 512
             elif aspect_ratio == "3:4 portrait 512x682":
@@ -485,6 +489,8 @@ class ComfyRoll_AspectRatio:
                 width, height = 768, 512
             elif aspect_ratio == "1:1 square 512x512":
                 width, height = 512, 512
+            elif aspect_ratio == "1:1 square 1024x1024":
+                width, height = 1024, 1024                
             elif aspect_ratio == "16:9 cinema 910x512":
                 width,height = 910, 512
             elif aspect_ratio == "3:4 portrait 512x682":
