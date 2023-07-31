@@ -22,6 +22,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Image Output": ComfyRoll_ImageOutput,
     "CR Integer Multiple": CR_Int_Multiple_Of,
     "CR Aspect Ratio": ComfyRoll_AspectRatio,
+    "CR Aspect Ratio SDXL": ComfyRoll_AspectRatio_SDXL,
     "CR Seed to Int": ComfyRoll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
 }
