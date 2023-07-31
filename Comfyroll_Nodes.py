@@ -642,6 +642,53 @@ class Comfyroll_Color_Tint:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+class ComfyRoll_prompt_mixer:
+    def __init__(self):
+        pass
+
+    @classmethod        
+    def INPUT_TYPES(s):
+        return {
+            "required":{
+            },
+            "optional":{
+                "prompt_positive": ("STRING", {"multiline": True, "default": "BASE_POSITIVE"}),
+                "prompt_negative": ("STRING", {"multiline": True, "default": "BASE_NEGATIVE"}),
+                "style_positive": ("STRING", {"multiline": True, "default": "REFINER_POSTIVE"}),
+                "style_negative": ("STRING", {"multiline": True, "default": "REFINER_NEGATIVE"}),
+                "preset": (["preset1", "preset2"],),
+            },
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("pos_g", "pos_l", "pos_r", "neg_g", "neg_l", "neg_r", )
+    FUNCTION = "mixer"
+
+    CATEGORY = "Comfyroll/SDXL"
+
+    def mixer(self, prompt_positive, prompt_negative, style_positive, style_negative, preset):
+        if preset == "preset1":
+            pos_g = prompt_positive
+            pos_l = prompt_positive
+            pos_r = prompt_positive
+            neg_g = prompt_negative
+            neg_l = prompt_negative
+            neg_r = prompt_negative
+        elif preset == "preset2":
+            pos_g = prompt_positive
+            pos_l = style_positive
+            pos_r = prompt_positive
+            neg_g = prompt_negative
+            neg_l = style_negative
+            neg_r = prompt_negative
+        return (pos_g, pos_l, pos_r, neg_g, neg_l, neg_r, )
+
+
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
 '''
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": ComfyRoll_InputImages,
@@ -660,6 +707,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Aspect Ratio SDXL": ComfyRoll_AspectRatio_SDXL,
     "CR Seed to Int": ComfyRoll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
+    "CR Prompt Mixer": ComfyRoll_prompt_mixer,
 }
 '''
 
