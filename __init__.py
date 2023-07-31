@@ -25,7 +25,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Aspect Ratio SDXL": ComfyRoll_AspectRatio_SDXL,
     "CR Seed to Int": ComfyRoll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
-    "CR Prompt Mixer": ComfyRoll_prompt_mixer,
+    "CR SDXL Prompt Mixer": ComfyRoll_prompt_mixer,
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
