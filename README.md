@@ -50,7 +50,7 @@ __Conditioning__
 
 __SDXL__
 * CR Aspect Ratio SDXL
-* CR Prompt Mixer
+* CR SDXL Prompt Mixer
 
 __Module__
 * CR Module Pipe Loader
