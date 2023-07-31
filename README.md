@@ -33,22 +33,24 @@ __Logic__
 
 __IO__
 * CR Load LoRA
+  
+__Maths__
+* CR Integer Multiple
+
+__Number__
+* CR Seed to Int
 
 __Image__
 * CR Image Size
 * CR Aspect Ratio
+* CR Color Tint
 
 __Conditioning__
 * CR Apply ControlNet
 
 __SDXL__
 * CR Aspect Ratio SDXL
-
-__Maths__
-* CR Integer Multiple
-   
-__Number__
-* CR Seed to Int
+* CR Prompt Mixer
 
 __Module__
 * CR Module Pipe Loader
