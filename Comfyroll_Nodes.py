@@ -488,9 +488,9 @@ class ComfyRoll_AspectRatio:
             elif aspect_ratio == "3:2 landscape 768x512":
                 width, height = 768, 512
             elif aspect_ratio == "1:1 square 512x512":
-                width, height = 512, 512
+                width, height = 512, 512              
             elif aspect_ratio == "1:1 square 1024x1024":
-                width, height = 1024, 1024                
+                width, height = 1024, 1024
             elif aspect_ratio == "16:9 cinema 910x512":
                 width,height = 910, 512
             elif aspect_ratio == "3:4 portrait 512x682":
@@ -500,6 +500,58 @@ class ComfyRoll_AspectRatio:
             elif aspect_ratio == "2:1 cinema 1024x512":
                 width, height = 1024, 512
             return(height, width, upscale_factor1, upscale_factor2, batch_size)
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class ComfyRoll_AspectRatio_SDXL:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640 x 1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
+                "swap_dimensions": (["Off", "On"],),
+                "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
+            }
+        }
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT")
+    #RETURN_NAMES = ("Width", "Height")
+    FUNCTION = "Aspect_Ratio"
+
+    CATEGORY = "Comfyroll/SDXL"
+
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
+        if aspect_ratio == "square 1024x1024":
+            width, height = 1024, 1024
+        elif aspect_ratio == "portrait 896x1152":
+            width, height = 896, 1152
+        elif aspect_ratio == "portrait 832x1216":
+            width, height = 822, 1216
+        elif aspect_ratio == "portrait 768x1344":
+            width, height = 768, 1344
+        elif aspect_ratio == "portrait 640 x 1536":
+            width, height = 640, 1536
+        elif aspect_ratio == "landscape 1152x896":
+            width, height = 1152, 896
+        elif aspect_ratio == "landscape 1152x896":
+            width, height = 682, 512
+        elif aspect_ratio == "landscape 1216x832":
+            width, height = 1216, 832
+        elif aspect_ratio == "landscape 1344x768":
+            width, height = 1152, 896
+        elif aspect_ratio == "landscape 1536x640":
+            width, height = 1536, 640
+            
+        if swap_dimensions == "On":
+            return(height, width, upscale_factor1, upscale_factor2, batch_size,)
+        else:
+            return(width, height, upscale_factor1, upscale_factor2, batch_size,)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -556,8 +608,8 @@ class Comfyroll_Color_Tint:
         sepia_weights = torch.tensor([0.2989, 0.5870, 0.1140]).view(1, 1, 1, 3).to(image.device)
       
         mode_filters = {
-	    "white": torch.tensor([1.0, 1.0, 1.0]),
-	    "black": torch.tensor([0, 0, 0]),
+            "white": torch.tensor([1.0, 1.0, 1.0]),
+            "black": torch.tensor([0, 0, 0]),
             "sepia": torch.tensor([1.0, 0.8, 0.6]),
             "red": torch.tensor([1.0, 0.6, 0.6]),
             "green": torch.tensor([0.6, 1.0, 0.6]),
@@ -605,6 +657,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Image Output": ComfyRoll_ImageOutput,
     "CR Integer Multiple": CR_Int_Multiple_Of,
     "CR Aspect Ratio": ComfyRoll_AspectRatio,
+    "CR Aspect Ratio SDXL": ComfyRoll_AspectRatio_SDXL,
     "CR Seed to Int": ComfyRoll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
 }
