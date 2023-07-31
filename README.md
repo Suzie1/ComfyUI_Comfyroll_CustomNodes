@@ -41,6 +41,9 @@ __Image__
 __Conditioning__
 * CR Apply ControlNet
 
+__SDXL__
+* CR Aspect Ratio SDXL
+
 __Maths__
 * CR Integer Multiple
    
