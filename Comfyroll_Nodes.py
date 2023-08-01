@@ -511,8 +511,8 @@ class ComfyRoll_AspectRatio_SDXL:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
                 "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640 x 1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
