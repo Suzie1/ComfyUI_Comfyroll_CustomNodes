@@ -26,8 +26,10 @@ NODE_CLASS_MAPPINGS = {
     "CR Seed to Int": ComfyRoll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
     "CR SDXL Prompt Mixer": ComfyRoll_prompt_mixer,
+    "CR SDXL Style Text": Comfyroll_SDXLStyleText,
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
 
 print("\033[34mComfyroll Custom Nodes: \033[92mLoaded\033[0m")
+
