@@ -656,7 +656,7 @@ class ComfyRoll_prompt_mixer:
                 "prompt_negative": ("STRING", {"multiline": True, "default": "BASE_NEGATIVE"}),
                 "style_positive": ("STRING", {"multiline": True, "default": "REFINER_POSTIVE"}),
                 "style_negative": ("STRING", {"multiline": True, "default": "REFINER_NEGATIVE"}),
-                "preset": (["preset1", "preset2"],),
+                "preset": (["preset1", "preset2", "preset3", "preset4"],),
             },
         }
 
@@ -681,10 +681,45 @@ class ComfyRoll_prompt_mixer:
             neg_g = prompt_negative
             neg_l = style_negative
             neg_r = prompt_negative
+        elif preset == "preset3":
+            pos_g = style_positive
+            pos_l = prompt_positive
+            pos_r = style_positive
+            neg_g = style_negative
+            neg_l = prompt_negative
+            neg_r = style_negative
+        elif preset == "preset4":
+            pos_g = prompt_positive + style_positive
+            pos_l = prompt_positive + style_positive
+            pos_r = prompt_positive + style_positive
+            neg_g = prompt_negative + style_negative
+            neg_l = prompt_negative + style_negative
+            neg_r = prompt_negative + style_negative
         return (pos_g, pos_l, pos_r, neg_g, neg_l, neg_r, )
 
 
 
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+class Comfyroll_SDXLStyleText:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                    "positive_style": ("STRING", {"default": "POS_STYLE", "multiline": True}),
+                    "negative_style": ("STRING", {"default": "NEG_STYLE", "multiline": True}),
+                    },
+                }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("positive_prompt_text_l", "negative_prompt_text_l" )
+    FUNCTION = "get_value"
+
+    CATEGORY = "Comfyroll/SDXL"
+
+    def get_value(self, positive_style, negative_style):
+        return (positive_style, negative_style,)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -707,12 +742,13 @@ NODE_CLASS_MAPPINGS = {
     "CR Aspect Ratio SDXL": ComfyRoll_AspectRatio_SDXL,
     "CR Seed to Int": ComfyRoll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
-    "CR Prompt Mixer": ComfyRoll_prompt_mixer,
+    "CR SDXL Prompt Mixer": ComfyRoll_prompt_mixer,
+    "CR SDXL Style Text": Comfyroll_SDXLStyleText,
 }
 '''
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # Credits                                                                                                                                           #
 # WASasquatch                             https://github.com/WASasquatch/was-node-suite-comfyui                                                     #
-# hnmr293				  https://github.com/hnmr293/ComfyUI-nodes-hnmr      		                                            #
+# hnmr293				                  https://github.com/hnmr293/ComfyUI-nodes-hnmr      		                                                #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
