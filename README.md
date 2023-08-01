@@ -65,7 +65,7 @@ __Module__
 
 ![Custom Nodes](/images/custom_nodes_image2.jpg)
 
-![Custom Nodes](/images/custom_nodes_image3.jpg)
+![Custom Nodes](/images/custom_nodes_image3.JPG)
 
 # Credits
 
