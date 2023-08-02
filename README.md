@@ -51,6 +51,7 @@ __Conditioning__
 __SDXL__
 * CR Aspect Ratio SDXL
 * CR SDXL Prompt Mixer
+* CR SDXL Style Text
 
 __Module__
 * CR Module Pipe Loader
@@ -66,6 +67,8 @@ __Module__
 ![Custom Nodes](/images/custom_nodes_image2.jpg)
 
 ![Custom Nodes](/images/custom_nodes_image3.JPG)
+
+![Custom Nodes](/images/custom_nodes_image4.JPG)
 
 # Credits
 
