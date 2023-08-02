@@ -52,6 +52,7 @@ __SDXL__
 * CR Aspect Ratio SDXL
 * CR SDXL Prompt Mixer
 * CR SDXL Style Text
+* CR SDXL Base Prompt Encoder
 
 __Module__
 * CR Module Pipe Loader
