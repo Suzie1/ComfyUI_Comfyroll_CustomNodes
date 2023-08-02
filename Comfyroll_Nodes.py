@@ -18,6 +18,7 @@ import comfy.model_management
 
 import folder_paths
 import json
+from nodes import MAX_RESOLUTION
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -656,7 +657,7 @@ class ComfyRoll_prompt_mixer:
                 "prompt_negative": ("STRING", {"multiline": True, "default": "BASE_NEGATIVE"}),
                 "style_positive": ("STRING", {"multiline": True, "default": "REFINER_POSTIVE"}),
                 "style_negative": ("STRING", {"multiline": True, "default": "REFINER_NEGATIVE"}),
-                "preset": (["preset1", "preset2", "preset3", "preset4"],),
+                "preset": (["preset 1", "preset 2", "preset 3", "preset 4", "preset 5"],),
             },
         }
 
@@ -667,34 +668,41 @@ class ComfyRoll_prompt_mixer:
     CATEGORY = "Comfyroll/SDXL"
 
     def mixer(self, prompt_positive, prompt_negative, style_positive, style_negative, preset):
-        if preset == "preset1":
+        if preset == "preset 1":
             pos_g = prompt_positive
             pos_l = prompt_positive
             pos_r = prompt_positive
             neg_g = prompt_negative
             neg_l = prompt_negative
             neg_r = prompt_negative
-        elif preset == "preset2":
+        elif preset == "preset 2":
             pos_g = prompt_positive
             pos_l = style_positive
             pos_r = prompt_positive
             neg_g = prompt_negative
             neg_l = style_negative
             neg_r = prompt_negative
-        elif preset == "preset3":
+        elif preset == "preset 3":
             pos_g = style_positive
             pos_l = prompt_positive
             pos_r = style_positive
             neg_g = style_negative
             neg_l = prompt_negative
             neg_r = style_negative
-        elif preset == "preset4":
+        elif preset == "preset 4":
             pos_g = prompt_positive + style_positive
             pos_l = prompt_positive + style_positive
             pos_r = prompt_positive + style_positive
             neg_g = prompt_negative + style_negative
             neg_l = prompt_negative + style_negative
             neg_r = prompt_negative + style_negative
+        elif preset == "preset 5":
+            pos_g = prompt_positive
+            pos_l = prompt_positive
+            pos_r = style_positive
+            neg_g = prompt_negative
+            neg_l = prompt_negative
+            neg_r = style_negative
         return (pos_g, pos_l, pos_r, neg_g, neg_l, neg_r, )
 
 
@@ -723,6 +731,103 @@ class Comfyroll_SDXLStyleText:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_SDXLBasePromptEncoder:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                    "base_clip": ("CLIP", ),
+                    "pos_g": ("STRING", {"multiline": True, "default": "POS_G"}),
+                    "pos_l": ("STRING", {"multiline": True, "default": "POS_L"}),
+                    "neg_g": ("STRING", {"multiline": True, "default": "NEG_G"}),
+                    "neg_l": ("STRING", {"multiline": True, "default": "NEG_L"}),
+                    "preset": (["preset A", "preset B", "preset C"],), 
+                    "base_width": ("INT", {"default": 4096.0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
+                    "base_height": ("INT", {"default": 4096.0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
+                    "crop_w": ("INT", {"default": 0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
+                    "crop_h": ("INT", {"default": 0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
+                    "target_width": ("INT", {"default": 4096.0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
+                    "target_height": ("INT", {"default": 4096.0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
+                    },
+                }
+
+    RETURN_TYPES = ("CONDITIONING", "CONDITIONING", )
+    RETURN_NAMES = ("base_positive", "base_negative", )
+    FUNCTION = "encode"
+
+    CATEGORY = "Comfyroll/SDXL"
+
+    def encode(self, base_clip, pos_g, pos_l, neg_g, neg_l, base_width, base_height, crop_w, crop_h, target_width, target_height, preset,):
+        empty = base_clip.tokenize("")
+
+        # positive prompt
+        tokens1 = base_clip.tokenize(pos_g)
+        tokens1["l"] = base_clip.tokenize(pos_l)["l"]
+
+        if len(tokens1["l"]) != len(tokens1["g"]):
+            while len(tokens1["l"]) < len(tokens1["g"]):
+                tokens1["l"] += empty["l"]
+            while len(tokens1["l"]) > len(tokens1["g"]):
+                tokens1["g"] += empty["g"]
+
+        cond1, pooled1 = base_clip.encode_from_tokens(tokens1, return_pooled=True)
+        res1 = [[cond1, {"pooled_output": pooled1, "width": base_width, "height": base_height, "crop_w": crop_w, "crop_h": crop_h, "target_width": target_width, "target_height": target_height}]]
+
+        # negative prompt
+        tokens2 = base_clip.tokenize(neg_g)
+        tokens2["l"] = base_clip.tokenize(neg_l)["l"]
+
+        if len(tokens2["l"]) != len(tokens2["g"]):
+            while len(tokens2["l"]) < len(tokens2["g"]):
+                tokens2["l"] += empty["l"]
+            while len(tokens2["l"]) > len(tokens2["g"]):
+                tokens2["g"] += empty["g"]
+
+        cond2, pooled2 = base_clip.encode_from_tokens(tokens2, return_pooled=True)
+        res2 = [[cond2, {"pooled_output": pooled2, "width": base_width, "height": base_height, "crop_w": crop_w, "crop_h": crop_h, "target_width": target_width, "target_height": target_height}]]
+
+        # positive style
+        tokens2 = base_clip.tokenize(pos_l)
+        tokens2["l"] = base_clip.tokenize(neg_l)["l"]
+
+        if len(tokens2["l"]) != len(tokens2["g"]):
+            while len(tokens2["l"]) < len(tokens2["g"]):
+                tokens2["l"] += empty["l"]
+            while len(tokens2["l"]) > len(tokens2["g"]):
+                tokens2["g"] += empty["g"]
+
+        cond2, pooled2 = base_clip.encode_from_tokens(tokens2, return_pooled=True)
+        res3 = [[cond2, {"pooled_output": pooled2, "width": base_width, "height": base_height, "crop_w": crop_w, "crop_h": crop_h, "target_width": target_width, "target_height": target_height}]]
+
+        # negative style
+        tokens2 = base_clip.tokenize(neg_l)
+        tokens2["l"] = base_clip.tokenize(neg_l)["l"]
+
+        if len(tokens2["l"]) != len(tokens2["g"]):
+            while len(tokens2["l"]) < len(tokens2["g"]):
+                tokens2["l"] += empty["l"]
+            while len(tokens2["l"]) > len(tokens2["g"]):
+                tokens2["g"] += empty["g"]
+
+        cond2, pooled2 = base_clip.encode_from_tokens(tokens2, return_pooled=True)
+        res4 = [[cond2, {"pooled_output": pooled2, "width": base_width, "height": base_height, "crop_w": crop_w, "crop_h": crop_h, "target_width": target_width, "target_height": target_height}]]
+
+        if preset == "preset A":
+            base_positive = res1
+            base_negative = res2
+        elif preset == "preset B":
+            base_positive = res3
+            base_negative = res4
+        elif preset == "preset C":
+            base_positive = res1 + res3
+            base_negative = res2 + res4
+            
+        return (base_positive, base_negative, )
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
 
 '''
 NODE_CLASS_MAPPINGS = {
@@ -744,6 +849,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Color Tint": Comfyroll_Color_Tint,
     "CR SDXL Prompt Mixer": ComfyRoll_prompt_mixer,
     "CR SDXL Style Text": Comfyroll_SDXLStyleText,
+    "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
 }
 '''
 
@@ -751,4 +857,5 @@ NODE_CLASS_MAPPINGS = {
 # Credits                                                                                                                                           #
 # WASasquatch                             https://github.com/WASasquatch/was-node-suite-comfyui                                                     #
 # hnmr293				                  https://github.com/hnmr293/ComfyUI-nodes-hnmr      		                                                #
+# SeargeDP                                https://github.com/SeargeDP/SeargeSDXL
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
