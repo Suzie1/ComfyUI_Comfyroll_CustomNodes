@@ -31,6 +31,10 @@ __Logic__
 * CR Model Input Switch
 * CR ControlNet Input Switch
 
+__Process__
+* CR Img2Img Process Switch
+* CR Hires Fix Process Switch
+
 __IO__
 * CR Load LoRA
   
@@ -62,6 +66,7 @@ __Module__
 * CR Image Pipe Edit
 * CR Image Pipe Out
 * CR Pipe Switch
+
 
 ![Custom Nodes](/images/custom_nodes_image1.png)
 
