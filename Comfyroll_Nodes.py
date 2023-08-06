@@ -111,6 +111,8 @@ class ComfyRoll_InputLatents:
             return (latent1, )
         else:
             return (latent2, )
+            
+
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -223,8 +225,88 @@ class ComfyRoll_InputControlNet:
             return (control_net1, )
         else:
             return (control_net2, )
-            
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class ComfyRoll_InputLatentsText:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "Input": (["txt2img", "img2img"],),
+                "txt2img": ("LATENT",),
+                "img2img": ("LATENT",)
+            }
+        }
+
+    RETURN_TYPES = ("LATENT",)
+    OUTPUT_NODE = True
+    FUNCTION = "InputLatentsText"
+
+    CATEGORY = "Comfyroll/Process"
+
+    def InputLatentsText(self, Input, txt2img, img2img):
+        if Input == "txt2img":
+            return (txt2img, )
+        else:
+            return (img2img, )            
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class ComfyRoll_HiResFixSwitch:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "Input": (["latent_upscale", "image_upscale"],),
+                "latent_upscale": ("LATENT",),
+                "image_upscale": ("LATENT",)
+            }
+        }
+
+    RETURN_TYPES = ("LATENT",)
+    OUTPUT_NODE = True
+    FUNCTION = "InputHiResText"
+
+    CATEGORY = "Comfyroll/Process"
+
+    def InputHiResText(self, Input, latent_upscale, image_upscale):
+        if Input == "latent_upscale":
+            return (latent_upscale, )
+        else:
+            return (image_upscale, )  
+
 #---------------------------------------------------------------------------------------------------------------------------------------------------#           
+            
+class Comfyroll_Comfyroll_Switch_Test:
+    def __init__(self):
+        pass
+        
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "switch": (["on","off"],),
+            }
+        }
+        
+    RETURN_TYPES = ("COMBO",)
+    FUNCTION = "switch"
+
+    CATEGORY = "Comfyroll/Test" 
+            
+    def switch(self, switch):  
+        combo = ttk.Combobox(switch)
+        return (combo, )
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#                       
             
 class ComfyRoll_LoraLoader:
     def __init__(self):
@@ -823,15 +905,16 @@ class Comfyroll_SDXLBasePromptEncoder:
             
         return (base_positive, base_negative, )
 
+
+
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-
 
 '''
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": ComfyRoll_InputImages,
     "CR Image Input Switch (4 way)": ComfyRoll_InputImages_4way,
     "CR Latent Input Switch": ComfyRoll_InputLatents,
+    "CR Process Switch": ComfyRoll_InputLatentsText,
     "CR Conditioning Input Switch": ComfyRoll_InputConditioning,
     "CR Clip Input Switch": ComfyRoll_InputClip,
     "CR Model Input Switch": ComfyRoll_InputModel,
@@ -848,6 +931,8 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Prompt Mixer": ComfyRoll_prompt_mixer,
     "CR SDXL Style Text": Comfyroll_SDXLStyleText,
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
+    "CR Switch": Comfyroll_Comfyroll_Switch_Test,
+    "CR Hires Fix Process Switch": ComfyRoll_HiResFixSwitch,
 }
 '''
 
