@@ -28,6 +28,9 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Prompt Mixer": ComfyRoll_prompt_mixer,
     "CR SDXL Style Text": Comfyroll_SDXLStyleText,
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
+    "CR Img2Img Process Switch": ComfyRoll_InputLatentsText,
+    "CR Hires Fix Process Switch": ComfyRoll_HiResFixSwitch,
+    "CR Switch": Comfyroll_Comfyroll_Switch_Test
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
