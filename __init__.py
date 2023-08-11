@@ -40,6 +40,7 @@ NODE_CLASS_MAPPINGS = {
     #"CR KSampler (Iterative)":Comfyroll_Iterative_KSampler,
     #"CR Load Image Sequence":Comfyroll_LoadImageSequence,
     #"CR Switch": Comfyroll_Comfyroll_Switch_Test,
+    #"CR Halftone Image":Comfyroll_ConvertImageToHalftone,
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
