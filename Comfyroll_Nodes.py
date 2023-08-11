@@ -9,6 +9,8 @@ from PIL import Image, ImageEnhance
 from PIL.PngImagePlugin import PngInfo
 import os
 import sys
+import io
+import matplotlib.pyplot as plt
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
@@ -19,6 +21,18 @@ import comfy.model_management
 import folder_paths
 import json
 from nodes import MAX_RESOLUTION
+from halftone import halftone
+import typing as tg
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+def tensor2pil(image):
+    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
+
+def pil2tensor(image):
+    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
+
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -282,29 +296,6 @@ class ComfyRoll_HiResFixSwitch:
         else:
             return (image_upscale, )  
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------#           
-            
-class Comfyroll_Comfyroll_Switch_Test:
-    def __init__(self):
-        pass
-        
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "switch": (["on","off"],),
-            }
-        }
-        
-    RETURN_TYPES = ("COMBO",)
-    FUNCTION = "switch"
-
-    CATEGORY = "Comfyroll/Test" 
-            
-    def switch(self, switch):  
-        combo = ttk.Combobox(switch)
-        return (combo, )
-
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#                       
             
@@ -430,7 +421,7 @@ class ComfyRoll_ImageOutput:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "Comfyroll/Test"
+    CATEGORY = "Comfyroll/Legacy"
 
     def save_images(self, images, filename_prefix="ComfyUI", output_type = "Preview", prompt=None, extra_pnginfo=None):
         def map_filename(filename):
@@ -909,6 +900,268 @@ class Comfyroll_SDXLBasePromptEncoder:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+
+class Comfyroll_Halftone_Grid:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "dot_style": (["Accent","afmhot","autumn","binary","Blues","bone","BrBG","brg",
+                            "BuGn","BuPu","bwr","cividis","CMRmap","cool","coolwarm","copper","cubehelix","Dark2","flag",
+                            "gist_earth","gist_gray","gist_heat","gist_rainbow","gist_stern","gist_yarg","GnBu","gnuplot","gnuplot2","gray","Greens",
+                            "Greys","hot","hsv","inferno","jet","magma","nipy_spectral","ocean","Oranges","OrRd",
+                            "Paired","Pastel1","Pastel2","pink","PiYG","plasma","PRGn","prism","PuBu","PuBuGn",
+                            "PuOr","PuRd","Purples","rainbow","RdBu","RdGy","RdPu","RdYlBu","RdYlGn","Reds","seismic",
+                            "Set1","Set2","Set3","Spectral","spring","summer","tab10","tab20","tab20b","tab20c","terrain",
+                            "turbo","twilight","twilight_shifted","viridis","winter","Wistia","YlGn","YlGnBu","YlOrBr","YlOrRd"],),
+                    "reverse_dot_style": (["No", "Yes"],),
+                    "dot_frequency": ("INT", {"default": 50, "min": 1, "max":200, "step": 1}),
+                    "background_color": (["custom", "white", "black", "red", "green", "blue", "cyan", "magenta", "yellow", "purple", "orange", "lime", "navy", "teal", "maroon", "lavender", "olive"],),
+                    "background_R": ("INT", {"default": 255, "min": 0, "max": 255, "step": 1}),
+                    "background_G": ("INT", {"default": 255, "min": 0, "max": 255, "step": 1}),
+                    "background_B": ("INT", {"default": 255, "min": 0, "max": 255, "step": 1}),
+                    "x_pos": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": .01}),
+                    "y_pos": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": .01}),                    
+                    },
+                }
+
+    RETURN_TYPES = ("IMAGE", )
+    FUNCTION = "halftone"
+
+    CATEGORY = "Comfyroll/Image"
+
+    def halftone(self, width, height, dot_style, reverse_dot_style, dot_frequency, background_color, background_R, background_G, background_B, x_pos, y_pos):
+        if background_color == "custom":
+            bgc = (background_R/255, background_G/255, background_B/255)
+        else:
+            bgc = background_color
+            
+        reverse = ""
+        
+        if reverse_dot_style == "Yes":
+            reverse = "_r"
+        
+        #img = Image.new(mode = 'RGB', size = (300, 200), color = (red, green, blue))
+        fig, ax = plt.subplots(figsize=(width/100,height/100))
+        #fig, ax = plt.subplots(figsize=(width/20,height/20))
+        
+    
+        dotsx = np.linspace(0, 1, dot_frequency)
+        dotsy = np.linspace(0, 1, dot_frequency)
+    
+        X, Y = np.meshgrid(dotsx, dotsy)
+    
+        dist = np.sqrt((X - x_pos)**2 + (Y - y_pos)**2)
+    
+        fig.patch.set_facecolor(bgc)
+        ax.scatter(X, Y, c=dist, cmap=dot_style+reverse)
+            
+        plt.axis('off')
+        plt.tight_layout(pad=0, w_pad=0, h_pad=0)
+        plt.autoscale(tight=True)
+        plt.show()
+        
+        img_buf = io.BytesIO()
+        plt.savefig(img_buf, format='png')
+        img = Image.open(img_buf)
+        
+        return(pil2tensor(img),)
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_ConvertImageToHalftone:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "file_path": ("STRING", {"default": "", "multiline":False}),
+                "dot_size": ("INT", {"default":70, "min":10, "max": 100}),
+                #"width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                },
+            }
+
+    RETURN_TYPES = ("IMAGE",)
+    FUNCTION = "convert_to_halftone"
+
+    CATEGORY = "Comfyroll/Test"
+
+    def convert_to_halftone(self, file_path, dot_size):
+        path = file_path
+        apd = "_ht"
+        ht_path = path[:-4] + apd + path[-4:]
+
+        h = halftone.Halftone(path)
+        
+        htest = h.make(
+        angles=[15, 75, 0, 45],
+        antialias=True,
+        percentage=dot_size,
+        filename_addition="_ht",
+        sample=2,
+        save_channels=False,
+        scale=2,
+        style="color"
+        )
+
+        htimg = Image.open(ht_path)
+        
+        return(pil2tensor(htimg),)
+        
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+class Comfyroll_LatentBatchSize:
+
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "latent": ("LATENT", ),
+                "batch_size": ("INT", {
+                    "default": 2,
+                    "min": 1,
+                    "max": 16,
+                    "step": 1,
+                }),
+            },
+        }
+
+    RETURN_TYPES = ("LATENT", )
+
+    FUNCTION = "batchsize"
+
+    OUTPUT_NODE = False
+
+    CATEGORY = "Comfyroll/Latent"
+
+    def batchsize(self, latent: tg.Sequence[tg.Mapping[tg.Text, torch.Tensor]], batch_size: int):
+        samples = latent['samples']
+        shape = samples.shape
+
+        sample_list = [samples] + [
+            torch.clone(samples) for _ in range(batch_size - 1)
+        ]
+
+        return ({
+            'samples': torch.cat(sample_list),
+        }, )
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_ApplyLoRA_Stack:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {"model": ("MODEL",),
+                            "clip": ("CLIP", ),
+                            "lora_stack": ("LORA_STACK", ),
+                            }
+        }
+
+    RETURN_TYPES = ("MODEL", "CLIP",)
+    RETURN_NAMES = ("MODEL", "CLIP", )
+    FUNCTION = "apply_lora_stack"
+    CATEGORY = "Comfyroll/IO"
+
+    def apply_lora_stack(self, model, clip, lora_stack=None,):
+
+        # Initialise the list
+        lora_params = list()
+ 
+        # Extend lora_params with lora-stack items 
+        if lora_stack:
+            lora_params.extend(lora_stack)
+        else:
+            return (model, clip,)
+
+        #print(lora_params)
+
+        # Initialise the model and clip
+        model_lora = model
+        clip_lora = clip
+
+        # Loop through the list
+        for tup in lora_params:
+            lora_name, strength_model, strength_clip = tup
+            print(lora_name, strength_model, strength_clip)
+            
+            lora_path = folder_paths.get_full_path("loras", lora_name)
+            lora = comfy.utils.load_torch_file(lora_path, safe_load=True)
+            
+            model_lora, clip_lora = comfy.sd.load_lora_for_models(model_lora, clip_lora, lora, strength_model, strength_clip)  
+
+        return (model_lora, clip_lora,)
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+# Based on Efficiency Nodes
+class Comfyroll_LoRA_Stack:
+
+    loras = ["None"] + folder_paths.get_filename_list("loras")
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {
+                    "switch_1": ([
+                        "Off",
+                        "On"],),
+                    "lora_name_1": (cls.loras,),
+                    "model_weight_1": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                    "clip_weight_1": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                    "switch_2": ([
+                        "Off",
+                        "On"],),
+                    "lora_name_2": (cls.loras,),
+                    "model_weight_2": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                    "clip_weight_2": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                    "switch_3": ([
+                        "Off",
+                        "On"],),
+                    "lora_name_3": (cls.loras,),
+                    "model_weight_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                    "clip_weight_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                },
+                "optional": {"lora_stack": ("LORA_STACK",)
+                },
+        }
+
+    RETURN_TYPES = ("LORA_STACK",)
+    RETURN_NAMES = ("LORA_STACK",)
+    FUNCTION = "lora_stacker"
+    CATEGORY = "Comfyroll/IO"
+
+    def lora_stacker(self, lora_name_1, model_weight_1, clip_weight_1, switch_1, lora_name_2, model_weight_2, clip_weight_2, switch_2, lora_name_3, model_weight_3, clip_weight_3, switch_3, lora_stack=None):
+
+        # Initialise the list
+        lora_list=list()
+        
+        if lora_stack is not None:
+            lora_list.extend([l for l in lora_stack if l[0] != "None"])
+        
+        if lora_name_1 != "None" and  switch_1 == "On":
+            lora_list.extend([(lora_name_1, model_weight_1, clip_weight_1)]),
+
+        if lora_name_2 != "None" and  switch_2 == "On":
+            lora_list.extend([(lora_name_2, model_weight_2, clip_weight_2)]),
+
+        if lora_name_3 != "None" and  switch_3 == "On":
+            lora_list.extend([(lora_name_3, model_weight_3, clip_weight_3)]),
+           
+        return (lora_list,)
+
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
 '''
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": ComfyRoll_InputImages,
@@ -931,8 +1184,12 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Prompt Mixer": ComfyRoll_prompt_mixer,
     "CR SDXL Style Text": Comfyroll_SDXLStyleText,
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
-    "CR Switch": Comfyroll_Comfyroll_Switch_Test,
     "CR Hires Fix Process Switch": ComfyRoll_HiResFixSwitch,
+    "CR Halftones" :Comfyroll_Halftone_Grid,
+    "CR Halftone Image":Comfyroll_ConvertImageToHalftone,
+    "CR LoRA Stack":Comfyroll_LoRA_Stack,
+    "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,
+    "CR Latent Batch Size":Comfyroll_LatentBatchSize
 }
 '''
 
@@ -940,5 +1197,8 @@ NODE_CLASS_MAPPINGS = {
 # Credits                                                                                                                                           #
 # WASasquatch                             https://github.com/WASasquatch/was-node-suite-comfyui                                                     #
 # hnmr293				                  https://github.com/hnmr293/ComfyUI-nodes-hnmr      		                                                #
-# SeargeDP                                https://github.com/SeargeDP/SeargeSDXL
+# SeargeDP                                https://github.com/SeargeDP/SeargeSDXL                                                                    #
+# LucianoCirino                           https://github.com/LucianoCirino/efficiency-nodes-comfyui                                                 #
+# credit SLAPaper                         https://github.com/SLAPaper/ComfyUI-Image-Selector                                                        #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+
