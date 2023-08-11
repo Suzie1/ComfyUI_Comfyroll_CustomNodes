@@ -970,48 +970,6 @@ class Comfyroll_Halftone_Grid:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class Comfyroll_ConvertImageToHalftone:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "file_path": ("STRING", {"default": "", "multiline":False}),
-                "dot_size": ("INT", {"default":70, "min":10, "max": 100}),
-                #"width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                },
-            }
-
-    RETURN_TYPES = ("IMAGE",)
-    FUNCTION = "convert_to_halftone"
-
-    CATEGORY = "Comfyroll/Test"
-
-    def convert_to_halftone(self, file_path, dot_size):
-        path = file_path
-        apd = "_ht"
-        ht_path = path[:-4] + apd + path[-4:]
-
-        h = halftone.Halftone(path)
-        
-        htest = h.make(
-        angles=[15, 75, 0, 45],
-        antialias=True,
-        percentage=dot_size,
-        filename_addition="_ht",
-        sample=2,
-        save_channels=False,
-        scale=2,
-        style="color"
-        )
-
-        htimg = Image.open(ht_path)
-        
-        return(pil2tensor(htimg),)
-        
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 class Comfyroll_LatentBatchSize:
@@ -1186,7 +1144,6 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
     "CR Hires Fix Process Switch": ComfyRoll_HiResFixSwitch,
     "CR Halftones" :Comfyroll_Halftone_Grid,
-    "CR Halftone Image":Comfyroll_ConvertImageToHalftone,
     "CR LoRA Stack":Comfyroll_LoRA_Stack,
     "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,
     "CR Latent Batch Size":Comfyroll_LatentBatchSize
