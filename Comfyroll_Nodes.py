@@ -1156,6 +1156,6 @@ NODE_CLASS_MAPPINGS = {
 # hnmr293				                  https://github.com/hnmr293/ComfyUI-nodes-hnmr      		                                                #
 # SeargeDP                                https://github.com/SeargeDP/SeargeSDXL                                                                    #
 # LucianoCirino                           https://github.com/LucianoCirino/efficiency-nodes-comfyui                                                 #
-# credit SLAPaper                         https://github.com/SLAPaper/ComfyUI-Image-Selector                                                        #
+# SLAPaper                                https://github.com/SLAPaper/ComfyUI-Image-Selector                                                        #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
