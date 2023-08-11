@@ -1,5 +1,6 @@
 from .Comfyroll_Nodes import *
 from .Comfyroll_Pipe_Nodes import *
+#from .Comfyroll_Test_Nodes import *
 
 NODE_CLASS_MAPPINGS = {
     "CR Module Pipe Loader": module_pipe_loader,
@@ -30,7 +31,15 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
     "CR Img2Img Process Switch": ComfyRoll_InputLatentsText,
     "CR Hires Fix Process Switch": ComfyRoll_HiResFixSwitch,
-    "CR Switch": Comfyroll_Comfyroll_Switch_Test
+    "CR Halftone Grid" : Comfyroll_Halftone_Grid,
+    "CR Latent Batch Size": Comfyroll_LatentBatchSize,
+    "CR LoRA Stack":Comfyroll_LoRA_Stack,
+    "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,
+    ### test nodes
+    #"CR Latent Upscale (Iterative)":Comfyroll_LatentUpscaleIterative,
+    #"CR KSampler (Iterative)":Comfyroll_Iterative_KSampler,
+    #"CR Load Image Sequence":Comfyroll_LoadImageSequence,
+    #"CR Switch": Comfyroll_Comfyroll_Switch_Test,
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
