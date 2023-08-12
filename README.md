@@ -37,7 +37,9 @@ __Process__
 
 __IO__
 * CR Load LoRA
-  
+* CR LoRA Stack
+* CR Apply LoRA Stack
+
 __Maths__
 * CR Integer Multiple
 
@@ -48,6 +50,8 @@ __Image__
 * CR Image Size
 * CR Aspect Ratio
 * CR Color Tint
+* CR Color Tint
+* CR Halftone Grid
 
 __Conditioning__
 * CR Apply ControlNet
@@ -66,6 +70,13 @@ __Module__
 * CR Image Pipe Edit
 * CR Image Pipe Out
 * CR Pipe Switch
+
+__Latent__
+* CR Latent Batch Size
+
+__Legacy__
+* CR Image Output
+
 
 
 ![Custom Nodes](/images/custom_nodes_image1.png)
@@ -87,3 +98,7 @@ TinyTerra/[ComfyUI_tinyterraNodes](https://github.com/TinyTerra/ComfyUI_tinyterr
 hnmr293/[ComfyUI-nodes-hnmr](https://github.com/hnmr293/ComfyUI-nodes-hnmr) - ComfyUI custom nodes - merge, grid (aka xyz-plot) and others
 
 SeargeDP/[SeargeSDXL](https://github.com/SeargeDP) - ComfyUI custom nodes - Prompt nodes and Conditioning nodes
+
+LucianoCirino/efficiency-nodes-comfyui - A collection of ComfyUI custom nodes.
+
+SLAPaper/ComfyUI-Image-Selector - Select one or some of images from a batch
