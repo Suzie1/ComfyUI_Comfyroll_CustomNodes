@@ -586,7 +586,7 @@ class ComfyRoll_AspectRatio_SDXL:
             "required": {
                 "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
                 "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640 x 1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
+                "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640x1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
                 "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
@@ -608,10 +608,8 @@ class ComfyRoll_AspectRatio_SDXL:
             width, height = 832, 1216
         elif aspect_ratio == "portrait 768x1344":
             width, height = 768, 1344
-        elif aspect_ratio == "portrait 640 x 1536":
+        elif aspect_ratio == "portrait 640x1536":
             width, height = 640, 1536
-        elif aspect_ratio == "landscape 1152x896":
-            width, height = 1152, 896
         elif aspect_ratio == "landscape 1152x896":
             width, height = 1152, 896
         elif aspect_ratio == "landscape 1216x832":
