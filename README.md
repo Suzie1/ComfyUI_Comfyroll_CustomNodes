@@ -50,7 +50,7 @@ __Number__
 
 __Image__
 * CR Image Size
-* CR Aspect Ratio
+* CR SD1.5 Aspect Ratio
 * CR Color Tint
 * CR Color Tint
 * CR Halftone Grid
@@ -59,7 +59,7 @@ __Conditioning__
 * CR Apply ControlNet
 
 __SDXL__
-* CR Aspect Ratio SDXL
+* CR SDXL Aspect Ratio
 * CR SDXL Prompt Mixer
 * CR SDXL Style Text
 * CR SDXL Base Prompt Encoder
@@ -78,8 +78,8 @@ __Latent__
 
 __Legacy__
 * CR Image Output
-
-
+* CR Aspect Ratio SDXL
+* CR Aspect Ratio
 
 ![Custom Nodes](/images/custom_nodes_image1.png)
 
