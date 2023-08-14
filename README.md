@@ -2,7 +2,7 @@
 
 These nodes were originally made for use in the Comfyroll Template Workflows.
 
-[ComfyUI Template Workflows](https://civitai.com/models/59806/comfyroll-template-workflows)
+[Comfyroll Template Workflows](https://civitai.com/models/59806/comfyroll-template-workflows)
 
 [Comfyroll Pro Templates](https://civitai.com/models/85619/comfyroll-pro-template)
 
