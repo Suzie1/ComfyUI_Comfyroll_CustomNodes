@@ -107,6 +107,6 @@ hnmr293/[ComfyUI-nodes-hnmr](https://github.com/hnmr293/ComfyUI-nodes-hnmr) - Co
 
 SeargeDP/[SeargeSDXL](https://github.com/SeargeDP) - ComfyUI custom nodes - Prompt nodes and Conditioning nodes
 
-LucianoCirino/efficiency-nodes-comfyui - A collection of ComfyUI custom nodes.
+LucianoCirino/[efficiency-nodes-comfyui](https://github.com/LucianoCirino/efficiency-nodes-comfyui) - A collection of ComfyUI custom nodes.
 
-SLAPaper/ComfyUI-Image-Selector - Select one or some of images from a batch
+SLAPaper/[ComfyUI-Image-Selector](https://github.com/SLAPaper/ComfyUI-Image-Selector) - Select one or some of images from a batch
