@@ -21,7 +21,6 @@ import comfy.model_management
 import folder_paths
 import json
 from nodes import MAX_RESOLUTION
-from halftone import halftone
 import typing as tg
 
 
