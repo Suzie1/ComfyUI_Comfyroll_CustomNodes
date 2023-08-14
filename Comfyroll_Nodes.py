@@ -21,6 +21,7 @@ import comfy.model_management
 import folder_paths
 import json
 from nodes import MAX_RESOLUTION
+from halftone import halftone
 import typing as tg
 
 
@@ -534,7 +535,7 @@ class ComfyRoll_AspectRatio:
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "Aspect_Ratio"
 
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Legacy"
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
         if swap_dimensions == "Off":
@@ -597,7 +598,7 @@ class ComfyRoll_AspectRatio_SDXL:
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "Aspect_Ratio"
 
-    CATEGORY = "Comfyroll/SDXL"
+    CATEGORY = "Comfyroll/Legacy"
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
         if aspect_ratio == "square 1024x1024":
@@ -625,6 +626,105 @@ class ComfyRoll_AspectRatio_SDXL:
             return(width, height, upscale_factor1, upscale_factor2, batch_size,)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_SDXL_AspectRatio_v2:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
+                "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640x1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
+                "swap_dimensions": (["Off", "On"],),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
+            }
+        }
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT")
+    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size")
+    FUNCTION = "Aspect_Ratio"
+
+    CATEGORY = "Comfyroll/SDXL"
+
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
+        if aspect_ratio == "square 1024x1024":
+            width, height = 1024, 1024
+        elif aspect_ratio == "portrait 896x1152":
+            width, height = 896, 1152
+        elif aspect_ratio == "portrait 832x1216":
+            width, height = 832, 1216
+        elif aspect_ratio == "portrait 768x1344":
+            width, height = 768, 1344
+        elif aspect_ratio == "portrait 640x1536":
+            width, height = 640, 1536
+        elif aspect_ratio == "landscape 1152x896":
+            width, height = 1152, 896
+        elif aspect_ratio == "landscape 1216x832":
+            width, height = 1216, 832
+        elif aspect_ratio == "landscape 1344x768":
+            width, height = 1344, 768
+        elif aspect_ratio == "landscape 1536x640":
+            width, height = 1536, 640
+            
+        if swap_dimensions == "On":
+            return(height, width, upscale_factor, batch_size,)
+        else:
+            return(width, height, upscale_factor, batch_size,)
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_AspectRatio_v2:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "aspect_ratio": (["custom", "1:1 square 512x512", "1:1 square 1024x1024", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
+                "swap_dimensions": (["Off", "On"],),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
+            }
+        }
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT")
+    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size")
+    FUNCTION = "Aspect_Ratio"
+
+    CATEGORY = "Comfyroll/Image"
+
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
+        if swap_dimensions == "Off":
+            if aspect_ratio == "2:3 portrait 512x768":
+                width, height = 512, 768
+            elif aspect_ratio == "3:2 landscape 768x512":
+                width, height = 768, 512
+            elif aspect_ratio == "1:1 square 512x512":
+                width, height = 512, 512
+            elif aspect_ratio == "1:1 square 1024x1024":
+                width, height = 1024, 1024
+            elif aspect_ratio == "16:9 cinema 910x512":
+                width, height = 910, 512
+            elif aspect_ratio == "3:4 portrait 512x682":
+                width, height = 512, 682
+            elif aspect_ratio == "4:3 landscape 682x512":
+                width, height = 682, 512
+            elif aspect_ratio == "2:1 cinema 1024x512":
+                width, height = 1024, 512
+            return(width, height, upscale_factor, batch_size)
+
+        if swap_dimensions == "On":
+            return(height, width, upscale_factor, batch_size,)
+        else:
+            return(width, height, upscale_factor, batch_size,)  
+            
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
 
 class ComfyRoll_SeedToInt:
     def __init__(self):
@@ -1143,7 +1243,9 @@ NODE_CLASS_MAPPINGS = {
     "CR Halftones" :Comfyroll_Halftone_Grid,
     "CR LoRA Stack":Comfyroll_LoRA_Stack,
     "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,
-    "CR Latent Batch Size":Comfyroll_LatentBatchSize
+    "CR Latent Batch Size":Comfyroll_LatentBatchSize,
+    "CR SDXL Aspect Ratio":Comfyroll_SDXL_AspectRatio_v2,
+    "CR SD1.5 Aspect Ratio":Comfyroll_AspectRatio_v2,
 }
 '''
 
@@ -1153,6 +1255,6 @@ NODE_CLASS_MAPPINGS = {
 # hnmr293				                  https://github.com/hnmr293/ComfyUI-nodes-hnmr      		                                                #
 # SeargeDP                                https://github.com/SeargeDP/SeargeSDXL                                                                    #
 # LucianoCirino                           https://github.com/LucianoCirino/efficiency-nodes-comfyui                                                 #
-# SLAPaper                                https://github.com/SLAPaper/ComfyUI-Image-Selector                                                        #
+# credit SLAPaper                         https://github.com/SLAPaper/ComfyUI-Image-Selector                                                        #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
