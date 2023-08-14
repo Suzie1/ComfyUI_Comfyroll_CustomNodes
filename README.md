@@ -93,6 +93,8 @@ __Legacy__
 
 ![Custom Nodes](/images/custom_nodes_image6.JPG)
 
+![Custom Nodes](/images/custom_nodes_image7.JPG)
+
 # Credits
 
 comfyanonymous/[ComfyUI](https://github.com/comfyanonymous/ComfyUI) - A powerful and modular stable diffusion GUI.
