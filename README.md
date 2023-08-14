@@ -6,6 +6,8 @@ These nodes were originally made for use in the Comfyroll Template Workflows.
 
 [Comfyroll Pro Templates](https://civitai.com/models/85619/comfyroll-pro-template)
 
+[Comfyroll SDXL Workflow Templates](https://civitai.com/models/118005/comfyroll-sdxl-workflow-templates)
+
 The nodes can be used in any ComfyUI workflow.
 
 # Installation
