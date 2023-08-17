@@ -102,6 +102,8 @@ Credits
 
 ![Custom Nodes](/images/custom_nodes_image8.JPG)
 
+![Custom Nodes](/images/custom_nodes_image9.JPG)
+
 # Credits
 
 comfyanonymous/[ComfyUI](https://github.com/comfyanonymous/ComfyUI) - A powerful and modular stable diffusion GUI.
