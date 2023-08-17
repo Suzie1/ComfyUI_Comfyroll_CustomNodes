@@ -1,4 +1,4 @@
-# Comfyroll Custom Nodes
+# Comfyroll Custom Nodes for SDXL and SD1.5
 
 These nodes were originally made for use in the Comfyroll Template Workflows.
 
