@@ -36,6 +36,7 @@ __Logic__
 __Process__
 * CR Img2Img Process Switch
 * CR Hires Fix Process Switch
+* CR Batch Process Switch
 
 __IO__
 * CR Load LoRA
@@ -56,10 +57,12 @@ __Image__
 
 __Conditioning__
 * CR Apply ControlNet
+* CR Multi-ControlNet Stack
+* CR Apply Multi-ControlNet Stack
 
 __SDXL__
 * CR SDXL Aspect Ratio
-* CR SDXL Prompt Mixer
+* CR SDXL Prompt Mix Presets
 * CR SDXL Style Text
 * CR SDXL Base Prompt Encoder
 
@@ -79,6 +82,9 @@ __Legacy__
 * CR Image Output
 * CR Aspect Ratio SDXL
 * CR Aspect Ratio
+* CR SDXL Prompt Mixer
+
+Credits
 
 ![Custom Nodes](/images/custom_nodes_image1.png)
 
