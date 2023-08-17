@@ -10,7 +10,7 @@ from PIL.PngImagePlugin import PngInfo
 import os
 import sys
 import io
-import matplotlib.pyplot as plt
+import pip
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
@@ -20,8 +20,15 @@ import comfy.model_management
 
 import folder_paths
 import json
-from nodes import MAX_RESOLUTION
+from nodes import MAX_RESOLUTION, ControlNetApply
 import typing as tg
+
+
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    pip.main(['install', 'matplotlib'])
+    import matplotlib.pyplot as plt
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -834,7 +841,7 @@ class ComfyRoll_prompt_mixer:
     RETURN_NAMES = ("pos_g", "pos_l", "pos_r", "neg_g", "neg_l", "neg_r", )
     FUNCTION = "mixer"
 
-    CATEGORY = "Comfyroll/SDXL"
+    CATEGORY = "Comfyroll/Legacy"
 
     def mixer(self, prompt_positive, prompt_negative, style_positive, style_negative, preset):
         if preset == "preset 1":
@@ -875,6 +882,69 @@ class ComfyRoll_prompt_mixer:
         return (pos_g, pos_l, pos_r, neg_g, neg_l, neg_r, )
 
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_prompt_mixer_v2:
+    def __init__(self):
+        pass
+
+    @classmethod        
+    def INPUT_TYPES(s):
+        return {
+            "required":{
+            },
+            "optional":{
+                "prompt_positive": ("STRING", {"multiline": True, "default": "BASE_POSITIVE"}),
+                "prompt_negative": ("STRING", {"multiline": True, "default": "BASE_NEGATIVE"}),
+                "style_positive": ("STRING", {"multiline": True, "default": "REFINER_POSTIVE"}),
+                "style_negative": ("STRING", {"multiline": True, "default": "REFINER_NEGATIVE"}),
+                "preset": (["default with no style text", "default with style text", "style boost 1", "style boost 2", "style text to refiner"],),
+            },
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("pos_g", "pos_l", "pos_r", "neg_g", "neg_l", "neg_r", )
+    FUNCTION = "mixer"
+
+    CATEGORY = "Comfyroll/SDXL"
+
+    def mixer(self, prompt_positive, prompt_negative, style_positive, style_negative, preset):
+        if preset == "default with no style text":
+            pos_g = prompt_positive
+            pos_l = prompt_positive
+            pos_r = prompt_positive
+            neg_g = prompt_negative
+            neg_l = prompt_negative
+            neg_r = prompt_negative
+        elif preset == "default with style text":
+            pos_g = prompt_positive + style_positive
+            pos_l = prompt_positive + style_positive
+            pos_r = prompt_positive + style_positive
+            neg_g = prompt_negative + style_negative
+            neg_l = prompt_negative + style_negative
+            neg_r = prompt_negative + style_negative
+        elif preset == "style boost 1":
+            pos_g = prompt_positive
+            pos_l = style_positive
+            pos_r = prompt_positive
+            neg_g = prompt_negative
+            neg_l = style_negative
+            neg_r = prompt_negative
+        elif preset == "style boost 2":
+            pos_g = style_positive
+            pos_l = prompt_positive
+            pos_r = style_positive
+            neg_g = style_negative
+            neg_l = prompt_negative
+            neg_r = style_negative
+        elif preset == "style text to refiner":
+            pos_g = prompt_positive
+            pos_l = prompt_positive
+            pos_r = style_positive
+            neg_g = prompt_negative
+            neg_l = prompt_negative
+            neg_r = style_negative
+        return (pos_g, pos_l, pos_r, neg_g, neg_l, neg_r, )
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -1028,6 +1098,8 @@ class Comfyroll_Halftone_Grid:
     CATEGORY = "Comfyroll/Image"
 
     def halftone(self, width, height, dot_style, reverse_dot_style, dot_frequency, background_color, background_R, background_G, background_B, x_pos, y_pos):
+        #install_matplotlib()
+    
         if background_color == "custom":
             bgc = (background_R/255, background_G/255, background_B/255)
         else:
@@ -1052,11 +1124,13 @@ class Comfyroll_Halftone_Grid:
     
         fig.patch.set_facecolor(bgc)
         ax.scatter(X, Y, c=dist, cmap=dot_style+reverse)
-            
+        
+
         plt.axis('off')
         plt.tight_layout(pad=0, w_pad=0, h_pad=0)
         plt.autoscale(tight=True)
-        plt.show()
+        #plt.show()
+      
         
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
@@ -1211,6 +1285,140 @@ class Comfyroll_LoRA_Stack:
            
         return (lora_list,)
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_ControlNetStack:
+
+    controlnets = ["None"] + folder_paths.get_filename_list("controlnet")
+    
+    @classmethod
+    def INPUT_TYPES(cls):
+        #controlnets = ["None"]
+        return {"required": {
+                },
+                "optional": {
+                    "image_1": ("IMAGE",),
+                    "image_2": ("IMAGE",),
+                    "image_3": ("IMAGE",),
+                    "switch_1": ([
+                        "Off",
+                        "On"],),
+                    "controlnet_1": (cls.controlnets,),
+                    "controlnet_strength_1": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                    "start_percent_1": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.001}),
+                    "end_percent_1": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.001}),
+                    #
+                    "switch_2": ([
+                        "Off",
+                        "On"],),
+                    "controlnet_2": (cls.controlnets,),
+                    "controlnet_strength_2": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                    "start_percent_2": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.001}),
+                    "end_percent_2": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.001}),
+                    #
+                    "switch_3": ([
+                        "Off",
+                        "On"],),
+                    "controlnet_3": (cls.controlnets,),
+                    "controlnet_strength_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
+                    "start_percent_3": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.001}),
+                    "end_percent_3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.001}),
+                    "controlnet_stack": ("CONTROL_NET_STACK",)
+                },
+        }
+
+    RETURN_TYPES = ("CONTROL_NET_STACK",)
+    RETURN_NAMES = ("CONTROLNET_STACK",)
+    FUNCTION = "controlnet_stacker"
+    CATEGORY = "Comfyroll/Conditioning"
+
+    def controlnet_stacker(self, switch_1, controlnet_1, image_1, controlnet_strength_1, start_percent_1, end_percent_1, switch_2, controlnet_2, image_2, controlnet_strength_2, start_percent_2, end_percent_2, switch_3, controlnet_3, image_3, controlnet_strength_3, start_percent_3, end_percent_3, controlnet_stack=None):
+
+        # Initialise the list
+        controlnet_list=list()
+        
+        if controlnet_stack is not None:
+            controlnet_list.extend([l for l in controlnet_stack if l[0] != "None"])
+        
+        if controlnet_1 != "None" and  switch_1 == "On":
+            controlnet_list.extend([(controlnet_1, image_1, controlnet_strength_1)]),
+
+        if controlnet_2 != "None" and  switch_2 == "On":
+            controlnet_list.extend([(controlnet_2, image_2, controlnet_strength_2)]),
+
+        if controlnet_3 != "None" and  switch_3 == "On":
+            controlnet_list.extend([(controlnet_3, image_3, controlnet_strength_3)]),
+
+        print(controlnet_list)
+
+        return (controlnet_list,)
+        
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_ApplyControlNetStack:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"base_positive": ("CONDITIONING", ),
+                             "switch": ([
+                                "Off",
+                                "On"],),
+                             "controlnet_stack": ("CONTROL_NET_STACK", ),
+                            }
+        }                    
+
+    RETURN_TYPES = ("CONDITIONING", )
+    RETURN_NAMES = ("base_pos", )
+    FUNCTION = "apply_controlnet_stack"
+    CATEGORY = "Comfyroll/Conditioning"
+
+    def apply_controlnet_stack(self, base_positive, switch, controlnet_stack=None,):
+
+        if switch == "Off":
+            return (base_positive, )
+    
+        if controlnet_stack is not None:
+            print("Multi-ControlNet Triggered")
+            for controlnet_tuple in controlnet_stack:
+                controlnet_name, image, strength = controlnet_tuple
+                
+                if type(controlnet_name) == str:
+                    controlnet_path = folder_paths.get_full_path("controlnet", controlnet_name)
+                    controlnet = comfy.sd.load_controlnet(controlnet_path)
+                else:
+                    controlnet = controlnet_name
+                
+                base_positive = ControlNetApply().apply_controlnet(base_positive, controlnet, image, strength)[0]
+
+        return (base_positive,)
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_BatchProcessSwitch:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "Input": (["image", "image batch"],),
+                "image": ("IMAGE", ),
+                "image_batch": ("IMAGE", )
+            }
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    OUTPUT_NODE = True
+    FUNCTION = "InputControlNet"
+
+    CATEGORY = "Comfyroll/Process"
+
+    def InputControlNet(self, Input, image, image_batch):
+        if Input == "image":
+            return (image, )
+        else:
+            return (image_batch, ) 
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -1242,9 +1450,11 @@ NODE_CLASS_MAPPINGS = {
     "CR Halftones" :Comfyroll_Halftone_Grid,
     "CR LoRA Stack":Comfyroll_LoRA_Stack,
     "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,
-    "CR Latent Batch Size":Comfyroll_LatentBatchSize,
-    "CR SDXL Aspect Ratio":Comfyroll_SDXL_AspectRatio_v2,
-    "CR SD1.5 Aspect Ratio":Comfyroll_AspectRatio_v2,
+    "CR Latent Batch Size":Comfyroll_LatentBatchSize
+    "CR Batch Process Switch": Comfyroll_BatchProcessSwitch,
+    "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
+    "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,
+    "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
 }
 '''
 
@@ -1256,4 +1466,5 @@ NODE_CLASS_MAPPINGS = {
 # LucianoCirino                           https://github.com/LucianoCirino/efficiency-nodes-comfyui                                                 #
 # credit SLAPaper                         https://github.com/SLAPaper/ComfyUI-Image-Selector                                                        #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+
 
