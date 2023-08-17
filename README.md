@@ -90,8 +90,6 @@ Credits
 
 ![Custom Nodes](/images/custom_nodes_image2.jpg)
 
-![Custom Nodes](/images/custom_nodes_image3.JPG)
-
 ![Custom Nodes](/images/custom_nodes_image4a.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image5.JPG)
