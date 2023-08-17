@@ -37,6 +37,10 @@ NODE_CLASS_MAPPINGS = {
     "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,
     "CR SDXL Aspect Ratio":Comfyroll_SDXL_AspectRatio_v2,
     "CR SD1.5 Aspect Ratio":Comfyroll_AspectRatio_v2,
+    "CR Batch Process Switch": Comfyroll_BatchProcessSwitch,
+    "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
+    "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,
+    "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
     ### test nodes
     #"CR Latent Upscale (Iterative)":Comfyroll_LatentUpscaleIterative,
     #"CR KSampler (Iterative)":Comfyroll_Iterative_KSampler,
@@ -48,4 +52,3 @@ NODE_CLASS_MAPPINGS = {
 __all__ = ['NODE_CLASS_MAPPINGS']
 
 print("\033[34mComfyroll Custom Nodes: \033[92mLoaded\033[0m")
-
