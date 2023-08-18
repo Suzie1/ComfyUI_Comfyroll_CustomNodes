@@ -95,10 +95,6 @@ https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
 
 # Node Images
 
-![Custom Nodes](/images/custom_nodes_image1.png)
-
-![Custom Nodes](/images/custom_nodes_image2.jpg)
-
 ![Custom Nodes](/images/custom_nodes_image4a.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image5.JPG)
@@ -112,6 +108,10 @@ https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
 ![Custom Nodes](/images/custom_nodes_image8.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image9.JPG)
+
+![Custom Nodes](/images/custom_nodes_image1.png)
+
+![Custom Nodes](/images/custom_nodes_image2.jpg)
 
 # Credits
 
