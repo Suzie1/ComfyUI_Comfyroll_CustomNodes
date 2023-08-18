@@ -41,6 +41,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,
     "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
+    "CR Seed": Comfyroll_Seed,
     ### test nodes
     #"CR Latent Upscale (Iterative)":Comfyroll_LatentUpscaleIterative,
     #"CR KSampler (Iterative)":Comfyroll_Iterative_KSampler,
