@@ -754,6 +754,31 @@ class ComfyRoll_SeedToInt:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+class Comfyroll_Seed:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                    "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                },
+        }
+
+    RETURN_TYPES = ("INT",)
+    RETURN_NAMES = ("seed",)
+    FUNCTION = "seedint"
+    OUTPUT_NODE = True
+
+    CATEGORY = "Comfyroll/Number"
+
+    @staticmethod
+    def seedint(seed):
+        return seed,
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
 class Comfyroll_Color_Tint:
     def __init__(self):
         pass
@@ -1349,8 +1374,6 @@ class Comfyroll_ControlNetStack:
         if controlnet_3 != "None" and  switch_3 == "On":
             controlnet_list.extend([(controlnet_3, image_3, controlnet_strength_3)]),
 
-        print(controlnet_list)
-
         return (controlnet_list,)
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -1377,7 +1400,6 @@ class Comfyroll_ApplyControlNetStack:
             return (base_positive, )
     
         if controlnet_stack is not None:
-            print("Multi-ControlNet Triggered")
             for controlnet_tuple in controlnet_stack:
                 controlnet_name, image, strength = controlnet_tuple
                 
@@ -1455,6 +1477,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,
     "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
+    "CR Seed":Comfyroll_Seed,
 }
 '''
 
