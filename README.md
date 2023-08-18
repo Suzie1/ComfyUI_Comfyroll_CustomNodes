@@ -48,6 +48,7 @@ __Maths__
 
 __Number__
 * CR Seed to Int
+* CR Seed
 
 __Image__
 * CR Image Size
