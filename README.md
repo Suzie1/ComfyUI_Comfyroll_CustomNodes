@@ -85,7 +85,15 @@ __Legacy__
 * CR Aspect Ratio
 * CR SDXL Prompt Mixer
 
-Credits
+# Multi-ControlNet methodology
+
+The method used in CR Apply Multi-ControlNet is to chain the conditioning so that the output from the first Controlnet becomes the input to the second.
+
+For an example of this method see this link:
+
+https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
+
+# Node Images
 
 ![Custom Nodes](/images/custom_nodes_image1.png)
 
