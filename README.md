@@ -10,7 +10,7 @@ These nodes were originally made for use in the Comfyroll Template Workflows.
 
 [SDXL Workflow for ComfyUI with Multi-ControlNet](https://civitai.com/models/129858/sdxl-workflow-for-comfyui-with-multi-controlnet)
 
-<p style="color: yellow;">The nodes can be used in any ComfyUI workflow.</p>
+The nodes can be used in any ComfyUI workflow.
 
 # Installation
 
