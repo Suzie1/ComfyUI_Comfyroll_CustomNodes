@@ -109,13 +109,13 @@ In the images below, the black nodes are the CR nodes and the grey nodes are oth
 
 ![Custom Nodes](/images/custom_nodes_image7b.JPG)
 
-![Custom Nodes](/images/custom_nodes_image9.JPG)
-
 ![Custom Nodes](/images/custom_nodes_image12.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image13.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image10.JPG)
+
+![Custom Nodes](/images/custom_nodes_image9.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image11.JPG)
 
