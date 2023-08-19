@@ -53,7 +53,6 @@ __Number__
 * CR Seed
 
 __Image__
-* CR Image Size
 * CR SD1.5 Aspect Ratio
 * CR Color Tint
 * CR Halftone Grid
@@ -82,6 +81,7 @@ __Latent__
 * CR Latent Batch Size
 
 __Legacy__
+* CR Image Size
 * CR Image Output
 * CR Aspect Ratio SDXL
 * CR Aspect Ratio
