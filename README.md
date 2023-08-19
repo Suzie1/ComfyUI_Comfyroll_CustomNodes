@@ -97,7 +97,7 @@ https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
 
 ![Custom Nodes](/images/custom_nodes_image4a.JPG)
 
-![Custom Nodes](/images/custom_nodes_image5.JPG)
+![Custom Nodes](/images/custom_nodes_image5a.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image6.JPG)
 
