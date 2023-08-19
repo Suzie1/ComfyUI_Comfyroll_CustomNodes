@@ -97,7 +97,7 @@ https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
 
 In the images below, the black nodes are the CR nodes and the grey nodes are other nodes shown for context.
 
-![Custom Nodes](/images/custom_nodes_image8.JPG)
+![Custom Nodes](/images/custom_nodes_image8a.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image5a.JPG)
 
