@@ -8,6 +8,8 @@ These nodes were originally made for use in the Comfyroll Template Workflows.
 
 [Comfyroll SDXL Workflow Templates](https://civitai.com/models/118005/comfyroll-sdxl-workflow-templates)
 
+[SDXL Workflow for ComfyUI with Multi-ControlNet](https://civitai.com/models/129858/sdxl-workflow-for-comfyui-with-multi-controlnet)
+
 The nodes can be used in any ComfyUI workflow.
 
 # Installation
