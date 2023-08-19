@@ -26,6 +26,22 @@ You can also install the nodes using the following methods:
 
 # List of Custom Nodes
 
+__SDXL__
+* CR SDXL Aspect Ratio
+* CR SDXL Prompt Mix Presets
+* CR SDXL Style Text
+* CR SDXL Base Prompt Encoder
+
+__IO__
+* CR Load LoRA
+* CR LoRA Stack
+* CR Apply LoRA Stack
+
+__Conditioning__
+* CR Apply ControlNet
+* CR Multi-ControlNet Stack
+* CR Apply Multi-ControlNet Stack
+
 __Logic__
 * CR Image Input Switch
 * CR Image Input Switch (4 way)
@@ -40,11 +56,6 @@ __Process__
 * CR Hires Fix Process Switch
 * CR Batch Process Switch
 
-__IO__
-* CR Load LoRA
-* CR LoRA Stack
-* CR Apply LoRA Stack
-
 __Maths__
 * CR Integer Multiple
 
@@ -56,17 +67,6 @@ __Image__
 * CR SD1.5 Aspect Ratio
 * CR Color Tint
 * CR Halftone Grid
-
-__Conditioning__
-* CR Apply ControlNet
-* CR Multi-ControlNet Stack
-* CR Apply Multi-ControlNet Stack
-
-__SDXL__
-* CR SDXL Aspect Ratio
-* CR SDXL Prompt Mix Presets
-* CR SDXL Style Text
-* CR SDXL Base Prompt Encoder
 
 __Module__
 * CR Module Pipe Loader
