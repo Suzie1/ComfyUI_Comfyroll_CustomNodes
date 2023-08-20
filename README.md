@@ -99,7 +99,7 @@ https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
 
 The CR Multi-ControlNet Stack cannot be plugged directly into the Efficient Loader node in the Efficiency nodes by LucianoCirino. This is because it uses a different data type. Compatability may be added in the future. CR Apply Multi-ControlNet Stack should be used to apply the stack in a normal workflow.
 
-CR Apply Multi-ControlNet Stack can accept inputs from the Control Net Stacker node in the Efficiency nodes.
+CR Apply Multi-ControlNet Stack can accept inputs from the Control Net Stacker node in the Efficiency nodes (see diagram below).
 
 # SDXL Prompt Mix Presets
 
