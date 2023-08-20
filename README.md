@@ -87,13 +87,17 @@ __Legacy__
 * CR Aspect Ratio
 * CR SDXL Prompt Mixer
 
-# Multi-ControlNet methodology
+# Multi-ControlNet Nodes
 
 The method used in CR Apply Multi-ControlNet is to chain the conditioning so that the output from the first Controlnet becomes the input to the second.
 
 For an example of this method see this link:
 
 https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
+
+The CR Multi-ControlNet Stack cannot be plugged directly into the Efficient Loader node in the Efficiency nodes by LucianoCirino. This is because it uses a different data type. Compatability may be added in the future. CR Apply Multi-ControlNet Stack should be used to apply the stack in a normal workflow.
+
+CR Apply Multi-ControlNet Stack can accept inputs from the Control Net Stacker node in the Efficiency nodes.
 
 # SDXL Prompt Mix Presets
 
