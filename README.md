@@ -95,6 +95,12 @@ For an example of this method see this link:
 
 https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
 
+# SDXL Prompt Mix Presets
+
+Preset mappings can be found in this CivitAI article:
+
+https://civitai.com/articles/1835
+
 # Node Images
 
 In the images below, the black nodes are the CR nodes and the grey nodes are other nodes shown for context.
