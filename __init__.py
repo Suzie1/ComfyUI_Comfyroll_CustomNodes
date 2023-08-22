@@ -1,5 +1,6 @@
 from .Comfyroll_Nodes import *
 from .Comfyroll_Pipe_Nodes import *
+#from .Comfyroll_Animation_Nodes import *
 #from .Comfyroll_Test_Nodes import *
 
 NODE_CLASS_MAPPINGS = {
@@ -42,7 +43,19 @@ NODE_CLASS_MAPPINGS = {
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,
     "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
     "CR Seed": Comfyroll_Seed,
+    ### Animation Nodes
+    "CR Load Animation Frames":Comfyroll_LoadAnimationFrames,
+    #"CR Animation Stack":Comfyroll_AnimationStack,
+    #"CR Prompt List":Comfyroll_PromptList,
+    #"CR Animation List":Comfyroll_AnimationList,
+    #"CR Prompt List Scheduler":Comfyroll_PromptListScheduler,
+    #"CR Animation Stack Scheduler":Comfyroll_AnimationStackScheduler,
+    #"CR Advanced Prompt Scheduler":Comfyroll_AdvancedPromptScheduler,
+    #"CR LoRA Scheduler":Comfyroll_LoraScheduler,
     ### test nodes
+    "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
+    "CR Model Stack":Comfyroll_ModelStack,
+    #"CR ModelMergeSimple": Comfyroll_SDXLCheckpointLoader,
     #"CR Latent Upscale (Iterative)":Comfyroll_LatentUpscaleIterative,
     #"CR KSampler (Iterative)":Comfyroll_Iterative_KSampler,
     #"CR Load Image Sequence":Comfyroll_LoadImageSequence,
