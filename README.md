@@ -97,7 +97,9 @@ https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
 
 # Multi-ControlNet compatability with Efficiency nodes
 
-The CR Multi-ControlNet Stack cannot be plugged directly into the Efficient Loader node in the Efficiency nodes by LucianoCirino. This is because it uses a different data type. Compatability may be added in the future. CR Apply Multi-ControlNet Stack should be used to apply the stack in a normal workflow.
+![Custom Nodes](/images/Efficiency_Compability.JPG)
+
+CR LoRA Stack and CR Multi-ControlNet Stack are both compatible with the Efficient Loader node, in Efficiency nodes by LucianoCirino.
 
 CR Apply Multi-ControlNet Stack can accept inputs from the Control Net Stacker node in the Efficiency nodes (see diagram in Node Images below).
 
@@ -114,6 +116,8 @@ In the images below, the black nodes are the CR nodes and the grey nodes are oth
 ![Custom Nodes](/images/custom_nodes_image8a.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image5a.JPG)
+
+![Custom Nodes](/images/Model_Merge.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image4b.JPG)
 
