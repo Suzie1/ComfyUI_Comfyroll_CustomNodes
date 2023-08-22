@@ -80,6 +80,11 @@ __Module__
 __Latent__
 * CR Latent Batch Size
 
+__Test__
+* CR Model Stack
+* CR Apply Model Merge
+* CR Load Animation Frames
+
 __Legacy__
 * CR Image Size
 * CR Image Output
