@@ -530,7 +530,7 @@ class ComfyRoll_AspectRatio:
             "required": {
                 "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
                 "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "1:1 square 512x512", "1:1 square 1024x1024", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
+                "aspect_ratio": (["custom", "1:1 - square 512x512", "1:1 - square 1024x1024", "2:3 - portrait 512x768", "3:4 - portrait 512x682", "3:2 - landscape 768x512", "4:3 - landscape 682x512", "16:9 - cinema 910x512", "2:1 - cinema 1024x512"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
                 "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
@@ -545,39 +545,39 @@ class ComfyRoll_AspectRatio:
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
         if swap_dimensions == "Off":
-            if aspect_ratio == "2:3 portrait 512x768":
+            if aspect_ratio == "2:3 - portrait 512x768":
                 width, height = 512, 768
-            elif aspect_ratio == "3:2 landscape 768x512":
+            elif aspect_ratio == "3:2 - landscape 768x512":
                 width, height = 768, 512
-            elif aspect_ratio == "1:1 square 512x512":
+            elif aspect_ratio == "1:1 - square 512x512":
                 width, height = 512, 512
-            elif aspect_ratio == "1:1 square 1024x1024":
+            elif aspect_ratio == "1:1 - square 1024x1024":
                 width, height = 1024, 1024
-            elif aspect_ratio == "16:9 cinema 910x512":
+            elif aspect_ratio == "16:9 - cinema 910x512":
                 width, height = 910, 512
-            elif aspect_ratio == "3:4 portrait 512x682":
+            elif aspect_ratio == "3:4 - portrait 512x682":
                 width, height = 512, 682
-            elif aspect_ratio == "4:3 landscape 682x512":
+            elif aspect_ratio == "4:3 - landscape 682x512":
                 width, height = 682, 512
-            elif aspect_ratio == "2:1 cinema 1024x512":
+            elif aspect_ratio == "2:1 - cinema 1024x512":
                 width, height = 1024, 512
             return(width, height, upscale_factor1, upscale_factor2, batch_size)
         elif swap_dimensions == "On":
-            if aspect_ratio == "2:3 portrait 512x768":
+            if aspect_ratio == "2:3 - portrait 512x768":
                 width, height = 512, 768
-            elif aspect_ratio == "3:2 landscape 768x512":
+            elif aspect_ratio == "3:2 - landscape 768x512":
                 width, height = 768, 512
-            elif aspect_ratio == "1:1 square 512x512":
+            elif aspect_ratio == "1:1 - square 512x512":
                 width, height = 512, 512              
-            elif aspect_ratio == "1:1 square 1024x1024":
+            elif aspect_ratio == "1:1 - square 1024x1024":
                 width, height = 1024, 1024
-            elif aspect_ratio == "16:9 cinema 910x512":
+            elif aspect_ratio == "16:9 - cinema 910x512":
                 width,height = 910, 512
-            elif aspect_ratio == "3:4 portrait 512x682":
+            elif aspect_ratio == "3:4 - portrait 512x682":
                 width, height = 512, 682
-            elif aspect_ratio == "4:3 landscape 682x512":
+            elif aspect_ratio == "4:3 - landscape 682x512":
                 width, height = 682, 512
-            elif aspect_ratio == "2:1 cinema 1024x512":
+            elif aspect_ratio == "2:1 - cinema 1024x512":
                 width, height = 1024, 512
             return(height, width, upscale_factor1, upscale_factor2, batch_size)
 
@@ -593,7 +593,7 @@ class ComfyRoll_AspectRatio_SDXL:
             "required": {
                 "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
                 "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640x1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
+                "aspect_ratio": (["custom", "1:1 - square 1024x1024", "3:4 - portrait 896x1152", "5:8 - portrait 832x1216", "9:16 - portrait 768x1344", "9:21 - portrait 640x1536", "4:3 - landscape 1152x896", "3:2 - landscape 1216x832", "16:9 - landscape 1344x768", "21:9 - landscape 1536x640"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
                 "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
@@ -607,23 +607,23 @@ class ComfyRoll_AspectRatio_SDXL:
     CATEGORY = "Comfyroll/Legacy"
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
-        if aspect_ratio == "square 1024x1024":
+        if aspect_ratio == "1:1 - square 1024x1024":
             width, height = 1024, 1024
-        elif aspect_ratio == "portrait 896x1152":
+        elif aspect_ratio == "3:4 - portrait 896x1152":
             width, height = 896, 1152
-        elif aspect_ratio == "portrait 832x1216":
+        elif aspect_ratio == "5:8 - portrait 832x1216":
             width, height = 832, 1216
-        elif aspect_ratio == "portrait 768x1344":
+        elif aspect_ratio == "9:16 - portrait 768x1344":
             width, height = 768, 1344
-        elif aspect_ratio == "portrait 640x1536":
+        elif aspect_ratio == "9:21 - portrait 640x1536":
             width, height = 640, 1536
-        elif aspect_ratio == "landscape 1152x896":
+        elif aspect_ratio == "4:3 - landscape 1152x896":
             width, height = 1152, 896
-        elif aspect_ratio == "landscape 1216x832":
+        elif aspect_ratio == "3:2 - landscape 1216x832":
             width, height = 1216, 832
-        elif aspect_ratio == "landscape 1344x768":
+        elif aspect_ratio == "16:9 - landscape 1344x768":
             width, height = 1344, 768
-        elif aspect_ratio == "landscape 1536x640":
+        elif aspect_ratio == "21:9 - landscape 1536x640":
             width, height = 1536, 640
             
         if swap_dimensions == "On":
@@ -643,7 +643,7 @@ class Comfyroll_SDXL_AspectRatio_v2:
             "required": {
                 "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
                 "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640x1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
+                "aspect_ratio": (["custom", "1:1 - square 1024x1024", "3:4 - portrait 896x1152", "5:8 - portrait 832x1216", "9:16 - portrait 768x1344", "9:21 - portrait 640x1536", "4:3 - landscape 1152x896", "3:2 - landscape 1216x832", "16:9 - landscape 1344x768", "21:9 - landscape 1536x640"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
@@ -656,23 +656,23 @@ class Comfyroll_SDXL_AspectRatio_v2:
     CATEGORY = "Comfyroll/SDXL"
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
-        if aspect_ratio == "square 1024x1024":
+        if aspect_ratio == "1:1 - square 1024x1024":
             width, height = 1024, 1024
-        elif aspect_ratio == "portrait 896x1152":
+        elif aspect_ratio == "3:4 - portrait 896x1152":
             width, height = 896, 1152
-        elif aspect_ratio == "portrait 832x1216":
+        elif aspect_ratio == "5:8 - portrait 832x1216":
             width, height = 832, 1216
-        elif aspect_ratio == "portrait 768x1344":
+        elif aspect_ratio == "9:16 - portrait 768x1344":
             width, height = 768, 1344
-        elif aspect_ratio == "portrait 640x1536":
+        elif aspect_ratio == "9:21 - portrait 640x1536":
             width, height = 640, 1536
-        elif aspect_ratio == "landscape 1152x896":
+        elif aspect_ratio == "4:3 - landscape 1152x896":
             width, height = 1152, 896
-        elif aspect_ratio == "landscape 1216x832":
+        elif aspect_ratio == "3:2 - landscape 1216x832":
             width, height = 1216, 832
-        elif aspect_ratio == "landscape 1344x768":
+        elif aspect_ratio == "16:9 - landscape 1344x768":
             width, height = 1344, 768
-        elif aspect_ratio == "landscape 1536x640":
+        elif aspect_ratio == "21:9 - landscape 1536x640":
             width, height = 1536, 640
             
         if swap_dimensions == "On":
@@ -692,7 +692,7 @@ class Comfyroll_AspectRatio_v2:
             "required": {
                 "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
                 "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "1:1 square 512x512", "1:1 square 1024x1024", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
+                "aspect_ratio": (["custom", "1:1 - square 512x512", "1:1 - square 1024x1024", "2:3 - portrait 512x768", "3:4 - portrait 512x682", "3:2 - landscape 768x512", "4:3 - landscape 682x512", "16:9 - cinema 910x512", "2:1 - cinema 1024x512"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
@@ -706,21 +706,21 @@ class Comfyroll_AspectRatio_v2:
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
         if swap_dimensions == "Off":
-            if aspect_ratio == "2:3 portrait 512x768":
+            if aspect_ratio == "2:3 - portrait 512x768":
                 width, height = 512, 768
-            elif aspect_ratio == "3:2 landscape 768x512":
+            elif aspect_ratio == "3:2 - landscape 768x512":
                 width, height = 768, 512
-            elif aspect_ratio == "1:1 square 512x512":
+            elif aspect_ratio == "1:1 - square 512x512":
                 width, height = 512, 512
-            elif aspect_ratio == "1:1 square 1024x1024":
+            elif aspect_ratio == "1:1 - square 1024x1024":
                 width, height = 1024, 1024
-            elif aspect_ratio == "16:9 cinema 910x512":
+            elif aspect_ratio == "16:9 - cinema 910x512":
                 width, height = 910, 512
-            elif aspect_ratio == "3:4 portrait 512x682":
+            elif aspect_ratio == "3:4 - portrait 512x682":
                 width, height = 512, 682
-            elif aspect_ratio == "4:3 landscape 682x512":
+            elif aspect_ratio == "4:3 - landscape 682x512":
                 width, height = 682, 512
-            elif aspect_ratio == "2:1 cinema 1024x512":
+            elif aspect_ratio == "2:1 - cinema 1024x512":
                 width, height = 1024, 512
             return(width, height, upscale_factor, batch_size)
 
