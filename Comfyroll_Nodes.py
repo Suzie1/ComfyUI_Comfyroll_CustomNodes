@@ -1563,8 +1563,6 @@ class Comfyroll_ApplyModelMerge:
                 #print(i)
                 
             return (merge_model_clone, merge_clip_clone, model_mix_info,)
-        else:
-            #print(f"Apply Model Merge: at least 2 models are needed for merging")
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
