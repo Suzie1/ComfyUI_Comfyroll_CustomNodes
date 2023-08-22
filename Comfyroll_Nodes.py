@@ -401,7 +401,7 @@ class ComfyRoll_ImageSize_Float:
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "ImageSize_Float"
 
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Legacy"
 
     def ImageSize_Float(self, width, height, upscale_factor):
         return(width, height, upscale_factor)
@@ -459,7 +459,6 @@ class ComfyRoll_ImageOutput:
         full_output_folder = os.path.join(self.output_dir, subfolder)
 
         if os.path.commonpath((self.output_dir, os.path.abspath(full_output_folder))) != self.output_dir:
-            print("Saving image outside the output folder is not allowed.")
             return {}
 
         try:
@@ -1244,7 +1243,6 @@ class Comfyroll_ApplyLoRA_Stack:
         # Loop through the list
         for tup in lora_params:
             lora_name, strength_model, strength_clip = tup
-            print(lora_name, strength_model, strength_clip)
             
             lora_path = folder_paths.get_full_path("loras", lora_name)
             lora = comfy.utils.load_torch_file(lora_path, safe_load=True)
@@ -1360,18 +1358,24 @@ class Comfyroll_ControlNetStack:
     def controlnet_stacker(self, switch_1, controlnet_1, image_1, controlnet_strength_1, start_percent_1, end_percent_1, switch_2, controlnet_2, image_2, controlnet_strength_2, start_percent_2, end_percent_2, switch_3, controlnet_3, image_3, controlnet_strength_3, start_percent_3, end_percent_3, controlnet_stack=None):
 
         # Initialise the list
-        controlnet_list=list()
+        controlnet_list= []
         
         if controlnet_stack is not None:
             controlnet_list.extend([l for l in controlnet_stack if l[0] != "None"])
         
         if controlnet_1 != "None" and  switch_1 == "On":
+            controlnet_path = folder_paths.get_full_path("controlnet", controlnet_1)
+            controlnet_1 = comfy.sd.load_controlnet(controlnet_path)
             controlnet_list.extend([(controlnet_1, image_1, controlnet_strength_1)]),
 
         if controlnet_2 != "None" and  switch_2 == "On":
+            controlnet_path = folder_paths.get_full_path("controlnet", controlnet_2)
+            controlnet_2 = comfy.sd.load_controlnet(controlnet_path)
             controlnet_list.extend([(controlnet_2, image_2, controlnet_strength_2)]),
 
         if controlnet_3 != "None" and  switch_3 == "On":
+            controlnet_path = folder_paths.get_full_path("controlnet", controlnet_3)
+            controlnet_3 = comfy.sd.load_controlnet(controlnet_path)
             controlnet_list.extend([(controlnet_3, image_3, controlnet_strength_3)]),
 
         return (controlnet_list,)
@@ -1442,9 +1446,171 @@ class Comfyroll_BatchProcessSwitch:
         else:
             return (image_batch, ) 
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_ModelStack:
+    #input_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))), 'models\checkpoints\SDXL')
+    #checkpoint_files = ["None"] + [name for name in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir,name))]
+    checkpoint_files = ["None"] + folder_paths.get_filename_list("checkpoints")
+    
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {"switch_1": ([
+                                "Off",
+                                "On"],),
+                             "ckpt_name1": (cls.checkpoint_files,),
+                             "model_ratio1": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "clip_ratio1": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             #
+                             "switch_2": ([
+                                "Off",
+                                "On"],),
+                             "ckpt_name2": (cls.checkpoint_files,),
+                             "model_ratio2": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "clip_ratio2": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             #
+                             "switch_3": ([
+                                "Off",
+                                "On"],),
+                             "ckpt_name3": (cls.checkpoint_files,),
+                             "model_ratio3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "clip_ratio3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                            },      
+                "optional":{
+                             "model_stack": ("MODEL_STACK",),
+                },
+        }
+
+    RETURN_TYPES = ("MODEL_STACK",)
+    FUNCTION = "list_checkpoints"
+
+    CATEGORY = "Comfyroll/Test"
+
+    def list_checkpoints(self, switch_1, ckpt_name1, model_ratio1, clip_ratio1, switch_2, ckpt_name2, model_ratio2, clip_ratio2, switch_3, ckpt_name3, model_ratio3, clip_ratio3, model_stack=None):
+    
+        # Initialise the list
+        model_list = list()
+    
+        if model_stack is not None:
+            model_list.extend([l for l in model_stack if l[0] != "None"])
+        
+        if ckpt_name1 != "None" and  switch_1 == "On":
+            model_list.extend([(ckpt_name1, model_ratio1, clip_ratio1)]),
+
+        if ckpt_name2 != "None" and  switch_2 == "On":
+            model_list.extend([(ckpt_name2, model_ratio2, clip_ratio2)]),
+
+        if ckpt_name3 != "None" and  switch_3 == "On":
+            model_list.extend([(ckpt_name3, model_ratio3, clip_ratio3)]),
+
+        
+        return (model_list,)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+def load_checkpoint(ckpt_name, output_vae=False, output_clip=False):
+    ckpt_path = folder_paths.get_full_path("checkpoints", ckpt_name)
+    out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=False, output_clip=False, embedding_directory=folder_paths.get_folder_paths("embeddings"))
+    return out # class tuple
+    
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+    
+class Comfyroll_ApplyModelMerge:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": { "model_stack": ("MODEL_STACK",),
+                              }}
+    RETURN_TYPES = ("MODEL", "CLIP", "TEXT",)
+    RETURN_NAMES = ("MODEL", "CLIP", "model_mix_info",)
+    FUNCTION = "merge"
+
+    CATEGORY = "Comfyroll/Test"
+
+    #add error capture for no models in stack
+
+    def merge(self, model_stack):
+         
+        model_mix_info = "test"
+
+        #first sum the active ratios?
+        
+        if model_stack is not None:
+            for model_tuple in model_stack:
+                i = 0
+                #model
+                model_name, model_ratio, clip_ratio = model_tuple
+                #print(model_name, model_ratio, clip_ratio)
+                
+                ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
+                merge_model = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
+                merge_model_clone = merge_model[0].clone()                  
+                
+                kp = merge_model_clone.get_key_patches("diffusion_model.")
+                for k in kp:
+                    merge_model_clone.add_patches({k: kp[k]}, 1.0 - model_ratio, model_ratio)
+                    
+                # clip
+                #print(type(merge_model[0]))
+                #print(type(merge_model[1]))
+                merge_clip_clone = merge_model[1].clone()          
+                kp = merge_clip_clone.get_key_patches()
+                for k in kp:
+                    if k.endswith(".position_ids") or k.endswith(".logit_scale"):
+                        continue
+                    merge_clip_clone.add_patches({k: kp[k]}, 1.0 - clip_ratio, clip_ratio)
+                    
+                i += 1
+                #print(i)
+                
+            return (merge_model_clone, merge_clip_clone, model_mix_info,)
+        else:
+            #print(f"Apply Model Merge: at least 2 models are needed for merging")
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+class Comfyroll_LoadAnimationFrames:
+    input_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))), 'input')
+    @classmethod
+    def INPUT_TYPES(s):
+        if not os.path.exists(s.input_dir):
+            os.makedirs(s.input_dir)
+        image_folder = [name for name in os.listdir(s.input_dir) if os.path.isdir(os.path.join(s.input_dir,name)) and len(os.listdir(os.path.join(s.input_dir,name))) != 0]
+        return {"required":
+                    {"image_sequence_folder": (sorted(image_folder), ),
+                     "start_index": ("INT", {"default": 1, "min": 1, "max": 10000}),
+                     "max_frames": ("INT", {"default": 1, "min": 1, "max": 10000})
+                     }
+                }
+
+    CATEGORY = "Comfyroll/Test"
+
+    RETURN_TYPES = ("IMAGE", "MASK", "INT")
+    RETURN_NAMES = ("frames", "masks", "index")
+    FUNCTION = "load_image_sequence"
+
+    def load_image_sequence(self, image_sequence_folder, start_index, max_frames):
+        image_path = os.path.join(self.input_dir, image_sequence_folder)
+        file_list = sorted(os.listdir(image_path), key=lambda s: sum(((s, int(n)) for s, n in re.findall(r'(\D+)(\d+)', 'a%s0' % s)), ()))
+        sample_frames = []
+        sample_frames_mask = []
+        sample_index = list(range(start_index-1, len(file_list), 1))[:max_frames]
+        for num in sample_index:
+            i = Image.open(os.path.join(image_path, file_list[num]))
+            image = i.convert("RGB")
+            image = np.array(image).astype(np.float32) / 255.0
+            image = torch.from_numpy(image)[None,]
+            image = image.squeeze()
+            if 'A' in i.getbands():
+                mask = np.array(i.getchannel('A')).astype(np.float32) / 255.0
+                mask = 1. - torch.from_numpy(mask)
+            else:
+                mask = torch.zeros((64, 64), dtype=torch.float32, device="cpu")
+            sample_frames.append(image)
+            sample_frames_mask.append(mask)
+        return (torch.stack(sample_frames), sample_frames_mask)
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 '''
 NODE_CLASS_MAPPINGS = {
