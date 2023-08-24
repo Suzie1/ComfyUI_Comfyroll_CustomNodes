@@ -592,7 +592,7 @@ class ComfyRoll_AspectRatio_SDXL:
             "required": {
                 "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
                 "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640x1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
+                "aspect_ratio": (["custom", "1:1 square 1024x1024", "3:4 portrait 896x1152", "5:8 portrait 832x1216", "9:16 portrait 768x1344", "9:21 portrait 640x1536", "4:3 landscape 1152x896", "3:2 landscape 1216x832", "16:9 landscape 1344x768", "21:9 landscape 1536x640"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
                 "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
@@ -606,23 +606,23 @@ class ComfyRoll_AspectRatio_SDXL:
     CATEGORY = "Comfyroll/Legacy"
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
-        if aspect_ratio == "square 1024x1024":
+        if aspect_ratio == "1:1 square 1024x1024":
             width, height = 1024, 1024
-        elif aspect_ratio == "portrait 896x1152":
+        elif aspect_ratio == "3:4 portrait 896x1152":
             width, height = 896, 1152
-        elif aspect_ratio == "portrait 832x1216":
+        elif aspect_ratio == "5:8 portrait 832x1216":
             width, height = 832, 1216
-        elif aspect_ratio == "portrait 768x1344":
+        elif aspect_ratio == "9:16 portrait 768x1344":
             width, height = 768, 1344
-        elif aspect_ratio == "portrait 640x1536":
+        elif aspect_ratio == "9:21 portrait 640x1536":
             width, height = 640, 1536
-        elif aspect_ratio == "landscape 1152x896":
+        elif aspect_ratio == "4:3 landscape 1152x896":
             width, height = 1152, 896
-        elif aspect_ratio == "landscape 1216x832":
+        elif aspect_ratio == "3:2 landscape 1216x832":
             width, height = 1216, 832
-        elif aspect_ratio == "landscape 1344x768":
+        elif aspect_ratio == "16:9 landscape 1344x768":
             width, height = 1344, 768
-        elif aspect_ratio == "landscape 1536x640":
+        elif aspect_ratio == "21:9 landscape 1536x640":
             width, height = 1536, 640
             
         if swap_dimensions == "On":
@@ -642,7 +642,7 @@ class Comfyroll_SDXL_AspectRatio_v2:
             "required": {
                 "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
                 "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "square 1024x1024", "portrait 896x1152", "portrait 832x1216", "portrait 768x1344", "portrait 640x1536", "landscape 1152x896", "landscape 1216x832", "landscape 1344x768", "landscape 1536x640"],),
+                "aspect_ratio": (["custom", "1:1 square 1024x1024", "3:4 portrait 896x1152", "5:8 portrait 832x1216", "9:16 portrait 768x1344", "9:21 portrait 640x1536", "4:3 landscape 1152x896", "3:2 landscape 1216x832", "16:9 landscape 1344x768", "21:9 landscape 1536x640"],),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
@@ -655,23 +655,23 @@ class Comfyroll_SDXL_AspectRatio_v2:
     CATEGORY = "Comfyroll/SDXL"
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
-        if aspect_ratio == "square 1024x1024":
+        if aspect_ratio == "1:1 square 1024x1024":
             width, height = 1024, 1024
-        elif aspect_ratio == "portrait 896x1152":
+        elif aspect_ratio == "3:4 portrait 896x1152":
             width, height = 896, 1152
-        elif aspect_ratio == "portrait 832x1216":
+        elif aspect_ratio == "5:8 portrait 832x1216":
             width, height = 832, 1216
-        elif aspect_ratio == "portrait 768x1344":
+        elif aspect_ratio == "9:16 portrait 768x1344":
             width, height = 768, 1344
-        elif aspect_ratio == "portrait 640x1536":
+        elif aspect_ratio == "9:21 portrait 640x1536":
             width, height = 640, 1536
-        elif aspect_ratio == "landscape 1152x896":
+        elif aspect_ratio == "4:3 landscape 1152x896":
             width, height = 1152, 896
-        elif aspect_ratio == "landscape 1216x832":
+        elif aspect_ratio == "3:2 landscape 1216x832":
             width, height = 1216, 832
-        elif aspect_ratio == "landscape 1344x768":
+        elif aspect_ratio == "16:9 landscape 1344x768":
             width, height = 1344, 768
-        elif aspect_ratio == "landscape 1536x640":
+        elif aspect_ratio == "21:9 landscape 1536x640":
             width, height = 1536, 640
             
         if swap_dimensions == "On":
@@ -680,6 +680,8 @@ class Comfyroll_SDXL_AspectRatio_v2:
             return(width, height, upscale_factor, batch_size,)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
 
 class Comfyroll_AspectRatio_v2:
     def __init__(self):
@@ -1514,13 +1516,15 @@ def load_checkpoint(ckpt_name, output_vae=False, output_clip=False):
     return out # class tuple
     
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-    
+
 class Comfyroll_ApplyModelMerge:
+
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": { "model_stack": ("MODEL_STACK",),
+        return {"required": {"model_stack": ("MODEL_STACK",),
+                             "merge_method": (["Recursive"],),
                               }}
-    RETURN_TYPES = ("MODEL", "CLIP", "TEXT",)
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING",)
     RETURN_NAMES = ("MODEL", "CLIP", "model_mix_info",)
     FUNCTION = "merge"
 
@@ -1528,41 +1532,73 @@ class Comfyroll_ApplyModelMerge:
 
     #add error capture for no models in stack
 
-    def merge(self, model_stack):
-         
-        model_mix_info = "test"
-
-        #first sum the active ratios?
+    def merge(self, model_stack, merge_method):
+              
+        model_mix_info = str("Merge Info:\n")
+        i = 1
         
         if model_stack is not None:
-            for model_tuple in model_stack:
-                i = 0
-                #model
-                model_name, model_ratio, clip_ratio = model_tuple
-                #print(model_name, model_ratio, clip_ratio)
+            if merge_method == "Recursive":
+                model_mix_info = model_mix_info + "Ratios are applied using the Recursive method\n\n"
                 
-                ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
-                merge_model = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
-                merge_model_clone = merge_model[0].clone()                  
-                
-                kp = merge_model_clone.get_key_patches("diffusion_model.")
-                for k in kp:
-                    merge_model_clone.add_patches({k: kp[k]}, 1.0 - model_ratio, model_ratio)
+                for model_tuple in model_stack:
+                    model_name, model_ratio, clip_ratio = model_tuple
+                    ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
+                    merge_model = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
+                    print(f"Apply Model Merge: Model Name {model_name}, Model Ratio {model_ratio}, CLIP Ratio {clip_ratio}")
                     
-                # clip
-                #print(type(merge_model[0]))
-                #print(type(merge_model[1]))
-                merge_clip_clone = merge_model[1].clone()          
-                kp = merge_clip_clone.get_key_patches()
-                for k in kp:
-                    if k.endswith(".position_ids") or k.endswith(".logit_scale"):
-                        continue
-                    merge_clip_clone.add_patches({k: kp[k]}, 1.0 - clip_ratio, clip_ratio)
+                    #Clone the first model
+                    if i == 1:
+                        print(f"Ratios for first model are ignored.")
+                        model1 = merge_model[0].clone()
+                        clip1 = merge_model[1].clone()
+                        
+                        model_mix_info = model_mix_info + "Base Model Name: " + model_name + "\nRatios for first model are ignored\n"
+                    else:                       
+                        # Merge next model  
+                        model2 = merge_model[0].clone()
+                        kp = model2.get_key_patches("diffusion_model.")
+                        for k in kp:
+                            model1.add_patches({k: kp[k]}, 1.0 - model_ratio, model_ratio)   
+                        # Merge next clip
+                        clip2 = merge_model[1].clone()          
+                        kp = clip2.get_key_patches()
+                        for k in kp:
+                            if k.endswith(".position_ids") or k.endswith(".logit_scale"):
+                                continue
+                            clip1.add_patches({k: kp[k]}, 1.0 - clip_ratio, clip_ratio)
                     
-                i += 1
-                #print(i)
+                    # Update model info                
+                        model_mix_info = model_mix_info + "\nModel Name: " + model_name + "\nModel Ratio: " + str(model_ratio) + "\nCLIP Ratio: " + str(clip_ratio) + "\n"
+                        
+                    i+=1
+                    
+                return (model1, clip1, model_mix_info,)
+            else:
+                model_mix_info = model_mix_info + "Ratios are applied using the Proportional method\n\n"
                 
-            return (merge_model_clone, merge_clip_clone, model_mix_info,)
+                for model_tuple in model_stack:
+                    model_name, model_ratio, clip_ratio = model_tuple
+                    ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
+                    merge_model = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
+                    print(f"Apply Model Merge: Model Name {model_name}, Model Ratio {model_ratio}, CLIP Ratio {clip_ratio}")
+                    
+                    if i == 1:
+                        print(f"Ratios for first model will be ignored.")
+                        model1 = merge_model[0].clone()
+                        clip1 = merge_model[1].clone() 
+                    
+                    #add logic for proportional method
+                    
+                    # Update model info                
+                        model_mix_info = model_mix_info + "\nModel Name: " + model_name + "\nModel Ratio: " + str(model_ratio) + "\nCLIP Ratio: " + str(clip_ratio)
+                        
+                    i+=1
+                    
+                return (model1, clip1, model_mix_info,)
+        else:
+            print(f"[ERROR] Apply Model Merge: at least 2 models are needed for merging")
+    
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
