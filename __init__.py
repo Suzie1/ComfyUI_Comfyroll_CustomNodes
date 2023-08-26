@@ -1,7 +1,7 @@
 from .Comfyroll_Nodes import *
 from .Comfyroll_Pipe_Nodes import *
 from .Comfyroll_SDXL_Nodes import *
-#from .Comfyroll_Animation_Nodes import *
+from .CR_Animation_Nodes import *
 #from .Comfyroll_Test_Nodes import *
 
 NODE_CLASS_MAPPINGS = {
@@ -48,18 +48,18 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
     "CR Aspect Ratio SDXL": Comfyroll_AspectRatio_SDXL,
     ### Animation Nodes
-    #"CR Load Animation Frames":Comfyroll_LoadAnimationFrames,
-    #"CR Debatch Frames":CR_DebatchFrames,
-    #"CR Index Increment":CR_IncrementIndex,
-    #"CR Index Multiply":CR_MultiplyIndex,
-    #"CR Index Reset":CR_IndexReset,    
-    #"CR Prompt List":CR_PromptList,
-    #"CR Animation Stack":CR_AnimationStack,
-    #"CR Prompt Text":CR_PromptText,
-    #"CR Keyframe List":CR_KeyframeList,
-    #"CR Text List To String":CR_TextListToString,
-    #"CR Prompt List Keyframes":CR_PromptListKeyframes,
-    #"CR Animation Stack Keyframes":CR_AnimationStackKeyframes,
+    "CR Load Animation Frames":CR_LoadAnimationFrames,
+    "CR Prompt List":CR_PromptList,
+    "CR Prompt List Keyframes":CR_PromptListKeyframes,
+    "CR Animation Stack":CR_AnimationStack,
+    "CR Animation Stack Keyframes":CR_AnimationStackKeyframes,
+    "CR Keyframe List":CR_KeyframeList,
+    "CR Prompt Text":CR_PromptText,
+    "CR Index Increment":CR_IncrementIndex,
+    "CR Index Multiply":CR_MultiplyIndex,
+    "CR Index Reset":CR_IndexReset,    
+    "CR Text List To String":CR_TextListToString,
+    "CR Debatch Frames":CR_DebatchFrames,
     #"CR Schedule LoRAs":CR_ScheduleLoRAs,
     #"CR Schedule Models":CR_ScheduleModels,
     #"CR Schedule ControlNets":CR_ScheduleControlNets,
