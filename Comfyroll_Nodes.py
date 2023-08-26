@@ -6,7 +6,6 @@
 import torch
 import numpy as np
 from PIL import Image, ImageEnhance
-from PIL.PngImagePlugin import PngInfo
 import os
 import sys
 import io
@@ -14,12 +13,12 @@ import pip
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
+import comfy.controlnet
 import comfy.sd
 import comfy.utils
 import comfy.model_management
 
 import folder_paths
-import json
 from nodes import MAX_RESOLUTION, ControlNetApply
 import typing as tg
 
@@ -32,6 +31,8 @@ except ImportError:
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+# FUNCTIONS
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 def tensor2pil(image):
     return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
@@ -39,10 +40,17 @@ def tensor2pil(image):
 def pil2tensor(image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
 
+def load_checkpoint(ckpt_name, output_vae=False, output_clip=False):
+    ckpt_path = folder_paths.get_full_path("checkpoints", ckpt_name)
+    out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=False, output_clip=False, embedding_directory=folder_paths.get_folder_paths("embeddings"))
+    return out # class tuple
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+# NODES
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_InputImages:
+#This is an input switch for images.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_ImageInputSwitch:
     def __init__(self):
         pass
 
@@ -70,7 +78,8 @@ class ComfyRoll_InputImages:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_InputImages_4way:
+#This is an input switch for 4 different images.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_ImageInputSwitch_4way:
     def __init__(self):
         pass
 
@@ -106,7 +115,8 @@ class ComfyRoll_InputImages_4way:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_InputLatents:
+#This is an input switch for latents.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_LatentInputSwitch:
     def __init__(self):
         pass
 
@@ -131,12 +141,11 @@ class ComfyRoll_InputLatents:
             return (latent1, )
         else:
             return (latent2, )
-            
-
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_InputConditioning:
+#This is an input switch for conditiong.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_ConditioningInputSwitch:
     def __init__(self):
         pass
 
@@ -164,7 +173,8 @@ class ComfyRoll_InputConditioning:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_InputClip:
+#This is an input switch for clip.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_ClipInputSwitch:
     def __init__(self):
         pass
 
@@ -192,7 +202,8 @@ class ComfyRoll_InputClip:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_InputModel:
+#This is an input switch for model.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_ModelInputSwitch:
     def __init__(self):
         pass
 
@@ -220,7 +231,8 @@ class ComfyRoll_InputModel:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#        
 
-class ComfyRoll_InputControlNet:
+#This is an input switch for controlNet.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_ControlNetInputSwitch:
     def __init__(self):
         pass
 
@@ -245,9 +257,77 @@ class ComfyRoll_InputControlNet:
             return (control_net1, )
         else:
             return (control_net2, )
+
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_InputLatentsText:
+#This is an input switch for text.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_TextInputSwitch:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "Input": ("INT", {"default": 1, "min": 1, "max": 2}),            
+                "text1": ("STRING", {"forceInput": True}),
+                "text2": ("STRING", {"forceInput": True}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    
+    FUNCTION = "text_input_switch"
+    CATEGORY = "Comfyroll/Logic"
+
+    def text_input_switch(self, Input, text1, text2,):
+
+        if Input == 1:
+            return (text1, )
+        else:
+            return (text2, )
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+ 
+#This is an input switch for 4 different texts.  Can pick an input and that image will be the one picked for the workflow.
+class Comfyroll_TextInputSwitch_4way:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "Input": ("INT", {"default": 1, "min": 1, "max": 4}),            
+                "text1": ("STRING", {"forceInput": True}),               
+            },
+            "optional": {
+                "text2": ("STRING", {"forceInput": True}),
+                "text3": ("STRING", {"forceInput": True}),
+                "text4": ("STRING", {"forceInput": True}),   
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    
+    FUNCTION = "text_input_switch"
+    CATEGORY = "Comfyroll/Logic"
+
+    def text_input_switch(self, Input, text1, text2=None, text3=None, text4=None):
+
+        if Input == 1:
+            return (text1, )
+        elif Input == 2:
+            return (text2, )
+        elif Input == 3:
+            return (text3, )
+        else:
+            return (text4, )            
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#This is an input switch for Image to Image or Text to Image.  This switch is more readable than the latent switch.
+class Comfyroll_InputLatentsText:
     def __init__(self):
         pass
 
@@ -276,7 +356,8 @@ class ComfyRoll_InputLatentsText:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_HiResFixSwitch:
+#This is an input switch for HiRes Fix.  This is a more reabable switch than the latent switch.
+class Comfyroll_HiResFixSwitch:
     def __init__(self):
         pass
 
@@ -302,10 +383,39 @@ class ComfyRoll_HiResFixSwitch:
         else:
             return (image_upscale, )  
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#This is a switch to choose between using one image or using a batch of images
+class Comfyroll_BatchProcessSwitch:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "Input": (["image", "image batch"],),
+                "image": ("IMAGE", ),
+                "image_batch": ("IMAGE", )
+            }
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    OUTPUT_NODE = True
+    FUNCTION = "InputControlNet"
+
+    CATEGORY = "Comfyroll/Process"
+
+    def InputControlNet(self, Input, image, image_batch):
+        if Input == "image":
+            return (image, )
+        else:
+            return (image_batch, ) 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#                       
-            
-class ComfyRoll_LoraLoader:
+       
+#This is a load lora node with an added switch to turn on or off.  On will add the lora and off will skip the node.
+class Comfyroll_LoraLoader:
     def __init__(self):
         self.loaded_lora = None
 
@@ -351,40 +461,122 @@ class ComfyRoll_LoraLoader:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#           
 
-class ComfyRoll_ApplyControlNet:
+#This node has a bunch of default picture widths and heights as well as being able to choose them yourself.
+class Comfyroll_AspectRatio:
+    def __init__(self):
+        pass
+
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"conditioning": ("CONDITIONING", ),
-                             "control_net": ("CONTROL_NET", ),
-                             "image": ("IMAGE", ),
-                             "switch": ([
-                                "On",
-                                "Off"],),
-                             "strength": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 10.0, "step": 0.01})
-                             }}
-    RETURN_TYPES = ("CONDITIONING",)
-    FUNCTION = "apply_controlnet"
+        return {
+            "required": {
+                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "aspect_ratio": (["custom", "1:1 square 512x512", "1:1 square 1024x1024", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
+                "swap_dimensions": (["Off", "On"],),
+                "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
+            }
+        }
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT")
+    #RETURN_NAMES = ("Width", "Height")
+    FUNCTION = "Aspect_Ratio"
 
-    CATEGORY = "Comfyroll/Conditioning"
+    CATEGORY = "Comfyroll/Legacy"
 
-    def apply_controlnet(self, conditioning, control_net, image, switch, strength):
-        if strength == 0 or switch == "Off":
-            return (conditioning, )
-
-        c = []
-        control_hint = image.movedim(-1,1)
-        for t in conditioning:
-            n = [t[0], t[1].copy()]
-            c_net = control_net.copy().set_cond_hint(control_hint, strength)
-            if 'control' in t[1]:
-                c_net.set_previous_controlnet(t[1]['control'])
-            n[1]['control'] = c_net
-            c.append(n)
-        return (c, )
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
+        if swap_dimensions == "Off":
+            if aspect_ratio == "2:3 portrait 512x768":
+                width, height = 512, 768
+            elif aspect_ratio == "3:2 landscape 768x512":
+                width, height = 768, 512
+            elif aspect_ratio == "1:1 square 512x512":
+                width, height = 512, 512
+            elif aspect_ratio == "1:1 square 1024x1024":
+                width, height = 1024, 1024
+            elif aspect_ratio == "16:9 cinema 910x512":
+                width, height = 910, 512
+            elif aspect_ratio == "3:4 portrait 512x682":
+                width, height = 512, 682
+            elif aspect_ratio == "4:3 landscape 682x512":
+                width, height = 682, 512
+            elif aspect_ratio == "2:1 cinema 1024x512":
+                width, height = 1024, 512
+            return(width, height, upscale_factor1, upscale_factor2, batch_size)
+        elif swap_dimensions == "On":
+            if aspect_ratio == "2:3 portrait 512x768":
+                width, height = 512, 768
+            elif aspect_ratio == "3:2 landscape 768x512":
+                width, height = 768, 512
+            elif aspect_ratio == "1:1 square 512x512":
+                width, height = 512, 512              
+            elif aspect_ratio == "1:1 square 1024x1024":
+                width, height = 1024, 1024
+            elif aspect_ratio == "16:9 cinema 910x512":
+                width,height = 910, 512
+            elif aspect_ratio == "3:4 portrait 512x682":
+                width, height = 512, 682
+            elif aspect_ratio == "4:3 landscape 682x512":
+                width, height = 682, 512
+            elif aspect_ratio == "2:1 cinema 1024x512":
+                width, height = 1024, 512
+            return(height, width, upscale_factor1, upscale_factor2, batch_size)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_ImageSize_Float:
+#This node has a bunch of default picture widths and heights as well as being able to choose them yourself.
+class Comfyroll_AspectRatio_v2:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "aspect_ratio": (["custom", "1:1 square 512x512", "1:1 square 1024x1024", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
+                "swap_dimensions": (["Off", "On"],),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
+            }
+        }
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT")
+    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size")
+    FUNCTION = "Aspect_Ratio"
+
+    CATEGORY = "Comfyroll/Image"
+
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
+        if swap_dimensions == "Off":
+            if aspect_ratio == "2:3 portrait 512x768":
+                width, height = 512, 768
+            elif aspect_ratio == "3:2 landscape 768x512":
+                width, height = 768, 512
+            elif aspect_ratio == "1:1 square 512x512":
+                width, height = 512, 512
+            elif aspect_ratio == "1:1 square 1024x1024":
+                width, height = 1024, 1024
+            elif aspect_ratio == "16:9 cinema 910x512":
+                width, height = 910, 512
+            elif aspect_ratio == "3:4 portrait 512x682":
+                width, height = 512, 682
+            elif aspect_ratio == "4:3 landscape 682x512":
+                width, height = 682, 512
+            elif aspect_ratio == "2:1 cinema 1024x512":
+                width, height = 1024, 512
+            return(width, height, upscale_factor, batch_size)
+
+        if swap_dimensions == "On":
+            return(height, width, upscale_factor, batch_size,)
+        else:
+            return(width, height, upscale_factor, batch_size,)  
+            
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#This node makes the upscale factor a float
+class Comfyroll_ImageSize_Float:
     def __init__(self):
         pass
 
@@ -408,7 +600,8 @@ class ComfyRoll_ImageSize_Float:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_ImageOutput:
+#Legacy Node. This node was an attempt at making a save and preview image node into one.
+class Comfyroll_ImageOutput:
     def __init__(self):
         self.output_dir = folder_paths.get_output_directory()
         self.type = "output"
@@ -493,7 +686,8 @@ class ComfyRoll_ImageOutput:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class CR_Int_Multiple_Of:
+#This node will give you the multiple of the value within the interger parameter.
+class Comfyroll_Int_Multiple_Of:
     def __init__(self):
         pass
         
@@ -519,221 +713,8 @@ class CR_Int_Multiple_Of:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_AspectRatio:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "1:1 square 512x512", "1:1 square 1024x1024", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
-                "swap_dimensions": (["Off", "On"],),
-                "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
-                "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
-                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
-            }
-        }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT")
-    #RETURN_NAMES = ("Width", "Height")
-    FUNCTION = "Aspect_Ratio"
-
-    CATEGORY = "Comfyroll/Legacy"
-
-    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
-        if swap_dimensions == "Off":
-            if aspect_ratio == "2:3 portrait 512x768":
-                width, height = 512, 768
-            elif aspect_ratio == "3:2 landscape 768x512":
-                width, height = 768, 512
-            elif aspect_ratio == "1:1 square 512x512":
-                width, height = 512, 512
-            elif aspect_ratio == "1:1 square 1024x1024":
-                width, height = 1024, 1024
-            elif aspect_ratio == "16:9 cinema 910x512":
-                width, height = 910, 512
-            elif aspect_ratio == "3:4 portrait 512x682":
-                width, height = 512, 682
-            elif aspect_ratio == "4:3 landscape 682x512":
-                width, height = 682, 512
-            elif aspect_ratio == "2:1 cinema 1024x512":
-                width, height = 1024, 512
-            return(width, height, upscale_factor1, upscale_factor2, batch_size)
-        elif swap_dimensions == "On":
-            if aspect_ratio == "2:3 portrait 512x768":
-                width, height = 512, 768
-            elif aspect_ratio == "3:2 landscape 768x512":
-                width, height = 768, 512
-            elif aspect_ratio == "1:1 square 512x512":
-                width, height = 512, 512              
-            elif aspect_ratio == "1:1 square 1024x1024":
-                width, height = 1024, 1024
-            elif aspect_ratio == "16:9 cinema 910x512":
-                width,height = 910, 512
-            elif aspect_ratio == "3:4 portrait 512x682":
-                width, height = 512, 682
-            elif aspect_ratio == "4:3 landscape 682x512":
-                width, height = 682, 512
-            elif aspect_ratio == "2:1 cinema 1024x512":
-                width, height = 1024, 512
-            return(height, width, upscale_factor1, upscale_factor2, batch_size)
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-class ComfyRoll_AspectRatio_SDXL:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "1:1 square 1024x1024", "3:4 portrait 896x1152", "5:8 portrait 832x1216", "9:16 portrait 768x1344", "9:21 portrait 640x1536", "4:3 landscape 1152x896", "3:2 landscape 1216x832", "16:9 landscape 1344x768", "21:9 landscape 1536x640"],),
-                "swap_dimensions": (["Off", "On"],),
-                "upscale_factor1": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
-                "upscale_factor2": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
-                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
-            }
-        }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT")
-    #RETURN_NAMES = ("Width", "Height")
-    FUNCTION = "Aspect_Ratio"
-
-    CATEGORY = "Comfyroll/Legacy"
-
-    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
-        if aspect_ratio == "1:1 square 1024x1024":
-            width, height = 1024, 1024
-        elif aspect_ratio == "3:4 portrait 896x1152":
-            width, height = 896, 1152
-        elif aspect_ratio == "5:8 portrait 832x1216":
-            width, height = 832, 1216
-        elif aspect_ratio == "9:16 portrait 768x1344":
-            width, height = 768, 1344
-        elif aspect_ratio == "9:21 portrait 640x1536":
-            width, height = 640, 1536
-        elif aspect_ratio == "4:3 landscape 1152x896":
-            width, height = 1152, 896
-        elif aspect_ratio == "3:2 landscape 1216x832":
-            width, height = 1216, 832
-        elif aspect_ratio == "16:9 landscape 1344x768":
-            width, height = 1344, 768
-        elif aspect_ratio == "21:9 landscape 1536x640":
-            width, height = 1536, 640
-            
-        if swap_dimensions == "On":
-            return(height, width, upscale_factor1, upscale_factor2, batch_size,)
-        else:
-            return(width, height, upscale_factor1, upscale_factor2, batch_size,)
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-class Comfyroll_SDXL_AspectRatio_v2:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "1:1 square 1024x1024", "3:4 portrait 896x1152", "5:8 portrait 832x1216", "9:16 portrait 768x1344", "9:21 portrait 640x1536", "4:3 landscape 1152x896", "3:2 landscape 1216x832", "16:9 landscape 1344x768", "21:9 landscape 1536x640"],),
-                "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
-                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
-            }
-        }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT")
-    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size")
-    FUNCTION = "Aspect_Ratio"
-
-    CATEGORY = "Comfyroll/SDXL"
-
-    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
-        if aspect_ratio == "1:1 square 1024x1024":
-            width, height = 1024, 1024
-        elif aspect_ratio == "3:4 portrait 896x1152":
-            width, height = 896, 1152
-        elif aspect_ratio == "5:8 portrait 832x1216":
-            width, height = 832, 1216
-        elif aspect_ratio == "9:16 portrait 768x1344":
-            width, height = 768, 1344
-        elif aspect_ratio == "9:21 portrait 640x1536":
-            width, height = 640, 1536
-        elif aspect_ratio == "4:3 landscape 1152x896":
-            width, height = 1152, 896
-        elif aspect_ratio == "3:2 landscape 1216x832":
-            width, height = 1216, 832
-        elif aspect_ratio == "16:9 landscape 1344x768":
-            width, height = 1344, 768
-        elif aspect_ratio == "21:9 landscape 1536x640":
-            width, height = 1536, 640
-            
-        if swap_dimensions == "On":
-            return(height, width, upscale_factor, batch_size,)
-        else:
-            return(width, height, upscale_factor, batch_size,)
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-
-
-class Comfyroll_AspectRatio_v2:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "aspect_ratio": (["custom", "1:1 square 512x512", "1:1 square 1024x1024", "2:3 portrait 512x768", "3:4 portrait 512x682", "3:2 landscape 768x512", "4:3 landscape 682x512", "16:9 cinema 910x512", "2:1 cinema 1024x512"],),
-                "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
-                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
-            }
-        }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT")
-    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size")
-    FUNCTION = "Aspect_Ratio"
-
-    CATEGORY = "Comfyroll/Image"
-
-    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
-        if swap_dimensions == "Off":
-            if aspect_ratio == "2:3 portrait 512x768":
-                width, height = 512, 768
-            elif aspect_ratio == "3:2 landscape 768x512":
-                width, height = 768, 512
-            elif aspect_ratio == "1:1 square 512x512":
-                width, height = 512, 512
-            elif aspect_ratio == "1:1 square 1024x1024":
-                width, height = 1024, 1024
-            elif aspect_ratio == "16:9 cinema 910x512":
-                width, height = 910, 512
-            elif aspect_ratio == "3:4 portrait 512x682":
-                width, height = 512, 682
-            elif aspect_ratio == "4:3 landscape 682x512":
-                width, height = 682, 512
-            elif aspect_ratio == "2:1 cinema 1024x512":
-                width, height = 1024, 512
-            return(width, height, upscale_factor, batch_size)
-
-        if swap_dimensions == "On":
-            return(height, width, upscale_factor, batch_size,)
-        else:
-            return(width, height, upscale_factor, batch_size,)  
-            
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-
-class ComfyRoll_SeedToInt:
+#This node is used to convert type Seed to int
+class Comfyroll_SeedToInt:
     def __init__(self):
         pass
 
@@ -755,6 +736,7 @@ class ComfyRoll_SeedToInt:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+#This node is for making seeds
 class Comfyroll_Seed:
     def __init__(self):
         pass
@@ -777,9 +759,9 @@ class Comfyroll_Seed:
     def seedint(seed):
         return seed,
 
-
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+#Adds a color tint into the picture
 class Comfyroll_Color_Tint:
     def __init__(self):
         pass
@@ -845,254 +827,7 @@ class Comfyroll_Color_Tint:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class ComfyRoll_prompt_mixer:
-    def __init__(self):
-        pass
-
-    @classmethod        
-    def INPUT_TYPES(s):
-        return {
-            "required":{
-            },
-            "optional":{
-                "prompt_positive": ("STRING", {"multiline": True, "default": "BASE_POSITIVE"}),
-                "prompt_negative": ("STRING", {"multiline": True, "default": "BASE_NEGATIVE"}),
-                "style_positive": ("STRING", {"multiline": True, "default": "REFINER_POSTIVE"}),
-                "style_negative": ("STRING", {"multiline": True, "default": "REFINER_NEGATIVE"}),
-                "preset": (["preset 1", "preset 2", "preset 3", "preset 4", "preset 5"],),
-            },
-        }
-
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", "STRING", )
-    RETURN_NAMES = ("pos_g", "pos_l", "pos_r", "neg_g", "neg_l", "neg_r", )
-    FUNCTION = "mixer"
-
-    CATEGORY = "Comfyroll/Legacy"
-
-    def mixer(self, prompt_positive, prompt_negative, style_positive, style_negative, preset):
-        if preset == "preset 1":
-            pos_g = prompt_positive
-            pos_l = prompt_positive
-            pos_r = prompt_positive
-            neg_g = prompt_negative
-            neg_l = prompt_negative
-            neg_r = prompt_negative
-        elif preset == "preset 2":
-            pos_g = prompt_positive
-            pos_l = style_positive
-            pos_r = prompt_positive
-            neg_g = prompt_negative
-            neg_l = style_negative
-            neg_r = prompt_negative
-        elif preset == "preset 3":
-            pos_g = style_positive
-            pos_l = prompt_positive
-            pos_r = style_positive
-            neg_g = style_negative
-            neg_l = prompt_negative
-            neg_r = style_negative
-        elif preset == "preset 4":
-            pos_g = prompt_positive + style_positive
-            pos_l = prompt_positive + style_positive
-            pos_r = prompt_positive + style_positive
-            neg_g = prompt_negative + style_negative
-            neg_l = prompt_negative + style_negative
-            neg_r = prompt_negative + style_negative
-        elif preset == "preset 5":
-            pos_g = prompt_positive
-            pos_l = prompt_positive
-            pos_r = style_positive
-            neg_g = prompt_negative
-            neg_l = prompt_negative
-            neg_r = style_negative
-        return (pos_g, pos_l, pos_r, neg_g, neg_l, neg_r, )
-
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-class Comfyroll_prompt_mixer_v2:
-    def __init__(self):
-        pass
-
-    @classmethod        
-    def INPUT_TYPES(s):
-        return {
-            "required":{
-            },
-            "optional":{
-                "prompt_positive": ("STRING", {"multiline": True, "default": "BASE_POSITIVE"}),
-                "prompt_negative": ("STRING", {"multiline": True, "default": "BASE_NEGATIVE"}),
-                "style_positive": ("STRING", {"multiline": True, "default": "REFINER_POSTIVE"}),
-                "style_negative": ("STRING", {"multiline": True, "default": "REFINER_NEGATIVE"}),
-                "preset": (["default with no style text", "default with style text", "style boost 1", "style boost 2", "style text to refiner"],),
-            },
-        }
-
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", "STRING", )
-    RETURN_NAMES = ("pos_g", "pos_l", "pos_r", "neg_g", "neg_l", "neg_r", )
-    FUNCTION = "mixer"
-
-    CATEGORY = "Comfyroll/SDXL"
-
-    def mixer(self, prompt_positive, prompt_negative, style_positive, style_negative, preset):
-        if preset == "default with no style text":
-            pos_g = prompt_positive
-            pos_l = prompt_positive
-            pos_r = prompt_positive
-            neg_g = prompt_negative
-            neg_l = prompt_negative
-            neg_r = prompt_negative
-        elif preset == "default with style text":
-            pos_g = prompt_positive + style_positive
-            pos_l = prompt_positive + style_positive
-            pos_r = prompt_positive + style_positive
-            neg_g = prompt_negative + style_negative
-            neg_l = prompt_negative + style_negative
-            neg_r = prompt_negative + style_negative
-        elif preset == "style boost 1":
-            pos_g = prompt_positive
-            pos_l = style_positive
-            pos_r = prompt_positive
-            neg_g = prompt_negative
-            neg_l = style_negative
-            neg_r = prompt_negative
-        elif preset == "style boost 2":
-            pos_g = style_positive
-            pos_l = prompt_positive
-            pos_r = style_positive
-            neg_g = style_negative
-            neg_l = prompt_negative
-            neg_r = style_negative
-        elif preset == "style text to refiner":
-            pos_g = prompt_positive
-            pos_l = prompt_positive
-            pos_r = style_positive
-            neg_g = prompt_negative
-            neg_l = prompt_negative
-            neg_r = style_negative
-        return (pos_g, pos_l, pos_r, neg_g, neg_l, neg_r, )
-
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-
-class Comfyroll_SDXLStyleText:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {
-                    "positive_style": ("STRING", {"default": "POS_STYLE", "multiline": True}),
-                    "negative_style": ("STRING", {"default": "NEG_STYLE", "multiline": True}),
-                    },
-                }
-
-    RETURN_TYPES = ("STRING", "STRING", )
-    RETURN_NAMES = ("positive_prompt_text_l", "negative_prompt_text_l" )
-    FUNCTION = "get_value"
-
-    CATEGORY = "Comfyroll/SDXL"
-
-    def get_value(self, positive_style, negative_style):
-        return (positive_style, negative_style,)
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-class Comfyroll_SDXLBasePromptEncoder:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {
-                    "base_clip": ("CLIP", ),
-                    "pos_g": ("STRING", {"multiline": True, "default": "POS_G"}),
-                    "pos_l": ("STRING", {"multiline": True, "default": "POS_L"}),
-                    "neg_g": ("STRING", {"multiline": True, "default": "NEG_G"}),
-                    "neg_l": ("STRING", {"multiline": True, "default": "NEG_L"}),
-                    "preset": (["preset A", "preset B", "preset C"],), 
-                    "base_width": ("INT", {"default": 4096.0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
-                    "base_height": ("INT", {"default": 4096.0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
-                    "crop_w": ("INT", {"default": 0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
-                    "crop_h": ("INT", {"default": 0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
-                    "target_width": ("INT", {"default": 4096.0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
-                    "target_height": ("INT", {"default": 4096.0, "min": 0, "max": MAX_RESOLUTION, "step": 64}),
-                    },
-                }
-
-    RETURN_TYPES = ("CONDITIONING", "CONDITIONING", )
-    RETURN_NAMES = ("base_positive", "base_negative", )
-    FUNCTION = "encode"
-
-    CATEGORY = "Comfyroll/SDXL"
-
-    def encode(self, base_clip, pos_g, pos_l, neg_g, neg_l, base_width, base_height, crop_w, crop_h, target_width, target_height, preset,):
-        empty = base_clip.tokenize("")
-
-        # positive prompt
-        tokens1 = base_clip.tokenize(pos_g)
-        tokens1["l"] = base_clip.tokenize(pos_l)["l"]
-
-        if len(tokens1["l"]) != len(tokens1["g"]):
-            while len(tokens1["l"]) < len(tokens1["g"]):
-                tokens1["l"] += empty["l"]
-            while len(tokens1["l"]) > len(tokens1["g"]):
-                tokens1["g"] += empty["g"]
-
-        cond1, pooled1 = base_clip.encode_from_tokens(tokens1, return_pooled=True)
-        res1 = [[cond1, {"pooled_output": pooled1, "width": base_width, "height": base_height, "crop_w": crop_w, "crop_h": crop_h, "target_width": target_width, "target_height": target_height}]]
-
-        # negative prompt
-        tokens2 = base_clip.tokenize(neg_g)
-        tokens2["l"] = base_clip.tokenize(neg_l)["l"]
-
-        if len(tokens2["l"]) != len(tokens2["g"]):
-            while len(tokens2["l"]) < len(tokens2["g"]):
-                tokens2["l"] += empty["l"]
-            while len(tokens2["l"]) > len(tokens2["g"]):
-                tokens2["g"] += empty["g"]
-
-        cond2, pooled2 = base_clip.encode_from_tokens(tokens2, return_pooled=True)
-        res2 = [[cond2, {"pooled_output": pooled2, "width": base_width, "height": base_height, "crop_w": crop_w, "crop_h": crop_h, "target_width": target_width, "target_height": target_height}]]
-
-        # positive style
-        tokens2 = base_clip.tokenize(pos_l)
-        tokens2["l"] = base_clip.tokenize(neg_l)["l"]
-
-        if len(tokens2["l"]) != len(tokens2["g"]):
-            while len(tokens2["l"]) < len(tokens2["g"]):
-                tokens2["l"] += empty["l"]
-            while len(tokens2["l"]) > len(tokens2["g"]):
-                tokens2["g"] += empty["g"]
-
-        cond2, pooled2 = base_clip.encode_from_tokens(tokens2, return_pooled=True)
-        res3 = [[cond2, {"pooled_output": pooled2, "width": base_width, "height": base_height, "crop_w": crop_w, "crop_h": crop_h, "target_width": target_width, "target_height": target_height}]]
-
-        # negative style
-        tokens2 = base_clip.tokenize(neg_l)
-        tokens2["l"] = base_clip.tokenize(neg_l)["l"]
-
-        if len(tokens2["l"]) != len(tokens2["g"]):
-            while len(tokens2["l"]) < len(tokens2["g"]):
-                tokens2["l"] += empty["l"]
-            while len(tokens2["l"]) > len(tokens2["g"]):
-                tokens2["g"] += empty["g"]
-
-        cond2, pooled2 = base_clip.encode_from_tokens(tokens2, return_pooled=True)
-        res4 = [[cond2, {"pooled_output": pooled2, "width": base_width, "height": base_height, "crop_w": crop_w, "crop_h": crop_h, "target_width": target_width, "target_height": target_height}]]
-
-        if preset == "preset A":
-            base_positive = res1
-            base_negative = res2
-        elif preset == "preset B":
-            base_positive = res3
-            base_negative = res4
-        elif preset == "preset C":
-            base_positive = res1 + res3
-            base_negative = res2 + res4
-            
-        return (base_positive, base_negative, )
-
-
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-
+#This node is a type of noise node to make image to image pictures more interesting.  Try it out!!  :D  My personal favorite is dot_style = Copper, reverse_dot_style = 'Yes', backgroundcolor = 'black'.  :)
 class Comfyroll_Halftone_Grid:
     @classmethod
     def INPUT_TYPES(s):
@@ -1166,8 +901,7 @@ class Comfyroll_Halftone_Grid:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-
-
+#This will run through a batch size of latents
 class Comfyroll_LatentBatchSize:
 
     def __init__(self):
@@ -1207,78 +941,33 @@ class Comfyroll_LatentBatchSize:
             'samples': torch.cat(sample_list),
         }, )
 
-
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class Comfyroll_ApplyLoRA_Stack:
-
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {"required": {"model": ("MODEL",),
-                            "clip": ("CLIP", ),
-                            "lora_stack": ("LORA_STACK", ),
-                            }
-        }
-
-    RETURN_TYPES = ("MODEL", "CLIP",)
-    RETURN_NAMES = ("MODEL", "CLIP", )
-    FUNCTION = "apply_lora_stack"
-    CATEGORY = "Comfyroll/IO"
-
-    def apply_lora_stack(self, model, clip, lora_stack=None,):
-
-        # Initialise the list
-        lora_params = list()
- 
-        # Extend lora_params with lora-stack items 
-        if lora_stack:
-            lora_params.extend(lora_stack)
-        else:
-            return (model, clip,)
-
-        #print(lora_params)
-
-        # Initialise the model and clip
-        model_lora = model
-        clip_lora = clip
-
-        # Loop through the list
-        for tup in lora_params:
-            lora_name, strength_model, strength_clip = tup
-            
-            lora_path = folder_paths.get_full_path("loras", lora_name)
-            lora = comfy.utils.load_torch_file(lora_path, safe_load=True)
-            
-            model_lora, clip_lora = comfy.sd.load_lora_for_models(model_lora, clip_lora, lora, strength_model, strength_clip)  
-
-        return (model_lora, clip_lora,)
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-# Based on Efficiency Nodes
+# Based on Efficiency Nodes.  This is a lora stack where a single node has 3 different loras each with their own switch
 class Comfyroll_LoRA_Stack:
 
-    loras = ["None"] + folder_paths.get_filename_list("loras")
-
     @classmethod
     def INPUT_TYPES(cls):
+    
+        loras = ["None"] + folder_paths.get_filename_list("loras")
+        
         return {"required": {
                     "switch_1": ([
                         "Off",
                         "On"],),
-                    "lora_name_1": (cls.loras,),
+                    "lora_name_1": (loras,),
                     "model_weight_1": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                     "clip_weight_1": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                     "switch_2": ([
                         "Off",
                         "On"],),
-                    "lora_name_2": (cls.loras,),
+                    "lora_name_2": (loras,),
                     "model_weight_2": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                     "clip_weight_2": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                     "switch_3": ([
                         "Off",
                         "On"],),
-                    "lora_name_3": (cls.loras,),
+                    "lora_name_3": (loras,),
                     "model_weight_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                     "clip_weight_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                 },
@@ -1312,6 +1001,85 @@ class Comfyroll_LoRA_Stack:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+#This applies the lora stack.
+class Comfyroll_ApplyLoRA_Stack:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {"model": ("MODEL",),
+                            "clip": ("CLIP", ),
+                            "lora_stack": ("LORA_STACK", ),
+                            }
+        }
+
+    RETURN_TYPES = ("MODEL", "CLIP",)
+    RETURN_NAMES = ("MODEL", "CLIP", )
+    FUNCTION = "apply_lora_stack"
+    CATEGORY = "Comfyroll/IO"
+
+    def apply_lora_stack(self, model, clip, lora_stack=None,):
+
+        # Initialise the list
+        lora_params = list()
+ 
+        # Extend lora_params with lora-stack items 
+        if lora_stack:
+            lora_params.extend(lora_stack)
+        else:
+            return (model, clip,)
+
+        # Initialise the model and clip
+        model_lora = model
+        clip_lora = clip
+
+        # Loop through the list
+        for tup in lora_params:
+            lora_name, strength_model, strength_clip = tup
+            
+            lora_path = folder_paths.get_full_path("loras", lora_name)
+            lora = comfy.utils.load_torch_file(lora_path, safe_load=True)
+            
+            model_lora, clip_lora = comfy.sd.load_lora_for_models(model_lora, clip_lora, lora, strength_model, strength_clip)  
+
+        return (model_lora, clip_lora,)
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#This node will apply any type of ControlNet.
+class Comfyroll_ApplyControlNet:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"conditioning": ("CONDITIONING", ),
+                             "control_net": ("CONTROL_NET", ),
+                             "image": ("IMAGE", ),
+                             "switch": ([
+                                "On",
+                                "Off"],),
+                             "strength": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 10.0, "step": 0.01})
+                             }}
+    RETURN_TYPES = ("CONDITIONING",)
+    FUNCTION = "apply_controlnet"
+
+    CATEGORY = "Comfyroll/Conditioning"
+
+    def apply_controlnet(self, conditioning, control_net, image, switch, strength):
+        if strength == 0 or switch == "Off":
+            return (conditioning, )
+
+        c = []
+        control_hint = image.movedim(-1,1)
+        for t in conditioning:
+            n = [t[0], t[1].copy()]
+            c_net = control_net.copy().set_cond_hint(control_hint, strength)
+            if 'control' in t[1]:
+                c_net.set_previous_controlnet(t[1]['control'])
+            n[1]['control'] = c_net
+            c.append(n)
+        return (c, )
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#This node is a stack of controlnets each with their own switch.
 class Comfyroll_ControlNetStack:
 
     controlnets = ["None"] + folder_paths.get_filename_list("controlnet")
@@ -1367,23 +1135,24 @@ class Comfyroll_ControlNetStack:
         
         if controlnet_1 != "None" and  switch_1 == "On":
             controlnet_path = folder_paths.get_full_path("controlnet", controlnet_1)
-            controlnet_1 = comfy.sd.load_controlnet(controlnet_path)
+            controlnet_1 = comfy.controlnet.load_controlnet(controlnet_path)
             controlnet_list.extend([(controlnet_1, image_1, controlnet_strength_1)]),
 
         if controlnet_2 != "None" and  switch_2 == "On":
             controlnet_path = folder_paths.get_full_path("controlnet", controlnet_2)
-            controlnet_2 = comfy.sd.load_controlnet(controlnet_path)
+            controlnet_2 = comfy.controlnet.load_controlnet(controlnet_path)
             controlnet_list.extend([(controlnet_2, image_2, controlnet_strength_2)]),
 
         if controlnet_3 != "None" and  switch_3 == "On":
             controlnet_path = folder_paths.get_full_path("controlnet", controlnet_3)
-            controlnet_3 = comfy.sd.load_controlnet(controlnet_path)
+            controlnet_3 = comfy.controlnet.load_controlnet(controlnet_path)
             controlnet_list.extend([(controlnet_3, image_3, controlnet_strength_3)]),
 
         return (controlnet_list,)
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
+#This applies the ControlNet stack.
 class Comfyroll_ApplyControlNetStack:
     @classmethod
     def INPUT_TYPES(s):
@@ -1422,37 +1191,8 @@ class Comfyroll_ApplyControlNetStack:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class Comfyroll_BatchProcessSwitch:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "Input": (["image", "image batch"],),
-                "image": ("IMAGE", ),
-                "image_batch": ("IMAGE", )
-            }
-        }
-
-    RETURN_TYPES = ("IMAGE",)
-    OUTPUT_NODE = True
-    FUNCTION = "InputControlNet"
-
-    CATEGORY = "Comfyroll/Process"
-
-    def InputControlNet(self, Input, image, image_batch):
-        if Input == "image":
-            return (image, )
-        else:
-            return (image_batch, ) 
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
+#This is a stack of models.  Each with thier own swtich.
 class Comfyroll_ModelStack:
-    #input_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))), 'models\checkpoints\SDXL')
-    #checkpoint_files = ["None"] + [name for name in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir,name))]
     checkpoint_files = ["None"] + folder_paths.get_filename_list("checkpoints")
     
     @classmethod
@@ -1510,13 +1250,7 @@ class Comfyroll_ModelStack:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-def load_checkpoint(ckpt_name, output_vae=False, output_clip=False):
-    ckpt_path = folder_paths.get_full_path("checkpoints", ckpt_name)
-    out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=False, output_clip=False, embedding_directory=folder_paths.get_folder_paths("embeddings"))
-    return out # class tuple
-    
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
+#This will apply the model stack and combine the models together
 class Comfyroll_ApplyModelMerge:
 
     @classmethod
@@ -1598,76 +1332,29 @@ class Comfyroll_ApplyModelMerge:
                 return (model1, clip1, model_mix_info,)
         else:
             print(f"[ERROR] Apply Model Merge: at least 2 models are needed for merging")
-    
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-
-
-class Comfyroll_LoadAnimationFrames:
-    input_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))), 'input')
-    @classmethod
-    def INPUT_TYPES(s):
-        if not os.path.exists(s.input_dir):
-            os.makedirs(s.input_dir)
-        image_folder = [name for name in os.listdir(s.input_dir) if os.path.isdir(os.path.join(s.input_dir,name)) and len(os.listdir(os.path.join(s.input_dir,name))) != 0]
-        return {"required":
-                    {"image_sequence_folder": (sorted(image_folder), ),
-                     "start_index": ("INT", {"default": 1, "min": 1, "max": 10000}),
-                     "max_frames": ("INT", {"default": 1, "min": 1, "max": 10000})
-                     }
-                }
-
-    CATEGORY = "Comfyroll/Test"
-
-    RETURN_TYPES = ("IMAGE", "MASK", "INT")
-    RETURN_NAMES = ("frames", "masks", "index")
-    FUNCTION = "load_image_sequence"
-
-    def load_image_sequence(self, image_sequence_folder, start_index, max_frames):
-        image_path = os.path.join(self.input_dir, image_sequence_folder)
-        file_list = sorted(os.listdir(image_path), key=lambda s: sum(((s, int(n)) for s, n in re.findall(r'(\D+)(\d+)', 'a%s0' % s)), ()))
-        sample_frames = []
-        sample_frames_mask = []
-        sample_index = list(range(start_index-1, len(file_list), 1))[:max_frames]
-        for num in sample_index:
-            i = Image.open(os.path.join(image_path, file_list[num]))
-            image = i.convert("RGB")
-            image = np.array(image).astype(np.float32) / 255.0
-            image = torch.from_numpy(image)[None,]
-            image = image.squeeze()
-            if 'A' in i.getbands():
-                mask = np.array(i.getchannel('A')).astype(np.float32) / 255.0
-                mask = 1. - torch.from_numpy(mask)
-            else:
-                mask = torch.zeros((64, 64), dtype=torch.float32, device="cpu")
-            sample_frames.append(image)
-            sample_frames_mask.append(mask)
-        return (torch.stack(sample_frames), sample_frames_mask)
-
+# MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 '''
 NODE_CLASS_MAPPINGS = {
-    "CR Image Input Switch": ComfyRoll_InputImages,
-    "CR Image Input Switch (4 way)": ComfyRoll_InputImages_4way,
-    "CR Latent Input Switch": ComfyRoll_InputLatents,
-    "CR Process Switch": ComfyRoll_InputLatentsText,
-    "CR Conditioning Input Switch": ComfyRoll_InputConditioning,
-    "CR Clip Input Switch": ComfyRoll_InputClip,
-    "CR Model Input Switch": ComfyRoll_InputModel,
-    "CR ControlNet Input Switch": ComfyRoll_InputControlNet,
-    "CR Load LoRA": ComfyRoll_LoraLoader,
-    "CR Apply ControlNet": ComfyRoll_ApplyControlNet,
-    "CR Image Size": ComfyRoll_ImageSize_Float,
-    "CR Image Output": ComfyRoll_ImageOutput,
+    "CR Image Input Switch": Comfyroll_InputImages,
+    "CR Image Input Switch (4 way)": Comfyroll_InputImages_4way,
+    "CR Latent Input Switch": Comfyroll_InputLatents,
+    "CR Process Switch": Comfyroll_InputLatentsText,
+    "CR Conditioning Input Switch": Comfyroll_InputConditioning,
+    "CR Clip Input Switch": Comfyroll_InputClip,
+    "CR Model Input Switch": Comfyroll_InputModel,
+    "CR ControlNet Input Switch": Comfyroll_InputControlNet,
+    "CR Load LoRA": Comfyroll_LoraLoader,
+    "CR Apply ControlNet": Comfyroll_ApplyControlNet,
+    "CR Image Size": Comfyroll_ImageSize_Float,
+    "CR Image Output": Comfyroll_ImageOutput,
     "CR Integer Multiple": CR_Int_Multiple_Of,
-    "CR Aspect Ratio": ComfyRoll_AspectRatio,
-    "CR Aspect Ratio SDXL": ComfyRoll_AspectRatio_SDXL,
-    "CR Seed to Int": ComfyRoll_SeedToInt,
+    "CR Aspect Ratio": Comfyroll_AspectRatio,
+    "CR Seed to Int": Comfyroll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
-    "CR SDXL Prompt Mixer": ComfyRoll_prompt_mixer,
-    "CR SDXL Style Text": Comfyroll_SDXLStyleText,
-    "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
     "CR Hires Fix Process Switch": ComfyRoll_HiResFixSwitch,
     "CR Halftones" :Comfyroll_Halftone_Grid,
     "CR LoRA Stack":Comfyroll_LoRA_Stack,
@@ -1676,7 +1363,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Batch Process Switch": Comfyroll_BatchProcessSwitch,
     "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,
-    "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
     "CR Seed":Comfyroll_Seed,
 }
 '''
