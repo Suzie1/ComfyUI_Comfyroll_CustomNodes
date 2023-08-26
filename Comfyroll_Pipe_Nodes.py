@@ -12,8 +12,10 @@ import comfy.utils
 import numpy as np
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+# NODES
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class module_pipe_loader:
+class CR_module_pipe_loader:
     def __init__(self):
         pass
 
@@ -48,7 +50,7 @@ class module_pipe_loader:
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#       
         
-class module_input:
+class CR_module_input:
     def __init__(self):
         pass
     
@@ -70,7 +72,7 @@ class module_input:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
  
-class module_output:
+class CR_module_output:
     def __init__(self):
         pass
     
@@ -131,7 +133,7 @@ class module_output:
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
         
-class image_pipe_in:
+class CR_image_pipe_in:
     def __init__(self):
         pass
 
@@ -153,7 +155,7 @@ class image_pipe_in:
     RETURN_NAMES = ("pipe", )
     FUNCTION = "flush"
 
-    CATEGORY = "Comfyroll/Module"
+    CATEGORY = "Comfyroll/Pipe"
 
     def flush(self, image=0, width=0, height=0, upscale_factor=0):
         pipe_line = (image, width, height, upscale_factor)
@@ -161,7 +163,7 @@ class image_pipe_in:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class image_pipe_edit:
+class CR_image_pipe_edit:
     def __init__(self):
         pass
     
@@ -180,7 +182,7 @@ class image_pipe_edit:
     RETURN_NAMES = ("pipe", )
     FUNCTION = "flush"
 
-    CATEGORY = "Comfyroll/Module"
+    CATEGORY = "Comfyroll/Pipe"
 
     def flush(self, pipe, image=None, width=None, height=None, upscale_factor=None):
         new_image, new_width, new_height, new_upscale_factor = pipe
@@ -202,7 +204,7 @@ class image_pipe_edit:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class image_pipe_out:
+class CR_image_pipe_out:
     def __init__(self):
         pass
     
@@ -216,7 +218,7 @@ class image_pipe_out:
     RETURN_NAMES = ("pipe", "image", "width", "height", "upscale_factor")
     FUNCTION = "flush"
 
-    CATEGORY = "Comfyroll/Module"
+    CATEGORY = "Comfyroll/Pipe"
     
     def flush(self, pipe):
         #if switch == "Off":
@@ -227,7 +229,7 @@ class image_pipe_out:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-class input_switch_pipe:
+class CR_input_switch_pipe:
     def __init__(self):
         pass
 
@@ -254,6 +256,9 @@ class input_switch_pipe:
             return (pipe2, )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+# MAPPINGS
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+
 '''
 NODE_CLASS_MAPPINGS_2 = {
     "CR Module Pipe Loader": module_pipe_loader,
@@ -265,6 +270,7 @@ NODE_CLASS_MAPPINGS_2 = {
     "CR Pipe Switch": input_switch_pipe,
 }
 '''
+
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # Credits   
 # TinyTerra                               https://github.com/TinyTerra/ComfyUI_tinyterraNodes                                                       #
