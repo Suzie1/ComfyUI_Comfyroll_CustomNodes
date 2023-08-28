@@ -5,11 +5,14 @@
 
 import torch
 import numpy as np
-from PIL import Image, ImageEnhance
 import os
 import sys
 import io
 import pip
+from PIL import Image, ImageEnhance
+from PIL.PngImagePlugin import PngInfo
+import json
+
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
@@ -28,6 +31,7 @@ try:
 except ImportError:
     pip.main(['install', 'matplotlib'])
     import matplotlib.pyplot as plt
+
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
