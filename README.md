@@ -10,6 +10,8 @@ These nodes were originally made for use in the Comfyroll Template Workflows.
 
 [SDXL Workflow for ComfyUI with Multi-ControlNet](https://civitai.com/models/129858/sdxl-workflow-for-comfyui-with-multi-controlnet)
 
+[SDXL and SD1.5 Model Merge Templates for ComfyUI](https://civitai.com/models/123125/sdxl-and-sd15-model-merge-templates-for-comfyui)
+
 The nodes can be used in any ComfyUI workflow.  Getting ready to release 1.1.  There's a lot of different changes being added.  The biggest thing being changed is that we have a new SDXL file being added.
 Also, up-date your ComfyUI for the Multi-ControlNet Stack.
 
