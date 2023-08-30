@@ -21,6 +21,7 @@ NODE_CLASS_MAPPINGS = {
     "CR ControlNet Input Switch": Comfyroll_ControlNetInputSwitch,
     "CR Text Input Switch": Comfyroll_TextInputSwitch,
     "CR Text Input Switch (4 way)": Comfyroll_TextInputSwitch_4way,
+    "CR Switch Model and CLIP":Comfyroll_ModelAndCLIPInputSwitch,
     "CR Load LoRA": Comfyroll_LoraLoader,
     "CR Apply ControlNet": Comfyroll_ApplyControlNet,
     "CR Image Size": Comfyroll_ImageSize_Float,
@@ -28,6 +29,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Integer Multiple": Comfyroll_Int_Multiple_Of,
     "CR Aspect Ratio": Comfyroll_AspectRatio,
     "CR Seed to Int": Comfyroll_SeedToInt,
+    "CR Integer To String":CR_IntegerToString,
+    "CR Float To String":CR_FloatToString,
     "CR Color Tint": Comfyroll_Color_Tint,
     "CR Img2Img Process Switch": Comfyroll_InputLatentsText,
     "CR Hires Fix Process Switch": Comfyroll_HiResFixSwitch,
@@ -40,6 +43,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,    
     "CR Seed": Comfyroll_Seed,
+    "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
+    "CR Model Stack":Comfyroll_ModelStack,
     ### SDXL Nodes
     "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
     "CR SDXL Aspect Ratio":Comfyroll_SDXL_AspectRatio_v2,
@@ -60,6 +65,10 @@ NODE_CLASS_MAPPINGS = {
     "CR Index Reset":CR_IndexReset,    
     "CR Text List To String":CR_TextListToString,
     "CR Debatch Frames":CR_DebatchFrames,
+    "CR Gradient Float":CR_GradientFloat,
+    "CR Gradient Integer":CR_GradientInteger,
+    "CR Increment Float":CR_IncrementFloat,
+    "CR Increment Integer":CR_IncrementInteger,
     #"CR Schedule LoRAs":CR_ScheduleLoRAs,
     #"CR Schedule Models":CR_ScheduleModels,
     #"CR Schedule ControlNets":CR_ScheduleControlNets,
@@ -68,8 +77,6 @@ NODE_CLASS_MAPPINGS = {
     #"CR Camera Rotation":CR_CameraRotation, 
     #"CR Morph Layers":CR_MorphLayers,  
     ### Test nodes
-    "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
-    "CR Model Stack":Comfyroll_ModelStack,
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
