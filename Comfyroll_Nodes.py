@@ -33,7 +33,6 @@ except ImportError:
     import matplotlib.pyplot as plt
 
 
-
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # FUNCTIONS
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -1230,7 +1229,7 @@ class Comfyroll_ModelStack:
     RETURN_TYPES = ("MODEL_STACK",)
     FUNCTION = "list_checkpoints"
 
-    CATEGORY = "Comfyroll/Test"
+    CATEGORY = "Comfyroll/Model Merge"
 
     def list_checkpoints(self, switch_1, ckpt_name1, model_ratio1, clip_ratio1, switch_2, ckpt_name2, model_ratio2, clip_ratio2, switch_3, ckpt_name3, model_ratio3, clip_ratio3, model_stack=None):
     
@@ -1266,7 +1265,7 @@ class Comfyroll_ApplyModelMerge:
     RETURN_NAMES = ("MODEL", "CLIP", "model_mix_info",)
     FUNCTION = "merge"
 
-    CATEGORY = "Comfyroll/Test"
+    CATEGORY = "Comfyroll/Model Merge"
 
     #add error capture for no models in stack
 
@@ -1338,6 +1337,69 @@ class Comfyroll_ApplyModelMerge:
             print(f"[ERROR] Apply Model Merge: at least 2 models are needed for merging")
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+
+class Comfyroll_ModelAndCLIPInputSwitch:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "Input": ("INT", {"default": 1, "min": 1, "max": 2}),
+                "model1": ("MODEL",),
+                "clip1": ("CLIP",),                
+                "model2": ("MODEL",),               
+                "clip2": ("CLIP",)
+            }
+        }
+
+    RETURN_TYPES = ("MODEL", "CLIP",)
+    RETURN_NAMES = ("MODEL", "CLIP",)
+    OUTPUT_NODE = True
+    FUNCTION = "switch"
+
+    CATEGORY = "Comfyroll/Logic"
+
+    def switch(self, Input, clip1, clip2, model1, model2):
+        if Input == 1:
+            return (model1, clip1, )
+        else:
+            return (model2, clip2, )
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+# cloned from Mikey Nodes
+class CR_IntegerToString:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"int_": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                }
+        }
+
+    RETURN_TYPES = ('STRING',)
+    FUNCTION = 'convert'
+    CATEGORY = 'Comfyroll/Text'
+
+    def convert(self, int_):
+        return (f'{int_}', )
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+# cloned from Mikey Nodes
+class CR_FloatToString:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"float_": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1000000.0}),
+                }        
+        }
+
+    RETURN_TYPES = ('STRING',)
+    FUNCTION = 'convert'
+    CATEGORY = 'Comfyroll/Text'
+
+    def convert(self, float_):
+        return (f'{float_}', )
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -1378,6 +1440,7 @@ NODE_CLASS_MAPPINGS = {
 # SeargeDP                                https://github.com/SeargeDP/SeargeSDXL                                                                    #
 # LucianoCirino                           https://github.com/LucianoCirino/efficiency-nodes-comfyui                                                 #
 # credit SLAPaper                         https://github.com/SLAPaper/ComfyUI-Image-Selector                                                        #
+# bash-j                                  https://github.com/bash-j/mikey_nodes                                                                     #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
