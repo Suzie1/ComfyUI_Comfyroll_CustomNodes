@@ -22,7 +22,7 @@ import comfy.utils
 import comfy.model_management
 
 import folder_paths
-from nodes import MAX_RESOLUTION, ControlNetApply
+from nodes import MAX_RESOLUTION, ControlNetApplyAdvanced
 import typing as tg
 
 
@@ -1139,17 +1139,17 @@ class Comfyroll_ControlNetStack:
         if controlnet_1 != "None" and  switch_1 == "On":
             controlnet_path = folder_paths.get_full_path("controlnet", controlnet_1)
             controlnet_1 = comfy.controlnet.load_controlnet(controlnet_path)
-            controlnet_list.extend([(controlnet_1, image_1, controlnet_strength_1)]),
+            controlnet_list.extend([(controlnet_1, image_1, controlnet_strength_1, start_percent_1, end_percent_1)]),
 
         if controlnet_2 != "None" and  switch_2 == "On":
             controlnet_path = folder_paths.get_full_path("controlnet", controlnet_2)
             controlnet_2 = comfy.controlnet.load_controlnet(controlnet_path)
-            controlnet_list.extend([(controlnet_2, image_2, controlnet_strength_2)]),
+            controlnet_list.extend([(controlnet_2, image_2, controlnet_strength_2, start_percent_2, end_percent_2)]),
 
         if controlnet_3 != "None" and  switch_3 == "On":
             controlnet_path = folder_paths.get_full_path("controlnet", controlnet_3)
             controlnet_3 = comfy.controlnet.load_controlnet(controlnet_path)
-            controlnet_list.extend([(controlnet_3, image_3, controlnet_strength_3)]),
+            controlnet_list.extend([(controlnet_3, image_3, controlnet_strength_3, start_percent_3, end_percent_3)]),
 
         return (controlnet_list,)
         
@@ -1179,7 +1179,7 @@ class Comfyroll_ApplyControlNetStack:
     
         if controlnet_stack is not None:
             for controlnet_tuple in controlnet_stack:
-                controlnet_name, image, strength = controlnet_tuple
+                controlnet_name, image, strength, start_percent, end_percent  = controlnet_tuple
                 
                 if type(controlnet_name) == str:
                     controlnet_path = folder_paths.get_full_path("controlnet", controlnet_name)
@@ -1187,7 +1187,8 @@ class Comfyroll_ApplyControlNetStack:
                 else:
                     controlnet = controlnet_name
                 
-                base_positive = ControlNetApply().apply_controlnet(base_positive, controlnet, image, strength)[0]
+                base_positive = ControlNetApplyAdvanced().apply_controlnet(base_positive, controlnet, image, strength,
+                                                                   start_percent, end_percent)[0]
 
         return (base_positive,)
 
