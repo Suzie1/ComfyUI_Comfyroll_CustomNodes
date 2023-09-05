@@ -1163,6 +1163,7 @@ class Comfyroll_ApplyControlNetStack:
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {"base_positive": ("CONDITIONING", ),
+                             "base_negative": ("CONDITIONING",),
                              "switch": ([
                                 "Off",
                                 "On"],),
@@ -1170,15 +1171,15 @@ class Comfyroll_ApplyControlNetStack:
                             }
         }                    
 
-    RETURN_TYPES = ("CONDITIONING", )
-    RETURN_NAMES = ("base_pos", )
+    RETURN_TYPES = ("CONDITIONING", "CONDITIONING", )
+    RETURN_NAMES = ("base_pos", "base_neg", )
     FUNCTION = "apply_controlnet_stack"
     CATEGORY = "Comfyroll/Conditioning"
 
-    def apply_controlnet_stack(self, base_positive, switch, controlnet_stack=None,):
+    def apply_controlnet_stack(self, base_positive, base_negative, switch, controlnet_stack=None,):
 
         if switch == "Off":
-            return (base_positive, )
+            return (base_positive, base_negative, )
     
         if controlnet_stack is not None:
             for controlnet_tuple in controlnet_stack:
@@ -1190,11 +1191,13 @@ class Comfyroll_ApplyControlNetStack:
                 else:
                     controlnet = controlnet_name
                 
-                base_positive = ControlNetApplyAdvanced().apply_controlnet(base_positive, controlnet, image, strength,
-                                                                   start_percent, end_percent)[0]
+                controlnet_conditioning = ControlNetApplyAdvanced().apply_controlnet(base_positive, base_negative,
+                                                                                     controlnet, image, strength,
+                                                                                     start_percent, end_percent)
 
-        return (base_positive,)
+                base_positive, base_negative = controlnet_conditioning[0], controlnet_conditioning[1]
 
+        return (base_positive, base_negative, )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
