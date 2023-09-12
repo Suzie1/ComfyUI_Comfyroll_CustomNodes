@@ -51,13 +51,6 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Style Text": Comfyroll_SDXLStyleText,
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
     "CR Aspect Ratio SDXL": Comfyroll_AspectRatio_SDXL,
-    #"CR Schedule LoRAs":CR_ScheduleLoRAs,
-    #"CR Schedule Models":CR_ScheduleModels,
-    #"CR Schedule ControlNets":CR_ScheduleControlNets,
-    #"CR Animate Transition":CR_AnimateTransition,
-    #"CR Camera Zoom":CR_CameraZoom,
-    #"CR Camera Rotation":CR_CameraRotation, 
-    #"CR Morph Layers":CR_MorphLayers,  
     ### Test nodes
 }
 
