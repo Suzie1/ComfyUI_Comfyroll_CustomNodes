@@ -43,11 +43,6 @@ def tensor2pil(image):
 def pil2tensor(image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
 
-def load_checkpoint(ckpt_name, output_vae=False, output_clip=False):
-    ckpt_path = folder_paths.get_full_path("checkpoints", ckpt_name)
-    out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=False, output_clip=False, embedding_directory=folder_paths.get_folder_paths("embeddings"))
-    return out # class tuple
-
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # NODES
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
