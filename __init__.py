@@ -35,7 +35,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,    
     "CR Seed": Comfyroll_Seed,
     "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
-    "CR Model Stack":Comfyroll_ModelStack,
+    "CR Model Merge Stack":Comfyroll_ModelMergeStack,
     ### Pipe Nodes
     "CR Module Pipe Loader": CR_module_pipe_loader,
     "CR Module Input": CR_module_input,
