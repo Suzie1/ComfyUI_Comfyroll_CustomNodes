@@ -1447,6 +1447,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,
     "CR Seed":Comfyroll_Seed,
+    "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
+    "CR Model Merge Stack":Comfyroll_ModelMergeStack,
 }
 '''
 
