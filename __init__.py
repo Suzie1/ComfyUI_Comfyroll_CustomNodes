@@ -1,7 +1,6 @@
 from .Comfyroll_Nodes import *
 from .Comfyroll_Pipe_Nodes import *
 from .Comfyroll_SDXL_Nodes import *
-#from .Comfyroll_Test_Nodes import *
 
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": Comfyroll_ImageInputSwitch,
