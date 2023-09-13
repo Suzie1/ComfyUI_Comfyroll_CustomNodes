@@ -4,13 +4,6 @@ from .Comfyroll_SDXL_Nodes import *
 #from .Comfyroll_Test_Nodes import *
 
 NODE_CLASS_MAPPINGS = {
-    "CR Module Pipe Loader": CR_module_pipe_loader,
-    "CR Module Input": CR_module_input,
-    "CR Module Output": CR_module_output,
-    "CR Image Pipe In": CR_image_pipe_in,
-    "CR Image Pipe Edit": CR_image_pipe_edit,
-    "CR Image Pipe Out": CR_image_pipe_out,
-    "CR Pipe Switch": CR_input_switch_pipe,
     "CR Image Input Switch": Comfyroll_ImageInputSwitch,
     "CR Image Input Switch (4 way)": Comfyroll_ImageInputSwitch_4way,
     "CR Latent Input Switch": Comfyroll_LatentInputSwitch,
@@ -44,6 +37,14 @@ NODE_CLASS_MAPPINGS = {
     "CR Seed": Comfyroll_Seed,
     "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
     "CR Model Stack":Comfyroll_ModelStack,
+    ### Pipe Nodes
+    "CR Module Pipe Loader": CR_module_pipe_loader,
+    "CR Module Input": CR_module_input,
+    "CR Module Output": CR_module_output,
+    "CR Image Pipe In": CR_image_pipe_in,
+    "CR Image Pipe Edit": CR_image_pipe_edit,
+    "CR Image Pipe Out": CR_image_pipe_out,
+    "CR Pipe Switch": CR_input_switch_pipe,
     ### SDXL Nodes
     "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
     "CR SDXL Aspect Ratio":Comfyroll_SDXL_AspectRatio_v2,
