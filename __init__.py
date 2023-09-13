@@ -51,7 +51,6 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Style Text": Comfyroll_SDXLStyleText,
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
     "CR Aspect Ratio SDXL": Comfyroll_AspectRatio_SDXL,
-    ### Test nodes
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
