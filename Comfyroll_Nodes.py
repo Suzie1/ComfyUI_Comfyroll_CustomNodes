@@ -1202,7 +1202,7 @@ class Comfyroll_ApplyControlNetStack:
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 #This is a stack of models.  Each with thier own swtich.
-class Comfyroll_ModelStack:
+class Comfyroll_ModelMergeStack:
     checkpoint_files = ["None"] + folder_paths.get_filename_list("checkpoints")
     
     @classmethod
@@ -1260,89 +1260,99 @@ class Comfyroll_ModelStack:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-#This will apply the model stack and combine the models together
+#This will apply the model merge stack and combine the models together
 class Comfyroll_ApplyModelMerge:
 
     @classmethod
     def INPUT_TYPES(s):
+        merge_methods = ["Recursive", "Weighted"]
         return {"required": {"model_stack": ("MODEL_STACK",),
-                             "merge_method": (["Recursive"],),
-                              }}
+                             "merge_method": (merge_methods,),
+                             "normalise_ratios": (["Yes","No"],),
+                             "weight_factor":("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                            }
+        }
+        
     RETURN_TYPES = ("MODEL", "CLIP", "STRING",)
     RETURN_NAMES = ("MODEL", "CLIP", "model_mix_info",)
     FUNCTION = "merge"
-
     CATEGORY = "Comfyroll/Model Merge"
 
-    #add error capture for no models in stack
-
-    def merge(self, model_stack, merge_method):
-              
+    def merge(self, model_stack, merge_method, normalise_ratios, weight_factor):
+    
+        # Initialise
+        sum_clip_ratio = 0
+        sum_model_ratio = 0
         model_mix_info = str("Merge Info:\n")
-        i = 1
-        
-        if model_stack is not None:
-            if merge_method == "Recursive":
-                model_mix_info = model_mix_info + "Ratios are applied using the Recursive method\n\n"
-                
-                for model_tuple in model_stack:
-                    model_name, model_ratio, clip_ratio = model_tuple
-                    ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
-                    merge_model = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
-                    print(f"Apply Model Merge: Model Name {model_name}, Model Ratio {model_ratio}, CLIP Ratio {clip_ratio}")
-                    
-                    #Clone the first model
-                    if i == 1:
-                        print(f"Ratios for first model are ignored.")
-                        model1 = merge_model[0].clone()
-                        clip1 = merge_model[1].clone()
-                        
-                        model_mix_info = model_mix_info + "Base Model Name: " + model_name + "\nRatios for first model are ignored\n"
-                    else:                       
-                        # Merge next model  
-                        model2 = merge_model[0].clone()
-                        kp = model2.get_key_patches("diffusion_model.")
-                        for k in kp:
-                            model1.add_patches({k: kp[k]}, 1.0 - model_ratio, model_ratio)   
-                        # Merge next clip
-                        clip2 = merge_model[1].clone()          
-                        kp = clip2.get_key_patches()
-                        for k in kp:
-                            if k.endswith(".position_ids") or k.endswith(".logit_scale"):
-                                continue
-                            clip1.add_patches({k: kp[k]}, 1.0 - clip_ratio, clip_ratio)
-                    
-                    # Update model info                
-                        model_mix_info = model_mix_info + "\nModel Name: " + model_name + "\nModel Ratio: " + str(model_ratio) + "\nCLIP Ratio: " + str(clip_ratio) + "\n"
-                        
-                    i+=1
-                    
-                return (model1, clip1, model_mix_info,)
-            else:
-                model_mix_info = model_mix_info + "Ratios are applied using the Proportional method\n\n"
-                
-                for model_tuple in model_stack:
-                    model_name, model_ratio, clip_ratio = model_tuple
-                    ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
-                    merge_model = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
-                    print(f"Apply Model Merge: Model Name {model_name}, Model Ratio {model_ratio}, CLIP Ratio {clip_ratio}")
-                    
-                    if i == 1:
-                        print(f"Ratios for first model will be ignored.")
-                        model1 = merge_model[0].clone()
-                        clip1 = merge_model[1].clone() 
-                    
-                    #add logic for proportional method
-                    
-                    # Update model info                
-                        model_mix_info = model_mix_info + "\nModel Name: " + model_name + "\nModel Ratio: " + str(model_ratio) + "\nCLIP Ratio: " + str(clip_ratio)
-                        
-                    i+=1
-                    
-                return (model1, clip1, model_mix_info,)
-        else:
-            print(f"[ERROR] Apply Model Merge: at least 2 models are needed for merging")
+             
+        # If no models
+        if len(model_stack) == 0:
+            print(f"[Warning] Apply Model Merge: No active models selected in the model merge stack")
+            return()
 
+        # If only one model
+        if len(model_stack) == 1:
+            print(f"[Warning] Apply Model Merge: Only one active model found in the model merge stack. At least 2 models are normally needed for merging. The active model will be output.")
+            model_name, model_ratio, clip_ratio = model_stack[0]
+            ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
+            return comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
+        
+        # Calculate ratio sums for normalisation        
+        for i, model_tuple in enumerate(model_stack):
+            model_name, model_ratio, clip_ratio = model_tuple
+            sum_model_ratio += model_ratio                
+            sum_clip_ratio += clip_ratio
+   
+        # Do recursive merge loops
+        model_mix_info = model_mix_info + "Ratios are applied using the Recursive method\n\n"
+        
+        # Loop through the models and compile the merged model
+        for i, model_tuple in enumerate(model_stack):
+            model_name, model_ratio, clip_ratio = model_tuple
+            ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
+            merge_model = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
+            print(f"Apply Model Merge: Model Name {model_name}, Model Ratio {model_ratio}, CLIP Ratio {clip_ratio}")
+
+            if sum_model_ratio != 1 and normalise_ratios == "Yes":
+                print(f"[Warning] Apply Model Merge: Sum of model ratios != 1. Ratios will be normalised")
+                # Normalise the ratios  
+                model_ratio = round(model_ratio / sum_model_ratio, 2)
+                clip_ratio = round(clip_ratio / sum_clip_ratio, 2)
+            
+            # Weighted merge method
+            if merge_method == "Weighted":
+                if i == 1:
+                    # Reassign extra weight to the second model
+                    model_ratio = 1 - weight_factor + (weight_factor * model_ratio)
+                    clip_ratio = 1 - weight_factor + (weight_factor * clip_ratio)
+                      
+            #Clone the first model
+            if i == 0: 
+                model1 = merge_model[0].clone()
+                clip1 = merge_model[1].clone()
+                
+                model_mix_info = model_mix_info + "Base Model Name: " + model_name
+            else:
+                # Merge next model
+                # Comfy merge logic is flipped for stacked nodes. This is because the first model is effectively model1 and all subsequent models are model2. 
+                model2 = merge_model[0].clone()
+                kp = model2.get_key_patches("diffusion_model.")
+                for k in kp:
+                    #model1.add_patches({k: kp[k]}, 1.0 - model_ratio, model_ratio) #original logic
+                    model1.add_patches({k: kp[k]}, model_ratio, 1.0 - model_ratio) #flipped logic
+                # Merge next clip
+                clip2 = merge_model[1].clone()          
+                kp = clip2.get_key_patches()
+                for k in kp:
+                    if k.endswith(".position_ids") or k.endswith(".logit_scale"):
+                        continue
+                    #clip1.add_patches({k: kp[k]}, 1.0 - clip_ratio, clip_ratio) #original logic
+                    clip1.add_patches({k: kp[k]}, clip_ratio, 1.0 - clip_ratio) #flipped logic
+            
+            # Update model info                
+                model_mix_info = model_mix_info + "\nModel Name: " + model_name + "\nModel Ratio: " + str(model_ratio) + "\nCLIP Ratio: " + str(clip_ratio) + "\n"
+                
+        return (model1, clip1, model_mix_info,)
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 class Comfyroll_ModelAndCLIPInputSwitch:
