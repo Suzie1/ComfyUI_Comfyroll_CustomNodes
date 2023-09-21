@@ -1,6 +1,7 @@
 from .Comfyroll_Nodes import *
 from .Comfyroll_Pipe_Nodes import *
 from .Comfyroll_SDXL_Nodes import *
+from .upscale import *
 
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": Comfyroll_ImageInputSwitch,
@@ -51,6 +52,10 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Style Text": Comfyroll_SDXLStyleText,
     "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
     "CR Aspect Ratio SDXL": Comfyroll_AspectRatio_SDXL,
+    ### Upscale Nodes
+    "CR Multi Upscale Stack":CR_MultiUpscaleStack,
+    "CR Upscale Image":CR_UpscaleImage,
+    "CR Apply Multi Upscale":CR_ApplyMultiUpscale,
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
