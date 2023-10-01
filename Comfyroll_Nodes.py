@@ -8,7 +8,6 @@ import numpy as np
 import os
 import sys
 import io
-import pip
 from PIL import Image, ImageEnhance
 from PIL.PngImagePlugin import PngInfo
 import json
@@ -29,6 +28,7 @@ import typing as tg
 try:
     import matplotlib.pyplot as plt
 except ImportError:
+    import pip
     pip.main(['install', 'matplotlib'])
     import matplotlib.pyplot as plt
 
