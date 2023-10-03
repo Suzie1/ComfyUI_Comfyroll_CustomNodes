@@ -92,10 +92,10 @@ class Comfyroll_prompt_mixer_v2:
             "required":{
             },
             "optional":{
-                "prompt_positive": ("STRING", {"multiline": True, "default": "BASE_POSITIVE"}),
-                "prompt_negative": ("STRING", {"multiline": True, "default": "BASE_NEGATIVE"}),
-                "style_positive": ("STRING", {"multiline": True, "default": "REFINER_POSTIVE"}),
-                "style_negative": ("STRING", {"multiline": True, "default": "REFINER_NEGATIVE"}),
+                "prompt_positive": ("STRING", {"multiline": True, "default": "prompt_pos"}),
+                "prompt_negative": ("STRING", {"multiline": True, "default": "prompt_neg"}),
+                "style_positive": ("STRING", {"multiline": True, "default": "style_pos"}),
+                "style_negative": ("STRING", {"multiline": True, "default": "style_neg"}),
                 "preset": (["default with no style text", "default with style text", "style boost 1", "style boost 2", "style text to refiner"],),
             },
         }
