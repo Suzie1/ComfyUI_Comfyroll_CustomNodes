@@ -1,7 +1,9 @@
 from .Comfyroll_Nodes import *
 from .Comfyroll_Pipe_Nodes import *
 from .Comfyroll_SDXL_Nodes import *
-from .upscale import *
+from .nodes.upscale import *
+from .nodes.xygrid import *
+from .nodes.utils import *
 
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": Comfyroll_ImageInputSwitch,
@@ -56,6 +58,27 @@ NODE_CLASS_MAPPINGS = {
     "CR Multi Upscale Stack":CR_MultiUpscaleStack,
     "CR Upscale Image":CR_UpscaleImage,
     "CR Apply Multi Upscale":CR_ApplyMultiUpscale,
+    ### XY Gid Nodes    
+    "CR XY List":CR_XYList,
+    "CR XY Interpolate":CR_XYInterpolate,
+    "CR XY Index":CR_XYIndex,
+    #"CR XYZ Index":CR_XYZIndex,
+    "CR XY From Folder":CR_XYFromFolder,
+    #"CR Load XY Annotation From File":CR_LoadXYAnnotationFromFile,
+    #"CR XY Grid":CR_XYGrid,
+    "CR Save XY Grid Image":CR_SaveXYGridImage,
+    ### Utils
+    "CR Index":CR_Index,    
+    "CR Index Increment":CR_IncrementIndex,
+    "CR Index Multiply":CR_MultiplyIndex,
+    "CR Index Reset":CR_IndexReset,
+    "CR Trigger":CR_Trigger,      
+    "CR Index":CR_Index,
+    "CR String To Number":CR_StringToNumber,
+    "CR Split String":CR_SplitString,
+    "CR Float To Integer":CR_FloatToInteger, 
+    "CR Text List To String":CR_TextListToString,
+    "CR String To Combo":CR_StringToCombo, 
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
