@@ -39,6 +39,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Seed": Comfyroll_Seed,
     "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
     "CR Model Merge Stack":Comfyroll_ModelMergeStack,
+    ##Prompt
+    "CR Prompt Text":CR_PromptText,
     ### Pipe Nodes
     "CR Module Pipe Loader": CR_module_pipe_loader,
     "CR Module Input": CR_module_input,
@@ -66,7 +68,7 @@ NODE_CLASS_MAPPINGS = {
     "CR XY From Folder":CR_XYFromFolder,
     #"CR Load XY Annotation From File":CR_LoadXYAnnotationFromFile,
     #"CR XY Grid":CR_XYGrid,
-    "CR Save XY Grid Image":CR_SaveXYGridImage,
+    "CR XY Save Grid Image":CR_XYSaveGridImage,
     ### Utils
     "CR Index":CR_Index,    
     "CR Index Increment":CR_IncrementIndex,
