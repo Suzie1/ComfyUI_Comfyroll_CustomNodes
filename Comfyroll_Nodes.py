@@ -1424,7 +1424,7 @@ class CR_PromptText:
     RETURN_TYPES = ("STRING", )
     RETURN_NAMES = ("prompt", )
     FUNCTION = "get_value"
-    CATEGORY = 'Comfyroll/Text'
+    CATEGORY = 'Comfyroll/Prompt'
 
     def get_value(self, prompt):
         return (prompt,)
