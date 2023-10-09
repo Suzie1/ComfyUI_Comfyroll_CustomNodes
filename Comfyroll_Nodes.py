@@ -1412,6 +1412,24 @@ class CR_FloatToString:
         return (f'{float_}', )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+#Text for prompts
+class CR_PromptText:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                    "prompt": ("STRING", {"default": "prompt", "multiline": True}),
+                    },
+                }
+
+    RETURN_TYPES = ("STRING", )
+    RETURN_NAMES = ("prompt", )
+    FUNCTION = "get_value"
+    CATEGORY = 'Comfyroll/Text'
+
+    def get_value(self, prompt):
+        return (prompt,)
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -1444,6 +1462,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Seed":Comfyroll_Seed,
     "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
     "CR Model Merge Stack":Comfyroll_ModelMergeStack,
+    "CR Prompt Text":CR_PromptText,
 }
 '''
 
