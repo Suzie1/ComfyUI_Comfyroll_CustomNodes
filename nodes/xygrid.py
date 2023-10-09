@@ -75,8 +75,10 @@ class CR_XYList:
         
         trigger = False
 
-        listx = list1.split(",")
-        listy = list2.split(",")
+        #listx = list1.split(",")
+        #listy = list2.split(",")
+        listx = re.split(r',(?=(?:[^"]*"[^"]*")*[^"]*$)', list1)
+        listy = re.split(r',(?=(?:[^"]*"[^"]*")*[^"]*$)', list2)
         
         listx = [item.strip() for item in listx]
         listy = [item.strip() for item in listy]
@@ -173,8 +175,8 @@ class CR_XYIndex:
     def INPUT_TYPES(s):
         gradient_profiles = ["Lerp"]    
     
-        return {"required": {"x_rows":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
-                             "y_columns":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
+        return {"required": {"x_columns":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
+                             "y_rows":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
                              "index": ("INT", {"default": 0.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),                             
                 }
         }
@@ -184,13 +186,13 @@ class CR_XYIndex:
     FUNCTION = "index"
     CATEGORY = "Comfyroll/XY Grid"
 
-    def index(self, x_rows, y_columns, index):
+    def index(self, x_columns, y_rows, index):
 
         # Index values for all XY nodes start from 1
         index -=1
         
-        x = index % x_rows
-        y = int(index / x_rows)  
+        x = index % x_columns
+        y = int(index / x_columns)  
         
         return (x, y)
         
@@ -274,7 +276,6 @@ class CR_XYFromFolder:
     
         input_dir = folder_paths.output_directory
         image_folder = [name for name in os.listdir(input_dir) if os.path.isdir(os.path.join(input_dir,name))] 
-        #and len(os.listdir(os.path.join(input_dir,name))) != 0]
         
         return {"required":
                     {"image_folder": (sorted(image_folder), ),
@@ -308,19 +309,16 @@ class CR_XYFromFolder:
         sample_frames = []
         pillow_images = []
         
-        #sample_index = list(range(start_index, len(file_list) + 1, 1))[:end_index]
         if len(file_list) < end_index:
             end_index = len(file_list)
 
         for num in range(start_index, end_index + 1):
-        #for num in sample_index:
             i = Image.open(os.path.join(image_path, file_list[num - 1]))
             image = i.convert("RGB")
             image = np.array(image).astype(np.float32) / 255.0
             image = torch.from_numpy(image)[None,]
             image = image.squeeze()
             sample_frames.append(image)
-        print(len(sample_frames))
         
         resolved_font_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "font\Roboto-Regular.ttf")
         font = ImageFont.truetype(str(resolved_font_path), size=font_size)
@@ -381,7 +379,7 @@ class CR_XYGrid:
         return (tensor_grid,)
 
 #---------------------------------------------------------------------------------------------------------------------
-class CR_SaveXYGridImage:
+class CR_XYSaveGridImage:
 # originally based on SaveImageSequence by mtb
 
     def __init__(self):
@@ -391,7 +389,7 @@ class CR_SaveXYGridImage:
     def INPUT_TYPES(cls):
     
         output_dir = folder_paths.output_directory
-        output_folders = [name for name in os.listdir(output_dir) if os.path.isdir(os.path.join(output_dir,name)) and len(os.listdir(os.path.join(output_dir,name))) != 0]
+        output_folders = [name for name in os.listdir(output_dir) if os.path.isdir(os.path.join(output_dir,name))]
     
         return {
             "required": {"mode": (["Save", "Preview"],),
@@ -471,7 +469,7 @@ NODE_CLASS_MAPPINGS = {
     "CR XY From Folder":CR_XYFromFolder,
     #"CR Load XY Annotation From File":CR_LoadXYAnnotationFromFile,
     #"CR XY Grid":CR_XYGrid,
-    "CR Save XY Grid Image":CR_SaveXYGridImage,    
+    "CR XY Save Grid Image":CR_XYSaveGridImage,    
 }
 '''
 
