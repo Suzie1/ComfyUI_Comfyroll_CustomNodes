@@ -39,7 +39,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Seed": Comfyroll_Seed,
     "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
     "CR Model Merge Stack":Comfyroll_ModelMergeStack,
-    ##Prompt
     "CR Prompt Text":CR_PromptText,
     ### Pipe Nodes
     "CR Module Pipe Loader": CR_module_pipe_loader,
