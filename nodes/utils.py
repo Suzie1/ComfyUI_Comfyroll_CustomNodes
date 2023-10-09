@@ -14,7 +14,7 @@ class CR_StringToNumber:
 
     RETURN_TYPES = ("INT", "FLOAT",)   
     FUNCTION = "convert"
-    CATEGORY = "Comfyroll/Utils"
+    CATEGORY = "Comfyroll/Text"
 
     def convert(self, text):
 
@@ -41,7 +41,7 @@ class CR_SplitString:
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING",)
     RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4",)    
     FUNCTION = "split"
-    CATEGORY = "Comfyroll/Utils"
+    CATEGORY = "Comfyroll/Text"
 
     def split(self, text, delimiter):
 
@@ -115,7 +115,7 @@ class CR_IncrementIndex:
     RETURN_TYPES = ("INT", "INT",)
     RETURN_NAMES = ("index", "interval")
     FUNCTION = "increment"
-    CATEGORY = "CR Animation/Index"
+    CATEGORY = "Comfyroll/Utils"
     
     def increment(self, index, interval):
         index+=interval
@@ -136,7 +136,7 @@ class CR_MultiplyIndex:
     RETURN_TYPES = ("INT", "INT",)
     RETURN_NAMES = ("index", "factor")
     FUNCTION = "multiply"
-    CATEGORY = "CR Animation/Index"
+    CATEGORY = "Comfyroll/Utils"
     
     def multiply(self, index, factor):
         index = index * factor
@@ -157,7 +157,7 @@ class CR_IndexReset:
     RETURN_TYPES = ("INT", "INT",)
     RETURN_NAMES = ("index", "reset_to")
     FUNCTION = "reset"
-    CATEGORY = "CR Animation/Index"
+    CATEGORY = "Comfyroll/Utils"
     
     def reset(self, index, reset_to):
         index = reset_to
@@ -175,7 +175,7 @@ class CR_TextListToString:
     RETURN_TYPES = ("STRING", )
     RETURN_NAMES = ("STRING", )
     FUNCTION = "joinlist"
-    CATEGORY = "CR Animation/Utils"
+    CATEGORY = "Comfyroll/Text"
 
     def joinlist(self, text_list):
     
@@ -203,7 +203,7 @@ class CR_StringToCombo:
 
     RETURN_TYPES = (any,)
     FUNCTION = "convert"
-    CATEGORY = "CR Animation/Utils"
+    CATEGORY = "Comfyroll/Text"
 
     def convert(self, text):
     
