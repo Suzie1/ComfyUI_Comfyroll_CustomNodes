@@ -62,8 +62,8 @@ class CR_XYList:
                     }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", )
-    RETURN_NAMES = ("X", "Y", "x_annotation", "y_annotation", ) 
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "BOOLEAN", )
+    RETURN_NAMES = ("X", "Y", "x_annotation", "y_annotation", "trigger", ) 
     FUNCTION = "cross_join"
     CATEGORY = "Comfyroll/XY Grid"
     
