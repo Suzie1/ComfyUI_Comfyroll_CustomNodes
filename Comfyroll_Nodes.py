@@ -599,7 +599,7 @@ class Comfyroll_ImageSize_Float:
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 #Legacy Node. This node was an attempt at making a save and preview image node into one.
-class CR_ImageOutput:
+class Comfyroll_ImageOutput:
     def __init__(self):
         self.output_dir = folder_paths.get_output_directory()
         self.type = "output"
