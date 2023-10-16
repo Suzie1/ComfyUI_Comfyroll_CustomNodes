@@ -599,7 +599,7 @@ class Comfyroll_ImageSize_Float:
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 #Legacy Node. This node was an attempt at making a save and preview image node into one.
-class Comfyroll_ImageOutput:
+class CR_ImageOutput:
     def __init__(self):
         self.output_dir = folder_paths.get_output_directory()
         self.type = "output"
@@ -611,16 +611,17 @@ class Comfyroll_ImageOutput:
                     "output_type": (["Preview", "Save"],),
                      "filename_prefix": ("STRING", {"default": "ComfyUI"})},
                 "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"},
+                "optional": {
+                    "trigger": ("BOOLEAN", {"default": False},),}
                 }
 
-    RETURN_TYPES = ()
+    RETURN_TYPES = ("BOOLEAN", )
+    RETURN_NAMES = ("trigger", )
     FUNCTION = "save_images"
-
     OUTPUT_NODE = True
+    CATEGORY = "Comfyroll/XY Grid"
 
-    CATEGORY = "Comfyroll/Legacy"
-
-    def save_images(self, images, filename_prefix="ComfyUI", output_type = "Preview", prompt=None, extra_pnginfo=None):
+    def save_images(self, images, filename_prefix="ComfyUI", trigger = False, output_type = "Preview", prompt=None, extra_pnginfo=None):
         def map_filename(filename):
             prefix_len = len(os.path.basename(filename_prefix))
             prefix = filename[:prefix_len + 1]
@@ -680,7 +681,7 @@ class Comfyroll_ImageOutput:
             })
             counter += 1
 
-        return { "ui": { "images": results } }
+        return { "ui": { "images": results }, "result": (trigger,) }
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
