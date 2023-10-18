@@ -71,6 +71,10 @@ __Image__
 * CR SD1.5 Aspect Ratio
 * CR Color Tint
 * CR Halftone Grid
+* CR Color Bars
+* CR Style Bars   
+* CR Checker Pattern
+* CR Color Gradient
 
 __Module__
 * CR Module Pipe Loader
@@ -84,14 +88,26 @@ __Module__
 __Latent__
 * CR Latent Batch Size
 
-__Test__
+__Model Merge__
 * CR Model Stack
 * CR Apply Model Merge
 * CR Load Animation Frames
 
+__Upscale__
+* CR Multi Upscale Stack
+* CR Upscale Image
+* CR Apply Multi Upscale
+
+__XY Grid__
+* CR XY List
+* CR XY Interpolate":CR_XYInterpolate   
+* CR XY Index
+* CR XY From Folder
+* CR XY Save Grid Image
+* CR Image Output
+
 __Legacy__
 * CR Image Size
-* CR Image Output
 * CR Aspect Ratio SDXL
 * CR Aspect Ratio
 * CR SDXL Prompt Mixer
