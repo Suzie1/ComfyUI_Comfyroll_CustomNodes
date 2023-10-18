@@ -69,7 +69,7 @@ NODE_CLASS_MAPPINGS = {
     #"CR XY Grid":CR_XYGrid,
     "CR XY Save Grid Image":CR_XYSaveGridImage,
     ### Matplot Nodes
-    "CR Halftone Grid" : Comfyroll_Halftone_Grid,
+    "CR Halftone Grid" : CR_Halftone_Grid,
     "CR Color Bars" :CR_ColorBars,
     "CR Style Bars" :CR_StyleBars,    
     "CR Checker Pattern" :CR_CheckerPattern,
