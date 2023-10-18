@@ -157,7 +157,7 @@ class CR_ColorBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "CR 3D"
+    CATEGORY = "Comfyroll/Image"
 
     def draw(self, mode, width, height, color1, color2, orientation, bar_frequency):
 
@@ -236,7 +236,7 @@ class CR_StyleBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "CR 3D"
+    CATEGORY = "Comfyroll/Image"
 
     def draw(self, mode, width, height, bar_style, orientation, bar_frequency):
 
@@ -306,7 +306,7 @@ class CR_ColorGradient:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "CR 3D"
+    CATEGORY = "Comfyroll/Image"
 
     def draw(self, mode, width, height, start_color, end_color, orientation):
     
@@ -383,7 +383,7 @@ class CR_CheckerPattern:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "CR 3D"
+    CATEGORY = "Comfyroll/Image"
 
     def draw(self, mode, width, height, color1, color2, grid_frequency, step):
 
@@ -450,7 +450,7 @@ class CR_Polygons:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "CR 3D"
+    CATEGORY = "Comfyroll/Image"
 
     def draw(self, width, height, rows, cols, color1, color2, mode):
     
@@ -514,7 +514,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Color Bars" :CR_ColorBars,
     "CR Style Bars" :CR_StyleBars,
     "CR Checker Pattern" :CR_CheckerPattern,
-    "CR Polygons" :CR_Polygons,
+    #"CR Polygons" :CR_Polygons,
     "CR Halftone Grid" :CR_HalftoneGrid,
     "CR Color Gradient":CR_ColorGradient,
 }
