@@ -12,7 +12,6 @@ from PIL import Image, ImageEnhance
 from PIL.PngImagePlugin import PngInfo
 import json
 
-
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
 import comfy.controlnet
@@ -23,15 +22,6 @@ import comfy.model_management
 import folder_paths
 from nodes import MAX_RESOLUTION, ControlNetApplyAdvanced
 import typing as tg
-
-
-try:
-    import matplotlib.pyplot as plt
-except ImportError:
-    import pip
-    pip.main(['install', 'matplotlib'])
-    import matplotlib.pyplot as plt
-
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # FUNCTIONS
