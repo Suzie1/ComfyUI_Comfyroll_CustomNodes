@@ -4,6 +4,7 @@ from .Comfyroll_SDXL_Nodes import *
 from .nodes.upscale import *
 from .nodes.xygrid import *
 from .nodes.utils import *
+from .nodes.matplot import *
 
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": Comfyroll_ImageInputSwitch,
@@ -28,7 +29,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Color Tint": Comfyroll_Color_Tint,
     "CR Img2Img Process Switch": Comfyroll_InputLatentsText,
     "CR Hires Fix Process Switch": Comfyroll_HiResFixSwitch,
-    "CR Halftone Grid" : Comfyroll_Halftone_Grid,
     "CR Latent Batch Size": Comfyroll_LatentBatchSize,
     "CR LoRA Stack":Comfyroll_LoRA_Stack,
     "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,    
@@ -68,6 +68,13 @@ NODE_CLASS_MAPPINGS = {
     #"CR Load XY Annotation From File":CR_LoadXYAnnotationFromFile,
     #"CR XY Grid":CR_XYGrid,
     "CR XY Save Grid Image":CR_XYSaveGridImage,
+    ### Matplot Nodes
+    "CR Halftone Grid" : Comfyroll_Halftone_Grid,
+    "CR Color Bars" :CR_ColorBars,
+    "CR Style Bars" :CR_StyleBars,    
+    "CR Checker Pattern" :CR_CheckerPattern,
+    #"CR Polygons" :CR_Polygons,
+    "CR Color Gradient":CR_ColorGradient,    
     ### Utils
     "CR Index":CR_Index,    
     "CR Index Increment":CR_IncrementIndex,
