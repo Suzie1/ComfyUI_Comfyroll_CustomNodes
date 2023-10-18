@@ -148,6 +148,16 @@ In the images below, the black nodes are the CR nodes and the grey nodes are oth
 
 ![Custom Nodes](/images/custom_nodes_image6.JPG)
 
+![Custom Nodes](/images/CR_Checker_Pattern.JPG)
+
+![Custom Nodes](/images/CR_Color_Bars.JPG)
+
+![Custom Nodes](/images/CR_Color_Gradient.JPG)
+
+![Custom Nodes](/images/CR_Style_Bars.JPG)
+
+![Custom Nodes](/images/CR_Style_Bars2.JPG)
+
 ![Custom Nodes](/images/custom_nodes_image7.JPG)
 
 ![Custom Nodes](/images/custom_nodes_image7b.JPG)
