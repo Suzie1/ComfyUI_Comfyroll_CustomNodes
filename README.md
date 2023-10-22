@@ -65,7 +65,6 @@ __Maths__
 * CR Integer Multiple
 
 __Number__
-* CR Seed to Int
 * CR Seed
 
 __Image__
@@ -116,9 +115,24 @@ __Image Text__
 * CR Mask Text
 * CR Composite Text
 
+__Index__
+* CR Index
+* CR Index Increment
+* CR Index Multiply
+* CR Index Reset
+* CR Trigger
+
+__Conversion__    
+* CR String To Number
+* CR String To Combo    
+* CR Float To String
+* CR Float To Integer
+* CR Integer To String    
+* CR Text List To String
+* CR Seed to Int
+
 __Legacy__
 * CR Image Size
-
 
 __Deleted Nodes__
 * CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio
