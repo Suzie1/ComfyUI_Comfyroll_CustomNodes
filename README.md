@@ -115,9 +115,12 @@ __Image Text__
 
 __Legacy__
 * CR Image Size
-* CR Aspect Ratio SDXL
-* CR Aspect Ratio
-* CR SDXL Prompt Mixer
+
+
+__Deleted Nodes__
+* CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio
+* CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
+* CR SDXL Prompt Mixer replaced by CR SDXL Prompt Mix Presets
 
 # Multi-ControlNet methodology
 
