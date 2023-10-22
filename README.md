@@ -67,6 +67,10 @@ __Maths__
 __Number__
 * CR Seed
 
+__Text__
+* CR Prompt Text
+* CR Split String
+
 __Image__
 * CR SD1.5 Aspect Ratio
 * CR Color Tint
