@@ -101,7 +101,7 @@ __Upscale__
 
 __XY Grid__
 * CR XY List
-* CR XY Interpolate":CR_XYInterpolate   
+* CR XY Interpolate   
 * CR XY Index
 * CR XY From Folder
 * CR XY Save Grid Image
