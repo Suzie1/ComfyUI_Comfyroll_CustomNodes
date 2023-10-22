@@ -72,7 +72,10 @@ __Image__
 * CR Color Bars
 * CR Style Bars   
 * CR Checker Pattern
+* CR Polygons
 * CR Color Gradient
+* CR Starburst Lines
+* CR Starburst Colors
 
 __Module__
 * CR Module Pipe Loader
@@ -103,6 +106,12 @@ __XY Grid__
 * CR XY From Folder
 * CR XY Save Grid Image
 * CR Image Output
+
+__Image Text__
+* CR Overlay Text
+* CR Draw Text
+* CR Mask Text
+* CR Composite Text
 
 __Legacy__
 * CR Image Size
