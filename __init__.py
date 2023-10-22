@@ -5,6 +5,7 @@ from .nodes.upscale import *
 from .nodes.xygrid import *
 from .nodes.utils import *
 from .nodes.matplot import *
+from .nodes.pil_text import *
 
 NODE_CLASS_MAPPINGS = {
     "CR Image Input Switch": Comfyroll_ImageInputSwitch,
@@ -73,8 +74,15 @@ NODE_CLASS_MAPPINGS = {
     "CR Color Bars":CR_ColorBars,
     "CR Style Bars":CR_StyleBars,    
     "CR Checker Pattern":CR_CheckerPattern,
-    #"CR Polygons":CR_Polygons,
-    "CR Color Gradient":CR_ColorGradient,    
+    "CR Polygons":CR_Polygons,
+    "CR Color Gradient":CR_ColorGradient,
+    "CR Starburst Lines":CR_StarburstLines,
+    "CR Starburst Colors":CR_StarburstColors, 
+    ### PIL Text
+    "CR Overlay Text":CR_OverlayText,
+    "CR Draw Text":CR_DrawText,
+    "CR Mask Text":CR_MaskText,
+    "CR Composite Text":CR_CompositeText, 
     ### Utils
     "CR Index":CR_Index,    
     "CR Index Increment":CR_IncrementIndex,
