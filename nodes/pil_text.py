@@ -361,7 +361,7 @@ class CR_CompositeText:
         back_image = tensor2pil(image_back_3d)
 
         # Create a blank canvas with the same size as the text image
-        text_mask = Image.new('L', text_image.size)
+        text_mask = Image.new('L', back_image.size)
 
         # Create a drawing context for the text mask        
         draw = ImageDraw.Draw(text_mask)
@@ -397,7 +397,7 @@ class CR_CompositeText:
         # Invert the text mask (so the text is white and the background is black)
         text_mask = ImageOps.invert(rotated_text_mask)
         
-        image_out = Image.composite(back_image, text_image, rotated_text_mask)
+        image_out = Image.composite(text_image, back_image, rotated_text_mask)
         
         # Convert the PIL image back to a torch tensor
         return pil2tensor(image_out),
