@@ -52,6 +52,9 @@ __Logic__
 * CR Clip Input Switch
 * CR Model Input Switch
 * CR ControlNet Input Switch
+* CR Text Input Switch
+* CR Text Input Switch (4 way)
+* CR Switch Model and CLIP
 
 __Process__
 * CR Img2Img Process Switch
