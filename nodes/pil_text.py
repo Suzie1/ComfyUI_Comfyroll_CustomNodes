@@ -201,7 +201,7 @@ class CR_DrawText:
             bg_color = color_mapping.get(background_color, (255, 255, 255))  # Default to white if the color is not found
         
         # Create PIL images for the text and background layers
-        size = (image_height, image_width)
+        size = (image_width, image_height)
         text_image = Image.new('RGB', size, text_color)
         back_image = Image.new('RGB', size, bg_color)
 
