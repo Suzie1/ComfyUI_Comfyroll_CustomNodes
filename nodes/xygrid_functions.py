@@ -22,7 +22,7 @@ def create_images_grid_by_columns(
     images: list[Image.Image],
     gap: int,
     max_columns: int,
-    annotation: t.Optional(Annotation) = None,
+    annotation: t.Optional[Annotation] = None,
 ) -> Image.Image:
     max_rows = (len(images) + max_columns - 1) // max_columns
     return _create_images_grid(images, gap, max_columns, max_rows, annotation)
@@ -32,7 +32,7 @@ def create_images_grid_by_rows(
     images: list[Image.Image],
     gap: int,
     max_rows: int,
-    annotation: t.Optional(Annotation) = None,
+    annotation: t.Optional[Annotation] = None,
 ) -> Image.Image:
     max_columns = (len(images) + max_rows - 1) // max_rows
     return _create_images_grid(images, gap, max_columns, max_rows, annotation)
@@ -50,7 +50,7 @@ def _create_images_grid(
     gap: int,
     max_columns: int,
     max_rows: int,
-    annotation: t.Optional(Annotation),
+    annotation: t.Optional[Annotation],
 ) -> Image.Image:
     size = images[0].size
     grid_width = size[0] * max_columns + (max_columns - 1) * gap
