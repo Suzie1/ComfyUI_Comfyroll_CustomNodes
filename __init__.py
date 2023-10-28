@@ -60,14 +60,11 @@ NODE_CLASS_MAPPINGS = {
     "CR Multi Upscale Stack":CR_MultiUpscaleStack,
     "CR Upscale Image":CR_UpscaleImage,
     "CR Apply Multi Upscale":CR_ApplyMultiUpscale,
-    ### XY Gid Nodes    
+    ### XY Grid Nodes    
     "CR XY List":CR_XYList,
     "CR XY Interpolate":CR_XYInterpolate,
     "CR XY Index":CR_XYIndex,
-    #"CR XYZ Index":CR_XYZIndex,
     "CR XY From Folder":CR_XYFromFolder,
-    #"CR Load XY Annotation From File":CR_LoadXYAnnotationFromFile,
-    #"CR XY Grid":CR_XYGrid,
     "CR XY Save Grid Image":CR_XYSaveGridImage,
     ### Matplot Nodes
     "CR Halftone Grid":CR_HalftoneGrid,
@@ -82,7 +79,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Overlay Text":CR_OverlayText,
     "CR Draw Text":CR_DrawText,
     "CR Mask Text":CR_MaskText,
-    "CR Composite Text":CR_CompositeText, 
+    "CR Composite Text":CR_CompositeText,
+    "CR Simple Meme Template":CR_SimpleMemeTemplate, 
     ### Utils
     "CR Index":CR_Index,    
     "CR Index Increment":CR_IncrementIndex,
