@@ -71,29 +71,6 @@ class CR_AspectRatioSD15:
             return(width, height, upscale_factor, batch_size,)  
             
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-#This node makes the upscale factor a float
-class CR_ImageSize:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000})
-            }
-        }
-    RETURN_TYPES = ("INT", "INT", "FLOAT")
-    RETURN_NAMES = ("Width", "Height", "upscale_factor")
-    FUNCTION = "ImageSize"
-    CATEGORY = "Comfyroll/Legacy"
-
-    def ImageSize(self, width, height, upscale_factor):
-        return(width, height, upscale_factor)
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
 
 #Legacy Node. This node was an attempt at making a save and preview image node into one.
 class CR_ImageOutput:
@@ -198,7 +175,7 @@ class CR_IntegerMultipleOf:
     
     RETURN_TYPES =("INT",)
     FUNCTION = "int_multiple_of"    
-    CATEGORY = "Comfyroll/Math"
+    CATEGORY = "Comfyroll/Utils/Math"
     
     def int_multiple_of(self, integer, multiple=8):
         if multiple == 0:
@@ -223,7 +200,7 @@ class CR_Seed:
     RETURN_NAMES = ("seed",)
     FUNCTION = "seedint"
     OUTPUT_NODE = True
-    CATEGORY = "Comfyroll/Number"
+    CATEGORY = "Comfyroll/Utils/Number"
 
     @staticmethod
     def seedint(seed):
@@ -313,7 +290,7 @@ class CR_LatentBatchSize:
 
     RETURN_TYPES = ("LATENT", )
     FUNCTION = "batchsize"
-    CATEGORY = "Comfyroll/Latent"
+    CATEGORY = "Comfyroll/Utils/Latent"
 
     def batchsize(self, latent: tg.Sequence[tg.Mapping[tg.Text, torch.Tensor]], batch_size: int):
         samples = latent['samples']
@@ -340,7 +317,7 @@ class CR_PromptText:
     RETURN_TYPES = ("STRING", )
     RETURN_NAMES = ("prompt", )
     FUNCTION = "get_value"
-    CATEGORY = 'Comfyroll/Text'
+    CATEGORY = 'Comfyroll/Utils/Prompt'
 
     def get_value(self, prompt):
         return (prompt,)
@@ -359,7 +336,7 @@ class CR_SplitString:
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING",)
     RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4",)    
     FUNCTION = "split"
-    CATEGORY = "Comfyroll/Text"
+    CATEGORY = "Comfyroll/Utils/Text"
 
     def split(self, text, delimiter):
 
