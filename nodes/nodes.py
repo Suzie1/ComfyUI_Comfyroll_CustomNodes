@@ -440,6 +440,31 @@ class CR_PromptText:
         return (prompt,)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+class CR_SplitString:
+
+    @classmethod
+    def INPUT_TYPES(s):  
+    
+        return {"required": {"text": ("STRING", {"multiline": False, "default": "text"}),
+                             "delimiter": ("STRING", {"multiline": False, "default": ","}), 
+                },
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING",)
+    RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4",)    
+    FUNCTION = "split"
+    CATEGORY = "Comfyroll/Text"
+
+    def split(self, text, delimiter):
+
+        # Split the text string
+        parts = text.split(delimiter)
+        strings = [part.strip() for part in parts[:4]]
+        string_1, string_2, string_3, string_4 = strings + [""] * (4 - len(strings))            
+
+        return (string_1, string_2, string_3, string_4)
+        
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -453,6 +478,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Latent Batch Size":Comfyroll_LatentBatchSize
     "CR Seed":Comfyroll_Seed,
     "CR Prompt Text":CR_PromptText,
+    "CR Split String":CR_SplitString, 
 }
 '''
 
