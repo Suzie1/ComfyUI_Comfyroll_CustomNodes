@@ -104,7 +104,7 @@ class CR_HalftoneGrid:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "halftone"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def halftone(self, width, height, dot_style, reverse_dot_style, dot_frequency, background_color, background_R, background_G, background_B, x_pos, y_pos):
     
@@ -160,7 +160,7 @@ class CR_ColorBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, color1, color2, orientation, bar_frequency):
 
@@ -239,7 +239,7 @@ class CR_StyleBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, bar_style, orientation, bar_frequency):
 
@@ -304,7 +304,7 @@ class CR_ColorGradient:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, start_color, end_color, orientation):
     
@@ -376,7 +376,7 @@ class CR_CheckerPattern:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, color1, color2, grid_frequency, step):
 
@@ -438,7 +438,7 @@ class CR_Polygons:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, rows, columns, face_color, line_color, line_width):
     
@@ -507,7 +507,7 @@ class CR_StarburstLines:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
     
     def draw(self, width, height, num_lines, line_length, line_width, line_color, background_color, center_x, center_y):
              
@@ -565,7 +565,7 @@ class CR_StarburstColors:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"        
+    CATEGORY = "Comfyroll/Graphics/Patterns"        
         
     def draw(self, width, height, num_triangles, color_1, color_2, center_x, center_y, bbox_factor): 
 
