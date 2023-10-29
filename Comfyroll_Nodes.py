@@ -801,14 +801,6 @@ class CR_PromptText:
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS = {
-    "CR Image Input Switch": Comfyroll_InputImages,
-    "CR Image Input Switch (4 way)": Comfyroll_InputImages_4way,
-    "CR Latent Input Switch": Comfyroll_InputLatents,
-    "CR Process Switch": Comfyroll_InputLatentsText,
-    "CR Conditioning Input Switch": Comfyroll_InputConditioning,
-    "CR Clip Input Switch": Comfyroll_InputClip,
-    "CR Model Input Switch": Comfyroll_InputModel,
-    "CR ControlNet Input Switch": Comfyroll_InputControlNet,
     "CR Load LoRA": Comfyroll_LoraLoader,
     "CR Apply ControlNet": Comfyroll_ApplyControlNet,
     "CR Image Size": Comfyroll_ImageSize_Float,
@@ -817,17 +809,13 @@ NODE_CLASS_MAPPINGS = {
     "CR Aspect Ratio": Comfyroll_AspectRatio,
     "CR Seed to Int": Comfyroll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
-    "CR Hires Fix Process Switch": ComfyRoll_HiResFixSwitch,
     "CR Halftones" :Comfyroll_Halftone_Grid,
     "CR LoRA Stack":Comfyroll_LoRA_Stack,
     "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,
     "CR Latent Batch Size":Comfyroll_LatentBatchSize
-    "CR Batch Process Switch": Comfyroll_BatchProcessSwitch,
     "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,
     "CR Seed":Comfyroll_Seed,
-    "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
-    "CR Model Merge Stack":Comfyroll_ModelMergeStack,
     "CR Prompt Text":CR_PromptText,
 }
 '''
