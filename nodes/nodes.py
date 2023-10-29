@@ -290,29 +290,6 @@ class Comfyroll_Int_Multiple_Of:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
-#This node is used to convert type Seed to int
-class Comfyroll_SeedToInt:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "seed": ("SEED", ),
-            }
-        }
-
-    RETURN_TYPES = ("INT",)
-    FUNCTION = "seed_to_int"
-
-    CATEGORY = "Comfyroll/Number"
-
-    def seed_to_int(self, seed):
-        return (seed.get('seed'),)
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-
 #This node is for making seeds
 class Comfyroll_Seed:
     def __init__(self):
@@ -443,38 +420,6 @@ class Comfyroll_LatentBatchSize:
         return ({
             'samples': torch.cat(sample_list),
         }, )
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-# cloned from Mikey Nodes
-class CR_IntegerToString:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {"int_": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
-                }
-        }
-
-    RETURN_TYPES = ('STRING',)
-    FUNCTION = 'convert'
-    CATEGORY = 'Comfyroll/Text'
-
-    def convert(self, int_):
-        return (f'{int_}', )
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-# cloned from Mikey Nodes
-class CR_FloatToString:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {"float_": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1000000.0}),
-                }        
-        }
-
-    RETURN_TYPES = ('STRING',)
-    FUNCTION = 'convert'
-    CATEGORY = 'Comfyroll/Text'
-
-    def convert(self, float_):
-        return (f'{float_}', )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 #Text for prompts
