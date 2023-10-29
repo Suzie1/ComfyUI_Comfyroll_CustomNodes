@@ -1,6 +1,6 @@
 from .Comfyroll_Nodes import *
-from .Comfyroll_Pipe_Nodes import *
-from .Comfyroll_SDXL_Nodes import *
+from .nodes.pipe import *
+from .nodes.sdxl import *
 from .nodes.upscale import *
 from .nodes.xygrid import *
 from .nodes.utils import *
@@ -42,20 +42,18 @@ NODE_CLASS_MAPPINGS = {
     "CR Model Merge Stack":Comfyroll_ModelMergeStack,
     "CR Prompt Text":CR_PromptText,
     ### Pipe Nodes
-    "CR Module Pipe Loader": CR_module_pipe_loader,
-    "CR Module Input": CR_module_input,
-    "CR Module Output": CR_module_output,
-    "CR Image Pipe In": CR_image_pipe_in,
-    "CR Image Pipe Edit": CR_image_pipe_edit,
-    "CR Image Pipe Out": CR_image_pipe_out,
-    "CR Pipe Switch": CR_input_switch_pipe,
+    "CR Module Pipe Loader":CR_ModulePipeLoader,
+    "CR Module Input":CR_ModuleInput,
+    "CR Module Output":CR_ModuleOutput,
+    "CR Image Pipe In":CR_ImagePipeIn,
+    "CR Image Pipe Edit":CR_ImagePipeEdit,
+    "CR Image Pipe Out":CR_ImagePipeOut,
+    "CR Pipe Switch":CR_InputSwitchPipe,  
     ### SDXL Nodes
-    "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
-    "CR SDXL Aspect Ratio":Comfyroll_SDXL_AspectRatio_v2,
-    "CR SDXL Prompt Mixer": Comfyroll_prompt_mixer,
-    "CR SDXL Style Text": Comfyroll_SDXLStyleText,
-    "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
-    "CR Aspect Ratio SDXL": Comfyroll_AspectRatio_SDXL,
+    "CR SDXL Prompt Mix Presets": CR_PromptMixPresets,
+    "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
+    "CR SDXL Style Text": CR_SDXLStyleText,
+    "CR SDXL Base Prompt Encoder": CR_SDXLBasePromptEncoder, 
     ### Upscale Nodes
     "CR Multi Upscale Stack":CR_MultiUpscaleStack,
     "CR Upscale Image":CR_UpscaleImage,
