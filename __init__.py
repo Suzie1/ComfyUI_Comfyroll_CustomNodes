@@ -1,4 +1,6 @@
 from .Comfyroll_Nodes import *
+from .nodes.logic import *
+from .nodes.index import *
 from .nodes.pipe import *
 from .nodes.sdxl import *
 from .nodes.model_merge import *
