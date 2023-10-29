@@ -1,6 +1,7 @@
 from .Comfyroll_Nodes import *
 from .nodes.pipe import *
 from .nodes.sdxl import *
+from .nodes.model_merge import *
 from .nodes.upscale import *
 from .nodes.xygrid import *
 from .nodes.utils import *
@@ -38,9 +39,10 @@ NODE_CLASS_MAPPINGS = {
     "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
     "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,    
     "CR Seed": Comfyroll_Seed,
-    "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
-    "CR Model Merge Stack":Comfyroll_ModelMergeStack,
     "CR Prompt Text":CR_PromptText,
+    ### Model Merge
+    "CR Apply Model Merge":CR_ApplyModelMerge,
+    "CR Model Merge Stack":CR_ModelMergeStack,
     ### Pipe Nodes
     "CR Module Pipe Loader":CR_ModulePipeLoader,
     "CR Module Input":CR_ModuleInput,
