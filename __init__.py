@@ -1,4 +1,4 @@
-from .Comfyroll_Nodes import *
+from .nodes.nodes import *
 from .nodes.lora import *
 from .nodes.controlnet import *  
 from .nodes.logic import *
