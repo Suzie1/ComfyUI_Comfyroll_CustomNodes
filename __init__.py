@@ -1,4 +1,6 @@
 from .Comfyroll_Nodes import *
+from .nodes.lora import *
+from .nodes.controlnet import *  
 from .nodes.logic import *
 from .nodes.index import *
 from .nodes.pipe import *
@@ -11,8 +13,6 @@ from .nodes.matplot import *
 from .nodes.pil_text import *
 
 NODE_CLASS_MAPPINGS = {
-    "CR Load LoRA": Comfyroll_LoraLoader,
-    "CR Apply ControlNet": Comfyroll_ApplyControlNet,
     "CR Image Size": Comfyroll_ImageSize_Float,
     "CR Image Output": Comfyroll_ImageOutput,
     "CR Integer Multiple": Comfyroll_Int_Multiple_Of,
@@ -21,14 +21,18 @@ NODE_CLASS_MAPPINGS = {
     "CR Integer To String":CR_IntegerToString,
     "CR Float To String":CR_FloatToString,
     "CR Color Tint": Comfyroll_Color_Tint,
-    "CR Latent Batch Size": Comfyroll_LatentBatchSize,
-    "CR LoRA Stack":Comfyroll_LoRA_Stack,
-    "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,    
+    "CR Latent Batch Size": Comfyroll_LatentBatchSize, 
     "CR SD1.5 Aspect Ratio":Comfyroll_AspectRatio_v2,
-    "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
-    "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,    
     "CR Seed": Comfyroll_Seed,
     "CR Prompt Text":CR_PromptText,
+    ### ControlNet Nodes
+    "CR Apply ControlNet": CR_ApplyControlNet,    
+    "CR Multi-ControlNet Stack":CR_ControlNetStack,
+    "CR Apply Multi-ControlNet":CR_ApplyControlNetStack,   
+    ### LoRA Nodes    
+    "CR Load LoRA": CR_LoraLoader,    
+    "CR LoRA Stack":CR_LoRAStack,
+    "CR Apply LoRA Stack":CR_ApplyLoRAStack,  
     ### Logic Nodes
     "CR Image Input Switch": CR_ImageInputSwitch,
     "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
