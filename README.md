@@ -135,10 +135,8 @@ __Conversion__
 * CR Text List To String
 * CR Seed to Int
 
-__Legacy__
-* CR Image Size
-
 __Deleted Nodes__
+* CR Image Size replaced by CR SD1.5 Aspect Ratio
 * CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio
 * CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
 * CR SDXL Prompt Mixer replaced by CR SDXL Prompt Mix Presets
