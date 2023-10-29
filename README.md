@@ -83,6 +83,13 @@ __Image__
 * CR Starburst Lines
 * CR Starburst Colors
 
+__Image Text__
+* CR Overlay Text
+* CR Draw Text
+* CR Mask Text
+* CR Composite Text
+* CR Simple Meme Template
+
 __Module__
 * CR Module Pipe Loader
 * CR Module Input
