@@ -9,7 +9,6 @@ from .nodes.sdxl import *
 from .nodes.model_merge import *
 from .nodes.upscale import *
 from .nodes.xygrid import *
-from .nodes.utils import *
 from .nodes.matplot import *
 from .nodes.pil_text import *
 
