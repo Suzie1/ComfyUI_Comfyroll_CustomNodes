@@ -14,7 +14,7 @@ class CR_Trigger:
     RETURN_TYPES = ("INT", "BOOLEAN",)
     RETURN_NAMES = ("index", "trigger", )
     FUNCTION = "trigger"
-    CATEGORY = "Comfyroll/Utils"
+    CATEGORY = "Comfyroll/Utils/Index"
 
     def trigger(self, index, trigger_value):
 
@@ -32,7 +32,7 @@ class CR_Index:
 
     RETURN_TYPES = ("INT",)
     FUNCTION = "index"
-    CATEGORY = "Comfyroll/Utils"
+    CATEGORY = "Comfyroll/Utils/Index"
 
     def index(self, index, print_to_console):
     
@@ -55,7 +55,7 @@ class CR_IncrementIndex:
     RETURN_TYPES = ("INT", "INT",)
     RETURN_NAMES = ("index", "interval")
     FUNCTION = "increment"
-    CATEGORY = "Comfyroll/Utils"
+    CATEGORY = "Comfyroll/Utils/Index"
     
     def increment(self, index, interval):
         index+=interval
@@ -76,7 +76,7 @@ class CR_MultiplyIndex:
     RETURN_TYPES = ("INT", "INT",)
     RETURN_NAMES = ("index", "factor")
     FUNCTION = "multiply"
-    CATEGORY = "Comfyroll/Utils"
+    CATEGORY = "Comfyroll/Utils/Index"
     
     def multiply(self, index, factor):
         index = index * factor
@@ -97,7 +97,7 @@ class CR_IndexReset:
     RETURN_TYPES = ("INT", "INT",)
     RETURN_NAMES = ("index", "reset_to")
     FUNCTION = "reset"
-    CATEGORY = "Comfyroll/Utils"
+    CATEGORY = "Comfyroll/Utils/Index"
     
     def reset(self, index, reset_to):
         index = reset_to
