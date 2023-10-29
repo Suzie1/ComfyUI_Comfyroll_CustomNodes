@@ -93,7 +93,7 @@ class CR_ImageOutput:
     RETURN_NAMES = ("trigger", )
     FUNCTION = "save_images"
     OUTPUT_NODE = True
-    CATEGORY = "Comfyroll/Legacy"
+    CATEGORY = "Comfyroll/IO"
 
     def save_images(self, images, filename_prefix="ComfyUI", trigger = False, output_type = "Preview", prompt=None, extra_pnginfo=None):
         def map_filename(filename):
