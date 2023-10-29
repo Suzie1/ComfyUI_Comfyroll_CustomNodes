@@ -13,13 +13,12 @@ from .nodes.matplot import *
 from .nodes.pil_text import *
 
 NODE_CLASS_MAPPINGS = {
-    "CR Image Size": Comfyroll_ImageSize_Float,
-    "CR Image Output": Comfyroll_ImageOutput,
-    "CR Integer Multiple": Comfyroll_Int_Multiple_Of,
-    "CR Color Tint": Comfyroll_Color_Tint,
-    "CR Latent Batch Size": Comfyroll_LatentBatchSize, 
-    "CR SD1.5 Aspect Ratio":Comfyroll_AspectRatio_v2,
-    "CR Seed": Comfyroll_Seed,
+    "CR Image Output": CR_ImageOutput,
+    "CR Integer Multiple": CR_IntegerMultipleOf,
+    "CR Color Tint": CR_ColorTint,
+    "CR Latent Batch Size": CR_LatentBatchSize, 
+    "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
+    "CR Seed": CR_Seed,
     "CR Prompt Text":CR_PromptText,
     "CR Split String":CR_SplitString, 
     ### ControlNet Nodes
