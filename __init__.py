@@ -17,12 +17,12 @@ NODE_CLASS_MAPPINGS = {
     "CR Image Size": Comfyroll_ImageSize_Float,
     "CR Image Output": Comfyroll_ImageOutput,
     "CR Integer Multiple": Comfyroll_Int_Multiple_Of,
-    "CR Aspect Ratio": Comfyroll_AspectRatio,
     "CR Color Tint": Comfyroll_Color_Tint,
     "CR Latent Batch Size": Comfyroll_LatentBatchSize, 
     "CR SD1.5 Aspect Ratio":Comfyroll_AspectRatio_v2,
     "CR Seed": Comfyroll_Seed,
     "CR Prompt Text":CR_PromptText,
+    "CR Split String":CR_SplitString, 
     ### ControlNet Nodes
     "CR Apply ControlNet": CR_ApplyControlNet,    
     "CR Multi-ControlNet Stack":CR_ControlNetStack,
