@@ -23,7 +23,7 @@ class CR_ImageInputSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputImages"
 
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def InputImages(self, Input, image1, image2):
         if Input == 1:
@@ -51,7 +51,7 @@ class CR_LatentInputSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputLatents"
 
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def InputLatents(self, Input, latent1, latent2):
         if Input == 1:
@@ -79,7 +79,7 @@ class CR_ConditioningInputSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputConditioning"
 
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def InputConditioning(self, Input, conditioning1, conditioning2):
         if Input == 1:
@@ -107,7 +107,7 @@ class CR_ClipInputSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputClip"
 
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def InputClip(self, Input, clip1, clip2):
         if Input == 1:
@@ -135,7 +135,7 @@ class CR_ModelInputSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputModel"
 
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def InputModel(self, Input, model1, model2):
         if Input == 1:
@@ -163,7 +163,7 @@ class CR_ControlNetInputSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputControlNet"
 
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def InputControlNet(self, Input, control_net1, control_net2):
         if Input == 1:
@@ -190,7 +190,7 @@ class CR_TextInputSwitch:
     RETURN_TYPES = ("STRING",)
     
     FUNCTION = "text_input_switch"
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def text_input_switch(self, Input, text1, text2,):
 
@@ -224,7 +224,7 @@ class CR_ImageInputSwitch4way:
     OUTPUT_NODE = True
     FUNCTION = "InputImages_4"
 
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def InputImages_4(self, Input, image1, image2=None, image3=None, image4=None):
         if Input == 1:
@@ -259,7 +259,7 @@ class CR_TextInputSwitch4way:
     RETURN_TYPES = ("STRING",)
     
     FUNCTION = "text_input_switch"
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def text_input_switch(self, Input, text1, text2=None, text3=None, text4=None):
 
@@ -294,7 +294,7 @@ class CR_ModelAndCLIPInputSwitch:
     OUTPUT_NODE = True
     FUNCTION = "switch"
 
-    CATEGORY = "Comfyroll/Logic"
+    CATEGORY = "Comfyroll/Utils/Logic"
 
     def switch(self, Input, clip1, clip2, model1, model2):
         if Input == 1:
@@ -324,7 +324,7 @@ class CR_Img2ImgProcessSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputLatentsText"
 
-    CATEGORY = "Comfyroll/Process"
+    CATEGORY = "Comfyroll/Utils/Process"
 
     def InputLatentsText(self, Input, txt2img, img2img):
         if Input == "txt2img":
@@ -352,7 +352,7 @@ class CR_HiResFixProcessSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputHiResText"
 
-    CATEGORY = "Comfyroll/Process"
+    CATEGORY = "Comfyroll/Utils/Process"
 
     def InputHiResText(self, Input, latent_upscale, image_upscale):
         if Input == "latent_upscale":
@@ -380,7 +380,7 @@ class CR_BatchProcessSwitch:
     OUTPUT_NODE = True
     FUNCTION = "InputControlNet"
 
-    CATEGORY = "Comfyroll/Process"
+    CATEGORY = "Comfyroll/Utils/Process"
 
     def InputControlNet(self, Input, image, image_batch):
         if Input == "image":
