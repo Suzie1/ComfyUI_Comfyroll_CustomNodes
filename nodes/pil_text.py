@@ -102,7 +102,7 @@ class CR_OverlayText:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "overlay_text"
-    CATEGORY = "Comfyroll/Image/Text"
+    CATEGORY = "Comfyroll/Graphics/Text"
 
     def overlay_text(self, image, text, font_name, font_size, font_color,  
                      margins, line_spacing,
@@ -169,7 +169,7 @@ class CR_DrawText:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw_text"
-    CATEGORY = "Comfyroll/Image/Text"
+    CATEGORY = "Comfyroll/Graphics/Text"
 
     def draw_text(self, image_width, image_height, text,
                   font_name, font_size, font_color, background_color,
@@ -236,7 +236,7 @@ class CR_MaskText:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "mask_text"
-    CATEGORY = "Comfyroll/Image/Text"
+    CATEGORY = "Comfyroll/Graphics/Text"
     
     def mask_text(self, image, text, font_name, font_size,
                   margins, line_spacing, 
@@ -300,7 +300,7 @@ class CR_CompositeText:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "composite_text"
-    CATEGORY = "Comfyroll/Image/Text"
+    CATEGORY = "Comfyroll/Graphics/Text"
     
     def composite_text(self, image_text, image_background, text,
                        font_name, font_size, 
@@ -361,7 +361,7 @@ class CR_SimpleMemeTemplate:
     RETURN_TYPES = ("IMAGE", "STRING", )
     RETURN_NAMES = ("image", "show_help", )
     FUNCTION = "make_meme"
-    CATEGORY = "Comfyroll/Image/Text"
+    CATEGORY = "Comfyroll/Graphics/Templates"
 
     def make_meme(self, image, preset,
                   text_top, text_bottom,
