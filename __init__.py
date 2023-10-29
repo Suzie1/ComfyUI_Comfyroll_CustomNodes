@@ -3,6 +3,7 @@ from .nodes.lora import *
 from .nodes.controlnet import *  
 from .nodes.logic import *
 from .nodes.index import *
+from .nodes.conversion import *
 from .nodes.pipe import *
 from .nodes.sdxl import *
 from .nodes.model_merge import *
@@ -17,9 +18,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Image Output": Comfyroll_ImageOutput,
     "CR Integer Multiple": Comfyroll_Int_Multiple_Of,
     "CR Aspect Ratio": Comfyroll_AspectRatio,
-    "CR Seed to Int": Comfyroll_SeedToInt,
-    "CR Integer To String":CR_IntegerToString,
-    "CR Float To String":CR_FloatToString,
     "CR Color Tint": Comfyroll_Color_Tint,
     "CR Latent Batch Size": Comfyroll_LatentBatchSize, 
     "CR SD1.5 Aspect Ratio":Comfyroll_AspectRatio_v2,
@@ -89,16 +87,20 @@ NODE_CLASS_MAPPINGS = {
     "CR Composite Text":CR_CompositeText,
     "CR Simple Meme Template":CR_SimpleMemeTemplate, 
     ### Utils
+    ### Conversion    
+    "CR String To Number":CR_StringToNumber,
+    "CR String To Combo":CR_StringToCombo,    
+    "CR Float To String":CR_FloatToString,
+    "CR Float To Integer":CR_FloatToInteger,
+    "CR Integer To String":CR_IntegerToString,    
+    "CR Text List To String":CR_TextListToString,
+    "CR Seed to Int": CR_SeedToInt,    
+    ### Index
     "CR Index":CR_Index,    
     "CR Index Increment":CR_IncrementIndex,
     "CR Index Multiply":CR_MultiplyIndex,
     "CR Index Reset":CR_IndexReset,
     "CR Trigger":CR_Trigger,
-    "CR String To Number":CR_StringToNumber,
-    "CR Split String":CR_SplitString,
-    "CR Float To Integer":CR_FloatToInteger, 
-    "CR Text List To String":CR_TextListToString,
-    "CR String To Combo":CR_StringToCombo, 
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
