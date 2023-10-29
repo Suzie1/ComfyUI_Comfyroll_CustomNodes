@@ -449,9 +449,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Image Output": Comfyroll_ImageOutput,
     "CR Integer Multiple": CR_Int_Multiple_Of,
     "CR Aspect Ratio": Comfyroll_AspectRatio,
-    "CR Seed to Int": Comfyroll_SeedToInt,
     "CR Color Tint": Comfyroll_Color_Tint,
-    "CR Halftones" :Comfyroll_Halftone_Grid,
     "CR Latent Batch Size":Comfyroll_LatentBatchSize
     "CR Seed":Comfyroll_Seed,
     "CR Prompt Text":CR_PromptText,
