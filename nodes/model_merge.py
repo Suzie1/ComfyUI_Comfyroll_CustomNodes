@@ -18,18 +18,18 @@ class CR_ModelMergeStack:
         checkpoint_files = ["None"] + folder_paths.get_filename_list("checkpoints")
         return {"required": {"switch_1": (["Off","On"],),
                              "ckpt_name1": (checkpoint_files,),
-                             "model_ratio1": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                             "clip_ratio1": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "model_ratio1": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
+                             "clip_ratio1": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
                              #
                              "switch_2": (["Off","On"],),
                              "ckpt_name2": (checkpoint_files,),
-                             "model_ratio2": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                             "clip_ratio2": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "model_ratio2": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
+                             "clip_ratio2": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
                              #
                              "switch_3": (["Off","On"],),
                              "ckpt_name3": (checkpoint_files,),
-                             "model_ratio3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                             "clip_ratio3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "model_ratio3": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
+                             "clip_ratio3": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
                             },      
                 "optional":{
                              "model_stack": ("MODEL_STACK",),
