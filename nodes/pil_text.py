@@ -475,6 +475,96 @@ class CR_SimpleMemeTemplate:
         return (image_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_ImagePanel:
+
+    @classmethod
+    def INPUT_TYPES(s):
+
+        directions = ["horizontal", "vertical"]               
+        
+        return {"required": {
+                "image_1": ("IMAGE",),
+                "border_thickness": ("INT", {"default": 0, "min": 0, "max": 1024}),
+                "border_color": (COLORS,),
+                "outline_thickness": ("INT", {"default": 0, "min": 0, "max": 1024}),
+                "outline_color": (COLORS,),
+                "layout_direction": (directions,),
+               },
+                "optional": {
+                "image_2": ("IMAGE",), 
+                "image_3": ("IMAGE",),
+                "image_4": ("IMAGE",),
+                "border_color_hex": ("STRING", {"multiline": False, "default": "#000000"})                
+               }
+    }
+
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("image", "show_help", )
+    FUNCTION = "make_panel"
+    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
+    
+    def make_panel(self, image_1,
+                   border_thickness, border_color,
+                   outline_thickness, outline_color, 
+                   layout_direction, image_2=None, image_3=None, image_4=None,
+                   border_color_hex='#000000'):
+
+        if border_color == "custom":
+            border_color = hex_to_rgb(border_color_hex)
+        else:
+            border_color = color_mapping.get(border_color, (0, 0, 0))  # Default to black if the color is not found
+
+        # Convert PIL images to NumPy arrays
+        images = []
+        image_1 = image_1[0, :, :, :]
+        images.append(tensor2pil(image_1))
+        if image_2 is not None:
+            image_2 = image_2[0, :, :, :]
+            images.append(tensor2pil(image_2))
+        if image_3 is not None:
+            image_3 = image_3[0, :, :, :]
+            images.append(tensor2pil(image_3))
+        if image_4 is not None:
+            image_4 = image_4[0, :, :, :]
+            images.append(tensor2pil(image_4))
+            
+        # Apply borders and outlines to each image
+        for i, image in enumerate(images):
+
+            # Apply the outline
+            if outline_thickness > 0:
+                image = ImageOps.expand(image, outline_thickness, fill=outline_color)
+            
+            # Apply the border
+            if border_thickness > 0:
+                image = ImageOps.expand(image, border_thickness, fill=border_color)
+
+            images[i] = image
+
+        # Combine images horizontally or vertically
+        if layout_direction == 'horizontal':
+            combined_width = sum(image.width for image in images)
+            combined_height = max(image.height for image in images)
+        else:
+            combined_width = max(image.width for image in images)
+            combined_height = sum(image.height for image in images)
+
+        combined_image = Image.new('RGB', (combined_width, combined_height))
+
+        x_offset = 0
+        y_offset = 0  # Initialize y_offset for vertical layout
+        for image in images:
+            combined_image.paste(image, (x_offset, y_offset))
+            if layout_direction == 'horizontal':
+                x_offset += image.width
+            else:
+                y_offset += image.height
+
+        show_help = "example help text"
+
+        return (pil2tensor(combined_image), show_help, ) 
+
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -486,6 +576,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Composite Text":CR_CompositeText,
     "CR Draw Perspective Text":CR_DrawPerspectiveText,
     "CR Simple Meme Template":CR_SimpleMemeTemplate,
+    "CR Image Panel":CR_ImagePanel,
 }
 '''
 
