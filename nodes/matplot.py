@@ -22,6 +22,10 @@ from matplotlib.patches import RegularPolygon
 
 #---------------------------------------------------------------------------------------------------------------------#
 
+#icons = {
+#    "Comfyroll/Graphics/Pattern": "🧩 Comfyroll/👾 Graphics/🌈 Pattern",
+#}
+
 # Dictionary to map color names to RGB values
 color_mapping = {
     "white": (255, 255, 255),
@@ -55,17 +59,33 @@ color_mapping = {
     "indigo": (75, 0, 130),    
 }
 
-COLORS = ["white", "black", "red", "green", "blue", "yellow",
+COLORS = ["custom", "white", "black", "red", "green", "blue", "yellow",
           "cyan", "magenta", "orange", "purple", "pink", "brown", "gray",
           "lightgray", "darkgray", "olive", "lime", "teal", "navy", "maroon",
           "fuchsia", "aqua", "silver", "gold", "turquoise", "lavender",
           "violet", "coral", "indigo"]
 
+STYLES = ["Accent","afmhot","autumn","binary","Blues","bone","BrBG","brg",
+    "BuGn","BuPu","bwr","cividis","CMRmap","cool","coolwarm","copper","cubehelix","Dark2","flag",
+    "gist_earth","gist_gray","gist_heat","gist_rainbow","gist_stern","gist_yarg","GnBu","gnuplot","gnuplot2","gray","Greens",
+    "Greys","hot","hsv","inferno","jet","magma","nipy_spectral","ocean","Oranges","OrRd",
+    "Paired","Pastel1","Pastel2","pink","PiYG","plasma","PRGn","prism","PuBu","PuBuGn",
+    "PuOr","PuRd","Purples","rainbow","RdBu","RdGy","RdPu","RdYlBu","RdYlGn","Reds","seismic",
+    "Set1","Set2","Set3","Spectral","spring","summer","tab10","tab20","tab20b","tab20c","terrain",
+    "turbo","twilight","twilight_shifted","viridis","winter","Wistia","YlGn","YlGnBu","YlOrBr","YlOrRd"]
+            
 #---------------------------------------------------------------------------------------------------------------------#
 
 def rgb_to_hex(rgb):
     r, g, b = rgb
     return "#{:02X}{:02X}{:02X}".format(r, g, b)
+    
+def hex_to_rgb(hex_color):
+    hex_color = hex_color.lstrip('#')  # Remove the '#' character, if present
+    r = int(hex_color[0:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+    return (r, g, b)    
 
 def tensor2pil(image):
     return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
@@ -77,39 +97,32 @@ def pil2tensor(image):
 class CR_HalftoneGrid:
     @classmethod
     def INPUT_TYPES(s):
-    
-        dot_styles = ["Accent","afmhot","autumn","binary","Blues","bone","BrBG","brg",
-            "BuGn","BuPu","bwr","cividis","CMRmap","cool","coolwarm","copper","cubehelix","Dark2","flag",
-            "gist_earth","gist_gray","gist_heat","gist_rainbow","gist_stern","gist_yarg","GnBu","gnuplot","gnuplot2","gray","Greens",
-            "Greys","hot","hsv","inferno","jet","magma","nipy_spectral","ocean","Oranges","OrRd",
-            "Paired","Pastel1","Pastel2","pink","PiYG","plasma","PRGn","prism","PuBu","PuBuGn",
-            "PuOr","PuRd","Purples","rainbow","RdBu","RdGy","RdPu","RdYlBu","RdYlGn","Reds","seismic",
-            "Set1","Set2","Set3","Spectral","spring","summer","tab10","tab20","tab20b","tab20c","terrain",
-            "turbo","twilight","twilight_shifted","viridis","winter","Wistia","YlGn","YlGnBu","YlOrBr","YlOrRd"]
-            
+               
         return {"required": {
-                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "dot_style": (dot_styles,),
-                    "reverse_dot_style": (["No", "Yes"],),
-                    "dot_frequency": ("INT", {"default": 50, "min": 1, "max":200, "step": 1}),
-                    "background_color": (["custom", "white", "black", "red", "green", "blue", "cyan", "magenta", "yellow", "purple", "orange", "lime", "navy", "teal", "maroon", "lavender", "olive"],),
-                    "background_R": ("INT", {"default": 255, "min": 0, "max": 255, "step": 1}),
-                    "background_G": ("INT", {"default": 255, "min": 0, "max": 255, "step": 1}),
-                    "background_B": ("INT", {"default": 255, "min": 0, "max": 255, "step": 1}),
-                    "x_pos": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": .01}),
-                    "y_pos": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": .01}),                    
-                    },
+                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "dot_style": (STYLES,),
+                "reverse_dot_style": (["No", "Yes"],),
+                "dot_frequency": ("INT", {"default": 50, "min": 1, "max":200, "step": 1}),
+                "background_color": (COLORS,),
+                "x_pos": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": .01}),
+                "y_pos": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": .01}),                     
+                },
+                "optional": {
+                "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"})
                 }
+        }        
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "halftone"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
 
-    def halftone(self, width, height, dot_style, reverse_dot_style, dot_frequency, background_color, background_R, background_G, background_B, x_pos, y_pos):
+
+    def halftone(self, width, height, dot_style, reverse_dot_style, dot_frequency, background_color, x_pos, y_pos, bg_color_hex='#000000'):
     
         if background_color == "custom":
-            bgc = (background_R/255, background_G/255, background_B/255)
+            bgc = bg_color_hex
         else:
             bgc = background_color
             
@@ -151,22 +164,37 @@ class CR_ColorBars:
                     "mode": (modes,),
                     "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
                     "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "color1": (COLORS,),
-                    "color2": (COLORS,),
+                    "color_1": (COLORS,),
+                    "color_2": (COLORS,),
                     "orientation": (["vertical", "horizontal", "diagonal", "alt_diagonal"],), #added 135 angle for diagonals
                     "bar_frequency": ("INT", {"default": 5, "min": 1, "max":200, "step": 1}),
                     "offset": ("FLOAT", {"default": 0, "min": 0, "max":20, "step": 0.05}),
-                    },
+                    },              
+                "optional": {
+                    "color1_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "color2_hex": ("STRING", {"multiline": False, "default": "#000000"}),
                 }
+        }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
 
-    def draw(self, mode, width, height, color1, color2, orientation, bar_frequency, offset=0):
+    def draw(self, mode, width, height, color_1, color_2, 
+             orientation, bar_frequency, offset=0,
+             color1_hex='#000000', color2_hex='#000000'):
 
-        color1_rgb = color_mapping.get(color1, (255, 255, 255))  # Default to white if the color is not found
-        color2_rgb = color_mapping.get(color2, (0, 0, 0))  # Default to black if the color is not found
+        # Get RGB values 
+        if color_1 == "custom":
+            color1_rgb = hex_to_rgb(color1_hex)
+        else:
+            color1_rgb = color_mapping.get(color_1, (255, 255, 255))  # Default to white if the color is not found
+
+        if color_2 == "custom":
+            color2_rgb = hex_to_rgb(color2_hex)
+        else:
+            color2_rgb = color_mapping.get(color_2, (0, 0, 0))  # Default to black if the color is not found
 
         canvas = np.zeros((height, width, 3), dtype=np.uint8)
         
@@ -229,32 +257,25 @@ class CR_StyleBars:
     @classmethod
     def INPUT_TYPES(s):
     
-        bar_styles = ["Accent","afmhot","autumn","binary","Blues","bone","BrBG","brg",
-            "BuGn","BuPu","bwr","cividis","CMRmap","cool","coolwarm","copper","cubehelix","Dark2","flag",
-            "gist_earth","gist_gray","gist_heat","gist_rainbow","gist_stern","gist_yarg","GnBu","gnuplot","gnuplot2","gray",
-            "Greens","Greys","hot","hsv","inferno","jet","magma","nipy_spectral","ocean","Oranges","OrRd",
-            "Paired","Pastel1","Pastel2","pink","PiYG","plasma","PRGn","prism","PuBu","PuBuGn",
-            "PuOr","PuRd","Purples","rainbow","RdBu","RdGy","RdPu","RdYlBu","RdYlGn","Reds","seismic",
-            "Set1","Set2","Set3","Spectral","spring","summer","tab10","tab20","tab20b","tab20c","terrain",
-            "turbo","twilight","twilight_shifted","viridis","winter","Wistia","YlGn","YlGnBu","YlOrBr","YlOrRd"]
         modes = ["color bars", "sin wave", "gradient bars"]
         
         return {"required": {
                     "mode": (modes,),
                     "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
                     "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "bar_style": (bar_styles,),
+                    "bar_style": (STYLES,),
                     "orientation": (["vertical", "horizontal", ],),
                     "bar_frequency": ("INT", {"default": 5, "min": 1, "max":200, "step": 1}),
-                    },
-                }
+                    }
+        }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
 
     def draw(self, mode, width, height, bar_style, orientation, bar_frequency):
-
+           
         # Create a horizontal or vertical bar depending on the orientation
         if orientation == "vertical":
             x = np.linspace(0, 1, width)
@@ -301,41 +322,51 @@ class CR_StyleBars:
 class CR_ColorGradient:
     @classmethod
     def INPUT_TYPES(s):
-    
-        modes = ["linear", "radial"]
         
         return {"required": {
-                    "mode": (modes,),
                     "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
                     "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
                     "start_color": (COLORS,),
                     "end_color": (COLORS,),
                     "gradient_distance": ("FLOAT", {"default": 1, "min": 0, "max": 2, "step": 0.05}),
-                    "transition_point": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
-                    "rad_center_x": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
-                    "rad_center_y": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                    "linear_transition": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
                     "orientation": (["vertical", "horizontal", ],),
                     },
+                "optional": {
+                    "start_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "end_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
                 }
+        }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
 
-    def draw(self, mode, width, height, start_color, end_color, orientation, transition_point=0.5, rad_center_x=0.5, rad_center_y=0.5, gradient_distance=1): # Default to .5 if the value is not found
-    
-        color1_rgb = color_mapping.get(start_color, (255, 255, 255))  # Default to white if the color is not found
-        color2_rgb = color_mapping.get(end_color, (0, 0, 0))  # Default to black if the color is not found
+    def draw(self, width, height, start_color, end_color, orientation,
+             linear_transition=0.5, gradient_distance=1,
+             start_color_hex='#000000', end_color_hex='#000000'): # Default to .5 if the value is not found
+ 
+        # Get RGB values 
+        if start_color == "custom":
+            color1_rgb = hex_to_rgb(start_color_hex)
+        else:
+            color1_rgb = color_mapping.get(start_color, (255, 255, 255))  # Default to white if the color is not found
 
+        if end_color == "custom":
+            color2_rgb = hex_to_rgb(end_color_hex)
+        else:
+            color2_rgb = color_mapping.get(end_color, (0, 0, 0))  # Default to black if the color is not found
+ 
         # Create a blank canvas
         canvas = np.zeros((height, width, 3), dtype=np.uint8)
-        transition_pixel = int(transition_point * (width if orientation == 'horizontal' else height)) #getting center point for gradient
+        transition_pixel = int(linear_transition * (width if orientation == 'horizontal' else height)) #getting center point for gradient
         
-        def get_gradient_value(pos, length, transition_point, gradient_distance): #getting the distance we use to apply gradient
+        def get_gradient_value(pos, length, linear_transition, gradient_distance): #getting the distance we use to apply gradient
             # Calculate the start and end of the transition
             transition_length = length * gradient_distance
-            transition_start = transition_point * length - transition_length / 2
-            transition_end = transition_point * length + transition_length / 2
+            transition_start = linear_transition * length - transition_length / 2
+            transition_end = linear_transition * length + transition_length / 2
             
             # Return the gradient value based on position
             if pos < transition_start:
@@ -344,45 +375,29 @@ class CR_ColorGradient:
                 return 1
             else:
                 return (pos - transition_start) / transition_length
+ 
+        if orientation == 'horizontal':
+            # Define the x-values for interpolation
+            x = [0, width * linear_transition - 0.5 * width * gradient_distance, width * linear_transition + 0.5 * width * gradient_distance, width]
+            # Define the y-values for interpolation (t-values)
+            y = [0, 0, 1, 1]
+            # Interpolate
+            t_values = np.interp(np.arange(width), x, y)
+            for i, t in enumerate(t_values):
+                interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
+                canvas[:, i] = interpolated_color
 
-        if mode == "linear":  #changed the approach here to use numpy since we have it anyway, makes the new code way easier to apply
-            if orientation == 'horizontal':
-                # Define the x-values for interpolation
-                x = [0, width * transition_point - 0.5 * width * gradient_distance, width * transition_point + 0.5 * width * gradient_distance, width]
-                # Define the y-values for interpolation (t-values)
-                y = [0, 0, 1, 1]
-                # Interpolate
-                t_values = np.interp(np.arange(width), x, y)
-                for i, t in enumerate(t_values):
-                    interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
-                    canvas[:, i] = interpolated_color
-
-            elif orientation == 'vertical':
-                # Define the x-values for interpolation
-                x = [0, height * transition_point - 0.5 * height * gradient_distance, height * transition_point + 0.5 * height * gradient_distance, height]
-                # Define the y-values for interpolation (t-values)
-                y = [0, 0, 1, 1]
-                # Interpolate
-                t_values = np.interp(np.arange(height), x, y)
-                for j, t in enumerate(t_values):
-                    interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
-                    canvas[j, :] = interpolated_color
+        elif orientation == 'vertical':
+            # Define the x-values for interpolation
+            x = [0, height * linear_transition - 0.5 * height * gradient_distance, height * linear_transition + 0.5 * height * gradient_distance, height]
+            # Define the y-values for interpolation (t-values)
+            y = [0, 0, 1, 1]
+            # Interpolate
+            t_values = np.interp(np.arange(height), x, y)
+            for j, t in enumerate(t_values):
+                interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
+                canvas[j, :] = interpolated_color
                     
-        elif mode == "radial":        
-                center_x = int(rad_center_x * width)
-                center_y = int(rad_center_y * height)
-                # Corrected computation for max_distance
-                max_distance = (np.sqrt(max(center_x, width - center_x)**2 + max(center_y, height - center_y)**2))*gradient_distance
-
-                for i in range(width):
-                    for j in range(height):
-                        distance_to_center = np.sqrt((i - center_x) ** 2 + (j - center_y) ** 2)
-                        t = distance_to_center / max_distance
-                        # Ensure t is between 0 and 1
-                        t = max(0, min(t, 1))
-                        interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
-                        canvas[j, i] = interpolated_color 
-
         fig, ax = plt.subplots(figsize=(width / 100, height / 100))
 
         ax.imshow(canvas)
@@ -397,6 +412,76 @@ class CR_ColorGradient:
         return pil2tensor(img),
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_RadialGradient:
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        return {"required": {
+                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "start_color": (COLORS,),
+                    "end_color": (COLORS,),
+                    "gradient_distance": ("FLOAT", {"default": 1, "min": 0, "max": 2, "step": 0.05}),
+                    "radial_center_x": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                    "radial_center_y": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                    },
+                "optional": {
+                    "start_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "end_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                }
+        }
+
+    RETURN_TYPES = ("IMAGE", )
+    FUNCTION = "draw"
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
+
+    def draw(self, width, height, start_color, end_color, 
+             radial_center_x=0.5, radial_center_y=0.5, gradient_distance=1,
+             start_color_hex='#000000', end_color_hex='#000000'): # Default to .5 if the value is not found
+ 
+        # Get RGB values 
+        if start_color == "custom":
+            color1_rgb = hex_to_rgb(start_color_hex)
+        else:
+            color1_rgb = color_mapping.get(start_color, (255, 255, 255))  # Default to white if the color is not found
+
+        if end_color == "custom":
+            color2_rgb = hex_to_rgb(end_color_hex)
+        else:
+            color2_rgb = color_mapping.get(end_color, (0, 0, 0))  # Default to black if the color is not found
+ 
+        # Create a blank canvas
+        canvas = np.zeros((height, width, 3), dtype=np.uint8)
+
+        center_x = int(radial_center_x * width)
+        center_y = int(radial_center_y * height)                
+        # Computation for max_distance
+        max_distance = (np.sqrt(max(center_x, width - center_x)**2 + max(center_y, height - center_y)**2))*gradient_distance
+
+        for i in range(width):
+            for j in range(height):
+                distance_to_center = np.sqrt((i - center_x) ** 2 + (j - center_y) ** 2)
+                t = distance_to_center / max_distance
+                # Ensure t is between 0 and 1
+                t = max(0, min(t, 1))
+                interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
+                canvas[j, i] = interpolated_color 
+
+        fig, ax = plt.subplots(figsize=(width / 100, height / 100))
+
+        ax.imshow(canvas)
+        plt.axis('off')
+        plt.tight_layout(pad=0, w_pad=0, h_pad=0)
+        plt.autoscale(tight=True)
+
+        img_buf = io.BytesIO()
+        plt.savefig(img_buf, format='png')
+        img = Image.open(img_buf)
+
+        return pil2tensor(img),
+        
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_CheckerPattern:
 
     @classmethod
@@ -405,24 +490,39 @@ class CR_CheckerPattern:
         modes = ["regular", "stepped"]          
         
         return {"required": {
-            "mode": (modes,),
-            "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-            "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-            "color1": (COLORS,),
-            "color2": (COLORS,), 
-            "grid_frequency": ("INT", {"default": 8, "min": 1, "max": 200, "step": 1}),
-            "step": ("INT", {"default": 2, "min": 2, "max": 200, "step": 1}),
-        },
+                    "mode": (modes,),
+                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "color_1": (COLORS,),
+                    "color_2": (COLORS,), 
+                    "grid_frequency": ("INT", {"default": 8, "min": 1, "max": 200, "step": 1}),
+                    "step": ("INT", {"default": 2, "min": 2, "max": 200, "step": 1}),
+                },
+                "optional": {
+                    "color1_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "color2_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                }        
     }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
 
-    def draw(self, mode, width, height, color1, color2, grid_frequency, step):
+    def draw(self, mode, width, height, color_1, color_2,
+             grid_frequency, step,
+             color1_hex='#000000', color2_hex='#000000'):
 
-        color1_rgb = color_mapping.get(color1, (255, 255, 255))  # Default to white if the color is not found
-        color2_rgb = color_mapping.get(color2, (0, 0, 0))  # Default to black if the color is not found
+        # Get RGB values 
+        if color_1 == "custom":
+            color1_rgb = hex_to_rgb(color1_hex)
+        #else:
+            #color1_rgb = color_mapping.get(color_1, (255, 255, 255))  # Default to white if the color is not found
+
+        if color_2 == "custom":
+            color2_rgb = hex_to_rgb(color2_hex)
+        #else:
+            #color2_rgb = color_mapping.get(color_2, (0, 0, 0))  # Default to black if the color is not found
 
         # Create a blank canvas
         canvas = np.zeros((height, width, 3), dtype=np.uint8)
@@ -466,33 +566,51 @@ class CR_Polygons:
         modes = ["hexagons", "triangles"]          
         
         return {"required": {
-            "mode": (modes,),
-            "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-            "height": ("INT", {"default": 512, "min": 64, "max": 2048}),         
-            "rows": ("INT", {"default": 5, "min": 1, "max": 512}),          
-            "columns": ("INT", {"default": 5, "min": 1, "max": 512}),
-            "face_color": (COLORS,),
-            "line_color": (COLORS,),            
-            "line_width": ("INT", {"default": 2, "min": 0, "max": 512}),
-        },
+                    "mode": (modes,),
+                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),         
+                    "rows": ("INT", {"default": 5, "min": 1, "max": 512}),          
+                    "columns": ("INT", {"default": 5, "min": 1, "max": 512}),
+                    "face_color": (COLORS,),
+                    "background_color": (COLORS,),
+                    "line_color": (COLORS,),            
+                    "line_width": ("INT", {"default": 2, "min": 0, "max": 512}),
+                },
+                "optional": {
+                    "face_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "line_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                } 
     }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
 
-    def draw(self, mode, width, height, rows, columns, face_color, line_color, line_width):
+    def draw(self, mode, width, height, rows, columns,
+             face_color, background_color, line_color, line_width,
+             face_color_hex='#000000', bg_color_hex='#000000', line_color_hex='#000000'):
+
+        # Get RGB values 
+        if face_color == "custom":
+            face_color = face_color_hex
+
+        if line_color == "custom":
+            line_color = line_color_hex
+
+        if background_color == "custom":
+            background_color = bg_color_hex
     
         fig, ax = plt.subplots(figsize=(width/100, height/100))
+        fig.set_facecolor(background_color)
         plt.xlim(0, width/100)
         plt.ylim(0, height/100)
         plt.axis('off')
         plt.tight_layout(pad=0, w_pad=0, h_pad=0)
         plt.autoscale(False)         
-        
-        face_color_rgb = color_mapping.get(face_color, (255, 255, 255))  # Default to white if the color is not found
-        face_color_hex = rgb_to_hex(face_color_rgb)
-        
+
+        # Get polygon shape  
         if mode == "hexagons":
             vertices = 6
         elif mode == "triangles":
@@ -500,10 +618,8 @@ class CR_Polygons:
         
         # Define the height and width of a hexagon
         cell_width = (width/100) / columns
-        print(cell_width)
     
         cell_height = (width/height) * np.sqrt(3) * (height/100) / (2 * columns)
-        print(cell_height)
         
         for row in range(rows + 2):
             for col in range(columns + 2):
@@ -513,9 +629,6 @@ class CR_Polygons:
                 # Shift every other row
                 if row % 2 == 1:
                     x += cell_width / 2
-                #    hex_color = hex_color2
-                #else:
-                #    hex_color = hex_color1
                     
                 # Create a hexagon as a polygon patch
                 hexagon = RegularPolygon((x, y), numVertices=vertices, radius=cell_width/1.732, edgecolor=line_color, linewidth=line_width, facecolor=face_color)
@@ -534,26 +647,41 @@ class CR_StarburstLines:
     def INPUT_TYPES(s):
       
         return {"required": {
-            "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-            "height": ("INT", {"default": 512, "min": 64, "max": 2048}),              
-            "num_lines": ("INT", {"default": 6, "min": 1, "max": 2048}),      
-            "line_length": ("INT", {"default": 256, "min": 1, "max": 512}), 
-            "line_width": ("INT", {"default": 5, "min": 1, "max": 512}),
-            "line_color": (COLORS,),
-            "background_color": (COLORS,),
-            "center_x": ("INT", {"default": 0, "min": 0, "max": 1024}),
-            "center_y": ("INT", {"default": 0, "min": 0, "max": 1024}),
-            "rotation": ("FLOAT", {"default": 0, "min": 0, "max": 720}),            
-        },
+                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),              
+                "num_lines": ("INT", {"default": 6, "min": 1, "max": 2048}),      
+                "line_length": ("INT", {"default": 256, "min": 1, "max": 512}), 
+                "line_width": ("INT", {"default": 5, "min": 1, "max": 512}),
+                "line_color": (COLORS,),
+                "background_color": (COLORS,),
+                "center_x": ("INT", {"default": 0, "min": 0, "max": 1024}),
+                "center_y": ("INT", {"default": 0, "min": 0, "max": 1024}),
+                "rotation": ("FLOAT", {"default": 0, "min": 0, "max": 720}),            
+                },
+                "optional": {
+                "line_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                } 
     }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
     
-    def draw(self, width, height, num_lines, line_length, line_width, line_color, background_color, center_x, center_y, rotation=0):
+    def draw(self, width, height, num_lines, line_length, line_width, line_color, background_color,
+             center_x, center_y, rotation=0,
+             line_color_hex='#000000', bg_color_hex='#000000'):
+
+        if line_color == "custom":
+            line_color = line_color_hex
+        else:
+            line_color = line_color   
              
-        bgc = background_color        
+        if background_color == "custom":
+            bgc = bg_color_hex
+        else:
+            bgc = background_color       
         
         # Define the angle for the spokes in the starburst
         angle = 360 / num_lines
@@ -597,24 +725,41 @@ class CR_StarburstColors:
     def INPUT_TYPES(s):
     
         return {"required": {
-            #"mode": (modes,),
-            "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-            "height": ("INT", {"default": 512, "min": 64, "max": 2048}),             
-            "num_triangles": ("INT", {"default": 6, "min": 1, "max": 512}),                      
-            "color_1": (COLORS,),
-            "color_2": (COLORS,),
-            "center_x": ("INT", {"default": 0, "min": 0, "max": 512}),
-            "center_y": ("INT", {"default": 0, "min": 0, "max": 512}),
-            "rotation": ("FLOAT", {"default": 0, "min": 0, "max": 720}),
-            "bbox_factor": ("FLOAT", {"default": 2, "min": 0, "max": 2, "step": .01}),
-        },
+                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),             
+                "num_triangles": ("INT", {"default": 6, "min": 1, "max": 512}),                      
+                "color_1": (COLORS,),
+                "color_2": (COLORS,),
+                "center_x": ("INT", {"default": 0, "min": 0, "max": 512}),
+                "center_y": ("INT", {"default": 0, "min": 0, "max": 512}),
+                "rotation": ("FLOAT", {"default": 0, "min": 0, "max": 720}),
+                "bbox_factor": ("FLOAT", {"default": 2, "min": 0, "max": 2, "step": .01}),
+                },
+                "optional": {
+                "color1_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                "color2_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                }
     }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"        
+    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+    CATEGORY = "Comfyroll/Graphics/Pattern"
         
-    def draw(self, width, height, num_triangles, color_1, color_2, center_x, center_y, bbox_factor, rotation=0): 
+    def draw(self, width, height, num_triangles, color_1, color_2,
+             center_x, center_y, bbox_factor, rotation=0,
+             color1_hex='#000000', color2_hex='#000000'): 
+
+        # Get RGB values for the text color  
+        if color_1 == "custom":
+            color_1 = color1_hex
+        else:
+            color_1 = color_1
+
+        if color_2 == "custom":
+            color_2 = color2_hex
+        else:
+            color_2 = color_2
 
         # Set up the plot
         fig, ax = plt.subplots()
@@ -670,15 +815,15 @@ class CR_StarburstColors:
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS = {
-    "CR Color Bars" :CR_ColorBars,
-    "CR Style Bars" :CR_StyleBars,
-    "CR Checker Pattern" :CR_CheckerPattern,
-    "CR Polygons" :CR_Polygons,
-    "CR Halftone Grid" :CR_HalftoneGrid,
-    "CR Color Gradient":CR_ColorGradient,
-    "CR Overlay Text":CR_OverlayText,
-    "CR Starburst Lines":CR_StarburstLines,
-    "CR Starburst Colors":CR_StarburstColors,
+    "CR Color Bars": CR_ColorBars,
+    "CR Style Bars": CR_StyleBars,
+    "CR Checker Pattern": CR_CheckerPattern,
+    "CR Polygons":CR_Polygons,
+    "CR Halftone Grid": CR_HalftoneGrid,
+    "CR Color Gradient": CR_ColorGradient,
+    "CR Radial Gradient": CR_RadialGradient,
+    "CR Overlay Text": CR_OverlayText,
+    "CR Starburst Lines": CR_StarburstLines,
+    "CR Starburst Colors": CR_StarburstColors,
 }
 '''
-
