@@ -85,7 +85,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Draw Text":CR_DrawText,
     "CR Mask Text":CR_MaskText,
     "CR Composite Text":CR_CompositeText,
-    "CR Simple Meme Template":CR_SimpleMemeTemplate, 
+    "CR Simple Meme Template":CR_SimpleMemeTemplate,
+    "CR Image Panel":CR_ImagePanel, 
     ### Conversion    
     "CR String To Number":CR_StringToNumber,
     "CR String To Combo":CR_StringToCombo,    
