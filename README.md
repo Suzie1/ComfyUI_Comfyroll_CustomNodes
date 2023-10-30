@@ -83,6 +83,13 @@ __Image__
 * CR Starburst Lines
 * CR Starburst Colors
 
+__Image Text__
+* CR Overlay Text
+* CR Draw Text
+* CR Mask Text
+* CR Composite Text
+* CR Simple Meme Template
+
 __Module__
 * CR Module Pipe Loader
 * CR Module Input
@@ -134,9 +141,6 @@ __Conversion__
 * CR Integer To String    
 * CR Text List To String
 * CR Seed to Int
-
-__Legacy__
-* CR Image Size
 
 __Deleted Nodes__
 * CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio

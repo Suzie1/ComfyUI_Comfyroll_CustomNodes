@@ -1,73 +1,73 @@
-from .Comfyroll_Nodes import *
-from .Comfyroll_Pipe_Nodes import *
-from .Comfyroll_SDXL_Nodes import *
+from .nodes.nodes import *
+from .nodes.lora import *
+from .nodes.controlnet import *  
+from .nodes.logic import *
+from .nodes.index import *
+from .nodes.conversion import *
+from .nodes.pipe import *
+from .nodes.sdxl import *
+from .nodes.model_merge import *
 from .nodes.upscale import *
 from .nodes.xygrid import *
-from .nodes.utils import *
 from .nodes.matplot import *
 from .nodes.pil_text import *
 
 NODE_CLASS_MAPPINGS = {
-    "CR Image Input Switch": Comfyroll_ImageInputSwitch,
-    "CR Image Input Switch (4 way)": Comfyroll_ImageInputSwitch_4way,
-    "CR Latent Input Switch": Comfyroll_LatentInputSwitch,
-    "CR Conditioning Input Switch": Comfyroll_ConditioningInputSwitch,
-    "CR Clip Input Switch": Comfyroll_ClipInputSwitch,
-    "CR Model Input Switch": Comfyroll_ModelInputSwitch,
-    "CR ControlNet Input Switch": Comfyroll_ControlNetInputSwitch,
-    "CR Text Input Switch": Comfyroll_TextInputSwitch,
-    "CR Text Input Switch (4 way)": Comfyroll_TextInputSwitch_4way,
-    "CR Switch Model and CLIP":Comfyroll_ModelAndCLIPInputSwitch,
-    "CR Load LoRA": Comfyroll_LoraLoader,
-    "CR Apply ControlNet": Comfyroll_ApplyControlNet,
-    "CR Image Size": Comfyroll_ImageSize_Float,
-    "CR Image Output": Comfyroll_ImageOutput,
-    "CR Integer Multiple": Comfyroll_Int_Multiple_Of,
-    "CR Aspect Ratio": Comfyroll_AspectRatio,
-    "CR Seed to Int": Comfyroll_SeedToInt,
-    "CR Integer To String":CR_IntegerToString,
-    "CR Float To String":CR_FloatToString,
-    "CR Color Tint": Comfyroll_Color_Tint,
-    "CR Img2Img Process Switch": Comfyroll_InputLatentsText,
-    "CR Hires Fix Process Switch": Comfyroll_HiResFixSwitch,
-    "CR Latent Batch Size": Comfyroll_LatentBatchSize,
-    "CR LoRA Stack":Comfyroll_LoRA_Stack,
-    "CR Apply LoRA Stack":Comfyroll_ApplyLoRA_Stack,    
-    "CR SD1.5 Aspect Ratio":Comfyroll_AspectRatio_v2,
-    "CR Batch Process Switch": Comfyroll_BatchProcessSwitch,
-    "CR Multi-ControlNet Stack":Comfyroll_ControlNetStack,
-    "CR Apply Multi-ControlNet":Comfyroll_ApplyControlNetStack,    
-    "CR Seed": Comfyroll_Seed,
-    "CR Apply Model Merge":Comfyroll_ApplyModelMerge,
-    "CR Model Merge Stack":Comfyroll_ModelMergeStack,
+    "CR Image Output": CR_ImageOutput,
+    "CR Integer Multiple": CR_IntegerMultipleOf,
+    "CR Color Tint": CR_ColorTint,
+    "CR Latent Batch Size": CR_LatentBatchSize, 
+    "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
+    "CR Seed": CR_Seed,
     "CR Prompt Text":CR_PromptText,
+    "CR Split String":CR_SplitString, 
+    ### ControlNet Nodes
+    "CR Apply ControlNet": CR_ApplyControlNet,    
+    "CR Multi-ControlNet Stack":CR_ControlNetStack,
+    "CR Apply Multi-ControlNet":CR_ApplyControlNetStack,   
+    ### LoRA Nodes    
+    "CR Load LoRA": CR_LoraLoader,    
+    "CR LoRA Stack":CR_LoRAStack,
+    "CR Apply LoRA Stack":CR_ApplyLoRAStack,  
+    ### Logic Nodes
+    "CR Image Input Switch": CR_ImageInputSwitch,
+    "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
+    "CR Latent Input Switch": CR_LatentInputSwitch,
+    "CR Conditioning Input Switch": CR_ConditioningInputSwitch,
+    "CR Clip Input Switch": CR_ClipInputSwitch,
+    "CR Model Input Switch": CR_ModelInputSwitch,
+    "CR ControlNet Input Switch": CR_ControlNetInputSwitch,
+    "CR Text Input Switch": CR_TextInputSwitch,
+    "CR Text Input Switch (4 way)": CR_TextInputSwitch4way,
+    "CR Switch Model and CLIP":CR_ModelAndCLIPInputSwitch,    
+    "CR Batch Process Switch": CR_BatchProcessSwitch,    
+    "CR Img2Img Process Switch": CR_Img2ImgProcessSwitch,
+    "CR Hires Fix Process Switch": CR_HiResFixProcessSwitch, 
+    ### Model Merge
+    "CR Apply Model Merge":CR_ApplyModelMerge,
+    "CR Model Merge Stack":CR_ModelMergeStack,
     ### Pipe Nodes
-    "CR Module Pipe Loader": CR_module_pipe_loader,
-    "CR Module Input": CR_module_input,
-    "CR Module Output": CR_module_output,
-    "CR Image Pipe In": CR_image_pipe_in,
-    "CR Image Pipe Edit": CR_image_pipe_edit,
-    "CR Image Pipe Out": CR_image_pipe_out,
-    "CR Pipe Switch": CR_input_switch_pipe,
+    "CR Module Pipe Loader":CR_ModulePipeLoader,
+    "CR Module Input":CR_ModuleInput,
+    "CR Module Output":CR_ModuleOutput,
+    "CR Image Pipe In":CR_ImagePipeIn,
+    "CR Image Pipe Edit":CR_ImagePipeEdit,
+    "CR Image Pipe Out":CR_ImagePipeOut,
+    "CR Pipe Switch":CR_InputSwitchPipe,  
     ### SDXL Nodes
-    "CR SDXL Prompt Mix Presets": Comfyroll_prompt_mixer_v2,
-    "CR SDXL Aspect Ratio":Comfyroll_SDXL_AspectRatio_v2,
-    "CR SDXL Prompt Mixer": Comfyroll_prompt_mixer,
-    "CR SDXL Style Text": Comfyroll_SDXLStyleText,
-    "CR SDXL Base Prompt Encoder": Comfyroll_SDXLBasePromptEncoder, 
-    "CR Aspect Ratio SDXL": Comfyroll_AspectRatio_SDXL,
+    "CR SDXL Prompt Mix Presets": CR_PromptMixPresets,
+    "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
+    "CR SDXL Style Text": CR_SDXLStyleText,
+    "CR SDXL Base Prompt Encoder": CR_SDXLBasePromptEncoder, 
     ### Upscale Nodes
     "CR Multi Upscale Stack":CR_MultiUpscaleStack,
     "CR Upscale Image":CR_UpscaleImage,
     "CR Apply Multi Upscale":CR_ApplyMultiUpscale,
-    ### XY Gid Nodes    
+    ### XY Grid Nodes    
     "CR XY List":CR_XYList,
     "CR XY Interpolate":CR_XYInterpolate,
     "CR XY Index":CR_XYIndex,
-    #"CR XYZ Index":CR_XYZIndex,
     "CR XY From Folder":CR_XYFromFolder,
-    #"CR Load XY Annotation From File":CR_LoadXYAnnotationFromFile,
-    #"CR XY Grid":CR_XYGrid,
     "CR XY Save Grid Image":CR_XYSaveGridImage,
     ### Matplot Nodes
     "CR Halftone Grid":CR_HalftoneGrid,
@@ -82,18 +82,23 @@ NODE_CLASS_MAPPINGS = {
     "CR Overlay Text":CR_OverlayText,
     "CR Draw Text":CR_DrawText,
     "CR Mask Text":CR_MaskText,
-    "CR Composite Text":CR_CompositeText, 
+    "CR Composite Text":CR_CompositeText,
+    "CR Simple Meme Template":CR_SimpleMemeTemplate, 
     ### Utils
+    ### Conversion    
+    "CR String To Number":CR_StringToNumber,
+    "CR String To Combo":CR_StringToCombo,    
+    "CR Float To String":CR_FloatToString,
+    "CR Float To Integer":CR_FloatToInteger,
+    "CR Integer To String":CR_IntegerToString,    
+    "CR Text List To String":CR_TextListToString,
+    "CR Seed to Int": CR_SeedToInt,    
+    ### Index
     "CR Index":CR_Index,    
     "CR Index Increment":CR_IncrementIndex,
     "CR Index Multiply":CR_MultiplyIndex,
     "CR Index Reset":CR_IndexReset,
     "CR Trigger":CR_Trigger,
-    "CR String To Number":CR_StringToNumber,
-    "CR Split String":CR_SplitString,
-    "CR Float To Integer":CR_FloatToInteger, 
-    "CR Text List To String":CR_TextListToString,
-    "CR String To Combo":CR_StringToCombo, 
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']
