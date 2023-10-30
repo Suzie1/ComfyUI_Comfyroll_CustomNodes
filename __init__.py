@@ -37,6 +37,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Clip Input Switch": CR_ClipInputSwitch,
     "CR Model Input Switch": CR_ModelInputSwitch,
     "CR ControlNet Input Switch": CR_ControlNetInputSwitch,
+    "CR VAE Input Switch": CR_VAEInputSwitch,
     "CR Text Input Switch": CR_TextInputSwitch,
     "CR Text Input Switch (4 way)": CR_TextInputSwitch4way,
     "CR Switch Model and CLIP":CR_ModelAndCLIPInputSwitch,    
@@ -76,6 +77,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Checker Pattern":CR_CheckerPattern,
     "CR Polygons":CR_Polygons,
     "CR Color Gradient":CR_ColorGradient,
+    "CR Radial Gradient": CR_RadialGradient,
     "CR Starburst Lines":CR_StarburstLines,
     "CR Starburst Colors":CR_StarburstColors, 
     ### PIL Text
@@ -84,7 +86,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Mask Text":CR_MaskText,
     "CR Composite Text":CR_CompositeText,
     "CR Simple Meme Template":CR_SimpleMemeTemplate, 
-    ### Utils
     ### Conversion    
     "CR String To Number":CR_StringToNumber,
     "CR String To Combo":CR_StringToCombo,    
