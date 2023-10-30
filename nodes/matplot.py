@@ -322,7 +322,7 @@ class CR_ColorGradient:
     FUNCTION = "draw"
     CATEGORY = "Comfyroll/Graphics/Patterns"
 
-    def draw(self, mode, width, height, start_color, end_color, orientation, transition_point=0.5, start_point_X=0.5, start_point_Y=0.5, gradient_distance=1): # Default to .5 if the value is not found
+    def draw(self, mode, width, height, start_color, end_color, orientation, transition_point=0.5, rad_center_x=0.5, rad_center_y=0.5, gradient_distance=1): # Default to .5 if the value is not found
     
         color1_rgb = color_mapping.get(start_color, (255, 255, 255))  # Default to white if the color is not found
         color2_rgb = color_mapping.get(end_color, (0, 0, 0))  # Default to black if the color is not found
