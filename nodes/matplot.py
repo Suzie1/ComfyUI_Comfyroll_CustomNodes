@@ -104,7 +104,7 @@ class CR_HalftoneGrid:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "halftone"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    CATEGORY = "Comfyroll/Image"
 
     def halftone(self, width, height, dot_style, reverse_dot_style, dot_frequency, background_color, background_R, background_G, background_B, x_pos, y_pos):
     
@@ -153,16 +153,17 @@ class CR_ColorBars:
                     "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
                     "color1": (COLORS,),
                     "color2": (COLORS,),
-                    "orientation": (["vertical", "horizontal", "diagonal"],),
+                    "orientation": (["vertical", "horizontal", "diagonal", "alt_diagonal"],), #added 135 angle for diagonals
                     "bar_frequency": ("INT", {"default": 5, "min": 1, "max":200, "step": 1}),
+                    "offset": ("FLOAT", {"default": 0, "min": 0, "max":20, "step": 0.05}),
                     },
                 }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    CATEGORY = "Comfyroll/Image"
 
-    def draw(self, mode, width, height, color1, color2, orientation, bar_frequency):
+    def draw(self, mode, width, height, color1, color2, orientation, bar_frequency, offset=0):
 
         color1_rgb = color_mapping.get(color1, (255, 255, 255))  # Default to white if the color is not found
         color2_rgb = color_mapping.get(color2, (0, 0, 0))  # Default to black if the color is not found
@@ -171,18 +172,19 @@ class CR_ColorBars:
         
         bar_width = width / bar_frequency
         bar_height = height / bar_frequency
+        offset_pixels = int(offset * max(width, height))
 
         if orientation == "vertical":
             for j in range(height):
                 for i in range(width):
-                    if (i // bar_width) % 2 == 0:  # Check for even index
+                    if ((i + offset_pixels) // bar_width) % 2 == 0:  # Check for even index
                         canvas[j, i] = color1_rgb
                     else:
                         canvas[j, i] = color2_rgb
         elif orientation == "horizontal":
             for j in range(height):
                 for i in range(width):
-                    if (j // bar_height) % 2 == 0:  # Check for even index
+                    if ((j + offset_pixels) // bar_height) % 2 == 0:  # Check for even index
                         canvas[j, i] = color1_rgb
                     else:
                         canvas[j, i] = color2_rgb                
@@ -191,8 +193,18 @@ class CR_ColorBars:
             bar_width = int(bar_height / np.tan(np.pi / 4)) * 2
             for j in range(height): 
                 for i in range(width):
-                    # Calculate which diagonal bar the pixel belongs to
-                    bar_number = (i + j) // bar_width
+                     # Calculate which diagonal bar the pixel belongs to with the offset
+                    bar_number = (i + j + offset_pixels) // bar_width
+                    if bar_number % 2 == 0:  # Check for even bar number
+                        canvas[j, i] = color1_rgb
+                    else:
+                        canvas[j, i] = color2_rgb
+        elif orientation == "alt_diagonal":
+            bar_width = int(bar_height / np.tan(np.pi / 4)) * 2
+            for j in range(height): 
+                for i in range(width):
+                    # Calculate which diagonal bar the pixel belongs to with the offset
+                    bar_number = (i - j + width + offset_pixels) // bar_width
                     if bar_number % 2 == 0:  # Check for even bar number
                         canvas[j, i] = color1_rgb
                     else:
@@ -239,7 +251,7 @@ class CR_StyleBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    CATEGORY = "Comfyroll/Image"
 
     def draw(self, mode, width, height, bar_style, orientation, bar_frequency):
 
@@ -298,49 +310,78 @@ class CR_ColorGradient:
                     "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
                     "start_color": (COLORS,),
                     "end_color": (COLORS,),
+                    "gradient_distance": ("FLOAT", {"default": 1, "min": 0, "max": 2, "step": 0.05}),
+                    "transition_point": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                    "start_point_X": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                    "start_point_Y": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
                     "orientation": (["vertical", "horizontal", ],),
                     },
                 }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    CATEGORY = "Comfyroll/Image"
 
-    def draw(self, mode, width, height, start_color, end_color, orientation):
+    def draw(self, mode, width, height, start_color, end_color, orientation, transition_point=0.5, start_point_X=0.5, start_point_Y=0.5, gradient_distance=1): # Default to .5 if the value is not found
     
         color1_rgb = color_mapping.get(start_color, (255, 255, 255))  # Default to white if the color is not found
         color2_rgb = color_mapping.get(end_color, (0, 0, 0))  # Default to black if the color is not found
 
         # Create a blank canvas
         canvas = np.zeros((height, width, 3), dtype=np.uint8)
+        transition_pixel = int(transition_point * (width if orientation == 'horizontal' else height)) #getting center point for gradient
+        
+        def get_gradient_value(pos, length, transition_point, gradient_distance): #getting the distance we use to apply gradient
+            # Calculate the start and end of the transition
+            transition_length = length * gradient_distance
+            transition_start = transition_point * length - transition_length / 2
+            transition_end = transition_point * length + transition_length / 2
+            
+            # Return the gradient value based on position
+            if pos < transition_start:
+                return 0
+            elif pos > transition_end:
+                return 1
+            else:
+                return (pos - transition_start) / transition_length
 
-        if mode == "linear": 
+        if mode == "linear":  #changed the approach here to use numpy since we have it anyway, makes the new code way easier to apply
             if orientation == 'horizontal':
-                # Create a smooth horizontal gradient
-                for i in range(width):
-                    t = i / (width - 1)
-                    interpolated_color = [int((1 - t) * c1 + t * c2) for c1, c2 in zip(color1_rgb, color2_rgb)]
+                # Define the x-values for interpolation
+                x = [0, width * transition_point - 0.5 * width * gradient_distance, width * transition_point + 0.5 * width * gradient_distance, width]
+                # Define the y-values for interpolation (t-values)
+                y = [0, 0, 1, 1]
+                # Interpolate
+                t_values = np.interp(np.arange(width), x, y)
+                for i, t in enumerate(t_values):
+                    interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
                     canvas[:, i] = interpolated_color
+
             elif orientation == 'vertical':
-                # Create a smooth vertical gradient
-                for j in range(height):
-                    t = j / (height - 1)
-                    interpolated_color = [int((1 - t) * c1 + t * c2) for c1, c2 in zip(color1_rgb, color2_rgb)]
+                # Define the x-values for interpolation
+                x = [0, height * transition_point - 0.5 * height * gradient_distance, height * transition_point + 0.5 * height * gradient_distance, height]
+                # Define the y-values for interpolation (t-values)
+                y = [0, 0, 1, 1]
+                # Interpolate
+                t_values = np.interp(np.arange(height), x, y)
+                for j, t in enumerate(t_values):
+                    interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
                     canvas[j, :] = interpolated_color
+                    
         elif mode == "radial":        
-            center_x = width // 2
-            center_y = height // 2
+                center_x = int(start_point_X * width)
+                center_y = int(start_point_Y * height)
+                # Corrected computation for max_distance
+                max_distance = (np.sqrt(max(center_x, width - center_x)**2 + max(center_y, height - center_y)**2))*gradient_distance
 
-            for i in range(width):
-                for j in range(height):
-                    distance_to_center = np.sqrt((i - center_x) ** 2 + (j - center_y) ** 2)
-                    t = distance_to_center / np.sqrt(center_x ** 2 + center_y ** 2)
-
-                    interpolated_color = [
-                        int((1 - t) * c1 + t * c2)
-                        for c1, c2 in zip(color1_rgb, color2_rgb)
-                    ]
-                    canvas[j, i] = interpolated_color      
+                for i in range(width):
+                    for j in range(height):
+                        distance_to_center = np.sqrt((i - center_x) ** 2 + (j - center_y) ** 2)
+                        t = distance_to_center / max_distance
+                        # Ensure t is between 0 and 1
+                        t = max(0, min(t, 1))
+                        interpolated_color = [int(c1 * (1 - t) + c2 * t) for c1, c2 in zip(color1_rgb, color2_rgb)]
+                        canvas[j, i] = interpolated_color 
 
         fig, ax = plt.subplots(figsize=(width / 100, height / 100))
 
@@ -376,7 +417,7 @@ class CR_CheckerPattern:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    CATEGORY = "Comfyroll/Image"
 
     def draw(self, mode, width, height, color1, color2, grid_frequency, step):
 
@@ -438,7 +479,7 @@ class CR_Polygons:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    CATEGORY = "Comfyroll/Image"
 
     def draw(self, mode, width, height, rows, columns, face_color, line_color, line_width):
     
@@ -507,7 +548,7 @@ class CR_StarburstLines:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"
+    CATEGORY = "Comfyroll/Image"
     
     def draw(self, width, height, num_lines, line_length, line_width, line_color, background_color, center_x, center_y):
              
@@ -565,7 +606,7 @@ class CR_StarburstColors:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Graphics/Patterns"        
+    CATEGORY = "Comfyroll/Image"        
         
     def draw(self, width, height, num_triangles, color_1, color_2, center_x, center_y, bbox_factor): 
 
