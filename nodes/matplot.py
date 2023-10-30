@@ -104,7 +104,7 @@ class CR_HalftoneGrid:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "halftone"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def halftone(self, width, height, dot_style, reverse_dot_style, dot_frequency, background_color, background_R, background_G, background_B, x_pos, y_pos):
     
@@ -161,7 +161,7 @@ class CR_ColorBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, color1, color2, orientation, bar_frequency, offset=0):
 
@@ -251,7 +251,7 @@ class CR_StyleBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, bar_style, orientation, bar_frequency):
 
@@ -312,15 +312,15 @@ class CR_ColorGradient:
                     "end_color": (COLORS,),
                     "gradient_distance": ("FLOAT", {"default": 1, "min": 0, "max": 2, "step": 0.05}),
                     "transition_point": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
-                    "start_point_X": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
-                    "start_point_Y": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                    "rad_center_x": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                    "rad_center_y": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
                     "orientation": (["vertical", "horizontal", ],),
                     },
                 }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, start_color, end_color, orientation, transition_point=0.5, start_point_X=0.5, start_point_Y=0.5, gradient_distance=1): # Default to .5 if the value is not found
     
@@ -369,8 +369,8 @@ class CR_ColorGradient:
                     canvas[j, :] = interpolated_color
                     
         elif mode == "radial":        
-                center_x = int(start_point_X * width)
-                center_y = int(start_point_Y * height)
+                center_x = int(rad_center_x * width)
+                center_y = int(rad_center_y * height)
                 # Corrected computation for max_distance
                 max_distance = (np.sqrt(max(center_x, width - center_x)**2 + max(center_y, height - center_y)**2))*gradient_distance
 
@@ -417,7 +417,7 @@ class CR_CheckerPattern:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, color1, color2, grid_frequency, step):
 
@@ -479,7 +479,7 @@ class CR_Polygons:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
 
     def draw(self, mode, width, height, rows, columns, face_color, line_color, line_width):
     
@@ -542,15 +542,16 @@ class CR_StarburstLines:
             "line_color": (COLORS,),
             "background_color": (COLORS,),
             "center_x": ("INT", {"default": 0, "min": 0, "max": 1024}),
-            "center_y": ("INT", {"default": 0, "min": 0, "max": 1024}),            
+            "center_y": ("INT", {"default": 0, "min": 0, "max": 1024}),
+            "rotation": ("FLOAT", {"default": 0, "min": 0, "max": 720}),            
         },
     }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = "Comfyroll/Graphics/Patterns"
     
-    def draw(self, width, height, num_lines, line_length, line_width, line_color, background_color, center_x, center_y):
+    def draw(self, width, height, num_lines, line_length, line_width, line_color, background_color, center_x, center_y, rotation=0):
              
         bgc = background_color        
         
@@ -572,8 +573,12 @@ class CR_StarburstLines:
         # Draw the starburst lines
         for i in range(num_lines):
             # Calculate the endpoint of each line
-            x = center_x + line_length * np.cos(np.radians(i * angle))
-            y = center_y + line_length * np.sin(np.radians(i * angle))
+            x_unrotated = center_x + line_length * np.cos(np.radians(i * angle))
+            y_unrotated = center_y + line_length * np.sin(np.radians(i * angle))
+        
+            # Apply rotation transformation
+            x = center_x + x_unrotated * np.cos(np.radians(rotation)) - y_unrotated * np.sin(np.radians(rotation))
+            y = center_y + x_unrotated * np.sin(np.radians(rotation)) + y_unrotated * np.cos(np.radians(rotation))
         
             # Plot the line
             fig.patch.set_facecolor(bgc)
@@ -600,15 +605,16 @@ class CR_StarburstColors:
             "color_2": (COLORS,),
             "center_x": ("INT", {"default": 0, "min": 0, "max": 512}),
             "center_y": ("INT", {"default": 0, "min": 0, "max": 512}),
+            "rotation": ("FLOAT", {"default": 0, "min": 0, "max": 720}),
             "bbox_factor": ("FLOAT", {"default": 2, "min": 0, "max": 2, "step": .01}),
         },
     }
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    CATEGORY = "Comfyroll/Image"        
+    CATEGORY = "Comfyroll/Graphics/Patterns"        
         
-    def draw(self, width, height, num_triangles, color_1, color_2, center_x, center_y, bbox_factor): 
+    def draw(self, width, height, num_triangles, color_1, color_2, center_x, center_y, bbox_factor, rotation=0): 
 
         # Set up the plot
         fig, ax = plt.subplots()
@@ -638,10 +644,16 @@ class CR_StarburstColors:
             # Calculate the endpoints of the triangle with varying length
             x1 = center_x/100
             y1 = center_y/100
-            x2 = (box_width / 2) * np.cos(np.radians(i * 360 / tri))
-            y2 = (box_height / 2) * np.sin(np.radians(i * 360 / tri))
-            x3 = (box_width / 2) * np.cos(np.radians((i + 1) * 360 / tri))
-            y3 = (box_height / 2) * np.sin(np.radians((i + 1) * 360 / tri))
+            x2_unrotated = (box_width / 2) * np.cos(np.radians(i * 360 / tri))
+            y2_unrotated = (box_height / 2) * np.sin(np.radians(i * 360 / tri))
+            x3_unrotated = (box_width / 2) * np.cos(np.radians((i + 1) * 360 / tri))
+            y3_unrotated = (box_height / 2) * np.sin(np.radians((i + 1) * 360 / tri))
+            
+            #apply rotation transform
+            x2 = x2_unrotated * np.cos(np.radians(rotation)) - y2_unrotated * np.sin(np.radians(rotation))
+            y2 = x2_unrotated * np.sin(np.radians(rotation)) + y2_unrotated * np.cos(np.radians(rotation))
+            x3 = x3_unrotated * np.cos(np.radians(rotation)) - y3_unrotated * np.sin(np.radians(rotation))
+            y3 = x3_unrotated * np.sin(np.radians(rotation)) + y3_unrotated * np.cos(np.radians(rotation))
             
             # Plot the triangle with alternating colors
             ax.fill([x1, x2, x3, x1], [y1, y2, y3, y1], color=colors[i % 2])
