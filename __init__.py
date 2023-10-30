@@ -105,14 +105,14 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     ### Misc Nodes
-    "CR Image Output": "📷 CR Image Output",
-    "CR Integer Multiple": "✖️ CR Integer Multiple",
+    "CR Image Output": "💾 CR Image Output",
+    "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Color Tint": "🎨 CR Color Tint",
-    "CR Latent Batch Size": "🌱 CR Latent Batch Size", 
+    "CR Latent Batch Size": "⚙️ CR Latent Batch Size", 
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR Seed": "🌱 CR Seed",
     "CR Prompt Text": "📝 CR Prompt Text",
-    "CR Split String": "✂️ CR Split String", 
+    "CR Split String": "⚙️ CR Split String", 
     ### ControlNet Nodes
     "CR Apply ControlNet": "🕹️ CR Apply ControlNet",    
     "CR Multi-ControlNet Stack": "🕹️ CR Multi-ControlNet Stack",
@@ -143,7 +143,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Module Pipe Loader": "✈️ CR Module Pipe Loader",
     "CR Module Input": "✈️ CR Module Input",
     "CR Module Output": "✈️ CR Module Output",
-    "CR Image Pipe In": "🛩 CR Image Pipe In",
+    "CR Image Pipe In": "🛩️ CR Image Pipe In",
     "CR Image Pipe Edit": "🛩️ CR Image Pipe Edit",
     "CR Image Pipe Out": "🛩️ CR Image Pipe Out",
     "CR Pipe Switch": "🔀️ CR Pipe Switch",    
@@ -190,7 +190,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR String To Combo": "🔧 CR String To Combo",    
     "CR Float To String": "🔧 CR Float To String",
     "CR Float To Integer": "🔧 CR Float To Integer",
-    "CR Text List To String": "🔧 CR Text List To String",    
+    "CR Integer To String": "🔧CR Integer To String",     
     "CR Text List To String": "🔧 CR Text List To String",
     "CR Seed to Int": "🔧 CR Seed to Int",    
 }
