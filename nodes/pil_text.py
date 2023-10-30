@@ -501,7 +501,8 @@ class CR_ImagePanel:
     RETURN_TYPES = ("IMAGE", "STRING", )
     RETURN_NAMES = ("image", "show_help", )
     FUNCTION = "make_panel"
-    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
+    #CATEGORY = icons.get("Comfyroll/Graphics/Layout")
+    CATEGORY = "Comfyroll/Graphics/Layout"
     
     def make_panel(self, image_1,
                    border_thickness, border_color,
