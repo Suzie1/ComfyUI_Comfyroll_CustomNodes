@@ -199,7 +199,34 @@ class CR_TextInputSwitch:
         else:
             return (text2, )
 
+#---------------------------------------------------------------------------------------------------------------------#
+#This is an input switch for VAE.  Can pick between 2 VAEs and switch between them
+class CR_VAEInputSwitch:
+    def __init__(self):
+        pass
 
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "Input": ("INT", {"default": 1, "min": 1, "max": 2}),            
+                "VAE1": ("VAE", {"forceInput": True}),
+                "VAE2": ("VAE", {"forceInput": True}),
+            }
+        }
+
+    RETURN_TYPES = ("VAE",)
+    
+    FUNCTION = "vae_switch"
+    CATEGORY = "Comfyroll/Utils/Logic"
+
+    def vae_switch(self, Input, VAE1, VAE2,):
+
+        if Input == 1:
+            return (VAE1, )
+        else:
+            return (VAE2, )
+            
 #---------------------------------------------------------------------------------------------------------------------#
 #This is an input switch for 4 different images.  Can pick an input and that image will be the one picked for the workflow.
 class CR_ImageInputSwitch4way:
@@ -402,6 +429,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Model Input Switch": CR_ModelInputSwitch,
     "CR ControlNet Input Switch": CR_ControlNetInputSwitch,
     "CR Text Input Switch": CR_TextInputSwitch,
+    "CR VAE Input Switch": CR_VAEInputSwitch,
     "CR Switch Model and CLIP":CR_ModelAndCLIPInputSwitch,
     # 4-way switches
     "CR Image Input Switch (4 way)": CR_InputImages4way, 
