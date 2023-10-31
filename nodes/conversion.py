@@ -2,8 +2,8 @@
 # Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/RockOfFire/CR-Animation-Nodes
 # for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
-# NODES
-#---------------------------------------------------------------------------------------------------------------------
+
+from ..categories import icons
 
 class AnyType(str):
     def __ne__(self, __value: object) -> bool:
@@ -22,7 +22,7 @@ class CR_StringToNumber:
 
     RETURN_TYPES = ("INT", "FLOAT",)   
     FUNCTION = "convert"
-    CATEGORY = "Comfyroll/Utils/Conversion"
+    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, text):
 
@@ -46,7 +46,7 @@ class CR_TextListToString:
 
     RETURN_TYPES = ("STRING", )
     FUNCTION = "joinlist"
-    CATEGORY = "Comfyroll/Utils/Conversion"
+    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def joinlist(self, text_list):
     
@@ -68,7 +68,7 @@ class CR_StringToCombo:
 
     RETURN_TYPES = (any,)
     FUNCTION = "convert"
-    CATEGORY = "Comfyroll/Utils/Conversion"
+    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, text):
     
@@ -92,7 +92,7 @@ class CR_IntegerToString:
 
     RETURN_TYPES = ('STRING',)
     FUNCTION = 'convert'
-    CATEGORY = 'Comfyroll/Utils/Conversion'
+    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, int_):
         return (f'{int_}', )
@@ -108,7 +108,7 @@ class CR_FloatToString:
 
     RETURN_TYPES = ('STRING',)
     FUNCTION = 'convert'
-    CATEGORY = 'Comfyroll/Utils/Conversion'
+    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, float_):
         return (f'{float_}', )
@@ -121,7 +121,7 @@ class CR_FloatToInteger:
 
     RETURN_TYPES = ("INT",)
     FUNCTION = "convert"
-    CATEGORY = "Comfyroll/Utils/Conversion"
+    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, _float):
         return (int(_float),)
@@ -142,7 +142,7 @@ class CR_SeedToInt:
 
     RETURN_TYPES = ("INT",)
     FUNCTION = "seed_to_int"
-    CATEGORY = "Comfyroll/Utils/Conversion"
+    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def seed_to_int(self, seed):
         return (seed.get('seed'),)
