@@ -13,6 +13,7 @@ from PIL.PngImagePlugin import PngInfo
 import json
 import folder_paths
 import typing as tg
+from ..categories import icons
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
@@ -43,7 +44,7 @@ class CR_AspectRatioSD15:
     RETURN_TYPES = ("INT", "INT", "FLOAT", "INT")
     RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size")
     FUNCTION = "Aspect_Ratio"
-    CATEGORY = "Comfyroll/Image"
+    CATEGORY = icons.get("Comfyroll/Other")
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
         if swap_dimensions == "Off":
@@ -93,7 +94,7 @@ class CR_ImageOutput:
     RETURN_NAMES = ("trigger", )
     FUNCTION = "save_images"
     OUTPUT_NODE = True
-    CATEGORY = "Comfyroll/IO"
+    CATEGORY = icons.get("Comfyroll/Other")
 
     def save_images(self, images, filename_prefix="ComfyUI", trigger = False, output_type = "Preview", prompt=None, extra_pnginfo=None):
         def map_filename(filename):
@@ -175,7 +176,7 @@ class CR_IntegerMultipleOf:
     
     RETURN_TYPES =("INT",)
     FUNCTION = "int_multiple_of"    
-    CATEGORY = "Comfyroll/Utils/Math"
+    CATEGORY = icons.get("Comfyroll/Other")
     
     def int_multiple_of(self, integer, multiple=8):
         if multiple == 0:
@@ -200,7 +201,7 @@ class CR_Seed:
     RETURN_NAMES = ("seed",)
     FUNCTION = "seedint"
     OUTPUT_NODE = True
-    CATEGORY = "Comfyroll/Utils/Number"
+    CATEGORY = icons.get("Comfyroll/Other")
 
     @staticmethod
     def seedint(seed):
@@ -231,7 +232,7 @@ class CR_ColorTint:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "color_tint"
-    CATEGORY = "Comfyroll/Graphics/Filters"
+    CATEGORY = CATEGORY = icons.get("Comfyroll/Graphics/Filter")
 
     def color_tint(self, image: torch.Tensor, strength: float, mode: str = "sepia"):
         if strength == 0:
@@ -290,7 +291,7 @@ class CR_LatentBatchSize:
 
     RETURN_TYPES = ("LATENT", )
     FUNCTION = "batchsize"
-    CATEGORY = "Comfyroll/Utils/Latent"
+    CATEGORY = icons.get("Comfyroll/Other")
 
     def batchsize(self, latent: tg.Sequence[tg.Mapping[tg.Text, torch.Tensor]], batch_size: int):
         samples = latent['samples']
@@ -317,7 +318,7 @@ class CR_PromptText:
     RETURN_TYPES = ("STRING", )
     RETURN_NAMES = ("prompt", )
     FUNCTION = "get_value"
-    CATEGORY = 'Comfyroll/Utils/Prompt'
+    CATEGORY = icons.get("Comfyroll/Other")
 
     def get_value(self, prompt):
         return (prompt,)
@@ -336,7 +337,7 @@ class CR_SplitString:
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING",)
     RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4",)    
     FUNCTION = "split"
-    CATEGORY = "Comfyroll/Utils/Text"
+    CATEGORY = icons.get("Comfyroll/Other")
 
     def split(self, text, delimiter):
 
@@ -365,7 +366,7 @@ class CR_ImageSize:
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "ImageSize_Float"
 
-    CATEGORY = "Comfyroll/Utils/Legacy"
+    CATEGORY = icons.get("Comfyroll/Other")
 
     def ImageSize_Float(self, width, height, upscale_factor):
         return(width, height, upscale_factor)

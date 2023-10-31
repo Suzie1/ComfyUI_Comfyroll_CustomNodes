@@ -11,6 +11,7 @@ from .nodes.upscale import *
 from .nodes.xygrid import *
 from .nodes.matplot import *
 from .nodes.pil_text import *
+from .nodes.pil_layout import *
 
 NODE_CLASS_MAPPINGS = {
     "CR Image Output": CR_ImageOutput,

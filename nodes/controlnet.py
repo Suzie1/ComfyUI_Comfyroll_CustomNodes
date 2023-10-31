@@ -9,6 +9,7 @@ import comfy.controlnet
 import comfy.sd
 import folder_paths
 from nodes import ControlNetApplyAdvanced
+from ..categories import icons
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
@@ -28,7 +29,7 @@ class CR_ApplyControlNet:
     RETURN_TYPES = ("CONDITIONING",)
     FUNCTION = "apply_controlnet"
 
-    CATEGORY = "Comfyroll/Conditioning"
+    CATEGORY = icons.get("Comfyroll/ControlNet")
 
     def apply_controlnet(self, conditioning, control_net, image, switch, strength):
         if strength == 0 or switch == "Off":
@@ -84,7 +85,7 @@ class CR_ControlNetStack:
     RETURN_TYPES = ("CONTROL_NET_STACK",)
     RETURN_NAMES = ("CONTROLNET_STACK",)
     FUNCTION = "controlnet_stacker"
-    CATEGORY = "Comfyroll/Conditioning"
+    CATEGORY = icons.get("Comfyroll/ControlNet")
 
     def controlnet_stacker(self, switch_1, controlnet_1, controlnet_strength_1, start_percent_1, end_percent_1,
                            switch_2, controlnet_2, controlnet_strength_2, start_percent_2, end_percent_2,
@@ -129,7 +130,7 @@ class CR_ApplyControlNetStack:
     RETURN_TYPES = ("CONDITIONING", "CONDITIONING", )
     RETURN_NAMES = ("base_pos", "base_neg", )
     FUNCTION = "apply_controlnet_stack"
-    CATEGORY = "Comfyroll/Conditioning"
+    CATEGORY = icons.get("Comfyroll/ControlNet")
 
     def apply_controlnet_stack(self, base_positive, base_negative, switch, controlnet_stack=None,):
 

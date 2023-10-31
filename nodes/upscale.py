@@ -7,7 +7,7 @@ import torch
 import numpy as np
 import folder_paths
 from PIL import Image
-
+from ..categories import icons
 from .upscale_functions import load_model, upscale_with_model, apply_resize_image
 
 #MAX_RESOLUTION=8192
@@ -46,7 +46,7 @@ class CR_UpscaleImage:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "upscale"
-    CATEGORY = "Comfyroll/Upscale"
+    CATEGORY = icons.get("Comfyroll/Upscale")
     
     def upscale(self, image, upscale_model, rounding_modulus=8, loops=1, mode="rescale", supersample='true', resampling_method="lanczos", rescale_factor=2, resize_width=1024):
 
@@ -103,7 +103,7 @@ class CR_MultiUpscaleStack:
 
     RETURN_TYPES = ("UPSCALE_STACK", )
     FUNCTION = "stack"
-    CATEGORY = "Comfyroll/Upscale"
+    CATEGORY = icons.get("Comfyroll/Upscale")
     
     def stack(self, switch_1, upscale_model_1, rescale_factor_1, switch_2, upscale_model_2, rescale_factor_2, switch_3, upscale_model_3, rescale_factor_3, upscale_stack=None):
     
@@ -141,10 +141,8 @@ class CR_ApplyMultiUpscale:
         }
     
     RETURN_TYPES = ("IMAGE", )
-    FUNCTION = "image"
     FUNCTION = "apply"
-
-    CATEGORY = "Comfyroll/Upscale"
+    CATEGORY = icons.get("Comfyroll/Upscale")
 
     def apply(self, image, resampling_method, supersample, rounding_modulus, upscale_stack):
 
