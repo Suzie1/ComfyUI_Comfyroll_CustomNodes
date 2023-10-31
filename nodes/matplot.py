@@ -10,6 +10,7 @@ import sys
 import io
 import folder_paths
 from PIL import Image
+from ..categories import icons
 
 try:
     import matplotlib.pyplot as plt
@@ -115,8 +116,7 @@ class CR_HalftoneGrid:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "halftone"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
 
     def halftone(self, width, height, dot_style, reverse_dot_style, dot_frequency, background_color, x_pos, y_pos, bg_color_hex='#000000'):
@@ -178,8 +178,7 @@ class CR_ColorBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
     def draw(self, mode, width, height, color_1, color_2, 
              orientation, bar_frequency, offset=0,
@@ -271,8 +270,7 @@ class CR_StyleBars:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
     def draw(self, mode, width, height, bar_style, orientation, bar_frequency):
            
@@ -340,8 +338,7 @@ class CR_ColorGradient:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
     def draw(self, width, height, start_color, end_color, orientation,
              linear_transition=0.5, gradient_distance=1,
@@ -433,8 +430,7 @@ class CR_RadialGradient:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
     def draw(self, width, height, start_color, end_color, 
              radial_center_x=0.5, radial_center_y=0.5, gradient_distance=1,
@@ -506,8 +502,7 @@ class CR_CheckerPattern:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
     def draw(self, mode, width, height, color_1, color_2,
              grid_frequency, step,
@@ -585,8 +580,7 @@ class CR_Polygons:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
     def draw(self, mode, width, height, rows, columns,
              face_color, background_color, line_color, line_width,
@@ -666,8 +660,7 @@ class CR_StarburstLines:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
     
     def draw(self, width, height, num_lines, line_length, line_width, line_color, background_color,
              center_x, center_y, rotation=0,
@@ -743,8 +736,7 @@ class CR_StarburstColors:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "draw"
-    #CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
-    CATEGORY = "Comfyroll/Graphics/Pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
         
     def draw(self, width, height, num_triangles, color_1, color_2,
              center_x, center_y, bbox_factor, rotation=0,
