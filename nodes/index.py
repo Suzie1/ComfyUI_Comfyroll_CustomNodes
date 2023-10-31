@@ -18,7 +18,7 @@ class CR_Trigger:
     RETURN_TYPES = ("INT", "BOOLEAN",)
     RETURN_NAMES = ("index", "trigger", )
     FUNCTION = "trigger"
-    CATEGORY = "Comfyroll/Utils/Index"
+    CATEGORY = icons.get("Comfyroll/Utils/Index")
 
     def trigger(self, index, trigger_value):
 
