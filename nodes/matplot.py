@@ -511,13 +511,13 @@ class CR_CheckerPattern:
         # Get RGB values 
         if color_1 == "custom":
             color1_rgb = hex_to_rgb(color1_hex)
-        #else:
-            #color1_rgb = color_mapping.get(color_1, (255, 255, 255))  # Default to white if the color is not found
+        else:
+            color1_rgb = color_mapping.get(color_1, (255, 255, 255))  # Default to white if the color is not found
 
         if color_2 == "custom":
             color2_rgb = hex_to_rgb(color2_hex)
-        #else:
-            #color2_rgb = color_mapping.get(color_2, (0, 0, 0))  # Default to black if the color is not found
+        else:
+            color2_rgb = color_mapping.get(color_2, (0, 0, 0))  # Default to black if the color is not found
 
         # Create a blank canvas
         canvas = np.zeros((height, width, 3), dtype=np.uint8)
