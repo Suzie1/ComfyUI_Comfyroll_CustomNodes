@@ -147,7 +147,7 @@ class CR_ImagePipeIn:
     RETURN_TYPES = ("PIPE_LINE", )
     RETURN_NAMES = ("pipe", )
     FUNCTION = "flush"
-    CATEGORY = icons.get("Comfyroll/Pipe/Module")
+    CATEGORY = icons.get("Comfyroll/Pipe/Image")
 
     def flush(self, image=0, width=0, height=0, upscale_factor=0):
         pipe_line = (image, width, height, upscale_factor)
@@ -233,7 +233,7 @@ class CR_InputSwitchPipe:
     RETURN_TYPES = ("PIPE_LINE",)
     OUTPUT_NODE = True
     FUNCTION = "InputSwitchPipe"
-    CATEGORY = icons.get("Comfyroll/Pipe/Image")
+    CATEGORY = icons.get("Comfyroll/Pipe")
 
     def InputSwitchPipe(self, Input, pipe1, pipe2):
         if Input == 1:
