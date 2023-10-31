@@ -232,7 +232,7 @@ class CR_ColorTint:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "color_tint"
-    CATEGORY = "Comfyroll/Graphics/Filters"
+    CATEGORY = CATEGORY = icons.get("Comfyroll/Graphics/Filter")
 
     def color_tint(self, image: torch.Tensor, strength: float, mode: str = "sepia"):
         if strength == 0:
