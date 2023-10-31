@@ -8,6 +8,7 @@ import sys
 import comfy.sd
 import comfy.utils
 import folder_paths
+from ..categories import icons
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
@@ -32,7 +33,7 @@ class CR_LoraLoader:
                               }}
     RETURN_TYPES = ("MODEL", "CLIP")
     FUNCTION = "load_lora"
-    CATEGORY = "Comfyroll/IO"
+    CATEGORY = icons.get("Comfyroll/LoRA")
 
     def load_lora(self, model, clip, switch, lora_name, strength_model, strength_clip):
         if strength_model == 0 and strength_clip == 0:
@@ -85,9 +86,8 @@ class CR_LoRAStack:
         }
 
     RETURN_TYPES = ("LORA_STACK",)
-    RETURN_NAMES = ("LORA_STACK",)
     FUNCTION = "lora_stacker"
-    CATEGORY = "Comfyroll/IO"
+    CATEGORY = icons.get("Comfyroll/LoRA")
 
     def lora_stacker(self, lora_name_1, model_weight_1, clip_weight_1, switch_1, lora_name_2, model_weight_2, clip_weight_2, switch_2, lora_name_3, model_weight_3, clip_weight_3, switch_3, lora_stack=None):
 
@@ -121,9 +121,8 @@ class CR_ApplyLoRAStack:
         }
 
     RETURN_TYPES = ("MODEL", "CLIP",)
-    RETURN_NAMES = ("MODEL", "CLIP", )
     FUNCTION = "apply_lora_stack"
-    CATEGORY = "Comfyroll/IO"
+    CATEGORY = icons.get("Comfyroll/LoRA")
 
     def apply_lora_stack(self, model, clip, lora_stack=None,):
 
