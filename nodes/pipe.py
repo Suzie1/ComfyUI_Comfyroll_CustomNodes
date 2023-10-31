@@ -2,13 +2,15 @@
 # Comfyroll Pipe Nodes by Akatsuzi                      https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
+# based on Tiny Terra nodes
+#---------------------------------------------------------------------------------------------------------------------#
 
 from ..categories import icons
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MODULE NODES
 #---------------------------------------------------------------------------------------------------------------------#
-# Based on Tiny Terra nodes
+
 class CR_ModulePipeLoader:
     def __init__(self):
         pass
@@ -56,7 +58,7 @@ class CR_ModuleInput:
     RETURN_NAMES = ("pipe", "model", "pos", "neg", "latent", "vae", "clip", "controlnet", "image", "seed")
     FUNCTION = "flush"
 
-    CATEGORY = "Comfyroll/Pipe/Module"
+    CATEGORY = icons.get("Comfyroll/Pipe/Module")
     
     def flush(self, pipe):
         model, pos, neg, latent, vae, clip, controlnet, image, seed = pipe
