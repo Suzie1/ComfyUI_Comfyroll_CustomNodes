@@ -6,6 +6,7 @@
 import comfy.sd
 import comfy.model_management
 import folder_paths
+from ..categories import icons
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#                          
 # Model Merge Nodes
@@ -38,8 +39,7 @@ class CR_ModelMergeStack:
 
     RETURN_TYPES = ("MODEL_STACK",)
     FUNCTION = "list_checkpoints"
-
-    CATEGORY = "Comfyroll/Model Merge"
+    CATEGORY = icons.get("Comfyroll/Model Merge")
 
     def list_checkpoints(self, switch_1, ckpt_name1, model_ratio1, clip_ratio1, switch_2, ckpt_name2, model_ratio2, clip_ratio2, switch_3, ckpt_name3, model_ratio3, clip_ratio3, model_stack=None):
     
@@ -78,7 +78,7 @@ class CR_ApplyModelMerge:
     RETURN_TYPES = ("MODEL", "CLIP", "STRING",)
     RETURN_NAMES = ("MODEL", "CLIP", "model_mix_info",)
     FUNCTION = "merge"
-    CATEGORY = "Comfyroll/Model Merge"
+    CATEGORY = icons.get("Comfyroll/Model Merge")
 
     def merge(self, model_stack, merge_method, normalise_ratios, weight_factor):
     
