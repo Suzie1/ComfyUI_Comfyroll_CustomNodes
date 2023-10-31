@@ -2,7 +2,11 @@
 # Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
 # for ComfyUI                                               https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
-# Logic Nodes
+
+from ..categories import icons
+
+#---------------------------------------------------------------------------------------------------------------------#
+# Logic Switches
 #---------------------------------------------------------------------------------------------------------------------#
 #This is an input switch for images.  Can pick an input and that image will be the one picked for the workflow.
 class CR_ImageInputSwitch:
@@ -20,10 +24,8 @@ class CR_ImageInputSwitch:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    OUTPUT_NODE = True
     FUNCTION = "InputImages"
-
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def InputImages(self, Input, image1, image2):
         if Input == 1:
@@ -48,10 +50,8 @@ class CR_LatentInputSwitch:
         }
 
     RETURN_TYPES = ("LATENT",)
-    OUTPUT_NODE = True
     FUNCTION = "InputLatents"
-
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def InputLatents(self, Input, latent1, latent2):
         if Input == 1:
@@ -76,10 +76,8 @@ class CR_ConditioningInputSwitch:
         }
 
     RETURN_TYPES = ("CONDITIONING",)
-    OUTPUT_NODE = True
     FUNCTION = "InputConditioning"
-
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def InputConditioning(self, Input, conditioning1, conditioning2):
         if Input == 1:
@@ -104,10 +102,8 @@ class CR_ClipInputSwitch:
         }
 
     RETURN_TYPES = ("CLIP",)
-    OUTPUT_NODE = True
     FUNCTION = "InputClip"
-
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def InputClip(self, Input, clip1, clip2):
         if Input == 1:
@@ -132,10 +128,8 @@ class CR_ModelInputSwitch:
         }
 
     RETURN_TYPES = ("MODEL",)
-    OUTPUT_NODE = True
     FUNCTION = "InputModel"
-
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def InputModel(self, Input, model1, model2):
         if Input == 1:
@@ -160,10 +154,8 @@ class CR_ControlNetInputSwitch:
         }
         
     RETURN_TYPES = ("CONTROL_NET",)
-    OUTPUT_NODE = True
     FUNCTION = "InputControlNet"
-
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def InputControlNet(self, Input, control_net1, control_net2):
         if Input == 1:
@@ -188,9 +180,8 @@ class CR_TextInputSwitch:
         }
 
     RETURN_TYPES = ("STRING",)
-    
     FUNCTION = "text_input_switch"
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def text_input_switch(self, Input, text1, text2,):
 
@@ -215,10 +206,9 @@ class CR_VAEInputSwitch:
             }
         }
 
-    RETURN_TYPES = ("VAE",)
-    
+    RETURN_TYPES = ("VAE",)   
     FUNCTION = "vae_switch"
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def vae_switch(self, Input, VAE1, VAE2,):
 
@@ -248,10 +238,8 @@ class CR_ImageInputSwitch4way:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    OUTPUT_NODE = True
     FUNCTION = "InputImages_4"
-
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def InputImages_4(self, Input, image1, image2=None, image3=None, image4=None):
         if Input == 1:
@@ -284,9 +272,8 @@ class CR_TextInputSwitch4way:
         }
 
     RETURN_TYPES = ("STRING",)
-    
     FUNCTION = "text_input_switch"
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def text_input_switch(self, Input, text1, text2=None, text3=None, text4=None):
 
@@ -317,11 +304,8 @@ class CR_ModelAndCLIPInputSwitch:
         }
 
     RETURN_TYPES = ("MODEL", "CLIP",)
-    RETURN_NAMES = ("MODEL", "CLIP",)
-    OUTPUT_NODE = True
     FUNCTION = "switch"
-
-    CATEGORY = "Comfyroll/Utils/Logic"
+    CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, clip1, clip2, model1, model2):
         if Input == 1:
@@ -348,10 +332,8 @@ class CR_Img2ImgProcessSwitch:
         }
 
     RETURN_TYPES = ("LATENT",)
-    OUTPUT_NODE = True
     FUNCTION = "InputLatentsText"
-
-    CATEGORY = "Comfyroll/Utils/Process"
+    CATEGORY = icons.get("Comfyroll/Utils/Process")
 
     def InputLatentsText(self, Input, txt2img, img2img):
         if Input == "txt2img":
@@ -376,10 +358,8 @@ class CR_HiResFixProcessSwitch:
         }
 
     RETURN_TYPES = ("LATENT",)
-    OUTPUT_NODE = True
     FUNCTION = "InputHiResText"
-
-    CATEGORY = "Comfyroll/Utils/Process"
+    CATEGORY = icons.get("Comfyroll/Utils/Process")
 
     def InputHiResText(self, Input, latent_upscale, image_upscale):
         if Input == "latent_upscale":
@@ -404,10 +384,8 @@ class CR_BatchProcessSwitch:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    OUTPUT_NODE = True
     FUNCTION = "InputControlNet"
-
-    CATEGORY = "Comfyroll/Utils/Process"
+    CATEGORY = icons.get("Comfyroll/Utils/Process")
 
     def InputControlNet(self, Input, image, image_batch):
         if Input == "image":
