@@ -190,7 +190,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR String To Combo": "🔧 CR String To Combo",    
     "CR Float To String": "🔧 CR Float To String",
     "CR Float To Integer": "🔧 CR Float To Integer",
-    "CR Integer To String": "🔧CR Integer To String",     
+    "CR Integer To String": "🔧 CR Integer To String",     
     "CR Text List To String": "🔧 CR Text List To String",
     "CR Seed to Int": "🔧 CR Seed to Int",    
 }
