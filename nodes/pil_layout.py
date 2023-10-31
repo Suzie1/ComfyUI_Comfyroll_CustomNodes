@@ -9,7 +9,6 @@ import os
 from PIL import Image, ImageDraw, ImageOps, ImageFont
 from ..categories import icons
 from .pil_text_functions import (draw_masked_text,
-                                 draw_masked_text_v2,
                                  draw_text_on_image,
                                  get_font_size)
 
