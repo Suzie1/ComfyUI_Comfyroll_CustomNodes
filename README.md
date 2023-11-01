@@ -1,4 +1,4 @@
-# Comfyroll Custom Nodes for SDXL and SD1.5
+# 🧩 Comfyroll Custom Nodes for SDXL and SD1.5
 
 These nodes were originally made for use in the Comfyroll Template Workflows.
 
@@ -49,8 +49,10 @@ __🔂 Process__
 * CR Hires Fix Process Switch
 * CR Batch Process Switch
 
-__Image__
+__👓 Filter__
 * CR Color Tint
+
+__🌈 Pattern__
 * CR Halftone Grid
 * CR Color Bars
 * CR Style Bars   
@@ -66,6 +68,8 @@ __🔤 Image Text__
 * CR Draw Text
 * CR Mask Text
 * CR Composite Text
+
+__👽 Template__
 * CR Simple Meme Template
 
 __🌁 Image Layout__
@@ -76,10 +80,12 @@ __🌁 Image Layout__
 * CR Color Panel (new 01/11/2023)
 * CR Simple Text Panel (new 01/11/2023)
 
-__Module__
+__✈️ Module__
 * CR Module Pipe Loader
 * CR Module Input
 * CR Module Output
+
+__🛩️ Pipe__
 * CR Image Pipe In
 * CR Image Pipe Edit
 * CR Image Pipe Out
@@ -95,19 +101,13 @@ __🔍 Upscale__
 * CR Upscale Image
 * CR Apply Multi Upscale
 
-__XY Grid__
+__📉 XY Grid__
 * CR XY List
 * CR XY Interpolate   
 * CR XY Index
 * CR XY From Folder
 * CR XY Save Grid Image
 * CR Image Output
-
-__Image Text__
-* CR Overlay Text
-* CR Draw Text
-* CR Mask Text
-* CR Composite Text
 
 __🔢 Index__
 * CR Index
