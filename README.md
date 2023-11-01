@@ -93,6 +93,14 @@ __Image Text__
 * CR Composite Text
 * CR Simple Meme Template
 
+__Image Layout__
+* CR Image Panel (new 23/10/2023)
+* CR Page Layout (new 01/11/2023)
+* CR Image Grid Panel (new 01/11/2023)
+* CR Image Border (new 01/11/2023)
+* CR Color Panel (new 01/11/2023)
+* CR Simple Text Panel (new 01/11/2023)
+
 __Module__
 * CR Module Pipe Loader
 * CR Module Input
