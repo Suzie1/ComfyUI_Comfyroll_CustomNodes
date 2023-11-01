@@ -13,7 +13,9 @@ from .graphics_functions import (hex_to_rgb,
                                  get_color_values,
                                  text_panel,
                                  combine_images,
-                                 apply_outline_and_border)                                                       
+                                 apply_outline_and_border,
+                                 get_font_size,
+                                 draw_text_on_image)   
 
 font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
 file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
