@@ -21,7 +21,8 @@ NODE_CLASS_MAPPINGS = {
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR Seed": CR_Seed,
     "CR Prompt Text":CR_PromptText,
-    "CR Split String":CR_SplitString, 
+    "CR Split String":CR_SplitString,
+    "CR Value": CR_Value, 
     ### ControlNet Nodes
     "CR Apply ControlNet": CR_ApplyControlNet,    
     "CR Multi-ControlNet Stack":CR_ControlNetStack,
@@ -119,7 +120,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR Seed": "🌱 CR Seed",
     "CR Prompt Text": "📝 CR Prompt Text",
-    "CR Split String": "⚙️ CR Split String", 
+    "CR Split String": "⚙️ CR Split String",
+    "CR Value": "⚙️ CR Value", 
     ### ControlNet Nodes
     "CR Apply ControlNet": "🕹️ CR Apply ControlNet",    
     "CR Multi-ControlNet Stack": "🕹️ CR Multi-ControlNet Stack",
