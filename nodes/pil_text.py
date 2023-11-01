@@ -9,7 +9,7 @@ import os
 from PIL import Image, ImageDraw, ImageOps
 from ..categories import icons
 from ..config import color_mapping, COLORS
-from .pil_text_functions import (draw_masked_text,
+from .graphics_functions import (draw_masked_text,
                                  hex_to_rgb,
                                  draw_text_on_image,
                                  get_font_size)
