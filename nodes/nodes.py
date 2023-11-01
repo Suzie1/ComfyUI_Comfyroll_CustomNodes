@@ -29,7 +29,7 @@ class CR_AspectRatioSD15:
         aspect_ratios = ["custom", "1:1 square 512x512", "1:1 square 1024x1024",
             "2:3 portrait 512x768", "3:4 portrait 512x682",
             "3:2 landscape 768x512", "4:3 landscape 682x512",
-            "16:9 cinema 910x512", "1.85:1 cinema 947x512", "2:1 cinema 1024x512",
+            "16:9 cinema 910x512", "1.85:1 cinema 952x512", "2:1 cinema 1024x512",
             "2.39:1 anamorphic 1224x512"]
                
         return {
