@@ -89,7 +89,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Composite Text":CR_CompositeText,
     ### PIL Layout
     "CR Simple Meme Template":CR_SimpleMemeTemplate,
-    "CR Image Panel":CR_ImagePanel,
+    "CR Page Layout": CR_PageLayout,
     "CR Image Panel": CR_ImagePanel,
     "CR Image Grid Panel": CR_ImageGridPanel,
     "CR Image Border": CR_ImageBorder,
