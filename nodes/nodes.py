@@ -377,6 +377,23 @@ class CR_ImageSize:
         return(width, height, upscale_factor)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
+class CR_Value:
+
+    @classmethod
+    def INPUT_TYPES(s):  
+        return {"required": {
+                    "value": ("FLOAT", {"default": 1.0,},)
+               },
+        }
+
+    RETURN_TYPES = ("FLOAT", "INT",)
+    CATEGORY = icons.get("Comfyroll/Other")
+    FUNCTION = "get_value"
+
+    def get_value(self, value):
+        return (float(value), int(value), )
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -390,7 +407,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Latent Batch Size":CR_LatentBatchSize
     "CR Seed":CR_Seed,
     "CR Prompt Text":CR_PromptText,
-    "CR Split String":CR_SplitString, 
+    "CR Split String":CR_SplitString,
+    "CR Value": CR_Value,
 }
 '''
 
