@@ -28,23 +28,23 @@ You can also install the nodes using the following methods:
 
 # List of Custom Nodes
 
-__SDXL__
+__🌟 SDXL__
 * CR SDXL Aspect Ratio
 * CR SDXL Prompt Mix Presets
 * CR SDXL Style Text
 * CR SDXL Base Prompt Encoder
 
-__IO__
+__💊 LoRA__
 * CR Load LoRA
 * CR LoRA Stack
 * CR Apply LoRA Stack
 
-__Conditioning__
+__🕹️ ControlNet__
 * CR Apply ControlNet
 * CR Multi-ControlNet Stack
 * CR Apply Multi-ControlNet Stack
 
-__Logic__
+__🔀 Logic__
 * CR Image Input Switch
 * CR Image Input Switch (4 way)
 * CR Latent Input Switch
@@ -57,25 +57,13 @@ __Logic__
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
 
-__Process__
+__🔂 Process__
 * CR Img2Img Process Switch
 * CR Hires Fix Process Switch
 * CR Batch Process Switch
 
-__Maths__
-* CR Integer Multiple
-
-__Number__
-* CR Seed
-
-__Text__
-* CR Prompt Text
-* CR Split String
-
 __Image__
-* CR SD1.5 Aspect Ratio
 * CR Color Tint
-* CR Image Panel (new 23/10/2023)
 * CR Halftone Grid
 * CR Color Bars
 * CR Style Bars   
@@ -152,6 +140,15 @@ __Conversion__
 * CR Integer To String    
 * CR Text List To String
 * CR Seed to Int
+* 
+__📦 Other__
+* CR Latent Batch Size
+* CR Prompt Text
+* CR Split String
+* CR Integer Multiple
+* CR Seed
+* CR SD1.5 Aspect Ratio
+* CR Value (new 01/11/2023)
 
 __Deleted Nodes__
 * CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio
