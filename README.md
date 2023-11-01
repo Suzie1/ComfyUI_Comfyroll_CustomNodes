@@ -44,19 +44,6 @@ __🕹️ ControlNet__
 * CR Multi-ControlNet Stack
 * CR Apply Multi-ControlNet Stack
 
-__🔀 Logic__
-* CR Image Input Switch
-* CR Image Input Switch (4 way)
-* CR Latent Input Switch
-* CR Conditioning Input Switch
-* CR Clip Input Switch
-* CR Model Input Switch
-* CR ControlNet Input Switch
-* CR VAE Input Switch (new 23/10/2023)
-* CR Text Input Switch
-* CR Text Input Switch (4 way)
-* CR Switch Model and CLIP
-
 __🔂 Process__
 * CR Img2Img Process Switch
 * CR Hires Fix Process Switch
@@ -74,14 +61,14 @@ __Image__
 * CR Starburst Lines
 * CR Starburst Colors
 
-__Image Text__
+__🔤 Image Text__
 * CR Overlay Text
 * CR Draw Text
 * CR Mask Text
 * CR Composite Text
 * CR Simple Meme Template
 
-__Image Layout__
+__🌁 Image Layout__
 * CR Image Panel (new 23/10/2023)
 * CR Page Layout (new 01/11/2023)
 * CR Image Grid Panel (new 01/11/2023)
@@ -98,15 +85,12 @@ __Module__
 * CR Image Pipe Out
 * CR Pipe Switch
 
-__Latent__
-* CR Latent Batch Size
-
-__Model Merge__
+__⛏️ Model Merge__
 * CR Model Stack
 * CR Apply Model Merge
 * CR Load Animation Frames
 
-__Upscale__
+__🔍 Upscale__
 * CR Multi Upscale Stack
 * CR Upscale Image
 * CR Apply Multi Upscale
@@ -125,14 +109,13 @@ __Image Text__
 * CR Mask Text
 * CR Composite Text
 
-__Index__
+__🔢 Index__
 * CR Index
 * CR Index Increment
 * CR Index Multiply
 * CR Index Reset
 * CR Trigger
-
-__Conversion__    
+__🔧 Conversion__    
 * CR String To Number
 * CR String To Combo    
 * CR Float To String
@@ -140,7 +123,19 @@ __Conversion__
 * CR Integer To String    
 * CR Text List To String
 * CR Seed to Int
-* 
+__🔀 Logic__
+* CR Image Input Switch
+* CR Image Input Switch (4 way)
+* CR Latent Input Switch
+* CR Conditioning Input Switch
+* CR Clip Input Switch
+* CR Model Input Switch
+* CR ControlNet Input Switch
+* CR VAE Input Switch (new 23/10/2023)
+* CR Text Input Switch
+* CR Text Input Switch (4 way)
+* CR Switch Model and CLIP
+  
 __📦 Other__
 * CR Latent Batch Size
 * CR Prompt Text
