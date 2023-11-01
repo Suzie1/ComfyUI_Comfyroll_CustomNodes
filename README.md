@@ -115,6 +115,7 @@ __🔢 Index__
 * CR Index Multiply
 * CR Index Reset
 * CR Trigger
+
 __🔧 Conversion__    
 * CR String To Number
 * CR String To Combo    
@@ -123,6 +124,7 @@ __🔧 Conversion__
 * CR Integer To String    
 * CR Text List To String
 * CR Seed to Int
+
 __🔀 Logic__
 * CR Image Input Switch
 * CR Image Input Switch (4 way)
