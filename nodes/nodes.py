@@ -29,7 +29,8 @@ class CR_AspectRatioSD15:
         aspect_ratios = ["custom", "1:1 square 512x512", "1:1 square 1024x1024",
             "2:3 portrait 512x768", "3:4 portrait 512x682",
             "3:2 landscape 768x512", "4:3 landscape 682x512",
-            "16:9 cinema 910x512", "2:1 cinema 1024x512"]
+            "16:9 cinema 910x512", "1.85:1 cinema 947x512", "2:1 cinema 1024x512",
+            "2.39:1 anamorphic 1224x512"]
                
         return {
             "required": {
@@ -62,8 +63,12 @@ class CR_AspectRatioSD15:
                 width, height = 512, 682
             elif aspect_ratio == "4:3 landscape 682x512":
                 width, height = 682, 512
+            elif aspect_ratio == "1.85:1 cinema 952x512":            
+                width, height = 952, 512
             elif aspect_ratio == "2:1 cinema 1024x512":
                 width, height = 1024, 512
+            elif aspect_ratio == "2.39:1 anamorphic 1224x512":
+                width, height = 1224, 512
             return(width, height, upscale_factor, batch_size)
 
         if swap_dimensions == "On":
