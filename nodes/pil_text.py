@@ -8,7 +8,9 @@ import torch
 import os 
 from PIL import Image, ImageDraw, ImageOps
 from ..categories import icons
-from .pil_text_functions import (draw_masked_text,
+from ..config import color_mapping, COLORS
+from .graphics_functions import (draw_masked_text,
+                                 hex_to_rgb,
                                  draw_text_on_image,
                                  get_font_size)
 
@@ -16,45 +18,6 @@ font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file_
 file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
 
 #---------------------------------------------------------------------------------------------------------------------#
-
-# Dictionary to map color names to RGB values
-color_mapping = {
-    "white": (255, 255, 255),
-    "black": (0, 0, 0),
-    "red": (255, 0, 0),
-    "green": (0, 255, 0),
-    "blue": (0, 0, 255),
-    "yellow": (255, 255, 0),
-    "cyan": (0, 255, 255),
-    "magenta": (255, 0, 255),
-    "orange": (255, 165, 0),
-    "purple": (128, 0, 128),
-    "pink": (255, 192, 203),
-    "brown": (165, 42, 42),
-    "gray": (128, 128, 128),
-    "lightgray": (211, 211, 211),
-    "darkgray": (169, 169, 169),
-    "olive": (128, 128, 0),
-    "lime": (0, 128, 0),
-    "teal": (0, 128, 128),
-    "navy": (0, 0, 128),
-    "maroon": (128, 0, 0),
-    "fuchsia": (255, 0, 128),
-    "aqua": (0, 255, 128),
-    "silver": (192, 192, 192),
-    "gold": (255, 215, 0),
-    "turquoise": (64, 224, 208),
-    "lavender": (230, 230, 250),
-    "violet": (238, 130, 238),
-    "coral": (255, 127, 80),
-    "indigo": (75, 0, 130),    
-}
-
-COLORS = ["custom", "white", "black", "red", "green", "blue", "yellow",
-          "cyan", "magenta", "orange", "purple", "pink", "brown", "gray",
-          "lightgray", "darkgray", "olive", "lime", "teal", "navy", "maroon",
-          "fuchsia", "aqua", "silver", "gold", "turquoise", "lavender",
-          "violet", "coral", "indigo"]
           
 ALIGN_OPTIONS = ["top", "center", "bottom"]                 
 ROTATE_OPTIONS = ["text center", "image center"]
@@ -68,13 +31,6 @@ def tensor2pil(image):
 
 def pil2tensor(image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0) 
-
-def hex_to_rgb(hex_color):
-    hex_color = hex_color.lstrip('#')  # Remove the '#' character, if present
-    r = int(hex_color[0:2], 16)
-    g = int(hex_color[2:4], 16)
-    b = int(hex_color[4:6], 16)
-    return (r, g, b)
     
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_OverlayText:

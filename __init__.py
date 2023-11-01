@@ -21,7 +21,8 @@ NODE_CLASS_MAPPINGS = {
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR Seed": CR_Seed,
     "CR Prompt Text":CR_PromptText,
-    "CR Split String":CR_SplitString, 
+    "CR Split String":CR_SplitString,
+    "CR Value": CR_Value, 
     ### ControlNet Nodes
     "CR Apply ControlNet": CR_ApplyControlNet,    
     "CR Multi-ControlNet Stack":CR_ControlNetStack,
@@ -86,8 +87,14 @@ NODE_CLASS_MAPPINGS = {
     "CR Draw Text":CR_DrawText,
     "CR Mask Text":CR_MaskText,
     "CR Composite Text":CR_CompositeText,
+    ### PIL Layout
     "CR Simple Meme Template":CR_SimpleMemeTemplate,
-    "CR Image Panel":CR_ImagePanel, 
+    "CR Page Layout": CR_PageLayout,
+    "CR Image Panel": CR_ImagePanel,
+    "CR Image Grid Panel": CR_ImageGridPanel,
+    "CR Image Border": CR_ImageBorder,
+    "CR Color Panel": CR_ColorPanel,
+    "CR Simple Text Panel": CR_SimpleTextPanel,
     ### Conversion    
     "CR String To Number":CR_StringToNumber,
     "CR String To Combo":CR_StringToCombo,    
@@ -113,7 +120,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR Seed": "🌱 CR Seed",
     "CR Prompt Text": "📝 CR Prompt Text",
-    "CR Split String": "⚙️ CR Split String", 
+    "CR Split String": "⚙️ CR Split String",
+    "CR Value": "⚙️ CR Value", 
     ### ControlNet Nodes
     "CR Apply ControlNet": "🕹️ CR Apply ControlNet",    
     "CR Multi-ControlNet Stack": "🕹️ CR Multi-ControlNet Stack",
@@ -173,13 +181,19 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Radial Gradient": "🟨 CR Radial Gradient",    
     "CR Starburst Lines": "🟧 CR Starburst Lines",
     "CR Starburst Colors": "🟥 CR Starburst Colors",   
-    ### PIL
+    ### PIL Text
     "CR Overlay Text": "🔤 CR Overlay Text",
     "CR Draw Text": "🔤️ CR Draw Text",
     "CR Mask Text": "🔤️ CR Mask Text",
     "CR Composite Text": "🔤️ CR Composite Text",
+    ### PIL Layout
     "CR Simple Meme Template": "👽 CR Simple Meme Template",
     "CR Image Panel": "🌁 CR Image Panel",
+    "CR Image Grid Panel": "🌁 CR Image Grid Panel",
+    "CR Simple Text Panel": "🌁 CR Simple Text Panel",
+    "CR Color Panel": "🌁 CR Color Panel",
+    "CR Page Layout": "🌁 CR Page Layout",
+    "CR Image Border": "🌁 CR Image Border",
     ### Index
     "CR Index":"🔢 CR Index",    
     "CR Index Increment": "🔢 CR Index Increment",
