@@ -1,0 +1,606 @@
+{
+  "last_node_id": 59,
+  "last_link_id": 58,
+  "nodes": [
+    {
+      "id": 35,
+      "type": "SaveImage",
+      "pos": [
+        130,
+        770
+      ],
+      "size": {
+        "0": 320,
+        "1": 270
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 37
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "CR"
+      ]
+    },
+    {
+      "id": 49,
+      "type": "SaveImage",
+      "pos": [
+        580,
+        770
+      ],
+      "size": {
+        "0": 320,
+        "1": 270
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 51
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "CR"
+      ]
+    },
+    {
+      "id": 52,
+      "type": "SaveImage",
+      "pos": [
+        1030,
+        770
+      ],
+      "size": {
+        "0": 320,
+        "1": 270
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 53
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "CR"
+      ]
+    },
+    {
+      "id": 47,
+      "type": "LoadImage",
+      "pos": [
+        590,
+        0
+      ],
+      "size": [
+        320,
+        310
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            50
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SDXL10__00108_ (1).png",
+        "image"
+      ]
+    },
+    {
+      "id": 55,
+      "type": "SaveImage",
+      "pos": [
+        1480,
+        770
+      ],
+      "size": {
+        "0": 320,
+        "1": 270
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 55
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "CR"
+      ]
+    },
+    {
+      "id": 53,
+      "type": "LoadImage",
+      "pos": [
+        1490,
+        0
+      ],
+      "size": [
+        320,
+        310
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SDXL10__00108_ (1).png",
+        "image"
+      ]
+    },
+    {
+      "id": 50,
+      "type": "LoadImage",
+      "pos": [
+        1040,
+        0
+      ],
+      "size": [
+        320,
+        310
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            52
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SDXL10__00108_ (1).png",
+        "image"
+      ]
+    },
+    {
+      "id": 59,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1920,
+        410
+      ],
+      "size": {
+        "0": 430,
+        "1": 170
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 58,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "Help:\n        \n        The two text entry boxes are for the top and bottom text.\n        these can be added either on a color bar or as an overlay.\n        Both top and bottom text are optional.\n        \n        Only the first two lines will be used for top and bottom text.\n        If you enter more than two lines any additional lines will be ignored.\n        \n        If you enter both top and bottom text and select a single bar (top or bottom),\n        then one of texts will be ouput as overlay text.\n        \n        If you enter both top and bottom text and select no bars,\n        then both texts will be ouput as overlay text."
+      ]
+    },
+    {
+      "id": 9,
+      "type": "LoadImage",
+      "pos": [
+        140,
+        0
+      ],
+      "size": [
+        320,
+        310
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            22
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SDXL10__00108_ (1).png",
+        "image"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "CR Simple Meme Template",
+      "pos": [
+        130,
+        390
+      ],
+      "size": {
+        "0": 400,
+        "1": 314
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Meme Template"
+      },
+      "widgets_values": [
+        "custom",
+        "Make A Meme Make A Meme Make A Meme\nMake A Meme Make A Meme Make A Meme",
+        "impact.ttf",
+        "impact.ttf",
+        150,
+        "white",
+        "thick",
+        "black",
+        "no bars"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 48,
+      "type": "CR Simple Meme Template",
+      "pos": [
+        580,
+        390
+      ],
+      "size": {
+        "0": 400,
+        "1": 314
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 50
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            51
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Meme Template"
+      },
+      "widgets_values": [
+        "custom",
+        "Make A Meme",
+        "impact.ttf",
+        "impact.ttf",
+        150,
+        "white",
+        "thick",
+        "black",
+        "top"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 51,
+      "type": "CR Simple Meme Template",
+      "pos": [
+        1030,
+        390
+      ],
+      "size": {
+        "0": 400,
+        "1": 314
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 52
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Meme Template"
+      },
+      "widgets_values": [
+        "custom",
+        "Make A Meme",
+        "impact.ttf",
+        "impact.ttf",
+        150,
+        "white",
+        "thick",
+        "black",
+        "bottom"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 54,
+      "type": "CR Simple Meme Template",
+      "pos": [
+        1480,
+        390
+      ],
+      "size": {
+        "0": 400,
+        "1": 314
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 54
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": [
+            58
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Meme Template"
+      },
+      "widgets_values": [
+        "custom",
+        "Make A Meme",
+        "impact.ttf",
+        "impact.ttf",
+        150,
+        "white",
+        "thick",
+        "black",
+        "top and bottom"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      22,
+      9,
+      0,
+      21,
+      0,
+      "IMAGE"
+    ],
+    [
+      37,
+      21,
+      0,
+      35,
+      0,
+      "IMAGE"
+    ],
+    [
+      50,
+      47,
+      0,
+      48,
+      0,
+      "IMAGE"
+    ],
+    [
+      51,
+      48,
+      0,
+      49,
+      0,
+      "IMAGE"
+    ],
+    [
+      52,
+      50,
+      0,
+      51,
+      0,
+      "IMAGE"
+    ],
+    [
+      53,
+      51,
+      0,
+      52,
+      0,
+      "IMAGE"
+    ],
+    [
+      54,
+      53,
+      0,
+      54,
+      0,
+      "IMAGE"
+    ],
+    [
+      55,
+      54,
+      0,
+      55,
+      0,
+      "IMAGE"
+    ],
+    [
+      58,
+      54,
+      1,
+      59,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

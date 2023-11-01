@@ -2,9 +2,15 @@
 # Comfyroll Pipe Nodes by Akatsuzi                      https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
-# PIPE AND MODULE NODES
+# based on Tiny Terra nodes
 #---------------------------------------------------------------------------------------------------------------------#
-# Based on Tiny Terra nodes
+
+from ..categories import icons
+
+#---------------------------------------------------------------------------------------------------------------------#
+# MODULE NODES
+#---------------------------------------------------------------------------------------------------------------------#
+
 class CR_ModulePipeLoader:
     def __init__(self):
         pass
@@ -31,8 +37,7 @@ class CR_ModulePipeLoader:
     RETURN_TYPES = ("PIPE_LINE", )
     RETURN_NAMES = ("pipe", )
     FUNCTION = "flush"
-
-    CATEGORY = "Comfyroll/Pipe/Module"
+    CATEGORY = icons.get("Comfyroll/Pipe/Module")
 
     def flush(self, model=0, pos=0, neg=0, latent=0, vae=0, clip=0, controlnet=0, image=0, seed=0):
         pipe_line = (model, pos, neg, latent, vae, clip, controlnet, image, seed)
@@ -53,7 +58,7 @@ class CR_ModuleInput:
     RETURN_NAMES = ("pipe", "model", "pos", "neg", "latent", "vae", "clip", "controlnet", "image", "seed")
     FUNCTION = "flush"
 
-    CATEGORY = "Comfyroll/Pipe/Module"
+    CATEGORY = icons.get("Comfyroll/Pipe/Module")
     
     def flush(self, pipe):
         model, pos, neg, latent, vae, clip, controlnet, image, seed = pipe
@@ -83,8 +88,7 @@ class CR_ModuleOutput:
     RETURN_TYPES = ("PIPE_LINE", )
     RETURN_NAMES = ("pipe", )
     FUNCTION = "flush"
-
-    CATEGORY = "Comfyroll/Pipe/Module"
+    CATEGORY = icons.get("Comfyroll/Pipe/Module")
 
     def flush(self, pipe, model=None, pos=None, neg=None, latent=None, vae=None, clip=None, controlnet=None, image=None, seed=None):
         new_model, new_pos, new_neg, new_latent, new_vae, new_clip, new_controlnet, new_image, new_seed = pipe
@@ -120,6 +124,8 @@ class CR_ModuleOutput:
         return (pipe, )
         
 #---------------------------------------------------------------------------------------------------------------------#
+# PIPE NODES
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_ImagePipeIn:
     def __init__(self):
         pass
@@ -141,8 +147,7 @@ class CR_ImagePipeIn:
     RETURN_TYPES = ("PIPE_LINE", )
     RETURN_NAMES = ("pipe", )
     FUNCTION = "flush"
-
-    CATEGORY = "Comfyroll/Pipe/Image"
+    CATEGORY = icons.get("Comfyroll/Pipe/Image")
 
     def flush(self, image=0, width=0, height=0, upscale_factor=0):
         pipe_line = (image, width, height, upscale_factor)
@@ -167,8 +172,7 @@ class CR_ImagePipeEdit:
     RETURN_TYPES = ("PIPE_LINE", )
     RETURN_NAMES = ("pipe", )
     FUNCTION = "flush"
-
-    CATEGORY = "Comfyroll/Pipe/Image"
+    CATEGORY = icons.get("Comfyroll/Pipe/Image")
 
     def flush(self, pipe, image=None, width=None, height=None, upscale_factor=None):
         new_image, new_width, new_height, new_upscale_factor = pipe
@@ -202,8 +206,7 @@ class CR_ImagePipeOut:
     RETURN_TYPES = ("PIPE_LINE", "IMAGE", "INT", "INT", "FLOAT",)
     RETURN_NAMES = ("pipe", "image", "width", "height", "upscale_factor")
     FUNCTION = "flush"
-
-    CATEGORY = "Comfyroll/Pipe/Image"
+    CATEGORY = icons.get("Comfyroll/Pipe/Image")
     
     def flush(self, pipe):
         #if switch == "Off":
@@ -230,8 +233,7 @@ class CR_InputSwitchPipe:
     RETURN_TYPES = ("PIPE_LINE",)
     OUTPUT_NODE = True
     FUNCTION = "InputSwitchPipe"
-
-    CATEGORY = "Comfyroll/Pipe/Module"
+    CATEGORY = icons.get("Comfyroll/Pipe")
 
     def InputSwitchPipe(self, Input, pipe1, pipe2):
         if Input == 1:

@@ -1,12 +1,12 @@
 {
-  "last_node_id": 69,
-  "last_link_id": 133,
+  "last_node_id": 75,
+  "last_link_id": 136,
   "nodes": [
     {
       "id": 40,
       "type": "PreviewImage",
       "pos": [
-        1710,
+        1700,
         400
       ],
       "size": {
@@ -14,7 +14,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 22,
+      "order": 40,
       "mode": 0,
       "inputs": [
         {
@@ -28,216 +28,6 @@
       }
     },
     {
-      "id": 39,
-      "type": "PreviewImage",
-      "pos": [
-        1700,
-        1020
-      ],
-      "size": {
-        "0": 320,
-        "1": 250
-      },
-      "flags": {},
-      "order": 31,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 118
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 46,
-      "type": "PreviewImage",
-      "pos": [
-        1710,
-        90
-      ],
-      "size": {
-        "0": 320,
-        "1": 250
-      },
-      "flags": {},
-      "order": 30,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 122
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 33,
-      "type": "CR Color Bars",
-      "pos": [
-        530,
-        90
-      ],
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            119
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Color Bars"
-      },
-      "widgets_values": [
-        "2-color",
-        512,
-        512,
-        "yellow",
-        "red",
-        "vertical",
-        5
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 51,
-      "type": "CR Color Bars",
-      "pos": [
-        530,
-        710
-      ],
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            124
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Color Bars"
-      },
-      "widgets_values": [
-        "2-color",
-        512,
-        512,
-        "cyan",
-        "navy",
-        "diagonal",
-        10
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 49,
-      "type": "CR Color Bars",
-      "pos": [
-        530,
-        400
-      ],
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            123
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Color Bars"
-      },
-      "widgets_values": [
-        "2-color",
-        512,
-        512,
-        "black",
-        "red",
-        "horizontal",
-        3
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 35,
-      "type": "CR Checker Pattern",
-      "pos": [
-        1310,
-        400
-      ],
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            117
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Checker Pattern"
-      },
-      "widgets_values": [
-        "stepped",
-        512,
-        512,
-        "indigo",
-        "brown",
-        8,
-        3
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 42,
       "type": "PreviewImage",
       "pos": [
@@ -249,191 +39,13 @@
         "1": 250
       },
       "flags": {},
-      "order": 34,
+      "order": 26,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
           "link": 120
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 50,
-      "type": "PreviewImage",
-      "pos": [
-        900,
-        400
-      ],
-      "size": {
-        "0": 320,
-        "1": 250
-      },
-      "flags": {},
-      "order": 21,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 123
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 52,
-      "type": "PreviewImage",
-      "pos": [
-        900,
-        710
-      ],
-      "size": {
-        "0": 320,
-        "1": 250
-      },
-      "flags": {},
-      "order": 20,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 124
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 54,
-      "type": "PreviewImage",
-      "pos": [
-        1700,
-        1330
-      ],
-      "size": {
-        "0": 320,
-        "1": 250
-      },
-      "flags": {},
-      "order": 23,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 126
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 53,
-      "type": "CR Color Gradient",
-      "pos": [
-        1320,
-        1330
-      ],
-      "size": {
-        "0": 315,
-        "1": 178
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            126
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Color Gradient"
-      },
-      "widgets_values": [
-        "linear",
-        512,
-        512,
-        "white",
-        "fuchsia",
-        "horizontal"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 47,
-      "type": "CR Color Gradient",
-      "pos": [
-        1310,
-        1640
-      ],
-      "size": {
-        "0": 315,
-        "1": 178
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            125
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Color Gradient"
-      },
-      "widgets_values": [
-        "radial",
-        512,
-        512,
-        "blue",
-        "red",
-        "horizontal"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 48,
-      "type": "PreviewImage",
-      "pos": [
-        1700,
-        1640
-      ],
-      "size": {
-        "0": 320,
-        "1": 250
-      },
-      "flags": {},
-      "order": 24,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 125
         }
       ],
       "properties": {
@@ -452,7 +64,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 29,
+      "order": 25,
       "mode": 0,
       "inputs": [
         {
@@ -477,7 +89,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 25,
+      "order": 21,
       "mode": 0,
       "inputs": [
         {
@@ -502,7 +114,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 27,
+      "order": 23,
       "mode": 0,
       "inputs": [
         {
@@ -527,7 +139,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 26,
+      "order": 22,
       "mode": 0,
       "inputs": [
         {
@@ -552,7 +164,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 6,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
@@ -591,7 +203,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 7,
+      "order": 1,
       "mode": 0,
       "outputs": [
         {
@@ -630,7 +242,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 28,
+      "order": 24,
       "mode": 0,
       "inputs": [
         {
@@ -655,7 +267,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 8,
+      "order": 2,
       "mode": 0,
       "outputs": [
         {
@@ -694,7 +306,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 9,
+      "order": 3,
       "mode": 0,
       "outputs": [
         {
@@ -733,7 +345,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 10,
+      "order": 4,
       "mode": 0,
       "outputs": [
         {
@@ -761,218 +373,6 @@
       "bgcolor": "#000"
     },
     {
-      "id": 45,
-      "type": "CR Checker Pattern",
-      "pos": [
-        1310,
-        90
-      ],
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 11,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            122
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Checker Pattern"
-      },
-      "widgets_values": [
-        "regular",
-        512,
-        512,
-        "blue",
-        "lavender",
-        8,
-        2
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 65,
-      "type": "PreviewImage",
-      "pos": [
-        920,
-        1640
-      ],
-      "size": {
-        "0": 320,
-        "1": 250
-      },
-      "flags": {},
-      "order": 33,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 131
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 36,
-      "type": "CR Color Gradient",
-      "pos": [
-        1310,
-        1020
-      ],
-      "size": {
-        "0": 315,
-        "1": 178
-      },
-      "flags": {},
-      "order": 12,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            118
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Color Gradient"
-      },
-      "widgets_values": [
-        "linear",
-        512,
-        512,
-        "purple",
-        "orange",
-        "vertical"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 64,
-      "type": "PreviewImage",
-      "pos": [
-        920,
-        1320
-      ],
-      "size": {
-        "0": 320,
-        "1": 250
-      },
-      "flags": {},
-      "order": 32,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 130
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 62,
-      "type": "CR Starburst Lines",
-      "pos": [
-        540,
-        1320
-      ],
-      "size": {
-        "0": 315,
-        "1": 250
-      },
-      "flags": {},
-      "order": 13,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            130
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Starburst Lines"
-      },
-      "widgets_values": [
-        511,
-        512,
-        6,
-        256,
-        5,
-        "orange",
-        "navy",
-        0,
-        0
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 63,
-      "type": "CR Starburst Colors",
-      "pos": [
-        540,
-        1640
-      ],
-      "size": {
-        "0": 315,
-        "1": 226
-      },
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            131
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Starburst Colors"
-      },
-      "widgets_values": [
-        512,
-        512,
-        14,
-        "white",
-        "orange",
-        0,
-        0,
-        2
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 41,
       "type": "CR Style Bars",
       "pos": [
@@ -984,7 +384,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 15,
+      "order": 5,
       "mode": 0,
       "outputs": [
         {
@@ -1023,7 +423,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 19,
+      "order": 32,
       "mode": 0,
       "inputs": [
         {
@@ -1037,24 +437,74 @@
       }
     },
     {
-      "id": 2,
+      "id": 50,
       "type": "PreviewImage",
       "pos": [
-        130,
-        90
+        900,
+        420
       ],
       "size": {
         "0": 320,
         "1": 250
       },
       "flags": {},
-      "order": 37,
+      "order": 29,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 115
+          "link": 123
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 52,
+      "type": "PreviewImage",
+      "pos": [
+        900,
+        760
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 124
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 72,
+      "type": "PreviewImage",
+      "pos": [
+        900,
+        1100
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 134
         }
       ],
       "properties": {
@@ -1065,15 +515,15 @@
       "id": 68,
       "type": "PreviewImage",
       "pos": [
-        130,
-        470
+        900,
+        1490
       ],
       "size": {
         "0": 320,
         "1": 250
       },
       "flags": {},
-      "order": 36,
+      "order": 35,
       "mode": 0,
       "inputs": [
         {
@@ -1087,18 +537,225 @@
       }
     },
     {
-      "id": 69,
+      "id": 64,
       "type": "PreviewImage",
       "pos": [
-        130,
-        790
+        120,
+        530
       ],
       "size": {
         "0": 320,
         "1": 250
       },
       "flags": {},
-      "order": 35,
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 130
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 48,
+      "type": "PreviewImage",
+      "pos": [
+        1700,
+        1660
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 136
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 39,
+      "type": "PreviewImage",
+      "pos": [
+        1700,
+        940
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 118
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 73,
+      "type": "CR Starburst Colors",
+      "pos": [
+        -250,
+        1310
+      ],
+      "size": {
+        "0": 315,
+        "1": 298
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            135
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Starburst Colors"
+      },
+      "widgets_values": [
+        512,
+        512,
+        14,
+        "fuchsia",
+        "lightgray",
+        0,
+        0,
+        15,
+        2,
+        "#0011AA",
+        "#007711"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 62,
+      "type": "CR Starburst Lines",
+      "pos": [
+        -250,
+        530
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            130
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Starburst Lines"
+      },
+      "widgets_values": [
+        511,
+        512,
+        6,
+        256,
+        5,
+        "orange",
+        "green",
+        0,
+        0,
+        30,
+        "#00FF33",
+        "#0033AA"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 49,
+      "type": "CR Color Bars",
+      "pos": [
+        530,
+        420
+      ],
+      "size": {
+        "0": 315,
+        "1": 274
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            123
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Color Bars"
+      },
+      "widgets_values": [
+        "2-color",
+        512,
+        512,
+        "black",
+        "red",
+        "horizontal",
+        3,
+        0,
+        "#000000",
+        "#000000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 69,
+      "type": "PreviewImage",
+      "pos": [
+        900,
+        1880
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 36,
       "mode": 0,
       "inputs": [
         {
@@ -1112,42 +769,341 @@
       }
     },
     {
-      "id": 67,
-      "type": "CR Polygons",
+      "id": 65,
+      "type": "PreviewImage",
       "pos": [
-        -240,
-        790
+        120,
+        930
       ],
       "size": {
-        "0": 315,
-        "1": 226
+        "0": 320,
+        "1": 250
       },
       "flags": {},
-      "order": 16,
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 131
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 74,
+      "type": "PreviewImage",
+      "pos": [
+        120,
+        1310
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 135
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 2,
+      "type": "PreviewImage",
+      "pos": [
+        120,
+        90
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 115
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 46,
+      "type": "PreviewImage",
+      "pos": [
+        1700,
+        90
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 122
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 54,
+      "type": "PreviewImage",
+      "pos": [
+        1700,
+        1270
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 126
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 63,
+      "type": "CR Starburst Colors",
+      "pos": [
+        -250,
+        930
+      ],
+      "size": {
+        "0": 310,
+        "1": 300
+      },
+      "flags": {},
+      "order": 9,
       "mode": 0,
       "outputs": [
         {
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            133
+            131
           ],
           "shape": 3,
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "CR Polygons"
+        "Node name for S&R": "CR Starburst Colors"
       },
       "widgets_values": [
-        "triangles",
         512,
         512,
+        14,
+        "navy",
+        "yellow",
+        0,
+        0,
+        15,
+        1,
+        "#440000",
+        "#003377"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 32,
+      "type": "CR Halftone Grid",
+      "pos": [
+        -240,
+        90
+      ],
+      "size": {
+        "0": 310,
+        "1": 250
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            115
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Halftone Grid"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "plasma",
+        "No",
+        20,
+        "black",
+        0,
+        0,
+        "#001133"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 33,
+      "type": "CR Color Bars",
+      "pos": [
+        530,
+        90
+      ],
+      "size": {
+        "0": 315,
+        "1": 274
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            119
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Color Bars"
+      },
+      "widgets_values": [
+        "2-color",
+        512,
+        512,
+        "yellow",
+        "pink",
+        "vertical",
         5,
-        5,
-        "brown",
-        "lavender",
-        2
+        0,
+        "#220077",
+        "#880000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 51,
+      "type": "CR Color Bars",
+      "pos": [
+        530,
+        760
+      ],
+      "size": {
+        "0": 315,
+        "1": 274
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            124
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Color Bars"
+      },
+      "widgets_values": [
+        "2-color",
+        512,
+        512,
+        "orange",
+        "white",
+        "alt_diagonal",
+        10,
+        0,
+        "#00BB00",
+        "#0000CC"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 71,
+      "type": "CR Color Bars",
+      "pos": [
+        530,
+        1100
+      ],
+      "size": {
+        "0": 315,
+        "1": 274
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            134
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Color Bars"
+      },
+      "widgets_values": [
+        "2-color",
+        512,
+        512,
+        "navy",
+        "black",
+        "diagonal",
+        10,
+        0,
+        "#550000",
+        "#007700"
       ],
       "color": "#222",
       "bgcolor": "#000"
@@ -1156,15 +1112,15 @@
       "id": 66,
       "type": "CR Polygons",
       "pos": [
-        -240,
-        470
+        530,
+        1490
       ],
       "size": {
         "0": 315,
-        "1": 226
+        "1": 322
       },
       "flags": {},
-      "order": 17,
+      "order": 14,
       "mode": 0,
       "outputs": [
         {
@@ -1187,22 +1143,155 @@
         5,
         5,
         "yellow",
+        "white",
         "black",
-        10
+        5,
+        "#55BB00",
+        "#335500",
+        "#003344"
       ],
       "color": "#222",
       "bgcolor": "#000"
     },
     {
-      "id": 32,
-      "type": "CR Halftone Grid",
+      "id": 67,
+      "type": "CR Polygons",
       "pos": [
-        -240,
-        90
+        530,
+        1880
       ],
       "size": {
         "0": 315,
-        "1": 298
+        "1": 322
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            133
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Polygons"
+      },
+      "widgets_values": [
+        "triangles",
+        512,
+        512,
+        5,
+        5,
+        "maroon",
+        "blue",
+        "lavender",
+        9,
+        "#770099",
+        "#770000",
+        "#006699"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 75,
+      "type": "CR Radial Gradient",
+      "pos": [
+        1310,
+        1660
+      ],
+      "size": {
+        "0": 315,
+        "1": 274
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            136
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Radial Gradient"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "orange",
+        "purple",
+        1,
+        0.5,
+        0.5,
+        "#6600FF",
+        "#004400"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 53,
+      "type": "CR Color Gradient",
+      "pos": [
+        1310,
+        1270
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            126
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Color Gradient"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "green",
+        "red",
+        0.75,
+        0.25,
+        "horizontal",
+        "#770000",
+        "#008800"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 36,
+      "type": "CR Color Gradient",
+      "pos": [
+        1310,
+        940
+      ],
+      "size": {
+        "0": 310,
+        "1": 250
       },
       "flags": {},
       "order": 18,
@@ -1212,27 +1301,109 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            115
+            118
           ],
           "shape": 3,
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "CR Halftone Grid"
+        "Node name for S&R": "CR Color Gradient"
       },
       "widgets_values": [
         512,
         512,
-        "ocean",
-        "No",
-        20,
-        "cyan",
-        255,
-        255,
-        255,
+        "yellow",
+        "blue",
         0.5,
-        0.5
+        0.5,
+        "vertical",
+        "#5555000",
+        "#004444"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 35,
+      "type": "CR Checker Pattern",
+      "pos": [
+        1310,
+        400
+      ],
+      "size": {
+        "0": 315,
+        "1": 250
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            117
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Checker Pattern"
+      },
+      "widgets_values": [
+        "stepped",
+        512,
+        512,
+        "aqua",
+        "fuchsia",
+        8,
+        3,
+        "#004400",
+        "#000099"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 45,
+      "type": "CR Checker Pattern",
+      "pos": [
+        1310,
+        90
+      ],
+      "size": {
+        "0": 315,
+        "1": 250
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            122
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Checker Pattern"
+      },
+      "widgets_values": [
+        "regular",
+        512,
+        512,
+        "black",
+        "white",
+        8,
+        2,
+        "#0044BB",
+        "#007788"
       ],
       "color": "#222",
       "bgcolor": "#000"
@@ -1320,14 +1491,6 @@
       "IMAGE"
     ],
     [
-      125,
-      47,
-      0,
-      48,
-      0,
-      "IMAGE"
-    ],
-    [
       126,
       53,
       0,
@@ -1388,6 +1551,30 @@
       67,
       0,
       69,
+      0,
+      "IMAGE"
+    ],
+    [
+      134,
+      71,
+      0,
+      72,
+      0,
+      "IMAGE"
+    ],
+    [
+      135,
+      73,
+      0,
+      74,
+      0,
+      "IMAGE"
+    ],
+    [
+      136,
+      75,
+      0,
+      48,
       0,
       "IMAGE"
     ]

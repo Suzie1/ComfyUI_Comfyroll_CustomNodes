@@ -52,6 +52,7 @@ __Logic__
 * CR Clip Input Switch
 * CR Model Input Switch
 * CR ControlNet Input Switch
+* CR VAE Input Switch (new 23/10/2023)
 * CR Text Input Switch
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
@@ -74,12 +75,14 @@ __Text__
 __Image__
 * CR SD1.5 Aspect Ratio
 * CR Color Tint
+* CR Image Panel (new 23/10/2023)
 * CR Halftone Grid
 * CR Color Bars
 * CR Style Bars   
 * CR Checker Pattern
 * CR Polygons
 * CR Color Gradient
+* CR Radial Gradiant (new 23/10/2023)
 * CR Starburst Lines
 * CR Starburst Colors
 

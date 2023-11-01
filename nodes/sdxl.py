@@ -10,6 +10,7 @@ import os
 import sys
 import folder_paths
 from nodes import MAX_RESOLUTION, ControlNetApply
+from ..categories import icons
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
@@ -38,8 +39,7 @@ class CR_PromptMixPresets:
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", "STRING", )
     RETURN_NAMES = ("pos_g", "pos_l", "pos_r", "neg_g", "neg_l", "neg_r", )
     FUNCTION = "mixer"
-
-    CATEGORY = "Comfyroll/SDXL"
+    CATEGORY = icons.get("Comfyroll/SDXL")
 
     def mixer(self, prompt_positive, prompt_negative, style_positive, style_negative, preset):
         if preset == "default with no style text":
@@ -92,8 +92,7 @@ class CR_SDXLStyleText:
     RETURN_TYPES = ("STRING", "STRING", )
     RETURN_NAMES = ("positive_prompt_text_l", "negative_prompt_text_l" )
     FUNCTION = "get_value"
-
-    CATEGORY = "Comfyroll/SDXL"
+    CATEGORY = icons.get("Comfyroll/SDXL")
 
     def get_value(self, positive_style, negative_style):
         return (positive_style, negative_style,)
@@ -121,8 +120,7 @@ class CR_SDXLBasePromptEncoder:
     RETURN_TYPES = ("CONDITIONING", "CONDITIONING", )
     RETURN_NAMES = ("base_positive", "base_negative", )
     FUNCTION = "encode"
-
-    CATEGORY = "Comfyroll/SDXL"
+    CATEGORY = icons.get("Comfyroll/SDXL")
 
     def encode(self, base_clip, pos_g, pos_l, neg_g, neg_l, base_width, base_height, crop_w, crop_h, target_width, target_height, preset,):
         empty = base_clip.tokenize("")
@@ -211,8 +209,7 @@ class CR_SDXLAspectRatio:
     RETURN_TYPES = ("INT", "INT", "FLOAT", "INT")
     RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size")
     FUNCTION = "Aspect_Ratio"
-
-    CATEGORY = "Comfyroll/SDXL"
+    CATEGORY = icons.get("Comfyroll/SDXL")
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
         if aspect_ratio == "1:1 square 1024x1024":

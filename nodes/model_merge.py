@@ -1,15 +1,16 @@
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             #
-# for ComfyUI                                               https://github.com/comfyanonymous/ComfyUI                                               #
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------------#
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi      https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
+# for ComfyUI                                            https://github.com/comfyanonymous/ComfyUI
+#---------------------------------------------------------------------------------------------------------------------#
 
 import comfy.sd
 import comfy.model_management
 import folder_paths
+from ..categories import icons
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------#                          
+#---------------------------------------------------------------------------------------------------------------------#                        
 # Model Merge Nodes
-#---------------------------------------------------------------------------------------------------------------------------------------------------#                          
+#---------------------------------------------------------------------------------------------------------------------#
 # Stacker node for storing a list of models and merge ratios
 class CR_ModelMergeStack:
     
@@ -18,18 +19,18 @@ class CR_ModelMergeStack:
         checkpoint_files = ["None"] + folder_paths.get_filename_list("checkpoints")
         return {"required": {"switch_1": (["Off","On"],),
                              "ckpt_name1": (checkpoint_files,),
-                             "model_ratio1": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                             "clip_ratio1": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "model_ratio1": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
+                             "clip_ratio1": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
                              #
                              "switch_2": (["Off","On"],),
                              "ckpt_name2": (checkpoint_files,),
-                             "model_ratio2": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                             "clip_ratio2": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "model_ratio2": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
+                             "clip_ratio2": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
                              #
                              "switch_3": (["Off","On"],),
                              "ckpt_name3": (checkpoint_files,),
-                             "model_ratio3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                             "clip_ratio3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                             "model_ratio3": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
+                             "clip_ratio3": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
                             },      
                 "optional":{
                              "model_stack": ("MODEL_STACK",),
@@ -38,8 +39,7 @@ class CR_ModelMergeStack:
 
     RETURN_TYPES = ("MODEL_STACK",)
     FUNCTION = "list_checkpoints"
-
-    CATEGORY = "Comfyroll/Model Merge"
+    CATEGORY = icons.get("Comfyroll/Model Merge")
 
     def list_checkpoints(self, switch_1, ckpt_name1, model_ratio1, clip_ratio1, switch_2, ckpt_name2, model_ratio2, clip_ratio2, switch_3, ckpt_name3, model_ratio3, clip_ratio3, model_stack=None):
     
@@ -61,7 +61,7 @@ class CR_ModelMergeStack:
         
         return (model_list,)
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------------#
 # Merges the models in the model merge stack to produce merged model and clip outputs
 class CR_ApplyModelMerge:
 
@@ -78,7 +78,7 @@ class CR_ApplyModelMerge:
     RETURN_TYPES = ("MODEL", "CLIP", "STRING",)
     RETURN_NAMES = ("MODEL", "CLIP", "model_mix_info",)
     FUNCTION = "merge"
-    CATEGORY = "Comfyroll/Model Merge"
+    CATEGORY = icons.get("Comfyroll/Model Merge")
 
     def merge(self, model_stack, merge_method, normalise_ratios, weight_factor):
     
@@ -156,9 +156,9 @@ class CR_ApplyModelMerge:
                 
         return (model1, clip1, model_mix_info,)
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS = {

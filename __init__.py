@@ -11,6 +11,7 @@ from .nodes.upscale import *
 from .nodes.xygrid import *
 from .nodes.matplot import *
 from .nodes.pil_text import *
+from .nodes.pil_layout import *
 
 NODE_CLASS_MAPPINGS = {
     "CR Image Output": CR_ImageOutput,
@@ -37,6 +38,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Clip Input Switch": CR_ClipInputSwitch,
     "CR Model Input Switch": CR_ModelInputSwitch,
     "CR ControlNet Input Switch": CR_ControlNetInputSwitch,
+    "CR VAE Input Switch": CR_VAEInputSwitch,
     "CR Text Input Switch": CR_TextInputSwitch,
     "CR Text Input Switch (4 way)": CR_TextInputSwitch4way,
     "CR Switch Model and CLIP":CR_ModelAndCLIPInputSwitch,    
@@ -76,6 +78,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Checker Pattern":CR_CheckerPattern,
     "CR Polygons":CR_Polygons,
     "CR Color Gradient":CR_ColorGradient,
+    "CR Radial Gradient": CR_RadialGradient,
     "CR Starburst Lines":CR_StarburstLines,
     "CR Starburst Colors":CR_StarburstColors, 
     ### PIL Text
@@ -83,8 +86,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Draw Text":CR_DrawText,
     "CR Mask Text":CR_MaskText,
     "CR Composite Text":CR_CompositeText,
-    "CR Simple Meme Template":CR_SimpleMemeTemplate, 
-    ### Utils
+    "CR Simple Meme Template":CR_SimpleMemeTemplate,
+    "CR Image Panel":CR_ImagePanel, 
     ### Conversion    
     "CR String To Number":CR_StringToNumber,
     "CR String To Combo":CR_StringToCombo,    
@@ -99,6 +102,98 @@ NODE_CLASS_MAPPINGS = {
     "CR Index Multiply":CR_MultiplyIndex,
     "CR Index Reset":CR_IndexReset,
     "CR Trigger":CR_Trigger,
+}
+
+NODE_DISPLAY_NAME_MAPPINGS = {
+    ### Misc Nodes
+    "CR Image Output": "💾 CR Image Output",
+    "CR Integer Multiple": "⚙️ CR Integer Multiple",
+    "CR Color Tint": "🎨 CR Color Tint",
+    "CR Latent Batch Size": "⚙️ CR Latent Batch Size", 
+    "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
+    "CR Seed": "🌱 CR Seed",
+    "CR Prompt Text": "📝 CR Prompt Text",
+    "CR Split String": "⚙️ CR Split String", 
+    ### ControlNet Nodes
+    "CR Apply ControlNet": "🕹️ CR Apply ControlNet",    
+    "CR Multi-ControlNet Stack": "🕹️ CR Multi-ControlNet Stack",
+    "CR Apply Multi-ControlNet": "🕹️ CR Apply Multi-ControlNet",   
+    ### LoRA Nodes    
+    "CR Load LoRA": "💊 CR Load LoRA",    
+    "CR LoRA Stack": "💊 CR LoRA Stack",
+    "CR Apply LoRA Stack": "💊 CR Apply LoRA Stack",
+    ### Model Merge Nodes
+    "CR Apply Model Merge": "⛏️ CR Apply Model Merge",
+    "CR Model Merge Stack": "⛏️ CR Model Merge Stack",
+    ### Logic Nodes
+    "CR Image Input Switch": "🔀 CR Image Input Switch",
+    "CR Image Input Switch (4 way)": "🔀 CR Image Input Switch (4 way)",
+    "CR Latent Input Switch": "🔀 CR Latent Input Switch",
+    "CR Conditioning Input Switch": "🔀 CR Conditioning Input Switch",
+    "CR Clip Input Switch": "🔀 CR Clip Input Switch",
+    "CR Model Input Switch": "🔀 CR Model Input Switch",
+    "CR ControlNet Input Switch": "🔀 CR ControlNet Input Switch",
+    "CR VAE Input Switch": "🔀 CR VAE Input Switch",     
+    "CR Text Input Switch": "🔀 CR Text Input Switch",
+    "CR Text Input Switch (4 way)": "🔀 CR Text Input Switch (4 way)",
+    "CR Switch Model and CLIP": "🔀 CR Switch Model and CLIP",    
+    "CR Batch Process Switch": "🔂 CR Batch Process Switch",    
+    "CR Img2Img Process Switch": "🔂 CR Img2Img Process Switch",
+    "CR Hires Fix Process Switch": "🔂 CR Hires Fix Process Switch",
+    ### Pipe Nodes
+    "CR Module Pipe Loader": "✈️ CR Module Pipe Loader",
+    "CR Module Input": "✈️ CR Module Input",
+    "CR Module Output": "✈️ CR Module Output",
+    "CR Image Pipe In": "🛩️ CR Image Pipe In",
+    "CR Image Pipe Edit": "🛩️ CR Image Pipe Edit",
+    "CR Image Pipe Out": "🛩️ CR Image Pipe Out",
+    "CR Pipe Switch": "🔀️ CR Pipe Switch",    
+    ### SDXL Nodes
+    "CR SDXL Prompt Mix Presets": "🌟 CR SDXL Prompt Mix Presets",
+    "CR SDXL Aspect Ratio": "🌟 CR SDXL Aspect Ratio",
+    "CR SDXL Style Text": "🌟 CR SDXL Style Text",
+    "CR SDXL Base Prompt Encoder": "🌟 CR SDXL Base Prompt Encoder", 
+    ### Upscale Nodes
+    "CR Multi Upscale Stack": "🔍 CR Multi Upscale Stack",
+    "CR Upscale Image": "🔍 CR Upscale Image",
+    "CR Apply Multi Upscale": "🔍 CR Apply Multi Upscale",
+    ### XY Grid Nodes    
+    "CR XY List": "📉 CR XY List",  
+    "CR XY Interpolate": "📉 CR XY Interpolate", 
+    "CR XY Index": "📉 CR XY Index",
+    "CR XY From Folder": "📉 CR XY From Folder",
+    "CR XY Save Grid Image": "📉 CR XY Save Grid Image",
+    ### Matplot
+    "CR Halftone Grid" : "🟫 CR Halftone Grid",    
+    "CR Color Bars" : "🟫 CR Color Bars",
+    "CR Style Bars" : "🟪 CR Style Bars",    
+    "CR Checker Pattern": "🟦 CR Checker Pattern",
+    "CR Polygons": "🟩 CR Polygons",
+    "CR Color Gradient": "🟨 CR Color Gradient",
+    "CR Radial Gradient": "🟨 CR Radial Gradient",    
+    "CR Starburst Lines": "🟧 CR Starburst Lines",
+    "CR Starburst Colors": "🟥 CR Starburst Colors",   
+    ### PIL
+    "CR Overlay Text": "🔤 CR Overlay Text",
+    "CR Draw Text": "🔤️ CR Draw Text",
+    "CR Mask Text": "🔤️ CR Mask Text",
+    "CR Composite Text": "🔤️ CR Composite Text",
+    "CR Simple Meme Template": "👽 CR Simple Meme Template",
+    "CR Image Panel": "🌁 CR Image Panel",
+    ### Index
+    "CR Index":"🔢 CR Index",    
+    "CR Index Increment": "🔢 CR Index Increment",
+    "CR Index Multiply": "🔢 CR Index Multiply",
+    "CR Index Reset": "🔢 CR Index Reset",
+    "CR Trigger": "🔢 CR Trigger",
+    ### Conversion    
+    "CR String To Number": "🔧 CR String To Number",
+    "CR String To Combo": "🔧 CR String To Combo",    
+    "CR Float To String": "🔧 CR Float To String",
+    "CR Float To Integer": "🔧 CR Float To Integer",
+    "CR Integer To String": "🔧 CR Integer To String",     
+    "CR Text List To String": "🔧 CR Text List To String",
+    "CR Seed to Int": "🔧 CR Seed to Int",    
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS']

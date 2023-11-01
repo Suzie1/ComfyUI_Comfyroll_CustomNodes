@@ -2,6 +2,8 @@
 # Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/RockOfFire/CR-Animation-Nodes
 # for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
+# based on https://github.com/LEv145/images-grid-comfy-plugin
+#---------------------------------------------------------------------------------------------------------------------#
 
 import os
 import folder_paths
@@ -13,6 +15,7 @@ from pathlib import Path
 import typing as t
 from dataclasses import dataclass
 from .xygrid_functions import create_images_grid_by_columns, Annotation
+from ..categories import icons
     
 def tensor_to_pillow(image: t.Any) -> Image.Image:
     return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
@@ -40,11 +43,7 @@ def find_highest_numeric_value(directory, filename_prefix):
     
     return highest_value
     
-#---------------------------------------------------------------------------------------------------------------------
-# NODES
-#---------------------------------------------------------------------------------------------------------------------
-# These nodes are based on https://github.com/LEv145/images-grid-comfy-plugin
-
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_XYList:
 
     @classmethod
@@ -65,7 +64,7 @@ class CR_XYList:
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "BOOLEAN", )
     RETURN_NAMES = ("X", "Y", "x_annotation", "y_annotation", "trigger", ) 
     FUNCTION = "cross_join"
-    CATEGORY = "Comfyroll/XY Grid"
+    CATEGORY = icons.get("Comfyroll/XY Grid") 
     
     def cross_join(self, list1, list2, x_prepend, x_append, x_annotation_prepend,
     y_prepend, y_append, y_annotation_prepend, index):
@@ -106,7 +105,7 @@ class CR_XYList:
             
         return (x_out, y_out, x_ann_out, y_ann_out, trigger, )
 
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_XYInterpolate:
 
     @classmethod
@@ -129,7 +128,7 @@ class CR_XYInterpolate:
     RETURN_TYPES = ("FLOAT", "FLOAT", "STRING", "STRING", "BOOLEAN", )
     RETURN_NAMES = ("X", "Y", "x_annotation", "y_annotation", "trigger", )    
     FUNCTION = "gradient"
-    CATEGORY = "Comfyroll/XY Grid"
+    CATEGORY = icons.get("Comfyroll/XY Grid") 
 
     def gradient(self, x_columns, x_start_value, x_step, x_annotation_prepend,
     y_rows, y_start_value, y_step, y_annotation_prepend, 
@@ -168,7 +167,7 @@ class CR_XYInterpolate:
              
         return (x_float_out, y_float_out, x_ann_out, y_ann_out, trigger)
    
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_XYIndex: 
 
     @classmethod
@@ -184,7 +183,7 @@ class CR_XYIndex:
     RETURN_TYPES = ("INT", "INT", )
     RETURN_NAMES = ("x", "y", )    
     FUNCTION = "index"
-    CATEGORY = "Comfyroll/XY Grid"
+    CATEGORY = icons.get("Comfyroll/XY Grid") 
 
     def index(self, x_columns, y_rows, index):
 
@@ -195,79 +194,7 @@ class CR_XYIndex:
         y = int(index / x_columns)  
         
         return (x, y)
-        
-#---------------------------------------------------------------------------------------------------------------------
-class CR_XYZIndex: 
-
-    @classmethod
-    def INPUT_TYPES(s):
-        gradient_profiles = ["Lerp"]    
-    
-        return {"required": {"x_steps":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
-                             "y_steps":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
-                             "z_steps":("INT", {"default": 0.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
-                             "index": ("INT", {"default": 0.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),                             
-                }
-        }
-
-    RETURN_TYPES = ("INT", "INT", "INT",)
-    RETURN_NAMES = ("x", "y", "z",)    
-    FUNCTION = "index"
-    CATEGORY = "Comfyroll/XY Grid"
-
-    def index(self, x_rows, y_columns, z_steps, index):
-
-        # Index values for all XY nodes start from 1
-        index -=1
-        
-        x = index % x_rows
-        y = int(index / x_rows)
-        z = 0    
-        
-        return (x, y, z)
-        
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_LoadXYAnnotationFromFile:
-    
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {
-            "input_file_path": ("STRING", {"multiline": False, "default": ""}),
-            "file_name": ("STRING", {"multiline": False, "default": ""}),
-            "file_extension": (["txt", "csv"],),
-            }
-        }
-
-    CATEGORY = "Comfyroll/XY Grid"
-    RETURN_TYPES = ("GRID_ANNOTATION", "STRING", )
-    RETURN_NAMES = ("GRID_ANNOTATION", "show_text", )
-    FUNCTION = "load"
-    
-    def load(self, input_file_path, file_name, file_extension):
-        filepath = input_file_path + "\\" + file_name + "." + file_extension
-        print(f"CR_Load Schedule From File: Loading {filepath}")
-        
-        lists = []
-            
-        if file_extension == "csv":
-            with open(filepath, "r") as csv_file:
-                reader = csv.reader(csv_file)
-        
-                for row in reader:
-                    lists.append(row)
-                    
-        else:
-            with open(filepath, "r") as txt_file:
-                for row in txt_file:
-                    parts = row.strip().split(",", 1)
-                    
-                    if len(parts) >= 2:
-                        second_part = parts[1].strip('"')
-                        lists.append([parts[0], second_part])
-
-        print(lists)
-        return(lists,str(lists),)
-
+                
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_XYFromFolder:
 
@@ -295,7 +222,7 @@ class CR_XYFromFolder:
     RETURN_TYPES = ("IMAGE", "BOOLEAN", )
     RETURN_NAMES = ("IMAGE", "trigger", )
     FUNCTION = "load_images"
-    CATEGORY = "Comfyroll/XY Grid"
+    CATEGORY = icons.get("Comfyroll/XY Grid") 
     
     def load_images(self, image_folder, start_index, end_index, max_columns, x_annotation, y_annotation, font_size, gap, trigger=False):
     
@@ -346,39 +273,7 @@ class CR_XYFromFolder:
 
         return (tensor_grid, trigger,)
 
-#---------------------------------------------------------------------------------------------------------------------
-class CR_XYGrid:
-
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {"required": {
-                    "images": ("IMAGE",),
-                    "gap": ("INT", {"default": 0, "min": 0}),
-                    "max_columns": ("INT", {"default": 1, "min": 1, "max": 10000}),
-            },
-                "optional": {
-                    "annotation": ("GRID_ANNOTATION",),
-            }
-        }
-
-    RETURN_TYPES = ("IMAGE",)
-    FUNCTION = "create_image"
-    CATEGORY = "Comfyroll/XY Grid"    
-    
-    def create_image(self, images, gap, max_columns, annotation=None):
-
-        pillow_images = [tensor_to_pillow(i) for i in images]
-        pillow_grid = create_images_grid_by_columns(
-            images=pillow_images,
-            gap=gap,
-            annotation=annotation,
-            max_columns=max_columns,
-        )
-        tensor_grid = pillow_to_tensor(pillow_grid)
-
-        return (tensor_grid,)
-
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_XYSaveGridImage:
 # originally based on SaveImageSequence by mtb
 
@@ -406,7 +301,7 @@ class CR_XYSaveGridImage:
     RETURN_TYPES = ()
     FUNCTION = "save_image"
     OUTPUT_NODE = True
-    CATEGORY = "Comfyroll/XY Grid" 
+    CATEGORY = icons.get("Comfyroll/XY Grid") 
             
     def save_image(self, mode, output_folder, image, file_format, output_path='', filename_prefix="CR", trigger=False):
 
@@ -454,7 +349,7 @@ class CR_XYSaveGridImage:
        
         return preview
 
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -463,12 +358,9 @@ class CR_XYSaveGridImage:
 NODE_CLASS_MAPPINGS = {
     # XY Grid
     "CR XY List":CR_XYList,
-    "CR XY Index":CR_XYIndex,
-    #"CR XYZ Index":CR_XYZIndex,    
+    "CR XY Index":CR_XYIndex,   
     "CR XY Interpolate":CR_XYInterpolate,
     "CR XY From Folder":CR_XYFromFolder,
-    #"CR Load XY Annotation From File":CR_LoadXYAnnotationFromFile,
-    #"CR XY Grid":CR_XYGrid,
     "CR XY Save Grid Image":CR_XYSaveGridImage,    
 }
 '''
