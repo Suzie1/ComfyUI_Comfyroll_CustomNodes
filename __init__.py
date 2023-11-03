@@ -16,6 +16,7 @@ from .nodes.pil_layout import *
 
 NODE_CLASS_MAPPINGS = {
     ### Other Nodes
+    "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Color Tint": CR_ColorTint,
     "CR Latent Batch Size": CR_LatentBatchSize, 
@@ -25,7 +26,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     ### Legacy Nodes
-    "CR Image Output": CR_ImageOutput,
+    "CR Image Size": CR_ImageSize,
     "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,       
     ### ControlNet Nodes
     "CR Apply ControlNet": CR_ApplyControlNet,    
@@ -126,7 +127,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Split String": "⚙️ CR Split String",
     "CR Value": "⚙️ CR Value",
     ### Legacy Nodes
-    "CR Image Output": "CR Image Output (Legacy)",
+    "CR Image Size": "CR Image Size (Legacy)",
     "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",
     ### ControlNet Nodes
     "CR Apply ControlNet": "🕹️ CR Apply ControlNet",    
