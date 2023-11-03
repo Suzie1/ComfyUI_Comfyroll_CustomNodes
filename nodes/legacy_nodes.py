@@ -28,7 +28,7 @@ class CR_ImageSize:
         return(width, height, upscale_factor)
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-class Comfyroll_AspectRatio_SDXL:
+class CR_AspectRatio_SDXL:
     def __init__(self):
         pass
 
