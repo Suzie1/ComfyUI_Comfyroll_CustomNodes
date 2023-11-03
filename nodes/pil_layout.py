@@ -64,7 +64,7 @@ class CR_SimpleMemeTemplate:
                 "font_name": (file_list,),
                 "max_font_size": ("INT", {"default": 150, "min": 20, "max": 500}),
                 "font_color": (colors,),
-                "font_outline": (["none", "thin", "thick"],),
+                "font_outline": (["none", "thin", "thick", "extra thick"],),
                 "bar_color": (colors,),
                 "bar_options": (bar_opts,),
                 }        

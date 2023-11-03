@@ -354,29 +354,6 @@ class CR_SplitString:
         return (string_1, string_2, string_3, string_4)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-class CR_ImageSize:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000})
-            }
-        }
-    RETURN_TYPES = ("INT", "INT", "FLOAT")
-    #RETURN_NAMES = ("Width", "Height")
-    FUNCTION = "ImageSize_Float"
-
-    CATEGORY = icons.get("Comfyroll/Other")
-
-    def ImageSize_Float(self, width, height, upscale_factor):
-        return(width, height, upscale_factor)
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
 class CR_Value:
 
     @classmethod
@@ -399,7 +376,6 @@ class CR_Value:
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS = {
-    "CR Image Size": CR_ImageSize,
     "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,

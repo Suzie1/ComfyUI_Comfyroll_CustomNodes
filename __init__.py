@@ -1,4 +1,5 @@
 from .nodes.nodes import *
+from .nodes.legacy_nodes import *
 from .nodes.lora import *
 from .nodes.controlnet import *  
 from .nodes.logic import *
@@ -14,6 +15,7 @@ from .nodes.pil_text import *
 from .nodes.pil_layout import *
 
 NODE_CLASS_MAPPINGS = {
+    ### Other Nodes
     "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Color Tint": CR_ColorTint,
@@ -22,7 +24,10 @@ NODE_CLASS_MAPPINGS = {
     "CR Seed": CR_Seed,
     "CR Prompt Text":CR_PromptText,
     "CR Split String":CR_SplitString,
-    "CR Value": CR_Value, 
+    "CR Value": CR_Value,
+    ### Legacy Nodes
+    "CR Image Size": CR_ImageSize,
+    "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,       
     ### ControlNet Nodes
     "CR Apply ControlNet": CR_ApplyControlNet,    
     "CR Multi-ControlNet Stack":CR_ControlNetStack,
@@ -121,7 +126,10 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Seed": "🌱 CR Seed",
     "CR Prompt Text": "📝 CR Prompt Text",
     "CR Split String": "⚙️ CR Split String",
-    "CR Value": "⚙️ CR Value", 
+    "CR Value": "⚙️ CR Value",
+    ### Legacy Nodes
+    "CR Image Size": "CR Image Size (Legacy)",
+    "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",
     ### ControlNet Nodes
     "CR Apply ControlNet": "🕹️ CR Apply ControlNet",    
     "CR Multi-ControlNet Stack": "🕹️ CR Multi-ControlNet Stack",
