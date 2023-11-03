@@ -118,6 +118,7 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     ### Misc Nodes
+    "CR Image Output": "💾 CR Image Output",
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Color Tint": "🎨 CR Color Tint",
     "CR Latent Batch Size": "⚙️ CR Latent Batch Size", 
