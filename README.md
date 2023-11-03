@@ -1,4 +1,4 @@
-# Comfyroll Custom Nodes for SDXL and SD1.5
+# 🧩 Comfyroll Custom Nodes for SDXL and SD1.5
 
 These nodes were originally made for use in the Comfyroll Template Workflows.
 
@@ -28,23 +28,104 @@ You can also install the nodes using the following methods:
 
 # List of Custom Nodes
 
-__SDXL__
+__🌟 SDXL__
 * CR SDXL Aspect Ratio
 * CR SDXL Prompt Mix Presets
 * CR SDXL Style Text
 * CR SDXL Base Prompt Encoder
 
-__IO__
+__💊 LoRA__
 * CR Load LoRA
 * CR LoRA Stack
 * CR Apply LoRA Stack
 
-__Conditioning__
+__🕹️ ControlNet__
 * CR Apply ControlNet
 * CR Multi-ControlNet Stack
 * CR Apply Multi-ControlNet Stack
 
-__Logic__
+__🔂 Process__
+* CR Img2Img Process Switch
+* CR Hires Fix Process Switch
+* CR Batch Process Switch
+
+__👓 Filter__
+* CR Color Tint
+
+__🌈 Pattern__
+* CR Halftone Grid
+* CR Color Bars
+* CR Style Bars   
+* CR Checker Pattern
+* CR Polygons
+* CR Color Gradient
+* CR Radial Gradiant (new 23/10/2023)
+* CR Starburst Lines
+* CR Starburst Colors
+
+__🔤 Image Text__
+* CR Overlay Text
+* CR Draw Text
+* CR Mask Text
+* CR Composite Text
+
+__👽 Template__
+* CR Simple Meme Template
+
+__🌁 Image Layout__
+* CR Image Panel (new 23/10/2023)
+* CR Page Layout (new 01/11/2023)
+* CR Image Grid Panel (new 01/11/2023)
+* CR Image Border (new 01/11/2023)
+* CR Color Panel (new 01/11/2023)
+* CR Simple Text Panel (new 01/11/2023)
+
+__✈️ Module__
+* CR Module Pipe Loader
+* CR Module Input
+* CR Module Output
+
+__🛩️ Pipe__
+* CR Image Pipe In
+* CR Image Pipe Edit
+* CR Image Pipe Out
+* CR Pipe Switch
+
+__⛏️ Model Merge__
+* CR Model Stack
+* CR Apply Model Merge
+* CR Load Animation Frames
+
+__🔍 Upscale__
+* CR Multi Upscale Stack
+* CR Upscale Image
+* CR Apply Multi Upscale
+
+__📉 XY Grid__
+* CR XY List
+* CR XY Interpolate   
+* CR XY Index
+* CR XY From Folder
+* CR XY Save Grid Image
+* CR Image Output
+
+__🔢 Index__
+* CR Index
+* CR Index Increment
+* CR Index Multiply
+* CR Index Reset
+* CR Trigger
+
+__🔧 Conversion__    
+* CR String To Number
+* CR String To Combo    
+* CR Float To String
+* CR Float To Integer
+* CR Integer To String    
+* CR Text List To String
+* CR Seed to Int
+
+__🔀 Logic__
 * CR Image Input Switch
 * CR Image Input Switch (4 way)
 * CR Latent Input Switch
@@ -56,94 +137,15 @@ __Logic__
 * CR Text Input Switch
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
-
-__Process__
-* CR Img2Img Process Switch
-* CR Hires Fix Process Switch
-* CR Batch Process Switch
-
-__Maths__
-* CR Integer Multiple
-
-__Number__
-* CR Seed
-
-__Text__
+  
+__📦 Other__
+* CR Latent Batch Size
 * CR Prompt Text
 * CR Split String
-
-__Image__
+* CR Integer Multiple
+* CR Seed
 * CR SD1.5 Aspect Ratio
-* CR Color Tint
-* CR Image Panel (new 23/10/2023)
-* CR Halftone Grid
-* CR Color Bars
-* CR Style Bars   
-* CR Checker Pattern
-* CR Polygons
-* CR Color Gradient
-* CR Radial Gradiant (new 23/10/2023)
-* CR Starburst Lines
-* CR Starburst Colors
-
-__Image Text__
-* CR Overlay Text
-* CR Draw Text
-* CR Mask Text
-* CR Composite Text
-* CR Simple Meme Template
-
-__Module__
-* CR Module Pipe Loader
-* CR Module Input
-* CR Module Output
-* CR Image Pipe In
-* CR Image Pipe Edit
-* CR Image Pipe Out
-* CR Pipe Switch
-
-__Latent__
-* CR Latent Batch Size
-
-__Model Merge__
-* CR Model Stack
-* CR Apply Model Merge
-* CR Load Animation Frames
-
-__Upscale__
-* CR Multi Upscale Stack
-* CR Upscale Image
-* CR Apply Multi Upscale
-
-__XY Grid__
-* CR XY List
-* CR XY Interpolate   
-* CR XY Index
-* CR XY From Folder
-* CR XY Save Grid Image
-* CR Image Output
-
-__Image Text__
-* CR Overlay Text
-* CR Draw Text
-* CR Mask Text
-* CR Composite Text
-
-__Index__
-* CR Index
-* CR Index Increment
-* CR Index Multiply
-* CR Index Reset
-* CR Trigger
-
-__Conversion__    
-* CR String To Number
-* CR String To Combo    
-* CR Float To String
-* CR Float To Integer
-* CR Integer To String    
-* CR Text List To String
-* CR Seed to Int
+* CR Value (new 01/11/2023)
 
 __Deleted Nodes__
 * CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio
