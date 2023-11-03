@@ -333,11 +333,7 @@ def draw_text(panel, text,
 
     for line in text_lines:
         # Calculate the width and height of the current line
-        line_width, line_height = get_text_size(draw, line, font) 
-
-        # Calculate the text width and height
-        line_width = bbox[2] - bbox[0]
-        line_height = bbox[3] - bbox[1]            
+        line_width, line_height = get_text_size(draw, line, font)            
                             
         # Get the text x and y positions for each line                                     
         text_plot_x = position_x + justify_text(justify, panel.width, line_width, margins)
