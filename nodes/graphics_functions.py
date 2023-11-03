@@ -10,6 +10,7 @@ from ..config import color_mapping
 font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
 file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
 
+
 def align_text(align, img_height, text_height, text_pos_y, margins):
     if align == "center":
         text_plot_y = img_height / 2 - text_height / 2 + text_pos_y
@@ -19,6 +20,7 @@ def align_text(align, img_height, text_height, text_pos_y, margins):
         text_plot_y = img_height - text_height + text_pos_y - margins 
     return text_plot_y        
 
+
 def justify_text(justify, img_width, line_width, margins):
     if justify == "left":
         text_plot_x = 0 + margins
@@ -27,6 +29,15 @@ def justify_text(justify, img_width, line_width, margins):
     elif justify == "center":
         text_plot_x = img_width/2 - line_width/2
     return text_plot_x   
+
+def get_text_size(draw, text, font):
+    bbox = draw.textbbox((0, 0), text, font=font)
+
+    # Calculate the text width and height
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+    return text_width, text_height
+
 
 def draw_masked_text(text_mask, text,
                      font_name, font_size,
@@ -52,9 +63,10 @@ def draw_masked_text(text_mask, text,
     max_text_height = 0
 
     for line in text_lines:
-        line_width, line_height = draw.textsize(line, font=font)
-        line_width = line_width 
-        line_height = line_height + line_spacing ###
+        # Calculate the width and height of the current line
+        line_width, line_height = get_text_size(draw, line, font)
+ 
+        line_height = line_height + line_spacing
         max_text_width = max(max_text_width, line_width)
         max_text_height = max(max_text_height, line_height)
     
@@ -69,8 +81,7 @@ def draw_masked_text(text_mask, text,
 
     for line in text_lines:
         # Calculate the width of the current line
-        line_width, _ = draw.textsize(line, font=font)
-        line_width = line_width
+        line_width, _ = get_text_size(draw, line, font)
                             
         # Get the text x and y positions for each line                                     
         text_plot_x = position_x + justify_text(justify, image_width, line_width, margins)
@@ -91,6 +102,7 @@ def draw_masked_text(text_mask, text,
         rotated_text_mask = text_mask.rotate(rotation_angle, center=(image_center_x, image_center_y))
         
     return rotated_text_mask        
+
 
 def draw_masked_text_v2(text_mask, text,
                      font_name, font_size,
@@ -116,9 +128,10 @@ def draw_masked_text_v2(text_mask, text,
     max_text_height = 0
 
     for line in text_lines:
-        line_width, line_height = draw.textsize(line, font=font)
-        line_width = line_width 
-        line_height = line_height + line_spacing ###
+        # Calculate the width of the current line
+        line_width, _ = get_text_size(draw, line, font)
+        
+        line_height = line_height + line_spacing
         max_text_width = max(max_text_width, line_width)
         max_text_height = max(max_text_height, line_height)
 
@@ -133,9 +146,8 @@ def draw_masked_text_v2(text_mask, text,
 
     for line in text_lines:
         # Calculate the width of the current line
-        line_width, _ = draw.textsize(line, font=font)
-        line_width = line_width
-                            
+        line_width, _ = get_text_size(draw, line, font)
+                                   
         # Get the text x and y positions for each line                                     
         text_plot_x = position_x + justify_text(justify, image_width, line_width, margins)
         text_plot_y = align_text(align, image_height, text_height, text_pos_y, margins)
@@ -150,15 +162,19 @@ def draw_masked_text_v2(text_mask, text,
     text_center_y = sum_text_plot_y / len(text_lines)
         
     return text_mask
-   
+
+
 def draw_text_on_image(draw, y_position, bar_width, bar_height, text, font, text_color, font_outline):
 
-        text_width, text_height = draw.textsize(text, font=font)
+        # Calculate the width and height of the text
+        text_width, text_height = get_text_size(draw, text, font)
        
         if font_outline == "thin":
             outline_thickness = text_height // 40
         elif font_outline == "thick":
             outline_thickness = text_height // 20
+        elif font_outline == "extra thick":
+            outline_thickness = text_height // 10            
             
         outline_color = (0, 0, 0)
         
@@ -172,20 +188,26 @@ def draw_text_on_image(draw, y_position, bar_width, bar_height, text, font, text
             else:    
                 draw.text((x, y), text, fill=text_color, font=font, stroke_width=outline_thickness, stroke_fill='black')
         elif len(text_lines) > 1:
-            text_width, text_height = draw.textsize(text_lines[0], font=font)
+            # Calculate the width and height of the text
+            text_width, text_height = get_text_size(draw, text_lines[0], font)
+            
             x = (bar_width - text_width) // 2
             y = y_position + (bar_height - text_height * 2) // 2 - (bar_height * 0.06)
             if font_outline == "none":
                 draw.text((x, y), text_lines[0], fill=text_color, font=font)
             else:    
                 draw.text((x, y), text_lines[0], fill=text_color, font=font, stroke_width=outline_thickness, stroke_fill='black')   
-            text_width, text_height = draw.textsize(text_lines[1], font=font)
+
+            # Calculate the width and height of the text
+            text_width, text_height = get_text_size(draw, text_lines[1], font)          
+            
             x = (bar_width - text_width) // 2
             y = y_position + (bar_height - text_height * 2) // 2 + text_height  - (bar_height * 0.06)         
             if font_outline == "none":
                 draw.text((x, y), text_lines[1], fill=text_color, font=font)
             else:    
                 draw.text((x, y), text_lines[1], fill=text_color, font=font, stroke_width=outline_thickness, stroke_fill='black')
+
 
 def get_font_size(draw, text, max_width, max_height, font_path, max_font_size):
 
@@ -207,21 +229,24 @@ def get_font_size(draw, text, max_width, max_height, font_path, max_font_size):
     max_text_width = 0
     longest_line = text_lines[0]
     for line in text_lines:
-        line_width, line_height = draw.textsize(line, font=font)
+        # Calculate the width and height of the current line
+        line_width, line_height = get_text_size(draw, line, font)
+        
         if line_width > max_text_width:
             longest_line = line
         max_text_width = max(max_text_width, line_width)             
     
-    # Calculate text height with the current font
-    text_width, text_height = font.getsize(text)
+    # Calculate the width and height of the text
+    text_width, text_height = get_text_size(draw, text, font)
     
     # Decrease the font size until it fits within the bounds
     while max_text_width > max_width or text_height > 0.88 * max_height / len(text_lines):
         font_size -= 1
         font = ImageFont.truetype(str(font_path), size=font_size)
-        max_text_width, text_height = font.getsize(longest_line)
+        max_text_width, text_height = get_text_size(draw, longest_line, font)
     
     return font
+
 
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')  # Remove the '#' character, if present
@@ -229,7 +254,8 @@ def hex_to_rgb(hex_color):
     g = int(hex_color[2:4], 16)
     b = int(hex_color[4:6], 16)
     return (r, g, b)
-    
+
+
 def text_panel(image_width, image_height, text,
               font_name, font_size, font_color, background_color,
               margins, line_spacing,
@@ -264,6 +290,7 @@ def text_panel(image_width, image_height, text,
   
     return image_out     
 
+
 def draw_text(panel, text,
               font_name, font_size,
               font_color, bg_color,
@@ -289,9 +316,10 @@ def draw_text(panel, text,
     max_text_height = 0
 
     for line in text_lines:
-        line_width, line_height = draw.textsize(line, font=font)
-        line_width = line_width 
-        line_height = line_height + line_spacing ###
+        # Calculate the width and height of the current line
+        line_width, line_height = get_text_size(draw, line, font)      
+        
+        line_height = line_height + line_spacing
         max_text_width = max(max_text_width, line_width)
         max_text_height = max(max_text_height, line_height)
     
@@ -304,9 +332,12 @@ def draw_text(panel, text,
     text_height = max_text_height * len(text_lines)
 
     for line in text_lines:
-        # Calculate the width of the current line
-        line_width, _ = draw.textsize(line, font=font)
-        line_width = line_width
+        # Calculate the width and height of the current line
+        line_width, line_height = get_text_size(draw, line, font) 
+
+        # Calculate the text width and height
+        line_width = bbox[2] - bbox[0]
+        line_height = bbox[3] - bbox[1]            
                             
         # Get the text x and y positions for each line                                     
         text_plot_x = position_x + justify_text(justify, panel.width, line_width, margins)
@@ -327,6 +358,7 @@ def draw_text(panel, text,
         rotated_panel = panel.rotate(rotation_angle, center=(image_center_x, image_center_y), resample=Image.BILINEAR)
         
     return rotated_panel
+
 
 def combine_images(images, layout_direction='horizontal'):
     """
@@ -360,6 +392,7 @@ def combine_images(images, layout_direction='horizontal'):
 
     return combined_image
 
+
 def apply_outline_and_border(images, outline_thickness, outline_color, border_thickness, border_color):
     for i, image in enumerate(images):
         # Apply the outline
@@ -373,7 +406,8 @@ def apply_outline_and_border(images, outline_thickness, outline_color, border_th
         images[i] = image
     
     return images
-    
+
+
 def get_color_values(color, color_hex, color_mapping):
     """
     Get RGB values for the text and background colors.
@@ -387,7 +421,8 @@ def get_color_values(color, color_hex, color_mapping):
         color_rgb = color_mapping.get(color, (0, 0, 0))  # Default to black if the color is not found
 
     return color_rgb 
-    
+
+
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')  # Remove the '#' character, if present
     r = int(hex_color[0:2], 16)
