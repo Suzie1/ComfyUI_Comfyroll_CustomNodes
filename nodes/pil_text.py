@@ -12,7 +12,8 @@ from ..config import color_mapping, COLORS
 from .graphics_functions import (draw_masked_text,
                                  hex_to_rgb,
                                  draw_text_on_image,
-                                 get_font_size)
+                                 get_font_size,
+                                 get_color_values)
 
 font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
 file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
@@ -69,11 +70,8 @@ class CR_OverlayText:
                      font_color_hex='#000000'):
 
         # Get RGB values for the text color  
-        if font_color == "custom":
-            text_color = hex_to_rgb(font_color_hex)
-        else:
-            text_color = color_mapping.get(font_color, (0, 0, 0))  # Default to black if the color is not found
-
+        text_color = get_color_values(font_color, font_color_hex, color_mapping)
+      
         # Convert tensor images
         image_3d = image[0, :, :, :]
 
@@ -136,15 +134,9 @@ class CR_DrawText:
                   rotation_angle, rotation_options,
                   font_color_hex='#000000', bg_color_hex='#000000'):
 
-        # Get RGB values for the text and background colors    
-        if font_color == "custom":
-            text_color = hex_to_rgb(font_color_hex)
-        else:
-            text_color = color_mapping.get(font_color, (0, 0, 0))  # Default to black if the color is not found
-        if background_color == "custom":
-            bg_color = hex_to_rgb(bg_color_hex)
-        else:
-            bg_color = color_mapping.get(background_color, (255, 255, 255))  # Default to white if the color is not found
+        # Get RGB values for the text and background colors
+        text_color = get_color_values(font_color, font_color_hex, color_mapping)
+        bg_color = get_color_values(background_color, bg_color_hex, color_mapping) 
         
         # Create PIL images for the text and background layers and text mask
         size = (image_width, image_height)
@@ -203,11 +195,8 @@ class CR_MaskText:
                   bg_color_hex='#000000'):
 
         # Get RGB values for the background color
-        if background_color == "custom":
-            bg_color = hex_to_rgb(bg_color_hex)
-        else:
-            bg_color = color_mapping.get(background_color, (255, 255, 255))  # Default to white if the color is not found
-        
+        bg_color = get_color_values(background_color, bg_color_hex, color_mapping)   
+   
         # Convert tensor images
         image_3d = image[0, :, :, :]
             
