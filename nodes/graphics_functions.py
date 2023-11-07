@@ -425,4 +425,46 @@ def hex_to_rgb(hex_color):
     g = int(hex_color[2:4], 16)
     b = int(hex_color[4:6], 16)
     return (r, g, b)
+
+
+def crop_and_resize_image(image, target_width, target_height):
+    width, height = image.size
+    aspect_ratio = width / height
+    target_aspect_ratio = target_width / target_height
+
+    if aspect_ratio > target_aspect_ratio:
+        # Crop the image's width to match the target aspect ratio
+        crop_width = int(height * target_aspect_ratio)
+        crop_height = height
+        left = (width - crop_width) // 2
+        top = 0
+    else:
+        # Crop the image's height to match the target aspect ratio
+        crop_height = int(width / target_aspect_ratio)
+        crop_width = width
+        left = 0
+        top = (height - crop_height) // 2
         
+    # Perform the center cropping
+    cropped_image = image.crop((left, top, left + crop_width, top + crop_height))
+    
+    return cropped_image
+
+
+def create_and_paste_panel(page, border_thickness, outline_thickness,
+                           panel_width, panel_height, page_width,
+                           panel_color, bg_color, outline_color,
+                           images, i, j, k, len_images, reading_direction):
+    panel = Image.new("RGB", (panel_width, panel_height), panel_color)
+    if k < len_images:
+        img = images[k]
+        image = crop_and_resize_image(img, panel_width, panel_height)
+        image.thumbnail((panel_width, panel_height), Image.ANTIALIAS)
+        panel.paste(image, (0, 0))
+    panel = ImageOps.expand(panel, border=outline_thickness, fill=outline_color)
+    panel = ImageOps.expand(panel, border=border_thickness, fill=bg_color)
+    new_panel_width, new_panel_height = panel.size
+    if reading_direction == "right to left":
+        page.paste(panel, (page_width - (j + 1) * new_panel_width, i * new_panel_height))
+    else:
+        page.paste(panel, (j * new_panel_width, i * new_panel_height))
