@@ -12,8 +12,21 @@ from ..config import color_mapping, COLORS
 from .graphics_functions import (draw_masked_text,
                                  hex_to_rgb,
                                  draw_text_on_image,
-                                 get_font_size)
+                                 get_font_size,
+                                 get_color_values)
 
+try:
+    from bidi.algorithm import get_display
+except ImportError:
+    import subprocess
+    subprocess.check_call(['python', '-m', 'pip', 'install', 'python_bidi'])
+
+try:    
+    import arabic_reshaper    
+except ImportError:
+    import subprocess
+    subprocess.check_call(['python', '-m', 'pip', 'install', 'arabic_reshaper'])
+  
 font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
 file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
 
@@ -69,11 +82,8 @@ class CR_OverlayText:
                      font_color_hex='#000000'):
 
         # Get RGB values for the text color  
-        if font_color == "custom":
-            text_color = hex_to_rgb(font_color_hex)
-        else:
-            text_color = color_mapping.get(font_color, (0, 0, 0))  # Default to black if the color is not found
-
+        text_color = get_color_values(font_color, font_color_hex, color_mapping)
+      
         # Convert tensor images
         image_3d = image[0, :, :, :]
 
@@ -136,15 +146,9 @@ class CR_DrawText:
                   rotation_angle, rotation_options,
                   font_color_hex='#000000', bg_color_hex='#000000'):
 
-        # Get RGB values for the text and background colors    
-        if font_color == "custom":
-            text_color = hex_to_rgb(font_color_hex)
-        else:
-            text_color = color_mapping.get(font_color, (0, 0, 0))  # Default to black if the color is not found
-        if background_color == "custom":
-            bg_color = hex_to_rgb(bg_color_hex)
-        else:
-            bg_color = color_mapping.get(background_color, (255, 255, 255))  # Default to white if the color is not found
+        # Get RGB values for the text and background colors
+        text_color = get_color_values(font_color, font_color_hex, color_mapping)
+        bg_color = get_color_values(background_color, bg_color_hex, color_mapping) 
         
         # Create PIL images for the text and background layers and text mask
         size = (image_width, image_height)
@@ -203,11 +207,8 @@ class CR_MaskText:
                   bg_color_hex='#000000'):
 
         # Get RGB values for the background color
-        if background_color == "custom":
-            bg_color = hex_to_rgb(bg_color_hex)
-        else:
-            bg_color = color_mapping.get(background_color, (255, 255, 255))  # Default to white if the color is not found
-        
+        bg_color = get_color_values(background_color, bg_color_hex, color_mapping)   
+   
         # Convert tensor images
         image_3d = image[0, :, :, :]
             
@@ -287,7 +288,41 @@ class CR_CompositeText:
         
         # Convert the PIL image back to a torch tensor
         return pil2tensor(image_out),
- 
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_ArabicTextRTL:
+    
+    @classmethod
+    def INPUT_TYPES(s):
+                        
+        return {"required": {
+                "arabic_text": ("STRING", {"multiline": True, "default": "شمس"}),
+                }          
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("arabic_text_rtl", "show help", )
+    FUNCTION = "adjust_arabic_to_rtl"
+    CATEGORY = icons.get("Comfyroll/Graphics/Text")
+
+    def adjust_arabic_to_rtl(self, arabic_text):
+        """
+        Adjust Arabic text to read from right to left (RTL).
+        
+        Args:
+            arabic_text (str): The Arabic text to be adjusted.
+            
+        Returns:
+            str: The adjusted Arabic text in RTL format.
+        """
+        
+        arabic_text_reshaped = arabic_reshaper.reshape(arabic_text)
+        rtl_text = get_display(arabic_text_reshaped)
+        
+        show_help = "example help text"
+                
+        return rtl_text, show_help,
+
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -299,6 +334,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Mask Text":CR_MaskText,
     "CR Composite Text":CR_CompositeText,
     "CR Draw Perspective Text":CR_DrawPerspectiveText,
+    "CR Arabic Text RTL": CR_ArabicTextRTL,
 }
 '''
 
