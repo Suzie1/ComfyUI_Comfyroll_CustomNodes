@@ -13,12 +13,13 @@ from .nodes.xygrid import *
 from .nodes.matplot import *
 from .nodes.pil_text import *
 from .nodes.pil_layout import *
+from .nodes.pil_filter import *
+from .nodes.pil_template import *
 
 NODE_CLASS_MAPPINGS = {
     ### Other Nodes
     "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
-    "CR Color Tint": CR_ColorTint,
     "CR Latent Batch Size": CR_LatentBatchSize, 
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR Seed": CR_Seed,
@@ -36,7 +37,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Load LoRA": CR_LoraLoader,    
     "CR LoRA Stack":CR_LoRAStack,
     "CR Apply LoRA Stack":CR_ApplyLoRAStack,  
-    ### Logic Nodes
+    ### Utils Logic Nodes
     "CR Image Input Switch": CR_ImageInputSwitch,
     "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
     "CR Latent Input Switch": CR_LatentInputSwitch,
@@ -77,7 +78,7 @@ NODE_CLASS_MAPPINGS = {
     "CR XY Index":CR_XYIndex,
     "CR XY From Folder":CR_XYFromFolder,
     "CR XY Save Grid Image":CR_XYSaveGridImage,
-    ### Matplot Nodes
+    ### Graphics Pattern
     "CR Halftone Grid":CR_HalftoneGrid,
     "CR Color Bars":CR_ColorBars,
     "CR Style Bars":CR_StyleBars,    
@@ -87,20 +88,26 @@ NODE_CLASS_MAPPINGS = {
     "CR Radial Gradient": CR_RadialGradient,
     "CR Starburst Lines":CR_StarburstLines,
     "CR Starburst Colors":CR_StarburstColors, 
-    ### PIL Text
+    ### Graphics Text
     "CR Overlay Text":CR_OverlayText,
     "CR Draw Text":CR_DrawText,
     "CR Mask Text":CR_MaskText,
     "CR Composite Text":CR_CompositeText,
-    ### PIL Layout
-    "CR Simple Meme Template":CR_SimpleMemeTemplate,
+    "CR Arabic Text RTL": CR_ArabicTextRTL,    
+    ### Graphics Filter
+    "CR Halftone Filter": CR_HalftoneFilter,
+    "CR Color Tint": CR_ColorTint,     
+    ### Graphics Layout
     "CR Page Layout": CR_PageLayout,
     "CR Image Panel": CR_ImagePanel,
     "CR Image Grid Panel": CR_ImageGridPanel,
     "CR Image Border": CR_ImageBorder,
     "CR Color Panel": CR_ColorPanel,
     "CR Simple Text Panel": CR_SimpleTextPanel,
-    ### Conversion    
+    ### Graphics Template
+    "CR Simple Meme Template":CR_SimpleMemeTemplate,
+    "CR Comic Panel Templates": CR_ComicPanelTemplates,
+    ### Utils Conversion    
     "CR String To Number":CR_StringToNumber,
     "CR String To Combo":CR_StringToCombo,    
     "CR Float To String":CR_FloatToString,
@@ -108,7 +115,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Integer To String":CR_IntegerToString,    
     "CR Text List To String":CR_TextListToString,
     "CR Seed to Int": CR_SeedToInt,    
-    ### Index
+    ### Utils Index
     "CR Index":CR_Index,    
     "CR Index Increment":CR_IncrementIndex,
     "CR Index Multiply":CR_MultiplyIndex,
@@ -120,7 +127,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     ### Misc Nodes
     "CR Image Output": "💾 CR Image Output",
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
-    "CR Color Tint": "🎨 CR Color Tint",
     "CR Latent Batch Size": "⚙️ CR Latent Batch Size", 
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR Seed": "🌱 CR Seed",
@@ -152,7 +158,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR VAE Input Switch": "🔀 CR VAE Input Switch",     
     "CR Text Input Switch": "🔀 CR Text Input Switch",
     "CR Text Input Switch (4 way)": "🔀 CR Text Input Switch (4 way)",
-    "CR Switch Model and CLIP": "🔀 CR Switch Model and CLIP",    
+    "CR Switch Model and CLIP": "🔀 CR Switch Model and CLIP", 
+    ### Utils Process
     "CR Batch Process Switch": "🔂 CR Batch Process Switch",    
     "CR Img2Img Process Switch": "🔂 CR Img2Img Process Switch",
     "CR Hires Fix Process Switch": "🔂 CR Hires Fix Process Switch",
@@ -179,7 +186,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR XY Index": "📉 CR XY Index",
     "CR XY From Folder": "📉 CR XY From Folder",
     "CR XY Save Grid Image": "📉 CR XY Save Grid Image",
-    ### Matplot
+    ### Graphics Pattern
     "CR Halftone Grid" : "🟫 CR Halftone Grid",    
     "CR Color Bars" : "🟫 CR Color Bars",
     "CR Style Bars" : "🟪 CR Style Bars",    
@@ -189,19 +196,25 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Radial Gradient": "🟨 CR Radial Gradient",    
     "CR Starburst Lines": "🟧 CR Starburst Lines",
     "CR Starburst Colors": "🟥 CR Starburst Colors",   
-    ### PIL Text
+    ### Graphics Text
     "CR Overlay Text": "🔤 CR Overlay Text",
     "CR Draw Text": "🔤️ CR Draw Text",
     "CR Mask Text": "🔤️ CR Mask Text",
     "CR Composite Text": "🔤️ CR Composite Text",
-    ### PIL Layout
-    "CR Simple Meme Template": "👽 CR Simple Meme Template",
+    "CR Arabic Text RTL": "🔤️ CR Arabic Text RTL",
+    ### Graphics Filter
+    "CR Halftone Filter": "🎨 Halftone Filter",
+    "CR Color Tint": "🎨 CR Color Tint",      
+    ### Graphics Layout
     "CR Image Panel": "🌁 CR Image Panel",
     "CR Image Grid Panel": "🌁 CR Image Grid Panel",
     "CR Simple Text Panel": "🌁 CR Simple Text Panel",
     "CR Color Panel": "🌁 CR Color Panel",
     "CR Page Layout": "🌁 CR Page Layout",
     "CR Image Border": "🌁 CR Image Border",
+    ### Graphics Template
+    "CR Simple Meme Template": "👽 CR Simple Meme Template",
+    "CR Comic Panel Templates": "👽 CR Comic Panel Templates",
     ### Index
     "CR Index":"🔢 CR Index",    
     "CR Index Increment": "🔢 CR Index Increment",
