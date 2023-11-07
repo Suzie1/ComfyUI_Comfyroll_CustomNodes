@@ -182,7 +182,7 @@ def draw_text_on_image(draw, y_position, bar_width, bar_height, text, font, text
         
         if len(text_lines) == 1:
             x = (bar_width - text_width) // 2
-            y = y_position + (bar_height - text_height) // 2 - (bar_height * 0.06)
+            y = y_position + (bar_height - text_height) // 2 - (bar_height * 0.10)
             if font_outline == "none":
                 draw.text((x, y), text, fill=text_color, font=font)
             else:    
@@ -192,7 +192,7 @@ def draw_text_on_image(draw, y_position, bar_width, bar_height, text, font, text
             text_width, text_height = get_text_size(draw, text_lines[0], font)
             
             x = (bar_width - text_width) // 2
-            y = y_position + (bar_height - text_height * 2) // 2 - (bar_height * 0.06)
+            y = y_position + (bar_height - text_height * 2) // 2 - (bar_height * 0.15)
             if font_outline == "none":
                 draw.text((x, y), text_lines[0], fill=text_color, font=font)
             else:    
@@ -202,7 +202,7 @@ def draw_text_on_image(draw, y_position, bar_width, bar_height, text, font, text
             text_width, text_height = get_text_size(draw, text_lines[1], font)          
             
             x = (bar_width - text_width) // 2
-            y = y_position + (bar_height - text_height * 2) // 2 + text_height  - (bar_height * 0.06)         
+            y = y_position + (bar_height - text_height * 2) // 2 + text_height  - (bar_height * 0.00)         
             if font_outline == "none":
                 draw.text((x, y), text_lines[1], fill=text_color, font=font)
             else:    
