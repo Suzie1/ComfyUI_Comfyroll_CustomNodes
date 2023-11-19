@@ -1,5 +1,4 @@
 from .animation_nodes.prompt import *
-from .dev_nodes.DT_Pixel_Sort import *
 
 from .dev_nodes.dev_nodes import *
 from .dev_nodes.graphics_dev_nodes import *
@@ -15,7 +14,6 @@ DEV_NODE_CLASS_MAPPINGS = {
     "CR XYZ Interpolate": CR_XYZInterpolate,    
     "CR XYZ Index": CR_XYZIndex,
     "CR Conditioning Mixer": CR_ConditioningMixer,  
-    "CR Pixel Sort": Pixel_Sort,
     ### Graphics_Dev Nodes
     "CR Overlay Transparent Image": CR_OverlayTransparentImage,
     "CR Multi-Panel Meme Template": CR_MultiPanelMemeTemplate,
