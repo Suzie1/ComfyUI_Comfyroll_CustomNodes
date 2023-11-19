@@ -288,7 +288,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Color Panel": "🌁 CR Color Panel",
     "CR Page Layout": "🌁 CR Page Layout",
     "CR Image Border": "🌁 CR Image Border", 
-    "CR Overlay Transparent Image": "🌁 CR Overlay Transparent Image (Test)",
     ### Graphics Template
     "CR Simple Meme Template": "👽 CR Simple Meme Template",    
     "CR Comic Panel Templates": "🌁 CR Comic Panel Templates",   
