@@ -1,0 +1,866 @@
+{
+  "last_node_id": 26,
+  "last_link_id": 53,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        2380,
+        460
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1990,
+        430
+      ],
+      "size": [
+        320,
+        110
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            26
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CR Current Frame",
+      "pos": [
+        320,
+        660
+      ],
+      "size": {
+        "0": 240,
+        "1": 80
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 4,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            20,
+            43
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        0,
+        "Yes"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 13,
+      "type": "CR Central Schedule",
+      "pos": [
+        60,
+        40
+      ],
+      "size": {
+        "0": 400,
+        "1": 530
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            18,
+            47
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Central Schedule"
+      },
+      "widgets_values": [
+        "0, AYO\n3, COU\n6, ZOV\n9, EPI",
+        "Model",
+        "M1",
+        "0, MAY, 1.0, 1.0\n4, HIL, 1.0, 1.0\n8, LIL, 1.0, 1.0",
+        "LoRA",
+        "L1",
+        "schedule",
+        "Text",
+        "",
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 11,
+      "type": "PreviewImage",
+      "pos": [
+        2650,
+        620
+      ],
+      "size": {
+        "0": 210,
+        "1": 250
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 12
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        2370,
+        620
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 10
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 17,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1630,
+        690
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 48
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            28
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "1girl, period costume"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1640,
+        850
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 49
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "embedding:EasyNegative, \nnsfw"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "CR Load Scheduled Models",
+      "pos": [
+        640,
+        620
+      ],
+      "size": {
+        "0": 460,
+        "1": 170
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_list",
+          "type": "MODEL_LIST",
+          "link": 19
+        },
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": 18
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 20,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Load Scheduled Models"
+      },
+      "widgets_values": [
+        "Schedule",
+        "SD1_5\\ComfyrollAnime_v1_fp16_pruned.safetensors",
+        "M1",
+        "SD1_5\\ComfyrollAnime_v1_fp16_pruned.safetensors",
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "pos": [
+        1990,
+        620
+      ],
+      "size": [
+        320,
+        470
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 50
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 28
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 9
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1018201769555609,
+        "fixed",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 21,
+      "type": "CR LoRA List",
+      "pos": [
+        1190,
+        210
+      ],
+      "size": {
+        "0": 315,
+        "1": 342
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_list",
+          "type": "lora_LIST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LORA_LIST",
+          "type": "LORA_LIST",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR LoRA List"
+      },
+      "widgets_values": [
+        "SD1_5\\character_pokemon_hilda_v3.safetensors",
+        "HIL",
+        1,
+        1,
+        "SD1_5\\character_pokemon_lillie_v5.safetensors",
+        "LIL",
+        1,
+        1,
+        "SD1_5\\character_pokemon_may_v6.safetensors",
+        "MAY",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 23,
+      "type": "CR Load Scheduled LoRAs",
+      "pos": [
+        1190,
+        620
+      ],
+      "size": {
+        "0": 320,
+        "1": 260
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 53
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 44
+        },
+        {
+          "name": "lora_list",
+          "type": "LORA_LIST",
+          "link": 46
+        },
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": 47
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 43,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            50
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            48,
+            49
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Load Scheduled LoRAs"
+      },
+      "widgets_values": [
+        "Schedule",
+        0,
+        "L1",
+        "SD1_5\\ArknightsSuzuran_20.safetensors",
+        1,
+        1,
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 1,
+      "type": "CR Model List",
+      "pos": [
+        640,
+        280
+      ],
+      "size": {
+        "0": 460,
+        "1": 294
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_list",
+          "type": "MODEL_LIST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL_LIST",
+          "type": "MODEL_LIST",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Model List"
+      },
+      "widgets_values": [
+        "SD1_5\\ayonimix_V4VAEBaked.safetensors",
+        "AYO",
+        "SD1_5\\CounterfeitV25_25.safetensors",
+        "COU",
+        "SD1_5\\Comfyroll_v1_fp16_pruned.safetensors",
+        "EPI",
+        "SD1_5\\cocotifamix_v20This.safetensors",
+        "ZOV",
+        "None",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 5,
+      "type": "PrimitiveNode",
+      "pos": [
+        50,
+        660
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            4
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        0,
+        "increment"
+      ]
+    }
+  ],
+  "links": [
+    [
+      4,
+      5,
+      0,
+      4,
+      0,
+      "INT"
+    ],
+    [
+      9,
+      7,
+      0,
+      8,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      10,
+      8,
+      0,
+      9,
+      0,
+      "LATENT"
+    ],
+    [
+      11,
+      10,
+      0,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      12,
+      9,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      13,
+      0,
+      14,
+      1,
+      "SCHEDULE"
+    ],
+    [
+      19,
+      1,
+      0,
+      14,
+      0,
+      "MODEL_LIST"
+    ],
+    [
+      20,
+      4,
+      0,
+      14,
+      2,
+      "INT"
+    ],
+    [
+      26,
+      16,
+      0,
+      8,
+      3,
+      "LATENT"
+    ],
+    [
+      28,
+      17,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      43,
+      4,
+      0,
+      23,
+      4,
+      "INT"
+    ],
+    [
+      44,
+      14,
+      1,
+      23,
+      1,
+      "CLIP"
+    ],
+    [
+      46,
+      21,
+      0,
+      23,
+      2,
+      "LORA_LIST"
+    ],
+    [
+      47,
+      13,
+      0,
+      23,
+      3,
+      "SCHEDULE"
+    ],
+    [
+      48,
+      23,
+      1,
+      17,
+      0,
+      "CLIP"
+    ],
+    [
+      49,
+      23,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      50,
+      23,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      53,
+      14,
+      0,
+      23,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

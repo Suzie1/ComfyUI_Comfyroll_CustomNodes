@@ -1,0 +1,965 @@
+{
+  "last_node_id": 56,
+  "last_link_id": 60,
+  "nodes": [
+    {
+      "id": 15,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1480,
+        410
+      ],
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 11,
+          "widget": {
+            "name": "width",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 8192,
+                "step": 8
+              }
+            ]
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 12,
+          "widget": {
+            "name": "height",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 8192,
+                "step": 8
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 11,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1120,
+        660
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 54
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "1girl, period costume"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1120,
+        820
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 55
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "embedding:EasyNegative, "
+      ]
+    },
+    {
+      "id": 16,
+      "type": "VAEDecode",
+      "pos": [
+        1910,
+        580
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 14
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 13,
+      "type": "KSampler",
+      "pos": [
+        1480,
+        580
+      ],
+      "size": {
+        "0": 320,
+        "1": 470
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 53
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 9
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "link": 57,
+          "widget": {
+            "name": "cfg",
+            "config": [
+              "FLOAT",
+              {
+                "default": 8,
+                "min": 0,
+                "max": 100
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        32603574575332,
+        "fixed",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 14,
+      "type": "CR SD1.5 Aspect Ratio",
+      "pos": [
+        1480,
+        90
+      ],
+      "size": {
+        "0": 320,
+        "1": 240
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 58,
+          "widget": {
+            "name": "width",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 2048
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "upscale_factor",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR SD1.5 Aspect Ratio"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "custom",
+        "Off",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 49,
+      "type": "CR Gradient Float",
+      "pos": [
+        1030,
+        360
+      ],
+      "size": {
+        "0": 320,
+        "1": 180
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 60,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Gradient Float"
+      },
+      "widgets_values": [
+        10,
+        20,
+        3,
+        8,
+        0,
+        "Lerp"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 26,
+      "type": "Save Image Sequence (mtb)",
+      "pos": [
+        2250,
+        330
+      ],
+      "size": {
+        "0": 380,
+        "1": 290
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 25,
+          "slot_index": 0
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 56,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999999
+              }
+            ]
+          },
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Save Image Sequence (mtb)"
+      },
+      "widgets_values": [
+        "F:\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\output\\Test\\",
+        5
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 17,
+      "type": "VAELoader",
+      "pos": [
+        1860,
+        710
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 47,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        580,
+        540
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            54,
+            55
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "Load Initial Checkpoint",
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SD1_5\\ComfyrollAnime_v1_fp16_pruned.safetensors"
+      ]
+    },
+    {
+      "id": 25,
+      "type": "CR Current Frame",
+      "pos": [
+        630,
+        290
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 23,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            56,
+            59,
+            60
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        1,
+        "Yes"
+      ]
+    },
+    {
+      "id": 51,
+      "type": "CR Gradient Integer",
+      "pos": [
+        1030,
+        90
+      ],
+      "size": {
+        "0": 320,
+        "1": 180
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 59,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            58
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Gradient Integer"
+      },
+      "widgets_values": [
+        512,
+        1024,
+        3,
+        8,
+        0,
+        "Lerp"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 54,
+      "type": "Note",
+      "pos": [
+        1270,
+        -70
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The float gradient is changing the the cfg with each frame with each frame, starting from the third frame"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 52,
+      "type": "Note",
+      "pos": [
+        70,
+        330
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "To run this workflow, first press Reset in the Animation Builder and then press the Queue button, Do not use queue prompt in the ComfyUI menu."
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 53,
+      "type": "Note",
+      "pos": [
+        1030,
+        -70
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "In this example the integer gradiant changes the width of the image with each frame, starting from the third frame"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 55,
+      "type": "Note",
+      "pos": [
+        1510,
+        -70
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Integer and float gradients can be attached to any widget with the same data type"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 56,
+      "type": "Note",
+      "pos": [
+        630,
+        120
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Frames are processed in sequence. The CR Current Frame node prints the current frame index to console so that you can see which frame is currently being processed"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 24,
+      "type": "Animation Builder (mtb)",
+      "pos": [
+        310,
+        330
+      ],
+      "size": {
+        "0": 210,
+        "1": 320
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "frame",
+          "type": "INT",
+          "links": [
+            23
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "0-1 (scaled)",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "loop_ended",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Animation Builder (mtb)"
+      },
+      "widgets_values": [
+        12,
+        1,
+        1,
+        12,
+        1,
+        "frame: 0 / 11",
+        "Done 😎!",
+        "reset",
+        "queue"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    }
+  ],
+  "links": [
+    [
+      8,
+      11,
+      0,
+      13,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      12,
+      0,
+      13,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      11,
+      14,
+      0,
+      15,
+      0,
+      "INT"
+    ],
+    [
+      12,
+      14,
+      1,
+      15,
+      1,
+      "INT"
+    ],
+    [
+      13,
+      15,
+      0,
+      13,
+      3,
+      "LATENT"
+    ],
+    [
+      14,
+      13,
+      0,
+      16,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      17,
+      0,
+      16,
+      1,
+      "VAE"
+    ],
+    [
+      23,
+      24,
+      0,
+      25,
+      0,
+      "INT"
+    ],
+    [
+      25,
+      16,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      53,
+      47,
+      0,
+      13,
+      0,
+      "MODEL"
+    ],
+    [
+      54,
+      47,
+      1,
+      11,
+      0,
+      "CLIP"
+    ],
+    [
+      55,
+      47,
+      1,
+      12,
+      0,
+      "CLIP"
+    ],
+    [
+      56,
+      25,
+      0,
+      26,
+      1,
+      "INT"
+    ],
+    [
+      57,
+      49,
+      0,
+      13,
+      4,
+      "FLOAT"
+    ],
+    [
+      58,
+      51,
+      0,
+      14,
+      0,
+      "INT"
+    ],
+    [
+      59,
+      25,
+      0,
+      51,
+      0,
+      "INT"
+    ],
+    [
+      60,
+      25,
+      0,
+      49,
+      0,
+      "INT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

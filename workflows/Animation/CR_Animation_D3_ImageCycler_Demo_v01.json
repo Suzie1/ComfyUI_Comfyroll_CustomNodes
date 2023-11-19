@@ -1,0 +1,569 @@
+{
+  "last_node_id": 30,
+  "last_link_id": 55,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "CR Cycle Images Simple",
+      "pos": [
+        600,
+        590
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image_2",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image_3",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image_4",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image_5",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image_list_simple",
+          "type": "IMAGE_LIST_SIMPLE",
+          "link": 34
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 48,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Cycle Images Simple"
+      },
+      "widgets_values": [
+        "Sequential",
+        1,
+        9,
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 1,
+      "type": "PreviewImage",
+      "pos": [
+        1020,
+        590
+      ],
+      "size": {
+        "0": 210,
+        "1": 250
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 45
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 17,
+      "type": "CR Image List Simple",
+      "pos": [
+        220,
+        600
+      ],
+      "size": {
+        "0": 300,
+        "1": 130
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": 46
+        },
+        {
+          "name": "image_2",
+          "type": "IMAGE",
+          "link": 52
+        },
+        {
+          "name": "image_3",
+          "type": "IMAGE",
+          "link": 54
+        },
+        {
+          "name": "image_4",
+          "type": "IMAGE",
+          "link": 55
+        },
+        {
+          "name": "image_5",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image_list_simple",
+          "type": "IMAGE_LIST_SIMPLE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE_LIST_SIMPLE",
+          "type": "IMAGE_LIST_SIMPLE",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Image List Simple"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 25,
+      "type": "Note",
+      "pos": [
+        -170,
+        240
+      ],
+      "size": [
+        210,
+        90
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Reset to 0 after each test run\n\nSet the btach count in Queue Prompt to the number of frames you want to process "
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 30,
+      "type": "Note",
+      "pos": [
+        1270,
+        590
+      ],
+      "size": {
+        "0": 210,
+        "1": 90
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The images will cycle in the preview"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 26,
+      "type": "LoadImage",
+      "pos": [
+        -50,
+        580
+      ],
+      "size": [
+        210,
+        310
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            52
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SDXL10__00008_ (2).png",
+        "image"
+      ]
+    },
+    {
+      "id": 28,
+      "type": "LoadImage",
+      "pos": [
+        -290,
+        950
+      ],
+      "size": [
+        210,
+        310
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SDXL10__00029_.png",
+        "image"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "LoadImage",
+      "pos": [
+        -50,
+        950
+      ],
+      "size": [
+        210,
+        310
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SDXL10__00014_.png",
+        "image"
+      ]
+    },
+    {
+      "id": 22,
+      "type": "LoadImage",
+      "pos": [
+        -290,
+        580
+      ],
+      "size": [
+        210,
+        310
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SDXL10__00017_ (2) (3).png",
+        "image"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "Note",
+      "pos": [
+        -540,
+        590
+      ],
+      "size": {
+        "0": 210,
+        "1": 90
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Drag some images into these Load Image Nodes"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 23,
+      "type": "CR Current Frame",
+      "pos": [
+        170,
+        400
+      ],
+      "size": [
+        320,
+        80
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 51,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        0,
+        "Yes"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 24,
+      "type": "PrimitiveNode",
+      "pos": [
+        -170,
+        400
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            51
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        0,
+        "increment"
+      ]
+    }
+  ],
+  "links": [
+    [
+      34,
+      17,
+      0,
+      2,
+      5,
+      "IMAGE_LIST_SIMPLE"
+    ],
+    [
+      45,
+      2,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      46,
+      22,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      48,
+      23,
+      0,
+      2,
+      6,
+      "INT"
+    ],
+    [
+      51,
+      24,
+      0,
+      23,
+      0,
+      "INT"
+    ],
+    [
+      52,
+      26,
+      0,
+      17,
+      1,
+      "IMAGE"
+    ],
+    [
+      54,
+      28,
+      0,
+      17,
+      2,
+      "IMAGE"
+    ],
+    [
+      55,
+      29,
+      0,
+      17,
+      3,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

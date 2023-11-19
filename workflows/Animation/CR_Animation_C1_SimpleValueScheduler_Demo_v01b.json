@@ -1,0 +1,1258 @@
+{
+  "last_node_id": 90,
+  "last_link_id": 103,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1120,
+        660
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 54
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "1girl, period costume"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "KSampler",
+      "pos": [
+        1480,
+        580
+      ],
+      "size": {
+        "0": 320,
+        "1": 470
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 53
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 9
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "link": 93,
+          "widget": {
+            "name": "denoise",
+            "config": [
+              "FLOAT",
+              {
+                "default": 1,
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        32603574575332,
+        "fixed",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 17,
+      "type": "VAELoader",
+      "pos": [
+        1860,
+        710
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 59,
+      "type": "Note",
+      "pos": [
+        660,
+        20
+      ],
+      "size": {
+        "0": 210,
+        "1": 130
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The CR Current Frame node prints the current frame index to console so that you can see which frame is currently being processed"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 47,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        630,
+        590
+      ],
+      "size": {
+        "0": 380,
+        "1": 100
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            54,
+            55
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SD1_5\\ComfyrollAnime_v1_fp16_pruned.safetensors"
+      ]
+    },
+    {
+      "id": 68,
+      "type": "Note",
+      "pos": [
+        660,
+        -100
+      ],
+      "size": {
+        "0": 210,
+        "1": 70
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Frames are processed in sequence starting from frame index 0"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 15,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1580,
+        420
+      ],
+      "size": {
+        "0": 210,
+        "1": 74
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 11,
+          "widget": {
+            "name": "width",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 8192,
+                "step": 8
+              }
+            ]
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 12,
+          "widget": {
+            "name": "height",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 8192,
+                "step": 8
+              }
+            ]
+          }
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "link": 72,
+          "widget": {
+            "name": "batch_size",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": 1,
+                "max": 64
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 78,
+      "type": "CR Integer To String",
+      "pos": [
+        660,
+        330
+      ],
+      "size": {
+        "0": 210,
+        "1": 34
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int_",
+          "type": "INT",
+          "link": 91,
+          "widget": {
+            "name": "int_",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 77,
+      "type": "ShowText|pysssss",
+      "pos": [
+        660,
+        420
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 90
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "0"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1120,
+        830
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 55
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "embedding:EasyNegative,\nnsfw"
+      ]
+    },
+    {
+      "id": 79,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1210,
+        400
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 97
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "1.0"
+      ]
+    },
+    {
+      "id": 72,
+      "type": "CR Simple Value Scheduler",
+      "pos": [
+        950,
+        310
+      ],
+      "size": {
+        "0": 220,
+        "1": 150
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 87,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            93,
+            96
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Value Scheduler"
+      },
+      "widgets_values": [
+        "0, 0.7\n2, 0.8\n4, 0.9\n6, 0.95\n8, 1.0",
+        0
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 81,
+      "type": "CR Float To String",
+      "pos": [
+        1210,
+        280
+      ],
+      "size": {
+        "0": 210,
+        "1": 60
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "float_",
+          "type": "FLOAT",
+          "link": 96,
+          "widget": {
+            "name": "float_",
+            "config": [
+              "FLOAT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 1000000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            97
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Float To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 84,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1210,
+        90
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "1024"
+      ]
+    },
+    {
+      "id": 83,
+      "type": "CR Integer To String",
+      "pos": [
+        1210,
+        10
+      ],
+      "size": {
+        "0": 210,
+        "1": 34
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int_",
+          "type": "INT",
+          "link": 98,
+          "widget": {
+            "name": "int_",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            99
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 25,
+      "type": "CR Current Frame",
+      "pos": [
+        660,
+        220
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 102,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            87,
+            91,
+            100
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        0,
+        "Yes"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 82,
+      "type": "CR Simple Value Scheduler",
+      "pos": [
+        950,
+        30
+      ],
+      "size": {
+        "0": 220,
+        "1": 150
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 100,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            98,
+            101
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Value Scheduler"
+      },
+      "widgets_values": [
+        "0, 512\n2, 640\n4, 768\n6, 896\n8, 1024",
+        0
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 14,
+      "type": "CR SD1.5 Aspect Ratio",
+      "pos": [
+        1480,
+        110
+      ],
+      "size": {
+        "0": 320,
+        "1": 240
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 101,
+          "widget": {
+            "name": "width",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 2048
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "upscale_factor",
+          "type": "FLOAT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": [
+            72
+          ],
+          "shape": 3,
+          "slot_index": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR SD1.5 Aspect Ratio"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "custom",
+        "Off",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 86,
+      "type": "Note",
+      "pos": [
+        950,
+        -100
+      ],
+      "size": {
+        "0": 210,
+        "1": 70
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Simple value schedulers must have a line for frame 0"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 87,
+      "type": "Note",
+      "pos": [
+        1540,
+        -110
+      ],
+      "size": {
+        "0": 210,
+        "1": 130
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The first value scheduler is increasing the width in CR SD1.5 Aspect Ratio\n\nThe second value scheduler is increasing the denoise in the KSampler"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 88,
+      "type": "PrimitiveNode",
+      "pos": [
+        360,
+        220
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            102
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        1,
+        "increment"
+      ]
+    },
+    {
+      "id": 89,
+      "type": "Note",
+      "pos": [
+        100,
+        220
+      ],
+      "size": {
+        "0": 210,
+        "1": 170
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The primitive node increments the current_frame on each batch\n\nReset the value to 0 before each run\n\nIn normal workflows the Primitive node can replace the Animation Builder"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 16,
+      "type": "VAEDecode",
+      "pos": [
+        1910,
+        580
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 14
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            103
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 90,
+      "type": "PreviewImage",
+      "pos": [
+        2250,
+        580
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 103
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    }
+  ],
+  "links": [
+    [
+      8,
+      11,
+      0,
+      13,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      12,
+      0,
+      13,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      11,
+      14,
+      0,
+      15,
+      0,
+      "INT"
+    ],
+    [
+      12,
+      14,
+      1,
+      15,
+      1,
+      "INT"
+    ],
+    [
+      13,
+      15,
+      0,
+      13,
+      3,
+      "LATENT"
+    ],
+    [
+      14,
+      13,
+      0,
+      16,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      17,
+      0,
+      16,
+      1,
+      "VAE"
+    ],
+    [
+      53,
+      47,
+      0,
+      13,
+      0,
+      "MODEL"
+    ],
+    [
+      54,
+      47,
+      1,
+      11,
+      0,
+      "CLIP"
+    ],
+    [
+      55,
+      47,
+      1,
+      12,
+      0,
+      "CLIP"
+    ],
+    [
+      72,
+      14,
+      3,
+      15,
+      2,
+      "INT"
+    ],
+    [
+      87,
+      25,
+      0,
+      72,
+      0,
+      "INT"
+    ],
+    [
+      90,
+      78,
+      0,
+      77,
+      0,
+      "STRING"
+    ],
+    [
+      91,
+      25,
+      0,
+      78,
+      0,
+      "INT"
+    ],
+    [
+      93,
+      72,
+      1,
+      13,
+      4,
+      "FLOAT"
+    ],
+    [
+      96,
+      72,
+      1,
+      81,
+      0,
+      "FLOAT"
+    ],
+    [
+      97,
+      81,
+      0,
+      79,
+      0,
+      "STRING"
+    ],
+    [
+      98,
+      82,
+      0,
+      83,
+      0,
+      "INT"
+    ],
+    [
+      99,
+      83,
+      0,
+      84,
+      0,
+      "STRING"
+    ],
+    [
+      100,
+      25,
+      0,
+      82,
+      0,
+      "INT"
+    ],
+    [
+      101,
+      82,
+      0,
+      14,
+      0,
+      "INT"
+    ],
+    [
+      102,
+      88,
+      0,
+      25,
+      0,
+      "INT"
+    ],
+    [
+      103,
+      16,
+      0,
+      90,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
