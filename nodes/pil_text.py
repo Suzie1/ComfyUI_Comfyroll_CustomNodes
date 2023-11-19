@@ -31,9 +31,6 @@ except ImportError:
     subprocess.check_call(['python', '-m', 'pip', 'install', 'arabic_reshaper'])
 '''
 
-font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
-file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
-
 #---------------------------------------------------------------------------------------------------------------------#
           
 ALIGN_OPTIONS = ["top", "center", "bottom"]                 
@@ -54,6 +51,9 @@ class CR_OverlayText:
 
     @classmethod
     def INPUT_TYPES(s):
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
                         
         return {"required": {
                 "image": ("IMAGE",),
@@ -114,7 +114,10 @@ class CR_DrawText:
 
     @classmethod
     def INPUT_TYPES(s):
-                        
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+                      
         return {"required": {
                 "image_width": ("INT", {"default": 512, "min": 64, "max": 2048}),
                 "image_height": ("INT", {"default": 512, "min": 64, "max": 2048}),  
@@ -178,6 +181,9 @@ class CR_MaskText:
 
     @classmethod
     def INPUT_TYPES(s):
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
                       
         return {"required": {
                 "image": ("IMAGE",),
@@ -242,6 +248,9 @@ class CR_CompositeText:
 
     @classmethod
     def INPUT_TYPES(s):
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
                              
         return {"required": {
                 "image_text": ("IMAGE",),
@@ -332,6 +341,9 @@ class CR_SimpleTextWatermark:
     
     @classmethod
     def INPUT_TYPES(s):
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
     
         ALIGN_OPTIONS = ["center", "top left", "top right", "bottom left", "bottom right"]  
                    
