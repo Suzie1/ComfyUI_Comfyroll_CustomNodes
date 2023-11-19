@@ -344,8 +344,8 @@ class CR_SimpleTextWatermark:
 
         font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
         file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
-    
-        ALIGN_OPTIONS = ["center", "top left", "top right", "bottom left", "bottom right"]  
+               
+        ALIGN_OPTIONS = ["center", "top left", "top center", "top right", "bottom left", "bottom center", "bottom right"]  
                    
         return {"required": {
                 "image": ("IMAGE",),
@@ -353,9 +353,10 @@ class CR_SimpleTextWatermark:
                 "align": (ALIGN_OPTIONS,),
                 "opacity": ("FLOAT", {"default": 0.10, "min": 0.00, "max": 1.00, "step": 0.01}),
                 "font_name": (file_list,),
-                "font_size": ("INT", {"default": 30, "min": 1, "max": 1024}),                
+                "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),                
                 "font_color": (COLORS[1:],), 
-                "margins": ("INT", {"default": 10, "min": -1024, "max": 1024}),
+                "x_margin": ("INT", {"default": 20, "min": -1024, "max": 1024}),
+                "y_margin": ("INT", {"default": 20, "min": -1024, "max": 1024}),
                 }     
         }
 
@@ -363,7 +364,7 @@ class CR_SimpleTextWatermark:
     FUNCTION = "overlay_text"
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
 
-    def overlay_text(self, image, text, align, font_name, font_size, font_color, opacity, margins):
+    def overlay_text(self, image, text, align, font_name, font_size, font_color, opacity, x_margin, y_margin):
         
         # Create PIL images for the background layer
         image = tensor2pil(image)
@@ -383,13 +384,17 @@ class CR_SimpleTextWatermark:
         if align == 'center':
             textpos = [(image.size[0] - textsize[0]) // 2, (image.size[1] - textsize[1]) // 2]
         elif align == 'top left':
-            textpos = [margins, margins]
+            textpos = [x_margin, y_margin]
+        elif align == 'top center':
+            textpos = [(image.size[0] - textsize[0]) // 2, y_margin]    
         elif align == 'top right':
-            textpos = [image.size[0] - textsize[0] - margins, margins]
+            textpos = [image.size[0] - textsize[0] - x_margin, y_margin]
         elif align == 'bottom left':
-            textpos = [margins, image.size[1] - textsize[1] - margins]
+            textpos = [x_margin, image.size[1] - textsize[1] - y_margin]
+        elif align == 'bottom center':
+            textpos = [(image.size[0] - textsize[0]) // 2, image.size[1] - textsize[1] - y_margin]             
         elif align == 'bottom right':
-            textpos = [image.size[0] - textsize[0] - margins, image.size[1] - textsize[1] - margins]
+            textpos = [image.size[0] - textsize[0] - x_margin, image.size[1] - textsize[1] - y_margin]
         
         # Draw the text on the text layer
         draw.text(textpos, text, font=font, fill=font_color)
