@@ -238,98 +238,6 @@ class CR_OutputFlowFrames:
         return c
 
 #---------------------------------------------------------------------------------------------------------------------#
-class CR_OutputScheduleToFile:
-    
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {
-            "output_file_path": ("STRING", {"multiline": False, "default": ""}),
-            "file_name": ("STRING", {"multiline": False, "default": ""}),
-            "file_extension": (["txt", "csv"],),
-            "schedule": ("SCHEDULE",),
-            }
-        }
-
-    CATEGORY = icons.get("Comfyroll/Animation/IO")
-    RETURN_TYPES = ()
-    OUTPUT_NODE = True
-    FUNCTION = "csvoutput"
-    
-    def csvoutput(self, output_file_path, file_name, schedule, file_extension):
-        filepath = output_file_path + "\\" + file_name + "." + file_extension
-        
-        index = 2
-
-        if(output_file_path == "" or file_name == ""):
-            print(f"[Warning] CR Output Schedule To File. No file details found. No file output.") 
-            return ()
-
-        while os.path.exists(filepath):
-            if os.path.exists(filepath):
-                filepath = output_file_path + "\\" + file_name + str(index) + "." + file_extension
-
-                index = index + 1
-            else:
-                break            
-        
-        print(f"[Info] CR_Output Schedule To File: Saving to {filepath}")        
-        
-        if file_extension == "csv":
-            with open(filepath, "w", newline="") as csv_file:
-                csv_writer = csv.writer(csv_file)
-                csv_writer.writerows(schedule)
-        else:
-            with open(filepath, "w", newline="") as text_writer:
-                for line in schedule:
-                    str_item = f'{line[0]},"{line[1]}"\n'
-                    text_writer.write(str_item)
-        
-        
-        return ()
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_LoadScheduleFromFile:
-    
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {
-            "input_file_path": ("STRING", {"multiline": False, "default": ""}),
-            "file_name": ("STRING", {"multiline": False, "default": ""}),
-            "file_extension": (["txt", "csv"],),
-            }
-        }
-
-    CATEGORY = icons.get("Comfyroll/Animation/IO")
-    RETURN_TYPES = ("SCHEDULE", "STRING", )
-    RETURN_NAMES = ("SCHEDULE", "show_text", )
-    FUNCTION = "csvinput"
-    
-    def csvinput(self, input_file_path, file_name, file_extension):
-        filepath = input_file_path + "\\" + file_name + "." + file_extension
-        print(f"CR_Load Schedule From File: Loading {filepath}")
-        
-        lists = []
-            
-        if file_extension == "csv":
-            with open(filepath, "r") as csv_file:
-                reader = csv.reader(csv_file)
-        
-                for row in reader:
-                    lists.append(row)
-                    
-        else:
-            with open(filepath, "r") as txt_file:
-                for row in txt_file:
-                    parts = row.strip().split(",", 1)
-                    
-                    if len(parts) >= 2:
-                        second_part = parts[1].strip('"')
-                        lists.append([parts[0], second_part])
-
-        print(lists)
-        return(lists,str(lists),)
-
-#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -340,8 +248,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Load Animation Frames":CR_LoadAnimationFrames,
     "CR Load Flow Frames":CR_LoadFlowFrames,
     "CR Output Flow Frames":CR_OutputFlowFrames,
-    "CR Output Schedule To File":CR_OutputScheduleToFile,
-    "CR Load Schedule From File":CR_LoadScheduleFromFile,
 }
 '''
 
