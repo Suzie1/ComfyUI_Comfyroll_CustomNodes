@@ -362,7 +362,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Output Flow Frames": "🎥 CR Output Flow Frames",       
 }
 
-INCLUDE_DEV_NODES = True
+INCLUDE_DEV_NODES = False
 
 try:
     from .dev_node_mappings import DEV_NODE_CLASS_MAPPINGS, DEV_NODE_DISPLAY_NAME_MAPPINGS
