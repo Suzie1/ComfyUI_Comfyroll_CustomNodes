@@ -114,7 +114,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Mask Text": CR_MaskText,
     "CR Composite Text": CR_CompositeText,
     #"CR Arabic Text RTL": CR_ArabicTextRTL,
-    "CR Simple Text Watermark": CR_SimpleTextWatermark,
+    #"CR Simple Text Watermark": CR_SimpleTextWatermark,
     ### Graphics Filter
     "CR Halftone Filter": CR_HalftoneFilter,
     "CR Color Tint": CR_ColorTint,    
@@ -277,7 +277,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Mask Text": "🔤️ CR Mask Text",
     "CR Composite Text": "🔤️ CR Composite Text",
     #"CR Arabic Text RTL": "🔤️ CR Arabic Text RTL",
-    "CR Simple Text Watermark": "🔤️ CR Simple Text Watermark (Test)",
+    #"CR Simple Text Watermark": "🔤️ CR Simple Text Watermark (Test)",
     ### Graphics Filter
     "CR Halftone Filter": "🎨 Halftone Filter",
     "CR Color Tint": "🎨 CR Color Tint",        
