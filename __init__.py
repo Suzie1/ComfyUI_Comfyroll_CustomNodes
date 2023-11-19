@@ -343,7 +343,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Text List": "📃 CR Text List",
     "CR Text List Simple": "📃 CR Text List Simple",
     "CR Image List": "📃 CR Image List",
-    "CR Image List Simple": "📃 CR Image List Simple",     
+    "CR Image List Simple": "📃 CR Image List Simple", 
+    "CR Input Text List": "📃 CR Input Text List", 
     # Cyclers
     "CR Cycle Models": "♻️ CR Cycle Models",    
     "CR Cycle LoRAs": "♻️ CR Cycle LoRAs",
@@ -354,7 +355,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     # Utils   
     "CR Debatch Frames": "🛠️ CR Debatch Frames",    
     "CR Current Frame": "🛠️ CR Current Frame",
-    "CR Input Text List": "🛠️ CR Input Text List",   
     # IO
     "CR Load Animation Frames": "⌨️ CR Load Animation Frames",
     "CR Load Flow Frames": "⌨️ CR Load Flow Frames",
