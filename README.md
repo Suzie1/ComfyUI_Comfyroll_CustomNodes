@@ -152,6 +152,12 @@ __Deleted Nodes__
 * CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
 * CR SDXL Prompt Mixer replaced by CR SDXL Prompt Mix Presets
 
+# CR Animation Nodes
+
+CR Animation Nodes are now included in the Comfyroll Custom Nodes pack.
+
+[Animation Nodes](https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/blob/suzie_dev/Animation_Nodes.md)
+
 # Multi-ControlNet methodology
 
 The method used in CR Apply Multi-ControlNet is to chain the conditioning so that the output from the first Controlnet becomes the input to the second.
