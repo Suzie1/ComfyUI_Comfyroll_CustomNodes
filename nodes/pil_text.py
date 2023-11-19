@@ -6,14 +6,16 @@
 import numpy as np
 import torch
 import os 
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image, ImageDraw, ImageOps, ImageFont
 from ..categories import icons
 from ..config import color_mapping, COLORS
 from .graphics_functions import (draw_masked_text,
                                  hex_to_rgb,
                                  draw_text_on_image,
                                  get_font_size,
-                                 get_color_values)
+                                 get_text_size,
+                                 get_color_values,
+                                 reduce_opacity)
 
 '''
 try:
@@ -326,6 +328,71 @@ class CR_ArabicTextRTL:
         return rtl_text, show_help,
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_SimpleTextWatermark:
+    
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        ALIGN_OPTIONS = ["center", "top left", "top right", "bottom left", "bottom right"]  
+                   
+        return {"required": {
+                "image": ("IMAGE",),
+                "text": ("STRING", {"multiline": False, "default": "@ your name"}),
+                "align": (ALIGN_OPTIONS,),
+                "opacity": ("FLOAT", {"default": 0.10, "min": 0.00, "max": 1.00, "step": 0.01}),
+                "font_name": (file_list,),
+                "font_size": ("INT", {"default": 30, "min": 1, "max": 1024}),                
+                "font_color": (COLORS[1:],), 
+                "margins": ("INT", {"default": 10, "min": -1024, "max": 1024}),
+                }     
+        }
+
+    RETURN_TYPES = ("IMAGE", )
+    FUNCTION = "overlay_text"
+    CATEGORY = icons.get("Comfyroll/Graphics/Text")
+
+    def overlay_text(self, image, text, align, font_name, font_size, font_color, opacity, margins):
+        
+        # Create PIL images for the background layer
+        image = tensor2pil(image)
+        
+        textlayer = Image.new("RGBA", image.size)
+        draw = ImageDraw.Draw(textlayer)
+        
+        # Load the font
+        font_file = "fonts\\" + str(font_name)   
+        resolved_font_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), font_file)
+        font = ImageFont.truetype(str(resolved_font_path), size=font_size)
+        
+        # Get the size of the text
+        textsize = get_text_size(draw, text, font)
+        
+        # Calculate the position to place the text based on the alignment
+        if align == 'center':
+            textpos = [(image.size[0] - textsize[0]) // 2, (image.size[1] - textsize[1]) // 2]
+        elif align == 'top left':
+            textpos = [margins, margins]
+        elif align == 'top right':
+            textpos = [image.size[0] - textsize[0] - margins, margins]
+        elif align == 'bottom left':
+            textpos = [margins, image.size[1] - textsize[1] - margins]
+        elif align == 'bottom right':
+            textpos = [image.size[0] - textsize[0] - margins, image.size[1] - textsize[1] - margins]
+        
+        # Draw the text on the text layer
+        draw.text(textpos, text, font=font, fill=font_color)
+        
+        # Adjust the opacity of the text layer if needed
+        if opacity != 1:
+            textlayer = reduce_opacity(textlayer, opacity)
+        
+        # Composite the text layer on top of the original image
+        image_out = Image.composite(textlayer, image, textlayer)
+        
+        # Convert the PIL image back to a torch tensor
+        return pil2tensor(image_out), 
+
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -337,6 +404,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Composite Text":CR_CompositeText,
     "CR Draw Perspective Text":CR_DrawPerspectiveText,
     "CR Arabic Text RTL": CR_ArabicTextRTL,
+    "CR Simple Text Watermark": CR_SimpleTextWatermark,
 }
 '''
 
