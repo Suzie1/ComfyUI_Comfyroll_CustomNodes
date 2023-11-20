@@ -351,7 +351,7 @@ class CR_SimpleTextWatermark:
                 "image": ("IMAGE",),
                 "text": ("STRING", {"multiline": False, "default": "@ your name"}),
                 "align": (ALIGN_OPTIONS,),
-                "opacity": ("FLOAT", {"default": 0.10, "min": 0.00, "max": 1.00, "step": 0.01}),
+                "opacity": ("FLOAT", {"default": 0.30, "min": 0.00, "max": 1.00, "step": 0.01}),
                 "font_name": (file_list,),
                 "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),                
                 "font_color": (COLORS[1:],), 
