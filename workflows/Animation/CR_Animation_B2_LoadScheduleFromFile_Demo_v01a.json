@@ -1,0 +1,705 @@
+{
+  "last_node_id": 133,
+  "last_link_id": 154,
+  "nodes": [
+    {
+      "id": 59,
+      "type": "Note",
+      "pos": [
+        928.237579825001,
+        372.36553706933677
+      ],
+      "size": {
+        "0": 210,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The CR Current Frame node prints the current frame index to console so that you can see which frame is currently being processed"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 78,
+      "type": "CR Integer To String",
+      "pos": [
+        928.237579825001,
+        682.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 34
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int_",
+          "type": "INT",
+          "link": 91,
+          "widget": {
+            "name": "int_",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 77,
+      "type": "ShowText|pysssss",
+      "pos": [
+        928.237579825001,
+        772.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 90
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "5"
+      ]
+    },
+    {
+      "id": 114,
+      "type": "Note",
+      "pos": [
+        368.2375798250001,
+        572.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 170
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The primitive node increments the current_frame on each batch\n\nReset the value to 0 before each run\n\nIn normal workflows the Primitive node can replace the Animation Builder"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 79,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1648.2375798250027,
+        622.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 144
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "Animation"
+      ]
+    },
+    {
+      "id": 84,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1648.2375798250027,
+        482.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "896"
+      ]
+    },
+    {
+      "id": 83,
+      "type": "CR Integer To String",
+      "pos": [
+        1648.2375798250027,
+        392.36553706933677
+      ],
+      "size": {
+        "0": 210,
+        "1": 34
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int_",
+          "type": "INT",
+          "link": 145,
+          "widget": {
+            "name": "int_",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            99
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 68,
+      "type": "Note",
+      "pos": [
+        928.237579825001,
+        242.3655370693365
+      ],
+      "size": {
+        "0": 210,
+        "1": 70
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Frames are processed in sequence starting from frame index 0"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 120,
+      "type": "Note",
+      "pos": [
+        1260,
+        240
+      ],
+      "size": {
+        "0": 210,
+        "1": 70
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Always convert the current_frame widget to input"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 25,
+      "type": "CR Current Frame",
+      "pos": [
+        928.237579825001,
+        572.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 134,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            91,
+            141,
+            142
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        5,
+        "Yes"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 124,
+      "type": "CR Text Scheduler",
+      "pos": [
+        1258.2375798250025,
+        622.3655370693361
+      ],
+      "size": {
+        "0": 320,
+        "1": 150
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": 153
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 142,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            144
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Scheduler"
+      },
+      "widgets_values": [
+        "Schedule",
+        0,
+        "T1",
+        "default text",
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 123,
+      "type": "CR Value Scheduler",
+      "pos": [
+        1258.2375798250025,
+        392.36553706933677
+      ],
+      "size": {
+        "0": 320,
+        "1": 150
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": 152
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 141,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            145
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Value Scheduler"
+      },
+      "widgets_values": [
+        "Schedule",
+        0,
+        "V1",
+        1024,
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 130,
+      "type": "Note",
+      "pos": [
+        360,
+        250
+      ],
+      "size": {
+        "0": 210,
+        "1": 90
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Load scheduling data from a file"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 113,
+      "type": "PrimitiveNode",
+      "pos": [
+        618.2375798249993,
+        572.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            134
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        6,
+        "increment"
+      ]
+    },
+    {
+      "id": 132,
+      "type": "CR Load Schedule From File",
+      "pos": [
+        620,
+        350
+      ],
+      "size": [
+        260,
+        130
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            152,
+            153
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Load Schedule From File"
+      },
+      "widgets_values": [
+        "F:\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\output\\Schedules",
+        "TestSchedule2",
+        "csv"
+      ]
+    }
+  ],
+  "links": [
+    [
+      90,
+      78,
+      0,
+      77,
+      0,
+      "STRING"
+    ],
+    [
+      91,
+      25,
+      0,
+      78,
+      0,
+      "INT"
+    ],
+    [
+      99,
+      83,
+      0,
+      84,
+      0,
+      "STRING"
+    ],
+    [
+      123,
+      98,
+      0,
+      91,
+      0,
+      "*"
+    ],
+    [
+      134,
+      113,
+      0,
+      25,
+      0,
+      "INT"
+    ],
+    [
+      141,
+      25,
+      0,
+      123,
+      1,
+      "INT"
+    ],
+    [
+      142,
+      25,
+      0,
+      124,
+      1,
+      "INT"
+    ],
+    [
+      144,
+      124,
+      0,
+      79,
+      0,
+      "STRING"
+    ],
+    [
+      145,
+      123,
+      0,
+      83,
+      0,
+      "INT"
+    ],
+    [
+      152,
+      132,
+      0,
+      123,
+      0,
+      "SCHEDULE"
+    ],
+    [
+      153,
+      132,
+      0,
+      124,
+      0,
+      "SCHEDULE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Schedulers",
+      "bounding": [
+        323,
+        136,
+        1580,
+        765
+      ],
+      "color": "#3f789e",
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

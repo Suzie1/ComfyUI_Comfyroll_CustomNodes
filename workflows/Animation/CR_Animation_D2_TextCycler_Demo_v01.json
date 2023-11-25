@@ -1,0 +1,1459 @@
+{
+  "last_node_id": 133,
+  "last_link_id": 174,
+  "nodes": [
+    {
+      "id": 52,
+      "type": "Note",
+      "pos": [
+        -189.97908726170903,
+        139.1117772231442
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "To run this workflow, first press Reset in the Animation Builder and then press the Queue button, Do not use queue prompt in the ComfyUI menu."
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 47,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        600.0209127382922,
+        329.1117772231446
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            78
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            83,
+            84
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "Load Initial Checkpoint",
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SD1_5\\dreamshaper_7.safetensors"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "VAEDecode",
+      "pos": [
+        1960.020912738287,
+        229.11177722314451
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 85
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 17,
+      "type": "VAELoader",
+      "pos": [
+        1910.0209127382873,
+        349.11177722314466
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 116,
+      "type": "CR SD1.5 Aspect Ratio",
+      "pos": [
+        780.0209127382919,
+        -150.88822277685603
+      ],
+      "size": {
+        "0": 320,
+        "1": 240
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            145
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            146
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "upscale_factor",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": [
+            147
+          ],
+          "shape": 3,
+          "slot_index": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR SD1.5 Aspect Ratio"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "2:3 portrait 512x768",
+        "Off",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 115,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1140.0209127382889,
+        -140.88822277685603
+      ],
+      "size": {
+        "0": 210,
+        "1": 90
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 145,
+          "widget": {
+            "name": "width",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 8192,
+                "step": 8
+              }
+            ]
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 146,
+          "widget": {
+            "name": "height",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 8192,
+                "step": 8
+              }
+            ]
+          }
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "link": 147,
+          "widget": {
+            "name": "batch_size",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": 1,
+                "max": 64
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            144
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 26,
+      "type": "Save Image Sequence (mtb)",
+      "pos": [
+        2330.0209127382855,
+        109.111777223144
+      ],
+      "size": {
+        "0": 380,
+        "1": 290
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 25,
+          "slot_index": 0
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 168,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999999
+              }
+            ]
+          },
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Save Image Sequence (mtb)"
+      },
+      "widgets_values": [
+        "F:\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\output\\Test\\",
+        5
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 117,
+      "type": "Reroute",
+      "pos": [
+        -199.58456613570323,
+        782.2872045326562
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 167
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            150,
+            169,
+            170
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 124,
+      "type": "CR Cycle Text Simple",
+      "pos": [
+        53.128190699999955,
+        1478.0512829
+      ],
+      "size": {
+        "0": 310,
+        "1": 250
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_list_simple",
+          "type": "TEXT_LIST_SIMPLE",
+          "link": null
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 169,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            160
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Cycle Text Simple"
+      },
+      "widgets_values": [
+        "Sequential",
+        1,
+        1,
+        "rainbow",
+        "castle",
+        "tropical island",
+        "mountain covered in snow",
+        "",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 111,
+      "type": "CR Prompt Text",
+      "pos": [
+        713.1281906999992,
+        968.0512829
+      ],
+      "size": {
+        "0": 320,
+        "1": 90
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            137
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Prompt Text"
+      },
+      "widgets_values": [
+        "in background"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 110,
+      "type": "CR Prompt Text",
+      "pos": [
+        713.1281906999992,
+        838.0512829
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            140
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Prompt Text"
+      },
+      "widgets_values": [
+        "1girl with "
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 93,
+      "type": "CR Text List Simple",
+      "pos": [
+        53.128190699999955,
+        1158.0512829
+      ],
+      "size": {
+        "0": 310,
+        "1": 154
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_list_simple",
+          "type": "TEXT_LIST_SIMPLE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TEXT_LIST_SIMPLE",
+          "type": "TEXT_LIST_SIMPLE",
+          "links": [
+            113
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text List Simple"
+      },
+      "widgets_values": [
+        "tropical island",
+        "mountain covered in snow",
+        "",
+        "",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 91,
+      "type": "CR Cycle Text Simple",
+      "pos": [
+        433.1281907000002,
+        1158.0512829
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_list_simple",
+          "type": "TEXT_LIST_SIMPLE",
+          "link": 113
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 150,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            172
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Cycle Text Simple"
+      },
+      "widgets_values": [
+        "Sequential",
+        3,
+        2,
+        "rainbow",
+        "castle",
+        "house",
+        "village",
+        "mine",
+        "shop"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 125,
+      "type": "CR Cycle Text Simple",
+      "pos": [
+        433.1281907000002,
+        1478.0512829
+      ],
+      "size": {
+        "0": 320,
+        "1": 250
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_list_simple",
+          "type": "TEXT_LIST_SIMPLE",
+          "link": null
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 170,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "text_1",
+          "type": "STRING",
+          "link": 160,
+          "widget": {
+            "name": "text_1",
+            "config": [
+              "STRING",
+              {
+                "multiline": false,
+                "default": ""
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            173
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Cycle Text Simple"
+      },
+      "widgets_values": [
+        "Sequential",
+        3,
+        2,
+        "rainbow",
+        "castle",
+        "house",
+        "village",
+        "mine",
+        "shop"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 130,
+      "type": "CR Text Input Switch",
+      "pos": [
+        833.1281906999992,
+        1158.0512829
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text1",
+          "type": "STRING",
+          "link": 172
+        },
+        {
+          "name": "text2",
+          "type": "STRING",
+          "link": 173
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            174
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Input Switch"
+      },
+      "widgets_values": [
+        1
+      ]
+    },
+    {
+      "id": 24,
+      "type": "Animation Builder (mtb)",
+      "pos": [
+        50.020912738290995,
+        139.1117772231442
+      ],
+      "size": {
+        "0": 210,
+        "1": 320
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "frame",
+          "type": "INT",
+          "links": [
+            166
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "0-1 (scaled)",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "loop_ended",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3,
+          "slot_index": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Animation Builder (mtb)"
+      },
+      "widgets_values": [
+        12,
+        1,
+        1,
+        9,
+        1,
+        "frame: 0 / 8",
+        "Done 😎!",
+        "reset",
+        "queue"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 127,
+      "type": "CR Current Frame",
+      "pos": [
+        340.0209127382915,
+        139.1117772231442
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 166,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            167,
+            168
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "max_frames",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        1,
+        0
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 131,
+      "type": "Note",
+      "pos": [
+        833.1281906999992,
+        1288.0512829
+      ],
+      "size": {
+        "0": 210,
+        "1": 70
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Switch betten the two scenarios"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 56,
+      "type": "Note",
+      "pos": [
+        370.0209127382916,
+        -40.88822277685599
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Frames are processed in sequence. The CR Current Frame node prints the current frame index to console so that you can see which frame is currently being processed"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 133,
+      "type": "Note",
+      "pos": [
+        2330.0209127382855,
+        -70.88822277685595
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Use the GIF Writer workflow to compile the output images into a GIF"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 75,
+      "type": "KSampler",
+      "pos": [
+        1470.0209127382889,
+        149.1117772231443
+      ],
+      "size": {
+        "0": 320,
+        "1": 470
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 78
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 81
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 82
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 144
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            85
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        927131295014992,
+        "fixed",
+        20,
+        10,
+        "dpmpp_3m_sde_gpu",
+        "karras",
+        0.7
+      ]
+    },
+    {
+      "id": 109,
+      "type": "Text Concatenate",
+      "pos": [
+        1113.1281907000011,
+        898.0512829
+      ],
+      "size": {
+        "0": 315,
+        "1": 118
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 140
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 174
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": 137
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            130
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        "false"
+      ]
+    },
+    {
+      "id": 76,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1130,
+        330
+      ],
+      "size": {
+        "0": 230,
+        "1": 90
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 84
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 130,
+          "widget": {
+            "name": "text",
+            "config": [
+              "STRING",
+              {
+                "multiline": true
+              }
+            ]
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            81
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "kaleidoscope, colorful, vivid, crystals, centered, radial symmetry"
+      ]
+    },
+    {
+      "id": 77,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1120,
+        480
+      ],
+      "size": {
+        "0": 240,
+        "1": 76
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 83
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            82
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "embedding:EasyNegative,\nnsfw"
+      ]
+    },
+    {
+      "id": 129,
+      "type": "Note",
+      "pos": [
+        -210,
+        1160
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The text list can be extended with additional Text List nodes"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 128,
+      "type": "Note",
+      "pos": [
+        -220,
+        1480
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Text cyclers can be chained together to create complex sequences"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 132,
+      "type": "Note",
+      "pos": [
+        420,
+        890
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "In the demo, the cyclers are being use to generate variable prompts"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    }
+  ],
+  "links": [
+    [
+      15,
+      17,
+      0,
+      16,
+      1,
+      "VAE"
+    ],
+    [
+      25,
+      16,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      78,
+      47,
+      0,
+      75,
+      0,
+      "MODEL"
+    ],
+    [
+      81,
+      76,
+      0,
+      75,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      82,
+      77,
+      0,
+      75,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      83,
+      47,
+      1,
+      77,
+      0,
+      "CLIP"
+    ],
+    [
+      84,
+      47,
+      1,
+      76,
+      0,
+      "CLIP"
+    ],
+    [
+      85,
+      75,
+      0,
+      16,
+      0,
+      "LATENT"
+    ],
+    [
+      113,
+      93,
+      0,
+      91,
+      0,
+      "TEXT_LIST_SIMPLE"
+    ],
+    [
+      130,
+      109,
+      0,
+      76,
+      1,
+      "STRING"
+    ],
+    [
+      137,
+      111,
+      0,
+      109,
+      2,
+      "STRING"
+    ],
+    [
+      140,
+      110,
+      0,
+      109,
+      0,
+      "STRING"
+    ],
+    [
+      144,
+      115,
+      0,
+      75,
+      3,
+      "LATENT"
+    ],
+    [
+      145,
+      116,
+      0,
+      115,
+      0,
+      "INT"
+    ],
+    [
+      146,
+      116,
+      1,
+      115,
+      1,
+      "INT"
+    ],
+    [
+      147,
+      116,
+      3,
+      115,
+      2,
+      "INT"
+    ],
+    [
+      150,
+      117,
+      0,
+      91,
+      1,
+      "INT"
+    ],
+    [
+      160,
+      124,
+      0,
+      125,
+      2,
+      "STRING"
+    ],
+    [
+      166,
+      24,
+      0,
+      127,
+      0,
+      "INT"
+    ],
+    [
+      167,
+      127,
+      0,
+      117,
+      0,
+      "*"
+    ],
+    [
+      168,
+      127,
+      0,
+      26,
+      1,
+      "INT"
+    ],
+    [
+      169,
+      117,
+      0,
+      124,
+      1,
+      "INT"
+    ],
+    [
+      170,
+      117,
+      0,
+      125,
+      1,
+      "INT"
+    ],
+    [
+      172,
+      91,
+      0,
+      130,
+      0,
+      "STRING"
+    ],
+    [
+      173,
+      125,
+      0,
+      130,
+      1,
+      "STRING"
+    ],
+    [
+      174,
+      130,
+      0,
+      109,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Cycle Text",
+      "bounding": [
+        -253,
+        707,
+        1763,
+        1077
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Simple Animation Flow (for SD1.5)",
+      "bounding": [
+        -257,
+        -263,
+        3059,
+        933
+      ],
+      "color": "#3f789e",
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

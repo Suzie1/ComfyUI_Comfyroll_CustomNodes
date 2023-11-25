@@ -1,0 +1,1102 @@
+{
+  "last_node_id": 135,
+  "last_link_id": 164,
+  "nodes": [
+    {
+      "id": 59,
+      "type": "Note",
+      "pos": [
+        928.237579825001,
+        372.36553706933677
+      ],
+      "size": {
+        "0": 210,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The CR Current Frame node prints the current frame index to console so that you can see which frame is currently being processed"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 78,
+      "type": "CR Integer To String",
+      "pos": [
+        928.237579825001,
+        682.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 34
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int_",
+          "type": "INT",
+          "link": 91,
+          "widget": {
+            "name": "int_",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 77,
+      "type": "ShowText|pysssss",
+      "pos": [
+        928.237579825001,
+        772.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 90
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "4"
+      ]
+    },
+    {
+      "id": 114,
+      "type": "Note",
+      "pos": [
+        368.2375798250001,
+        572.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 170
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The primitive node increments the current_frame on each batch\n\nReset the value to 0 before each run\n\nIn normal workflows the Primitive node can replace the Animation Builder"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 79,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1648.2375798250027,
+        622.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 144
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "2D Game Art"
+      ]
+    },
+    {
+      "id": 84,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1648.2375798250027,
+        482.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "896"
+      ]
+    },
+    {
+      "id": 83,
+      "type": "CR Integer To String",
+      "pos": [
+        1648.2375798250027,
+        392.36553706933677
+      ],
+      "size": {
+        "0": 210,
+        "1": 34
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int_",
+          "type": "INT",
+          "link": 145,
+          "widget": {
+            "name": "int_",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            99
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 68,
+      "type": "Note",
+      "pos": [
+        928.237579825001,
+        242.3655370693365
+      ],
+      "size": {
+        "0": 210,
+        "1": 70
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Frames are processed in sequence starting from frame index 0"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 120,
+      "type": "Note",
+      "pos": [
+        1260,
+        240
+      ],
+      "size": {
+        "0": 210,
+        "1": 70
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Always convert the current_frame widget to input"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 25,
+      "type": "CR Current Frame",
+      "pos": [
+        928.237579825001,
+        572.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 134,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            91,
+            141,
+            142
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        0,
+        "Yes"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 124,
+      "type": "CR Text Scheduler",
+      "pos": [
+        1258.2375798250025,
+        622.3655370693361
+      ],
+      "size": {
+        "0": 320,
+        "1": 150
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": 140
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 142,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            144
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Scheduler"
+      },
+      "widgets_values": [
+        "Schedule",
+        0,
+        "T1",
+        "default text",
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 123,
+      "type": "CR Value Scheduler",
+      "pos": [
+        1258.2375798250025,
+        392.36553706933677
+      ],
+      "size": {
+        "0": 320,
+        "1": 150
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": 139
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 141,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            145
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Value Scheduler"
+      },
+      "widgets_values": [
+        "Schedule",
+        0,
+        "V1",
+        1024,
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 128,
+      "type": "CR Output Schedule To File",
+      "pos": [
+        732.5905286035164,
+        -717.3633016601559
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": 159
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Output Schedule To File"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "txt"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 91,
+      "type": "Reroute",
+      "pos": [
+        980,
+        30
+      ],
+      "size": [
+        107.2,
+        26
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 158
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            139,
+            140
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 131,
+      "type": "CR Combine Schedules",
+      "pos": [
+        280,
+        -510
+      ],
+      "size": {
+        "0": 254.40000915527344,
+        "1": 106
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule_1",
+          "type": "SCHEDULE",
+          "link": 163
+        },
+        {
+          "name": "schedule_2",
+          "type": "SCHEDULE",
+          "link": 161
+        },
+        {
+          "name": "schedule_3",
+          "type": "SCHEDULE",
+          "link": 162
+        },
+        {
+          "name": "schedule_4",
+          "type": "SCHEDULE",
+          "link": 164
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            158,
+            159
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": [
+            157
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Combine Schedules"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 132,
+      "type": "CR Simple Schedule",
+      "pos": [
+        -207.40947139648455,
+        -137.36330166015622
+      ],
+      "size": {
+        "0": 360,
+        "1": 200
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            162
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Schedule"
+      },
+      "widgets_values": [
+        "0, 512\n2, 640\n3, 768\n4, 896\n8, 1024",
+        "Value",
+        "V1",
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 133,
+      "type": "CR Combine Schedules",
+      "pos": [
+        280,
+        -670
+      ],
+      "size": {
+        "0": 254.40000915527344,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule_1",
+          "type": "SCHEDULE",
+          "link": null
+        },
+        {
+          "name": "schedule_2",
+          "type": "SCHEDULE",
+          "link": null
+        },
+        {
+          "name": "schedule_3",
+          "type": "SCHEDULE",
+          "link": null
+        },
+        {
+          "name": "schedule_4",
+          "type": "SCHEDULE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            163
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Combine Schedules"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 122,
+      "type": "CR Central Schedule",
+      "pos": [
+        -207.40947139648455,
+        -717.3633016601559
+      ],
+      "size": {
+        "0": 360,
+        "1": 510
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            161
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Central Schedule"
+      },
+      "widgets_values": [
+        "0, Art Nouveau\n2, Antarctica\n4, 2D Game Art\n5, Animation\n8, Airbrushing",
+        "Text",
+        "T1",
+        "schedule",
+        "Upscale",
+        "",
+        "schedule",
+        "Model",
+        "",
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 134,
+      "type": "Note",
+      "pos": [
+        660,
+        -510
+      ],
+      "size": [
+        230,
+        160
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Four different methods of combining schedules are shown\n\n1. Combine from Central Schedules\n2. Combine from Simple Schedules\n3. Combine from combination nodes\n4. Combine from File\n\n"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 135,
+      "type": "CR Load Schedule From File",
+      "pos": [
+        240,
+        -70
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            164
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Load Schedule From File"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "txt"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 113,
+      "type": "PrimitiveNode",
+      "pos": [
+        618.2375798249993,
+        572.3655370693361
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            134
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        0,
+        "increment"
+      ]
+    },
+    {
+      "id": 130,
+      "type": "ShowText|pysssss",
+      "pos": [
+        670,
+        -260
+      ],
+      "size": {
+        "0": 310,
+        "1": 130
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 157,
+          "widget": {
+            "name": "text",
+            "config": [
+              "STRING",
+              {
+                "forceInput": true
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "[('T1', '0, Art Nouveau'), ('T1', '2, Antarctica'), ('T1', '4, 2D Game Art'), ('T1', '5, Animation'), ('T1', '8, Airbrushing'), ('V1', '0, 512'), ('V1', '2, 640'), ('V1', '3, 768'), ('V1', '4, 896'), ('V1', '8, 1024'), ['V1', '0, 512'], ['V1', '2, 640'], ['V1', '3, 768'], ['V1', '4, 896'], ['V1', '8, 1024'], ['T1', '0, Art Nouveau'], ['T1', '2, Antarctica'], ['T1', '4, 2D Game Art'], ['T1', '5, Animation'], ['T1', '8, Airbrushing']]"
+      ]
+    }
+  ],
+  "links": [
+    [
+      90,
+      78,
+      0,
+      77,
+      0,
+      "STRING"
+    ],
+    [
+      91,
+      25,
+      0,
+      78,
+      0,
+      "INT"
+    ],
+    [
+      99,
+      83,
+      0,
+      84,
+      0,
+      "STRING"
+    ],
+    [
+      123,
+      98,
+      0,
+      91,
+      0,
+      "*"
+    ],
+    [
+      134,
+      113,
+      0,
+      25,
+      0,
+      "INT"
+    ],
+    [
+      139,
+      91,
+      0,
+      123,
+      0,
+      "SCHEDULE"
+    ],
+    [
+      140,
+      91,
+      0,
+      124,
+      0,
+      "SCHEDULE"
+    ],
+    [
+      141,
+      25,
+      0,
+      123,
+      1,
+      "INT"
+    ],
+    [
+      142,
+      25,
+      0,
+      124,
+      1,
+      "INT"
+    ],
+    [
+      144,
+      124,
+      0,
+      79,
+      0,
+      "STRING"
+    ],
+    [
+      145,
+      123,
+      0,
+      83,
+      0,
+      "INT"
+    ],
+    [
+      157,
+      131,
+      1,
+      130,
+      0,
+      "STRING"
+    ],
+    [
+      158,
+      131,
+      0,
+      91,
+      0,
+      "*"
+    ],
+    [
+      159,
+      131,
+      0,
+      128,
+      0,
+      "SCHEDULE"
+    ],
+    [
+      161,
+      122,
+      0,
+      131,
+      1,
+      "SCHEDULE"
+    ],
+    [
+      162,
+      132,
+      0,
+      131,
+      2,
+      "SCHEDULE"
+    ],
+    [
+      163,
+      133,
+      0,
+      131,
+      0,
+      "SCHEDULE"
+    ],
+    [
+      164,
+      135,
+      0,
+      131,
+      3,
+      "SCHEDULE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Central Schedule",
+      "bounding": [
+        -253,
+        -819,
+        1389,
+        919
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Schedulers",
+      "bounding": [
+        323,
+        136,
+        1580,
+        765
+      ],
+      "color": "#3f789e",
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

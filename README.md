@@ -49,10 +49,10 @@ __🔂 Process__
 * CR Hires Fix Process Switch
 * CR Batch Process Switch
 
-__👓 Filter__
+__👓 Graphics - Filter__
 * CR Color Tint
 
-__🌈 Pattern__
+__🌈 Graphics - Pattern__
 * CR Halftone Grid
 * CR Color Bars
 * CR Style Bars   
@@ -63,16 +63,16 @@ __🌈 Pattern__
 * CR Starburst Lines
 * CR Starburst Colors
 
-__🔤 Image Text__
+__🔤 Graphics - Text__
 * CR Overlay Text
 * CR Draw Text
 * CR Mask Text
 * CR Composite Text
 
-__👽 Template__
+__👽 Graphics - Template__
 * CR Simple Meme Template
 
-__🌁 Image Layout__
+__🌁 Graphics - Layout__
 * CR Image Panel (new 23/10/2023)
 * CR Page Layout (new 01/11/2023)
 * CR Image Grid Panel (new 01/11/2023)
@@ -151,6 +151,12 @@ __Deleted Nodes__
 * CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio
 * CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
 * CR SDXL Prompt Mixer replaced by CR SDXL Prompt Mix Presets
+
+# CR Animation Nodes
+
+CR Animation Nodes are now included in the Comfyroll Custom Nodes pack.
+
+[Animation Nodes](https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/blob/suzie_dev/Animation_Nodes.md)
 
 # Multi-ControlNet methodology
 

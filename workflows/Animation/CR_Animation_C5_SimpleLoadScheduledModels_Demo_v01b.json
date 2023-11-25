@@ -1,0 +1,658 @@
+{
+  "last_node_id": 16,
+  "last_link_id": 24,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1240,
+        680
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "1girl, period costume"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1240,
+        840
+      ],
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "embedding:EasyNegative, \nnsfw"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "pos": [
+        1580,
+        600
+      ],
+      "size": [
+        320,
+        470
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 19
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 9
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        485968570890081,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        2000,
+        450
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        1990,
+        600
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 10
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 11,
+      "type": "PreviewImage",
+      "pos": [
+        2270,
+        600
+      ],
+      "size": [
+        210,
+        250
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 12
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 1,
+      "type": "CR Model List",
+      "pos": [
+        640,
+        240
+      ],
+      "size": {
+        "0": 460,
+        "1": 294
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_list",
+          "type": "MODEL_LIST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL_LIST",
+          "type": "MODEL_LIST",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_text",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Model List"
+      },
+      "widgets_values": [
+        "SD1_5\\dalcefoV3Anime_dalcefoV3Anime.safetensors",
+        "DAL",
+        "SD1_5\\CounterfeitV25_25.safetensors",
+        "COU",
+        "SD1_5\\epicrealism_newEra.safetensors",
+        "EPI",
+        "SD1_5\\aZovyaPhotoreal_v2.safetensors",
+        "ZOV",
+        "None",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 4,
+      "type": "CR Current Frame",
+      "pos": [
+        320,
+        640
+      ],
+      "size": {
+        "0": 240,
+        "1": 80
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 4,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            22
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        0,
+        "Yes"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 15,
+      "type": "CR Simple Schedule",
+      "pos": [
+        330,
+        330
+      ],
+      "size": {
+        "0": 250,
+        "1": 200
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SCHEDULE",
+          "type": "SCHEDULE",
+          "links": [
+            23
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Schedule"
+      },
+      "widgets_values": [
+        "0, ZOV\n3, COU\n6, DAL\n9, EPI",
+        "Model",
+        "M1",
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 14,
+      "type": "CR Load Scheduled Models",
+      "pos": [
+        640,
+        600
+      ],
+      "size": {
+        "0": 460,
+        "1": 200
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_list",
+          "type": "MODEL_LIST",
+          "link": 18
+        },
+        {
+          "name": "schedule",
+          "type": "SCHEDULE",
+          "link": 23
+        },
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 22,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            20,
+            21
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Load Scheduled Models"
+      },
+      "widgets_values": [
+        "Schedule",
+        "SD1_5\\ComfyrollAnime_v1_fp16_pruned.safetensors",
+        "M1",
+        "SD1_5\\Comfyroll_v1_fp16_pruned.safetensors",
+        "CR"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 16,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1580,
+        430
+      ],
+      "size": {
+        "0": 210,
+        "1": 110
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 5,
+      "type": "PrimitiveNode",
+      "pos": [
+        50,
+        640
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            4
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        0,
+        "increment"
+      ]
+    }
+  ],
+  "links": [
+    [
+      4,
+      5,
+      0,
+      4,
+      0,
+      "INT"
+    ],
+    [
+      8,
+      6,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      7,
+      0,
+      8,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      10,
+      8,
+      0,
+      9,
+      0,
+      "LATENT"
+    ],
+    [
+      11,
+      10,
+      0,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      12,
+      9,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      1,
+      0,
+      14,
+      0,
+      "MODEL_LIST"
+    ],
+    [
+      19,
+      14,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      20,
+      14,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      21,
+      14,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      22,
+      4,
+      0,
+      14,
+      2,
+      "INT"
+    ],
+    [
+      23,
+      15,
+      0,
+      14,
+      1,
+      "SCHEDULE"
+    ],
+    [
+      24,
+      16,
+      0,
+      8,
+      3,
+      "LATENT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

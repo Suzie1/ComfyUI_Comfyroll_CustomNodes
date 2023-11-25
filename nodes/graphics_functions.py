@@ -4,7 +4,7 @@
 #---------------------------------------------------------------------------------------------------------------------#
 
 import os
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageEnhance
 from ..config import color_mapping
 
 font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
@@ -29,6 +29,7 @@ def justify_text(justify, img_width, line_width, margins):
     elif justify == "center":
         text_plot_x = img_width/2 - line_width/2
     return text_plot_x   
+
 
 def get_text_size(draw, text, font):
     bbox = draw.textbbox((0, 0), text, font=font)
@@ -93,6 +94,7 @@ def draw_masked_text(text_mask, text,
         text_pos_y += max_text_height  # Move down for the next line
         sum_text_plot_y += text_plot_y     # Sum the y positions
 
+    # Calculate centers for rotation
     text_center_x = text_plot_x + max_text_width / 2
     text_center_y = sum_text_plot_y / len(text_lines)
 
@@ -182,7 +184,7 @@ def draw_text_on_image(draw, y_position, bar_width, bar_height, text, font, text
         
         if len(text_lines) == 1:
             x = (bar_width - text_width) // 2
-            y = y_position + (bar_height - text_height) // 2 - (bar_height * 0.06)
+            y = y_position + (bar_height - text_height) // 2 - (bar_height * 0.10)
             if font_outline == "none":
                 draw.text((x, y), text, fill=text_color, font=font)
             else:    
@@ -192,7 +194,7 @@ def draw_text_on_image(draw, y_position, bar_width, bar_height, text, font, text
             text_width, text_height = get_text_size(draw, text_lines[0], font)
             
             x = (bar_width - text_width) // 2
-            y = y_position + (bar_height - text_height * 2) // 2 - (bar_height * 0.06)
+            y = y_position + (bar_height - text_height * 2) // 2 - (bar_height * 0.15)
             if font_outline == "none":
                 draw.text((x, y), text_lines[0], fill=text_color, font=font)
             else:    
@@ -202,7 +204,7 @@ def draw_text_on_image(draw, y_position, bar_width, bar_height, text, font, text
             text_width, text_height = get_text_size(draw, text_lines[1], font)          
             
             x = (bar_width - text_width) // 2
-            y = y_position + (bar_height - text_height * 2) // 2 + text_height  - (bar_height * 0.06)         
+            y = y_position + (bar_height - text_height * 2) // 2 + text_height  - (bar_height * 0.00)         
             if font_outline == "none":
                 draw.text((x, y), text_lines[1], fill=text_color, font=font)
             else:    
@@ -405,12 +407,9 @@ def apply_outline_and_border(images, outline_thickness, outline_color, border_th
 
 
 def get_color_values(color, color_hex, color_mapping):
-    """
-    Get RGB values for the text and background colors.
+    
+    #Get RGB values for the text and background colors.
 
-    Returns:
-        tuple: A tuple containing (font_color_rgb, background_color_rgb).
-    """
     if color == "custom":
         color_rgb = hex_to_rgb(color_hex)
     else:
@@ -468,3 +467,16 @@ def create_and_paste_panel(page, border_thickness, outline_thickness,
         page.paste(panel, (page_width - (j + 1) * new_panel_width, i * new_panel_height))
     else:
         page.paste(panel, (j * new_panel_width, i * new_panel_height))
+
+
+def reduce_opacity(img, opacity):
+    """Returns an image with reduced opacity."""
+    assert opacity >= 0 and opacity <= 1
+    if img.mode != 'RGBA':
+        img = img.convert('RGBA')
+    else:
+        img = img.copy()
+    alpha = img.split()[3]
+    alpha = ImageEnhance.Brightness(alpha).enhance(opacity)
+    img.putalpha(alpha)
+    return img
