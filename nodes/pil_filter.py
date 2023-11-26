@@ -89,21 +89,23 @@ class CR_HalftoneFilter:
     def INPUT_TYPES(cls):
     
         shapes = ["ellipse", "rectangle"]
+        rez = ["normal", "hi-res (2x output size)"]
     
         return {
             "required": {
                 "image": ("IMAGE",),
                 "dot_size": ("INT", {"default": 5, "min": 1, "max": 30, "step": 1}),
                 "dot_shape": (shapes, {"default": "ellipse"}),
-                "scale": ("INT", {"default": 1, "min": 1, "max": 8, "step": 1}),
+                #"scale": ("INT", {"default": 1, "min": 1, "max": 8, "step": 1}),
+                "resolution": (rez, {"default": "normal"}),
                 "angle_c": ("INT", {"default": 75, "min": 0, "max": 360, "step": 1}),
                 "angle_m": ("INT", {"default": 45, "min": 0, "max": 360, "step": 1}),
                 "angle_y": ("INT", {"default": 15, "min": 0, "max": 360, "step": 1}),
                 "angle_k": ("INT", {"default": 0, "min": 0, "max": 360, "step": 1}),
                 "greyscale": ("BOOLEAN", {"default": True}),
                 "antialias": ("BOOLEAN", {"default": True}),
-                "antialias_scale": ("INT", {"default": 3, "min": 2, "max": 8, "step": 1}),
-                "border_blending":  ("BOOLEAN", {"default": False}),
+                "antialias_scale": ("INT", {"default": 2, "min": 1, "max": 4, "step": 1}),
+                "border_blending":  ("BOOLEAN", {"default": False}),                       
             },
         }
 
@@ -111,15 +113,37 @@ class CR_HalftoneFilter:
     RETURN_NAMES = ("image", "show_help", )
     FUNCTION = "halftone_effect"
     CATEGORY = icons.get("Comfyroll/Graphics/Filter")
+                 
+    def tensor_to_pil(self, tensor):
+        if tensor.ndim == 4 and tensor.shape[0] == 1:  # Check for batch dimension
+            tensor = tensor.squeeze(0)  # Remove batch dimension
+        if tensor.dtype == torch.float32:  # Check for float tensors
+            tensor = tensor.mul(255).byte()  # Convert to range [0, 255] and change to byte type
+        elif tensor.dtype != torch.uint8:  # If not float and not uint8, conversion is needed
+            tensor = tensor.byte()  # Convert to byte type
+        numpy_image = tensor.cpu().numpy()
+        pil_image = Image.fromarray(numpy_image, 'RGB' if tensor.shape[2] == 3 else 'L')
+        return pil_image
 
-    def halftone_effect(self, image, dot_size, dot_shape, scale, angle_c, angle_m, angle_y, angle_k, 
-                        greyscale, antialias, border_blending, antialias_scale):
-                        
+    def pil_to_tensor(self, pil_image):
+        numpy_image = np.array(pil_image)
+        tensor = torch.from_numpy(numpy_image).float().div(255)  # Convert to range [0, 1]
+        tensor = tensor.unsqueeze(0)  # Add batch dimension
+        return tensor
+        
+    def halftone_effect(self, image, dot_size, dot_shape, resolution, angle_c, angle_m, angle_y, angle_k, greyscale, antialias, border_blending, antialias_scale):
+        
         sample = dot_size
         shape = dot_shape
-        show_help = "example help text"
         
-        # If the input is a PyTorch tensor, convert to PIL Image
+        # Map resolution to scale
+        resolution_to_scale = {
+            "normal": 1,
+            "hi-res (2x output size)": 2,
+        }
+        scale = resolution_to_scale.get(resolution, 1)  # Default to 1 if resolution is not recognized
+             
+         # If the input is a PyTorch tensor, convert to PIL Image
         if isinstance(image, torch.Tensor):
             image = self.tensor_to_pil(image)
         
@@ -140,35 +164,21 @@ class CR_HalftoneFilter:
             angles = [angle_c, angle_m, angle_y, angle_k]
 
         # Apply the halftone effect using PIL
-        halftone_images = self._halftone_pil(pil_image, channel_images, sample, scale, 
-                                             angles, antialias, border_blending, antialias_scale, shape)
+        halftone_images = self._halftone_pil(pil_image, channel_images, sample, scale, angles, antialias, border_blending, antialias_scale, shape)
 
         # Merge channels and convert to RGB
         if greyscale:
-            new_image = halftone_images[0]
+            new_image = halftone_images[0].convert("RGB")  # Convert the greyscale image to RGB
         else:
             new_image = Image.merge("CMYK", halftone_images).convert("RGB")
-
+        
         result_tensor = self.pil_to_tensor(new_image)
-        return (result_tensor,)
-        
-    def tensor_to_pil(self, tensor):
-        if tensor.ndim == 4 and tensor.shape[0] == 1:  # Check for batch dimension
-            tensor = tensor.squeeze(0)  # Remove batch dimension
-        if tensor.dtype == torch.float32:  # Check for float tensors
-            tensor = tensor.mul(255).byte()  # Convert to range [0, 255] and change to byte type
-        elif tensor.dtype != torch.uint8:  # If not float and not uint8, conversion is needed
-            tensor = tensor.byte()  # Convert to byte type
-        numpy_image = tensor.cpu().numpy()
-        pil_image = Image.fromarray(numpy_image, 'RGB' if tensor.shape[2] == 3 else 'L')
-        return pil_image
 
-    def pil_to_tensor(self, pil_image):
-        numpy_image = np.array(pil_image)
-        tensor = torch.from_numpy(numpy_image).float().div(255)  # Convert to range [0, 1]
-        tensor = tensor.unsqueeze(0)  # Add batch dimension
-        return tensor
-        
+        # Debug print to check the final tensor shape
+        print("Final tensor shape:", result_tensor.shape)
+
+        return (result_tensor,)
+
     def _halftone_pil(self, im, cmyk, sample, scale, angles, antialias, border_blending, antialias_scale, shape):
         # If we're antialiasing, we'll multiply the size of the image by this
         # scale while drawing, and then scale it back down again afterwards.
@@ -242,7 +252,7 @@ class CR_HalftoneFilter:
                 h = int((yy2 - yy1) / antialias_scale)
                 half_tone = half_tone.resize((w, h), resample=Image.LANCZOS)
 
-            dots.append(half_tone) 
+            dots.append(half_tone)
 
         return dots
         
