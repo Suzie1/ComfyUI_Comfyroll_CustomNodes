@@ -36,13 +36,16 @@ LIVE_NODE_CLASS_MAPPINGS = {
     ### Misc Nodes
     "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
-    "CR Latent Batch Size": CR_LatentBatchSize, 
-    "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
+    "CR Latent Batch Size": CR_LatentBatchSize,   
     "CR Seed": CR_Seed,
     "CR Prompt Text":CR_PromptText,
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
+    ### Aspect Ratio Nodes
+    "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
+    "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
+    "CR Aspect Ratio": CR_AspectRatio,      
     ### Legacy Nodes
     "CR Image Size": CR_ImageSize,
     "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,    
@@ -83,7 +86,6 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Pipe Switch": CR_InputSwitchPipe,
     ### SDXL Nodes
     "CR SDXL Prompt Mix Presets": CR_PromptMixPresets,
-    "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
     "CR SDXL Style Text": CR_SDXLStyleText,
     "CR SDXL Base Prompt Encoder": CR_SDXLBasePromptEncoder, 
     ### Upscale Nodes
@@ -202,12 +204,15 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Image Output": "💾 CR Image Output",
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Latent Batch Size": "⚙️ CR Latent Batch Size", 
-    "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR Seed": "🌱 CR Seed",
     "CR Prompt Text": "📝 CR Prompt Text",
     "CR Split String": "⚙️ CR Split String",
     "CR Value": "⚙️ CR Value",
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
+    ### Aspect Ratio Nodes
+    "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
+    "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
+    "CR Aspect Ratio": "🔳 CR Aspect Ratio",    
     ### Legacy Nodes
     "CR Image Size": "CR Image Size (Legacy)",
     "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",     
@@ -247,7 +252,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Pipe Switch": "🔀️ CR Pipe Switch",    
     ### SDXL Nodes
     "CR SDXL Prompt Mix Presets": "🌟 CR SDXL Prompt Mix Presets",
-    "CR SDXL Aspect Ratio": "🌟 CR SDXL Aspect Ratio",
     "CR SDXL Style Text": "🌟 CR SDXL Style Text",
     "CR SDXL Base Prompt Encoder": "🌟 CR SDXL Base Prompt Encoder", 
     ### Upscale Nodes
