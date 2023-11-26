@@ -32,8 +32,6 @@ from .animation_nodes.lists import *
 from .animation_nodes.utils import *
 from .animation_nodes.cyclers import *
 
-from .dev_node_mappings import DEV_NODE_CLASS_MAPPINGS, DEV_NODE_DISPLAY_NAME_MAPPINGS
-
 LIVE_NODE_CLASS_MAPPINGS = {
     ### Misc Nodes
     "CR Image Output": CR_ImageOutput,
@@ -43,7 +41,8 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Seed": CR_Seed,
     "CR Prompt Text":CR_PromptText,
     "CR Split String":CR_SplitString,
-    "CR Value": CR_Value, 
+    "CR Value": CR_Value,
+    "CR Conditioning Mixer":CR_ConditioningMixer,
     ### Legacy Nodes
     "CR Image Size": CR_ImageSize,
     "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,    
@@ -208,6 +207,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Prompt Text": "📝 CR Prompt Text",
     "CR Split String": "⚙️ CR Split String",
     "CR Value": "⚙️ CR Value",
+    "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
     ### Legacy Nodes
     "CR Image Size": "CR Image Size (Legacy)",
     "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",     
@@ -276,7 +276,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Mask Text": "🔤️ CR Mask Text",
     "CR Composite Text": "🔤️ CR Composite Text",
     #"CR Arabic Text RTL": "🔤️ CR Arabic Text RTL",
-    "CR Simple Text Watermark": "🔤️ CR Simple Text Watermark (Test)",
+    "CR Simple Text Watermark": "🔤️ CR Simple Text Watermark",
     ### Graphics Filter
     "CR Halftone Filter": "🎨 Halftone Filter",
     "CR Color Tint": "🎨 CR Color Tint",        
