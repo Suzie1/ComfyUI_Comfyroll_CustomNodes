@@ -8,6 +8,7 @@ import numpy as np
 import os
 import sys
 import io
+import comfy.sd
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 import json
@@ -157,26 +158,23 @@ class CR_AspectRatio:
     def INPUT_TYPES(s):
     
         aspect_ratios = ["custom",
-                         "----- SD1.5 -----",
-                         "1:1 square 512x512",
-                         "2:3 portrait 512x768",
-                         "3:4 portrait 512x682",
-                         "3:2 landscape 768x512",
-                         "4:3 landscape 682x512",
-                         "16:9 cinema 910x512",
-                         "1.85:1 cinema 952x512",
-                         "2:1 cinema 1024x512",
-                         "2.39:1 anamorphic 1224x512",
-                         "----- SDXL -----",
-                         "1:1 square 1024x1024",
-                         "3:4 portrait 896x1152",
-                         "5:8 portrait 832x1216",
-                         "9:16 portrait 768x1344",
-                         "9:21 portrait 640x1536",
-                         "4:3 landscape 1152x896",
-                         "3:2 landscape 1216x832",
-                         "16:9 landscape 1344x768",
-                         "21:9 landscape 1536x640"]
+                         "SD1.5 - 1:1 square 512x512",
+                         "SD1.5 - 2:3 portrait 512x768",
+                         "SD1.5 - 3:4 portrait 512x682",
+                         "SD1.5 - 3:2 landscape 768x512",
+                         "SD1.5 - 4:3 landscape 682x512",
+                         "SD1.5 - 16:9 cinema 910x512",
+                         "SD1.5 - 1.85:1 cinema 952x512",
+                         "SD1.5 - 2:1 cinema 1024x512",
+                         "SDXL - 1:1 square 1024x1024",
+                         "SDXL - 3:4 portrait 896x1152",
+                         "SDXL - 5:8 portrait 832x1216",
+                         "SDXL - 9:16 portrait 768x1344",
+                         "SDXL - 9:21 portrait 640x1536",
+                         "SDXL - 4:3 landscape 1152x896",
+                         "SDXL - 3:2 landscape 1216x832",
+                         "SDXL - 16:9 landscape 1344x768",
+                         "SDXL - 21:9 landscape 1536x640"]
                
         return {
             "required": {
@@ -196,42 +194,42 @@ class CR_AspectRatio:
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
         
         # SD1.5
-        if aspect_ratio == "1:1 square 512x512" or aspect_ratio == "----- SD1.5 -----":
+        if aspect_ratio == "SD1.5 - 1:1 square 512x512":
             width, height = 512, 512
-        elif aspect_ratio == "2:3 portrait 512x768":
+        elif aspect_ratio == "SD1.5 - 2:3 portrait 512x768":
             width, height = 512, 768
-        elif aspect_ratio == "16:9 cinema 910x512":
+        elif aspect_ratio == "SD1.5 - 16:9 cinema 910x512":
             width, height = 910, 512
-        elif aspect_ratio == "3:4 portrait 512x682":
+        elif aspect_ratio == "SD1.5 - 3:4 portrait 512x682":
             width, height = 512, 682
-        elif aspect_ratio == "3:2 landscape 768x512":
+        elif aspect_ratio == "SD1.5 - 3:2 landscape 768x512":
             width, height = 768, 512    
-        elif aspect_ratio == "4:3 landscape 682x512":
+        elif aspect_ratio == "SD1.5 - 4:3 landscape 682x512":
             width, height = 682, 512
-        elif aspect_ratio == "1.85:1 cinema 952x512":            
+        elif aspect_ratio == "SD1.5 - 1.85:1 cinema 952x512":            
             width, height = 952, 512
-        elif aspect_ratio == "2:1 cinema 1024x512":
+        elif aspect_ratio == "SD1.5 - 2:1 cinema 1024x512":
             width, height = 1024, 512
-        elif aspect_ratio == "2.39:1 anamorphic 1224x512":
+        elif aspect_ratio == "SD1.5 - 2.39:1 anamorphic 1224x512":
             width, height = 1224, 512 
         # SDXL   
-        if aspect_ratio == "1:1 square 1024x1024" or aspect_ratio == "----- SDXL -----":
+        if aspect_ratio == "SDXL - 1:1 square 1024x1024":
             width, height = 1024, 1024
-        elif aspect_ratio == "3:4 portrait 896x1152":
+        elif aspect_ratio == "SDXL - 3:4 portrait 896x1152":
             width, height = 896, 1152
-        elif aspect_ratio == "5:8 portrait 832x1216":
+        elif aspect_ratio == "SDXL - 5:8 portrait 832x1216":
             width, height = 832, 1216
-        elif aspect_ratio == "9:16 portrait 768x1344":
+        elif aspect_ratio == "SDXL - 9:16 portrait 768x1344":
             width, height = 768, 1344
-        elif aspect_ratio == "9:21 portrait 640x1536":
+        elif aspect_ratio == "SDXL - 9:21 portrait 640x1536":
             width, height = 640, 1536
-        elif aspect_ratio == "4:3 landscape 1152x896":
+        elif aspect_ratio == "SDXL - 4:3 landscape 1152x896":
             width, height = 1152, 896
-        elif aspect_ratio == "3:2 landscape 1216x832":
+        elif aspect_ratio == "SDXL - 3:2 landscape 1216x832":
             width, height = 1216, 832
-        elif aspect_ratio == "16:9 landscape 1344x768":
+        elif aspect_ratio == "SDXL - 16:9 landscape 1344x768":
             width, height = 1344, 768
-        elif aspect_ratio == "21:9 landscape 1536x640":
+        elif aspect_ratio == "SDXL - 21:9 landscape 1536x640":
             width, height = 1536, 640                
         
         if swap_dimensions == "On":
@@ -361,10 +359,7 @@ class CR_Seed:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {
-                    "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
-                },
-        }
+        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff})}}
 
     RETURN_TYPES = ("INT",)
     RETURN_NAMES = ("seed",)
@@ -384,12 +379,10 @@ class CR_LatentBatchSize:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "required": {
-                "latent": ("LATENT", ),
-                "batch_size": ("INT", {"default": 2, "min": 1, "max": 16, "step": 1}),
-            },
-        }
+        return {"required": {"latent": ("LATENT", ),
+                             "batch_size": ("INT", {"default": 2, "min": 1, "max": 16, "step": 1}),
+                            }
+               }
 
     RETURN_TYPES = ("LATENT", )
     FUNCTION = "batchsize"
@@ -411,10 +404,7 @@ class CR_LatentBatchSize:
 class CR_PromptText:
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {
-                    "prompt": ("STRING", {"default": "prompt", "multiline": True}),
-                    },
-                }
+        return {"required": {"prompt": ("STRING", {"default": "prompt", "multiline": True})}}
 
     RETURN_TYPES = ("STRING", )
     RETURN_NAMES = ("prompt", )
@@ -432,7 +422,7 @@ class CR_SplitString:
     
         return {"required": {"text": ("STRING", {"multiline": False, "default": "text"}),
                              "delimiter": ("STRING", {"multiline": False, "default": ","}), 
-                },
+                }
         }
 
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING",)
@@ -454,10 +444,7 @@ class CR_Value:
 
     @classmethod
     def INPUT_TYPES(s):  
-        return {"required": {
-                    "value": ("FLOAT", {"default": 1.0,},)
-               },
-        }
+        return {"required": {"value": ("FLOAT", {"default": 1.0,},)}}
 
     RETURN_TYPES = ("FLOAT", "INT",)
     CATEGORY = icons.get("Comfyroll/Other")
@@ -479,8 +466,8 @@ class CR_ConditioningMixer:
                      "conditioning_2": ("CONDITIONING", ),      
                      "mix_method": (mix_methods, ),
                      "average_strength": ("FLOAT", {"default": 0.5, "min": 0.0, "max": 1.0, "step": 0.01}),
-                     }
-                }
+                    }
+               }
 
     RETURN_TYPES = ("CONDITIONING", )
     FUNCTION = "conditioning"
@@ -540,6 +527,52 @@ class CR_ConditioningMixer:
             return (out, )
             
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_SelectModel:
+    
+    @classmethod
+    def INPUT_TYPES(cls):
+    
+        checkpoint_files = ["None"] + folder_paths.get_filename_list("checkpoints")
+        
+        return {"required": {"ckpt_name1": (checkpoint_files,),
+                             "ckpt_name2": (checkpoint_files,),
+                             "ckpt_name3": (checkpoint_files,),
+                             "ckpt_name4": (checkpoint_files,),
+                             "ckpt_name5": (checkpoint_files,),
+                             "select_model": ("INT", {"default": 1, "min": 1, "max": 5}),
+                            }    
+               }
+
+
+    RETURN_TYPES = ("MODEL", "CLIP", "VAE")
+    FUNCTION = "select_model"
+    CATEGORY = icons.get("Comfyroll/Other")
+
+    def select_model(self, ckpt_name1, ckpt_name2, ckpt_name3, ckpt_name4, ckpt_name5, select_model):
+    
+        # Initialise the list
+        model_list = list()
+    
+        if select_model == 1:
+            model_name = ckpt_name1
+        elif select_model == 2:
+            model_name = ckpt_name2
+        elif select_model == 3:
+            model_name = ckpt_name3
+        elif select_model == 4:
+            model_name = ckpt_name4
+        elif select_model == 5:
+            model_name = ckpt_name5
+            
+        if  model_name == "None":
+            print(f"CR Select Model: No model selected")
+            return()
+
+        ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
+        return comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True,
+                                                     embedding_directory=folder_paths.get_folder_paths("embeddings"))
+            
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -555,7 +588,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Prompt Text":CR_PromptText,
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
-    "CR Conditioning Mixer":CR_ConditioningMixer,    
+    "CR Conditioning Mixer":CR_ConditioningMixer,
+    "CR Select Model": CR_SelectModel,    
 }
 '''
 

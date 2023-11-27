@@ -43,24 +43,27 @@ class CR_SimpleMemeTemplate:
         font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
         file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
         bar_opts = ["no bars", "top", "bottom", "top and bottom"]
-        colors = COLORS[1:]
         simple_meme_presets = ["custom",
                                "One Does Not Simply ... MEME IN COMFY",
                                "This is fine.",
                                "Good Morning ... No Such Thing!"]        
         
         return {"required": {
-                "image": ("IMAGE",),
-                "preset": (simple_meme_presets,),   
-                "text_top": ("STRING", {"multiline": True, "default": "text_top"}),
-                "text_bottom": ("STRING", {"multiline": True, "default": "text_bottom"}),
-                "font_name": (file_list,),
-                "max_font_size": ("INT", {"default": 150, "min": 20, "max": 500}),
-                "font_color": (colors,),
-                "font_outline": (["none", "thin", "thick", "extra thick"],),
-                "bar_color": (colors,),
-                "bar_options": (bar_opts,),
-                }        
+                    "image": ("IMAGE",),
+                    "preset": (simple_meme_presets,),   
+                    "text_top": ("STRING", {"multiline": True, "default": "text_top"}),
+                    "text_bottom": ("STRING", {"multiline": True, "default": "text_bottom"}),
+                    "font_name": (file_list,),
+                    "max_font_size": ("INT", {"default": 150, "min": 20, "max": 500}),
+                    "font_color": (COLORS,),
+                    "font_outline": (["none", "thin", "thick", "extra thick"],),
+                    "bar_color": (COLORS,),
+                    "bar_options": (bar_opts,),
+                },
+                "optional": {
+                    "font_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "bar_color_hex": ("STRING", {"multiline": False, "default": "#000000"})
+                }         
     }
 
     RETURN_TYPES = ("IMAGE", "STRING", )
@@ -71,212 +74,127 @@ class CR_SimpleMemeTemplate:
     def make_meme(self, image, preset,
                   text_top, text_bottom,
                   font_name, max_font_size, font_color, font_outline,
-                  bar_color, bar_options):
+                  bar_color, bar_options,
+                  font_color_hex='#000000', bar_color_hex='#000000'):
 
-        text_color = color_mapping.get(font_color, (0, 0, 0))  # Default to black if the color is not found
+        # Get RGB values for the text and bar colors
+        text_color = get_color_values(font_color, font_color_hex, color_mapping)
+        bar_color = get_color_values(bar_color, bar_color_hex, color_mapping) 
         
-        # Convert tensor images
-        image_3d = image[0, :, :, :]
-
-        # Calculate the height factor
-        if bar_options == "top":
-            height_factor = 1.2
-        elif bar_options == "bottom":
-            height_factor = 1.2
-        elif bar_options == "top and bottom":
-            height_factor = 1.4
-        else:
-            height_factor = 1.0
+        total_images = []
         
-        if preset == "One Does Not Simply ... MEME IN COMFY":
-            text_top = "One Does Not Simply"
-            text_bottom = "MEME IN COMFY"
-        if preset == "This is fine.":
-            text_top = "This is fine."
-            text_bottom = ""            
-        if preset == "Good Morning ... No Such Thing!":
-            text_top = "Good Morning"
-            text_bottom = "\"No Such Thing!\""  
+        for img in image:
         
-        # Create PIL images for the image and text bars
-        back_image = tensor2pil(image_3d)   
-        size = back_image.width, int(back_image.height * height_factor)
-        result_image = Image.new("RGB", size)
-
-        # Define font settings
-        #font_file = "fonts\\" + str(font_name)
-        font_file = os.path.join("fonts", font_name)
-        resolved_font_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), font_file)
-    
-        # Create the drawing context
-        draw = ImageDraw.Draw(result_image)
- 
-        # Create two color bars at the top and bottom
-        bar_width = back_image.width
-        bar_height = back_image.height // 5    ### add parameter for this in adv node
-        top_bar = Image.new("RGB", (bar_width, bar_height), bar_color)
-        bottom_bar = Image.new("RGB", (bar_width, bar_height), bar_color)
-
-        # Composite the result image onto the input image
-        if bar_options == "top" or bar_options == "top and bottom":
-            image_out = result_image.paste(back_image, (0, bar_height))
-        else:
-            image_out = result_image.paste(back_image, (0, 0))
-        
-        # Get the font size and draw the text
-        if bar_options == "top" or bar_options == "top and bottom":
-            result_image.paste(top_bar, (0, 0))
-            font_top = get_font_size(draw, text_top, bar_width, bar_height, resolved_font_path, max_font_size)
-            draw_text_on_image(draw, 0, bar_width, bar_height, text_top, font_top, text_color, font_outline)
-            
-        if bar_options == "bottom" or bar_options == "top and bottom":
-            result_image.paste(bottom_bar, (0, (result_image.height - bar_height)))
-            font_bottom = get_font_size(draw, text_bottom, bar_width, bar_height, resolved_font_path, max_font_size)
-            if bar_options == "bottom":
-                y_position = back_image.height
+            # Calculate the height factor
+            if bar_options == "top":
+                height_factor = 1.2
+            elif bar_options == "bottom":
+                height_factor = 1.2
+            elif bar_options == "top and bottom":
+                height_factor = 1.4
             else:
-                y_position = bar_height + back_image.height
-            draw_text_on_image(draw, y_position, bar_width, bar_height, text_bottom, font_bottom, text_color, font_outline)
+                height_factor = 1.0
+            
+            if preset == "One Does Not Simply ... MEME IN COMFY":
+                text_top = "One Does Not Simply"
+                text_bottom = "MEME IN COMFY"
+            if preset == "This is fine.":
+                text_top = "This is fine."
+                text_bottom = ""            
+            if preset == "Good Morning ... No Such Thing!":
+                text_top = "Good Morning"
+                text_bottom = "\"No Such Thing!\""  
+            
+            # Create PIL images for the image and text bars
+            back_image = tensor2pil(img)   
+            size = back_image.width, int(back_image.height * height_factor)
+            result_image = Image.new("RGB", size)
 
-        # Overlay text on image
-        if bar_options == "bottom" and text_top > "":
-            font_top = get_font_size(draw, text_top, bar_width, bar_height, resolved_font_path, max_font_size)
-            draw_text_on_image(draw, 0, bar_width, bar_height, text_top, font_top, text_color, font_outline)
+            # Define font settings
+            #font_file = "fonts\\" + str(font_name)
+            font_file = os.path.join("fonts", font_name)
+            resolved_font_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), font_file)
+        
+            # Create the drawing context
+            draw = ImageDraw.Draw(result_image)
+     
+            # Create two color bars at the top and bottom
+            bar_width = back_image.width
+            bar_height = back_image.height // 5    ### add parameter for this in adv node
+            top_bar = Image.new("RGB", (bar_width, bar_height), bar_color)
+            bottom_bar = Image.new("RGB", (bar_width, bar_height), bar_color)
 
-        if (bar_options == "top" or bar_options == "none") and text_bottom > "":
-            font_bottom = get_font_size(draw, text_bottom, bar_width, bar_height, resolved_font_path, max_font_size)
-            y_position = back_image.height
-            draw_text_on_image(draw, y_position, bar_width, bar_height, text_bottom, font_bottom, text_color, font_outline)
+            # Composite the result image onto the input image
+            if bar_options == "top" or bar_options == "top and bottom":
+                image_out = result_image.paste(back_image, (0, bar_height))
+            else:
+                image_out = result_image.paste(back_image, (0, 0))
+            
+            # Get the font size and draw the text
+            if bar_options == "top" or bar_options == "top and bottom":
+                result_image.paste(top_bar, (0, 0))
+                font_top = get_font_size(draw, text_top, bar_width, bar_height, resolved_font_path, max_font_size)
+                draw_text_on_image(draw, 0, bar_width, bar_height, text_top, font_top, text_color, font_outline)
+                
+            if bar_options == "bottom" or bar_options == "top and bottom":
+                result_image.paste(bottom_bar, (0, (result_image.height - bar_height)))
+                font_bottom = get_font_size(draw, text_bottom, bar_width, bar_height, resolved_font_path, max_font_size)
+                if bar_options == "bottom":
+                    y_position = back_image.height
+                else:
+                    y_position = bar_height + back_image.height
+                draw_text_on_image(draw, y_position, bar_width, bar_height, text_bottom, font_bottom, text_color, font_outline)
 
-        if bar_options == "no bars" and text_bottom > "":
-            font_bottom = get_font_size(draw, text_bottom, bar_width, bar_height, resolved_font_path, max_font_size)
-            y_position = back_image.height - bar_height
-            draw_text_on_image(draw, y_position, bar_width, bar_height, text_bottom, font_bottom, text_color, font_outline)
+            # Overlay text on image
+            if bar_options == "bottom" and text_top > "":
+                font_top = get_font_size(draw, text_top, bar_width, bar_height, resolved_font_path, max_font_size)
+                draw_text_on_image(draw, 0, bar_width, bar_height, text_top, font_top, text_color, font_outline)
 
-        if bar_options == "no bars" and text_top > "":
-            font_top = get_font_size(draw, text_top, bar_width, bar_height, resolved_font_path, max_font_size)
-            draw_text_on_image(draw, 0, bar_width, bar_height, text_top, font_top, text_color, font_outline)
+            if (bar_options == "top" or bar_options == "none") and text_bottom > "":
+                font_bottom = get_font_size(draw, text_bottom, bar_width, bar_height, resolved_font_path, max_font_size)
+                y_position = back_image.height
+                draw_text_on_image(draw, y_position, bar_width, bar_height, text_bottom, font_bottom, text_color, font_outline)
+
+            if bar_options == "no bars" and text_bottom > "":
+                font_bottom = get_font_size(draw, text_bottom, bar_width, bar_height, resolved_font_path, max_font_size)
+                y_position = back_image.height - bar_height
+                draw_text_on_image(draw, y_position, bar_width, bar_height, text_bottom, font_bottom, text_color, font_outline)
+
+            if bar_options == "no bars" and text_top > "":
+                font_top = get_font_size(draw, text_top, bar_width, bar_height, resolved_font_path, max_font_size)
+                draw_text_on_image(draw, 0, bar_width, bar_height, text_top, font_top, text_color, font_outline)
+     
+            show_help = """Help:
+            
+            The two text entry boxes are for the top and bottom text.
+            these can be added either on a color bar or as an overlay.
+            Both top and bottom text are optional.
+            
+            Only the first two lines will be used for top and bottom text.
+            If you enter more than two lines any additional lines will be ignored.
+            
+            If you enter both top and bottom text and select a single bar (top or bottom),
+            then one of texts will be ouput as overlay text.
+            
+            If you enter both top and bottom text and select no bars,
+            then both texts will be ouput as overlay text."""
+            
+            #image_out = np.array(result_image).astype(np.float32) / 255.0
+            #image_out = torch.from_numpy(image_out).unsqueeze(0)          
+            
+            # Convert the PIL image back to a torch tensor
+            #return (pil2tensor(image_out), show_help, )
+            #return (image_out, show_help, )
+        
+            # convert to tensor
+            out_image = np.array(result_image.convert("RGB")).astype(np.float32) / 255.0
+            out_image = torch.from_numpy(out_image).unsqueeze(0)
+            total_images.append(out_image)
+
+        images_out = torch.cat(total_images, 0)
  
-        show_help = """Help:
-        
-        The two text entry boxes are for the top and bottom text.
-        these can be added either on a color bar or as an overlay.
-        Both top and bottom text are optional.
-        
-        Only the first two lines will be used for top and bottom text.
-        If you enter more than two lines any additional lines will be ignored.
-        
-        If you enter both top and bottom text and select a single bar (top or bottom),
-        then one of texts will be ouput as overlay text.
-        
-        If you enter both top and bottom text and select no bars,
-        then both texts will be ouput as overlay text."""
-        
-        image_out = np.array(result_image).astype(np.float32) / 255.0
-        image_out = torch.from_numpy(image_out).unsqueeze(0)          
-        
         # Convert the PIL image back to a torch tensor
-        #return (pil2tensor(image_out), show_help, )
-        return (image_out, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_MultiPanelMemeTemplate:
-
-    @classmethod
-    def INPUT_TYPES(s):
-
-        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
-        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
-        templates = ["vertical - 2 image + 2 text",
-                     "vertical - 3 image + 3 text",
-                     "vertical - 4 image + 4 text",
-                     "horizontal - 2 image + 2 text",
-                     "horizontal - text bar + 2 image",
-                     "text bar + 1 image with overlay text",
-                     "text bar + 4 image",
-                     "text bar + 4 image with overlay text"] 
-        colors = COLORS[1:]                     
-        
-        return {"required": {
-                "template": (templates,),
-                "image_1": ("IMAGE",),
-                "text_1": ("STRING", {"multiline": True, "default": "text_1"}),
-                "text_2": ("STRING", {"multiline": True, "default": "text_2"}),
-                "text_3": ("STRING", {"multiline": True, "default": "text_3"}),
-                "text_4": ("STRING", {"multiline": True, "default": "text_4"}),              
-                "font_name": (file_list,),
-                "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
-                "font_color": (colors,),
-                "bar_color": (colors,),
-                "reverse_panels": (["No", "Yes"],),
-               },
-                "optional": {
-                "image_2": ("IMAGE",),
-                "image_3": ("IMAGE",),
-                "image_4": ("IMAGE",),
-                }        
-    }
-
-    RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_NAMES = ("image", "show_help", )
-    FUNCTION = "draw_text"
-    CATEGORY = icons.get("Comfyroll/Graphics/Template")
-
-    def draw_text(self, template, image_1, text_1, text_2, text_3, text_4,
-                  font_name, font_size, font_color, bar_color, reverse_panels, image_2 = None, image_3 = None, image_4 = None):
-        
-        show_help = "example help text"
-        
-        # Convert the PIL image back to a torch tensor
-        return image_1, show_help,
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_PopularMemeTemplates:
-
-    @classmethod
-    def INPUT_TYPES(s):
-
-        templates = ["Expanding brain",
-                     "My honest reaction",
-                     "The GF I want",
-                     "Who would win?",
-                     "I have 4 sides",
-                     "This is Fine",
-                     "Is This a Pigeon?",
-                     "Drake hotline bling"]
-        colors = COLORS[1:]                
-        
-        return {"required": {
-                "meme": (templates,),
-                "image_1": ("IMAGE",),
-                        
-                "text_1": ("STRING", {"multiline": True, "default": "text_1"}),
-                "text_2": ("STRING", {"multiline": True, "default": "text_2"}),
-                "text_3": ("STRING", {"multiline": True, "default": "text_3"}),
-                "text_4": ("STRING", {"multiline": True, "default": "text_4"}),
-                "font_name": (file_list,),
-                "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
-                "font_color": (colors,),
-               },
-                "optional": {
-                "image_2": ("IMAGE",), 
-                "image_3": ("IMAGE",),
-                "image_4": ("IMAGE",),
-               }
-    }
-
-    RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_NAMES = ("image", "show_help", )
-    FUNCTION = "draw_text"
-    CATEGORY = icons.get("Comfyroll/Graphics/Template")
-
-    def draw_text(self, meme, image_1, text_1, text_2, text_3, text_4,
-                  font_name, font_size, font_color, image_2 = None, image_3 = None, image_4 = None):
-
-        show_help = "example help text"
-        
-        # Convert the PIL image back to a torch tensor
-        return image_1, show_help,
+        return (images_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ComicPanelTemplates:
@@ -416,8 +334,6 @@ class CR_ComicPanelTemplates:
 '''
 NODE_CLASS_MAPPINGS = {
     "CR Simple Meme Template": CR_SimpleMemeTemplate,
-    #"CR Multi-Panel Meme Template": CR_MultiPanelMemeTemplate,
-    #"CR Popular Meme Templates": CR_PopularMemeTemplates,
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
 }
 '''
