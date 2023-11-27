@@ -444,6 +444,78 @@ class CR_AddAnnotation:
         show_help = "example help text"
  
         return (annotation_stack, show_help, )
+        
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_SimpleImageWatermark:
+    
+    @classmethod
+    def INPUT_TYPES(cls):
+    
+        ALIGN_OPTIONS = ["center", "top left", "top center", "top right", "bottom left", "bottom center", "bottom right"]  
+
+        return {"required": {
+                "image": ("IMAGE",),
+                "watermark_image": ("IMAGE",),
+                "watermark_scale": ("FLOAT", {"default": 1, "min": 0.1, "max": 5.00, "step": 0.01}),
+                "opacity": ("FLOAT", {"default": 0.30, "min": 0.00, "max": 1.00, "step": 0.01}),
+                "align": (ALIGN_OPTIONS,),
+                "x_margin": ("INT", {"default": 20, "min": -1024, "max": 1024}),
+                "y_margin": ("INT", {"default": 20, "min": -1024, "max": 1024}),
+            }
+        }
+
+    RETURN_TYPES = ("IMAGE", )
+    FUNCTION = "overlay_image"
+    CATEGORY = icons.get("Comfyroll/Graphics/Image")
+
+    def overlay_image(self, image, watermark_image, watermark_scale, opacity, align, x_margin, y_margin):
+    
+        # Create PIL images for the background layer
+        image = tensor2pil(image)
+        watermark_image = tensor2pil(watermark_image)
+        
+        # Open images using Pillow
+        image = image.convert("RGBA")
+        watermark = watermark_image.convert("RGBA")
+
+        # Resize watermark if needed
+        watermark = watermark.resize(image.size)
+
+        # Create a transparent layer for the watermark
+        watermark_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(watermark_layer)
+
+        # Calculate the position to place the watermark based on the alignment
+        if align == 'center':
+            watermark_pos = ((image.width - watermark.width) // 2, (image.height - watermark.height) // 2)
+        elif align == 'top left':
+            watermark_pos = (x_margin, y_margin)
+        elif align == 'top center':
+            watermark_pos = ((image.width - watermark.width) // 2, y_margin)
+        elif align == 'top right':
+            watermark_pos = (image.width - watermark.width - x_margin, y_margin)
+        elif align == 'bottom left':
+            watermark_pos = (x_margin, image.height - watermark.height - y_margin)
+        elif align == 'bottom center':
+            watermark_pos = ((image.width - watermark.width) // 2, image.height - watermark.height - y_margin)
+        elif align == 'bottom right':
+            watermark_pos = (image.width - watermark.width - x_margin, image.height - watermark.height - y_margin)
+
+        # Paste the watermark onto the transparent layer
+        #watermark_layer.paste(watermark, watermark_pos, watermark)
+
+        # Blend the images using the specified opacity
+        #image = Image.alpha_composite(image, watermark_layer)
+            
+        # Adjust the opacity of the watermark layer if needed
+        if opacity != 1:
+            watermark_layer = reduce_opacity(watermark_layer, opacity)
+        
+        # Composite the text layer on top of the original image
+        image_out = Image.composite(watermark_layer, image, watermark_layer)
+
+        # Convert the PIL image back to a torch tensor
+        return pil2tensor(image_out)        
                
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -457,7 +529,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Overlay Transparent Image":CR_OverlayTransparentImage,
     "CR Simple Annotations": CR_SimpleAnnotations,
     "CR Apply Annotations": CR_ApplyAnnotations,
-    "CR Add Annotation": CR_AddAnnotation,    
+    "CR Add Annotation": CR_AddAnnotation,
+    "CR Simple Image Watermark": CR_SimpleImageWatermark,    
 }
 '''
 

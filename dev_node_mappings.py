@@ -23,6 +23,7 @@ DEV_NODE_CLASS_MAPPINGS = {
     "CR Add Annotation": CR_AddAnnotation,    
     "CR 3D Polygon": CR_3DPolygon,
     "CR 3D Solids": CR_3DSolids,
+    "CR Simple Image Watermark": CR_SimpleImageWatermark,    
     ### Workflow Dev Nodes
     "CR Job List": CR_JobList,
     "CR Job Scheduler": CR_JobScheduler,
@@ -65,7 +66,8 @@ DEV_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Apply Annotations": "CR Apply Annotations (Prototype)",
     "CR Add Annotation": "CR Add Annotation (Prototype)",    
     "CR 3D Polygon": "CR 3D Polygon (Dev)",
-    "CR 3D Solids": "CR 3D Solids (Dev)",    
+    "CR 3D Solids": "CR 3D Solids (Dev)",
+    "CR Simple Image Watermark": "🌁 CR Simple Image Watermark",    
     "CR Job List": "CR Job List (Prototype)",
     "CR Job Scheduler": "CR Job Scheduler (Prototype)",
     "CR Check Job Complete": "CR Check Job Complete (Prototype)",

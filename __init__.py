@@ -42,6 +42,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
+    "CR Select Model": CR_SelectModel,
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
@@ -209,6 +210,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Split String": "⚙️ CR Split String",
     "CR Value": "⚙️ CR Value",
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
+    "CR Select Model": "🔮 CR Select Model",
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
@@ -290,7 +292,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Simple Text Panel": "🌁 CR Simple Text Panel",
     "CR Color Panel": "🌁 CR Color Panel",
     "CR Page Layout": "🌁 CR Page Layout",
-    "CR Image Border": "🌁 CR Image Border", 
+    "CR Image Border": "🌁 CR Image Border",
     ### Graphics Template
     "CR Simple Meme Template": "👽 CR Simple Meme Template",    
     "CR Comic Panel Templates": "🌁 CR Comic Panel Templates",   

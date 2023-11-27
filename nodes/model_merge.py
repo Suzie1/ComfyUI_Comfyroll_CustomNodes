@@ -11,12 +11,13 @@ from ..categories import icons
 #---------------------------------------------------------------------------------------------------------------------#                        
 # Model Merge Nodes
 #---------------------------------------------------------------------------------------------------------------------#
-# Stacker node for storing a list of models and merge ratios
 class CR_ModelMergeStack:
     
     @classmethod
     def INPUT_TYPES(cls):
+    
         checkpoint_files = ["None"] + folder_paths.get_filename_list("checkpoints")
+        
         return {"required": {"switch_1": (["Off","On"],),
                              "ckpt_name1": (checkpoint_files,),
                              "model_ratio1": ("FLOAT", {"default": 1.0, "min": -100.0, "max": 100.0, "step": 0.01}),
@@ -62,12 +63,13 @@ class CR_ModelMergeStack:
         return (model_list,)
 
 #---------------------------------------------------------------------------------------------------------------------#
-# Merges the models in the model merge stack to produce merged model and clip outputs
 class CR_ApplyModelMerge:
 
     @classmethod
     def INPUT_TYPES(s):
+    
         merge_methods = ["Recursive", "Weighted"]
+        
         return {"required": {"model_stack": ("MODEL_STACK",),
                              "merge_method": (merge_methods,),
                              "normalise_ratios": (["Yes","No"],),
@@ -162,8 +164,8 @@ class CR_ApplyModelMerge:
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS = {
-    "CR Apply Model Merge":CR_ApplyModelMerge,
-    "CR Model Merge Stack":CR_ModelMergeStack,
+    "CR Apply Model Merge": CR_ApplyModelMerge,
+    "CR Model Merge Stack": CR_ModelMergeStack,
 }
 '''
 

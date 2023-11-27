@@ -44,24 +44,27 @@ class CR_UpscaleImage:
                      }
                 }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING",)
+    RETURN_NAMES = ("IMAGE", "show_help",)
     FUNCTION = "upscale"
     CATEGORY = icons.get("Comfyroll/Upscale")
     
     def upscale(self, image, upscale_model, rounding_modulus=8, loops=1, mode="rescale", supersample='true', resampling_method="lanczos", rescale_factor=2, resize_width=1024):
 
-        pil_img = tensor2pil(image)
-        original_width, original_height = pil_img.size
-        
         # Load upscale model 
         up_model = load_model(upscale_model)
 
         # Upscale with model
-        up_image = upscale_with_model(up_model, image)            
-        
-        # Get new size
-        pil_img = tensor2pil(up_image)
-        upscaled_width, upscaled_height = pil_img.size
+        up_image = upscale_with_model(up_model, image)  
+
+        for img in image:
+            pil_img = tensor2pil(img)
+            original_width, original_height = pil_img.size
+
+        for img in up_image:
+            # Get new size
+            pil_img = tensor2pil(img)
+            upscaled_width, upscaled_height = pil_img.size
 
         # Return if no rescale needed
         if upscaled_width == original_width and rescale_factor == 1:
@@ -73,8 +76,10 @@ class CR_UpscaleImage:
         for img in up_image:
             scaled_images.append(pil2tensor(apply_resize_image(tensor2pil(img), original_width, original_height, rounding_modulus, mode, supersample, rescale_factor, resize_width, resampling_method)))
         images_out = torch.cat(scaled_images, dim=0)
-            
-        return (images_out, )
+              
+        show_help = "example help text"
+ 
+        return (images_out, show_help, )        
  
 #---------------------------------------------------------------------------------------------------------------------
 class CR_MultiUpscaleStack:
