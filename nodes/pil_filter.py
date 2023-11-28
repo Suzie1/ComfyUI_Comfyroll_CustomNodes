@@ -121,8 +121,23 @@ class CR_HalftoneFilter:
             tensor = tensor.mul(255).byte()  # Convert to range [0, 255] and change to byte type
         elif tensor.dtype != torch.uint8:  # If not float and not uint8, conversion is needed
             tensor = tensor.byte()  # Convert to byte type
+
         numpy_image = tensor.cpu().numpy()
-        pil_image = Image.fromarray(numpy_image, 'RGB' if tensor.shape[2] == 3 else 'L')
+
+        # Determine the correct mode based on the number of channels
+        if tensor.ndim == 3:
+            if tensor.shape[2] == 1:
+                mode = 'L'  # Grayscale
+            elif tensor.shape[2] == 3:
+                mode = 'RGB'  # RGB
+            elif tensor.shape[2] == 4:
+                mode = 'RGBA'  # RGBA
+            else:
+                raise ValueError(f"Unsupported channel number: {tensor.shape[2]}")
+        else:
+            raise ValueError(f"Unexpected tensor shape: {tensor.shape}")
+
+        pil_image = Image.fromarray(numpy_image, mode)
         return pil_image
 
     def pil_to_tensor(self, pil_image):
