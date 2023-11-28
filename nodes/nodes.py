@@ -544,7 +544,8 @@ class CR_SelectModel:
                }
 
 
-    RETURN_TYPES = ("MODEL", "CLIP", "VAE")
+    RETURN_TYPES = ("MODEL", "CLIP", "VAE", "STRING")
+    RETURN_NAMES = ("MODEL", "CLIP", "VAE", "ckpt_name")
     FUNCTION = "select_model"
     CATEGORY = icons.get("Comfyroll/Other")
 
@@ -569,8 +570,10 @@ class CR_SelectModel:
             return()
 
         ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
-        return comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True,
+        model, clip, vae, clipvision = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True,
                                                      embedding_directory=folder_paths.get_folder_paths("embeddings"))
+             
+        return (model, clip, vae, model_name,)
             
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
