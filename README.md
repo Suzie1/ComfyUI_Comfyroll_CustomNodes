@@ -28,8 +28,12 @@ You can also install the nodes using the following methods:
 
 # List of Custom Nodes
 
-__🌟 SDXL__
+__🔳 Aspect Ratio__
 * CR SDXL Aspect Ratio
+* CR SD1.5 Aspect Ratio
+* CR Aspect Ratio (new 27/11/2023)
+
+__🌟 SDXL__
 * CR SDXL Prompt Mix Presets
 * CR SDXL Style Text
 * CR SDXL Base Prompt Encoder
@@ -59,7 +63,7 @@ __🌈 Graphics - Pattern__
 * CR Checker Pattern
 * CR Polygons
 * CR Color Gradient
-* CR Radial Gradiant (new 23/10/2023)
+* CR Radial Gradiant
 * CR Starburst Lines
 * CR Starburst Colors
 
@@ -73,12 +77,12 @@ __👽 Graphics - Template__
 * CR Simple Meme Template
 
 __🌁 Graphics - Layout__
-* CR Image Panel (new 23/10/2023)
-* CR Page Layout (new 01/11/2023)
-* CR Image Grid Panel (new 01/11/2023)
-* CR Image Border (new 01/11/2023)
-* CR Color Panel (new 01/11/2023)
-* CR Simple Text Panel (new 01/11/2023)
+* CR Image Panel
+* CR Page Layout
+* CR Image Grid Panel
+* CR Image Border
+* CR Color Panel
+* CR Simple Text Panel
 
 __✈️ Module__
 * CR Module Pipe Loader
@@ -133,7 +137,7 @@ __🔀 Logic__
 * CR Clip Input Switch
 * CR Model Input Switch
 * CR ControlNet Input Switch
-* CR VAE Input Switch (new 23/10/2023)
+* CR VAE Input Switch
 * CR Text Input Switch
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
@@ -144,11 +148,11 @@ __📦 Other__
 * CR Split String
 * CR Integer Multiple
 * CR Seed
-* CR SD1.5 Aspect Ratio
-* CR Value (new 01/11/2023)
+* CR Value
+* CR Conditioning Mixer (new 27/11/2023)
+* CR Select Model (new 27/11/2023)
 
 __Deleted Nodes__
-* CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio
 * CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
 * CR SDXL Prompt Mixer replaced by CR SDXL Prompt Mix Presets
 
