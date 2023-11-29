@@ -1,0 +1,562 @@
+{
+  "last_node_id": 38,
+  "last_link_id": 53,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "CheckpointSave",
+      "pos": [
+        1240,
+        720
+      ],
+      "size": {
+        "0": 310,
+        "1": 100
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 31
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 32
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 13
+        }
+      ],
+      "title": "Checkpoint Save",
+      "properties": {
+        "Node name for S&R": "CheckpointSave"
+      },
+      "widgets_values": [
+        "MergeModels/Merge"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "CR Apply LoRA Stack",
+      "pos": [
+        940,
+        680
+      ],
+      "size": {
+        "0": 210,
+        "1": 66
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 49
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 48
+        },
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            31
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "title": "Apply LoRA Stack",
+      "properties": {
+        "Node name for S&R": "CR Apply LoRA Stack"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 25,
+      "type": "Save Text File",
+      "pos": [
+        1240,
+        870
+      ],
+      "size": {
+        "0": 310,
+        "1": 130
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 51
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Save Text File"
+      },
+      "widgets_values": [
+        "./ComfyUI/output/MergeModels/[time(%Y-%m-%d)]",
+        "MergeInfo",
+        "_",
+        4,
+        4
+      ]
+    },
+    {
+      "id": 20,
+      "type": "CR LoRA Stack",
+      "pos": [
+        1050,
+        250
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LORA_STACK",
+          "type": "LORA_STACK",
+          "links": [
+            28
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "LoRA Stack",
+      "properties": {
+        "Node name for S&R": "CR LoRA Stack"
+      },
+      "widgets_values": [
+        "Off",
+        "None",
+        1,
+        1,
+        "Off",
+        "None",
+        1,
+        1,
+        "Off",
+        "SD1_5\\ArknightsDusk_10.safetensors",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 31,
+      "type": "CR Apply Model Merge",
+      "pos": [
+        540,
+        680
+      ],
+      "size": {
+        "0": 330,
+        "1": 146
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_stack",
+          "type": "MODEL_STACK",
+          "link": 52
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            49
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "model_mix_info",
+          "type": "STRING",
+          "links": [
+            51
+          ],
+          "shape": 3,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Apply Model Merge"
+      },
+      "widgets_values": [
+        "Recursive",
+        "Yes",
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 34,
+      "type": "Note",
+      "pos": [
+        -100,
+        650
+      ],
+      "size": {
+        "0": 270,
+        "1": 150
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "title": "Gradients",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Model and CLIP ratios should add up to 1.0.\n\nIf normalise_ratios is on Yes, then the total ratios may be more or less than 1. The model merge will automatically normalise the ratios.\n\n"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 32,
+      "type": "CR Model Merge Stack",
+      "pos": [
+        -100,
+        260
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_stack",
+          "type": "MODEL_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL_STACK",
+          "type": "MODEL_STACK",
+          "links": [
+            53
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Model Merge Stack"
+      },
+      "widgets_values": [
+        "On",
+        "SD1_5\\ComfyrollAnime_v1_fp16_pruned.safetensors",
+        0.33,
+        0.33,
+        "On",
+        "SD1_5\\7th_anime_v3_A.safetensors",
+        0.33,
+        0.33,
+        "Off",
+        "None",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 33,
+      "type": "CR Model Merge Stack",
+      "pos": [
+        250,
+        260
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_stack",
+          "type": "MODEL_STACK",
+          "link": 53
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL_STACK",
+          "type": "MODEL_STACK",
+          "links": [
+            52
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Model Merge Stack"
+      },
+      "widgets_values": [
+        "On",
+        "SD1_5\\mixProV4_v4.safetensors",
+        0.33,
+        0.33,
+        "Off",
+        "None",
+        1,
+        1,
+        "Off",
+        "SD1_5\\mixproyuki77mi_v10.safetensors",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 19,
+      "type": "CR LoRA Stack",
+      "pos": [
+        700,
+        250
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LORA_STACK",
+          "type": "LORA_STACK",
+          "links": [
+            27
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "LoRA Stack",
+      "properties": {
+        "Node name for S&R": "CR LoRA Stack"
+      },
+      "widgets_values": [
+        "Off",
+        "SD1_5\\add_detail.safetensors",
+        0.2,
+        0.2,
+        "Off",
+        "None",
+        1,
+        1,
+        "Off",
+        "SD1_5\\ArknightsNian_20.safetensors",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 12,
+      "type": "VAELoader",
+      "pos": [
+        730,
+        890
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      13,
+      12,
+      0,
+      10,
+      2,
+      "VAE"
+    ],
+    [
+      27,
+      19,
+      0,
+      20,
+      0,
+      "LORA_STACK"
+    ],
+    [
+      28,
+      20,
+      0,
+      21,
+      2,
+      "LORA_STACK"
+    ],
+    [
+      31,
+      21,
+      0,
+      10,
+      0,
+      "MODEL"
+    ],
+    [
+      32,
+      21,
+      1,
+      10,
+      1,
+      "CLIP"
+    ],
+    [
+      48,
+      31,
+      1,
+      21,
+      1,
+      "CLIP"
+    ],
+    [
+      49,
+      31,
+      0,
+      21,
+      0,
+      "MODEL"
+    ],
+    [
+      51,
+      31,
+      2,
+      25,
+      0,
+      "STRING"
+    ],
+    [
+      52,
+      33,
+      0,
+      31,
+      0,
+      "MODEL_STACK"
+    ],
+    [
+      53,
+      32,
+      0,
+      33,
+      0,
+      "MODEL_STACK"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Stacked Model Merge Template (SDXL and 1.5)",
+      "bounding": [
+        -158,
+        154,
+        1762,
+        883
+      ],
+      "color": "#3f789e",
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
