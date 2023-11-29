@@ -458,7 +458,7 @@ def create_and_paste_panel(page, border_thickness, outline_thickness,
     if k < len_images:
         img = images[k]
         image = crop_and_resize_image(img, panel_width, panel_height)
-        image.thumbnail((panel_width, panel_height), Image.ANTIALIAS)
+        image.thumbnail((panel_width, panel_height), Image.Resampling.LANCZOS)
         panel.paste(image, (0, 0))
     panel = ImageOps.expand(panel, border=outline_thickness, fill=outline_color)
     panel = ImageOps.expand(panel, border=border_thickness, fill=bg_color)

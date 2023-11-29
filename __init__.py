@@ -295,7 +295,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Image Border": "🌁 CR Image Border",
     ### Graphics Template
     "CR Simple Meme Template": "👽 CR Simple Meme Template",    
-    "CR Comic Panel Templates": "🌁 CR Comic Panel Templates",   
+    "CR Comic Panel Templates": "👽 CR Comic Panel Templates",   
     ### Index
     "CR Index":"🔢 CR Index",    
     "CR Index Increment": "🔢 CR Index Increment",

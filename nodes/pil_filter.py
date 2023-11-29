@@ -5,7 +5,8 @@
 import torch
 import numpy as np
 from PIL import Image, ImageDraw, ImageStat, ImageFilter
-#from typing import List
+from .graphics_functions import get_color_values
+from ..config import color_mapping, COLORS
 from ..categories import icons
 
 def tensor2pil(image):
@@ -23,32 +24,41 @@ class CR_ColorTint:
     @classmethod
     def INPUT_TYPES(s):
     
-        modes = ["white", "black", "sepia", "red", "green", "blue",
+        #tints = COLORS.append('sepia')
+        '''
+        tints = ["custom", "white", "black", "sepia", "red", "green", "blue",
             "cyan", "magenta", "yellow", "purple", "orange", "warm",
             "cool",  "lime", "navy", "vintage", "rose", "teal",
             "maroon", "peach", "lavender", "olive"]
+        '''    
             
         return {
-            "required": {
-                "image": ("IMAGE",),
-                "strength": ("FLOAT", {"default": 1.0,"min": 0.1,"max": 1.0,"step": 0.1}),
-                "mode": (modes,),
-            },
+            "required": {"image": ("IMAGE",),
+                         "strength": ("FLOAT", {"default": 1.0,"min": 0.1,"max": 1.0,"step": 0.1}),
+                         "mode": (COLORS,),
+                        },
+            "optional": {"tint_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),} 
         }
 
-    RETURN_TYPES = ("IMAGE",)
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )    
     FUNCTION = "color_tint"
-    #CATEGORY = "Comfyroll/Graphics/Filters"
     CATEGORY = icons.get("Comfyroll/Graphics/Filter")
 
-    def color_tint(self, image: torch.Tensor, strength: float, mode: str = "sepia"):
+    def color_tint(self, image: torch.Tensor, strength, mode: str="sepia", tint_color_hex='#000000'):
+    
         if strength == 0:
             return (image,)
-
+            
+        # Get RGB values for the tint color  
+        tint_color = get_color_values(mode, tint_color_hex, color_mapping)    
+        color_rgb = tuple([value / 255 for value in tint_color])
+        
         sepia_weights = torch.tensor([0.2989, 0.5870, 0.1140]).view(1, 1, 1, 3).to(image.device)
-      
+        
         mode_filters = {
-            "white": torch.tensor([1.0, 1.0, 1.0]),
+            "custom": torch.tensor([color_rgb[0], color_rgb[1], color_rgb[2]]),
+            "white": torch.tensor([1, 1, 1]),
             "black": torch.tensor([0, 0, 0]),
             "sepia": torch.tensor([1.0, 0.8, 0.6]),
             "red": torch.tensor([1.0, 0.6, 0.6]),
@@ -78,7 +88,10 @@ class CR_ColorTint:
         tinted = grayscale * scale_filter
 
         result = tinted * strength + image * (1 - strength)
-        return (result,)
+        
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Filter-Nodes"
+        
+        return (result, show_help, ) 
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_HalftoneFilter:
@@ -110,7 +123,7 @@ class CR_HalftoneFilter:
         }
 
     RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_NAMES = ("image", "show_help", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "halftone_effect"
     CATEGORY = icons.get("Comfyroll/Graphics/Filter")
                  
@@ -192,7 +205,7 @@ class CR_HalftoneFilter:
         # Debug print to check the final tensor shape
         print("Final tensor shape:", result_tensor.shape)
 
-        return (result_tensor,)
+        return (result_tensor, show_help, ) 
 
     def _halftone_pil(self, im, cmyk, sample, scale, angles, antialias, border_blending, antialias_scale, shape):
         # If we're antialiasing, we'll multiply the size of the image by this
@@ -268,8 +281,10 @@ class CR_HalftoneFilter:
                 half_tone = half_tone.resize((w, h), resample=Image.LANCZOS)
 
             dots.append(half_tone)
+            
+            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Filter-Nodes"
 
-        return dots
+        return (dots, show_help, )  
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

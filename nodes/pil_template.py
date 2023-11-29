@@ -208,18 +208,12 @@ class CR_ComicPanelTemplates:
                      "G22", "G33",
                      "H2", "H3",
                      "H12", "H13",
-                     #"H121", "H122", "H123", "H131", "H132", "H133",
                      "H21", "H23",
-                     #"H211", "H212", "H213", "H221", "H223",
                      "H31", "H32",
-                     #"H311", "H312", "H313", "H321", "H322", "H323", "H331", "H332",
                      "V2", "V3",
                      "V12", "V13",
-                     #"V121", "V122", "V123", "V131", "V132", "V133",
                      "V21", "V23",
-                     #"V211", "V212", "V213", "V221", "V223",
-                     "V31", "V32"]
-                     #"V311", "V312", "V313", "V321", "V322", "V323", "V331", "V332"]                              
+                     "V31", "V32"]                           
         
         return {"required": {
                     "page_width": ("INT", {"default": 512, "min": 8, "max": 4096}),
@@ -234,7 +228,7 @@ class CR_ComicPanelTemplates:
                },
                 "optional": {
                     "images": ("IMAGE",),
-                    "custom_panel_layout": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "custom_panel_layout": ("STRING", {"multiline": False, "default": "H123"}),
                     "outline_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
                     "panel_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
                     "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
@@ -326,7 +320,9 @@ class CR_ComicPanelTemplates:
             
         show_help = "example help text"
 
-        return (pil2tensor(page), show_help, )         
+        return (pil2tensor(page), show_help, )   
+
+        
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
