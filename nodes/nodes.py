@@ -14,6 +14,8 @@ from PIL.PngImagePlugin import PngInfo
 import json
 import folder_paths
 import typing as tg
+import random
+from .graphics_functions import random_hex_color
 from ..categories import icons
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
@@ -544,8 +546,8 @@ class CR_SelectModel:
                }
 
 
-    RETURN_TYPES = ("MODEL", "CLIP", "VAE", "STRING")
-    RETURN_NAMES = ("MODEL", "CLIP", "VAE", "ckpt_name")
+    RETURN_TYPES = ("MODEL", "CLIP", "VAE", "STRING", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "VAE", "ckpt_name", "show_help", )
     FUNCTION = "select_model"
     CATEGORY = icons.get("Comfyroll/Other")
 
@@ -572,27 +574,60 @@ class CR_SelectModel:
         ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
         model, clip, vae, clipvision = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True,
                                                      embedding_directory=folder_paths.get_folder_paths("embeddings"))
-             
-        return (model, clip, vae, model_name,)
             
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-model"
+            
+        return (model, clip, vae, model_name, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_RandomHexColor:
+    
+    @classmethod
+    def INPUT_TYPES(cls):
+        
+        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),}}
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("hex_color1", "hex_color2", "hex_color3", "hex_color4", "show_help", )
+    OUTPUT_NODE = True
+    FUNCTION = "get_colors"
+    CATEGORY = icons.get("Comfyroll/Other")
+
+    def get_colors(self, seed):
+    
+        # Set the seed
+        random.seed(seed)
+    
+        hex_color1 = random_hex_color()
+        hex_color2 = random_hex_color()
+        hex_color3 = random_hex_color()
+        hex_color4 = random_hex_color()
+        
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-hex-color"
+             
+        return (hex_color1, hex_color2, hex_color3, hex_color4, show_help, )
+                     
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS = {
-    "CR Image Output": CR_ImageOutput,
-    "CR Integer Multiple": CR_IntegerMultipleOf,
+    ### Aspect ratio
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
     "CR Aspect Ratio": CR_AspectRatio,
+    ### Other
+    "CR Image Output": CR_ImageOutput,
+    "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Latent Batch Size":CR_LatentBatchSize
     "CR Seed":CR_Seed,
     "CR Prompt Text":CR_PromptText,
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel,    
+    "CR Select Model": CR_SelectModel, 
+    "CR Random Hex Color": CR_RandomHexColor,    
 }
 '''
 

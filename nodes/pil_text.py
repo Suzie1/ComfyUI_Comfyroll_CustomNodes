@@ -33,9 +33,9 @@ except ImportError:
 
 #---------------------------------------------------------------------------------------------------------------------#
           
-ALIGN_OPTIONS = ["top", "center", "bottom"]                 
+ALIGN_OPTIONS = ["center", "top", "bottom"]                 
 ROTATE_OPTIONS = ["text center", "image center"]
-JUSTIFY_OPTIONS = ["left", "center", "right"]
+JUSTIFY_OPTIONS = ["center", "left", "right"]
 PERSPECTIVE_OPTIONS = ["top", "bottom", "left", "right"]
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -146,7 +146,8 @@ class CR_DrawText:
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
 
     def draw_text(self, image_width, image_height, text,
-                  font_name, font_size, font_color, background_color,
+                  font_name, font_size, font_color, 
+                  background_color,
                   margins, line_spacing,
                   position_x, position_y,
                   align, justify,
