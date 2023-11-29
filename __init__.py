@@ -43,6 +43,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel,
+    "CR Random Hex Color": CR_RandomHexColor,        
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
@@ -211,6 +212,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Value": "⚙️ CR Value",
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
     "CR Select Model": "🔮 CR Select Model",
+    "CR Random Hex Color": "⚙️ CR Random Hex Color",
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
@@ -295,7 +297,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Image Border": "🌁 CR Image Border",
     ### Graphics Template
     "CR Simple Meme Template": "👽 CR Simple Meme Template",    
-    "CR Comic Panel Templates": "🌁 CR Comic Panel Templates",   
+    "CR Comic Panel Templates": "👽 CR Comic Panel Templates",   
     ### Index
     "CR Index":"🔢 CR Index",    
     "CR Index Increment": "🔢 CR Index Increment",

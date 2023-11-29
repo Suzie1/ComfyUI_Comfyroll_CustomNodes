@@ -1,12 +1,24 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## PR44 Nov 28, 2023
+
+__Changed Nodes__
+
+    CR Select Model
+
+    * added ckpt_name output
+	
+__Other Changes__
+
+    - added new Patch Notes page 	
+
 ## PR40 Nov 27, 2023
 
 __Added nodes__
 
     CR Select Model
 
-    * allows selection of model from one of 5 presets 
+    * allows selection of model from one of 5 preset models 
 
 __Changed Nodes__
 
@@ -23,6 +35,7 @@ __Other Changes__
 
     - changed preset RGB for brown to 160, 85, 15  
 
+
 ## PR39 Nov 26, 2023
 
 __Changed Nodes__
@@ -30,6 +43,7 @@ __Changed Nodes__
     CR Halftone Filter
 
     * changed handling for RGBA inputs 
+
 
 ## PR38 Nov 26, 2023
 
@@ -55,6 +69,7 @@ __Changed Nodes__
 
     * added empty_latent output  
 
+
 ## PR37 Nov 19, 2023
 
 __Added Nodes__
@@ -65,7 +80,7 @@ __Added Nodes__
 
 __Other Changes__
 
-    * Merged CR Animation Nodes into Comfyroll custom Nodes
+    * merged CR Animation Nodes into Comfyroll custom Nodes
     * added CR Animation Nodes demo workflows
     * added reduce_opacity function in graphics_functions
 

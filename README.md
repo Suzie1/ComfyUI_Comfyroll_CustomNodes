@@ -1,22 +1,8 @@
 # 🧩 Comfyroll Custom Nodes for SDXL and SD1.5
 
-These nodes were originally made for use in the Comfyroll Template Workflows.
-
-[Comfyroll Template Workflows](https://civitai.com/models/59806/comfyroll-template-workflows)
-
-[Comfyroll Pro Templates](https://civitai.com/models/85619/comfyroll-pro-template)
-
-[Comfyroll SDXL Workflow Templates](https://civitai.com/models/118005/comfyroll-sdxl-workflow-templates)
-
-[SDXL Workflow for ComfyUI with Multi-ControlNet](https://civitai.com/models/129858/sdxl-workflow-for-comfyui-with-multi-controlnet)
-
-[SDXL and SD1.5 Model Merge Templates for ComfyUI](https://civitai.com/models/123125/sdxl-and-sd15-model-merge-templates-for-comfyui)
-
-The nodes can be used in any ComfyUI workflow.  
+These nodes can be used in any ComfyUI workflow.  
 
 # Installation
-
-If you have an old version of the Comfyroll nodes from the Comfyroll Worflow Templates download, please delete this before installing these nodes.
 
 1. cd custom_nodes
 2. git clone https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes.git
@@ -25,6 +11,10 @@ If you have an old version of the Comfyroll nodes from the Comfyroll Worflow Tem
 You can also install the nodes using the following methods:
 * install using [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager)
 * download from [CivitAI](https://civitai.com/models/87609/comfyroll-custom-nodes-for-comfyui)
+
+# Wiki
+
+https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki
 
 # List of Custom Nodes
 
@@ -98,7 +88,6 @@ __🛩️ Pipe__
 __⛏️ Model Merge__
 * CR Model Stack
 * CR Apply Model Merge
-* CR Load Animation Frames
 
 __🔍 Upscale__
 * CR Multi Upscale Stack
@@ -183,6 +172,20 @@ CR Apply Multi-ControlNet Stack can accept inputs from the Control Net Stacker n
 Preset mappings can be found in this CivitAI article:
 
 https://civitai.com/articles/1835
+
+# Comfyroll Workflow Templates
+
+The nodes were originally made for use in the Comfyroll Template Workflows.
+
+[Comfyroll Template Workflows](https://civitai.com/models/59806/comfyroll-template-workflows)
+
+[Comfyroll Pro Templates](https://civitai.com/models/85619/comfyroll-pro-template)
+
+[Comfyroll SDXL Workflow Templates](https://civitai.com/models/118005/comfyroll-sdxl-workflow-templates)
+
+[SDXL Workflow for ComfyUI with Multi-ControlNet](https://civitai.com/models/129858/sdxl-workflow-for-comfyui-with-multi-controlnet)
+
+[SDXL and SD1.5 Model Merge Templates for ComfyUI](https://civitai.com/models/123125/sdxl-and-sd15-model-merge-templates-for-comfyui)
 
 # Node Images
 

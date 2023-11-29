@@ -1,0 +1,3072 @@
+{
+  "last_node_id": 243,
+  "last_link_id": 588,
+  "nodes": [
+    {
+      "id": 125,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        2271.464720934434,
+        -42.51139164477244
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            363
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "RealESRGAN_x2.pth"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 177,
+      "type": "Note",
+      "pos": [
+        -507.1336667459445,
+        828.9509770334472
+      ],
+      "size": {
+        "0": 315.0569152832031,
+        "1": 64.73121643066406
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "title": "Save Model",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "To unhide this node, right click then Mode > Always\n\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 174,
+      "type": "VAELoader",
+      "pos": [
+        68.82123096767066,
+        238.46804881065552
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            503
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae.safetensors"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 205,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        630,
+        -50
+      ],
+      "size": {
+        "0": 458,
+        "1": 132
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            538
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            531
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null
+        }
+      ],
+      "title": "XL Refiner Model",
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SDXL\\sd_xl_refiner_1.0.safetensors"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 206,
+      "type": "SeargePromptText",
+      "pos": [
+        671.3846854124997,
+        386.538436474219
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            532,
+            533,
+            534
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SeargePromptText"
+      },
+      "widgets_values": [
+        "A vibrant 20-year-old woman with a free-spirited style, strolling gracefully through a picturesque meadow adorned with a myriad of colorful flowers. She radiates the essence of summer, her flowing dress and long, sun-kissed hair adding to the natural beauty of the scene"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 207,
+      "type": "SeargePromptText",
+      "pos": [
+        671.3846854124997,
+        666.5384364742179
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            535,
+            536,
+            537
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SeargePromptText"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 208,
+      "type": "SeargeSamplerInputs",
+      "pos": [
+        1641.0815801410135,
+        62.855455210877295
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "sampler_name",
+          "type": "SAMPLER_NAME",
+          "links": [
+            528
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "scheduler",
+          "type": "SCHEDULER_NAME",
+          "links": [
+            529
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SeargeSamplerInputs"
+      },
+      "widgets_values": [
+        "dpmpp_2m",
+        "karras"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 160,
+      "type": "ModelMergeSimple",
+      "pos": [
+        -1318.4105971698255,
+        476.88168464943556
+      ],
+      "size": {
+        "0": 230,
+        "1": 80
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model1",
+          "type": "MODEL",
+          "link": 575
+        },
+        {
+          "name": "model2",
+          "type": "MODEL",
+          "link": 574
+        },
+        {
+          "name": "ratio",
+          "type": "FLOAT",
+          "link": 566,
+          "widget": {
+            "name": "ratio",
+            "config": [
+              "FLOAT",
+              {
+                "default": 1,
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            464
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Model Merge",
+      "properties": {
+        "Node name for S&R": "ModelMergeSimple"
+      },
+      "widgets_values": [
+        0.5
+      ]
+    },
+    {
+      "id": 172,
+      "type": "CR LoRA Stack",
+      "pos": [
+        -972.1116192382817,
+        468.55508251673456
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": 461
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LORA_STACK",
+          "type": "LORA_STACK",
+          "links": [
+            462
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "XL LoRA Stack 2",
+      "properties": {
+        "Node name for S&R": "CR LoRA Stack"
+      },
+      "widgets_values": [
+        "Off",
+        "None",
+        1,
+        1,
+        "Off",
+        "None",
+        1,
+        1,
+        "Off",
+        "None",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 183,
+      "type": "Reroute",
+      "pos": [
+        1430,
+        100
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 489
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            547
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 188,
+      "type": "Reroute",
+      "pos": [
+        510,
+        170
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 503
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            504
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 209,
+      "type": "Reroute",
+      "pos": [
+        1430,
+        250
+      ],
+      "size": [
+        82,
+        26
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 538
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            524
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 95,
+      "type": "EmptyLatentImage",
+      "pos": [
+        530,
+        -160
+      ],
+      "size": {
+        "0": 210,
+        "1": 74
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 540,
+          "widget": {
+            "name": "width",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 8192,
+                "step": 8
+              }
+            ]
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 541,
+          "widget": {
+            "name": "height",
+            "config": [
+              "INT",
+              {
+                "default": 512,
+                "min": 64,
+                "max": 8192,
+                "step": 8
+              }
+            ]
+          }
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "link": 542,
+          "widget": {
+            "name": "batch_size",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": 1,
+                "max": 64
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            549
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 161,
+      "type": "CLIPMergeSimple",
+      "pos": [
+        -1320.2519182689223,
+        609.9827772677869
+      ],
+      "size": {
+        "0": 230,
+        "1": 80
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip1",
+          "type": "CLIP",
+          "link": 555
+        },
+        {
+          "name": "clip2",
+          "type": "CLIP",
+          "link": 556
+        },
+        {
+          "name": "ratio",
+          "type": "FLOAT",
+          "link": 567,
+          "widget": {
+            "name": "ratio",
+            "config": [
+              "FLOAT",
+              {
+                "default": 1,
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            463
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "CLIP Merge",
+      "properties": {
+        "Node name for S&R": "CLIPMergeSimple"
+      },
+      "widgets_values": [
+        0.5
+      ]
+    },
+    {
+      "id": 212,
+      "type": "Reroute",
+      "pos": [
+        1150,
+        -190
+      ],
+      "size": [
+        90.4,
+        26
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 549
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            550
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 211,
+      "type": "Reroute",
+      "pos": [
+        1430,
+        140
+      ],
+      "size": [
+        90.4,
+        26
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 550
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            546
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 185,
+      "type": "Reroute",
+      "pos": [
+        -220,
+        410
+      ],
+      "size": [
+        82,
+        26
+      ],
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 494
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            551
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 167,
+      "type": "CheckpointSave",
+      "pos": [
+        -505.1336667459445,
+        656.9509770334475
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 40,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 468
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 467
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 498
+        }
+      ],
+      "title": "Checkpoint Save",
+      "properties": {
+        "Node name for S&R": "CheckpointSave"
+      },
+      "widgets_values": [
+        "checkpoints/MyModel"
+      ]
+    },
+    {
+      "id": 184,
+      "type": "Reroute",
+      "pos": [
+        -220,
+        470
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 495
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            552
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 197,
+      "type": "Reroute",
+      "pos": [
+        480,
+        410
+      ],
+      "size": [
+        82,
+        26
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 551
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            543
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 196,
+      "type": "Reroute",
+      "pos": [
+        480,
+        470
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 552
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            530
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 189,
+      "type": "Reroute",
+      "pos": [
+        1430,
+        210
+      ],
+      "size": [
+        82,
+        26
+      ],
+      "flags": {},
+      "order": 44,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 543
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            521
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 204,
+      "type": "SeargeSDXLPromptEncoder",
+      "pos": [
+        1230,
+        390
+      ],
+      "size": {
+        "0": 311.32244873046875,
+        "1": 415.3662414550781
+      },
+      "flags": {},
+      "order": 45,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "base_clip",
+          "type": "CLIP",
+          "link": 530
+        },
+        {
+          "name": "refiner_clip",
+          "type": "CLIP",
+          "link": 531
+        },
+        {
+          "name": "pos_g",
+          "type": "STRING",
+          "link": 532,
+          "widget": {
+            "name": "pos_g",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "POS_G"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pos_l",
+          "type": "STRING",
+          "link": 533,
+          "widget": {
+            "name": "pos_l",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "POS_L"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pos_r",
+          "type": "STRING",
+          "link": 534,
+          "widget": {
+            "name": "pos_r",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "POS_R"
+              }
+            ]
+          }
+        },
+        {
+          "name": "neg_g",
+          "type": "STRING",
+          "link": 535,
+          "widget": {
+            "name": "neg_g",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "NEG_G"
+              }
+            ]
+          }
+        },
+        {
+          "name": "neg_l",
+          "type": "STRING",
+          "link": 536,
+          "widget": {
+            "name": "neg_l",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "NEG_L"
+              }
+            ]
+          }
+        },
+        {
+          "name": "neg_r",
+          "type": "STRING",
+          "link": 537,
+          "widget": {
+            "name": "neg_r",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "NEG_R"
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "base_positive",
+          "type": "CONDITIONING",
+          "links": [
+            522
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "base_negative",
+          "type": "CONDITIONING",
+          "links": [
+            523
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "refiner_positive",
+          "type": "CONDITIONING",
+          "links": [
+            525
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "refiner_negative",
+          "type": "CONDITIONING",
+          "links": [
+            526
+          ],
+          "shape": 3,
+          "slot_index": 3
+        }
+      ],
+      "title": "XL Prompt Encoder",
+      "properties": {
+        "Node name for S&R": "SeargeSDXLPromptEncoder"
+      },
+      "widgets_values": [
+        "POS_G",
+        "POS_L",
+        "POS_R",
+        "NEG_G",
+        "NEG_L",
+        "NEG_R",
+        4096,
+        4096,
+        0,
+        0,
+        4096,
+        4096,
+        6,
+        2.5,
+        2048,
+        2048
+      ]
+    },
+    {
+      "id": 118,
+      "type": "VAEDecode",
+      "pos": [
+        2030,
+        200
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 47,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 548
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 504
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            341,
+            364
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 123,
+      "type": "PreviewImage",
+      "pos": [
+        2240,
+        210
+      ],
+      "size": {
+        "0": 520,
+        "1": 800
+      },
+      "flags": {},
+      "order": 48,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 341
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 137,
+      "type": "ImageUpscaleWithModel",
+      "pos": [
+        2271.464720934434,
+        67.48860835522774
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 363
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 364
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            423
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageUpscaleWithModel"
+      }
+    },
+    {
+      "id": 157,
+      "type": "Image Levels Adjustment",
+      "pos": [
+        2621.464720934434,
+        -42.51139164477244
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 423
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            424
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Image Levels Adjustment"
+      },
+      "widgets_values": [
+        0,
+        127.5,
+        255
+      ]
+    },
+    {
+      "id": 135,
+      "type": "SaveImage",
+      "pos": [
+        2810,
+        180
+      ],
+      "size": {
+        "0": 520,
+        "1": 830
+      },
+      "flags": {},
+      "order": 51,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 424,
+          "slot_index": 0
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "Merge/Merge"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 173,
+      "type": "CR Apply LoRA Stack",
+      "pos": [
+        -550,
+        420
+      ],
+      "size": {
+        "0": 210,
+        "1": 66
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 464
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 463
+        },
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": 462
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            468,
+            494
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            467,
+            495
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "title": "Apply LoRA Stack",
+      "properties": {
+        "Node name for S&R": "CR Apply LoRA Stack"
+      }
+    },
+    {
+      "id": 210,
+      "type": "CR SDXL Aspect Ratio",
+      "pos": [
+        70,
+        -190
+      ],
+      "size": {
+        "0": 315,
+        "1": 238
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            540
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            541
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "upscale_factor",
+          "type": "FLOAT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": [
+            542
+          ],
+          "shape": 3,
+          "slot_index": 3
+        }
+      ],
+      "title": "SDXL Aspect Ratio",
+      "properties": {
+        "Node name for S&R": "CR SDXL Aspect Ratio"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "3:4 portrait 896x1152",
+        "Off",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 181,
+      "type": "CR Seed",
+      "pos": [
+        68.82123096767066,
+        98.46804881065545
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            489
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Seed",
+      "properties": {
+        "Node name for S&R": "CR Seed"
+      },
+      "widgets_values": [
+        0,
+        "fixed"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 219,
+      "type": "CR Gradient Float",
+      "pos": [
+        -1340,
+        -80
+      ],
+      "size": {
+        "0": 250,
+        "1": 154
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 564,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            567,
+            568
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "CLIP Gradient",
+      "properties": {
+        "Node name for S&R": "CR Gradient Float"
+      },
+      "widgets_values": [
+        1,
+        0,
+        0,
+        10,
+        0,
+        "Lerp"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 225,
+      "type": "CR Float To String",
+      "pos": [
+        -1640,
+        130
+      ],
+      "size": {
+        "0": 220,
+        "1": 60
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "float_",
+          "type": "FLOAT",
+          "link": 571,
+          "widget": {
+            "name": "float_",
+            "config": [
+              "FLOAT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 1000000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            570
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Float To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 224,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -1650,
+        200
+      ],
+      "size": {
+        "0": 220,
+        "1": 80
+      },
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 570,
+          "widget": {
+            "name": "text",
+            "config": [
+              "STRING",
+              {
+                "forceInput": true
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "0.7"
+      ]
+    },
+    {
+      "id": 222,
+      "type": "CR Float To String",
+      "pos": [
+        -1330,
+        130
+      ],
+      "size": {
+        "0": 220,
+        "1": 60
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "float_",
+          "type": "FLOAT",
+          "link": 568,
+          "widget": {
+            "name": "float_",
+            "config": [
+              "FLOAT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 1000000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            569
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Float To String"
+      },
+      "widgets_values": [
+        0
+      ]
+    },
+    {
+      "id": 218,
+      "type": "CR Current Frame",
+      "pos": [
+        -1330,
+        -160
+      ],
+      "size": {
+        "0": 250,
+        "1": 80
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "link": 563,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            564,
+            565
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Current Frame"
+      },
+      "widgets_values": [
+        3,
+        "Yes"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 221,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -1330,
+        200
+      ],
+      "size": {
+        "0": 220,
+        "1": 80
+      },
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 569,
+          "widget": {
+            "name": "text",
+            "config": [
+              "STRING",
+              {
+                "forceInput": true
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "0.7"
+      ]
+    },
+    {
+      "id": 186,
+      "type": "VAELoader",
+      "pos": [
+        -540,
+        260
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            498
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae_fixed.safetensors"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 162,
+      "type": "CLIPSetLastLayer",
+      "pos": [
+        -1660,
+        660
+      ],
+      "size": {
+        "0": 220,
+        "1": 60
+      },
+      "flags": {
+        "pinned": false,
+        "collapsed": false
+      },
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 577
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            556
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPSetLastLayer"
+      },
+      "widgets_values": [
+        -1
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CLIPSetLastLayer",
+      "pos": [
+        -1660,
+        550
+      ],
+      "size": {
+        "0": 220,
+        "1": 60
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 576
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            555
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPSetLastLayer"
+      },
+      "widgets_values": [
+        -1
+      ]
+    },
+    {
+      "id": 73,
+      "type": "Note",
+      "pos": [
+        -2520,
+        -280
+      ],
+      "size": {
+        "0": 530,
+        "1": 150
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "title": "Workbook Details",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Workflow\nhttps://civitai.com/models/123125\n\nRequires CR Animation Nodes\nhttps://civitai.com/models/137333/comfyui-cr-animation-nodes\n\nSetember 2023\nAkatsuzi\n\n\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 217,
+      "type": "PrimitiveNode",
+      "pos": [
+        -1650,
+        -230
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            563
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "index",
+            "config": [
+              "INT",
+              {
+                "default": 1,
+                "min": -10000,
+                "max": 10000
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        4,
+        "increment"
+      ]
+    },
+    {
+      "id": 229,
+      "type": "CR Apply Model Merge",
+      "pos": [
+        -2120,
+        70
+      ],
+      "size": {
+        "0": 330,
+        "1": 146
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_stack",
+          "type": "MODEL_STACK",
+          "link": 587
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            575
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            576
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "model_mix_info",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "Apply Model Merge 1",
+      "properties": {
+        "Node name for S&R": "CR Apply Model Merge"
+      },
+      "widgets_values": [
+        "Recursive",
+        "Yes",
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 171,
+      "type": "CR LoRA Stack",
+      "pos": [
+        -971.3108651981408,
+        96.30713404293414
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LORA_STACK",
+          "type": "LORA_STACK",
+          "links": [
+            461
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "XL LoRA Stack 1",
+      "properties": {
+        "Node name for S&R": "CR LoRA Stack"
+      },
+      "widgets_values": [
+        "Off",
+        "None",
+        1,
+        1,
+        "Off",
+        "None",
+        1,
+        1,
+        "Off",
+        "None",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 226,
+      "type": "CR Apply Model Merge",
+      "pos": [
+        -2120,
+        450
+      ],
+      "size": {
+        "0": 330,
+        "1": 146
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_stack",
+          "type": "MODEL_STACK",
+          "link": 588
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            574
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            577
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "model_mix_info",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "Apply Model Merge 2",
+      "properties": {
+        "Node name for S&R": "CR Apply Model Merge"
+      },
+      "widgets_values": [
+        "Recursive",
+        "Yes",
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 220,
+      "type": "CR Gradient Float",
+      "pos": [
+        -1670,
+        -80
+      ],
+      "size": {
+        "0": 260,
+        "1": 154
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "current_frame",
+          "type": "INT",
+          "link": 565,
+          "widget": {
+            "name": "current_frame",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 9999,
+                "step": 1
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            566,
+            571
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Model Gradient",
+      "properties": {
+        "Node name for S&R": "CR Gradient Float"
+      },
+      "widgets_values": [
+        1,
+        0,
+        0,
+        10,
+        0,
+        "Lerp"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 242,
+      "type": "Note",
+      "pos": [
+        -1340,
+        790
+      ],
+      "size": {
+        "0": 220,
+        "1": 70
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "title": "Merging",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The output from the two stack merges are merged here\n"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 243,
+      "type": "Note",
+      "pos": [
+        -2010,
+        660
+      ],
+      "size": {
+        "0": 220,
+        "1": 70
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "title": "Merging",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The two model merge stacks are each merged here\n"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 241,
+      "type": "Note",
+      "pos": [
+        -1010,
+        -290
+      ],
+      "size": {
+        "0": 270,
+        "1": 150
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "title": "Gradients",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "The gradients will provide 10 merges stepping between the merged models outputs from stacks 1 and 2\n\nSet the Batch Count in Queue Prompt to 10\n\n"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 239,
+      "type": "CR Model Merge Stack",
+      "pos": [
+        -2480,
+        70
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_stack",
+          "type": "MODEL_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL_STACK",
+          "type": "MODEL_STACK",
+          "links": [
+            587
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "XL Model Merge Stack 1",
+      "properties": {
+        "Node name for S&R": "CR Model Merge Stack"
+      },
+      "widgets_values": [
+        "On",
+        "SDXL\\rundiffusionXL_beta.safetensors",
+        0.5,
+        0.5,
+        "On",
+        "SDXL\\nijiDiffusionXlBase1_v10.safetensors",
+        0.5,
+        0.5,
+        "Off",
+        "None",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 240,
+      "type": "CR Model Merge Stack",
+      "pos": [
+        -2480,
+        450
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_stack",
+          "type": "MODEL_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL_STACK",
+          "type": "MODEL_STACK",
+          "links": [
+            588
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "XL Model Merge Stack 2",
+      "properties": {
+        "Node name for S&R": "CR Model Merge Stack"
+      },
+      "widgets_values": [
+        "On",
+        "SDXL\\dreamshaperXL10_alpha2Xl10.safetensors",
+        0.5,
+        0.5,
+        "On",
+        "SDXL\\copaxRealisticXLSDXL1_v2.safetensors",
+        0.5,
+        0.5,
+        "Off",
+        "None",
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 203,
+      "type": "SeargeSDXLSampler2",
+      "pos": [
+        1641.0815801410135,
+        232.8554552108752
+      ],
+      "size": {
+        "0": 320,
+        "1": 620
+      },
+      "flags": {},
+      "order": 46,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "base_model",
+          "type": "MODEL",
+          "link": 521
+        },
+        {
+          "name": "base_positive",
+          "type": "CONDITIONING",
+          "link": 522
+        },
+        {
+          "name": "base_negative",
+          "type": "CONDITIONING",
+          "link": 523
+        },
+        {
+          "name": "refiner_model",
+          "type": "MODEL",
+          "link": 524
+        },
+        {
+          "name": "refiner_positive",
+          "type": "CONDITIONING",
+          "link": 525
+        },
+        {
+          "name": "refiner_negative",
+          "type": "CONDITIONING",
+          "link": 526
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 546
+        },
+        {
+          "name": "sampler_name",
+          "type": "SAMPLER_NAME",
+          "link": 528
+        },
+        {
+          "name": "scheduler",
+          "type": "SCHEDULER_NAME",
+          "link": 529
+        },
+        {
+          "name": "noise_seed",
+          "type": "INT",
+          "link": 547,
+          "widget": {
+            "name": "noise_seed",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            548
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "SDXL Mix Sampler",
+      "properties": {
+        "Node name for S&R": "SeargeSDXLSampler2"
+      },
+      "widgets_values": [
+        602234572132077,
+        "randomize",
+        24,
+        8,
+        1,
+        1,
+        3,
+        1,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      341,
+      118,
+      0,
+      123,
+      0,
+      "IMAGE"
+    ],
+    [
+      363,
+      125,
+      0,
+      137,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      364,
+      118,
+      0,
+      137,
+      1,
+      "IMAGE"
+    ],
+    [
+      423,
+      137,
+      0,
+      157,
+      0,
+      "IMAGE"
+    ],
+    [
+      424,
+      157,
+      0,
+      135,
+      0,
+      "IMAGE"
+    ],
+    [
+      461,
+      171,
+      0,
+      172,
+      0,
+      "LORA_STACK"
+    ],
+    [
+      462,
+      172,
+      0,
+      173,
+      2,
+      "LORA_STACK"
+    ],
+    [
+      463,
+      161,
+      0,
+      173,
+      1,
+      "CLIP"
+    ],
+    [
+      464,
+      160,
+      0,
+      173,
+      0,
+      "MODEL"
+    ],
+    [
+      467,
+      173,
+      1,
+      167,
+      1,
+      "CLIP"
+    ],
+    [
+      468,
+      173,
+      0,
+      167,
+      0,
+      "MODEL"
+    ],
+    [
+      489,
+      181,
+      0,
+      183,
+      0,
+      "*"
+    ],
+    [
+      494,
+      173,
+      0,
+      185,
+      0,
+      "*"
+    ],
+    [
+      495,
+      173,
+      1,
+      184,
+      0,
+      "*"
+    ],
+    [
+      498,
+      186,
+      0,
+      167,
+      2,
+      "VAE"
+    ],
+    [
+      503,
+      174,
+      0,
+      188,
+      0,
+      "*"
+    ],
+    [
+      504,
+      188,
+      0,
+      118,
+      1,
+      "VAE"
+    ],
+    [
+      521,
+      189,
+      0,
+      203,
+      0,
+      "MODEL"
+    ],
+    [
+      522,
+      204,
+      0,
+      203,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      523,
+      204,
+      1,
+      203,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      524,
+      209,
+      0,
+      203,
+      3,
+      "MODEL"
+    ],
+    [
+      525,
+      204,
+      2,
+      203,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      526,
+      204,
+      3,
+      203,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      528,
+      208,
+      0,
+      203,
+      7,
+      "SAMPLER_NAME"
+    ],
+    [
+      529,
+      208,
+      1,
+      203,
+      8,
+      "SCHEDULER_NAME"
+    ],
+    [
+      530,
+      196,
+      0,
+      204,
+      0,
+      "CLIP"
+    ],
+    [
+      531,
+      205,
+      1,
+      204,
+      1,
+      "CLIP"
+    ],
+    [
+      532,
+      206,
+      0,
+      204,
+      2,
+      "STRING"
+    ],
+    [
+      533,
+      206,
+      0,
+      204,
+      3,
+      "STRING"
+    ],
+    [
+      534,
+      206,
+      0,
+      204,
+      4,
+      "STRING"
+    ],
+    [
+      535,
+      207,
+      0,
+      204,
+      5,
+      "STRING"
+    ],
+    [
+      536,
+      207,
+      0,
+      204,
+      6,
+      "STRING"
+    ],
+    [
+      537,
+      207,
+      0,
+      204,
+      7,
+      "STRING"
+    ],
+    [
+      538,
+      205,
+      0,
+      209,
+      0,
+      "*"
+    ],
+    [
+      540,
+      210,
+      0,
+      95,
+      0,
+      "INT"
+    ],
+    [
+      541,
+      210,
+      1,
+      95,
+      1,
+      "INT"
+    ],
+    [
+      542,
+      210,
+      3,
+      95,
+      2,
+      "INT"
+    ],
+    [
+      543,
+      197,
+      0,
+      189,
+      0,
+      "*"
+    ],
+    [
+      546,
+      211,
+      0,
+      203,
+      6,
+      "LATENT"
+    ],
+    [
+      547,
+      183,
+      0,
+      203,
+      9,
+      "INT"
+    ],
+    [
+      548,
+      203,
+      0,
+      118,
+      0,
+      "LATENT"
+    ],
+    [
+      549,
+      95,
+      0,
+      212,
+      0,
+      "*"
+    ],
+    [
+      550,
+      212,
+      0,
+      211,
+      0,
+      "*"
+    ],
+    [
+      551,
+      185,
+      0,
+      197,
+      0,
+      "*"
+    ],
+    [
+      552,
+      184,
+      0,
+      196,
+      0,
+      "*"
+    ],
+    [
+      555,
+      2,
+      0,
+      161,
+      0,
+      "CLIP"
+    ],
+    [
+      556,
+      162,
+      0,
+      161,
+      1,
+      "CLIP"
+    ],
+    [
+      563,
+      217,
+      0,
+      218,
+      0,
+      "INT"
+    ],
+    [
+      564,
+      218,
+      0,
+      219,
+      0,
+      "INT"
+    ],
+    [
+      565,
+      218,
+      0,
+      220,
+      0,
+      "INT"
+    ],
+    [
+      566,
+      220,
+      0,
+      160,
+      2,
+      "FLOAT"
+    ],
+    [
+      567,
+      219,
+      0,
+      161,
+      2,
+      "FLOAT"
+    ],
+    [
+      568,
+      219,
+      0,
+      222,
+      0,
+      "FLOAT"
+    ],
+    [
+      569,
+      222,
+      0,
+      221,
+      0,
+      "STRING"
+    ],
+    [
+      570,
+      225,
+      0,
+      224,
+      0,
+      "STRING"
+    ],
+    [
+      571,
+      220,
+      0,
+      225,
+      0,
+      "FLOAT"
+    ],
+    [
+      574,
+      226,
+      0,
+      160,
+      1,
+      "MODEL"
+    ],
+    [
+      575,
+      229,
+      0,
+      160,
+      0,
+      "MODEL"
+    ],
+    [
+      576,
+      229,
+      1,
+      2,
+      0,
+      "CLIP"
+    ],
+    [
+      577,
+      226,
+      1,
+      162,
+      0,
+      "CLIP"
+    ],
+    [
+      587,
+      239,
+      0,
+      229,
+      0,
+      "MODEL_STACK"
+    ],
+    [
+      588,
+      240,
+      0,
+      226,
+      0,
+      "MODEL_STACK"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Prompt",
+      "bounding": [
+        626,
+        264,
+        482,
+        678
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "XL Models",
+      "bounding": [
+        -2524,
+        -25,
+        772,
+        835
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "XL LoRAs",
+      "bounding": [
+        -1002,
+        -6,
+        383,
+        847
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Sampling",
+      "bounding": [
+        1608,
+        -32,
+        386,
+        968
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Upscale and Levels",
+      "bounding": [
+        2238,
+        -130,
+        731,
+        233
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "SDXL Model Gradient Merge with Model Merge Stacks",
+      "bounding": [
+        -2563,
+        -385,
+        2447,
+        1430
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Merge Models",
+      "bounding": [
+        -1346,
+        394,
+        287,
+        335
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Setup",
+      "bounding": [
+        33,
+        -282,
+        397,
+        629
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Save Model",
+      "bounding": [
+        -535,
+        569,
+        376,
+        363
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Model Preview",
+      "bounding": [
+        -12,
+        -381,
+        3380,
+        1429
+      ],
+      "color": "#3f789e",
+      "locked": false
+    },
+    {
+      "title": "Gradients",
+      "bounding": [
+        -1693,
+        -318,
+        635,
+        675
+      ],
+      "color": "#3f789e",
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
