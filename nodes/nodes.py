@@ -44,11 +44,11 @@ class CR_AspectRatioSD15:
                
         return {
             "required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "width": ("INT", {"default": 512, "min": 64, "max": 8192}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
@@ -109,11 +109,11 @@ class CR_SDXLAspectRatio:
         
         return {
             "required": {
-                "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
+                "width": ("INT", {"default": 1024, "min": 64, "max": 8192}),
+                "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
@@ -180,11 +180,11 @@ class CR_AspectRatio:
                
         return {
             "required": {
-                "width": ("INT", {"default": 1024, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 1024, "min": 64, "max": 2048}),
+                "width": ("INT", {"default": 1024, "min": 64, "max": 8192}),
+                "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000}),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }

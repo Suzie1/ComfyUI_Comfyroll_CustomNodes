@@ -62,22 +62,6 @@ LIVE_NODE_CLASS_MAPPINGS = {
     ### Model Merge Nodes
     "CR Apply Model Merge": CR_ApplyModelMerge,
     "CR Model Merge Stack": CR_ModelMergeStack,
-    ### Utils Logic Nodes
-    "CR Image Input Switch": CR_ImageInputSwitch,
-    "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
-    "CR Latent Input Switch": CR_LatentInputSwitch,
-    "CR Conditioning Input Switch": CR_ConditioningInputSwitch,
-    "CR Clip Input Switch": CR_ClipInputSwitch,
-    "CR Model Input Switch": CR_ModelInputSwitch,
-    "CR ControlNet Input Switch": CR_ControlNetInputSwitch,
-    "CR VAE Input Switch": CR_VAEInputSwitch,    
-    "CR Text Input Switch": CR_TextInputSwitch,
-    "CR Text Input Switch (4 way)": CR_TextInputSwitch4way,
-    "CR Switch Model and CLIP": CR_ModelAndCLIPInputSwitch,  
-    ### Utils Process
-    "CR Batch Process Switch": CR_BatchProcessSwitch,    
-    "CR Img2Img Process Switch": CR_Img2ImgProcessSwitch,
-    "CR Hires Fix Process Switch": CR_HiResFixProcessSwitch,
     ### Pipe Nodes
     "CR Module Pipe Loader": CR_ModulePipeLoader,
     "CR Module Input": CR_ModuleInput,
@@ -130,13 +114,29 @@ LIVE_NODE_CLASS_MAPPINGS = {
     ### Graphics Template
     "CR Simple Meme Template": CR_SimpleMemeTemplate,     
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
-    ### Utils Index
+    ### Utils Logic Nodes
+    "CR Image Input Switch": CR_ImageInputSwitch,
+    "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
+    "CR Latent Input Switch": CR_LatentInputSwitch,
+    "CR Conditioning Input Switch": CR_ConditioningInputSwitch,
+    "CR Clip Input Switch": CR_ClipInputSwitch,
+    "CR Model Input Switch": CR_ModelInputSwitch,
+    "CR ControlNet Input Switch": CR_ControlNetInputSwitch,
+    "CR VAE Input Switch": CR_VAEInputSwitch,    
+    "CR Text Input Switch": CR_TextInputSwitch,
+    "CR Text Input Switch (4 way)": CR_TextInputSwitch4way,
+    "CR Switch Model and CLIP": CR_ModelAndCLIPInputSwitch,  
+    ### Utils Process Nodes
+    "CR Batch Process Switch": CR_BatchProcessSwitch,    
+    "CR Img2Img Process Switch": CR_Img2ImgProcessSwitch,
+    "CR Hires Fix Process Switch": CR_HiResFixProcessSwitch,    
+    ### Utils Index Nodes
     "CR Index": CR_Index,    
     "CR Index Increment": CR_IncrementIndex,
     "CR Index Multiply": CR_MultiplyIndex,
     "CR Index Reset": CR_IndexReset,
     "CR Trigger": CR_Trigger,
-    ### Utils Conversion    
+    ### Utils Conversion Nodes  
     "CR String To Number": CR_StringToNumber,
     "CR String To Combo": CR_StringToCombo,    
     "CR Float To String": CR_FloatToString,
@@ -169,7 +169,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Simple Prompt List Keyframes": CR_SimplePromptListKeyframes,
     "CR Keyframe List": CR_KeyframeList,    
     "CR Prompt Text": CR_PromptText,
-    "CR Load Prompt Style": CR_LoadPromptStyle,
+    #"CR Load Prompt Style": CR_LoadPromptStyle,
     "CR Encode Scheduled Prompts": CR_EncodeScheduledPrompts,      
     # Interpolation
     "CR Gradient Float": CR_GradientFloat,
@@ -231,21 +231,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     ### Model Merge Nodes
     "CR Apply Model Merge": "⛏️ CR Apply Model Merge",
     "CR Model Merge Stack": "⛏️ CR Model Merge Stack",
-    ### Logic Nodes
-    "CR Image Input Switch": "🔀 CR Image Input Switch",
-    "CR Image Input Switch (4 way)": "🔀 CR Image Input Switch (4 way)",
-    "CR Latent Input Switch": "🔀 CR Latent Input Switch",
-    "CR Conditioning Input Switch": "🔀 CR Conditioning Input Switch",
-    "CR Clip Input Switch": "🔀 CR Clip Input Switch",
-    "CR Model Input Switch": "🔀 CR Model Input Switch",
-    "CR ControlNet Input Switch": "🔀 CR ControlNet Input Switch",
-    "CR VAE Input Switch": "🔀 CR VAE Input Switch",     
-    "CR Text Input Switch": "🔀 CR Text Input Switch",
-    "CR Text Input Switch (4 way)": "🔀 CR Text Input Switch (4 way)",
-    "CR Switch Model and CLIP": "🔀 CR Switch Model and CLIP",    
-    "CR Batch Process Switch": "🔂 CR Batch Process Switch",    
-    "CR Img2Img Process Switch": "🔂 CR Img2Img Process Switch",
-    "CR Hires Fix Process Switch": "🔂 CR Hires Fix Process Switch",
     ### Pipe Nodes
     "CR Module Pipe Loader": "✈️ CR Module Pipe Loader",
     "CR Module Input": "✈️ CR Module Input",
@@ -297,14 +282,30 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Image Border": "🌁 CR Image Border",
     ### Graphics Template
     "CR Simple Meme Template": "👽 CR Simple Meme Template",    
-    "CR Comic Panel Templates": "👽 CR Comic Panel Templates",   
-    ### Index
+    "CR Comic Panel Templates": "👽 CR Comic Panel Templates",
+    ### Utils Logic Nodes
+    "CR Image Input Switch": "🔀 CR Image Input Switch",
+    "CR Image Input Switch (4 way)": "🔀 CR Image Input Switch (4 way)",
+    "CR Latent Input Switch": "🔀 CR Latent Input Switch",
+    "CR Conditioning Input Switch": "🔀 CR Conditioning Input Switch",
+    "CR Clip Input Switch": "🔀 CR Clip Input Switch",
+    "CR Model Input Switch": "🔀 CR Model Input Switch",
+    "CR ControlNet Input Switch": "🔀 CR ControlNet Input Switch",
+    "CR VAE Input Switch": "🔀 CR VAE Input Switch",     
+    "CR Text Input Switch": "🔀 CR Text Input Switch",
+    "CR Text Input Switch (4 way)": "🔀 CR Text Input Switch (4 way)",
+    "CR Switch Model and CLIP": "🔀 CR Switch Model and CLIP",
+    ### Utils Process Nodes
+    "CR Batch Process Switch": "🔂 CR Batch Process Switch",    
+    "CR Img2Img Process Switch": "🔂 CR Img2Img Process Switch",
+    "CR Hires Fix Process Switch": "🔂 CR Hires Fix Process Switch",    
+    ### Utils Index Nodes
     "CR Index":"🔢 CR Index",    
     "CR Index Increment": "🔢 CR Index Increment",
     "CR Index Multiply": "🔢 CR Index Multiply",
     "CR Index Reset": "🔢 CR Index Reset",
     "CR Trigger": "🔢 CR Trigger",
-    ### Conversion    
+    ### Utils Conversion Nodes
     "CR String To Number": "🔧 CR String To Number",
     "CR String To Combo": "🔧 CR String To Combo",    
     "CR Float To String": "🔧 CR Float To String",
@@ -337,7 +338,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Simple Prompt List Keyframes": "📝 CR Simple Prompt List Keyframes",
     "CR Keyframe List": "📝 CR Keyframe List",    
     "CR Prompt Text": "📝 CR Prompt Text",
-    "CR Load Prompt Style": "📝 CR Load Prompt Style",
+    #"CR Load Prompt Style": "📝 CR Load Prompt Style",
     "CR Encode Scheduled Prompts": "📝 CR Encode Scheduled Prompts",      
     # Interpolation
     "CR Gradient Float": "🔢 CR Gradient Float",
