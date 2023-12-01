@@ -114,7 +114,8 @@ class CR_HalftoneGrid:
                 }
         }        
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "halftone"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
@@ -150,8 +151,10 @@ class CR_HalftoneGrid:
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-halftone-grid"
         
-        return(pil2tensor(img),)
+        return(pil2tensor(img), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ColorBars:
@@ -176,7 +179,8 @@ class CR_ColorBars:
                 }
         }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
@@ -249,7 +253,9 @@ class CR_ColorBars:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        return pil2tensor(img),
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-color-bars"
+
+        return (pil2tensor(img), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_StyleBars:
@@ -268,7 +274,8 @@ class CR_StyleBars:
                     }
         }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
@@ -314,7 +321,9 @@ class CR_StyleBars:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        return pil2tensor(img),
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-style-bars"
+
+        return (pil2tensor(img), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ColorGradient:
@@ -336,7 +345,8 @@ class CR_ColorGradient:
                 }
         }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMESS = ("IMAGE", "show_help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
@@ -406,7 +416,9 @@ class CR_ColorGradient:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        return pil2tensor(img),
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-color-gradient"
+
+        return (pil2tensor(img), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_RadialGradient:
@@ -428,7 +440,8 @@ class CR_RadialGradient:
                 }
         }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_Help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
@@ -475,7 +488,9 @@ class CR_RadialGradient:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        return pil2tensor(img),
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-radial-gradiant"
+
+        return (pil2tensor(img), show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_CheckerPattern:
@@ -500,7 +515,8 @@ class CR_CheckerPattern:
                 }        
     }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
@@ -550,7 +566,9 @@ class CR_CheckerPattern:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        return pil2tensor(img),
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-checker-pattern"
+
+        return (pil2tensor(img), show_help, )
        
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_Polygons:
@@ -578,7 +596,8 @@ class CR_Polygons:
                 } 
     }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 
@@ -632,7 +651,9 @@ class CR_Polygons:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        return pil2tensor(img),   
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-polygons"
+
+        return (pil2tensor(img), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_StarburstLines:
@@ -658,7 +679,8 @@ class CR_StarburstLines:
                 } 
     }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
     
@@ -709,7 +731,9 @@ class CR_StarburstLines:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        return pil2tensor(img), 
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-starburst-lines"
+
+        return (pil2tensor(img), show_help, ) 
         
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_StarburstColors:
@@ -734,7 +758,8 @@ class CR_StarburstColors:
                 }
     }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
         
@@ -799,7 +824,9 @@ class CR_StarburstColors:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        return pil2tensor(img), 
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-starburst-colors"
+
+        return (pil2tensor(img), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

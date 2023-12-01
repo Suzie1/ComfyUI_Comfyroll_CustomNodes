@@ -212,8 +212,8 @@ class CR_MaskText:
                 }         
     }
 
-    RETURN_TYPES = ("IMAGE", "STRING")
-    RETURN_NAMES = ("IMAGE", "show_help")
+    RETURN_TYPES = ("IMAGE", "STRING",)
+    RETURN_NAMES = ("IMAGE", "show_help",)
     FUNCTION = "mask_text"
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
     
@@ -347,7 +347,7 @@ class CR_ArabicTextRTL:
         
         show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-arabic-text-rtl"
                 
-        return rtl_text, show_help,
+        return (rtl_text, show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SimpleTextWatermark:
