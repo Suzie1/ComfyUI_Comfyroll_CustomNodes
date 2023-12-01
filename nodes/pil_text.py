@@ -187,22 +187,22 @@ class CR_MaskText:
         file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
                       
         return {"required": {
-                "image": ("IMAGE",),
-                "text": ("STRING", {"multiline": True, "default": "text"}),
-                "font_name": (file_list,),
-                "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
-                "background_color": (COLORS,),
-                "align": (ALIGN_OPTIONS,),
-                "justify": (JUSTIFY_OPTIONS,),
-                "margins": ("INT", {"default": 0, "min": -1024, "max": 1024}),
-                "line_spacing": ("INT", {"default": 0, "min": -1024, "max": 1024}),
-                "position_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
-                "position_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
-                "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
-                "rotation_options": (ROTATE_OPTIONS,),             
+                    "image": ("IMAGE",),
+                    "text": ("STRING", {"multiline": True, "default": "text"}),
+                    "font_name": (file_list,),
+                    "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
+                    "background_color": (COLORS,),
+                    "align": (ALIGN_OPTIONS,),
+                    "justify": (JUSTIFY_OPTIONS,),
+                    "margins": ("INT", {"default": 0, "min": -1024, "max": 1024}),
+                    "line_spacing": ("INT", {"default": 0, "min": -1024, "max": 1024}),
+                    "position_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                    "position_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                    "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
+                    "rotation_options": (ROTATE_OPTIONS,),             
                 },
                 "optional": {
-                "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"})
+                    "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"})
                 }         
     }
 
@@ -254,19 +254,19 @@ class CR_CompositeText:
         file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
                              
         return {"required": {
-                "image_text": ("IMAGE",),
-                "image_background": ("IMAGE",),
-                "text": ("STRING", {"multiline": True, "default": "text"}),
-                "font_name": (file_list,),
-                "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
-                "align": (ALIGN_OPTIONS,),
-                "justify": (JUSTIFY_OPTIONS,),
-                "margins": ("INT", {"default": 0, "min": -1024, "max": 1024}),
-                "line_spacing": ("INT", {"default": 0, "min": -1024, "max": 1024}),
-                "position_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
-                "position_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
-                "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
-                "rotation_options": (ROTATE_OPTIONS,),
+                    "image_text": ("IMAGE",),
+                    "image_background": ("IMAGE",),
+                    "text": ("STRING", {"multiline": True, "default": "text"}),
+                    "font_name": (file_list,),
+                    "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
+                    "align": (ALIGN_OPTIONS,),
+                    "justify": (JUSTIFY_OPTIONS,),
+                    "margins": ("INT", {"default": 0, "min": -1024, "max": 1024}),
+                    "line_spacing": ("INT", {"default": 0, "min": -1024, "max": 1024}),
+                    "position_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                    "position_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                    "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
+                    "rotation_options": (ROTATE_OPTIONS,),
                 }        
     }
 

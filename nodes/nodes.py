@@ -15,7 +15,7 @@ import json
 import folder_paths
 import typing as tg
 import random
-from .graphics_functions import random_hex_color
+from .graphics_functions import random_hex_color, random_rgb
 from ..categories import icons
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
@@ -606,6 +606,34 @@ class CR_RandomHexColor:
         show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-hex-color"
              
         return (hex_color1, hex_color2, hex_color3, hex_color4, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_RandomRGB:
+    
+    @classmethod
+    def INPUT_TYPES(cls):
+        
+        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),}}
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("rgb_1", "rgb_2", "rgb_3", "rgb_4", "show_help", )
+    OUTPUT_NODE = True
+    FUNCTION = "get_colors"
+    CATEGORY = icons.get("Comfyroll/Other")
+
+    def get_colors(self, seed):
+    
+        # Set the seed
+        random.seed(seed)
+    
+        rgb_1 = random_rgb()
+        rgb_2 = random_rgb()
+        rgb_3 = random_rgb()
+        rgb_4 = random_rgb()
+        
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-rgb"
+             
+        return (rgb_1, rgb_2, rgb_3, rgb_4, show_help, )
                      
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -627,7 +655,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel, 
-    "CR Random Hex Color": CR_RandomHexColor,    
+    "CR Random Hex Color": CR_RandomHexColor,
+    "CR Random RGB": CR_RandomRGB,     
 }
 '''
 

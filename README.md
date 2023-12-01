@@ -12,6 +12,11 @@ You can also install the nodes using the following methods:
 * install using [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager)
 * download from [CivitAI](https://civitai.com/models/87609/comfyroll-custom-nodes-for-comfyui)
 
+# Patch Notes
+
+https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
+
+
 # Wiki
 
 https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki
