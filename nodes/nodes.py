@@ -53,7 +53,7 @@ class CR_AspectRatioSD15:
             }
         }
     RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
-    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", "show_help")
+    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", "show_help", )
     FUNCTION = "Aspect_Ratio"
     CATEGORY = icons.get("Comfyroll/Aspect Ratio")
 
@@ -352,8 +352,8 @@ class CR_IntegerMultipleOf:
             }
         }
     
-    RETURN_TYPES =("INT", "STRING")
-    RETURN_NAMES =("INT", "show_help")
+    RETURN_TYPES =("INT", "STRING", )
+    RETURN_NAMES =("INT", "show_help", )
     FUNCTION = "int_multiple_of"    
     CATEGORY = icons.get("Comfyroll/Other")
     
@@ -374,7 +374,7 @@ class CR_Seed:
         return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff})}}
 
     RETURN_TYPES = ("INT", "STRING", )
-    RETURN_NAMES = ("seed", "show_help")
+    RETURN_NAMES = ("seed", "show_help", )
     FUNCTION = "seedint"
     OUTPUT_NODE = True
     CATEGORY = icons.get("Comfyroll/Other")
@@ -421,14 +421,14 @@ class CR_PromptText:
     def INPUT_TYPES(s):
         return {"required": {"prompt": ("STRING", {"default": "prompt", "multiline": True})}}
 
-    RETURN_TYPES = ("STRING", "STRING")
-    RETURN_NAMES = ("prompt", "show_help")
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("prompt", "show_help", )
     FUNCTION = "get_value"
     CATEGORY = icons.get("Comfyroll/Other")
 
     def get_value(self, prompt):
         show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-prompt-text"
-        return (prompt,show_help, )
+        return (prompt, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SplitString:
@@ -441,8 +441,8 @@ class CR_SplitString:
                 }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING")
-    RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4", "show_help")    
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4", "show_help", )    
     FUNCTION = "split"
     CATEGORY = icons.get("Comfyroll/Other")
 
@@ -464,8 +464,8 @@ class CR_Value:
     def INPUT_TYPES(s):  
         return {"required": {"value": ("FLOAT", {"default": 1.0,},)}}
 
-    RETURN_TYPES = ("FLOAT", "INT", "STRING")
-    RETURN_NAMES = ("FLOAT", "INT", "show_help")
+    RETURN_TYPES = ("FLOAT", "INT", "STRING", )
+    RETURN_NAMES = ("FLOAT", "INT", "show_help", )
     CATEGORY = icons.get("Comfyroll/Other")
     FUNCTION = "get_value"
 

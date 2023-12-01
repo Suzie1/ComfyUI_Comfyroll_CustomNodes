@@ -346,7 +346,7 @@ class CR_ColorGradient:
         }
 
     RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_NAMESS = ("IMAGE", "show_help", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "draw"
     CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
 

@@ -236,8 +236,8 @@ class CR_InputSwitchPipe:
             }
         }
  
-    RETURN_TYPES = ("PIPE_LINE", "STRING")
-    RETURN_NAMES = ("PIPE_LINE", "show_help")
+    RETURN_TYPES = ("PIPE_LINE", "STRING", )
+    RETURN_NAMES = ("PIPE_LINE", "show_help", )
     OUTPUT_NODE = True
     FUNCTION = "InputSwitchPipe"
     CATEGORY = icons.get("Comfyroll/Pipe")

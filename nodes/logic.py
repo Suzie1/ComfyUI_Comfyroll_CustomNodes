@@ -131,7 +131,7 @@ class CR_ModelInputSwitch:
         }
 
     RETURN_TYPES = ("MODEL", "STRING", )
-    RETURN_TYPES = ("MODEL", "show_help", )
+    RETURN_NAMES = ("MODEL", "show_help", )
     FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
@@ -159,7 +159,7 @@ class CR_ControlNetInputSwitch:
         }
         
     RETURN_TYPES = ("CONTROL_NET", "STRING", )
-    RETURN_TYPES = ("CONTROL_NET", "show_help", )
+    RETURN_NAMES = ("CONTROL_NET", "show_help", )
     FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
@@ -245,7 +245,7 @@ class CR_ImageInputSwitch4way:
         }
 
     RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_TYPES = ("IMAGE", "show_help", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 

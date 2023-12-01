@@ -44,8 +44,8 @@ class CR_UpscaleImage:
                      }
                 }
 
-    RETURN_TYPES = ("IMAGE", "STRING", "STRING", )
-    RETURN_NAMES = ("IMAGE", "show_help", "show_help", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "upscale"
     CATEGORY = icons.get("Comfyroll/Upscale")
     
