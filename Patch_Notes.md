@@ -1,12 +1,46 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## PR50 Dec 1, 2023
+
+__Other Changes__
+	
+	- added show-help outputs with links to wiki
+
+## PR48 Nov 30, 2023
+
+__Other Changes__
+
+	- disabled CR Load Prompt Style
+	- rename classes on logic nodes
+	- increased max sizes on Aspect Ratio nodes
+
+## PR45 Nov 29, 2023
+
+__Added Nodes__
+
+	CR Random Hex Color
+
+__Changed Nodes__
+
+    CR Color Tint 
+
+    - added custom color
+	
+	CR Simple Text Panel
+	
+	- added outline text
+	
+__Other Changes__
+	
+	- added demo workflows
+	
 ## PR44 Nov 28, 2023
 
 __Changed Nodes__
 
     CR Select Model
 
-    * added ckpt_name output
+    - added ckpt_name output
 	
 __Other Changes__
 
@@ -14,22 +48,26 @@ __Other Changes__
 
 ## PR40 Nov 27, 2023
 
-__Added nodes__
+__Added Nodes__
 
     CR Select Model
 
-    * allows selection of model from one of 5 preset models 
+    - allows selection of model from one of 5 preset models 
 
 __Changed Nodes__
 
     CR Simple Text Watermark
 
-    * added batch support
-    * added custom font hex color
+    - added batch support
+    - added custom font hex color
 
     CR Aspect Ratio
 
-    * changed descriptions in aspect_ratios for issue 24
+    - changed descriptions in aspect_ratios for issue 24
+	
+	CR Upscale Image
+
+    - fixed issue with batched images
 
 __Other Changes__
 
@@ -42,32 +80,32 @@ __Changed Nodes__
 
     CR Halftone Filter
 
-    * changed handling for RGBA inputs 
+    - changed handling for RGBA inputs 
 
 
 ## PR38 Nov 26, 2023
 
- __Added nodes__
+ __Added Nodes__
 
     CR Aspect Ratio
 
-    * combines aspect ratio options for both SD1.5 and SDXL
-    * includes empty_latent output
+    - combines aspect ratio options for both SD1.5 and SDXL
+    - includes empty_latent output
 
 __Changed Nodes__
 
     CR Halftone Filter
 
-    * added resolution options 
-    * modified antialias_scale parameters
+    - added resolution options 
+    - modified antialias_scale parameters
 
     CR SDXL Aspect Ratio
 
-    * added empty_latent output  
+    - added empty_latent output  
 
     CR SD1.5 Aspect Ratio
 
-    * added empty_latent output  
+    - added empty_latent output  
 
 
 ## PR37 Nov 19, 2023
@@ -76,11 +114,11 @@ __Added Nodes__
 
     CR Simple Text Watermark
 
-    * adds a text watermark to an image
+    - adds a text watermark to an image
 
 __Other Changes__
 
-    * merged CR Animation Nodes into Comfyroll custom Nodes
-    * added CR Animation Nodes demo workflows
-    * added reduce_opacity function in graphics_functions
+    - merged CR Animation Nodes into Comfyroll custom Nodes
+    - added CR Animation Nodes demo workflows
+    - added reduce_opacity function in graphics_functions
 
