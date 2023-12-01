@@ -74,7 +74,8 @@ class CR_OverlayText:
                 }        
     }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING",)
+    RETURN_NAMES = ("IMAGE", "show_help",)
     FUNCTION = "overlay_text"
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
 
@@ -105,9 +106,11 @@ class CR_OverlayText:
 
         # Composite the text image onto the background image using the rotated text mask       
         image_out = Image.composite(text_image, back_image, rotated_text_mask)       
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-overlay-text"
         
         # Convert the PIL image back to a torch tensor
-        return pil2tensor(image_out), 
+        return (pil2tensor(image_out), show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_DrawText:
@@ -141,7 +144,8 @@ class CR_DrawText:
                 }          
     }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING",)
+    RETURN_NAMES = ("IMAGE", "show_help",)
     FUNCTION = "draw_text"
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
 
@@ -174,8 +178,10 @@ class CR_DrawText:
         # Composite the text image onto the background image using the rotated text mask
         image_out = Image.composite(text_image, back_image, rotated_text_mask)
         
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-draw-text"
+
         # Convert the PIL image back to a torch tensor
-        return pil2tensor(image_out), 
+        return (pil2tensor(image_out), show_help,)
     
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_MaskText:
@@ -206,7 +212,8 @@ class CR_MaskText:
                 }         
     }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING")
+    RETURN_NAMES = ("IMAGE", "show_help")
     FUNCTION = "mask_text"
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
     
@@ -240,9 +247,11 @@ class CR_MaskText:
 
         # Composite the text image onto the background image using the inverted text mask        
         image_out = Image.composite(background_image, text_image, text_mask)
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-mask-text"
         
         # Convert the PIL image back to a torch tensor
-        return pil2tensor(image_out),
+        return (pil2tensor(image_out), show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_CompositeText:
@@ -270,7 +279,8 @@ class CR_CompositeText:
                 }        
     }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING",)
+    RETURN_NAMES = ("IMAGE", "show_help",)
     FUNCTION = "composite_text"
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
     
@@ -299,9 +309,11 @@ class CR_CompositeText:
                                              
         # Composite the text image onto the background image using the rotated text mask
         image_out = Image.composite(text_image, back_image, rotated_text_mask)
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-composite-text"
         
         # Convert the PIL image back to a torch tensor
-        return pil2tensor(image_out),
+        return (pil2tensor(image_out), show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ArabicTextRTL:
@@ -333,7 +345,7 @@ class CR_ArabicTextRTL:
         arabic_text_reshaped = arabic_reshaper.reshape(arabic_text)
         rtl_text = get_display(arabic_text_reshaped)
         
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-arabic-text-rtl"
                 
         return rtl_text, show_help,
 
@@ -427,7 +439,7 @@ class CR_SimpleTextWatermark:
 
         images_out = torch.cat(total_images, 0)
         
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-simple-text-watermark"
  
         # Convert the PIL image back to a torch tensor
         return (images_out, show_help, )

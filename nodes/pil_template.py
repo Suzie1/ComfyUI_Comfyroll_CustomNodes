@@ -164,20 +164,7 @@ class CR_SimpleMemeTemplate:
                 font_top = get_font_size(draw, text_top, bar_width, bar_height, resolved_font_path, max_font_size)
                 draw_text_on_image(draw, 0, bar_width, bar_height, text_top, font_top, text_color, font_outline)
      
-            show_help = """Help:
-            
-            The two text entry boxes are for the top and bottom text.
-            these can be added either on a color bar or as an overlay.
-            Both top and bottom text are optional.
-            
-            Only the first two lines will be used for top and bottom text.
-            If you enter more than two lines any additional lines will be ignored.
-            
-            If you enter both top and bottom text and select a single bar (top or bottom),
-            then one of texts will be ouput as overlay text.
-            
-            If you enter both top and bottom text and select no bars,
-            then both texts will be ouput as overlay text."""
+            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Template-Nodes#cr-simple-meme-template"
             
             #image_out = np.array(result_image).astype(np.float32) / 255.0
             #image_out = torch.from_numpy(image_out).unsqueeze(0)          
@@ -318,7 +305,7 @@ class CR_ComicPanelTemplates:
         if border_thickness > 0:
             page = ImageOps.expand(page, border_thickness, bg_color)
             
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Template-Nodes#cr-comic-panel-templates"
 
         return (pil2tensor(page), show_help, )   
 
