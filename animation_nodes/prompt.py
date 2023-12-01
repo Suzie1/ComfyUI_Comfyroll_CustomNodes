@@ -284,6 +284,7 @@ class CR_KeyframeList:
         return (keyframe_list, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+'''
 class CR_LoadPromptStyle:
 
     def __init__(self):
@@ -318,14 +319,12 @@ class CR_LoadPromptStyle:
                 template_str = str(template)     
         print(f"[Info] CR Load Prompt Style: Got style template {template_str}")
 
-        '''
-        name, prompt, negative_prompt = extract_values_from_json(template_str)
-        print(name, prompt, negative_prompt)
-        split_prompt = prompt.split("{prompt}", 1)
-        prepend_text = split_prompt[0]
-        append_text = split_prompt[1]
-        negative_text = negative_prompt
-        '''
+        #name, prompt, negative_prompt = extract_values_from_json(template_str)
+        #print(name, prompt, negative_prompt)
+        #split_prompt = prompt.split("{prompt}", 1)
+        #prepend_text = split_prompt[0]
+        #append_text = split_prompt[1]
+        #negative_text = negative_prompt
  
         # Note: This will fail if negative_prompt is before the prompt
         split1 = template_str.split("{prompt}", 1)
@@ -337,7 +336,7 @@ class CR_LoadPromptStyle:
         negative_text = split4[1][:-2]
       
         return (prepend_text, append_text, negative_text, )
-
+'''
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_EncodeScheduledPrompts:
 
@@ -408,7 +407,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Simple Prompt List":CR_SimplePromptList,    
     "CR Simple Prompt List Keyframes":CR_SimplePromptListKeyframes,
     "CR Keyframe List":CR_KeyframeList,    
-    "CR Load Prompt Style":CR_LoadPromptStyle,
+    #"CR Load Prompt Style":CR_LoadPromptStyle,
     "CR Encode Scheduled Prompts":CR_EncodeScheduledPrompts,    
 }
 '''

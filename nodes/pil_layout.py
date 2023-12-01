@@ -361,6 +361,8 @@ class CR_SimpleTextPanel:
                 "font_name": (file_list,),
                 "font_color": (COLORS,),
                 "font_size": ("INT", {"default": 100, "min": 0, "max": 1024}),
+                "font_outline_thickness": ("INT", {"default": 0, "min": 0, "max": 50}),
+                "font_outline_color": (COLORS,),                
                 "background_color": (COLORS,),                
                 "align": (ALIGN_OPTIONS, ),
                 "justify": (JUSTIFY_OPTIONS, ),
@@ -379,11 +381,13 @@ class CR_SimpleTextPanel:
     def layout(self, panel_width, panel_height,
                text, align, justify,
                font_name, font_color, font_size,
+               font_outline_thickness, font_outline_color,
                background_color, 
-               font_color_hex='#000000', bg_color_hex='#000000'):
+               font_color_hex='#000000', font_outline_color_hex='#000000', bg_color_hex='#000000'):
 
         # Get RGB values for the text and background colors    
         font_color = get_color_values(font_color, font_color_hex, color_mapping)
+        outline_color = get_color_values(font_outline_color, font_outline_color_hex, color_mapping)
         bg_color = get_color_values(background_color, bg_color_hex, color_mapping)
         
         # Set defaults
@@ -397,14 +401,15 @@ class CR_SimpleTextPanel:
         ### Create text panels
         
         panel = text_panel(panel_width, panel_height, text,
-                           font_name, font_size,
-                           font_color, background_color,
+                           font_name, font_size, font_color, 
+                           font_outline_thickness, outline_color,
+                           background_color,
                            margins, line_spacing,
                            position_x, position_y,
                            align, justify,
                            rotation_angle, rotation_options)
                                                        
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple-text-panel"
 
         return (pil2tensor(panel), show_help, )    
                

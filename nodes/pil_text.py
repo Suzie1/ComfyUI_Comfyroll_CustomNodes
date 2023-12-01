@@ -33,9 +33,9 @@ except ImportError:
 
 #---------------------------------------------------------------------------------------------------------------------#
           
-ALIGN_OPTIONS = ["top", "center", "bottom"]                 
+ALIGN_OPTIONS = ["center", "top", "bottom"]                 
 ROTATE_OPTIONS = ["text center", "image center"]
-JUSTIFY_OPTIONS = ["left", "center", "right"]
+JUSTIFY_OPTIONS = ["center", "left", "right"]
 PERSPECTIVE_OPTIONS = ["top", "bottom", "left", "right"]
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -119,25 +119,25 @@ class CR_DrawText:
         file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
                       
         return {"required": {
-                "image_width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "image_height": ("INT", {"default": 512, "min": 64, "max": 2048}),  
-                "text": ("STRING", {"multiline": True, "default": "text"}),
-                "font_name": (file_list,),
-                "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
-                "font_color": (COLORS,),
-                "background_color": (COLORS,),
-                "align": (ALIGN_OPTIONS,),
-                "justify": (JUSTIFY_OPTIONS,),
-                "margins": ("INT", {"default": 0, "min": -1024, "max": 1024}),
-                "line_spacing": ("INT", {"default": 0, "min": -1024, "max": 1024}),
-                "position_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
-                "position_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
-                "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
-                "rotation_options": (ROTATE_OPTIONS,),            
+                    "image_width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "image_height": ("INT", {"default": 512, "min": 64, "max": 2048}),  
+                    "text": ("STRING", {"multiline": True, "default": "text"}),
+                    "font_name": (file_list,),
+                    "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
+                    "font_color": (COLORS,),
+                    "background_color": (COLORS,),
+                    "align": (ALIGN_OPTIONS,),
+                    "justify": (JUSTIFY_OPTIONS,),
+                    "margins": ("INT", {"default": 0, "min": -1024, "max": 1024}),
+                    "line_spacing": ("INT", {"default": 0, "min": -1024, "max": 1024}),
+                    "position_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                    "position_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                    "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
+                    "rotation_options": (ROTATE_OPTIONS,),            
                 },
                 "optional": {
-                "font_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
-                "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"})
+                    "font_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"})
                 }          
     }
 
@@ -146,7 +146,8 @@ class CR_DrawText:
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
 
     def draw_text(self, image_width, image_height, text,
-                  font_name, font_size, font_color, background_color,
+                  font_name, font_size, font_color, 
+                  background_color,
                   margins, line_spacing,
                   position_x, position_y,
                   align, justify,
@@ -348,66 +349,88 @@ class CR_SimpleTextWatermark:
         ALIGN_OPTIONS = ["center", "top left", "top center", "top right", "bottom left", "bottom center", "bottom right"]  
                    
         return {"required": {
-                "image": ("IMAGE",),
-                "text": ("STRING", {"multiline": False, "default": "@ your name"}),
-                "align": (ALIGN_OPTIONS,),
-                "opacity": ("FLOAT", {"default": 0.30, "min": 0.00, "max": 1.00, "step": 0.01}),
-                "font_name": (file_list,),
-                "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),                
-                "font_color": (COLORS[1:],), 
-                "x_margin": ("INT", {"default": 20, "min": -1024, "max": 1024}),
-                "y_margin": ("INT", {"default": 20, "min": -1024, "max": 1024}),
+                    "image": ("IMAGE",),
+                    "text": ("STRING", {"multiline": False, "default": "@ your name"}),
+                    "align": (ALIGN_OPTIONS,),
+                    "opacity": ("FLOAT", {"default": 0.30, "min": 0.00, "max": 1.00, "step": 0.01}),
+                    "font_name": (file_list,),
+                    "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),                
+                    "font_color": (COLORS,), 
+                    "x_margin": ("INT", {"default": 20, "min": -1024, "max": 1024}),
+                    "y_margin": ("INT", {"default": 20, "min": -1024, "max": 1024}),
+                },
+                "optional": {
+                    "font_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
                 }     
         }
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "overlay_text"
     CATEGORY = icons.get("Comfyroll/Graphics/Text")
 
-    def overlay_text(self, image, text, align, font_name, font_size, font_color, opacity, x_margin, y_margin):
+    def overlay_text(self, image, text, align,
+                     font_name, font_size, font_color,
+                     opacity, x_margin, y_margin, font_color_hex='#000000'):
+
+        # Get RGB values for the text color  
+        text_color = get_color_values(font_color, font_color_hex, color_mapping)
         
-        # Create PIL images for the background layer
-        image = tensor2pil(image)
+        total_images = []
         
-        textlayer = Image.new("RGBA", image.size)
-        draw = ImageDraw.Draw(textlayer)
+        for img in image:
+            
+            # Create PIL images for the background layer
+            img = tensor2pil(img)
+            
+            textlayer = Image.new("RGBA", img.size)
+            draw = ImageDraw.Draw(textlayer)
+            
+            # Load the font
+            font_file = "fonts\\" + str(font_name)   
+            resolved_font_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), font_file)
+            font = ImageFont.truetype(str(resolved_font_path), size=font_size)
+            
+            # Get the size of the text
+            textsize = get_text_size(draw, text, font)
+            
+            # Calculate the position to place the text based on the alignment
+            if align == 'center':
+                textpos = [(img.size[0] - textsize[0]) // 2, (img.size[1] - textsize[1]) // 2]
+            elif align == 'top left':
+                textpos = [x_margin, y_margin]
+            elif align == 'top center':
+                textpos = [(img.size[0] - textsize[0]) // 2, y_margin]    
+            elif align == 'top right':
+                textpos = [img.size[0] - textsize[0] - x_margin, y_margin]
+            elif align == 'bottom left':
+                textpos = [x_margin, img.size[1] - textsize[1] - y_margin]
+            elif align == 'bottom center':
+                textpos = [(img.size[0] - textsize[0]) // 2, img.size[1] - textsize[1] - y_margin]             
+            elif align == 'bottom right':
+                textpos = [img.size[0] - textsize[0] - x_margin, img.size[1] - textsize[1] - y_margin]
+            
+            # Draw the text on the text layer
+            draw.text(textpos, text, font=font, fill=text_color)
+            
+            # Adjust the opacity of the text layer if needed
+            if opacity != 1:
+                textlayer = reduce_opacity(textlayer, opacity)
+            
+            # Composite the text layer on top of the original image
+            out_image = Image.composite(textlayer, img, textlayer)
+ 
+            # convert to tensor
+            out_image = np.array(out_image.convert("RGB")).astype(np.float32) / 255.0
+            out_image = torch.from_numpy(out_image).unsqueeze(0)
+            total_images.append(out_image)
+
+        images_out = torch.cat(total_images, 0)
         
-        # Load the font
-        font_file = "fonts\\" + str(font_name)   
-        resolved_font_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), font_file)
-        font = ImageFont.truetype(str(resolved_font_path), size=font_size)
-        
-        # Get the size of the text
-        textsize = get_text_size(draw, text, font)
-        
-        # Calculate the position to place the text based on the alignment
-        if align == 'center':
-            textpos = [(image.size[0] - textsize[0]) // 2, (image.size[1] - textsize[1]) // 2]
-        elif align == 'top left':
-            textpos = [x_margin, y_margin]
-        elif align == 'top center':
-            textpos = [(image.size[0] - textsize[0]) // 2, y_margin]    
-        elif align == 'top right':
-            textpos = [image.size[0] - textsize[0] - x_margin, y_margin]
-        elif align == 'bottom left':
-            textpos = [x_margin, image.size[1] - textsize[1] - y_margin]
-        elif align == 'bottom center':
-            textpos = [(image.size[0] - textsize[0]) // 2, image.size[1] - textsize[1] - y_margin]             
-        elif align == 'bottom right':
-            textpos = [image.size[0] - textsize[0] - x_margin, image.size[1] - textsize[1] - y_margin]
-        
-        # Draw the text on the text layer
-        draw.text(textpos, text, font=font, fill=font_color)
-        
-        # Adjust the opacity of the text layer if needed
-        if opacity != 1:
-            textlayer = reduce_opacity(textlayer, opacity)
-        
-        # Composite the text layer on top of the original image
-        image_out = Image.composite(textlayer, image, textlayer)
-        
+        show_help = "example help text"
+ 
         # Convert the PIL image back to a torch tensor
-        return pil2tensor(image_out), 
+        return (images_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

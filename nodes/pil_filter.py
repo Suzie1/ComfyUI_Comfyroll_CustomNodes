@@ -5,7 +5,8 @@
 import torch
 import numpy as np
 from PIL import Image, ImageDraw, ImageStat, ImageFilter
-#from typing import List
+from .graphics_functions import get_color_values
+from ..config import color_mapping, COLORS
 from ..categories import icons
 
 def tensor2pil(image):
@@ -23,32 +24,41 @@ class CR_ColorTint:
     @classmethod
     def INPUT_TYPES(s):
     
-        modes = ["white", "black", "sepia", "red", "green", "blue",
+        #tints = COLORS.append('sepia')
+        '''
+        tints = ["custom", "white", "black", "sepia", "red", "green", "blue",
             "cyan", "magenta", "yellow", "purple", "orange", "warm",
             "cool",  "lime", "navy", "vintage", "rose", "teal",
             "maroon", "peach", "lavender", "olive"]
+        '''    
             
         return {
-            "required": {
-                "image": ("IMAGE",),
-                "strength": ("FLOAT", {"default": 1.0,"min": 0.1,"max": 1.0,"step": 0.1}),
-                "mode": (modes,),
-            },
+            "required": {"image": ("IMAGE",),
+                         "strength": ("FLOAT", {"default": 1.0,"min": 0.1,"max": 1.0,"step": 0.1}),
+                         "mode": (COLORS,),
+                        },
+            "optional": {"tint_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),} 
         }
 
-    RETURN_TYPES = ("IMAGE",)
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )    
     FUNCTION = "color_tint"
-    #CATEGORY = "Comfyroll/Graphics/Filters"
     CATEGORY = icons.get("Comfyroll/Graphics/Filter")
 
-    def color_tint(self, image: torch.Tensor, strength: float, mode: str = "sepia"):
+    def color_tint(self, image: torch.Tensor, strength, mode: str="sepia", tint_color_hex='#000000'):
+    
         if strength == 0:
             return (image,)
-
+            
+        # Get RGB values for the tint color  
+        tint_color = get_color_values(mode, tint_color_hex, color_mapping)    
+        color_rgb = tuple([value / 255 for value in tint_color])
+        
         sepia_weights = torch.tensor([0.2989, 0.5870, 0.1140]).view(1, 1, 1, 3).to(image.device)
-      
+        
         mode_filters = {
-            "white": torch.tensor([1.0, 1.0, 1.0]),
+            "custom": torch.tensor([color_rgb[0], color_rgb[1], color_rgb[2]]),
+            "white": torch.tensor([1, 1, 1]),
             "black": torch.tensor([0, 0, 0]),
             "sepia": torch.tensor([1.0, 0.8, 0.6]),
             "red": torch.tensor([1.0, 0.6, 0.6]),
@@ -78,7 +88,10 @@ class CR_ColorTint:
         tinted = grayscale * scale_filter
 
         result = tinted * strength + image * (1 - strength)
-        return (result,)
+        
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Filter-Nodes"
+        
+        return (result, show_help, ) 
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_HalftoneFilter:
@@ -89,37 +102,76 @@ class CR_HalftoneFilter:
     def INPUT_TYPES(cls):
     
         shapes = ["ellipse", "rectangle"]
+        rez = ["normal", "hi-res (2x output size)"]
     
         return {
             "required": {
                 "image": ("IMAGE",),
                 "dot_size": ("INT", {"default": 5, "min": 1, "max": 30, "step": 1}),
                 "dot_shape": (shapes, {"default": "ellipse"}),
-                "scale": ("INT", {"default": 1, "min": 1, "max": 8, "step": 1}),
+                #"scale": ("INT", {"default": 1, "min": 1, "max": 8, "step": 1}),
+                "resolution": (rez, {"default": "normal"}),
                 "angle_c": ("INT", {"default": 75, "min": 0, "max": 360, "step": 1}),
                 "angle_m": ("INT", {"default": 45, "min": 0, "max": 360, "step": 1}),
                 "angle_y": ("INT", {"default": 15, "min": 0, "max": 360, "step": 1}),
                 "angle_k": ("INT", {"default": 0, "min": 0, "max": 360, "step": 1}),
                 "greyscale": ("BOOLEAN", {"default": True}),
                 "antialias": ("BOOLEAN", {"default": True}),
-                "antialias_scale": ("INT", {"default": 3, "min": 2, "max": 8, "step": 1}),
-                "border_blending":  ("BOOLEAN", {"default": False}),
+                "antialias_scale": ("INT", {"default": 2, "min": 1, "max": 4, "step": 1}),
+                "border_blending":  ("BOOLEAN", {"default": False}),                       
             },
         }
 
     RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_NAMES = ("image", "show_help", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "halftone_effect"
     CATEGORY = icons.get("Comfyroll/Graphics/Filter")
+                 
+    def tensor_to_pil(self, tensor):
+        if tensor.ndim == 4 and tensor.shape[0] == 1:  # Check for batch dimension
+            tensor = tensor.squeeze(0)  # Remove batch dimension
+        if tensor.dtype == torch.float32:  # Check for float tensors
+            tensor = tensor.mul(255).byte()  # Convert to range [0, 255] and change to byte type
+        elif tensor.dtype != torch.uint8:  # If not float and not uint8, conversion is needed
+            tensor = tensor.byte()  # Convert to byte type
 
-    def halftone_effect(self, image, dot_size, dot_shape, scale, angle_c, angle_m, angle_y, angle_k, 
-                        greyscale, antialias, border_blending, antialias_scale):
-                        
+        numpy_image = tensor.cpu().numpy()
+
+        # Determine the correct mode based on the number of channels
+        if tensor.ndim == 3:
+            if tensor.shape[2] == 1:
+                mode = 'L'  # Grayscale
+            elif tensor.shape[2] == 3:
+                mode = 'RGB'  # RGB
+            elif tensor.shape[2] == 4:
+                mode = 'RGBA'  # RGBA
+            else:
+                raise ValueError(f"Unsupported channel number: {tensor.shape[2]}")
+        else:
+            raise ValueError(f"Unexpected tensor shape: {tensor.shape}")
+
+        pil_image = Image.fromarray(numpy_image, mode)
+        return pil_image
+
+    def pil_to_tensor(self, pil_image):
+        numpy_image = np.array(pil_image)
+        tensor = torch.from_numpy(numpy_image).float().div(255)  # Convert to range [0, 1]
+        tensor = tensor.unsqueeze(0)  # Add batch dimension
+        return tensor
+        
+    def halftone_effect(self, image, dot_size, dot_shape, resolution, angle_c, angle_m, angle_y, angle_k, greyscale, antialias, border_blending, antialias_scale):
+        
         sample = dot_size
         shape = dot_shape
-        show_help = "example help text"
         
-        # If the input is a PyTorch tensor, convert to PIL Image
+        # Map resolution to scale
+        resolution_to_scale = {
+            "normal": 1,
+            "hi-res (2x output size)": 2,
+        }
+        scale = resolution_to_scale.get(resolution, 1)  # Default to 1 if resolution is not recognized
+             
+         # If the input is a PyTorch tensor, convert to PIL Image
         if isinstance(image, torch.Tensor):
             image = self.tensor_to_pil(image)
         
@@ -140,35 +192,21 @@ class CR_HalftoneFilter:
             angles = [angle_c, angle_m, angle_y, angle_k]
 
         # Apply the halftone effect using PIL
-        halftone_images = self._halftone_pil(pil_image, channel_images, sample, scale, 
-                                             angles, antialias, border_blending, antialias_scale, shape)
+        halftone_images = self._halftone_pil(pil_image, channel_images, sample, scale, angles, antialias, border_blending, antialias_scale, shape)
 
         # Merge channels and convert to RGB
         if greyscale:
-            new_image = halftone_images[0]
+            new_image = halftone_images[0].convert("RGB")  # Convert the greyscale image to RGB
         else:
             new_image = Image.merge("CMYK", halftone_images).convert("RGB")
-
+        
         result_tensor = self.pil_to_tensor(new_image)
-        return (result_tensor,)
-        
-    def tensor_to_pil(self, tensor):
-        if tensor.ndim == 4 and tensor.shape[0] == 1:  # Check for batch dimension
-            tensor = tensor.squeeze(0)  # Remove batch dimension
-        if tensor.dtype == torch.float32:  # Check for float tensors
-            tensor = tensor.mul(255).byte()  # Convert to range [0, 255] and change to byte type
-        elif tensor.dtype != torch.uint8:  # If not float and not uint8, conversion is needed
-            tensor = tensor.byte()  # Convert to byte type
-        numpy_image = tensor.cpu().numpy()
-        pil_image = Image.fromarray(numpy_image, 'RGB' if tensor.shape[2] == 3 else 'L')
-        return pil_image
 
-    def pil_to_tensor(self, pil_image):
-        numpy_image = np.array(pil_image)
-        tensor = torch.from_numpy(numpy_image).float().div(255)  # Convert to range [0, 1]
-        tensor = tensor.unsqueeze(0)  # Add batch dimension
-        return tensor
-        
+        # Debug print to check the final tensor shape
+        print("Final tensor shape:", result_tensor.shape)
+
+        return (result_tensor, show_help, ) 
+
     def _halftone_pil(self, im, cmyk, sample, scale, angles, antialias, border_blending, antialias_scale, shape):
         # If we're antialiasing, we'll multiply the size of the image by this
         # scale while drawing, and then scale it back down again afterwards.
@@ -242,9 +280,11 @@ class CR_HalftoneFilter:
                 h = int((yy2 - yy1) / antialias_scale)
                 half_tone = half_tone.resize((w, h), resample=Image.LANCZOS)
 
-            dots.append(half_tone) 
+            dots.append(half_tone)
+            
+            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Filter-Nodes"
 
-        return dots
+        return (dots, show_help, )  
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

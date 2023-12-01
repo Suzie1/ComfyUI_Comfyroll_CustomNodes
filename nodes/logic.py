@@ -8,7 +8,6 @@ from ..categories import icons
 #---------------------------------------------------------------------------------------------------------------------#
 # Logic Switches
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for images.  Can pick an input and that image will be the one picked for the workflow.
 class CR_ImageInputSwitch:
     def __init__(self):
         pass
@@ -24,17 +23,16 @@ class CR_ImageInputSwitch:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    FUNCTION = "InputImages"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def InputImages(self, Input, image1, image2):
+    def switch(self, Input, image1, image2):
         if Input == 1:
             return (image1, )
         else:
             return (image2, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for latents.  Can pick an input and that image will be the one picked for the workflow.
 class CR_LatentInputSwitch:
     def __init__(self):
         pass
@@ -50,17 +48,16 @@ class CR_LatentInputSwitch:
         }
 
     RETURN_TYPES = ("LATENT",)
-    FUNCTION = "InputLatents"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def InputLatents(self, Input, latent1, latent2):
+    def switch(self, Input, latent1, latent2):
         if Input == 1:
             return (latent1, )
         else:
             return (latent2, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for conditiong.  Can pick an input and that image will be the one picked for the workflow.
 class CR_ConditioningInputSwitch:
     def __init__(self):
         pass
@@ -76,17 +73,16 @@ class CR_ConditioningInputSwitch:
         }
 
     RETURN_TYPES = ("CONDITIONING",)
-    FUNCTION = "InputConditioning"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def InputConditioning(self, Input, conditioning1, conditioning2):
+    def switch(self, Input, conditioning1, conditioning2):
         if Input == 1:
             return (conditioning1, )
         else:
             return (conditioning2, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for clip.  Can pick an input and that image will be the one picked for the workflow.
 class CR_ClipInputSwitch:
     def __init__(self):
         pass
@@ -102,17 +98,16 @@ class CR_ClipInputSwitch:
         }
 
     RETURN_TYPES = ("CLIP",)
-    FUNCTION = "InputClip"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def InputClip(self, Input, clip1, clip2):
+    def switch(self, Input, clip1, clip2):
         if Input == 1:
             return (clip1, )
         else:
             return (clip2, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for model.  Can pick an input and that image will be the one picked for the workflow.
 class CR_ModelInputSwitch:
     def __init__(self):
         pass
@@ -128,10 +123,10 @@ class CR_ModelInputSwitch:
         }
 
     RETURN_TYPES = ("MODEL",)
-    FUNCTION = "InputModel"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def InputModel(self, Input, model1, model2):
+    def switch(self, Input, model1, model2):
         if Input == 1:
             return (model1, )
         else:
@@ -154,10 +149,10 @@ class CR_ControlNetInputSwitch:
         }
         
     RETURN_TYPES = ("CONTROL_NET",)
-    FUNCTION = "InputControlNet"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def InputControlNet(self, Input, control_net1, control_net2):
+    def switch(self, Input, control_net1, control_net2):
         if Input == 1:
             return (control_net1, )
         else:
@@ -180,10 +175,10 @@ class CR_TextInputSwitch:
         }
 
     RETURN_TYPES = ("STRING",)
-    FUNCTION = "text_input_switch"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def text_input_switch(self, Input, text1, text2,):
+    def switch(self, Input, text1, text2,):
 
         if Input == 1:
             return (text1, )
@@ -191,7 +186,6 @@ class CR_TextInputSwitch:
             return (text2, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for VAE.  Can pick between 2 VAEs and switch between them
 class CR_VAEInputSwitch:
     def __init__(self):
         pass
@@ -207,10 +201,10 @@ class CR_VAEInputSwitch:
         }
 
     RETURN_TYPES = ("VAE",)   
-    FUNCTION = "vae_switch"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def vae_switch(self, Input, VAE1, VAE2,):
+    def switch(self, Input, VAE1, VAE2,):
 
         if Input == 1:
             return (VAE1, )
@@ -218,7 +212,6 @@ class CR_VAEInputSwitch:
             return (VAE2, )
             
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for 4 different images.  Can pick an input and that image will be the one picked for the workflow.
 class CR_ImageInputSwitch4way:
     def __init__(self):
         pass
@@ -238,10 +231,10 @@ class CR_ImageInputSwitch4way:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    FUNCTION = "InputImages_4"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def InputImages_4(self, Input, image1, image2=None, image3=None, image4=None):
+    def switch(self, Input, image1, image2=None, image3=None, image4=None):
         if Input == 1:
             return (image1, )
         elif Input == 2:
@@ -252,7 +245,6 @@ class CR_ImageInputSwitch4way:
             return (image4, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for 4 different texts.  Can pick an input and that image will be the one picked for the workflow.
 class CR_TextInputSwitch4way:
     def __init__(self):
         pass
@@ -272,10 +264,10 @@ class CR_TextInputSwitch4way:
         }
 
     RETURN_TYPES = ("STRING",)
-    FUNCTION = "text_input_switch"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
-    def text_input_switch(self, Input, text1, text2=None, text3=None, text4=None):
+    def switch(self, Input, text1, text2=None, text3=None, text4=None):
 
         if Input == 1:
             return (text1, )
@@ -316,7 +308,6 @@ class CR_ModelAndCLIPInputSwitch:
 #---------------------------------------------------------------------------------------------------------------------#
 # Process switches
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for Image to Image or Text to Image.  This switch is more readable than the latent switch.
 class CR_Img2ImgProcessSwitch:
     def __init__(self):
         pass
@@ -332,17 +323,16 @@ class CR_Img2ImgProcessSwitch:
         }
 
     RETURN_TYPES = ("LATENT",)
-    FUNCTION = "InputLatentsText"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Process")
 
-    def InputLatentsText(self, Input, txt2img, img2img):
+    def switch(self, Input, txt2img, img2img):
         if Input == "txt2img":
             return (txt2img, )
         else:
             return (img2img, )            
 
 #---------------------------------------------------------------------------------------------------------------------#
-#This is an input switch for HiRes Fix.  This is a more reabable switch than the latent switch.
 class CR_HiResFixProcessSwitch:
     def __init__(self):
         pass
@@ -358,17 +348,16 @@ class CR_HiResFixProcessSwitch:
         }
 
     RETURN_TYPES = ("LATENT",)
-    FUNCTION = "InputHiResText"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Process")
 
-    def InputHiResText(self, Input, latent_upscale, image_upscale):
+    def switch(self, Input, latent_upscale, image_upscale):
         if Input == "latent_upscale":
             return (latent_upscale, )
         else:
             return (image_upscale, )  
 
 #---------------------------------------------------------------------------------------------------------------------#
-#This is a switch to choose between using one image or using a batch of images
 class CR_BatchProcessSwitch:
     def __init__(self):
         pass
@@ -384,10 +373,10 @@ class CR_BatchProcessSwitch:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    FUNCTION = "InputControlNet"
+    FUNCTION = "switch"
     CATEGORY = icons.get("Comfyroll/Utils/Process")
 
-    def InputControlNet(self, Input, image, image_batch):
+    def switch(self, Input, image, image_batch):
         if Input == "image":
             return (image, )
         else:

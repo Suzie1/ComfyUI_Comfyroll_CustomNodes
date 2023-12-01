@@ -1,22 +1,8 @@
 # 🧩 Comfyroll Custom Nodes for SDXL and SD1.5
 
-These nodes were originally made for use in the Comfyroll Template Workflows.
-
-[Comfyroll Template Workflows](https://civitai.com/models/59806/comfyroll-template-workflows)
-
-[Comfyroll Pro Templates](https://civitai.com/models/85619/comfyroll-pro-template)
-
-[Comfyroll SDXL Workflow Templates](https://civitai.com/models/118005/comfyroll-sdxl-workflow-templates)
-
-[SDXL Workflow for ComfyUI with Multi-ControlNet](https://civitai.com/models/129858/sdxl-workflow-for-comfyui-with-multi-controlnet)
-
-[SDXL and SD1.5 Model Merge Templates for ComfyUI](https://civitai.com/models/123125/sdxl-and-sd15-model-merge-templates-for-comfyui)
-
-The nodes can be used in any ComfyUI workflow.  
+These nodes can be used in any ComfyUI workflow.  
 
 # Installation
-
-If you have an old version of the Comfyroll nodes from the Comfyroll Worflow Templates download, please delete this before installing these nodes.
 
 1. cd custom_nodes
 2. git clone https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes.git
@@ -26,10 +12,18 @@ You can also install the nodes using the following methods:
 * install using [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager)
 * download from [CivitAI](https://civitai.com/models/87609/comfyroll-custom-nodes-for-comfyui)
 
+# Wiki
+
+https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki
+
 # List of Custom Nodes
 
-__🌟 SDXL__
+__🔳 Aspect Ratio__
 * CR SDXL Aspect Ratio
+* CR SD1.5 Aspect Ratio
+* CR Aspect Ratio (new 27/11/2023)
+
+__🌟 SDXL__
 * CR SDXL Prompt Mix Presets
 * CR SDXL Style Text
 * CR SDXL Base Prompt Encoder
@@ -59,7 +53,7 @@ __🌈 Graphics - Pattern__
 * CR Checker Pattern
 * CR Polygons
 * CR Color Gradient
-* CR Radial Gradiant (new 23/10/2023)
+* CR Radial Gradiant
 * CR Starburst Lines
 * CR Starburst Colors
 
@@ -73,12 +67,12 @@ __👽 Graphics - Template__
 * CR Simple Meme Template
 
 __🌁 Graphics - Layout__
-* CR Image Panel (new 23/10/2023)
-* CR Page Layout (new 01/11/2023)
-* CR Image Grid Panel (new 01/11/2023)
-* CR Image Border (new 01/11/2023)
-* CR Color Panel (new 01/11/2023)
-* CR Simple Text Panel (new 01/11/2023)
+* CR Image Panel
+* CR Page Layout
+* CR Image Grid Panel
+* CR Image Border
+* CR Color Panel
+* CR Simple Text Panel
 
 __✈️ Module__
 * CR Module Pipe Loader
@@ -94,7 +88,6 @@ __🛩️ Pipe__
 __⛏️ Model Merge__
 * CR Model Stack
 * CR Apply Model Merge
-* CR Load Animation Frames
 
 __🔍 Upscale__
 * CR Multi Upscale Stack
@@ -133,7 +126,7 @@ __🔀 Logic__
 * CR Clip Input Switch
 * CR Model Input Switch
 * CR ControlNet Input Switch
-* CR VAE Input Switch (new 23/10/2023)
+* CR VAE Input Switch
 * CR Text Input Switch
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
@@ -144,11 +137,11 @@ __📦 Other__
 * CR Split String
 * CR Integer Multiple
 * CR Seed
-* CR SD1.5 Aspect Ratio
-* CR Value (new 01/11/2023)
+* CR Value
+* CR Conditioning Mixer (new 27/11/2023)
+* CR Select Model (new 27/11/2023)
 
 __Deleted Nodes__
-* CR Aspect Ratio replaced by CR SD1.5 Aspect Ratio
 * CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
 * CR SDXL Prompt Mixer replaced by CR SDXL Prompt Mix Presets
 
@@ -179,6 +172,20 @@ CR Apply Multi-ControlNet Stack can accept inputs from the Control Net Stacker n
 Preset mappings can be found in this CivitAI article:
 
 https://civitai.com/articles/1835
+
+# Comfyroll Workflow Templates
+
+The nodes were originally made for use in the Comfyroll Template Workflows.
+
+[Comfyroll Template Workflows](https://civitai.com/models/59806/comfyroll-template-workflows)
+
+[Comfyroll Pro Templates](https://civitai.com/models/85619/comfyroll-pro-template)
+
+[Comfyroll SDXL Workflow Templates](https://civitai.com/models/118005/comfyroll-sdxl-workflow-templates)
+
+[SDXL Workflow for ComfyUI with Multi-ControlNet](https://civitai.com/models/129858/sdxl-workflow-for-comfyui-with-multi-controlnet)
+
+[SDXL and SD1.5 Model Merge Templates for ComfyUI](https://civitai.com/models/123125/sdxl-and-sd15-model-merge-templates-for-comfyui)
 
 # Node Images
 

@@ -9,12 +9,11 @@ from .dev_nodes.dev_schedulers import *
 from .dev_nodes.dev_xygrid import *
 
 DEV_NODE_CLASS_MAPPINGS = {
-    ### Dev Nodes
+    ### XY Dev Nodes
     "CR XYZ List": CR_XYZList,    
     "CR XYZ Interpolate": CR_XYZInterpolate,    
     "CR XYZ Index": CR_XYZIndex,
-    "CR Conditioning Mixer": CR_ConditioningMixer,  
-    ### Graphics_Dev Nodes
+    ### Graphics Dev Nodes
     "CR Overlay Transparent Image": CR_OverlayTransparentImage,
     "CR Multi-Panel Meme Template": CR_MultiPanelMemeTemplate,
     "CR Popular Meme Templates": CR_PopularMemeTemplates,    
@@ -24,7 +23,9 @@ DEV_NODE_CLASS_MAPPINGS = {
     "CR Add Annotation": CR_AddAnnotation,    
     "CR 3D Polygon": CR_3DPolygon,
     "CR 3D Solids": CR_3DSolids,
-    ### Workflow
+    "CR Simple Image Watermark": CR_SimpleImageWatermark,
+    "CR Comic Panel Templates (Advanced)": CR_ComicPanelTemplatesAdvanced,    
+    ### Workflow Dev Nodes
     "CR Job List": CR_JobList,
     "CR Job Scheduler": CR_JobScheduler,
     "CR Check Job Complete": CR_CheckJobComplete,
@@ -66,14 +67,15 @@ DEV_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Apply Annotations": "CR Apply Annotations (Prototype)",
     "CR Add Annotation": "CR Add Annotation (Prototype)",    
     "CR 3D Polygon": "CR 3D Polygon (Dev)",
-    "CR 3D Solids": "CR 3D Solids (Dev)",    
+    "CR 3D Solids": "CR 3D Solids (Dev)",
+    "CR Simple Image Watermark": "🌁 CR Simple Image Watermark",
+    "CR Comic Panel Templates Advanced": "👽 Comic Panel Templates (Advanced)",     
     "CR Job List": "CR Job List (Prototype)",
     "CR Job Scheduler": "CR Job Scheduler (Prototype)",
     "CR Check Job Complete": "CR Check Job Complete (Prototype)",
     "CR Spawn Workflow Instance": "CR Spawn Workflow Instance (Prototype)",    
     "CR Job Current Frame": "CR Job Current Frame (Prototype)",
     "CR Load Workflow": "CR Load Workflow (Prototype)",
-    "CR Conditioning Mixer": "CR Conditioning Mixer (Dev)",
     ### Animation Dev Nodes
     "CR Prompt Weight Scheduler": "CR Prompt Weight Scheduler (Dev)",    
     "CR Load Scheduled ControlNets": "CR Load Scheduled ControlNets (Dev)",
