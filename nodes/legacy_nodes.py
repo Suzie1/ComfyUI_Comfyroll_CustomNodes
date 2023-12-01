@@ -19,13 +19,14 @@ class CR_ImageSize:
                 "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT")
-    RETURN_NAMES = ("Width", "Height", "upscale_factor")
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "STRING", )
+    RETURN_NAMES = ("Width", "Height", "upscale_factor", "show_help", )
     FUNCTION = "ImageSize"
     CATEGORY = icons.get("Comfyroll/Other/Legacy")
 
     def ImageSize(self, width, height, upscale_factor):
-        return(width, height, upscale_factor)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Legacy-Nodes#cr-image-size"
+        return(width, height, upscale_factor, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 class CR_AspectRatio_SDXL:
@@ -45,7 +46,8 @@ class CR_AspectRatio_SDXL:
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT")
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT", "STRING", )
+    RETURN_NAMES = ("INT", "INT", "FLOAT", "FLOAT", "INT", "show_help", )
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "Aspect_Ratio"
 
@@ -71,10 +73,12 @@ class CR_AspectRatio_SDXL:
         elif aspect_ratio == "21:9 landscape 1536x640":
             width, height = 1536, 640
             
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Legacy-Nodes#cr-aspect-ratio-sdxl"
+
         if swap_dimensions == "On":
-            return(height, width, upscale_factor1, upscale_factor2, batch_size,)
+            return(height, width, upscale_factor1, upscale_factor2, batch_size,show_help,)
         else:
-            return(width, height, upscale_factor1, upscale_factor2, batch_size,)        
+            return(width, height, upscale_factor1, upscale_factor2, batch_size,show_help,)        
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
