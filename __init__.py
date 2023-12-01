@@ -58,6 +58,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     ### LoRA Nodes    
     "CR Load LoRA": CR_LoraLoader,    
     "CR LoRA Stack": CR_LoRAStack,
+    "CR Random LoRA Stack": CR_RandomLoRAStack,
     "CR Apply LoRA Stack": CR_ApplyLoRAStack,  
     ### Model Merge Nodes
     "CR Apply Model Merge": CR_ApplyModelMerge,
@@ -227,6 +228,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     ### LoRA Nodes    
     "CR Load LoRA": "💊 CR Load LoRA",    
     "CR LoRA Stack": "💊 CR LoRA Stack",
+    "CR Random LoRA Stack": "💊 CR Random LoRA Stack",
     "CR Apply LoRA Stack": "💊 CR Apply LoRA Stack",
     ### Model Merge Nodes
     "CR Apply Model Merge": "⛏️ CR Apply Model Merge",
