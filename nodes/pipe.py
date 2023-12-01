@@ -34,14 +34,15 @@ class CR_ModulePipeLoader:
             },
         }
 
-    RETURN_TYPES = ("PIPE_LINE", )
-    RETURN_NAMES = ("pipe", )
+    RETURN_TYPES = ("PIPE_LINE", "STRING", )
+    RETURN_NAMES = ("pipe", "show_help", )
     FUNCTION = "flush"
     CATEGORY = icons.get("Comfyroll/Pipe/Module")
 
     def flush(self, model=0, pos=0, neg=0, latent=0, vae=0, clip=0, controlnet=0, image=0, seed=0):
         pipe_line = (model, pos, neg, latent, vae, clip, controlnet, image, seed)
-        return (pipe_line, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-pipe-loader"
+        return (pipe_line, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ModuleInput:
@@ -54,15 +55,16 @@ class CR_ModuleInput:
             "required": {"pipe": ("PIPE_LINE",)},
             }
 
-    RETURN_TYPES = ("PIPE_LINE", "MODEL", "CONDITIONING", "CONDITIONING", "LATENT", "VAE", "CLIP", "CONTROL_NET", "IMAGE", "INT")
-    RETURN_NAMES = ("pipe", "model", "pos", "neg", "latent", "vae", "clip", "controlnet", "image", "seed")
+    RETURN_TYPES = ("PIPE_LINE", "MODEL", "CONDITIONING", "CONDITIONING", "LATENT", "VAE", "CLIP", "CONTROL_NET", "IMAGE", "INT", "STRING", )
+    RETURN_NAMES = ("pipe", "model", "pos", "neg", "latent", "vae", "clip", "controlnet", "image", "seed", "show_help", )
     FUNCTION = "flush"
 
     CATEGORY = icons.get("Comfyroll/Pipe/Module")
     
     def flush(self, pipe):
         model, pos, neg, latent, vae, clip, controlnet, image, seed = pipe
-        return pipe, model, pos, neg, latent, vae, clip, controlnet, image, seed
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-input"
+        return (pipe, model, pos, neg, latent, vae, clip, controlnet, image, seed, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ModuleOutput:
@@ -85,8 +87,8 @@ class CR_ModuleOutput:
                 },
             }
 
-    RETURN_TYPES = ("PIPE_LINE", )
-    RETURN_NAMES = ("pipe", )
+    RETURN_TYPES = ("PIPE_LINE", "STRING", )
+    RETURN_NAMES = ("pipe", "show_help", )
     FUNCTION = "flush"
     CATEGORY = icons.get("Comfyroll/Pipe/Module")
 
@@ -121,7 +123,8 @@ class CR_ModuleOutput:
             new_seed = seed
        
         pipe = new_model, new_pos, new_neg, new_latent, new_vae, new_clip, new_controlnet, new_image, new_seed
-        return (pipe, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-output"
+        return (pipe, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 # PIPE NODES
@@ -144,14 +147,15 @@ class CR_ImagePipeIn:
             },
         }
 
-    RETURN_TYPES = ("PIPE_LINE", )
-    RETURN_NAMES = ("pipe", )
+    RETURN_TYPES = ("PIPE_LINE", "STRING", )
+    RETURN_NAMES = ("pipe", "show_help", )
     FUNCTION = "flush"
     CATEGORY = icons.get("Comfyroll/Pipe/Image")
 
     def flush(self, image=0, width=0, height=0, upscale_factor=0):
         pipe_line = (image, width, height, upscale_factor)
-        return (pipe_line, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-in"
+        return (pipe_line, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ImagePipeEdit:
@@ -169,8 +173,8 @@ class CR_ImagePipeEdit:
                 },
             }
 
-    RETURN_TYPES = ("PIPE_LINE", )
-    RETURN_NAMES = ("pipe", )
+    RETURN_TYPES = ("PIPE_LINE", "STRING", )
+    RETURN_NAMES = ("pipe", "show_help", )
     FUNCTION = "flush"
     CATEGORY = icons.get("Comfyroll/Pipe/Image")
 
@@ -190,7 +194,8 @@ class CR_ImagePipeEdit:
             new_upscale_factor = upscale_factor
             
         pipe = new_image, new_width, new_height, new_upscale_factor
-        return (pipe, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-edit"
+        return (pipe, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ImagePipeOut:
@@ -203,8 +208,8 @@ class CR_ImagePipeOut:
             "required": {"pipe": ("PIPE_LINE",)},
             }
 
-    RETURN_TYPES = ("PIPE_LINE", "IMAGE", "INT", "INT", "FLOAT",)
-    RETURN_NAMES = ("pipe", "image", "width", "height", "upscale_factor")
+    RETURN_TYPES = ("PIPE_LINE", "IMAGE", "INT", "INT", "FLOAT", "STRING", )
+    RETURN_NAMES = ("pipe", "image", "width", "height", "upscale_factor", "show_help", )
     FUNCTION = "flush"
     CATEGORY = icons.get("Comfyroll/Pipe/Image")
     
@@ -212,8 +217,9 @@ class CR_ImagePipeOut:
         #if switch == "Off":
             #return (pipe, )
         #else:  
+            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-out"
             image, width, height, upscale_factor = pipe
-            return pipe, image, width, height, upscale_factor
+            return (pipe, image, width, height, upscale_factor, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_InputSwitchPipe:
@@ -229,17 +235,19 @@ class CR_InputSwitchPipe:
                 "pipe2": ("PIPE_LINE",)
             }
         }
-
-    RETURN_TYPES = ("PIPE_LINE",)
+ 
+    RETURN_TYPES = ("PIPE_LINE", "STRING")
+    RETURN_NAMES = ("PIPE_LINE", "show_help")
     OUTPUT_NODE = True
     FUNCTION = "InputSwitchPipe"
     CATEGORY = icons.get("Comfyroll/Pipe")
 
     def InputSwitchPipe(self, Input, pipe1, pipe2):
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-pipe-switch"
         if Input == 1:
-            return (pipe1, )
+            return (pipe1, show_help, )
         else:
-            return (pipe2, )
+            return (pipe2, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

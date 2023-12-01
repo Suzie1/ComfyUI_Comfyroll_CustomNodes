@@ -44,8 +44,8 @@ class CR_UpscaleImage:
                      }
                 }
 
-    RETURN_TYPES = ("IMAGE", "STRING",)
-    RETURN_NAMES = ("IMAGE", "show_help",)
+    RETURN_TYPES = ("IMAGE", "STRING", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", "show_help", )
     FUNCTION = "upscale"
     CATEGORY = icons.get("Comfyroll/Upscale")
     
@@ -66,9 +66,11 @@ class CR_UpscaleImage:
             pil_img = tensor2pil(img)
             upscaled_width, upscaled_height = pil_img.size
 
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-upscale-image"
+
         # Return if no rescale needed
         if upscaled_width == original_width and rescale_factor == 1:
-            return (up_image, )
+            return (up_image, show_help)
               
         # Image resize
         scaled_images = []
@@ -76,8 +78,6 @@ class CR_UpscaleImage:
         for img in up_image:
             scaled_images.append(pil2tensor(apply_resize_image(tensor2pil(img), original_width, original_height, rounding_modulus, mode, supersample, rescale_factor, resize_width, resampling_method)))
         images_out = torch.cat(scaled_images, dim=0)
-              
-        show_help = "example help text"
  
         return (images_out, show_help, )        
  
@@ -106,7 +106,8 @@ class CR_MultiUpscaleStack:
                 }
         }
 
-    RETURN_TYPES = ("UPSCALE_STACK", )
+    RETURN_TYPES = ("UPSCALE_STACK", "STRING", )
+    RETURN_NAMES = ("UPSCALE_STACK", "show_help", )
     FUNCTION = "stack"
     CATEGORY = icons.get("Comfyroll/Upscale")
     
@@ -127,7 +128,8 @@ class CR_MultiUpscaleStack:
         if upscale_model_3 != "None" and  switch_3 == "On":
             upscale_list.extend([(upscale_model_3, rescale_factor_3)]),
 
-        return (upscale_list,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-multi-upscale-stack"
+        return (upscale_list, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
 class CR_ApplyMultiUpscale:
@@ -145,7 +147,8 @@ class CR_ApplyMultiUpscale:
                             }
         }
     
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "apply"
     CATEGORY = icons.get("Comfyroll/Upscale")
 
@@ -186,7 +189,9 @@ class CR_ApplyMultiUpscale:
                     scaled_images.append(pil2tensor(apply_resize_image(tensor2pil(img), original_width, original_height, rounding_modulus, mode, supersample, rescale_factor, resize_width, resampling_method)))
                 image = torch.cat(scaled_images, dim=0)
             
-        return (image, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-apply-multi-upscale"
+
+        return (image, show_help, )
    
 #---------------------------------------------------------------------------------------------------------------------
 # MAPPINGS
