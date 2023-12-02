@@ -214,7 +214,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
     "CR Select Model": "🔮 CR Select Model",
     "CR Random Hex Color": "⚙️ CR Random Hex Color",
-    "CR Random RGB": "⚙️ Random RGB", 
+    "CR Random RGB": "⚙️ CR Random RGB", 
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    

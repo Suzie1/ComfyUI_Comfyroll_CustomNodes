@@ -591,7 +591,7 @@ class CR_RandomHexColor:
     RETURN_NAMES = ("hex_color1", "hex_color2", "hex_color3", "hex_color4", "show_help", )
     OUTPUT_NODE = True
     FUNCTION = "get_colors"
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Graphics/Utilty")
 
     def get_colors(self, seed):
     
@@ -619,7 +619,7 @@ class CR_RandomRGB:
     RETURN_NAMES = ("rgb_1", "rgb_2", "rgb_3", "rgb_4", "show_help", )
     OUTPUT_NODE = True
     FUNCTION = "get_colors"
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Graphics/Utilty")
 
     def get_colors(self, seed):
     

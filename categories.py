@@ -19,6 +19,7 @@ icons = {
     "Comfyroll/Graphics/Filter": "🧩 Comfyroll/👾 Graphics/🎨 Filter",
     "Comfyroll/Graphics/Pattern": "🧩 Comfyroll/👾 Graphics/🌈 Pattern",
     "Comfyroll/Graphics/3D": "🧩 Comfyroll/👾 Graphics/3D",
+    "Comfyroll/Graphics/Utilty": "🧩 Comfyroll/👾 Graphics/🔧 Utility",
     "Comfyroll/Workflow": "🧩 Comfyroll/Workflow",     
     "Comfyroll/Other": "🧩 Comfyroll/📦 Other",
     "Comfyroll/Other/Legacy": "🧩 Comfyroll/📦 Other/💀 Legacy",

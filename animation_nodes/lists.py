@@ -381,57 +381,6 @@ class CR_ImageListSimple:
             
         return (images,)
  
-
-#---------------------------------------------------------------------------------------------------------------------#  
-class CR_LoadImageFromList:
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {"image_list": ("IMAGE_LIST",),
-                             "image_ID": ("STRING", {"default": "", "multiline": False}),
-                },
-        }
-    
-    RETURN_TYPES = ("IMAGE", )
-    RETURN_NAMES = ("IMAGE", )
-    FUNCTION = "loadimage"
-    CATEGORY = icons.get("Comfyroll/Animation/List")
-
-    def loadimage(self, image_ID, image_list,):
-
-        print(image_list)
-        #if image_list == None:
- 
-        #pick image by ID
-        #load image
-
-        return (image_ID,)
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_LoadTextFromList:
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {"text_list": ("TEXT_LIST",),
-                             "text_ID": ("STRING", {"default": "", "multiline": False}),
-                },
-        }
-    
-    RETURN_TYPES = ("STRING", )
-    RETURN_NAMES = ("STRING", )
-    FUNCTION = "loadtext"
-    CATEGORY = icons.get("Comfyroll/Animation/List")
-
-    def loadtext(self, text_ID, text_list,):
-
-        print(text_list)
-        #if text_list == None:
- 
-        #pick text by ID
-        #load text
-
-        return (text_ID,)
-
 #---------------------------------------------------------------------------------------------------------------------#   
 class CR_InputTextList:
 
