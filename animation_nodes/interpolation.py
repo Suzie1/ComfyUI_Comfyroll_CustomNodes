@@ -24,18 +24,19 @@ class CR_GradientInteger:
                 },
         }
     
-    RETURN_TYPES = ("INT", )
-    RETURN_NAMES = ("INT", )
+    RETURN_TYPES = ("INT", "STRING", )
+    RETURN_NAMES = ("INT", "show_help", )
     FUNCTION = "gradient"
     CATEGORY = icons.get("Comfyroll/Animation/Interpolate")
 
     def gradient(self, start_value, end_value, start_frame, frame_duration, current_frame, gradient_profile):
-    
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Interpolation-Nodes#cr-gradient-integer"
+
         if current_frame < start_frame:
-            return (start_value,)
+            return (start_value, show_help, )
 
         if current_frame > start_frame + frame_duration:
-            return (end_value,)
+            return (end_value, show_help, )
             
         step = (end_value - start_value) / frame_duration
         
@@ -43,7 +44,7 @@ class CR_GradientInteger:
         
         int_out = start_value + int(current_step * step)
         
-        return (int_out,)
+        return (int_out, show_help, )
     
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_GradientFloat:
@@ -61,18 +62,19 @@ class CR_GradientFloat:
                 },
         }
     
-    RETURN_TYPES = ("FLOAT", )
-    RETURN_NAMES = ("FLOAT", )    
+    RETURN_TYPES = ("FLOAT", "STRING", )
+    RETURN_NAMES = ("FLOAT", "show_help", )    
     FUNCTION = "gradient"
     CATEGORY = icons.get("Comfyroll/Animation/Interpolate")
 
     def gradient(self, start_value, end_value, start_frame, frame_duration, current_frame, gradient_profile):
-    
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Interpolation-Nodes#cr-gradient-float"
+
         if current_frame < start_frame:
-            return (start_value,)
+            return (start_value, show_help, )
 
         if current_frame > start_frame + frame_duration:
-            return (end_value,)
+            return (end_value, show_help, )
             
         step = (end_value - start_value) / frame_duration
         
@@ -80,7 +82,7 @@ class CR_GradientFloat:
         
         float_out = start_value + current_step * step
         
-        return (float_out,)
+        return (float_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_IncrementFloat:
@@ -96,25 +98,26 @@ class CR_IncrementFloat:
                 },
         }
     
-    RETURN_TYPES = ("FLOAT",)
-    RETURN_NAMES = ("FLOAT",)
+    RETURN_TYPES = ("FLOAT", "STRING", )
+    RETURN_NAMES = ("FLOAT", "show_help", )
     OUTPUT_NODE = True    
     FUNCTION = "increment"
     CATEGORY = icons.get("Comfyroll/Animation/Interpolate")
 
     def increment(self, start_value, step, start_frame, frame_duration, current_frame):
-  
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Interpolation-Nodes#cr-increment-float"
+
         #print(f"current frame {current_frame}")
         if current_frame < start_frame:
-            return (start_value,)
+            return (start_value, show_help, )
   
         current_value = start_value + (current_frame - start_frame) * step
         if current_frame <= start_frame + frame_duration:
             current_value += step
             #print(f"<current value {current_value}")    
-            return (current_value,)
+            return (current_value, show_help, )
                 
-        return (current_value,)
+        return (current_value, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_IncrementInteger:
@@ -130,25 +133,26 @@ class CR_IncrementInteger:
                 },
         }
     
-    RETURN_TYPES = ("INT",)
-    RETURN_NAMES = ("INT",)
+    RETURN_TYPES = ("INT", "STRING", )
+    RETURN_NAMES = ("INT", "show_help", )
     OUTPUT_NODE = True    
     FUNCTION = "increment"
     CATEGORY = icons.get("Comfyroll/Animation/Interpolate")
 
     def increment(self, start_value, step, start_frame, frame_duration, current_frame):
-  
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Interpolation-Nodes#cr-increment-integer"
+
         #print(f"current frame {current_frame}")
         if current_frame < start_frame:
-            return (start_value,)
+            return (start_value, show_help, )
   
         current_value = start_value + (current_frame - start_frame) * step
         if current_frame <= start_frame + frame_duration:
             current_value += step
             #print(f"<current value {current_value}")    
-            return (current_value,)
+            return (current_value, show_help, )
                 
-        return (current_value,)
+        return (current_value, show_help, )
          
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_InterpolateLatents:
@@ -168,7 +172,8 @@ class CR_InterpolateLatents:
             }
         }
 
-    RETURN_TYPES = ("LATENT",)
+    RETURN_TYPES = ("LATENT", "STRING", )
+    RETURN_NAMES = ("LATENT", "show_help", )
     FUNCTION = "interpolate"
     CATEGORY = icons.get("Comfyroll/Animation/Interpolate")
 
@@ -198,8 +203,10 @@ class CR_InterpolateLatents:
 
             interpolated_samples = weight1 * latent1["samples"] + weight2 * latent2["samples"]
             a["samples"] = interpolated_samples
+        
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Interpolation-Nodes#cr-interpolate-latents"
 
-        return (a,)
+        return (a, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

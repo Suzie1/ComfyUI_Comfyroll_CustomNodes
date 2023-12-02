@@ -15,14 +15,14 @@ class CR_Trigger:
                 },
         }
 
-    RETURN_TYPES = ("INT", "BOOLEAN",)
-    RETURN_NAMES = ("index", "trigger", )
+    RETURN_TYPES = ("INT", "BOOLEAN", "STRING", )
+    RETURN_NAMES = ("index", "trigger", "show_help", )
     FUNCTION = "trigger"
     CATEGORY = icons.get("Comfyroll/Utils/Index")
 
     def trigger(self, index, trigger_value):
-
-        return (index, index == trigger_value,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-trigger"
+        return (index, index == trigger_value, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
 class CR_Index: 
@@ -34,7 +34,8 @@ class CR_Index:
                 },
         }
 
-    RETURN_TYPES = ("INT",)
+    RETURN_TYPES = ("INT", "STRING", )
+    RETURN_NAMES = ("INT", "show_help", )
     FUNCTION = "index"
     CATEGORY = icons.get("Comfyroll/Utils/Index")
 
@@ -43,7 +44,8 @@ class CR_Index:
         if print_to_console == "Yes":
             print(f"[Info] CR Index:{index}")
 
-        return (index,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index"
+        return (index, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
 class CR_IncrementIndex:
@@ -56,14 +58,15 @@ class CR_IncrementIndex:
                     }
         }
 
-    RETURN_TYPES = ("INT", "INT",)
-    RETURN_NAMES = ("index", "interval")
+    RETURN_TYPES = ("INT", "INT", "STRING", )
+    RETURN_NAMES = ("index", "interval", "show_help", )
     FUNCTION = "increment"
     CATEGORY = icons.get("Comfyroll/Utils/Index")
     
     def increment(self, index, interval):
         index+=interval
-        return (index, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-increment"
+        return (index, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#   
 class CR_MultiplyIndex:
@@ -77,14 +80,15 @@ class CR_MultiplyIndex:
         }
 
 
-    RETURN_TYPES = ("INT", "INT",)
-    RETURN_NAMES = ("index", "factor")
+    RETURN_TYPES = ("INT", "INT", "STRING", )
+    RETURN_NAMES = ("index", "factor", "show_help", )
     FUNCTION = "multiply"
     CATEGORY = icons.get("Comfyroll/Utils/Index")
     
     def multiply(self, index, factor):
         index = index * factor
-        return (index, factor) 
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-multiply"
+        return (index, factor, show_help, ) 
 
 #---------------------------------------------------------------------------------------------------------------------#   
 class CR_IndexReset:
@@ -98,15 +102,16 @@ class CR_IndexReset:
         }
 
 
-    RETURN_TYPES = ("INT", "INT",)
-    RETURN_NAMES = ("index", "reset_to")
+    RETURN_TYPES = ("INT", "INT", "STRING", )
+    RETURN_NAMES = ("index", "reset_to", "show_help", )
     FUNCTION = "reset"
     CATEGORY = icons.get("Comfyroll/Utils/Index")
     
     def reset(self, index, reset_to):
         index = reset_to
-        return (index, reset_to)    
- 
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-reset"
+        return (index, reset_to, show_help, )   
+     
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#

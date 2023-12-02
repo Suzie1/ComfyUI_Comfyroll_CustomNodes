@@ -61,8 +61,8 @@ class CR_XYList:
                     }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "BOOLEAN", )
-    RETURN_NAMES = ("X", "Y", "x_annotation", "y_annotation", "trigger", ) 
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "BOOLEAN", "STRING", )
+    RETURN_NAMES = ("X", "Y", "x_annotation", "y_annotation", "trigger", "show_help", ) 
     FUNCTION = "cross_join"
     CATEGORY = icons.get("Comfyroll/XY Grid") 
     
@@ -102,8 +102,10 @@ class CR_XYList:
             x_ann_out = "".join([str(item) for item in x_ann_out])
             y_ann_out = "".join([str(item) for item in y_ann_out])
             trigger = True
-            
-        return (x_out, y_out, x_ann_out, y_ann_out, trigger, )
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-list"
+
+        return (x_out, y_out, x_ann_out, y_ann_out, trigger, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_XYInterpolate:
@@ -125,8 +127,8 @@ class CR_XYInterpolate:
                             }              
                 }
     
-    RETURN_TYPES = ("FLOAT", "FLOAT", "STRING", "STRING", "BOOLEAN", )
-    RETURN_NAMES = ("X", "Y", "x_annotation", "y_annotation", "trigger", )    
+    RETURN_TYPES = ("FLOAT", "FLOAT", "STRING", "STRING", "BOOLEAN", "STRING", )
+    RETURN_NAMES = ("X", "Y", "x_annotation", "y_annotation", "trigger", "show_help", )    
     FUNCTION = "gradient"
     CATEGORY = icons.get("Comfyroll/XY Grid") 
 
@@ -165,7 +167,9 @@ class CR_XYInterpolate:
             print(x_ann_out,y_ann_out)
             trigger = True
              
-        return (x_float_out, y_float_out, x_ann_out, y_ann_out, trigger)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-interpolate"
+
+        return (x_float_out, y_float_out, x_ann_out, y_ann_out, trigger, show_help, )
    
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_XYIndex: 
@@ -180,8 +184,8 @@ class CR_XYIndex:
                 }
         }
 
-    RETURN_TYPES = ("INT", "INT", )
-    RETURN_NAMES = ("x", "y", )    
+    RETURN_TYPES = ("INT", "INT", "STRING", )
+    RETURN_NAMES = ("x", "y", "show_help", )    
     FUNCTION = "index"
     CATEGORY = icons.get("Comfyroll/XY Grid") 
 
@@ -193,7 +197,9 @@ class CR_XYIndex:
         x = index % x_columns
         y = int(index / x_columns)  
         
-        return (x, y)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-index"
+
+        return (x, y, show_help, )
                 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_XYFromFolder:
@@ -219,15 +225,16 @@ class CR_XYFromFolder:
             }                     
                 }
 
-    RETURN_TYPES = ("IMAGE", "BOOLEAN", )
-    RETURN_NAMES = ("IMAGE", "trigger", )
+    RETURN_TYPES = ("IMAGE", "BOOLEAN", "STRING", )
+    RETURN_NAMES = ("IMAGE", "trigger", "show_help", )
     FUNCTION = "load_images"
     CATEGORY = icons.get("Comfyroll/XY Grid") 
     
     def load_images(self, image_folder, start_index, end_index, max_columns, x_annotation, y_annotation, font_size, gap, trigger=False):
-    
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-from-folder"
+
         if trigger == False:
-            return((),False,)
+            return((), False, show_help, )
             
         input_dir = folder_paths.output_directory
         image_path = os.path.join(input_dir, image_folder)
@@ -271,7 +278,7 @@ class CR_XYFromFolder:
         )
         tensor_grid = pillow_to_tensor(pillow_grid)
 
-        return (tensor_grid, trigger,)
+        return (tensor_grid, trigger, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_XYSaveGridImage:

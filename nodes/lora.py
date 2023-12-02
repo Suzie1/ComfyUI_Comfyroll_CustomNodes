@@ -31,16 +31,18 @@ class CR_LoraLoader:
                               "strength_model": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               "strength_clip": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               }}
-    RETURN_TYPES = ("MODEL", "CLIP")
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "show_help", )
     FUNCTION = "load_lora"
     CATEGORY = icons.get("Comfyroll/LoRA")
 
     def load_lora(self, model, clip, switch, lora_name, strength_model, strength_clip):
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-load-lora"
         if strength_model == 0 and strength_clip == 0:
-            return (model, clip)
+            return (model, clip, show_help, )
 
         if switch == "Off" or  lora_name == "None":
-            return (model, clip)
+            return (model, clip, show_help, )
 
         lora_path = folder_paths.get_full_path("loras", lora_name)
         lora = None
@@ -55,7 +57,7 @@ class CR_LoraLoader:
             self.loaded_lora = (lora_path, lora)
 
         model_lora, clip_lora = comfy.sd.load_lora_for_models(model, clip, lora, strength_model, strength_clip)
-        return (model_lora, clip_lora)
+        return (model_lora, clip_lora, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # Based on Efficiency Nodes
@@ -85,7 +87,8 @@ class CR_LoRAStack:
                 },
         }
 
-    RETURN_TYPES = ("LORA_STACK",)
+    RETURN_TYPES = ("LORA_STACK", "STRING", )
+    RETURN_NAMES = ("LORA_STACK", "show_help", )
     FUNCTION = "lora_stacker"
     CATEGORY = icons.get("Comfyroll/LoRA")
 
@@ -106,7 +109,9 @@ class CR_LoRAStack:
         if lora_name_3 != "None" and  switch_3 == "On":
             lora_list.extend([(lora_name_3, model_weight_3, clip_weight_3)]),
            
-        return (lora_list,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-lora-stack"           
+
+        return (lora_list, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # This applies the lora stack.
@@ -120,11 +125,13 @@ class CR_ApplyLoRAStack:
                             }
         }
 
-    RETURN_TYPES = ("MODEL", "CLIP",)
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "show_help", )
     FUNCTION = "apply_lora_stack"
     CATEGORY = icons.get("Comfyroll/LoRA")
 
     def apply_lora_stack(self, model, clip, lora_stack=None,):
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-apply-lora-stack"
 
         # Initialise the list
         lora_params = list()
@@ -133,7 +140,7 @@ class CR_ApplyLoRAStack:
         if lora_stack:
             lora_params.extend(lora_stack)
         else:
-            return (model, clip,)
+            return (model, clip, show_help,)
 
         # Initialise the model and clip
         model_lora = model
@@ -148,7 +155,7 @@ class CR_ApplyLoRAStack:
             
             model_lora, clip_lora = comfy.sd.load_lora_for_models(model_lora, clip_lora, lora, strength_model, strength_clip)  
 
-        return (model_lora, clip_lora,)
+        return (model_lora, clip_lora, show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
