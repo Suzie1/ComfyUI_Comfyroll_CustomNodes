@@ -295,7 +295,7 @@ class CR_ImageList:
         }
 
     RETURN_TYPES = ("IMAGE_LIST", "STRING", )
-    RETURN_NAMES = ("IMAGE_LIST", "STRING", )
+    RETURN_NAMES = ("IMAGE_LIST", "show_help", )
     FUNCTION = "image_list"
     CATEGORY = icons.get("Comfyroll/Animation/List")
 
@@ -353,7 +353,7 @@ class CR_ImageListSimple:
         }
 
     RETURN_TYPES = ("IMAGE_LIST_SIMPLE", "STRING", )
-    RETURN_NAMES = ("IMAGE_LIST_SIMPLE", "STRING", )
+    RETURN_NAMES = ("IMAGE_LIST_SIMPLE", "show_help", )
     FUNCTION = "image_list_simple"
     CATEGORY = icons.get("Comfyroll/Animation/List")
 
@@ -398,7 +398,7 @@ class CR_InputTextList:
         }
 
     RETURN_TYPES = ("TEXT_LIST_SIMPLE", "STRING", )
-    RETURN_NAMES = ("TEXT_LIST_SIMPLE", "STRING", )
+    RETURN_NAMES = ("TEXT_LIST_SIMPLE", "show_help", )
     FUNCTION = "text_list_simple"
     CATEGORY = icons.get("Comfyroll/Animation/List")
 
