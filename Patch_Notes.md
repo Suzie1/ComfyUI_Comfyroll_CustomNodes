@@ -1,5 +1,17 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## PR54 Dec 2, 2023
+
+__Other Changes__
+	
+	- added show-help outputs on animation nodes with links to wiki
+	
+## PR51, PR52 Dec 2, 2023	
+
+__Added Nodes__
+
+	CR Random RGB
+
 ## PR50 Dec 1, 2023
 
 __Other Changes__
