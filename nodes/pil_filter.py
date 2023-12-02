@@ -89,7 +89,7 @@ class CR_ColorTint:
 
         result = tinted * strength + image * (1 - strength)
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Filter-Nodes"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Filter-Nodes#cr-color-tint"
         
         return (result, show_help, ) 
 
@@ -282,7 +282,7 @@ class CR_HalftoneFilter:
 
             dots.append(half_tone)
             
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Filter-Nodes"
+            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Filter-Nodes#cr-halftone-filter"
 
         return (dots, show_help, )  
         

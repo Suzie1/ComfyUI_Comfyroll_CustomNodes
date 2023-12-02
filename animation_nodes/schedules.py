@@ -28,7 +28,8 @@ class CR_SimpleSchedule:
                 },
         }
     
-    RETURN_TYPES = ("SCHEDULE", )
+    RETURN_TYPES = ("SCHEDULE", "STRING", )
+    RETURN_NAMES = ("SCHEDULE", "show_help", )
     FUNCTION = "send_schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedule")
 
@@ -48,7 +49,9 @@ class CR_SimpleSchedule:
                 schedule_lines.extend([(schedule_alias, line)])
         #print(f"[Debug] CR Simple Schedule: {schedule_lines}")
 
-        return (schedule_lines, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-simple-schedule"
+
+        return (schedule_lines, show_help, )
 
 #-----------------------------------------------------------------------------------------------------------#
 class CR_CombineSchedules:
@@ -179,17 +182,19 @@ class Comfyroll_ScheduleInputSwitch:
             }
         }
 
-    RETURN_TYPES = ("SCHEDULE",)
+    RETURN_TYPES = ("SCHEDULE", "STRING", )
+    RETURN_NAMES = ("SCHEDULE", "show_help", )
     OUTPUT_NODE = True
     FUNCTION = "switch"
 
     CATEGORY = icons.get("Comfyroll/Animation/Schedule")
 
     def switch(self, Input, schedule1, schedule2):
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-schedule-input-switch"
         if Input == 1:
-            return (schedule1, )
+            return (schedule1, show_help, )
         else:
-            return (schedule2, )
+            return (schedule2, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_OutputScheduleToFile:

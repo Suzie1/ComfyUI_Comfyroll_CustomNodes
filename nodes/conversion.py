@@ -20,7 +20,8 @@ class CR_StringToNumber:
                 },
         }
 
-    RETURN_TYPES = ("INT", "FLOAT",)   
+    RETURN_TYPES = ("INT", "FLOAT", "STRING", )
+    RETURN_NAMES = ("INT", "FLOAT", "show_help", )
     FUNCTION = "convert"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
@@ -33,7 +34,8 @@ class CR_StringToNumber:
         else:
             print(f"[Error] CR String To Number. Not a number.")         
         
-        return (int_out, float_out,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-number"
+        return (int_out, float_out, show_help,)
         
 #---------------------------------------------------------------------------------------------------------------------# 
 class CR_TextListToString:
@@ -44,15 +46,18 @@ class CR_TextListToString:
                     },
                 }
 
-    RETURN_TYPES = ("STRING", )
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
     FUNCTION = "joinlist"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def joinlist(self, text_list):
     
         string_out = " ".join(text_list)
-        
-        return (string_out,)
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-text-list-to-string"
+
+        return (string_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#  
 # based on Repeater node by pythongosssss 
@@ -66,7 +71,8 @@ class CR_StringToCombo:
             },
         }
 
-    RETURN_TYPES = (any,)
+    RETURN_TYPES = (any, "STRING", )
+    RETURN_TYPES = ("any", "show_help", )
     FUNCTION = "convert"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
@@ -79,7 +85,9 @@ class CR_StringToCombo:
             text_list = values[0]
             print(text_list)
         
-        return (text_list, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-combo"
+
+        return (text_list, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # Cloned from Mikey Nodes
@@ -90,12 +98,14 @@ class CR_IntegerToString:
                 }
         }
 
-    RETURN_TYPES = ('STRING',)
+    RETURN_TYPES = ("STRING","STRING", )
+    RETURN_NAMES = ("STRING","show_help", )
     FUNCTION = 'convert'
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, int_):
-        return (f'{int_}', )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-integer-to-string"
+        return (f'{int_}', show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # Cloned from Mikey Nodes
@@ -106,12 +116,14 @@ class CR_FloatToString:
                 }        
         }
 
-    RETURN_TYPES = ('STRING',)
+    RETURN_TYPES = ('STRING', "STRING", )
+    RETURN_NAMES = ('STRING', "show_help", )
     FUNCTION = 'convert'
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, float_):
-        return (f'{float_}', )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-string"
+        return (f'{float_}', show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
 class CR_FloatToInteger:
@@ -119,12 +131,14 @@ class CR_FloatToInteger:
     def INPUT_TYPES(cls):
         return {"required": {"_float": ("FLOAT", {"default": 0.0})}}
 
-    RETURN_TYPES = ("INT",)
+    RETURN_TYPES = ("INT", "STRING", )
+    RETURN_NAMES = ("INT", "show_help", )
     FUNCTION = "convert"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, _float):
-        return (int(_float),)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-integer"
+        return (int(_float), show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # This node is used to convert type Seed to type INT
@@ -140,12 +154,14 @@ class CR_SeedToInt:
             }
         }
 
-    RETURN_TYPES = ("INT",)
+    RETURN_TYPES = ("INT", "STRING", )
+    RETURN_NAMES = ("INT", "show_help", )
     FUNCTION = "seed_to_int"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def seed_to_int(self, seed):
-        return (seed.get('seed'),)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-seed-to-int"
+        return (seed.get('seed'), show_help, )
  
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -164,3 +180,4 @@ NODE_CLASS_MAPPINGS = {
 }
 '''    
      
+
