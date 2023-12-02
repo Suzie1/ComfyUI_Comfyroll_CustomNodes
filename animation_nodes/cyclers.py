@@ -41,7 +41,7 @@ class CR_CycleModels:
         }
     
     RETURN_TYPES = ("MODEL", "CLIP", "VAE", "STRING", )
-    RETURN_NAMES = ("MODEL", "CLIP", "VAE", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "VAE", "show_help", )
     FUNCTION = "cycle_models"
     CATEGORY = icons.get("Comfyroll/Animation/Cyclers")
 
@@ -100,7 +100,7 @@ class CR_CycleLoRAs:
         }
     
     RETURN_TYPES = ("MODEL", "CLIP", "STRING", )
-    RETURN_NAMES = ("MODEL", "CLIP", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "show_help", )
     FUNCTION = "cycle"
     CATEGORY = icons.get("Comfyroll/Animation/Cyclers")
 
@@ -209,7 +209,7 @@ class CR_CycleTextSimple:
         }
     
     RETURN_TYPES = ("STRING", "STRING", )
-    RETURN_NAMES = ("STRING", "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
     FUNCTION = "cycle_text"
     CATEGORY = icons.get("Comfyroll/Animation/Cyclers")
 
@@ -269,7 +269,7 @@ class CR_CycleImages:
         }
     
     RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_NAMES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "cycle"
     CATEGORY = icons.get("Comfyroll/Animation/Cyclers")
 
@@ -319,7 +319,7 @@ class CR_CycleImagesSimple:
         }
     
     RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_NAMES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "cycle_image"
     CATEGORY = icons.get("Comfyroll/Animation/Cyclers")
 
