@@ -183,7 +183,7 @@ class Comfyroll_ScheduleInputSwitch:
         }
 
     RETURN_TYPES = ("SCHEDULE", "STRING", )
-    RETURN_TYPES = ("SCHEDULE", "show_help", )
+    RETURN_NAMES = ("SCHEDULE", "show_help", )
     OUTPUT_NODE = True
     FUNCTION = "switch"
 

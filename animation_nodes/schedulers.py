@@ -79,7 +79,7 @@ class CR_TextScheduler:
         }
     
     RETURN_TYPES = ("STRING", "STRING", )
-    RETURN_TYPES = ("STRING", "show_help", )
+    RETURN_NAMES = ("STRING", "show_help", )
     FUNCTION = "schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
@@ -362,7 +362,7 @@ class CR_LoadScheduledModels:
         }
  
     RETURN_TYPES = ("MODEL", "CLIP", "VAE", "STRING", )
-    RETURN_TYPES = ("MODEL", "CLIP", "VAE", "show_help", )
+    RETURN_NAMES = ("MODEL", "CLIP", "VAE", "show_help", )
     FUNCTION = "schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
