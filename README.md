@@ -192,44 +192,6 @@ The nodes were originally made for use in the Comfyroll Template Workflows.
 
 [SDXL and SD1.5 Model Merge Templates for ComfyUI](https://civitai.com/models/123125/sdxl-and-sd15-model-merge-templates-for-comfyui)
 
-# Node Images
-
-In the images below, the black nodes are the CR nodes and the grey nodes are other nodes shown for context.
-
-![Custom Nodes](/images/custom_nodes_image8a.JPG)
-
-![Custom Nodes](/images/custom_nodes_image5a.JPG)
-
-![Custom Nodes](/images/Model_Merge.JPG)
-
-![Custom Nodes](/images/custom_nodes_image4b.JPG)
-
-![Custom Nodes](/images/custom_nodes_image6.JPG)
-
-![Custom Nodes](/images/CR_Checker_Pattern.JPG)
-
-![Custom Nodes](/images/CR_Color_Bars.JPG)
-
-![Custom Nodes](/images/CR_Color_Gradient.JPG)
-
-![Custom Nodes](/images/CR_Style_Bars.JPG)
-
-![Custom Nodes](/images/CR_Style_Bars2.JPG)
-
-![Custom Nodes](/images/custom_nodes_image7.JPG)
-
-![Custom Nodes](/images/custom_nodes_image7b.JPG)
-
-![Custom Nodes](/images/custom_nodes_image12.JPG)
-
-![Custom Nodes](/images/custom_nodes_image13.JPG)
-
-![Custom Nodes](/images/custom_nodes_image10.JPG)
-
-![Custom Nodes](/images/custom_nodes_image9.JPG)
-
-![Custom Nodes](/images/custom_nodes_image11.JPG)
-
 # Credits
 
 comfyanonymous/[ComfyUI](https://github.com/comfyanonymous/ComfyUI) - A powerful and modular stable diffusion GUI.
