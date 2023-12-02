@@ -99,7 +99,7 @@ class CR_IncrementFloat:
         }
     
     RETURN_TYPES = ("FLOAT", "STRING", )
-    RETURN_NAMES = ("FLOAT", "STRING", )
+    RETURN_NAMES = ("FLOAT", "show_help", )
     OUTPUT_NODE = True    
     FUNCTION = "increment"
     CATEGORY = icons.get("Comfyroll/Animation/Interpolate")
@@ -134,7 +134,7 @@ class CR_IncrementInteger:
         }
     
     RETURN_TYPES = ("INT", "STRING", )
-    RETURN_NAMES = ("INT", "STRING", )
+    RETURN_NAMES = ("INT", "show_help", )
     OUTPUT_NODE = True    
     FUNCTION = "increment"
     CATEGORY = icons.get("Comfyroll/Animation/Interpolate")
