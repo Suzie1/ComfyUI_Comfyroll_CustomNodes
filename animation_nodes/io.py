@@ -64,7 +64,8 @@ class CR_LoadAnimationFrames:
                      }
                 }
 
-    RETURN_TYPES = ("IMAGE",)
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
     FUNCTION = "load_image_sequence"
     CATEGORY = icons.get("Comfyroll/Animation/IO")
 
@@ -81,7 +82,8 @@ class CR_LoadAnimationFrames:
             image = torch.from_numpy(image)[None,]
             image = image.squeeze()
             sample_frames.append(image)
-        return (torch.stack(sample_frames),)      
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/IO-Nodes#cr-load-animation-frames"                        
+        return (torch.stack(sample_frames), show_help, )
  
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_LoadFlowFrames:
@@ -109,12 +111,13 @@ class CR_LoadFlowFrames:
 
     CATEGORY = icons.get("Comfyroll/Animation/IO")
 
-    RETURN_TYPES = ("IMAGE", "IMAGE", "INT", )
-    RETURN_NAMES = ("current_image", "previous_image", "current_frame", )
+    RETURN_TYPES = ("IMAGE", "IMAGE", "INT", "STRING", )
+    RETURN_NAMES = ("current_image", "previous_image", "current_frame", "show_help", )
     FUNCTION = "load_images"
 
     def load_images(self, file_pattern, skip_start_frames, input_folder, sort_by, current_frame, input_path=''):
-    
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/IO-Nodes#cr-load-flow-frames"
+
         input_dir = folder_paths.input_directory
         
         current_frame = current_frame + skip_start_frames
@@ -123,7 +126,7 @@ class CR_LoadFlowFrames:
         if input_path != '':
             if not os.path.exists(input_path):
                 print(f"[Warning] CR Load Flow Frames: The input_path `{input_path}` does not exist")
-                return ("",)
+                return ("", )
             image_path = os.path.join('', input_path)
         else:
             image_path = os.path.join(input_dir, input_folder)
@@ -162,7 +165,7 @@ class CR_LoadFlowFrames:
             pre_image = torch.from_numpy(pre_image)[None,] 
             print(f"[Debug] CR Load Flow Frames: Previous image {file_list[current_frame - 1]}")            
 
-        return (cur_image, pre_image, current_frame)
+        return (cur_image, pre_image, current_frame, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_OutputFlowFrames:
