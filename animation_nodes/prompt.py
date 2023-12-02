@@ -43,7 +43,7 @@ class CR_SimplePromptList:
         }
 
     RETURN_TYPES = ("SIMPLE_PROMPT_LIST", "STRING", )
-    RETURN_NAMES = ("SIMPLE_PROMPT_LIST", "STRING", )
+    RETURN_NAMES = ("SIMPLE_PROMPT_LIST", "show_help", )
     FUNCTION = "prompt_stacker"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -101,7 +101,7 @@ class CR_SimplePromptListKeyframes:
         }
     
     RETURN_TYPES = ("STRING", "STRING", )
-    RETURN_NAMES = ("keyframe_list", "STRING", )
+    RETURN_NAMES = ("keyframe_list", "show_help", )
     FUNCTION = "make_keyframes"
 
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
@@ -177,7 +177,7 @@ class CR_PromptList:
         }
 
     RETURN_TYPES = ("PROMPT_LIST", "STRING", )
-    RETURN_NAMES = ("PROMPT_LIST", "STRING", )
+    RETURN_NAMES = ("PROMPT_LIST", "show_help", )
     FUNCTION = "animation_stacker"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -233,7 +233,7 @@ class CR_PromptListKeyframes:
         }
     
     RETURN_TYPES = ("STRING", "STRING", )
-    RETURN_NAMES = ("keyframe_list", "STRING", )
+    RETURN_NAMES = ("keyframe_list", "show_help", )
     FUNCTION = "make_keyframes"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -280,7 +280,7 @@ class CR_KeyframeList:
         }
 
     RETURN_TYPES = ("STRING", "STRING", )
-    RETURN_NAMES = ("keyframe_list", "STRING", )
+    RETURN_NAMES = ("keyframe_list", "show_help", )
     FUNCTION = "keyframelist"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -401,7 +401,7 @@ class CR_EncodeScheduledPrompts:
             n = [tw, t_to]
             out.append(n)
         show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-encode-scheduled-prompts"
-        return (out,)
+        return (out, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
