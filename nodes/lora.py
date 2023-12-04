@@ -33,16 +33,18 @@ class CR_LoraLoader:
                               "strength_model": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               "strength_clip": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                               }}
-    RETURN_TYPES = ("MODEL", "CLIP")
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "show_help", )
     FUNCTION = "load_lora"
     CATEGORY = icons.get("Comfyroll/LoRA")
 
     def load_lora(self, model, clip, switch, lora_name, strength_model, strength_clip):
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-load-lora"
         if strength_model == 0 and strength_clip == 0:
-            return (model, clip)
+            return (model, clip, show_help, )
 
         if switch == "Off" or  lora_name == "None":
-            return (model, clip)
+            return (model, clip, show_help, )
 
         lora_path = folder_paths.get_full_path("loras", lora_name)
         lora = None
@@ -57,7 +59,7 @@ class CR_LoraLoader:
             self.loaded_lora = (lora_path, lora)
 
         model_lora, clip_lora = comfy.sd.load_lora_for_models(model, clip, lora, strength_model, strength_clip)
-        return (model_lora, clip_lora)
+        return (model_lora, clip_lora, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # Based on Efficiency Nodes
@@ -87,7 +89,8 @@ class CR_LoRAStack:
                 },
         }
 
-    RETURN_TYPES = ("LORA_STACK",)
+    RETURN_TYPES = ("LORA_STACK", "STRING", )
+    RETURN_NAMES = ("LORA_STACK", "show_help", )
     FUNCTION = "lora_stacker"
     CATEGORY = icons.get("Comfyroll/LoRA")
 
@@ -108,7 +111,9 @@ class CR_LoRAStack:
         if lora_name_3 != "None" and  switch_3 == "On":
             lora_list.extend([(lora_name_3, model_weight_3, clip_weight_3)]),
            
-        return (lora_list,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-lora-stack"          
+         
+        return (lora_list, show_help, )
     
 #---------------------------------------------------------------------------------------------------------------------#
 # This is adds to a LoRA stack chain, which produces a LoRA instance with a randomized weight within a range.
@@ -133,68 +138,6 @@ class CR_RandomWeightLoRA:
                 },
         }
 
-    RETURN_TYPES = ("LORA_STACK",)
-    FUNCTION = "random_weight_lora"
-    CATEGORY = icons.get("Comfyroll/LoRA")
-    
-    LastWeightMap = {}
-    StridesMap = {}
-    LastHashMap = {}
-    
-    @staticmethod
-    def getIdHash(lora_name: str, force_randomize_after_stride, stride, weight_min, weight_max, clip_weight) -> int:
-        fl_str = f"{lora_name}_{force_randomize_after_stride}_{stride}_{weight_min:.2f}_{weight_max:.2f}_{clip_weight:.2f}"
-        return hashlib.sha256(fl_str.encode('utf-8')).hexdigest()
-    
-    @classmethod
-    def IS_CHANGED(cls, stride, force_randomize_after_stride, lora_name, switch, weight_min, weight_max, clip_weight, lora_stack=None):     
-        id_hash = CR_RandomWeightLoRA.getIdHash(lora_name, force_randomize_after_stride, stride, weight_min, weight_max, clip_weight)
-        
-        if switch == "Off":
-            return id_hash + "_Off"
-        if lora_name == "None":
-            return id_hash
-                
-        if id_hash not in CR_RandomWeightLoRA.StridesMap:
-            CR_RandomWeightLoRA.StridesMap[id_hash] = 0
-            
-        CR_RandomWeightLoRA.StridesMap[id_hash] += 1
-        
-        if stride > 1 and CR_RandomWeightLoRA.StridesMap[id_hash] < stride and id_hash in CR_RandomWeightLoRA.LastHashMap:
-            return CR_RandomWeightLoRA.LastHashMap[id_hash]
-        else:
-            CR_RandomWeightLoRA.StridesMap[id_hash] = 0
-                    
-        last_weight = CR_RandomWeightLoRA.LastWeightMap.get(id_hash, None)
-        weight = uniform(weight_min, weight_max)
-        
-        if last_weight is not None:
-            while weight == last_weight:
-                weight = uniform(weight_min, weight_max)
-                
-        CR_RandomWeightLoRA.LastWeightMap[id_hash] = weight 
-
-        hash_str = f"{id_hash}_{weight:.3f}"
-        CR_RandomWeightLoRA.LastHashMap[id_hash] = hash_str
-        return hash_str
-
-    def random_weight_lora(self, stride, force_randomize_after_stride, lora_name, switch, weight_min, weight_max, clip_weight, lora_stack=None):
-        id_hash = CR_RandomWeightLoRA.getIdHash(lora_name, force_randomize_after_stride, stride, weight_min, weight_max, clip_weight)
-        
-        # Initialise the list
-        lora_list=list()
-        
-        if lora_stack is not None:
-            lora_list.extend([l for l in lora_stack if l[0] != "None"])
-            
-        weight = CR_RandomWeightLoRA.LastWeightMap.get(id_hash, 0.0)
-                
-        if lora_name != "None" and switch == "On":
-            lora_list.extend([(lora_name, weight, clip_weight)]),
-           
-        return (lora_list,)
-
-    
 #---------------------------------------------------------------------------------------------------------------------#
 # This is a lora stack where a single node has 3 different loras which can be applied randomly. Exclusive mode causes only one lora to be applied.
 # If exclusive mode is on, each LoRA's chance of being applied is evaluated, and the lora with the highest chance is applied
@@ -225,25 +168,6 @@ class CR_RandomLoRAStack:
                     "chance_3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
                     "model_weight_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                     "clip_weight_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
-            
-                    # "exclusive_mode": (["Off","On"],),
-                    # "stride": (("INT", {"default": 1, "min": 1, "max": 1000})),
-                    # "force_randomize_after_stride": (["Off","On"],),
-                    # "switch_1": (["Off","On"],),
-                    # "lora_name_1": (loras,),
-                    # "model_weight_1": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
-                    # "clip_weight_1": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
-                    # "chance_1": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                    # "switch_2": (["Off","On"],),
-                    # "lora_name_2": (loras,),
-                    # "model_weight_2": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
-                    # "clip_weight_2": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
-                    # "chance_2": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                    # "switch_3": (["Off","On"],),
-                    # "lora_name_3": (loras,),
-                    # "model_weight_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
-                    # "clip_weight_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
-                    # "chance_3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
                 },
                 "optional": {"lora_stack": ("LORA_STACK",)
                 },
@@ -410,11 +334,13 @@ class CR_ApplyLoRAStack:
                             }
         }
 
-    RETURN_TYPES = ("MODEL", "CLIP",)
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "show_help", )
     FUNCTION = "apply_lora_stack"
     CATEGORY = icons.get("Comfyroll/LoRA")
 
     def apply_lora_stack(self, model, clip, lora_stack=None,):
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-apply-lora-stack"
 
         # Initialise the list
         lora_params = list()
@@ -423,7 +349,7 @@ class CR_ApplyLoRAStack:
         if lora_stack:
             lora_params.extend(lora_stack)
         else:
-            return (model, clip,)
+            return (model, clip, show_help,)
 
         # Initialise the model and clip
         model_lora = model
@@ -438,7 +364,7 @@ class CR_ApplyLoRAStack:
             
             model_lora, clip_lora = comfy.sd.load_lora_for_models(model_lora, clip_lora, lora, strength_model, strength_clip)  
 
-        return (model_lora, clip_lora,)
+        return (model_lora, clip_lora, show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

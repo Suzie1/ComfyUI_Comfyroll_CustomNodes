@@ -31,16 +31,18 @@ class CR_ValueScheduler:
                 }                    
         }
     
-    RETURN_TYPES = ("INT", "FLOAT", )
+    RETURN_TYPES = ("INT", "FLOAT", "STRING", )
+    RETURN_NAMES = ("INT", "FLOAT", "show_help", )
     FUNCTION = "schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, current_frame, schedule_alias, default_value, schedule_format, schedule=None):
-                        
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-value-scheduler"
+
         if mode == "Default Value":
             print(f"[Info] CR Value Scheduler: Scheduler {schedule_alias} is disabled")
             int_out, float_out = int(default_value), float(default_value)    
-            return (int_out, float_out,)
+            return (int_out, float_out, show_help, )
 
         # Get params
         params = keyframe_scheduler(schedule, schedule_alias, current_frame)
@@ -58,7 +60,7 @@ class CR_ValueScheduler:
             except ValueError:
                 print(f"[Warning] CR Value Scheduler. Invalid params: {params}")
                 return()
-        return (int_out, float_out,)
+        return (int_out, float_out, show_help, )
 
 #-----------------------------------------------------------------------------------------------------------#
 class CR_TextScheduler:
@@ -76,16 +78,18 @@ class CR_TextScheduler:
                 }                    
         }
     
-    RETURN_TYPES = ("STRING", )
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
     FUNCTION = "schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, current_frame, schedule_alias, default_text, schedule_format, schedule=None):
-                        
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-text-scheduler"
+
         if mode == "Default Text":
             print(f"[Info] CR Text Scheduler: Scheduler {schedule_alias} is disabled")
             text_out = default_text
-            return (text_out,)
+            return (text_out, show_help, )
 
         # Get params
         params = keyframe_scheduler(schedule, schedule_alias, current_frame)
@@ -102,7 +106,7 @@ class CR_TextScheduler:
             except ValueError:
                 print(f"[Warning] CR Text Scheduler. Invalid params: {params}")
                 return()
-        return (text_out,)
+        return (text_out, show_help, )
 
 
 #-----------------------------------------------------------------------------------------------------------#
@@ -126,18 +130,19 @@ class CR_PromptScheduler:
                 }                    
         }
     
-    RETURN_TYPES = ("STRING", "STRING", "FLOAT",)
-    RETURN_NAMES = ("current_prompt", "next_prompt", "weight")
+    RETURN_TYPES = ("STRING", "STRING", "FLOAT", "STRING", )
+    RETURN_NAMES = ("current_prompt", "next_prompt", "weight", "show_help", )
     FUNCTION = "schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, prepend_text, append_text, current_frame, schedule_alias, default_prompt, schedule_format, interpolate_prompt, keyframe_list="", schedule=None):
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-prompt-scheduler"
 
         schedule_lines = list()    
     
         if mode == "Default Prompt":
             print(f"[Info] CR Prompt Scheduler: Scheduler {schedule_alias} is disabled")
-            return (default_prompt, default_prompt, 1.0,)
+            return (default_prompt, default_prompt, 1.0, show_help, )
 
         if mode == "Keyframe List":
             if keyframe_list == "":
@@ -195,7 +200,7 @@ class CR_PromptScheduler:
         #    next_prompt_out = temp
         #    weight_out = 1 - weight_out
                 
-        return (current_prompt_out, next_prompt_out, weight_out, ) 
+        return (current_prompt_out, next_prompt_out, weight_out, show_help, ) 
 
 #-----------------------------------------------------------------------------------------------------------#
 class CR_SimplePromptScheduler:
@@ -208,8 +213,8 @@ class CR_SimplePromptScheduler:
                 },
         }
     
-    RETURN_TYPES = ("STRING", "STRING", "FLOAT", )
-    RETURN_NAMES = ("current_prompt", "next_prompt", "weight", )
+    RETURN_TYPES = ("STRING", "STRING", "FLOAT", "STRING", )
+    RETURN_NAMES = ("current_prompt", "next_prompt", "weight", "show_help", )
     FUNCTION = "simple_schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
@@ -250,7 +255,9 @@ class CR_SimplePromptScheduler:
             else:
                 weight_out = (to_index - current_frame) / (to_index - from_index)
             
-            return(current_prompt_out, next_prompt_out, weight_out, )
+            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-prompt-scheduler"
+
+            return(current_prompt_out, next_prompt_out, weight_out, show_help, )
             
 #-----------------------------------------------------------------------------------------------------------#
 class CR_SimpleValueScheduler:
@@ -262,7 +269,8 @@ class CR_SimpleValueScheduler:
                 },
         }
     
-    RETURN_TYPES = ("INT", "FLOAT")
+    RETURN_TYPES = ("INT", "FLOAT", "STRING", )
+    RETURN_NAMES = ("INT", "FLOAT", "show_help", )
     FUNCTION = "simple_schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
@@ -288,8 +296,10 @@ class CR_SimpleValueScheduler:
                 float_out = float(params)
             except ValueError:
                 print(f"[Warning] CR Simple Value Scheduler. Invalid params {params} at frame {current_frame}")
-                
-            return (int_out, float_out,)
+
+            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-value-scheduler"
+
+            return (int_out, float_out, show_help, )
         
 #-----------------------------------------------------------------------------------------------------------#
 class CR_SimpleTextScheduler:
@@ -301,7 +311,8 @@ class CR_SimpleTextScheduler:
                 },
         }
     
-    RETURN_TYPES = ("STRING", )
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
     FUNCTION = "simple_schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
@@ -326,8 +337,10 @@ class CR_SimpleTextScheduler:
                 text_out = str(params)
             except ValueError:
                 print(f"[Warning] CR Simple Text Scheduler. Invalid params {params} at frame {current_frame}")
-                
-            return(text_out,)
+
+            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-text-scheduler"
+
+            return(text_out, show_help, )
 
 #-----------------------------------------------------------------------------------------------------------#
 class CR_LoadScheduledModels:
@@ -348,12 +361,14 @@ class CR_LoadScheduledModels:
                 },                
         }
  
-    RETURN_TYPES = ("MODEL", "CLIP", "VAE")
+    RETURN_TYPES = ("MODEL", "CLIP", "VAE", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "VAE", "show_help", )
     FUNCTION = "schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, current_frame, schedule_alias, default_model, schedule_format, model_list=None, schedule=None):
-     
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-load-scheduled-models"
+
         #model_name = ""
     
         # Load default Model mode
@@ -361,7 +376,7 @@ class CR_LoadScheduledModels:
             ckpt_path = folder_paths.get_full_path("checkpoints", default_model)
             out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
             print(f"[Debug] CR Load Scheduled Models. Loading default model.")    
-            return out[:3]            
+            return (out[:3], show_help, )
         
         # Get params
         params = keyframe_scheduler(schedule, schedule_alias, current_frame)
@@ -371,7 +386,7 @@ class CR_LoadScheduledModels:
             print(f"[Warning] CR Load Scheduled Models. No model specified in schedule for frame {current_frame}. Using default model.")
             ckpt_path = folder_paths.get_full_path("checkpoints", default_model)
             out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
-            return out[:3]      
+            return (out[:3], show_help, )
         else:
             # Try the params
             try:
@@ -397,7 +412,7 @@ class CR_LoadScheduledModels:
         ckpt_path = folder_paths.get_full_path("checkpoints", model_name)
         out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
         print(f"[Info] CR Load Scheduled Models. Loading new checkpoint model {model_name}")
-        return out[:3]
+        return (out[:3], show_help, )
  
 #-----------------------------------------------------------------------------------------------------------# 
 class CR_LoadScheduledLoRAs:
@@ -422,28 +437,29 @@ class CR_LoadScheduledLoRAs:
                 },                
         }
  
-    RETURN_TYPES = ("MODEL", "CLIP")
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "show_help", )
     FUNCTION = "schedule"
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, model, clip, current_frame, schedule_alias, default_lora, strength_model, strength_clip, schedule_format, lora_list=None, schedule=None):
-     
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-load-scheduled-loras"
         #lora_name = ""
 
         # Off mode
         if mode == "Off":
             print(f"[Info] CR Load Scheduled LoRAs. Disabled.")    
-            return (model, clip) 
+            return (model, clip, show_help, ) 
     
         # Load Default LoRA mode
         if mode == "Load default LoRA":
             if default_lora == None:
-                return (model, clip)
+                return (model, clip, show_help, )
             if strength_model == 0 and strength_clip == 0:
-                return (model, clip)                   
+                return (model, clip, show_help, )                   
             model, clip = LoraLoader().load_lora(model, clip, default_lora, strength_model, strength_clip)  
             print(f"[Info] CR Load Scheduled LoRAs. Loading default LoRA {lora_name}.")    
-            return (model, clip)           
+            return (model, clip, show_help, )           
         
         # Get params
         params = keyframe_scheduler(schedule, schedule_alias, current_frame)
@@ -453,7 +469,7 @@ class CR_LoadScheduledLoRAs:
             print(f"[Warning] CR Load Scheduled LoRAs. No LoRA specified in schedule for frame {current_frame}. Using default lora.")
             if default_lora != None:
                 model, clip = LoraLoader().load_lora(model, clip, default_lora, strength_model, strength_clip)
-            return (model, clip)      
+            return (model, clip, show_help, )      
         else:
             # Unpack the parameters
             parts = params.split(',')
@@ -483,7 +499,7 @@ class CR_LoadScheduledLoRAs:
         # Load the new LoRA
         model, clip = LoraLoader().load_lora(model, clip, lora_name, s_strength_model, s_strength_clip)
         print(f"[Debug] CR Load Scheduled LoRAs. Loading new LoRA {lora_name}")
-        return (model, clip)
+        return (model, clip, show_help, )
  
 #-----------------------------------------------------------------------------------------------------------#
 # MAPPINGS

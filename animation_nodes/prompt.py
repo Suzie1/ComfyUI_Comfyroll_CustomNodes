@@ -42,8 +42,8 @@ class CR_SimplePromptList:
                 },
         }
 
-    RETURN_TYPES = ("SIMPLE_PROMPT_LIST",)
-    RETURN_NAMES = ("SIMPLE_PROMPT_LIST",)
+    RETURN_TYPES = ("SIMPLE_PROMPT_LIST", "STRING", )
+    RETURN_NAMES = ("SIMPLE_PROMPT_LIST", "show_help", )
     FUNCTION = "prompt_stacker"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -73,8 +73,10 @@ class CR_SimplePromptList:
             prompts.extend([(prompt_5)]),
             
         #print(f"[TEST] CR Simple Prompt List: {prompts}")        
-            
-        return (prompts,)
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-simple-prompt-list"           
+
+        return (prompts, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------# 
 class CR_SimplePromptListKeyframes:
@@ -98,8 +100,8 @@ class CR_SimplePromptListKeyframes:
                 },         
         }
     
-    RETURN_TYPES = ("STRING", )
-    RETURN_NAMES = ("keyframe_list", )
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("keyframe_list", "show_help", )
     FUNCTION = "make_keyframes"
 
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
@@ -129,8 +131,9 @@ class CR_SimplePromptListKeyframes:
         keyframes_out = " ".join(keyframe_list)[:-2]
               
         #print(f"[TEST] CR Simple Prompt List Keyframes: {keyframes_out}")   
-        
-        return (keyframes_out, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-simple-prompt-list-keyframes"
+
+        return (keyframes_out, show_help, )
  
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_PromptList:
@@ -173,8 +176,8 @@ class CR_PromptList:
                 },
         }
 
-    RETURN_TYPES = ("PROMPT_LIST",)
-    RETURN_NAMES = ("PROMPT_LIST",)
+    RETURN_TYPES = ("PROMPT_LIST", "STRING", )
+    RETURN_NAMES = ("PROMPT_LIST", "show_help", )
     FUNCTION = "animation_stacker"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -216,8 +219,9 @@ class CR_PromptList:
                 transition_profile5, keyframe_interval, j)]),
         
         #print(f"[TEST] CR Prompt List: {keyframe_list}") 
-       
-        return (keyframe_list,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-prompt-list"
+
+        return (keyframe_list, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#  
 class CR_PromptListKeyframes:
@@ -228,8 +232,8 @@ class CR_PromptListKeyframes:
                 }         
         }
     
-    RETURN_TYPES = ("STRING", )
-    RETURN_NAMES = ("keyframe_list", )
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("keyframe_list", "show_help", )
     FUNCTION = "make_keyframes"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -260,8 +264,9 @@ class CR_PromptListKeyframes:
         keyframes_out = "".join(keyframe_list)[:-2]
         
         #print(f"[TEST] CR Prompt List Keyframes: {keyframes_out}")   
-        
-        return (keyframes_out, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-prompt-list-keyframes"
+
+        return (keyframes_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------# 
 class CR_KeyframeList:
@@ -274,14 +279,14 @@ class CR_KeyframeList:
                 }
         }
 
-    RETURN_TYPES = ("STRING", )
-    RETURN_NAMES = ("keyframe_list", )
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("keyframe_list", "show_help", )
     FUNCTION = "keyframelist"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
     def keyframelist(self, keyframe_list, keyframe_format):
-          
-        return (keyframe_list, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-keyframe-list"          
+        return (keyframe_list, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 '''
@@ -307,8 +312,8 @@ class CR_LoadPromptStyle:
             },
         }
 
-    RETURN_TYPES = ('STRING', 'STRING', 'STRING', )
-    RETURN_NAMES = ('prepend_text', 'append_text', 'negative_text', )
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("prepend_text", "append_text", "negative_text", "show_help", )
     FUNCTION = 'prompt_styler'
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -335,7 +340,9 @@ class CR_LoadPromptStyle:
         append_text = split3[0].replace(" . ","")
         negative_text = split4[1][:-2]
       
-        return (prepend_text, append_text, negative_text, )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-load-prompt-style"
+        
+        return (prepend_text, append_text, negative_text, show_help, )
 '''
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_EncodeScheduledPrompts:
@@ -349,8 +356,8 @@ class CR_EncodeScheduledPrompts:
                             }
         }
     
-    RETURN_TYPES = ("CONDITIONING", )
-    RETURN_NAMES = ("CONDITIONING",)
+    RETURN_TYPES = ("CONDITIONING", "STRING", )
+    RETURN_NAMES = ("CONDITIONING", "show_help", )
     FUNCTION = "condition"
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
@@ -393,7 +400,8 @@ class CR_EncodeScheduledPrompts:
 
             n = [tw, t_to]
             out.append(n)
-        return (out,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-encode-scheduled-prompts"
+        return (out, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

@@ -239,8 +239,8 @@ class CR_TextListSimple:
                 },
         }
 
-    RETURN_TYPES = ("TEXT_LIST_SIMPLE", )
-    RETURN_NAMES = ("TEXT_LIST_SIMPLE", )
+    RETURN_TYPES = ("TEXT_LIST_SIMPLE", "STRING", )
+    RETURN_NAMES = ("TEXT_LIST_SIMPLE", "show_help", )
     FUNCTION = "text_list_simple"
     CATEGORY = icons.get("Comfyroll/Animation/List")
 
@@ -268,7 +268,9 @@ class CR_TextListSimple:
         if text_5 != "" and text_5 != None:
             texts.append(text_5),
             
-        return (texts,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text-list-simple"
+
+        return (texts, show_help, )
  
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ImageList:
@@ -292,8 +294,8 @@ class CR_ImageList:
                 },
         }
 
-    RETURN_TYPES = ("IMAGE_LIST", )
-    RETURN_NAMES = ("IMAGE_LIST", )
+    RETURN_TYPES = ("IMAGE_LIST", "STRING", )
+    RETURN_NAMES = ("IMAGE_LIST", "show_help", )
     FUNCTION = "image_list"
     CATEGORY = icons.get("Comfyroll/Animation/List")
 
@@ -327,8 +329,10 @@ class CR_ImageList:
             
         if image_5 != None:
             images.extend([(alias5, image_5)]),
-            
-        return (images, )   
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list"          
+
+        return (images, show_help, )   
 
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -348,8 +352,8 @@ class CR_ImageListSimple:
                 },
         }
 
-    RETURN_TYPES = ("IMAGE_LIST_SIMPLE", )
-    RETURN_NAMES = ("IMAGE_LIST_SIMPLE", )
+    RETURN_TYPES = ("IMAGE_LIST_SIMPLE", "STRING", )
+    RETURN_NAMES = ("IMAGE_LIST_SIMPLE", "show_help", )
     FUNCTION = "image_list_simple"
     CATEGORY = icons.get("Comfyroll/Animation/List")
 
@@ -378,59 +382,10 @@ class CR_ImageListSimple:
             
         if image_5 != None:
             images.append(image_5),
-            
-        return (images,)
- 
 
-#---------------------------------------------------------------------------------------------------------------------#  
-class CR_LoadImageFromList:
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list-simple"         
 
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {"image_list": ("IMAGE_LIST",),
-                             "image_ID": ("STRING", {"default": "", "multiline": False}),
-                },
-        }
-    
-    RETURN_TYPES = ("IMAGE", )
-    RETURN_NAMES = ("IMAGE", )
-    FUNCTION = "loadimage"
-    CATEGORY = icons.get("Comfyroll/Animation/List")
-
-    def loadimage(self, image_ID, image_list,):
-
-        print(image_list)
-        #if image_list == None:
- 
-        #pick image by ID
-        #load image
-
-        return (image_ID,)
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_LoadTextFromList:
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {"text_list": ("TEXT_LIST",),
-                             "text_ID": ("STRING", {"default": "", "multiline": False}),
-                },
-        }
-    
-    RETURN_TYPES = ("STRING", )
-    RETURN_NAMES = ("STRING", )
-    FUNCTION = "loadtext"
-    CATEGORY = icons.get("Comfyroll/Animation/List")
-
-    def loadtext(self, text_ID, text_list,):
-
-        print(text_list)
-        #if text_list == None:
- 
-        #pick text by ID
-        #load text
-
-        return (text_ID,)
+        return (images, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#   
 class CR_InputTextList:
@@ -442,8 +397,8 @@ class CR_InputTextList:
                 }
         }
 
-    RETURN_TYPES = ("TEXT_LIST_SIMPLE", )
-    RETURN_NAMES = ("TEXT_LIST_SIMPLE", )
+    RETURN_TYPES = ("TEXT_LIST_SIMPLE", "STRING", )
+    RETURN_NAMES = ("TEXT_LIST_SIMPLE", "show_help", )
     FUNCTION = "text_list_simple"
     CATEGORY = icons.get("Comfyroll/Animation/List")
 
@@ -462,7 +417,9 @@ class CR_InputTextList:
                 
             texts.append(line),    
             
-        return (texts,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Animation-Utility-Nodes#cr-input-text-list"
+
+        return (texts, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

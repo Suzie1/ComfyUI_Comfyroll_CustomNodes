@@ -63,7 +63,7 @@ class CR_PageLayout:
                 "header_font_size": ("INT", {"default": 150, "min": 0, "max": 1024}),
                 "footer_font_size": ("INT", {"default": 50, "min": 0, "max": 1024}),
                 "border_thickness": ("INT", {"default": 0, "min": 0, "max": 1024}),
-                "border_color": (COLORS[1:],),                
+                "border_color": (COLORS,),                
                 "background_color": (COLORS,),
                },
                 "optional": {
@@ -105,14 +105,17 @@ class CR_PageLayout:
         align = "center"
         rotation_angle = 0
         rotation_options = "image center"
+        font_outline_thickness = 0
+        font_outline_color = "black"
         
         images = []
         
         ### Create text panels and add to images array       
         if layout_options == "header" or layout_options == "header and footer":
             header_panel = text_panel(image_width, header_height, header_text,
-                                      font_name, header_font_size,
-                                      font_color, background_color,
+                                      font_name, header_font_size, font_color,
+                                      font_outline_thickness, font_outline_color,
+                                      bg_color,
                                       margins, line_spacing,
                                       position_x, position_y,
                                       align, header_align,
@@ -123,8 +126,9 @@ class CR_PageLayout:
                
         if layout_options == "footer" or layout_options == "header and footer":        
             footer_panel = text_panel(image_width, footer_height, footer_text,
-                                      font_name, footer_font_size,
-                                      font_color, background_color,
+                                      font_name, footer_font_size, font_color,
+                                      font_outline_thickness, font_outline_color,
+                                      bg_color,
                                       margins, line_spacing,
                                       position_x, position_y,
                                       align, footer_align,
@@ -137,7 +141,7 @@ class CR_PageLayout:
         if border_thickness > 0:
             combined_image = ImageOps.expand(combined_image, border_thickness, border_color)
             
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-page-layout"
 
         return (pil2tensor(combined_image), show_help, )    
  
@@ -197,7 +201,7 @@ class CR_ImagePanel:
 
         combined_image = combine_images(images, layout_direction)
 
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-panel"
 
         return (pil2tensor(combined_image), show_help, )   
 
@@ -256,7 +260,7 @@ class CR_ImageGridPanel:
                 x_offset = 0
                 y_offset += image.height
 
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-grid-panel"
 
         return (pil2tensor(combined_image), show_help, )   
 
@@ -311,7 +315,7 @@ class CR_ImageBorder:
         
         images = torch.cat(images, dim=0)                
 
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-border"
 
         return (images, show_help, )
 
@@ -344,7 +348,7 @@ class CR_ColorPanel:
         size = (panel_width, panel_height)
         panel = Image.new('RGB', size, fill_color)
         
-        show_help = "example help text"
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-color-panel"
 
         return (pil2tensor(panel), show_help, )
 
@@ -403,7 +407,7 @@ class CR_SimpleTextPanel:
         panel = text_panel(panel_width, panel_height, text,
                            font_name, font_size, font_color, 
                            font_outline_thickness, outline_color,
-                           background_color,
+                           bg_color,
                            margins, line_spacing,
                            position_x, position_y,
                            align, justify,

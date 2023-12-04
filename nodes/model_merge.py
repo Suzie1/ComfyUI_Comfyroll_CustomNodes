@@ -38,7 +38,8 @@ class CR_ModelMergeStack:
                 },
         }
 
-    RETURN_TYPES = ("MODEL_STACK",)
+    RETURN_TYPES = ("MODEL_STACK", "STRING", )
+    RETURN_NAMES = ("MODEL_STACK", "show_help", )
     FUNCTION = "list_checkpoints"
     CATEGORY = icons.get("Comfyroll/Model Merge")
 
@@ -59,8 +60,9 @@ class CR_ModelMergeStack:
         if ckpt_name3 != "None" and  switch_3 == "On":
             model_list.extend([(ckpt_name3, model_ratio3, clip_ratio3)]),
 
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Model-Merge-Nodes#cr-model-stack"
         
-        return (model_list,)
+        return (model_list, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ApplyModelMerge:
@@ -77,8 +79,8 @@ class CR_ApplyModelMerge:
                             }
         }
         
-    RETURN_TYPES = ("MODEL", "CLIP", "STRING",)
-    RETURN_NAMES = ("MODEL", "CLIP", "model_mix_info",)
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING", "STRING", )
+    RETURN_NAMES = ("MODEL", "CLIP", "model_mix_info", "show_help", )
     FUNCTION = "merge"
     CATEGORY = icons.get("Comfyroll/Model Merge")
 
@@ -155,8 +157,10 @@ class CR_ApplyModelMerge:
             
             # Update model info                
                 model_mix_info = model_mix_info + "\nModel Name: " + model_name + "\nModel Ratio: " + str(model_ratio) + "\nCLIP Ratio: " + str(clip_ratio) + "\n"
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Model-Merge-Nodes#cr-apply-model-merge"
                 
-        return (model1, clip1, model_mix_info,)
+        return (model1, clip1, model_mix_info, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

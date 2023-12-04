@@ -15,7 +15,7 @@ import json
 import folder_paths
 import typing as tg
 import random
-from .graphics_functions import random_hex_color
+from .graphics_functions import random_hex_color, random_rgb
 from ..categories import icons
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
@@ -52,8 +52,8 @@ class CR_AspectRatioSD15:
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", )
-    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", )
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
+    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", "show_help", )
     FUNCTION = "Aspect_Ratio"
     CATEGORY = icons.get("Comfyroll/Aspect Ratio")
 
@@ -85,8 +85,10 @@ class CR_AspectRatioSD15:
             height = temp
            
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sd15-aspect-ratio"
            
-        return(width, height, upscale_factor, batch_size, {"samples":latent}, )   
+        return(width, height, upscale_factor, batch_size, {"samples":latent}, show_help, )   
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SDXLAspectRatio:
@@ -117,8 +119,8 @@ class CR_SDXLAspectRatio:
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", )
-    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", )
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
+    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", "show_help", )
     FUNCTION = "Aspect_Ratio"
     CATEGORY = icons.get("Comfyroll/Aspect Ratio")
 
@@ -148,8 +150,10 @@ class CR_SDXLAspectRatio:
             height = temp
            
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sdxl-aspect-ratio"
            
-        return(width, height, upscale_factor, batch_size, {"samples":latent}, )                 
+        return(width, height, upscale_factor, batch_size, {"samples":latent}, show_help, )  
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_AspectRatio:
@@ -188,8 +192,8 @@ class CR_AspectRatio:
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", )
-    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", )
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
+    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", "show_help", )
     FUNCTION = "Aspect_Ratio"
     CATEGORY = icons.get("Comfyroll/Aspect Ratio")
 
@@ -240,8 +244,10 @@ class CR_AspectRatio:
             height = temp
            
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio"
            
-        return(width, height, upscale_factor, batch_size, {"samples":latent}, )    
+        return(width, height, upscale_factor, batch_size, {"samples":latent}, show_help, )    
 #---------------------------------------------------------------------------------------------------------------------#
 # Other Nodes
 #---------------------------------------------------------------------------------------------------------------------#
@@ -327,6 +333,8 @@ class CR_ImageOutput:
             })
             counter += 1
 
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-output"
+
         return { "ui": { "images": results }, "result": (trigger,) }
 
 
@@ -344,15 +352,17 @@ class CR_IntegerMultipleOf:
             }
         }
     
-    RETURN_TYPES =("INT",)
+    RETURN_TYPES =("INT", "STRING", )
+    RETURN_NAMES =("INT", "show_help", )
     FUNCTION = "int_multiple_of"    
     CATEGORY = icons.get("Comfyroll/Other")
     
     def int_multiple_of(self, integer, multiple=8):
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-integer-multiple"
         if multiple == 0:
-            return (int(integer), )
-        integer = integer * multiple
-        return (int(integer), )
+            return (int(integer), show_help, )
+        integer = integer * multiple        
+        return (int(integer), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_Seed:
@@ -363,15 +373,16 @@ class CR_Seed:
     def INPUT_TYPES(s):
         return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff})}}
 
-    RETURN_TYPES = ("INT",)
-    RETURN_NAMES = ("seed",)
+    RETURN_TYPES = ("INT", "STRING", )
+    RETURN_NAMES = ("seed", "show_help", )
     FUNCTION = "seedint"
     OUTPUT_NODE = True
     CATEGORY = icons.get("Comfyroll/Other")
 
     @staticmethod
     def seedint(seed):
-        return seed,
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-seed"
+        return (seed, show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_LatentBatchSize:
@@ -398,6 +409,8 @@ class CR_LatentBatchSize:
             torch.clone(samples) for _ in range(batch_size - 1)
         ]
 
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-latent-batch-size"
+
         return ({
             'samples': torch.cat(sample_list),
         }, )
@@ -408,13 +421,14 @@ class CR_PromptText:
     def INPUT_TYPES(s):
         return {"required": {"prompt": ("STRING", {"default": "prompt", "multiline": True})}}
 
-    RETURN_TYPES = ("STRING", )
-    RETURN_NAMES = ("prompt", )
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("prompt", "show_help", )
     FUNCTION = "get_value"
     CATEGORY = icons.get("Comfyroll/Other")
 
     def get_value(self, prompt):
-        return (prompt,)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-prompt-text"
+        return (prompt, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SplitString:
@@ -427,8 +441,8 @@ class CR_SplitString:
                 }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING",)
-    RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4",)    
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4", "show_help", )    
     FUNCTION = "split"
     CATEGORY = icons.get("Comfyroll/Other")
 
@@ -439,7 +453,9 @@ class CR_SplitString:
         strings = [part.strip() for part in parts[:4]]
         string_1, string_2, string_3, string_4 = strings + [""] * (4 - len(strings))            
 
-        return (string_1, string_2, string_3, string_4)
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-split-string"
+
+        return (string_1, string_2, string_3, string_4, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_Value:
@@ -448,12 +464,14 @@ class CR_Value:
     def INPUT_TYPES(s):  
         return {"required": {"value": ("FLOAT", {"default": 1.0,},)}}
 
-    RETURN_TYPES = ("FLOAT", "INT",)
+    RETURN_TYPES = ("FLOAT", "INT", "STRING", )
+    RETURN_NAMES = ("FLOAT", "INT", "show_help", )
     CATEGORY = icons.get("Comfyroll/Other")
     FUNCTION = "get_value"
 
     def get_value(self, value):
-        return (float(value), int(value), )
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-value"
+        return (float(value), int(value), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ConditioningMixer:
@@ -471,7 +489,8 @@ class CR_ConditioningMixer:
                     }
                }
 
-    RETURN_TYPES = ("CONDITIONING", )
+    RETURN_TYPES = ("CONDITIONING", "STRING", )
+    RETURN_NAMES = ("CONDITIONING", "show_help", )
     FUNCTION = "conditioning"
     CATEGORY = icons.get("Comfyroll/Other")
     
@@ -480,9 +499,11 @@ class CR_ConditioningMixer:
         conditioning_from = conditioning_1
         conditioning_to = conditioning_2
         conditioning_to_strength = average_strength
+
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-conditioning-mixer"
     
         if mix_method == "Combine":
-            return (conditioning_1 + conditioning_2, )
+            return (conditioning_1 + conditioning_2, show_help, )
 
         if mix_method == "Average":
         
@@ -510,7 +531,7 @@ class CR_ConditioningMixer:
 
                 n = [tw, t_to]
                 out.append(n)
-            return (out,)
+            return (out, show_help, )
 
         if mix_method == "Concatenate":
         
@@ -526,7 +547,7 @@ class CR_ConditioningMixer:
                 tw = torch.cat((t1, cond_from),1)
                 n = [tw, conditioning_to[i][1].copy()]
                 out.append(n)
-            return (out, )
+            return (out, show_help, )
             
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SelectModel:
@@ -591,7 +612,7 @@ class CR_RandomHexColor:
     RETURN_NAMES = ("hex_color1", "hex_color2", "hex_color3", "hex_color4", "show_help", )
     OUTPUT_NODE = True
     FUNCTION = "get_colors"
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Graphics/Utilty")
 
     def get_colors(self, seed):
     
@@ -606,6 +627,34 @@ class CR_RandomHexColor:
         show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-hex-color"
              
         return (hex_color1, hex_color2, hex_color3, hex_color4, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_RandomRGB:
+    
+    @classmethod
+    def INPUT_TYPES(cls):
+        
+        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),}}
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("rgb_1", "rgb_2", "rgb_3", "rgb_4", "show_help", )
+    OUTPUT_NODE = True
+    FUNCTION = "get_colors"
+    CATEGORY = icons.get("Comfyroll/Graphics/Utilty")
+
+    def get_colors(self, seed):
+    
+        # Set the seed
+        random.seed(seed)
+    
+        rgb_1 = random_rgb()
+        rgb_2 = random_rgb()
+        rgb_3 = random_rgb()
+        rgb_4 = random_rgb()
+        
+        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-rgb"
+             
+        return (rgb_1, rgb_2, rgb_3, rgb_4, show_help, )
                      
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -627,7 +676,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel, 
-    "CR Random Hex Color": CR_RandomHexColor,    
+    "CR Random Hex Color": CR_RandomHexColor,
+    "CR Random RGB": CR_RandomRGB,     
 }
 '''
 
