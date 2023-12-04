@@ -138,6 +138,67 @@ class CR_RandomWeightLoRA:
                 },
         }
 
+    RETURN_TYPES = ("LORA_STACK",)
+    FUNCTION = "random_weight_lora"
+    CATEGORY = icons.get("Comfyroll/LoRA")
+    
+    LastWeightMap = {}
+    StridesMap = {}
+    LastHashMap = {}
+    
+    @staticmethod
+    def getIdHash(lora_name: str, force_randomize_after_stride, stride, weight_min, weight_max, clip_weight) -> int:
+        fl_str = f"{lora_name}_{force_randomize_after_stride}_{stride}_{weight_min:.2f}_{weight_max:.2f}_{clip_weight:.2f}"
+        return hashlib.sha256(fl_str.encode('utf-8')).hexdigest()
+    
+    @classmethod
+    def IS_CHANGED(cls, stride, force_randomize_after_stride, lora_name, switch, weight_min, weight_max, clip_weight, lora_stack=None):     
+        id_hash = CR_RandomWeightLoRA.getIdHash(lora_name, force_randomize_after_stride, stride, weight_min, weight_max, clip_weight)
+        
+        if switch == "Off":
+            return id_hash + "_Off"
+        if lora_name == "None":
+            return id_hash
+                
+        if id_hash not in CR_RandomWeightLoRA.StridesMap:
+            CR_RandomWeightLoRA.StridesMap[id_hash] = 0
+            
+        CR_RandomWeightLoRA.StridesMap[id_hash] += 1
+        
+        if stride > 1 and CR_RandomWeightLoRA.StridesMap[id_hash] < stride and id_hash in CR_RandomWeightLoRA.LastHashMap:
+            return CR_RandomWeightLoRA.LastHashMap[id_hash]
+        else:
+            CR_RandomWeightLoRA.StridesMap[id_hash] = 0
+                    
+        last_weight = CR_RandomWeightLoRA.LastWeightMap.get(id_hash, None)
+        weight = uniform(weight_min, weight_max)
+        
+        if last_weight is not None:
+            while weight == last_weight:
+                weight = uniform(weight_min, weight_max)
+                
+        CR_RandomWeightLoRA.LastWeightMap[id_hash] = weight 
+
+        hash_str = f"{id_hash}_{weight:.3f}"
+        CR_RandomWeightLoRA.LastHashMap[id_hash] = hash_str
+        return hash_str
+
+    def random_weight_lora(self, stride, force_randomize_after_stride, lora_name, switch, weight_min, weight_max, clip_weight, lora_stack=None):
+        id_hash = CR_RandomWeightLoRA.getIdHash(lora_name, force_randomize_after_stride, stride, weight_min, weight_max, clip_weight)
+        
+        # Initialise the list
+        lora_list=list()
+        
+        if lora_stack is not None:
+            lora_list.extend([l for l in lora_stack if l[0] != "None"])
+            
+        weight = CR_RandomWeightLoRA.LastWeightMap.get(id_hash, 0.0)
+                
+        if lora_name != "None" and switch == "On":
+            lora_list.extend([(lora_name, weight, clip_weight)]),
+           
+        return (lora_list,)
+
 #---------------------------------------------------------------------------------------------------------------------#
 # This is a lora stack where a single node has 3 different loras which can be applied randomly. Exclusive mode causes only one lora to be applied.
 # If exclusive mode is on, each LoRA's chance of being applied is evaluated, and the lora with the highest chance is applied
