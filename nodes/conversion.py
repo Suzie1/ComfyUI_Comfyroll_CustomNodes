@@ -71,7 +71,8 @@ class CR_StringToCombo:
             },
         }
 
-    RETURN_TYPES = ("any", "show_help", )
+    RETURN_TYPES = (any, "STRING", )
+    RETURN_NAMES = ("any", "show_help", )
     FUNCTION = "convert"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
