@@ -116,7 +116,7 @@ class CR_SDXLAspectRatio:
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "FLOAT", "STRING", )
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
     RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", "show_help", )
     FUNCTION = "Aspect_Ratio"
     CATEGORY = icons.get("Comfyroll/Aspect Ratio")
