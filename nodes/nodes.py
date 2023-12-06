@@ -48,7 +48,7 @@ class CR_AspectRatioSD15:
                 "height": ("INT", {"default": 512, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 0.1, "max": 100, "step": 0.1}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
@@ -83,7 +83,7 @@ class CR_AspectRatioSD15:
             temp = width
             width = height
             height = temp
-           
+
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
         show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sd15-aspect-ratio"
@@ -115,7 +115,7 @@ class CR_SDXLAspectRatio:
                 "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 0.1, "max": 100, "step": 0.1}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
@@ -148,7 +148,7 @@ class CR_SDXLAspectRatio:
             temp = width
             width = height
             height = temp
-           
+
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
         show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sdxl-aspect-ratio"
@@ -188,16 +188,17 @@ class CR_AspectRatio:
                 "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 0.1, "max": 100, "step": 0.1}),
+                "prescale_factor": ("FLOAT", {"default": 1, "min": 0.1, "max": 100, "step": 0.1}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
-    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", "show_help", )
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT", "LATENT", "STRING", )
+    RETURN_NAMES = ("width", "height", "upscale_factor", "prescale_factor", "batch_size", "empty_latent", "show_help", )
     FUNCTION = "Aspect_Ratio"
     CATEGORY = icons.get("Comfyroll/Aspect Ratio")
 
-    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, prescale_factor, batch_size):
         
         # SD1.5
         if aspect_ratio == "SD1.5 - 1:1 square 512x512":
@@ -242,12 +243,15 @@ class CR_AspectRatio:
             temp = width
             width = height
             height = temp
+
+        width = int(width*prescale_factor)
+        height = int(height*prescale_factor)
            
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
         show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio"
            
-        return(width, height, upscale_factor, batch_size, {"samples":latent}, show_help, )    
+        return(width, height, upscale_factor, prescale_factor, batch_size, {"samples":latent}, show_help, )    
 #---------------------------------------------------------------------------------------------------------------------#
 # Other Nodes
 #---------------------------------------------------------------------------------------------------------------------#
