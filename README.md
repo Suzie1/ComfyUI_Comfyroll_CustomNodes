@@ -1,5 +1,7 @@
 # 🧩 Comfyroll Custom Nodes for SDXL and SD1.5
 
+Co-authored by Suzie1 and RockOfFire
+
 These nodes can be used in any ComfyUI workflow.  
 
 # Installation
