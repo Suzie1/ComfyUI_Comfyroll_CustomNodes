@@ -7,7 +7,7 @@ These nodes can be used in any ComfyUI workflow.
 # Installation
 
 1. cd custom_nodes
-2. git clone https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes.git
+2. git clone https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes.git
 3. Restart ComfyUI
 
 You can also install the nodes using the following methods:
