@@ -49,6 +49,7 @@ class CR_AspectRatioSD15:
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
     RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
