@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------------------------------------#
-# CR Animation Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/CR-Animation-Nodes
+# CR Animation Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                       https://github.com/comfyanonymous/ComfyUI
 #-----------------------------------------------------------------------------------------------------------#
 
@@ -37,7 +37,7 @@ class CR_ValueScheduler:
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, current_frame, schedule_alias, default_value, schedule_format, schedule=None):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-value-scheduler"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-value-scheduler"
 
         if mode == "Default Value":
             print(f"[Info] CR Value Scheduler: Scheduler {schedule_alias} is disabled")
@@ -84,7 +84,7 @@ class CR_TextScheduler:
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, current_frame, schedule_alias, default_text, schedule_format, schedule=None):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-text-scheduler"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-text-scheduler"
 
         if mode == "Default Text":
             print(f"[Info] CR Text Scheduler: Scheduler {schedule_alias} is disabled")
@@ -136,7 +136,7 @@ class CR_PromptScheduler:
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, prepend_text, append_text, current_frame, schedule_alias, default_prompt, schedule_format, interpolate_prompt, keyframe_list="", schedule=None):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-prompt-scheduler"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-prompt-scheduler"
 
         schedule_lines = list()    
     
@@ -255,7 +255,7 @@ class CR_SimplePromptScheduler:
             else:
                 weight_out = (to_index - current_frame) / (to_index - from_index)
             
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-prompt-scheduler"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-prompt-scheduler"
 
             return(current_prompt_out, next_prompt_out, weight_out, show_help, )
             
@@ -297,7 +297,7 @@ class CR_SimpleValueScheduler:
             except ValueError:
                 print(f"[Warning] CR Simple Value Scheduler. Invalid params {params} at frame {current_frame}")
 
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-value-scheduler"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-value-scheduler"
 
             return (int_out, float_out, show_help, )
         
@@ -338,7 +338,7 @@ class CR_SimpleTextScheduler:
             except ValueError:
                 print(f"[Warning] CR Simple Text Scheduler. Invalid params {params} at frame {current_frame}")
 
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-text-scheduler"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-simple-text-scheduler"
 
             return(text_out, show_help, )
 
@@ -367,7 +367,7 @@ class CR_LoadScheduledModels:
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, current_frame, schedule_alias, default_model, schedule_format, model_list=None, schedule=None):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-load-scheduled-models"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-load-scheduled-models"
 
         #model_name = ""
     
@@ -443,7 +443,7 @@ class CR_LoadScheduledLoRAs:
     CATEGORY = icons.get("Comfyroll/Animation/Schedulers")
 
     def schedule(self, mode, model, clip, current_frame, schedule_alias, default_lora, strength_model, strength_clip, schedule_format, lora_list=None, schedule=None):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-load-scheduled-loras"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Scheduler-Nodes#cr-load-scheduled-loras"
         #lora_name = ""
 
         # Off mode

@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# CR Animation Nodes by RockOfFire and Akatsuzi  https://github.com/RockOfFire/CR-Animation-Nodes
+# CR Animation Nodes by RockOfFire and Akatsuzi  https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                    https://github.com/comfyanonymous/ComfyUI 
 #---------------------------------------------------------------------------------------------------------------------#
 
