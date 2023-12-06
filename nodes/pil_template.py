@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -164,7 +164,7 @@ class CR_SimpleMemeTemplate:
                 font_top = get_font_size(draw, text_top, bar_width, bar_height, resolved_font_path, max_font_size)
                 draw_text_on_image(draw, 0, bar_width, bar_height, text_top, font_top, text_color, font_outline)
      
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Template-Nodes#cr-simple-meme-template"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Template-Nodes#cr-simple-meme-template"
             
             #image_out = np.array(result_image).astype(np.float32) / 255.0
             #image_out = torch.from_numpy(image_out).unsqueeze(0)          
@@ -305,7 +305,7 @@ class CR_ComicPanelTemplates:
         if border_thickness > 0:
             page = ImageOps.expand(page, border_thickness, bg_color)
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Template-Nodes#cr-comic-panel-templates"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Template-Nodes#cr-comic-panel-templates"
 
         return (pil2tensor(page), show_help, )   
 

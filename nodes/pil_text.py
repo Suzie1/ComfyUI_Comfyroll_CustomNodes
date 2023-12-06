@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -107,7 +107,7 @@ class CR_OverlayText:
         # Composite the text image onto the background image using the rotated text mask       
         image_out = Image.composite(text_image, back_image, rotated_text_mask)       
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-overlay-text"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-overlay-text"
         
         # Convert the PIL image back to a torch tensor
         return (pil2tensor(image_out), show_help,)
@@ -178,7 +178,7 @@ class CR_DrawText:
         # Composite the text image onto the background image using the rotated text mask
         image_out = Image.composite(text_image, back_image, rotated_text_mask)
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-draw-text"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-draw-text"
 
         # Convert the PIL image back to a torch tensor
         return (pil2tensor(image_out), show_help,)
@@ -248,7 +248,7 @@ class CR_MaskText:
         # Composite the text image onto the background image using the inverted text mask        
         image_out = Image.composite(background_image, text_image, text_mask)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-mask-text"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-mask-text"
         
         # Convert the PIL image back to a torch tensor
         return (pil2tensor(image_out), show_help,)
@@ -310,7 +310,7 @@ class CR_CompositeText:
         # Composite the text image onto the background image using the rotated text mask
         image_out = Image.composite(text_image, back_image, rotated_text_mask)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-composite-text"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-composite-text"
         
         # Convert the PIL image back to a torch tensor
         return (pil2tensor(image_out), show_help,)
@@ -345,7 +345,7 @@ class CR_ArabicTextRTL:
         arabic_text_reshaped = arabic_reshaper.reshape(arabic_text)
         rtl_text = get_display(arabic_text_reshaped)
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-arabic-text-rtl"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-arabic-text-rtl"
                 
         return (rtl_text, show_help,)
 
@@ -439,11 +439,11 @@ class CR_SimpleTextWatermark:
 
         images_out = torch.cat(total_images, 0)
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-simple-text-watermark"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-simple-text-watermark"
  
         # Convert the PIL image back to a torch tensor
         return (images_out, show_help, )
-
+             
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#

@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi      https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi      https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
 # for ComfyUI                                            https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -60,7 +60,7 @@ class CR_ModelMergeStack:
         if ckpt_name3 != "None" and  switch_3 == "On":
             model_list.extend([(ckpt_name3, model_ratio3, clip_ratio3)]),
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Model-Merge-Nodes#cr-model-stack"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Model-Merge-Nodes#cr-model-stack"
         
         return (model_list, show_help, )
 
@@ -158,7 +158,7 @@ class CR_ApplyModelMerge:
             # Update model info                
                 model_mix_info = model_mix_info + "\nModel Name: " + model_name + "\nModel Ratio: " + str(model_ratio) + "\nCLIP Ratio: " + str(clip_ratio) + "\n"
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Model-Merge-Nodes#cr-apply-model-merge"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Model-Merge-Nodes#cr-apply-model-merge"
                 
         return (model1, clip1, model_mix_info, show_help, )
 

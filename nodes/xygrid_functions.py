@@ -1,3 +1,8 @@
+#---------------------------------------------------------------------------------------------------------------------#
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI                                               
+#---------------------------------------------------------------------------------------------------------------------#
+
 # these functions are a straight clone from
 # https://github.com/LEv145/images-grid-comfy-plugin
 

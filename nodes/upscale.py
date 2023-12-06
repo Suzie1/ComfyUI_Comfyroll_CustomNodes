@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/RockOfFire/CR-Animation-Nodes
+# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -66,7 +66,7 @@ class CR_UpscaleImage:
             pil_img = tensor2pil(img)
             upscaled_width, upscaled_height = pil_img.size
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-upscale-image"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-upscale-image"
 
         # Return if no rescale needed
         if upscaled_width == original_width and rescale_factor == 1:
@@ -128,7 +128,7 @@ class CR_MultiUpscaleStack:
         if upscale_model_3 != "None" and  switch_3 == "On":
             upscale_list.extend([(upscale_model_3, rescale_factor_3)]),
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-multi-upscale-stack"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-multi-upscale-stack"
         return (upscale_list, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ class CR_ApplyMultiUpscale:
                     scaled_images.append(pil2tensor(apply_resize_image(tensor2pil(img), original_width, original_height, rounding_modulus, mode, supersample, rescale_factor, resize_width, resampling_method)))
                 image = torch.cat(scaled_images, dim=0)
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-apply-multi-upscale"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-apply-multi-upscale"
 
         return (image, show_help, )
    

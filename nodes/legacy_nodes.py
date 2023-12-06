@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             #
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             #
 # for ComfyUI                                               https://github.com/comfyanonymous/ComfyUI                                               #
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -25,7 +25,7 @@ class CR_ImageSize:
     CATEGORY = icons.get("Comfyroll/Other/Legacy")
 
     def ImageSize(self, width, height, upscale_factor):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Legacy-Nodes#cr-image-size"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Legacy-Nodes#cr-image-size"
         return(width, height, upscale_factor, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -73,7 +73,7 @@ class CR_AspectRatio_SDXL:
         elif aspect_ratio == "21:9 landscape 1536x640":
             width, height = 1536, 640
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Legacy-Nodes#cr-aspect-ratio-sdxl"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Legacy-Nodes#cr-aspect-ratio-sdxl"
 
         if swap_dimensions == "On":
             return(height, width, upscale_factor1, upscale_factor2, batch_size,show_help,)

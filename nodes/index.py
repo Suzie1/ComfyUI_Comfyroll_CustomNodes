@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/RockOfFire/CR-Animation-Nodes
+# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -21,7 +21,7 @@ class CR_Trigger:
     CATEGORY = icons.get("Comfyroll/Utils/Index")
 
     def trigger(self, index, trigger_value):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-trigger"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-trigger"
         return (index, index == trigger_value, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ class CR_Index:
         if print_to_console == "Yes":
             print(f"[Info] CR Index:{index}")
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index"
         return (index, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ class CR_IncrementIndex:
     
     def increment(self, index, interval):
         index+=interval
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-increment"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-increment"
         return (index, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#   
@@ -87,7 +87,7 @@ class CR_MultiplyIndex:
     
     def multiply(self, index, factor):
         index = index * factor
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-multiply"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-multiply"
         return (index, factor, show_help, ) 
 
 #---------------------------------------------------------------------------------------------------------------------#   
@@ -109,7 +109,7 @@ class CR_IndexReset:
     
     def reset(self, index, reset_to):
         index = reset_to
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-reset"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-reset"
         return (index, reset_to, show_help, )   
      
 #---------------------------------------------------------------------------------------------------------------------#

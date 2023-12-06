@@ -1,5 +1,7 @@
 # 🧩 Comfyroll Custom Nodes for SDXL and SD1.5
 
+Co-authored by Suzie1 and RockOfFire
+
 These nodes can be used in any ComfyUI workflow.  
 
 # Installation
@@ -14,12 +16,12 @@ You can also install the nodes using the following methods:
 
 # Patch Notes
 
-https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
+https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
 
 
 # Wiki
 
-https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki
+https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
 
 # List of Custom Nodes
 
@@ -154,7 +156,7 @@ __Deleted Nodes__
 
 CR Animation Nodes are now included in the Comfyroll Custom Nodes pack.
 
-[Animation Nodes](https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/blob/suzie_dev/Animation_Nodes.md)
+[Animation Nodes](https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/suzie_dev/Animation_Nodes.md)
 
 # Multi-ControlNet methodology
 

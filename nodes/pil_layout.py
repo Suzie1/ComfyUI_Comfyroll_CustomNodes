@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -141,7 +141,7 @@ class CR_PageLayout:
         if border_thickness > 0:
             combined_image = ImageOps.expand(combined_image, border_thickness, border_color)
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-page-layout"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-page-layout"
 
         return (pil2tensor(combined_image), show_help, )    
  
@@ -201,7 +201,7 @@ class CR_ImagePanel:
 
         combined_image = combine_images(images, layout_direction)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-panel"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-panel"
 
         return (pil2tensor(combined_image), show_help, )   
 
@@ -260,7 +260,7 @@ class CR_ImageGridPanel:
                 x_offset = 0
                 y_offset += image.height
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-grid-panel"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-grid-panel"
 
         return (pil2tensor(combined_image), show_help, )   
 
@@ -315,7 +315,7 @@ class CR_ImageBorder:
         
         images = torch.cat(images, dim=0)                
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-border"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-border"
 
         return (images, show_help, )
 
@@ -348,7 +348,7 @@ class CR_ColorPanel:
         size = (panel_width, panel_height)
         panel = Image.new('RGB', size, fill_color)
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-color-panel"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-color-panel"
 
         return (pil2tensor(panel), show_help, )
 
@@ -413,7 +413,7 @@ class CR_SimpleTextPanel:
                            align, justify,
                            rotation_angle, rotation_options)
                                                        
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple-text-panel"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple-text-panel"
 
         return (pil2tensor(panel), show_help, )    
                
