@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Pipe Nodes by Akatsuzi                      https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
+# Comfyroll Pipe Nodes by Akatsuzi                      https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 # based on Tiny Terra nodes
@@ -41,7 +41,7 @@ class CR_ModulePipeLoader:
 
     def flush(self, model=0, pos=0, neg=0, latent=0, vae=0, clip=0, controlnet=0, image=0, seed=0):
         pipe_line = (model, pos, neg, latent, vae, clip, controlnet, image, seed)
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-pipe-loader"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-pipe-loader"
         return (pipe_line, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
@@ -63,7 +63,7 @@ class CR_ModuleInput:
     
     def flush(self, pipe):
         model, pos, neg, latent, vae, clip, controlnet, image, seed = pipe
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-input"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-input"
         return (pipe, model, pos, neg, latent, vae, clip, controlnet, image, seed, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -123,7 +123,7 @@ class CR_ModuleOutput:
             new_seed = seed
        
         pipe = new_model, new_pos, new_neg, new_latent, new_vae, new_clip, new_controlnet, new_image, new_seed
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-output"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-output"
         return (pipe, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
@@ -154,7 +154,7 @@ class CR_ImagePipeIn:
 
     def flush(self, image=0, width=0, height=0, upscale_factor=0):
         pipe_line = (image, width, height, upscale_factor)
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-in"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-in"
         return (pipe_line, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -194,7 +194,7 @@ class CR_ImagePipeEdit:
             new_upscale_factor = upscale_factor
             
         pipe = new_image, new_width, new_height, new_upscale_factor
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-edit"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-edit"
         return (pipe, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -217,7 +217,7 @@ class CR_ImagePipeOut:
         #if switch == "Off":
             #return (pipe, )
         #else:  
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-out"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-out"
             image, width, height, upscale_factor = pipe
             return (pipe, image, width, height, upscale_factor, show_help, )
 
@@ -243,7 +243,7 @@ class CR_InputSwitchPipe:
     CATEGORY = icons.get("Comfyroll/Pipe")
 
     def InputSwitchPipe(self, Input, pipe1, pipe2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-pipe-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-pipe-switch"
         if Input == 1:
             return (pipe1, show_help, )
         else:

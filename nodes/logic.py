@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
 # for ComfyUI                                               https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -28,7 +28,7 @@ class CR_ImageInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, image1, image2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-image-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-image-input-switch"
         if Input == 1:
             return (image1, show_help, )
         else:
@@ -55,7 +55,7 @@ class CR_LatentInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, latent1, latent2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-latent-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-latent-input-switch"
         if Input == 1:
             return (latent1, show_help, )
         else:
@@ -82,7 +82,7 @@ class CR_ConditioningInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, conditioning1, conditioning2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-conditioning-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-conditioning-input-switch"
         if Input == 1:
             return (conditioning1, show_help, )
         else:
@@ -109,7 +109,7 @@ class CR_ClipInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, clip1, clip2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-clip-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-clip-input-switch"
         if Input == 1:
             return (clip1, show_help, )
         else:
@@ -136,7 +136,7 @@ class CR_ModelInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, model1, model2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-model-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-model-input-switch"
         if Input == 1:
             return (model1, show_help, )
         else:
@@ -164,7 +164,7 @@ class CR_ControlNetInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, control_net1, control_net2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-controlnet-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-controlnet-input-switch"
         if Input == 1:
             return (control_net1, show_help, )
         else:
@@ -192,7 +192,7 @@ class CR_TextInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, text1, text2,):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-text-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-text-input-switch"
         if Input == 1:
             return (text1, show_help, )
         else:
@@ -219,7 +219,7 @@ class CR_VAEInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, VAE1, VAE2,):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-vae-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-vae-input-switch"
         if Input == 1:
             return (VAE1, show_help, )
         else:
@@ -250,7 +250,7 @@ class CR_ImageInputSwitch4way:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, image1, image2=None, image3=None, image4=None):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-text-input-switch-4-way"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-text-input-switch-4-way"
         if Input == 1:
             return (image1, show_help, )
         elif Input == 2:
@@ -285,7 +285,7 @@ class CR_TextInputSwitch4way:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, text1, text2=None, text3=None, text4=None):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-text-input-switch-4-way"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-text-input-switch-4-way"
         if Input == 1:
             return (text1, show_help, )
         elif Input == 2:
@@ -318,7 +318,7 @@ class CR_ModelAndCLIPInputSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Logic")
 
     def switch(self, Input, clip1, clip2, model1, model2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-switch-model-and-clip"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Logic-Nodes#cr-switch-model-and-clip"
         if Input == 1:
             return (model1, clip1, show_help, )
         else:
@@ -347,7 +347,7 @@ class CR_Img2ImgProcessSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Process")
 
     def switch(self, Input, txt2img, img2img):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Process-Nodes#cr-img2img-process-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Process-Nodes#cr-img2img-process-switch"
         if Input == "txt2img":
             return (txt2img, show_help, )
         else:
@@ -374,7 +374,7 @@ class CR_HiResFixProcessSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Process")
 
     def switch(self, Input, latent_upscale, image_upscale):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Process-Nodes#cr-hires-fix-process-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Process-Nodes#cr-hires-fix-process-switch"
         if Input == "latent_upscale":
             return (latent_upscale, show_help, )
         else:
@@ -401,7 +401,7 @@ class CR_BatchProcessSwitch:
     CATEGORY = icons.get("Comfyroll/Utils/Process")
 
     def switch(self, Input, image, image_batch):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Process-Nodes#cr-batch-process-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Process-Nodes#cr-batch-process-switch"
         if Input == "image":
             return (image, show_help, )
         else:

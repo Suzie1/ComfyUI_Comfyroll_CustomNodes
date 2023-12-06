@@ -1,5 +1,20 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## PR59 Dec 6, 2023
+
+__Changed Nodes__
+
+	CR Aspect Ratio
+	
+	- added prescale_factor
+
+## PR55 Dec 2, 2023
+
+__Other Changes__
+
+	- removed node images
+	- fixes to CR Page Layout	
+
 ## PR54 Dec 2, 2023
 
 __Other Changes__

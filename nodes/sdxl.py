@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -77,7 +77,7 @@ class CR_PromptMixPresets:
             neg_g = prompt_negative
             neg_l = prompt_negative
             neg_r = style_negative
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/SDXL-Nodes#cr-sdxl-prompt-mix-presets"            
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/SDXL-Nodes#cr-sdxl-prompt-mix-presets"            
         return (pos_g, pos_l, pos_r, neg_g, neg_l, neg_r, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -96,7 +96,7 @@ class CR_SDXLStyleText:
     CATEGORY = icons.get("Comfyroll/SDXL")
 
     def get_value(self, positive_style, negative_style):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/SDXL-Nodes#cr-sdxl-style-text"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/SDXL-Nodes#cr-sdxl-style-text"
         return (positive_style, negative_style, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -189,7 +189,7 @@ class CR_SDXLBasePromptEncoder:
             base_positive = res1 + res3
             base_negative = res2 + res4
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/SDXL-Nodes#cr-sdxl-base-prompt-encoder"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/SDXL-Nodes#cr-sdxl-base-prompt-encoder"
         return (base_positive, base_negative, show_help, )
                
 #---------------------------------------------------------------------------------------------------------------------#

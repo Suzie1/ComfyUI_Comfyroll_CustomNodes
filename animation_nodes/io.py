@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# CR Animation Nodes by RockOfFire and Akatsuzi   https://github.com/RockOfFire/CR-Animation-Nodes
+# CR Animation Nodes by RockOfFire and Akatsuzi   https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -82,7 +82,7 @@ class CR_LoadAnimationFrames:
             image = torch.from_numpy(image)[None,]
             image = image.squeeze()
             sample_frames.append(image)
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/IO-Nodes#cr-load-animation-frames"                        
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/IO-Nodes#cr-load-animation-frames"                        
         return (torch.stack(sample_frames), show_help, )
  
 #---------------------------------------------------------------------------------------------------------------------#
@@ -116,7 +116,7 @@ class CR_LoadFlowFrames:
     FUNCTION = "load_images"
 
     def load_images(self, file_pattern, skip_start_frames, input_folder, sort_by, current_frame, input_path=''):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/IO-Nodes#cr-load-flow-frames"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/IO-Nodes#cr-load-flow-frames"
 
         input_dir = folder_paths.input_directory
         

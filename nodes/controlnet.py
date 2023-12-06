@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             #
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             #
 # for ComfyUI                                               https://github.com/comfyanonymous/ComfyUI                                               #
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -33,7 +33,7 @@ class CR_ApplyControlNet:
     CATEGORY = icons.get("Comfyroll/ControlNet")
 
     def apply_controlnet(self, conditioning, control_net, image, switch, strength):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/ControlNet-Nodes#cr-apply-controlnet"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/ControlNet-Nodes#cr-apply-controlnet"
         if strength == 0 or switch == "Off":
             return (conditioning, show_help, )
 
@@ -115,7 +115,7 @@ class CR_ControlNetStack:
             controlnet_3 = comfy.controlnet.load_controlnet(controlnet_path)
             controlnet_list.extend([(controlnet_3, image_3, controlnet_strength_3, start_percent_3, end_percent_3)]),
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/ControlNet-Nodes#cr-multi-controlnet-stack"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/ControlNet-Nodes#cr-multi-controlnet-stack"
 
         return (controlnet_list, show_help, )
         
@@ -137,7 +137,7 @@ class CR_ApplyControlNetStack:
     CATEGORY = icons.get("Comfyroll/ControlNet")
 
     def apply_controlnet_stack(self, base_positive, base_negative, switch, controlnet_stack=None,):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/ControlNet-Nodes#cr-apply-multi-controlnet-stack"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/ControlNet-Nodes#cr-apply-multi-controlnet-stack"
 
         if switch == "Off":
             return (base_positive, base_negative, show_help, )

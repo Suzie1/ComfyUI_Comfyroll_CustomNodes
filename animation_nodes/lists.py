@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# CR Animation Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/CR-Animation-Nodes
+# CR Animation Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                       https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -268,7 +268,7 @@ class CR_TextListSimple:
         if text_5 != "" and text_5 != None:
             texts.append(text_5),
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text-list-simple"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text-list-simple"
 
         return (texts, show_help, )
  
@@ -330,7 +330,7 @@ class CR_ImageList:
         if image_5 != None:
             images.extend([(alias5, image_5)]),
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list"          
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list"          
 
         return (images, show_help, )   
 
@@ -383,7 +383,7 @@ class CR_ImageListSimple:
         if image_5 != None:
             images.append(image_5),
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list-simple"         
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list-simple"         
 
         return (images, show_help, )
 
@@ -417,7 +417,7 @@ class CR_InputTextList:
                 
             texts.append(line),    
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Animation-Utility-Nodes#cr-input-text-list"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Animation-Utility-Nodes#cr-input-text-list"
 
         return (texts, show_help, )
         
