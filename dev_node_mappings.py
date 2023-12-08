@@ -14,7 +14,6 @@ DEV_NODE_CLASS_MAPPINGS = {
     "CR XYZ Interpolate": CR_XYZInterpolate,    
     "CR XYZ Index": CR_XYZIndex,
     ### Graphics Dev Nodes
-    "CR Overlay Transparent Image": CR_OverlayTransparentImage,
     "CR Multi-Panel Meme Template": CR_MultiPanelMemeTemplate,
     "CR Popular Meme Templates": CR_PopularMemeTemplates,    
     "CR Draw Perspective Text": CR_DrawPerspectiveText,
@@ -23,6 +22,7 @@ DEV_NODE_CLASS_MAPPINGS = {
     "CR Add Annotation": CR_AddAnnotation,    
     "CR 3D Polygon": CR_3DPolygon,
     "CR 3D Solids": CR_3DSolids,
+    "CR Draw OBJ": CR_DrawOBJ,    
     "CR Simple Image Watermark": CR_SimpleImageWatermark,
     "CR Comic Panel Templates (Advanced)": CR_ComicPanelTemplatesAdvanced,    
     ### Workflow Dev Nodes
@@ -59,7 +59,6 @@ DEV_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR XYZ List": "CR XYZ List (Dev)",    
     "CR XYZ Interpolate": "CR XYZ Interpolate (Dev)",    
     "CR XYZ Index": "CR XYZ Index (Dev)",    
-    "CR Overlay Transparent Image": "CR Overlay Transparent Image (Dev)",
     "CR Multi-Panel Meme Template": "CR Multi-Panel Meme Template (Dev)",
     "CR Popular Meme Templates": "CR Popular Meme Templates (Dev)",    
     "CR Draw Perspective Text": "CR Draw Perspective Text (Dev)",
@@ -68,7 +67,8 @@ DEV_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Add Annotation": "CR Add Annotation (Prototype)",    
     "CR 3D Polygon": "CR 3D Polygon (Dev)",
     "CR 3D Solids": "CR 3D Solids (Dev)",
-    "CR Simple Image Watermark": "🌁 CR Simple Image Watermark",
+    "CR Draw OBJ": "CR Draw OBJ",
+    "CR Simple Image Watermark": "CR Simple Image Watermark (Dev)",
     "CR Comic Panel Templates Advanced": "👽 Comic Panel Templates (Advanced)",     
     "CR Job List": "CR Job List (Prototype)",
     "CR Job Scheduler": "CR Job Scheduler (Prototype)",

@@ -17,9 +17,6 @@ from .graphics_functions import (hex_to_rgb,
                                  get_font_size,
                                  draw_text_on_image) 
 
-font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
-file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
-
 #try:
 #    import Markdown
 #except ImportError:
@@ -46,6 +43,9 @@ class CR_PageLayout:
 
     @classmethod
     def INPUT_TYPES(s):
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
 
         layout_options = ["header", "footer", "header and footer", "no header or footer"]               
         
@@ -358,6 +358,9 @@ class CR_SimpleTextPanel:
     @classmethod
     def INPUT_TYPES(s):
     
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+
         return {"required": {
                 "panel_width": ("INT", {"default": 512, "min": 8, "max": 4096}),
                 "panel_height": ("INT", {"default": 512, "min": 8, "max": 4096}),
@@ -416,7 +419,78 @@ class CR_SimpleTextPanel:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple-text-panel"
 
         return (pil2tensor(panel), show_help, )    
-               
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_OverlayTransparentImage:
+    
+    @classmethod
+    def INPUT_TYPES(s):
+                  
+        return {"required": {
+                "back_image": ("IMAGE",),
+                "overlay_image": ("IMAGE",),
+                "transparency": ("FLOAT", {"default": 0, "min": 0, "max": 1, "step": 0.1}),
+                "offset_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                "offset_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
+                "overlay_scale_factor": ("FLOAT", {"default": 1.0, "min": -0.1, "max": 100.0, "step": 0.1}),
+                }        
+        }
+
+    RETURN_TYPES = ("IMAGE", )
+    FUNCTION = "overlay_image"
+    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
+
+    def overlay_image(self, back_image, overlay_image, 
+                      transparency, offset_x, offset_y, rotation_angle, overlay_scale_factor=1.0):
+
+        """
+        Overlay an image onto another image with transparency, rotation, and scaling.
+
+        Args:
+            back_image (torch.Tensor): Background image tensor.
+            overlay_image (torch.Tensor): Overlay image tensor.
+            transparency (float): Transparency level for the overlay image (0.0 to 1.0).
+            offset_x (int): X-coordinate relative to the center of the back image.
+            offset_y (int): Y-coordinate relative to the center of the back image.
+            rotation_angle (float): Rotation angle in degrees.
+            scale_factor (float): Scaling factor for the overlay image.
+
+        Returns:
+            torch.Tensor: Resulting image tensor.
+        """
+        
+        # Convert tensor images
+        #back_image = back_image[0, :, :, :]
+        #overlay_image = overlay_image[0, :, :, :]
+
+        # Create PIL images for the text and background layers and text mask
+        back_image = tensor2pil(back_image)
+        overlay_image = tensor2pil(overlay_image)
+
+        # Apply transparency to overlay image
+        overlay_image.putalpha(int(255 * (1 - transparency)))
+
+        # Rotate overlay image
+        overlay_image = overlay_image.rotate(rotation_angle, expand=True)
+
+        # Scale overlay image
+        overlay_width, overlay_height = overlay_image.size
+        new_size = (int(overlay_width * overlay_scale_factor), int(overlay_height * overlay_scale_factor))
+        overlay_image = overlay_image.resize(new_size, Image.ANTIALIAS)
+
+        # Calculate centered position relative to the center of the background image
+        center_x = back_image.width // 2
+        center_y = back_image.height // 2
+        position_x = center_x - overlay_image.width // 2 + offset_x
+        position_y = center_y - overlay_image.height // 2 + offset_y
+
+        # Paste the rotated overlay image onto the new back image at the specified position
+        back_image.paste(overlay_image, (position_x, position_y), overlay_image)
+
+        # Convert the PIL image back to a torch tensor
+        return pil2tensor(back_image),
+           
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -429,6 +503,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Image Border": CR_ImageBorder,
     "CR Color Panel": CR_ColorPanel,
     "CR Simple Text Panel": CR_SimpleTextPanel,
+    "CR Overlay Transparent Image": CR_OverlayTransparentImage,
 }
 '''
 

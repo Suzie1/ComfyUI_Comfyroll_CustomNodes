@@ -597,63 +597,7 @@ class CR_SelectModel:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-model"
             
         return (model, clip, vae, model_name, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_RandomHexColor:
-    
-    @classmethod
-    def INPUT_TYPES(cls):
-        
-        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),}}
-
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
-    RETURN_NAMES = ("hex_color1", "hex_color2", "hex_color3", "hex_color4", "show_help", )
-    OUTPUT_NODE = True
-    FUNCTION = "get_colors"
-    CATEGORY = icons.get("Comfyroll/Graphics/Utilty")
-
-    def get_colors(self, seed):
-    
-        # Set the seed
-        random.seed(seed)
-    
-        hex_color1 = random_hex_color()
-        hex_color2 = random_hex_color()
-        hex_color3 = random_hex_color()
-        hex_color4 = random_hex_color()
-        
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-hex-color"
-             
-        return (hex_color1, hex_color2, hex_color3, hex_color4, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_RandomRGB:
-    
-    @classmethod
-    def INPUT_TYPES(cls):
-        
-        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),}}
-
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
-    RETURN_NAMES = ("rgb_1", "rgb_2", "rgb_3", "rgb_4", "show_help", )
-    OUTPUT_NODE = True
-    FUNCTION = "get_colors"
-    CATEGORY = icons.get("Comfyroll/Graphics/Utilty")
-
-    def get_colors(self, seed):
-    
-        # Set the seed
-        random.seed(seed)
-    
-        rgb_1 = random_rgb()
-        rgb_2 = random_rgb()
-        rgb_3 = random_rgb()
-        rgb_4 = random_rgb()
-        
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-rgb"
-             
-        return (rgb_1, rgb_2, rgb_3, rgb_4, show_help, )
-                     
+                   
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -673,9 +617,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel, 
-    "CR Random Hex Color": CR_RandomHexColor,
-    "CR Random RGB": CR_RandomRGB,     
+    "CR Select Model": CR_SelectModel,  
 }
 '''
 

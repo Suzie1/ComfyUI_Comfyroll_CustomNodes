@@ -210,60 +210,6 @@ class CR_DrawPerspectiveText:
         return pil2tensor(image_out), pil2tensor(preview_out), show_help,  
 
 #---------------------------------------------------------------------------------------------------------------------#
-class CR_OverlayTransparentImage:
-    
-    @classmethod
-    def INPUT_TYPES(s):
-                  
-        return {"required": {
-                "back_image": ("IMAGE",),
-                "overlay_image": ("IMAGE",),
-                "align": (ALIGN_OPTIONS, ),
-                "transparency": ("FLOAT", {"default": 0, "min": 0, "max": 1, "step": 0.1}),
-                "position_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
-                "position_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
-                "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
-                }        
-        }
-
-    RETURN_TYPES = ("IMAGE", )
-    FUNCTION = "overlay_image"
-    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
-
-    def overlay_image(self, back_image, overlay_image, align,
-                      transparency, position_x, position_y, rotation_angle):
-        
-        # Convert tensor images
-        #back_image = back_image[0, :, :, :]
-        #overlay_image = overlay_image[0, :, :, :]
-
-        # Create PIL images for the text and background layers and text mask
-        back_image = tensor2pil(back_image)
-        overlay_image = tensor2pil(overlay_image)
-
-        # Apply transparency to overlay image
-        overlay_image.putalpha(int(255 * (1 - transparency)))
-
-        # Rotate overlay image
-        overlay_image = overlay_image.rotate(rotation_angle, expand=True)
-
-        # Calculate the new size of the back image considering the rotated overlay image
-        new_size = (max(back_image.width, position_x + overlay_image.width),
-                    max(back_image.height, position_y + overlay_image.height))
-
-        # Create a new back image with the updated size
-        new_back_image = Image.new('RGBA', new_size, (0, 0, 0, 0))
-
-        # Paste the original back image onto the new back image
-        new_back_image.paste(back_image, (0, 0))
-
-        # Paste the rotated overlay image onto the new back image at the specified position
-        new_back_image.paste(overlay_image, (position_x, position_y), overlay_image)
-
-        # Convert the PIL image back to a torch tensor
-        return pil2tensor(new_back_image),
-
-#---------------------------------------------------------------------------------------------------------------------#
 class CR_SimpleAnnotations:
 
     @classmethod
@@ -466,7 +412,7 @@ class CR_SimpleImageWatermark:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "overlay_image"
-    CATEGORY = icons.get("Comfyroll/Graphics/Image")
+    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
 
     def overlay_image(self, image, watermark_image, watermark_scale, opacity, align, x_margin, y_margin):
     
@@ -683,7 +629,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Multi-Panel Meme Template": CR_MultiPanelMemeTemplate,
     "CR Popular Meme Templates": CR_PopularMemeTemplates,
     "CR Draw Perspective Text": CR_DrawPerspectiveText,
-    "CR Overlay Transparent Image":CR_OverlayTransparentImage,
     "CR Simple Annotations": CR_SimpleAnnotations,
     "CR Apply Annotations": CR_ApplyAnnotations,
     "CR Add Annotation": CR_AddAnnotation,
