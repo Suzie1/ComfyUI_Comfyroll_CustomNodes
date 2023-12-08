@@ -10,7 +10,8 @@ import os
 from PIL import Image, ImageDraw
 from ..categories import icons
 from ..config import color_mapping, COLORS
-          
+from pywavefront import Wavefront    
+    
 #---------------------------------------------------------------------------------------------------------------------#
 
 def tensor2pil(image):
@@ -210,7 +211,63 @@ class CR_3DSolids:
         tensor_image = pil2tensor(image)
 
         return (tensor_image,)
- 
+
+#---------------------------------------------------------------------------------------------------------------------#
+
+class CR_DrawOBJ:
+
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        obj_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "obj")
+        file_list = [f for f in os.listdir(obj_dir) if os.path.isfile(os.path.join(obj_dir, f)) and f.lower().endswith(".obj")]      
+
+    
+        return {"required": {
+            "image_width": ("INT", {"default": 512, "min": 64, "max": 2048}),
+            "image_height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+            "obj_name": (file_list,),            
+            "line_color": (COLORS[1:],),           
+        },
+    }
+
+    RETURN_TYPES = ("IMAGE", )
+    FUNCTION = "draw_wireframe"
+    CATEGORY = icons.get("Comfyroll/Graphics/3D")
+    
+    def draw_wireframe(self, obj_name, image_width=800, image_height=800, line_color="black"):
+
+        # Load the OBJ file
+        obj_file = "obj\\" + str(obj_name)   
+        resolved_obj_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), obj_file)
+        scene = Wavefront(resolved_obj_path)
+
+        # Create a blank image
+        img = Image.new("RGB", (image_width, image_height), (0, 0, 0))
+        draw = ImageDraw.Draw(img)
+
+        for name, material in scene.materials.items():
+            for face in material.mesh.faces:
+                vertices = [scene.vertices[i] for i in face]
+
+                # Draw lines between vertices to create wireframe
+                for i in range(len(vertices)):
+                    x1, y1, z1 = vertices[i]
+                    x2, y2, z2 = vertices[(i + 1) % len(vertices)]
+
+                    # Scale and translate vertices to fit the image
+                    x1 = int((x1 + 1) * image_width / 2)
+                    y1 = int((1 - y1) * image_height / 2)
+                    x2 = int((x2 + 1) * image_width / 2)
+                    y2 = int((1 - y2) * image_height / 2)
+
+                    draw.line([(x1, y1), (x2, y2)], fill=line_color)
+
+        # Convert the PIL image to a PyTorch tensor
+        tensor_image = pil2tensor(img)
+
+        return (tensor_image,)    
+
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -219,6 +276,7 @@ class CR_3DSolids:
 NODE_CLASS_MAPPINGS = {
     "CR 3D Polygon":CR_3DPolygon,
     "CR 3D Solids":CR_3DSolids,
+    "CR Draw OBJ":CR_DrawOBJ,
 }
 '''
 

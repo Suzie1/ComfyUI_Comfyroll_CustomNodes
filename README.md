@@ -7,7 +7,7 @@ These nodes can be used in any ComfyUI workflow.
 # Installation
 
 1. cd custom_nodes
-2. git clone https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes.git
+2. git clone https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes.git
 3. Restart ComfyUI
 
 You can also install the nodes using the following methods:
@@ -63,6 +63,8 @@ __🌈 Graphics - Pattern__
 * CR Radial Gradiant
 * CR Starburst Lines
 * CR Starburst Colors
+* CR Simple Binary Pattern
+* CR Binary Pattern
 
 __🔤 Graphics - Text__
 * CR Overlay Text
@@ -80,6 +82,7 @@ __🌁 Graphics - Layout__
 * CR Image Border
 * CR Color Panel
 * CR Simple Text Panel
+* CR Overlay Transparent Image
 
 __✈️ Module__
 * CR Module Pipe Loader
@@ -137,6 +140,12 @@ __🔀 Logic__
 * CR Text Input Switch
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
+
+__🎲 Random__
+* CR Random Hex Color
+* CR Random RGB
+* CR Random Multiline Values
+* CR Random RGB Gradient
   
 __📦 Other__
 * CR Latent Batch Size
