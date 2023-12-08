@@ -52,6 +52,7 @@ __🔂 Process__
 
 __👓 Graphics - Filter__
 * CR Color Tint
+* CR Halftone Filter
 
 __🌈 Graphics - Pattern__
 * CR Halftone Grid
@@ -63,8 +64,8 @@ __🌈 Graphics - Pattern__
 * CR Radial Gradiant
 * CR Starburst Lines
 * CR Starburst Colors
-* CR Simple Binary Pattern
-* CR Binary Pattern
+* CR Simple Binary Pattern (new 8/12/2023)
+* CR Binary Pattern (new 8/12/2023)
 
 __🔤 Graphics - Text__
 * CR Overlay Text
@@ -74,6 +75,7 @@ __🔤 Graphics - Text__
 
 __👽 Graphics - Template__
 * CR Simple Meme Template
+* CR Comic Panel Templates
 
 __🌁 Graphics - Layout__
 * CR Image Panel
@@ -144,8 +146,8 @@ __🔀 Logic__
 __🎲 Random__
 * CR Random Hex Color
 * CR Random RGB
-* CR Random Multiline Values
-* CR Random RGB Gradient
+* CR Random Multiline Values (new 8/12/2023)
+* CR Random RGB Gradient (new 8/12/2023)
   
 __📦 Other__
 * CR Latent Batch Size
