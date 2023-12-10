@@ -31,6 +31,13 @@ except ImportError:
     subprocess.check_call(['python', '-m', 'pip', 'install', 'arabic_reshaper'])
 '''
 
+def get_offset_for_true_mm(text, draw, font):
+    anchor_bbox = draw.textbbox((0, 0), text, font=font, anchor='lt')
+    anchor_center = (anchor_bbox[0] + anchor_bbox[2]) // 2, (anchor_bbox[1] + anchor_bbox[3]) // 2
+    mask_bbox = font.getmask(text).getbbox()
+    mask_center = (mask_bbox[0] + mask_bbox[2]) // 2, (mask_bbox[1] + mask_bbox[3]) // 2
+    return anchor_center[0] - mask_center[0], anchor_center[1] - mask_center[1]
+
 #---------------------------------------------------------------------------------------------------------------------#
           
 ALIGN_OPTIONS = ["center", "top", "bottom"]                 
@@ -445,6 +452,91 @@ class CR_SimpleTextWatermark:
         return (images_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_SystemTrueTypeFont:
+    def __init__(self):
+        pass
+        
+    @classmethod
+    def INPUT_TYPES(cls):
+
+        system_root = os.environ.get('SystemRoot')
+        font_dir = os.path.join(system_root, 'Fonts')   
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+                        
+        return {"required": {
+                "font_name": (file_list,),
+                "font_size": ("INT", {"default": 50, "min": 1, "max": 1024}),
+                }       
+    }
+
+    RETURN_TYPES = ("FONT", "IMAGE", "STRING",)
+    RETURN_NAMES = ("FONT", "preview", "show_help",)
+    FUNCTION = "truetype_font"
+    CATEGORY = icons.get("Comfyroll/Graphics/Text")
+
+    def truetype_font(self, font_name, font_size):
+
+        # Construct the path to the Fonts directory
+        system_root = os.environ.get('SystemRoot')
+        fonts_directory = os.path.join(system_root, 'Fonts')
+        resolved_font_path = os.path.join(fonts_directory, font_name)
+        font_out = ImageFont.truetype(str(resolved_font_path), size=font_size)      
+
+        # Create a blank image with a white background
+        image = Image.new('RGB', (300, 100), 'white')
+        draw = ImageDraw.Draw(image)
+
+        x = image.width // 2
+        y = image.height // 2
+        
+        text = "abcdefghij"
+
+        # Draw the text on the image
+        draw.text((x, y), text, font=font_out, fill='black', anchor='mm')
+    
+        preview = pil2tensor(image)
+        
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-system-truetype-font"
+        
+        return (font_out, preview, show_help,)
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_DisplayFont:
+
+    @classmethod
+    def INPUT_TYPES(s):
+               
+        return {"required": {
+                "font": ("FONT",),
+                "text": ("STRING", {"multiline": False, "default": "abcdefghij"}),
+                }       
+    }
+
+    RETURN_TYPES = ("IMAGE", "show_help", )
+    OUTPUT_NODE = True
+    FUNCTION = "draw_font"
+    CATEGORY = icons.get("Comfyroll/Graphics/Text")
+
+    def draw_font(self, font, text):
+        # Create a blank image with a white background
+        image = Image.new('RGB', (300, 100), 'white')
+        draw = ImageDraw.Draw(image)
+
+        # Calculate the position to center the text
+        x = image.width // 2
+        y = image.height // 2
+
+        # Draw the text on the image
+        draw.text((x, y), text, font=font, fill='black', anchor='mm')
+
+        # Convert the PIL image back to a torch tensor
+        image_out = pil2tensor(image)
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-display-font"
+        
+        return (image_out, show_help,)       
+        
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -457,6 +549,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Draw Perspective Text":CR_DrawPerspectiveText,
     "CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
+    "CR System TrueType Font": CR_SystemTrueTypeFont,
+    "CR Display Font": CR_DisplayFont,
 }
 '''
 

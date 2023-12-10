@@ -49,6 +49,7 @@ class CR_AspectRatioSD15:
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
                 "upscale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
     RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
@@ -80,7 +81,7 @@ class CR_AspectRatioSD15:
 
         if swap_dimensions == "On":
             width, height = height, width
-
+           
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sd15-aspect-ratio"
@@ -239,7 +240,7 @@ class CR_AspectRatio:
         
         width = int(width*prescale_factor)
         height = int(height*prescale_factor)
-           
+        
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio"
