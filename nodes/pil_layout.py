@@ -146,6 +146,102 @@ class CR_PageLayout:
         return (pil2tensor(combined_image), show_help, )    
  
 #---------------------------------------------------------------------------------------------------------------------#    
+class CR_SimpleTitles:
+
+    @classmethod
+    def INPUT_TYPES(s):
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+
+        layout_options = ["header", "footer", "header and footer", "no header or footer"]               
+        
+        return {"required": {
+                "image": ("IMAGE",),
+                "header_text": ("STRING", {"multiline": True, "default": "text"}),
+                "header_height": ("INT", {"default": 0, "min": 0, "max": 1024}),
+                "header_font_size": ("INT", {"default": 150, "min": 0, "max": 1024}),                
+                "header_align": (JUSTIFY_OPTIONS, ),
+                "footer_text": ("STRING", {"multiline": True, "default": "text"}),
+                "footer_height": ("INT", {"default": 0, "min": 0, "max": 1024}),  
+                "footer_font_size": ("INT", {"default": 50, "min": 0, "max": 1024}),                
+                "footer_align": (JUSTIFY_OPTIONS, ),
+                "font_name": (file_list,),
+                "font_color": (COLORS,),
+                "background_color": (COLORS,),
+               },
+                "optional": {
+                "font_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+               }
+    }
+
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("image", "show_help", )
+    FUNCTION = "layout"
+    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
+    
+    def layout(self, image,
+               header_height, header_text, header_align, header_font_size, 
+               footer_height, footer_text, footer_align, footer_font_size,
+               font_name, font_color, background_color,
+               font_color_hex='#000000', bg_color_hex='#000000',):
+
+        # Get RGB values for the text and background colors    
+        font_color = get_color_values(font_color, font_color_hex, color_mapping)
+        bg_color = get_color_values(background_color, bg_color_hex, color_mapping)
+        
+        main_panel = tensor2pil(image)
+        
+        # Get image width and height        
+        image_width = main_panel.width
+        image_height = main_panel.height 
+
+        # Set defaults
+        margins = 50
+        line_spacing = 0
+        position_x = 0
+        position_y = 0
+        align = "center"
+        rotation_angle = 0
+        rotation_options = "image center"
+        font_outline_thickness = 0
+        font_outline_color = "black"
+        
+        images = []
+        
+        ### Create text panels and add to images array       
+        if header_height >0:
+            header_panel = text_panel(image_width, header_height, header_text,
+                                      font_name, header_font_size, font_color,
+                                      font_outline_thickness, font_outline_color,
+                                      bg_color,
+                                      margins, line_spacing,
+                                      position_x, position_y,
+                                      align, header_align,
+                                      rotation_angle, rotation_options)
+            images.append(header_panel)
+        
+        images.append(main_panel)
+               
+        if footer_height >0:       
+            footer_panel = text_panel(image_width, footer_height, footer_text,
+                                      font_name, footer_font_size, font_color,
+                                      font_outline_thickness, font_outline_color,
+                                      bg_color,
+                                      margins, line_spacing,
+                                      position_x, position_y,
+                                      align, footer_align,
+                                      rotation_angle, rotation_options)
+            images.append(footer_panel)                                                           
+       
+        combined_image = combine_images(images, 'vertical')
+          
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple_titles"
+
+        return (pil2tensor(combined_image), show_help, )    
+ 
+#---------------------------------------------------------------------------------------------------------------------#    
 class CR_ImagePanel:
 
     @classmethod
@@ -418,7 +514,7 @@ class CR_SimpleTextPanel:
                                                        
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple-text-panel"
 
-        return (pil2tensor(panel), show_help, )    
+        return (pil2tensor(panel), show_help, )  
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_OverlayTransparentImage:
@@ -504,6 +600,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Color Panel": CR_ColorPanel,
     "CR Simple Text Panel": CR_SimpleTextPanel,
     "CR Overlay Transparent Image": CR_OverlayTransparentImage,
+    "CR Simple Titles": CR_SimpleTitles,
 }
 '''
 

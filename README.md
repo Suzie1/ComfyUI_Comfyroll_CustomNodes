@@ -75,6 +75,7 @@ __🔤 Graphics - Text__
 
 __👽 Graphics - Template__
 * CR Simple Meme Template
+* CR Simple Banner
 * CR Comic Panel Templates
 
 __🌁 Graphics - Layout__

@@ -101,9 +101,11 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Overlay Text": CR_OverlayText,
     "CR Draw Text": CR_DrawText,
     "CR Mask Text": CR_MaskText,
-    "CR Composite Text": CR_CompositeText,
+    "CR Composite Text": CR_CompositeText, 
     #"CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
+    #"CR System TrueType Font": CR_SystemTrueTypeFont,      
+    #"CR Display Font": CR_DisplayFont,
     ### Graphics Filter
     "CR Halftone Filter": CR_HalftoneFilter,
     "CR Color Tint": CR_ColorTint,    
@@ -114,9 +116,11 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Image Border": CR_ImageBorder,
     "CR Simple Text Panel": CR_SimpleTextPanel,    
     "CR Color Panel": CR_ColorPanel,
-    "CR Overlay Transparent Image": CR_OverlayTransparentImage,    
+    "CR Overlay Transparent Image": CR_OverlayTransparentImage,
+    #"CR Simple Titles": CR_SimpleTitles,    
     ### Graphics Template
-    "CR Simple Meme Template": CR_SimpleMemeTemplate,     
+    "CR Simple Meme Template": CR_SimpleMemeTemplate,
+    "CR Simple Banner": CR_SimpleBanner,    
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
     ### Utils Logic Nodes
     "CR Image Input Switch": CR_ImageInputSwitch,
@@ -290,9 +294,11 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Color Panel": "🌁 CR Color Panel",
     "CR Page Layout": "🌁 CR Page Layout",
     "CR Image Border": "🌁 CR Image Border",      
-    "CR Overlay Transparent Image": "🌁 CR Overlay Transparent Image",    
+    "CR Overlay Transparent Image": "🌁 CR Overlay Transparent Image",
+    #"CR Simple Titles": "🌁 CR Simple Titles",    
     ### Graphics Template
-    "CR Simple Meme Template": "👽 CR Simple Meme Template",    
+    "CR Simple Meme Template": "👽 CR Simple Meme Template",
+    "CR Simple Banner": "👽 CR Simple Banner",     
     "CR Comic Panel Templates": "👽 CR Comic Panel Templates",
     ### Utils Logic Nodes
     "CR Image Input Switch": "🔀 CR Image Input Switch",

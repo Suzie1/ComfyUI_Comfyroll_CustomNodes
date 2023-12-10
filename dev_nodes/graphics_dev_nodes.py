@@ -618,8 +618,43 @@ class CR_ComicPanelTemplatesAdvanced:
             
         show_help = "example help text"
 
-        return (pil2tensor(page), show_help, )             
-               
+        return (pil2tensor(page), show_help, )  
+        
+#---------------------------------------------------------------------------------------------------------------------#
+'''
+class CR_ASCIIPattern:
+    
+    @classmethod
+    def INPUT_TYPES(s):
+                 
+        return {"required": {
+                    "image": ("IMAGE",),
+                }    
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("multiline_text", "show_help", )
+    FUNCTION = "draw_pattern"
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+
+    def draw_pattern(self, image):
+                     
+        pixel_ascii_map = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
+
+        im = image
+        x = list(im.getdata())
+        for pixel in iter(x):
+            x = sum(pixel) // 3 # integer division
+            x = (x * len(pixel_ascii_map)) // 255 # rescaling
+            ascii_val = pixel_ascii_map[x]
+            
+        text_out = ascii_val
+            
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-ascii-pattern"
+     
+        # Convert the PIL image back to a torch tensor
+        return (text_out, show_help, )
+'''                 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -633,7 +668,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Apply Annotations": CR_ApplyAnnotations,
     "CR Add Annotation": CR_AddAnnotation,
     "CR Simple Image Watermark": CR_SimpleImageWatermark,
-    "CR Comic Panel Templates Advanced": CR_ComicPanelTemplatesAdvanced,    
+    "CR Comic Panel Templates Advanced": CR_ComicPanelTemplatesAdvanced,
+    "CR ASCII Pattern": CR_ASCIIPattern,    
 }
 '''
 
