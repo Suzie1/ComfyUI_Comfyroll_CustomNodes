@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/RockOfFire/CR-Animation-Nodes
+# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -34,7 +34,7 @@ class CR_StringToNumber:
         else:
             print(f"[Error] CR String To Number. Not a number.")         
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-number"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-number"
         return (int_out, float_out, show_help,)
         
 #---------------------------------------------------------------------------------------------------------------------# 
@@ -55,7 +55,7 @@ class CR_TextListToString:
     
         string_out = " ".join(text_list)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-text-list-to-string"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-text-list-to-string"
 
         return (string_out, show_help, )
 
@@ -85,7 +85,7 @@ class CR_StringToCombo:
             text_list = values[0]
             print(text_list)
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-combo"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-combo"
 
         return (text_list, show_help, )
         
@@ -104,7 +104,7 @@ class CR_IntegerToString:
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, int_):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-integer-to-string"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-integer-to-string"
         return (f'{int_}', show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -122,7 +122,7 @@ class CR_FloatToString:
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, float_):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-string"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-string"
         return (f'{float_}', show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -137,7 +137,7 @@ class CR_FloatToInteger:
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def convert(self, _float):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-integer"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-integer"
         return (int(_float), show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -160,7 +160,7 @@ class CR_SeedToInt:
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
     def seed_to_int(self, seed):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-seed-to-int"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-seed-to-int"
         return (seed.get('seed'), show_help, )
  
 #---------------------------------------------------------------------------------------------------------------------#

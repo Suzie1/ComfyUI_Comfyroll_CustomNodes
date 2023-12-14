@@ -22,6 +22,8 @@ from .nodes.pil_text import *
 from .nodes.pil_layout import *
 from .nodes.pil_filter import *
 from .nodes.pil_template import *
+from .nodes.pil_pattern import *
+from .nodes.nodes_random import *
 
 from .animation_nodes.interpolation import *
 from .animation_nodes.io import *
@@ -42,9 +44,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel,
-    "CR Random Hex Color": CR_RandomHexColor, 
-    "CR Random RGB": CR_RandomRGB,      
+    "CR Select Model": CR_SelectModel,   
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
@@ -96,14 +96,18 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Color Gradient": CR_ColorGradient,
     "CR Radial Gradient": CR_RadialGradient,    
     "CR Starburst Lines": CR_StarburstLines,
-    "CR Starburst Colors": CR_StarburstColors,   
+    "CR Starburst Colors": CR_StarburstColors,
+    "CR Simple Binary Pattern": CR_BinaryPatternSimple,     
+    "CR Binary Pattern": CR_BinaryPattern,
     ### Graphics Text
     "CR Overlay Text": CR_OverlayText,
     "CR Draw Text": CR_DrawText,
     "CR Mask Text": CR_MaskText,
-    "CR Composite Text": CR_CompositeText,
+    "CR Composite Text": CR_CompositeText, 
     #"CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
+    #"CR System TrueType Font": CR_SystemTrueTypeFont,      
+    #"CR Display Font": CR_DisplayFont,
     ### Graphics Filter
     "CR Halftone Filter": CR_HalftoneFilter,
     "CR Color Tint": CR_ColorTint,    
@@ -114,8 +118,11 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Image Border": CR_ImageBorder,
     "CR Simple Text Panel": CR_SimpleTextPanel,    
     "CR Color Panel": CR_ColorPanel,
+    "CR Overlay Transparent Image": CR_OverlayTransparentImage,
+    #"CR Simple Titles": CR_SimpleTitles,    
     ### Graphics Template
-    "CR Simple Meme Template": CR_SimpleMemeTemplate,     
+    "CR Simple Meme Template": CR_SimpleMemeTemplate,
+    "CR Simple Banner": CR_SimpleBanner,    
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
     ### Utils Logic Nodes
     "CR Image Input Switch": CR_ImageInputSwitch,
@@ -147,6 +154,11 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Integer To String": CR_IntegerToString,    
     "CR Text List To String": CR_TextListToString,
     "CR Seed to Int": CR_SeedToInt,
+    ### Utils Random Nodes
+    "CR Random Hex Color": CR_RandomHexColor, 
+    "CR Random RGB": CR_RandomRGB,
+    "CR Random Multiline Values": CR_RandomMultilineValues,
+    "CR Random RGB Gradient": CR_RandomRGBGradient,    
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  
@@ -215,8 +227,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Value": "⚙️ CR Value",
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
     "CR Select Model": "🔮 CR Select Model",
-    "CR Random Hex Color": "⚙️ CR Random Hex Color",
-    "CR Random RGB": "⚙️ CR Random RGB", 
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
@@ -268,7 +278,9 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Color Gradient": "🟨 CR Color Gradient",
     "CR Radial Gradient": "🟨 CR Radial Gradient",    
     "CR Starburst Lines": "🟧 CR Starburst Lines",
-    "CR Starburst Colors": "🟥 CR Starburst Colors",    
+    "CR Starburst Colors": "🟥 CR Starburst Colors",
+    "CR Simple Binary Pattern": "🟥 CR Simple Binary Pattern",
+    "CR Binary Pattern": "🟥 CR Binary Pattern",
     ### Graphics Text
     "CR Overlay Text": "🔤 CR Overlay Text",
     "CR Draw Text": "🔤️ CR Draw Text",
@@ -285,9 +297,12 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Simple Text Panel": "🌁 CR Simple Text Panel",
     "CR Color Panel": "🌁 CR Color Panel",
     "CR Page Layout": "🌁 CR Page Layout",
-    "CR Image Border": "🌁 CR Image Border",
+    "CR Image Border": "🌁 CR Image Border",      
+    "CR Overlay Transparent Image": "🌁 CR Overlay Transparent Image",
+    #"CR Simple Titles": "🌁 CR Simple Titles",    
     ### Graphics Template
-    "CR Simple Meme Template": "👽 CR Simple Meme Template",    
+    "CR Simple Meme Template": "👽 CR Simple Meme Template",
+    "CR Simple Banner": "👽 CR Simple Banner",     
     "CR Comic Panel Templates": "👽 CR Comic Panel Templates",
     ### Utils Logic Nodes
     "CR Image Input Switch": "🔀 CR Image Input Switch",
@@ -319,6 +334,11 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Integer To String": "🔧 CR Integer To String",    
     "CR Text List To String": "🔧 CR Text List To String",
     "CR Seed to Int": "🔧 CR Seed to Int",
+    ### Utils Random Nodes
+    "CR Random Hex Color": "🎲 CR Random Hex Color", 
+    "CR Random RGB": "🎲 CR Random RGB",
+    "CR Random Multiline Values": "🎲 CR Random Multiline Values",
+    "CR Random RGB Gradient": "🎲 CR Random RGB Gradient", 
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  
@@ -373,7 +393,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     # IO
     "CR Load Animation Frames": "⌨️ CR Load Animation Frames",
     "CR Load Flow Frames": "⌨️ CR Load Flow Frames",
-    "CR Output Flow Frames": "⌨️ CR Output Flow Frames",        
+    "CR Output Flow Frames": "⌨️ CR Output Flow Frames",  
 }
 
 INCLUDE_DEV_NODES = False
@@ -383,6 +403,7 @@ try:
     if INCLUDE_DEV_NODES:
         NODE_CLASS_MAPPINGS = {**DEV_NODE_CLASS_MAPPINGS, **LIVE_NODE_CLASS_MAPPINGS}
         NODE_DISPLAY_NAME_MAPPINGS = {**DEV_NODE_DISPLAY_NAME_MAPPINGS, **LIVE_NODE_DISPLAY_NAME_MAPPINGS}
+        print("\033[34mComfyroll Custom Nodes: \033[92mDev Nodes Loaded\033[0m")
     else:
         NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
         NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS

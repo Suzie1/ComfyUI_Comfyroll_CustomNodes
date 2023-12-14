@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -16,9 +16,6 @@ from .graphics_functions import (hex_to_rgb,
                                  apply_outline_and_border,
                                  get_font_size,
                                  draw_text_on_image) 
-
-font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
-file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
 
 #try:
 #    import Markdown
@@ -46,6 +43,9 @@ class CR_PageLayout:
 
     @classmethod
     def INPUT_TYPES(s):
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
 
         layout_options = ["header", "footer", "header and footer", "no header or footer"]               
         
@@ -141,7 +141,103 @@ class CR_PageLayout:
         if border_thickness > 0:
             combined_image = ImageOps.expand(combined_image, border_thickness, border_color)
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-page-layout"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-page-layout"
+
+        return (pil2tensor(combined_image), show_help, )    
+ 
+#---------------------------------------------------------------------------------------------------------------------#    
+class CR_SimpleTitles:
+
+    @classmethod
+    def INPUT_TYPES(s):
+
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+
+        layout_options = ["header", "footer", "header and footer", "no header or footer"]               
+        
+        return {"required": {
+                "image": ("IMAGE",),
+                "header_text": ("STRING", {"multiline": True, "default": "text"}),
+                "header_height": ("INT", {"default": 0, "min": 0, "max": 1024}),
+                "header_font_size": ("INT", {"default": 150, "min": 0, "max": 1024}),                
+                "header_align": (JUSTIFY_OPTIONS, ),
+                "footer_text": ("STRING", {"multiline": True, "default": "text"}),
+                "footer_height": ("INT", {"default": 0, "min": 0, "max": 1024}),  
+                "footer_font_size": ("INT", {"default": 50, "min": 0, "max": 1024}),                
+                "footer_align": (JUSTIFY_OPTIONS, ),
+                "font_name": (file_list,),
+                "font_color": (COLORS,),
+                "background_color": (COLORS,),
+               },
+                "optional": {
+                "font_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+               }
+    }
+
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("image", "show_help", )
+    FUNCTION = "layout"
+    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
+    
+    def layout(self, image,
+               header_height, header_text, header_align, header_font_size, 
+               footer_height, footer_text, footer_align, footer_font_size,
+               font_name, font_color, background_color,
+               font_color_hex='#000000', bg_color_hex='#000000',):
+
+        # Get RGB values for the text and background colors    
+        font_color = get_color_values(font_color, font_color_hex, color_mapping)
+        bg_color = get_color_values(background_color, bg_color_hex, color_mapping)
+        
+        main_panel = tensor2pil(image)
+        
+        # Get image width and height        
+        image_width = main_panel.width
+        image_height = main_panel.height 
+
+        # Set defaults
+        margins = 50
+        line_spacing = 0
+        position_x = 0
+        position_y = 0
+        align = "center"
+        rotation_angle = 0
+        rotation_options = "image center"
+        font_outline_thickness = 0
+        font_outline_color = "black"
+        
+        images = []
+        
+        ### Create text panels and add to images array       
+        if header_height >0:
+            header_panel = text_panel(image_width, header_height, header_text,
+                                      font_name, header_font_size, font_color,
+                                      font_outline_thickness, font_outline_color,
+                                      bg_color,
+                                      margins, line_spacing,
+                                      position_x, position_y,
+                                      align, header_align,
+                                      rotation_angle, rotation_options)
+            images.append(header_panel)
+        
+        images.append(main_panel)
+               
+        if footer_height >0:       
+            footer_panel = text_panel(image_width, footer_height, footer_text,
+                                      font_name, footer_font_size, font_color,
+                                      font_outline_thickness, font_outline_color,
+                                      bg_color,
+                                      margins, line_spacing,
+                                      position_x, position_y,
+                                      align, footer_align,
+                                      rotation_angle, rotation_options)
+            images.append(footer_panel)                                                           
+       
+        combined_image = combine_images(images, 'vertical')
+          
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple_titles"
 
         return (pil2tensor(combined_image), show_help, )    
  
@@ -201,7 +297,7 @@ class CR_ImagePanel:
 
         combined_image = combine_images(images, layout_direction)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-panel"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-panel"
 
         return (pil2tensor(combined_image), show_help, )   
 
@@ -260,7 +356,7 @@ class CR_ImageGridPanel:
                 x_offset = 0
                 y_offset += image.height
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-grid-panel"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-grid-panel"
 
         return (pil2tensor(combined_image), show_help, )   
 
@@ -315,7 +411,7 @@ class CR_ImageBorder:
         
         images = torch.cat(images, dim=0)                
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-border"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-border"
 
         return (images, show_help, )
 
@@ -348,7 +444,7 @@ class CR_ColorPanel:
         size = (panel_width, panel_height)
         panel = Image.new('RGB', size, fill_color)
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-color-panel"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-color-panel"
 
         return (pil2tensor(panel), show_help, )
 
@@ -358,6 +454,9 @@ class CR_SimpleTextPanel:
     @classmethod
     def INPUT_TYPES(s):
     
+        font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+
         return {"required": {
                 "panel_width": ("INT", {"default": 512, "min": 8, "max": 4096}),
                 "panel_height": ("INT", {"default": 512, "min": 8, "max": 4096}),
@@ -413,10 +512,81 @@ class CR_SimpleTextPanel:
                            align, justify,
                            rotation_angle, rotation_options)
                                                        
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple-text-panel"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple-text-panel"
 
-        return (pil2tensor(panel), show_help, )    
-               
+        return (pil2tensor(panel), show_help, )  
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_OverlayTransparentImage:
+    
+    @classmethod
+    def INPUT_TYPES(s):
+                  
+        return {"required": {
+                "back_image": ("IMAGE",),
+                "overlay_image": ("IMAGE",),
+                "transparency": ("FLOAT", {"default": 0, "min": 0, "max": 1, "step": 0.1}),
+                "offset_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                "offset_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
+                "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
+                "overlay_scale_factor": ("FLOAT", {"default": 1.0, "min": -0.1, "max": 100.0, "step": 0.1}),
+                }        
+        }
+
+    RETURN_TYPES = ("IMAGE", )
+    FUNCTION = "overlay_image"
+    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
+
+    def overlay_image(self, back_image, overlay_image, 
+                      transparency, offset_x, offset_y, rotation_angle, overlay_scale_factor=1.0):
+
+        """
+        Overlay an image onto another image with transparency, rotation, and scaling.
+
+        Args:
+            back_image (torch.Tensor): Background image tensor.
+            overlay_image (torch.Tensor): Overlay image tensor.
+            transparency (float): Transparency level for the overlay image (0.0 to 1.0).
+            offset_x (int): X-coordinate relative to the center of the back image.
+            offset_y (int): Y-coordinate relative to the center of the back image.
+            rotation_angle (float): Rotation angle in degrees.
+            scale_factor (float): Scaling factor for the overlay image.
+
+        Returns:
+            torch.Tensor: Resulting image tensor.
+        """
+        
+        # Convert tensor images
+        #back_image = back_image[0, :, :, :]
+        #overlay_image = overlay_image[0, :, :, :]
+
+        # Create PIL images for the text and background layers and text mask
+        back_image = tensor2pil(back_image)
+        overlay_image = tensor2pil(overlay_image)
+
+        # Apply transparency to overlay image
+        overlay_image.putalpha(int(255 * (1 - transparency)))
+
+        # Rotate overlay image
+        overlay_image = overlay_image.rotate(rotation_angle, expand=True)
+
+        # Scale overlay image
+        overlay_width, overlay_height = overlay_image.size
+        new_size = (int(overlay_width * overlay_scale_factor), int(overlay_height * overlay_scale_factor))
+        overlay_image = overlay_image.resize(new_size, Image.ANTIALIAS)
+
+        # Calculate centered position relative to the center of the background image
+        center_x = back_image.width // 2
+        center_y = back_image.height // 2
+        position_x = center_x - overlay_image.width // 2 + offset_x
+        position_y = center_y - overlay_image.height // 2 + offset_y
+
+        # Paste the rotated overlay image onto the new back image at the specified position
+        back_image.paste(overlay_image, (position_x, position_y), overlay_image)
+
+        # Convert the PIL image back to a torch tensor
+        return pil2tensor(back_image),
+           
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -429,6 +599,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Image Border": CR_ImageBorder,
     "CR Color Panel": CR_ColorPanel,
     "CR Simple Text Panel": CR_SimpleTextPanel,
+    "CR Overlay Transparent Image": CR_OverlayTransparentImage,
+    "CR Simple Titles": CR_SimpleTitles,
 }
 '''
 

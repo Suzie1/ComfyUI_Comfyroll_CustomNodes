@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi       https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi       https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
 # for ComfyUI                                             https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -48,7 +48,7 @@ class CR_AspectRatioSD15:
                 "height": ("INT", {"default": 512, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
+                "upscale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
@@ -80,13 +80,11 @@ class CR_AspectRatioSD15:
             width, height = 1224, 512
 
         if swap_dimensions == "On":
-            temp = width
-            width = height
-            height = temp
+            width, height = height, width
            
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sd15-aspect-ratio"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sd15-aspect-ratio"
            
         return(width, height, upscale_factor, batch_size, {"samples":latent}, show_help, )   
 
@@ -115,7 +113,7 @@ class CR_SDXLAspectRatio:
                 "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
+                "upscale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
@@ -145,13 +143,11 @@ class CR_SDXLAspectRatio:
             width, height = 1536, 640
 
         if swap_dimensions == "On":
-            temp = width
-            width = height
-            height = temp
-           
+            width, height = height, width
+             
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sdxl-aspect-ratio"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-sdxl-aspect-ratio"
            
         return(width, height, upscale_factor, batch_size, {"samples":latent}, show_help, )  
 
@@ -188,16 +184,17 @@ class CR_AspectRatio:
                 "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
                 "aspect_ratio": (aspect_ratios,),
                 "swap_dimensions": (["Off", "On"],),
-                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 100}),
+                "upscale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "prescale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
             }
         }
-    RETURN_TYPES = ("INT", "INT", "FLOAT", "INT", "LATENT", "STRING", )
-    RETURN_NAMES = ("width", "height", "upscale_factor", "batch_size", "empty_latent", "show_help", )
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT", "LATENT", "STRING", )
+    RETURN_NAMES = ("width", "height", "upscale_factor", "prescale_factor", "batch_size", "empty_latent", "show_help", )
     FUNCTION = "Aspect_Ratio"
     CATEGORY = icons.get("Comfyroll/Aspect Ratio")
 
-    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, batch_size):
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, prescale_factor, batch_size):
         
         # SD1.5
         if aspect_ratio == "SD1.5 - 1:1 square 512x512":
@@ -239,15 +236,16 @@ class CR_AspectRatio:
             width, height = 1536, 640                
         
         if swap_dimensions == "On":
-            temp = width
-            width = height
-            height = temp
-           
+            width, height = height, width
+        
+        width = int(width*prescale_factor)
+        height = int(height*prescale_factor)
+        
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio"
            
-        return(width, height, upscale_factor, batch_size, {"samples":latent}, show_help, )    
+        return(width, height, upscale_factor, prescale_factor, batch_size, {"samples":latent}, show_help, )    
 #---------------------------------------------------------------------------------------------------------------------#
 # Other Nodes
 #---------------------------------------------------------------------------------------------------------------------#
@@ -333,7 +331,7 @@ class CR_ImageOutput:
             })
             counter += 1
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-output"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-output"
 
         return { "ui": { "images": results }, "result": (trigger,) }
 
@@ -358,7 +356,7 @@ class CR_IntegerMultipleOf:
     CATEGORY = icons.get("Comfyroll/Other")
     
     def int_multiple_of(self, integer, multiple=8):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-integer-multiple"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-integer-multiple"
         if multiple == 0:
             return (int(integer), show_help, )
         integer = integer * multiple        
@@ -381,7 +379,7 @@ class CR_Seed:
 
     @staticmethod
     def seedint(seed):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-seed"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-seed"
         return (seed, show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -409,7 +407,7 @@ class CR_LatentBatchSize:
             torch.clone(samples) for _ in range(batch_size - 1)
         ]
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-latent-batch-size"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-latent-batch-size"
 
         return ({
             'samples': torch.cat(sample_list),
@@ -427,7 +425,7 @@ class CR_PromptText:
     CATEGORY = icons.get("Comfyroll/Other")
 
     def get_value(self, prompt):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-prompt-text"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-prompt-text"
         return (prompt, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -453,7 +451,7 @@ class CR_SplitString:
         strings = [part.strip() for part in parts[:4]]
         string_1, string_2, string_3, string_4 = strings + [""] * (4 - len(strings))            
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-split-string"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-split-string"
 
         return (string_1, string_2, string_3, string_4, show_help, )
 
@@ -470,7 +468,7 @@ class CR_Value:
     FUNCTION = "get_value"
 
     def get_value(self, value):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-value"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-value"
         return (float(value), int(value), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -500,7 +498,7 @@ class CR_ConditioningMixer:
         conditioning_to = conditioning_2
         conditioning_to_strength = average_strength
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-conditioning-mixer"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-conditioning-mixer"
     
         if mix_method == "Combine":
             return (conditioning_1 + conditioning_2, show_help, )
@@ -596,66 +594,10 @@ class CR_SelectModel:
         model, clip, vae, clipvision = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True,
                                                      embedding_directory=folder_paths.get_folder_paths("embeddings"))
             
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-model"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-model"
             
         return (model, clip, vae, model_name, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_RandomHexColor:
-    
-    @classmethod
-    def INPUT_TYPES(cls):
-        
-        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),}}
-
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
-    RETURN_NAMES = ("hex_color1", "hex_color2", "hex_color3", "hex_color4", "show_help", )
-    OUTPUT_NODE = True
-    FUNCTION = "get_colors"
-    CATEGORY = icons.get("Comfyroll/Graphics/Utilty")
-
-    def get_colors(self, seed):
-    
-        # Set the seed
-        random.seed(seed)
-    
-        hex_color1 = random_hex_color()
-        hex_color2 = random_hex_color()
-        hex_color3 = random_hex_color()
-        hex_color4 = random_hex_color()
-        
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-hex-color"
-             
-        return (hex_color1, hex_color2, hex_color3, hex_color4, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_RandomRGB:
-    
-    @classmethod
-    def INPUT_TYPES(cls):
-        
-        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),}}
-
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
-    RETURN_NAMES = ("rgb_1", "rgb_2", "rgb_3", "rgb_4", "show_help", )
-    OUTPUT_NODE = True
-    FUNCTION = "get_colors"
-    CATEGORY = icons.get("Comfyroll/Graphics/Utilty")
-
-    def get_colors(self, seed):
-    
-        # Set the seed
-        random.seed(seed)
-    
-        rgb_1 = random_rgb()
-        rgb_2 = random_rgb()
-        rgb_3 = random_rgb()
-        rgb_4 = random_rgb()
-        
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-rgb"
-             
-        return (rgb_1, rgb_2, rgb_3, rgb_4, show_help, )
-                     
+                   
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -675,9 +617,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel, 
-    "CR Random Hex Color": CR_RandomHexColor,
-    "CR Random RGB": CR_RandomRGB,     
+    "CR Select Model": CR_SelectModel,  
 }
 '''
 

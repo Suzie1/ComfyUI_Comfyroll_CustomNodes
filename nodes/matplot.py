@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
 # for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -100,8 +100,8 @@ class CR_HalftoneGrid:
     def INPUT_TYPES(s):
                
         return {"required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 4096}),
                 "dot_style": (STYLES,),
                 "reverse_dot_style": (["No", "Yes"],),
                 "dot_frequency": ("INT", {"default": 50, "min": 1, "max":200, "step": 1}),
@@ -152,7 +152,7 @@ class CR_HalftoneGrid:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-halftone-grid"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-halftone-grid"
         
         return(pil2tensor(img), show_help, )
 
@@ -165,8 +165,8 @@ class CR_ColorBars:
         
         return {"required": {
                     "mode": (modes,),
-                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 4096}),
                     "color_1": (COLORS,),
                     "color_2": (COLORS,),
                     "orientation": (["vertical", "horizontal", "diagonal", "alt_diagonal"],), #added 135 angle for diagonals
@@ -253,7 +253,7 @@ class CR_ColorBars:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-color-bars"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-color-bars"
 
         return (pil2tensor(img), show_help, )
 
@@ -266,8 +266,8 @@ class CR_StyleBars:
         
         return {"required": {
                     "mode": (modes,),
-                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 4096}),
                     "bar_style": (STYLES,),
                     "orientation": (["vertical", "horizontal", ],),
                     "bar_frequency": ("INT", {"default": 5, "min": 1, "max":200, "step": 1}),
@@ -321,7 +321,7 @@ class CR_StyleBars:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-style-bars"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-style-bars"
 
         return (pil2tensor(img), show_help, )
 
@@ -331,8 +331,8 @@ class CR_ColorGradient:
     def INPUT_TYPES(s):
         
         return {"required": {
-                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 4096}),
                     "start_color": (COLORS,),
                     "end_color": (COLORS,),
                     "gradient_distance": ("FLOAT", {"default": 1, "min": 0, "max": 2, "step": 0.05}),
@@ -416,7 +416,7 @@ class CR_ColorGradient:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-color-gradient"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-color-gradient"
 
         return (pil2tensor(img), show_help, )
 
@@ -426,8 +426,8 @@ class CR_RadialGradient:
     def INPUT_TYPES(s):
     
         return {"required": {
-                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 4096}),
                     "start_color": (COLORS,),
                     "end_color": (COLORS,),
                     "gradient_distance": ("FLOAT", {"default": 1, "min": 0, "max": 2, "step": 0.05}),
@@ -488,7 +488,7 @@ class CR_RadialGradient:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-radial-gradiant"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-radial-gradiant"
 
         return (pil2tensor(img), show_help, )
         
@@ -502,8 +502,8 @@ class CR_CheckerPattern:
         
         return {"required": {
                     "mode": (modes,),
-                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
+                    "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 4096}),
                     "color_1": (COLORS,),
                     "color_2": (COLORS,), 
                     "grid_frequency": ("INT", {"default": 8, "min": 1, "max": 200, "step": 1}),
@@ -566,7 +566,7 @@ class CR_CheckerPattern:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-checker-pattern"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-checker-pattern"
 
         return (pil2tensor(img), show_help, )
        
@@ -580,8 +580,8 @@ class CR_Polygons:
         
         return {"required": {
                     "mode": (modes,),
-                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),         
+                    "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 4096}),         
                     "rows": ("INT", {"default": 5, "min": 1, "max": 512}),          
                     "columns": ("INT", {"default": 5, "min": 1, "max": 512}),
                     "face_color": (COLORS,),
@@ -651,7 +651,7 @@ class CR_Polygons:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-polygons"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-polygons"
 
         return (pil2tensor(img), show_help, )
 
@@ -662,10 +662,10 @@ class CR_StarburstLines:
     def INPUT_TYPES(s):
       
         return {"required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),              
-                "num_lines": ("INT", {"default": 6, "min": 1, "max": 2048}),      
-                "line_length": ("INT", {"default": 256, "min": 1, "max": 512}), 
+                "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 4096}),              
+                "num_lines": ("INT", {"default": 6, "min": 1, "max": 500}),      
+                "line_length": ("FLOAT", {"default": 5, "min": 0, "max": 100, "step": 0.1}),      
                 "line_width": ("INT", {"default": 5, "min": 1, "max": 512}),
                 "line_color": (COLORS,),
                 "background_color": (COLORS,),
@@ -731,7 +731,7 @@ class CR_StarburstLines:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-starburst-lines"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-starburst-lines"
 
         return (pil2tensor(img), show_help, ) 
         
@@ -742,8 +742,8 @@ class CR_StarburstColors:
     def INPUT_TYPES(s):
     
         return {"required": {
-                "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                "height": ("INT", {"default": 512, "min": 64, "max": 2048}),             
+                "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 4096}),             
                 "num_triangles": ("INT", {"default": 6, "min": 1, "max": 512}),                      
                 "color_1": (COLORS,),
                 "color_2": (COLORS,),
@@ -824,7 +824,7 @@ class CR_StarburstColors:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-starburst-colors"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-starburst-colors"
 
         return (pil2tensor(img), show_help, )
 

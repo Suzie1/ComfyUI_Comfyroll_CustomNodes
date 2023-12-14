@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/RockOfFire/CR-Animation-Nodes
+# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 # based on https://github.com/LEv145/images-grid-comfy-plugin
@@ -103,7 +103,7 @@ class CR_XYList:
             y_ann_out = "".join([str(item) for item in y_ann_out])
             trigger = True
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-list"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-list"
 
         return (x_out, y_out, x_ann_out, y_ann_out, trigger, show_help, )
 
@@ -167,7 +167,7 @@ class CR_XYInterpolate:
             print(x_ann_out,y_ann_out)
             trigger = True
              
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-interpolate"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-interpolate"
 
         return (x_float_out, y_float_out, x_ann_out, y_ann_out, trigger, show_help, )
    
@@ -197,7 +197,7 @@ class CR_XYIndex:
         x = index % x_columns
         y = int(index / x_columns)  
         
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-index"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-index"
 
         return (x, y, show_help, )
                 
@@ -231,7 +231,7 @@ class CR_XYFromFolder:
     CATEGORY = icons.get("Comfyroll/XY Grid") 
     
     def load_images(self, image_folder, start_index, end_index, max_columns, x_annotation, y_annotation, font_size, gap, trigger=False):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-from-folder"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-from-folder"
 
         if trigger == False:
             return((), False, show_help, )

@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# CR Animation Nodes by RockOfFire and Akatsuzi  https://github.com/RockOfFire/CR-Animation-Nodes
+# CR Animation Nodes by RockOfFire and Akatsuzi  https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                    https://github.com/comfyanonymous/ComfyUI 
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -74,7 +74,7 @@ class CR_SimplePromptList:
             
         #print(f"[TEST] CR Simple Prompt List: {prompts}")        
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-simple-prompt-list"           
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-simple-prompt-list"           
 
         return (prompts, show_help, )
 
@@ -131,7 +131,7 @@ class CR_SimplePromptListKeyframes:
         keyframes_out = " ".join(keyframe_list)[:-2]
               
         #print(f"[TEST] CR Simple Prompt List Keyframes: {keyframes_out}")   
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-simple-prompt-list-keyframes"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-simple-prompt-list-keyframes"
 
         return (keyframes_out, show_help, )
  
@@ -219,7 +219,7 @@ class CR_PromptList:
                 transition_profile5, keyframe_interval, j)]),
         
         #print(f"[TEST] CR Prompt List: {keyframe_list}") 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-prompt-list"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-prompt-list"
 
         return (keyframe_list, show_help, )
 
@@ -264,7 +264,7 @@ class CR_PromptListKeyframes:
         keyframes_out = "".join(keyframe_list)[:-2]
         
         #print(f"[TEST] CR Prompt List Keyframes: {keyframes_out}")   
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-prompt-list-keyframes"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-prompt-list-keyframes"
 
         return (keyframes_out, show_help, )
 
@@ -285,7 +285,7 @@ class CR_KeyframeList:
     CATEGORY = icons.get("Comfyroll/Animation/Prompt")
 
     def keyframelist(self, keyframe_list, keyframe_format):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-keyframe-list"          
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-keyframe-list"          
         return (keyframe_list, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -340,7 +340,7 @@ class CR_LoadPromptStyle:
         append_text = split3[0].replace(" . ","")
         negative_text = split4[1][:-2]
       
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-load-prompt-style"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-load-prompt-style"
         
         return (prepend_text, append_text, negative_text, show_help, )
 '''
@@ -400,7 +400,7 @@ class CR_EncodeScheduledPrompts:
 
             n = [tw, t_to]
             out.append(n)
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-encode-scheduled-prompts"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Prompt-Nodes#cr-encode-scheduled-prompts"
         return (out, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#

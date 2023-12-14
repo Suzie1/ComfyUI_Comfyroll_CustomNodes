@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------------------------------------#
-# CR Animation Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/CR-Animation-Nodes
+# CR Animation Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                       https://github.com/comfyanonymous/ComfyUI
 #-----------------------------------------------------------------------------------------------------------#
 
@@ -49,7 +49,7 @@ class CR_SimpleSchedule:
                 schedule_lines.extend([(schedule_alias, line)])
         #print(f"[Debug] CR Simple Schedule: {schedule_lines}")
 
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-simple-schedule"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-simple-schedule"
 
         return (schedule_lines, show_help, )
 
@@ -190,7 +190,7 @@ class Comfyroll_ScheduleInputSwitch:
     CATEGORY = icons.get("Comfyroll/Animation/Schedule")
 
     def switch(self, Input, schedule1, schedule2):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-schedule-input-switch"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-schedule-input-switch"
         if Input == 1:
             return (schedule1, show_help, )
         else:

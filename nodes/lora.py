@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes                             #
+# Comfyroll Custom Nodes by RockOfFire and Akatsuzi         https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             #
 # for ComfyUI                                               https://github.com/comfyanonymous/ComfyUI                                               #
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -39,7 +39,7 @@ class CR_LoraLoader:
     CATEGORY = icons.get("Comfyroll/LoRA")
 
     def load_lora(self, model, clip, switch, lora_name, strength_model, strength_clip):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-load-lora"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-load-lora"
         if strength_model == 0 and strength_clip == 0:
             return (model, clip, show_help, )
 
@@ -111,8 +111,8 @@ class CR_LoRAStack:
         if lora_name_3 != "None" and  switch_3 == "On":
             lora_list.extend([(lora_name_3, model_weight_3, clip_weight_3)]),
            
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-lora-stack"          
-         
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-lora-stack"           
+
         return (lora_list, show_help, )
     
 #---------------------------------------------------------------------------------------------------------------------#
@@ -401,7 +401,7 @@ class CR_ApplyLoRAStack:
     CATEGORY = icons.get("Comfyroll/LoRA")
 
     def apply_lora_stack(self, model, clip, lora_stack=None,):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-apply-lora-stack"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/LoRA-Nodes#cr-apply-lora-stack"
 
         # Initialise the list
         lora_params = list()

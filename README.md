@@ -1,11 +1,13 @@
 # 🧩 Comfyroll Custom Nodes for SDXL and SD1.5
 
+Co-authored by Suzie1 and RockOfFire
+
 These nodes can be used in any ComfyUI workflow.  
 
 # Installation
 
 1. cd custom_nodes
-2. git clone https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes.git
+2. git clone https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes.git
 3. Restart ComfyUI
 
 You can also install the nodes using the following methods:
@@ -14,12 +16,12 @@ You can also install the nodes using the following methods:
 
 # Patch Notes
 
-https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
+https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
 
 
 # Wiki
 
-https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki
+https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
 
 # List of Custom Nodes
 
@@ -50,6 +52,7 @@ __🔂 Process__
 
 __👓 Graphics - Filter__
 * CR Color Tint
+* CR Halftone Filter
 
 __🌈 Graphics - Pattern__
 * CR Halftone Grid
@@ -61,6 +64,8 @@ __🌈 Graphics - Pattern__
 * CR Radial Gradiant
 * CR Starburst Lines
 * CR Starburst Colors
+* CR Simple Binary Pattern (new 8/12/2023)
+* CR Binary Pattern (new 8/12/2023)
 
 __🔤 Graphics - Text__
 * CR Overlay Text
@@ -70,6 +75,8 @@ __🔤 Graphics - Text__
 
 __👽 Graphics - Template__
 * CR Simple Meme Template
+* CR Simple Banner
+* CR Comic Panel Templates
 
 __🌁 Graphics - Layout__
 * CR Image Panel
@@ -78,6 +85,7 @@ __🌁 Graphics - Layout__
 * CR Image Border
 * CR Color Panel
 * CR Simple Text Panel
+* CR Overlay Transparent Image
 
 __✈️ Module__
 * CR Module Pipe Loader
@@ -135,6 +143,12 @@ __🔀 Logic__
 * CR Text Input Switch
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
+
+__🎲 Random__
+* CR Random Hex Color
+* CR Random RGB
+* CR Random Multiline Values (new 8/12/2023)
+* CR Random RGB Gradient (new 8/12/2023)
   
 __📦 Other__
 * CR Latent Batch Size
@@ -154,7 +168,7 @@ __Deleted Nodes__
 
 CR Animation Nodes are now included in the Comfyroll Custom Nodes pack.
 
-[Animation Nodes](https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/blob/suzie_dev/Animation_Nodes.md)
+[Animation Nodes](https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/suzie_dev/Animation_Nodes.md)
 
 # Multi-ControlNet methodology
 

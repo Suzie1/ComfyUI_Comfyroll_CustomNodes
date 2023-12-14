@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# CR Animation Nodes by RockOfFire and Akatsuzi     https://github.com/RockOfFire/CR-Animation-Nodes
+# CR Animation Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/CR-Animation-Nodes
 # for ComfyUI                                       https://github.com/comfyanonymous/ComfyUI
 #---------------------------------------------------------------------------------------------------------------------#
 
@@ -46,7 +46,7 @@ class CR_CycleModels:
     CATEGORY = icons.get("Comfyroll/Animation/Cyclers")
 
     def cycle_models(self, mode, model, clip, model_list, frame_interval, loops, current_frame,):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-models"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-models"
 
         # Initialize the list
         model_params = list()
@@ -105,7 +105,7 @@ class CR_CycleLoRAs:
     CATEGORY = icons.get("Comfyroll/Animation/Cyclers")
 
     def cycle(self, mode, model, clip, lora_list, frame_interval, loops, current_frame):
-        show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-loras"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-loras"
 
         # Initialize the list
         lora_params = list()
@@ -182,7 +182,7 @@ class CR_CycleText:
             text_alias, current_text_item = current_text_params            
             #print(f"[Debug] CR Cycle Text:{current_text_item}")
             
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-text"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-text"
 
             return (current_text_item, show_help, )
 
@@ -248,7 +248,7 @@ class CR_CycleTextSimple:
             # Get the parameters of the current text            
             current_text_item = text_params[current_text_index]          
             #print(f"[Debug] CR Cycle Text
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-text-simple"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-text-simple"
 
             return (current_text_item, show_help, )
 
@@ -292,7 +292,7 @@ class CR_CycleImages:
             current_image_params = image_params[current_image_index]
             image_alias, current_image_item = current_image_params            
             
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-images"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-images"
 
             return (current_image_item, show_help, ) 
                 
@@ -355,7 +355,7 @@ class CR_CycleImagesSimple:
 
             # Get the parameters of the current image            
             current_image_item = image_params[current_image_index]          
-            show_help = "https://github.com/RockOfFire/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-images-simple"
+            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Cycler-Nodes#cr-cycle-images-simple"
             return (current_image_item, show_help, )
  
 #---------------------------------------------------------------------------------------------------------------------#
