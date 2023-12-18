@@ -16,7 +16,8 @@ class CR_StringToNumber:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"text": ("STRING", {"multiline": False, "default": "text"}),                             
+        return {"required": {"text": ("STRING", {"multiline": False, "default": "text"}),
+                "round_integer": (["round", "round down","round up"],),
                 },
         }
 
@@ -25,14 +26,32 @@ class CR_StringToNumber:
     FUNCTION = "convert"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
-    def convert(self, text):
+    def convert(self, text, round_integer):
 
-        # Check if number
-        if text.replace('.','',1).isdigit():
-            float_out = float(text)
-            int_out = int(float_out)
+        # Check if the text starts with a minus sign
+        if text.startswith('-') and text[1:].replace('.','',1).isdigit():
+            # If it starts with '-', remove it and convert the rest to int and float
+            float_out = -float(text[1:])
         else:
-            print(f"[Error] CR String To Number. Not a number.")         
+            # Check if number
+            if text.replace('.','',1).isdigit():
+                float_out = float(text)
+            else:
+                print(f"[Error] CR String To Number. Not a number.")
+                return {}
+
+        if round_integer == "round up":
+            if text.startswith('-'):
+                int_out = int(float_out)
+            else:
+                int_out = int(float_out) + 1
+        elif round_integer == "round down": 
+            if text.startswith('-'):
+                int_out = int(float_out) - 1
+            else:
+                int_out = int(float_out)
+        else:
+            int_out = round(float_out)
         
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-number"
         return (int_out, float_out, show_help,)

@@ -200,7 +200,41 @@ class CR_XYIndex:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-index"
 
         return (x, y, show_help, )
-                
+
+#---------------------------------------------------------------------------------------------------------------------
+'''
+class CR_XYZIndex: 
+
+    @classmethod
+    def INPUT_TYPES(s):  
+    
+        return {"required": {"x_columns":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
+                             "y_rows":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
+                             "z_sheets":("INT", {"default": 0.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
+                             "index": ("INT", {"default": 0.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),                             
+                }
+        }
+
+    RETURN_TYPES = ("INT", "INT", "INT", "STRING", )
+    RETURN_NAMES = ("x", "y", "z", "show_help", )    
+    FUNCTION = "index"
+    CATEGORY = icons.get("Comfyroll/XY Grid")  
+
+    def index(self, x_columns, y_rows, z_sheets, index):
+
+        # Index values for all XY nodes start from 1
+        index -=1
+        sheet_size = x_columns * y_rows
+       
+        x = index % x_columns
+        y = int(index / x_columns) % y_rows
+        z = int(index / sheet_size) 
+        #print (x,y,z)
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xyz-index"
+       
+        return (x, y, z)  
+'''        
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_XYFromFolder:
 
@@ -365,7 +399,8 @@ class CR_XYSaveGridImage:
 NODE_CLASS_MAPPINGS = {
     # XY Grid
     "CR XY List":CR_XYList,
-    "CR XY Index":CR_XYIndex,   
+    "CR XY Index":CR_XYIndex,
+    #"CR XYZ Index":CR_XYZIndex,    
     "CR XY Interpolate":CR_XYInterpolate,
     "CR XY From Folder":CR_XYFromFolder,
     "CR XY Save Grid Image":CR_XYSaveGridImage,    

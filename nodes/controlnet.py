@@ -16,24 +16,26 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "co
 #---------------------------------------------------------------------------------------------------------------------#
 # This node will apply any type of ControlNet.
 class CR_ApplyControlNet:
+
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {"conditioning": ("CONDITIONING", ),
                              "control_net": ("CONTROL_NET", ),
                              "image": ("IMAGE", ),
-                             "switch": ([
-                                "On",
-                                "Off"],),
+                             "switch": (["On","Off"],),
                              "strength": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 10.0, "step": 0.01})
-                             }}
+                             }
+               }
+               
     RETURN_TYPES = ("CONDITIONING", "STRING", )
     RETURN_NAMES = ("CONDITIONING", "show_help", )
     FUNCTION = "apply_controlnet"
-
     CATEGORY = icons.get("Comfyroll/ControlNet")
 
     def apply_controlnet(self, conditioning, control_net, image, switch, strength):
+        
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/ControlNet-Nodes#cr-apply-controlnet"
+        
         if strength == 0 or switch == "Off":
             return (conditioning, show_help, )
 
@@ -46,6 +48,7 @@ class CR_ApplyControlNet:
                 c_net.set_previous_controlnet(t[1]['control'])
             n[1]['control'] = c_net
             c.append(n)
+            
         return (c, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -77,6 +80,7 @@ class CR_ControlNetStack:
                     "controlnet_strength_3": ("FLOAT", {"default": 1.0, "min": -10.0, "max": 10.0, "step": 0.01}),
                     "start_percent_3": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.001}),
                     "end_percent_3": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.001}),
+                    #
                     "image_1": ("IMAGE",),
                     "image_2": ("IMAGE",),
                     "image_3": ("IMAGE",),
@@ -122,6 +126,7 @@ class CR_ControlNetStack:
 #---------------------------------------------------------------------------------------------------------------------#
 # This applies the ControlNet stack.
 class CR_ApplyControlNetStack:
+
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {"base_positive": ("CONDITIONING", ),

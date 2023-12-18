@@ -44,11 +44,12 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel,   
+    "CR Select Model": CR_SelectModel, 
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
-    "CR Aspect Ratio": CR_AspectRatio,      
+    "CR Aspect Ratio": CR_AspectRatio,
+    "CR Aspect Ratio Banners": CR_AspectRatioBanners,      
     ### Legacy Nodes
     "CR Image Size": CR_ImageSize,
     "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,    
@@ -59,7 +60,9 @@ LIVE_NODE_CLASS_MAPPINGS = {
     ### LoRA Nodes    
     "CR Load LoRA": CR_LoraLoader,    
     "CR LoRA Stack": CR_LoRAStack,
-    "CR Apply LoRA Stack": CR_ApplyLoRAStack,  
+    "CR Apply LoRA Stack": CR_ApplyLoRAStack, 
+    "CR Random LoRA Stack": CR_RandomLoRAStack,
+    "CR Random Weight LoRA": CR_RandomWeightLoRA,    
     ### Model Merge Nodes
     "CR Apply Model Merge": CR_ApplyModelMerge,
     "CR Model Merge Stack": CR_ModelMergeStack,
@@ -82,9 +85,10 @@ LIVE_NODE_CLASS_MAPPINGS = {
     ### XY Grid Nodes    
     "CR XY List": CR_XYList,  
     "CR XY Interpolate": CR_XYInterpolate,   
-    "CR XY Index": CR_XYIndex,
     "CR XY From Folder": CR_XYFromFolder,
     "CR XY Save Grid Image": CR_XYSaveGridImage,
+    "CR XY Index": CR_XYIndex,
+    #"CR XYZ Index": CR_XYZIndex,
     ### Graphics Pattern
     "CR Halftone Grid": CR_HalftoneGrid,    
     "CR Color Bars": CR_ColorBars,
@@ -106,6 +110,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
     #"CR System TrueType Font": CR_SystemTrueTypeFont,      
     #"CR Display Font": CR_DisplayFont,
+    "CR Font File List": CR_FontFileList, 
     ### Graphics Filter
     "CR Halftone Filter": CR_HalftoneFilter,
     "CR Color Tint": CR_ColorTint,    
@@ -122,6 +127,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Simple Meme Template": CR_SimpleMemeTemplate,
     "CR Simple Banner": CR_SimpleBanner,    
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
+    "CR Simple Image Compare": CR_SimpleImageCompare,
     ### Utils Logic Nodes
     "CR Image Input Switch": CR_ImageInputSwitch,
     "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
@@ -228,7 +234,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
-    "CR Aspect Ratio": "🔳 CR Aspect Ratio",    
+    "CR Aspect Ratio": "🔳 CR Aspect Ratio",
+    "CR Aspect Ratio Banners": "🔳 CR Aspect Ratio Banners",
     ### Legacy Nodes
     "CR Image Size": "CR Image Size (Legacy)",
     "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",     
@@ -239,6 +246,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     ### LoRA Nodes    
     "CR Load LoRA": "💊 CR Load LoRA",    
     "CR LoRA Stack": "💊 CR LoRA Stack",
+    "CR Random LoRA Stack": "💊 CR Random LoRA Stack",
+    "CR Random Weight LoRA": "💊 CR Random Weight LoRA",     
     "CR Apply LoRA Stack": "💊 CR Apply LoRA Stack",
     ### Model Merge Nodes
     "CR Apply Model Merge": "⛏️ CR Apply Model Merge",
@@ -265,6 +274,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR XY Index": "📉 CR XY Index",
     "CR XY From Folder": "📉 CR XY From Folder",
     "CR XY Save Grid Image": "📉 CR XY Save Grid Image",
+    #"CR XYZ Index": "📉 CR XYZ Index",
     ### Graphics Pattern
     "CR Halftone Grid" : "🟫 CR Halftone Grid",    
     "CR Color Bars" : "🟫 CR Color Bars",
@@ -284,6 +294,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Composite Text": "🔤️ CR Composite Text",
     #"CR Arabic Text RTL": "🔤️ CR Arabic Text RTL",
     "CR Simple Text Watermark": "🔤️ CR Simple Text Watermark",
+    "CR Font File List": "🔤️ CR Font File List",
     ### Graphics Filter
     "CR Halftone Filter": "🎨 Halftone Filter",
     "CR Color Tint": "🎨 CR Color Tint",        
@@ -300,6 +311,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Simple Meme Template": "👽 CR Simple Meme Template",
     "CR Simple Banner": "👽 CR Simple Banner",     
     "CR Comic Panel Templates": "👽 CR Comic Panel Templates",
+    "CR Simple Image Compare": "👽 CR Simple Image Compare",
     ### Utils Logic Nodes
     "CR Image Input Switch": "🔀 CR Image Input Switch",
     "CR Image Input Switch (4 way)": "🔀 CR Image Input Switch (4 way)",
@@ -408,3 +420,20 @@ except ImportError:
     NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
     
 print("\033[34mComfyroll Custom Nodes: \033[92mLoaded\033[0m")
+
+import shutil
+import folder_paths
+import os
+
+comfy_path = os.path.dirname(folder_paths.__file__)
+comfyroll_nodes_path = os.path.join(os.path.dirname(__file__))
+
+js_dest_path = os.path.join(comfy_path, "web", "extensions", "Comfyroll")
+os.makedirs(js_dest_path, exist_ok=True)
+
+files_to_copy = ["test.js"]
+
+for file in files_to_copy:
+    js_src_path = os.path.join(comfyroll_nodes_path, "js", file)
+    shutil.copy(js_src_path, js_dest_path)
+
