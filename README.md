@@ -128,7 +128,7 @@ __🔢 Index__
 * CR Trigger
 
 __🔧 Conversion__    
-* CR String To Number
+* CR String To Number (changed 18/12/2023)
 * CR String To Combo    
 * CR Float To String
 * CR Float To Integer
@@ -156,6 +156,7 @@ __🎲 Random__
 * CR Random RGB Gradient (new 8/12/2023)
   
 __📦 Other__
+* CR Image Output (changed 18/12/2023)
 * CR Latent Batch Size
 * CR Prompt Text
 * CR Split String
