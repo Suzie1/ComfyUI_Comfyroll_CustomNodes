@@ -729,8 +729,8 @@ class CR_FontFileList:
     
         return {"required": {}}
 
-    RETURN_TYPES = (any_type, any_type,)
-    RETURN_NAMES = ("LIST", "display_names", )
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("LIST", "show_help", )
     OUTPUT_IS_LIST = (True,)
     FUNCTION = "load_path"
     CATEGORY = icons.get("Comfyroll/Other")
@@ -753,8 +753,10 @@ class CR_FontFileList:
         
         files = "\n".join(file_list)
 
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-font-file-list"
+
         #return {"ui": {"text": files,}, "result": (file_list,),} 
-        return (file_list, font_names, font_list, )
+        return (file_list, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
