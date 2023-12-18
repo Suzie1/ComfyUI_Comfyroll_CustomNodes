@@ -351,7 +351,7 @@ class CR_ImageOutput:
                      "output_type": (["Preview", "Save"],),
                      "filename_prefix": ("STRING", {"default": "CR"}),
                      "prefix_presets": (presets, ),
-                     "file_format": (["webp", "jpg", "png", "tif"],),
+                     "file_format": (["jpg", "png", "webp", "tif"],),
                     },
                 "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"},
                 "optional": 
