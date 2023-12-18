@@ -406,7 +406,7 @@ class CR_SimpleTextWatermark:
             draw = ImageDraw.Draw(textlayer)
             
             # Load the font
-            font_file = "fonts\\" + str(font_name)   
+            font_file = os.path.join("fonts", str(font_name))   
             resolved_font_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), font_file)
             font = ImageFont.truetype(str(resolved_font_path), size=font_size)
             
