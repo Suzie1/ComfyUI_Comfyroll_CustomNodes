@@ -9,12 +9,14 @@ import os
 import sys
 import io
 import comfy.sd
-from PIL import Image
-from PIL.PngImagePlugin import PngInfo
 import json
 import folder_paths
 import typing as tg
 import random
+import datetime
+from PIL import Image
+from PIL.PngImagePlugin import PngInfo
+from pathlib import Path
 from .graphics_functions import random_hex_color, random_rgb
 from ..categories import icons
 
@@ -246,6 +248,91 @@ class CR_AspectRatio:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio"
            
         return(width, height, upscale_factor, prescale_factor, batch_size, {"samples":latent}, show_help, )    
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_AspectRatioBanners:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        aspect_ratios = ["custom",
+                         "Large Rectangle - 336x280", 
+                         "Medium Rectangle - 300x250", 
+                         "Small Rectangle - 180x150",
+                         "Square - 250x250", 
+                         "Small Square - 200x200",
+                         "Button - 125x125", 
+                         "Half Page - 300x600",
+                         "Vertical Banner - 120x240", 
+                         "Wide Skyscraper - 160x600", 
+                         "Skyscraper - 120x600", 
+                         "Billboard - 970x250", 
+                         "Portrait - 300x1050", 
+                         "Banner - 468x60", 
+                         "Leaderboard - 728x90"]
+                                 
+        return {
+            "required": {
+                "width": ("INT", {"default": 1024, "min": 64, "max": 8192}),
+                "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
+                "aspect_ratio": (aspect_ratios,),
+                "swap_dimensions": (["Off", "On"],),
+                "upscale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "prescale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
+            }
+        }
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT", "LATENT", "STRING", )
+    RETURN_NAMES = ("width", "height", "upscale_factor", "prescale_factor", "batch_size", "empty_latent", "show_help", )
+    FUNCTION = "Aspect_Ratio"
+    CATEGORY = icons.get("Comfyroll/Aspect Ratio")
+
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, prescale_factor, batch_size):
+        
+        # Banner sizes
+        if aspect_ratio == "Large Rectangle - 336x280":
+            width, height = 336, 280
+        elif aspect_ratio == "Medium Rectangle - 300x250":
+            width, height = 300, 250
+        elif aspect_ratio == "Small Rectangle - 180x150":
+            width, height = 180, 150
+        elif aspect_ratio == "Square - 250x250":
+            width, height = 250, 250
+        elif aspect_ratio == "Small Square - 200x200":
+            width, height = 200	, 200
+        elif aspect_ratio == "Button - 125x125":
+            width, height = 125	, 125
+        elif aspect_ratio == "Half Page - 300x600":
+            width, height = 300, 600
+        elif aspect_ratio == "Vertical Banner - 120x240":
+            width, height = 120, 240
+        elif aspect_ratio == "Wide Skyscraper - 160x600":
+            width, height = 160, 600
+        elif aspect_ratio == "Skyscraper - 120x600":
+            width, height = 120, 600
+        elif aspect_ratio == "Billboard - 970x250":
+            width, height = 970, 250
+        elif aspect_ratio == "Portrait - 300x1050":
+            width, height = 300, 1050
+        elif aspect_ratio == "Banner - 468x60":
+            width, height = 168, 60
+        elif aspect_ratio == "Leaderboard - 728x90":
+            width, height = 728, 90              
+        
+        if swap_dimensions == "On":
+            width, height = height, width
+        
+        width = int(width*prescale_factor)
+        height = int(height*prescale_factor)
+        
+        latent = torch.zeros([batch_size, 4, height // 8, width // 8])
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio-banners"
+           
+        return(width, height, upscale_factor, prescale_factor, batch_size, {"samples":latent}, show_help, ) 
+
 #---------------------------------------------------------------------------------------------------------------------#
 # Other Nodes
 #---------------------------------------------------------------------------------------------------------------------#
@@ -256,13 +343,20 @@ class CR_ImageOutput:
 
     @classmethod
     def INPUT_TYPES(s):
+    
+        presets = ["None", "yyyyMMdd"]
+    
         return {"required": 
                     {"images": ("IMAGE", ),
-                    "output_type": (["Preview", "Save"],),
-                     "filename_prefix": ("STRING", {"default": "ComfyUI"})},
+                     "output_type": (["Preview", "Save"],),
+                     "filename_prefix": ("STRING", {"default": "CR"}),
+                     "prefix_presets": (presets, ),
+                     "file_format": (["webp", "jpg", "png", "tif"],),
+                    },
                 "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"},
-                "optional": {
-                    "trigger": ("BOOLEAN", {"default": False},),}
+                "optional": 
+                    {"trigger": ("BOOLEAN", {"default": False},),
+                    }
                 }
 
     RETURN_TYPES = ("BOOLEAN", )
@@ -271,7 +365,9 @@ class CR_ImageOutput:
     OUTPUT_NODE = True
     CATEGORY = icons.get("Comfyroll/Other")
 
-    def save_images(self, images, filename_prefix="ComfyUI", trigger = False, output_type = "Preview", prompt=None, extra_pnginfo=None):
+    def save_images(self, images, file_format, prefix_presets, filename_prefix="CR",
+        trigger=False, output_type="Preview", prompt=None, extra_pnginfo=None):
+    
         def map_filename(filename):
             prefix_len = len(os.path.basename(filename_prefix))
             prefix = filename[:prefix_len + 1]
@@ -281,19 +377,27 @@ class CR_ImageOutput:
                 digits = 0
             return (digits, prefix)
 
-        def compute_vars(input):
-            input = input.replace("%width%", str(images[0].shape[1]))
-            input = input.replace("%height%", str(images[0].shape[0]))
-            return input
-
         if output_type == "Save":
             self.output_dir = folder_paths.get_output_directory()
             self.type = "output"
         elif output_type == "Preview":
             self.output_dir = folder_paths.get_temp_directory()
             self.type = "temp"
+     
+        date_formats = {
+            'yyyyMMdd': lambda d: '{}{:02d}{:02d}'.format(str(d.year), d.month, d.day),
+        }
+        
+        current_datetime = datetime.datetime.now()
 
-        filename_prefix = compute_vars(filename_prefix)
+        for format_key, format_lambda in date_formats.items(): 
+            preset_prefix = f"{format_lambda(current_datetime)}"
+        
+        if prefix_presets != "None":
+            filename_prefix = filename_prefix + "_" + preset_prefix
+
+        if filename_prefix[0] == "_":
+            filename_prefix = filename_prefix[1:]            
 
         subfolder = os.path.dirname(os.path.normpath(filename_prefix))
         filename = os.path.basename(os.path.normpath(filename_prefix))
@@ -310,7 +414,7 @@ class CR_ImageOutput:
         except FileNotFoundError:
             os.makedirs(full_output_folder, exist_ok=True)
             counter = 1
-
+      
         results = list()
         for image in images:
             i = 255. * image.cpu().numpy()
@@ -322,10 +426,19 @@ class CR_ImageOutput:
                 for x in extra_pnginfo:
                     metadata.add_text(x, json.dumps(extra_pnginfo[x]))
 
-            file = f"{filename}_{counter:05}_.png"
-            img.save(os.path.join(full_output_folder, file), pnginfo=metadata, compress_level=4)
+            file_name = f"{filename}_{counter:05}_.{file_format}"
+            
+            img_params = {'png': {'compress_level': 4}, 
+                          'webp': {'method': 6, 'lossless': False, 'quality': 80},
+                          'jpg': {'format': 'JPEG'},
+                          'tif': {'format': 'TIFF'}
+                         }
+            
+            resolved_image_path = os.path.join(full_output_folder, file_name)
+            
+            img.save(resolved_image_path, **img_params[file_format], pnginfo=metadata)
             results.append({
-                "filename": file,
+                "filename": file_name,
                 "subfolder": subfolder,
                 "type": self.type
             })
@@ -334,8 +447,7 @@ class CR_ImageOutput:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-output"
 
         return { "ui": { "images": results }, "result": (trigger,) }
-
-
+       
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_IntegerMultipleOf:
     def __init__(self):
@@ -599,6 +711,52 @@ class CR_SelectModel:
         return (model, clip, vae, model_name, show_help, )
                    
 #---------------------------------------------------------------------------------------------------------------------#
+class AnyType(str):
+    """A special type that can be connected to any other types. Credit to pythongosssss"""
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+any_type = AnyType("*")
+
+class CR_FontFileList:
+
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        system_root = os.environ.get('SystemRoot')
+        font_dir = os.path.join(system_root, 'Fonts') 
+    
+        return {"required": {}}
+
+    RETURN_TYPES = (any_type, any_type,)
+    RETURN_NAMES = ("LIST", "display_names", )
+    OUTPUT_IS_LIST = (True,)
+    FUNCTION = "load_path"
+    CATEGORY = icons.get("Comfyroll/Other")
+
+    def load_path(self, path: str = "./input/", image_load_limit: int = 0, start_index: int = 0):
+    
+        system_root = os.environ.get('SystemRoot')
+        font_dir = os.path.join(system_root, 'Fonts')   
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+        print(len(file_list))
+
+        import matplotlib.font_manager
+
+        # Get the list of available font names
+        font_list = matplotlib.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
+
+        # Retrieve the font properties to access the user-friendly name
+        font_props = matplotlib.font_manager.FontProperties(fname=font_list[0])
+        font_names = font_props.get_name()
+        
+        files = "\n".join(file_list)
+
+        #return {"ui": {"text": files,}, "result": (file_list,),} 
+        return (file_list, font_names, font_list, )
+
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -608,6 +766,7 @@ NODE_CLASS_MAPPINGS = {
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
     "CR Aspect Ratio": CR_AspectRatio,
+    "CR Aspect Ratio Banners":CR_AspectRatioBanners,
     ### Other
     "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
@@ -617,7 +776,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel,  
+    "CR Select Model": CR_SelectModel,
+    "CR Font File List": CR_FontFileList,  
 }
 '''
 

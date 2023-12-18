@@ -195,39 +195,7 @@ class CR_XYZInterpolate:
             trigger = True
              
         return (x_float_out, y_float_out, z_float_out, x_ann_out, y_ann_out, z_ann_out, trigger)
-          
-#---------------------------------------------------------------------------------------------------------------------
-class CR_XYZIndex: 
-
-    @classmethod
-    def INPUT_TYPES(s):
-        gradient_profiles = ["Lerp"]    
-    
-        return {"required": {"x_columns":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
-                             "y_rows":("INT", {"default": 5.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
-                             "z_sheets":("INT", {"default": 0.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),
-                             "index": ("INT", {"default": 0.0, "min": 0.0, "max": 9999.0, "step": 1.0,}),                             
-                }
-        }
-
-    RETURN_TYPES = ("INT", "INT", "INT",)
-    RETURN_NAMES = ("x", "y", "z",)    
-    FUNCTION = "index"
-    CATEGORY = icons.get("Comfyroll/XY Grid")  
-
-    def index(self, x_columns, y_rows, z_sheets, index):
-
-        # Index values for all XY nodes start from 1
-        index -=1
-        sheet_size = x_columns * y_rows
-       
-        x = index % x_columns
-        y = int(index / x_columns) % y_rows
-        z = int(index / sheet_size) 
-        #print (x,y,z)
-        
-        return (x, y, z)
-        
+               
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_LoadXYAnnotationFromFile:
     
@@ -386,7 +354,6 @@ class CR_XYSaveGridImage:
 '''
 NODE_CLASS_MAPPINGS = {
     # XY Grid
-    "CR XYZ List":CR_XYZList,
     "CR XYZ Index":CR_XYZIndex,    
     "CR XYZ Interpolate":CR_XYZInterpolate,
     "CR Load XY Annotation From File":CR_LoadXYAnnotationFromFile,

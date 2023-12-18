@@ -12,7 +12,6 @@ DEV_NODE_CLASS_MAPPINGS = {
     ### XY Dev Nodes
     "CR XYZ List": CR_XYZList,    
     "CR XYZ Interpolate": CR_XYZInterpolate,    
-    "CR XYZ Index": CR_XYZIndex,
     ### Graphics Dev Nodes
     "CR Multi-Panel Meme Template": CR_MultiPanelMemeTemplate,
     "CR Popular Meme Templates": CR_PopularMemeTemplates,    

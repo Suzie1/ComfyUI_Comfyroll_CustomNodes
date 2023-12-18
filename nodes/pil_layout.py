@@ -144,7 +144,7 @@ class CR_PageLayout:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-page-layout"
 
         return (pil2tensor(combined_image), show_help, )    
- 
+
 #---------------------------------------------------------------------------------------------------------------------#    
 class CR_SimpleTitles:
 

@@ -1,0 +1,190 @@
+{
+  "last_node_id": 24,
+  "last_link_id": 30,
+  "nodes": [
+    {
+      "id": 20,
+      "type": "SaveImage",
+      "pos": [
+        1510,
+        560
+      ],
+      "size": [
+        210,
+        280
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 26
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "CR"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CR Image Grid Panel",
+      "pos": [
+        1130,
+        560
+      ],
+      "size": {
+        "0": 315,
+        "1": 198
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            26
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Image Grid Panel"
+      },
+      "widgets_values": [
+        0,
+        "custom",
+        10,
+        "black",
+        5,
+        "#000000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 24,
+      "type": "ImageListToImageBatch",
+      "pos": [
+        870,
+        560
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageListToImageBatch"
+      }
+    },
+    {
+      "id": 23,
+      "type": "LoadImageListFromDir //Inspire",
+      "pos": [
+        500,
+        560
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            29
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImageListFromDir //Inspire"
+      },
+      "widgets_values": [
+        "F:\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\output\\Halftone",
+        20,
+        0
+      ]
+    }
+  ],
+  "links": [
+    [
+      26,
+      7,
+      0,
+      20,
+      0,
+      "IMAGE"
+    ],
+    [
+      29,
+      23,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ],
+    [
+      30,
+      24,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
