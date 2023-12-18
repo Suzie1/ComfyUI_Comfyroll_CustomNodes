@@ -452,6 +452,7 @@ class CR_SimpleTextWatermark:
         return (images_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+'''
 class CR_SystemTrueTypeFont:
     def __init__(self):
         pass
@@ -499,8 +500,9 @@ class CR_SystemTrueTypeFont:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-system-truetype-font"
         
         return (font_out, preview, show_help,)
-
+'''
 #---------------------------------------------------------------------------------------------------------------------#
+'''
 class CR_DisplayFont:
 
     @classmethod
@@ -535,7 +537,7 @@ class CR_DisplayFont:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-display-font"
         
         return (image_out, show_help,)       
-        
+'''        
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -549,8 +551,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Draw Perspective Text":CR_DrawPerspectiveText,
     "CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
-    "CR System TrueType Font": CR_SystemTrueTypeFont,
-    "CR Display Font": CR_DisplayFont,
+    #"CR System TrueType Font": CR_SystemTrueTypeFont,
+    #"CR Display Font": CR_DisplayFont,
 }
 '''
 
