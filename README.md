@@ -29,6 +29,11 @@ __🔳 Aspect Ratio__
 * CR SDXL Aspect Ratio
 * CR SD1.5 Aspect Ratio
 * CR Aspect Ratio (new 27/11/2023)
+* CR Aspect Ratio Banners (new 18/12/2023)
+
+__📜 List Nodes__
+* CR Font File List (new 18/12/2023)
+* CR Text List (new 19/12/2023)
 
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets
@@ -39,6 +44,8 @@ __💊 LoRA__
 * CR Load LoRA
 * CR LoRA Stack
 * CR Apply LoRA Stack
+* CR Random LoRA Stack (new 18/12/2023)
+* CR Random Weight LoRA (new 18/12/2023)
 
 __🕹️ ControlNet__
 * CR Apply ControlNet
@@ -77,6 +84,8 @@ __👽 Graphics - Template__
 * CR Simple Meme Template
 * CR Simple Banner
 * CR Comic Panel Templates
+* CR Simple Banner (new 18/12/2023)
+* CR Simple Image Compare (new 18/12/2023)
 
 __🌁 Graphics - Layout__
 * CR Image Panel
@@ -123,7 +132,7 @@ __🔢 Index__
 * CR Trigger
 
 __🔧 Conversion__    
-* CR String To Number
+* CR String To Number (changed 18/12/2023)
 * CR String To Combo    
 * CR Float To String
 * CR Float To Integer
@@ -151,6 +160,7 @@ __🎲 Random__
 * CR Random RGB Gradient (new 8/12/2023)
   
 __📦 Other__
+* CR Image Output (changed 18/12/2023)
 * CR Latent Batch Size
 * CR Prompt Text
 * CR Split String

@@ -351,7 +351,7 @@ class CR_ImageOutput:
                      "output_type": (["Preview", "Save"],),
                      "filename_prefix": ("STRING", {"default": "CR"}),
                      "prefix_presets": (presets, ),
-                     "file_format": (["webp", "jpg", "png", "tif"],),
+                     "file_format": (["png", "jpg", "webp", "tif"],),
                     },
                 "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"},
                 "optional": 
@@ -709,7 +709,9 @@ class CR_SelectModel:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-model"
             
         return (model, clip, vae, model_name, show_help, )
-                   
+
+#---------------------------------------------------------------------------------------------------------------------#
+# List Nodes                
 #---------------------------------------------------------------------------------------------------------------------#
 class AnyType(str):
     """A special type that can be connected to any other types. Credit to pythongosssss"""
@@ -724,37 +726,88 @@ class CR_FontFileList:
     @classmethod
     def INPUT_TYPES(s):
     
-        system_root = os.environ.get('SystemRoot')
-        font_dir = os.path.join(system_root, 'Fonts') 
-    
-        return {"required": {}}
+        comfyroll_font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+        comfyroll_file_list = [f for f in os.listdir(comfyroll_font_dir) if os.path.isfile(os.path.join(comfyroll_font_dir, f)) and f.lower().endswith(".ttf")]
 
-    RETURN_TYPES = (any_type, any_type,)
-    RETURN_NAMES = ("LIST", "display_names", )
-    OUTPUT_IS_LIST = (True,)
-    FUNCTION = "load_path"
-    CATEGORY = icons.get("Comfyroll/Other")
-
-    def load_path(self, path: str = "./input/", image_load_limit: int = 0, start_index: int = 0):
-    
-        system_root = os.environ.get('SystemRoot')
-        font_dir = os.path.join(system_root, 'Fonts')   
-        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
-        print(len(file_list))
-
-        import matplotlib.font_manager
-
-        # Get the list of available font names
-        font_list = matplotlib.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
-
-        # Retrieve the font properties to access the user-friendly name
-        font_props = matplotlib.font_manager.FontProperties(fname=font_list[0])
-        font_names = font_props.get_name()
+        sources = ["System", "Comfyroll"]
         
-        files = "\n".join(file_list)
+        return {"required": {"source_folder": (sources,),
+                             #"full_folder_path": 
+                             "start_index": ("INT", {"default": 0, "min": 0, "max": 9999}),
+                             "max_rows": ("INT", {"default": 1000, "min": 1, "max": 9999}),                            
+                            }
+        }
 
-        #return {"ui": {"text": files,}, "result": (file_list,),} 
-        return (file_list, font_names, font_list, )
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("LIST", "show_help", )
+    OUTPUT_IS_LIST = (True,)
+    FUNCTION = "make_list"
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def make_list(self, source_folder, start_index, max_rows):
+
+        if source_folder == "System":
+            system_root = os.environ.get('SystemRoot')
+            system_font_dir = os.path.join(system_root, 'Fonts')   
+            file_list = [f for f in os.listdir(system_font_dir) if os.path.isfile(os.path.join(system_font_dir, f)) and f.lower().endswith(".ttf")]
+            #print(len(file_list))
+        elif source_folder == "Comfyroll":
+            comfyroll_font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
+            file_list = [f for f in os.listdir(comfyroll_font_dir) if os.path.isfile(os.path.join(comfyroll_font_dir, f)) and f.lower().endswith(".ttf")]
+            #print(len(comfyroll_file_list))
+        else:
+            pass
+        
+        # Ensure start_index is within the bounds of the list
+        start_index = max(0, min(start_index, len(file_list) - 1))
+
+        # Calculate the end index based on max_rows
+        end_index = min(start_index + max_rows, len(file_list))
+
+        # Extract the desired portion of the list
+        selected_files = file_list[start_index:end_index]
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-font-file-list"
+
+        return (selected_files, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_TextList:
+
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        return {"required": {"multiline_text": ("STRING", {"multiline": False, "default": "text"}),
+                             "start_index": ("INT", {"default": 0, "min": 0, "max": 9999}),
+                             "max_rows": ("INT", {"default": 1000, "min": 1, "max": 9999}),
+                            }
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
+    OUTPUT_IS_LIST = (True,)
+    FUNCTION = "make_list"
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def make_list(self, multiline_text, start_index, max_rows):
+
+        lines = multiline_text.split('\n')
+
+        # Ensure start_index is within the bounds of the list
+        start_index = max(0, min(start_index, len(lines) - 1))
+
+        # Calculate the end index based on max_rows
+        end_index = min(start_index + max_rows, len(lines))
+
+        # Extract the desired portion of the list
+        selected_rows = lines[start_index:end_index]
+
+        # Join the selected portion into a multiline string
+        text_list = "\n".join(selected_rows)
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-text-list"
+
+        return (selected_rows, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -764,20 +817,22 @@ class CR_FontFileList:
 NODE_CLASS_MAPPINGS = {
     ### Aspect ratio
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
-    "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
+    "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
     "CR Aspect Ratio": CR_AspectRatio,
     "CR Aspect Ratio Banners":CR_AspectRatioBanners,
+    ### List nodes
+    "CR Font File List": CR_FontFileList,  
+    "CR Text List": CR_TextList, 
     ### Other
     "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
-    "CR Latent Batch Size":CR_LatentBatchSize
-    "CR Seed":CR_Seed,
-    "CR Prompt Text":CR_PromptText,
-    "CR Split String":CR_SplitString,
+    "CR Latent Batch Size": CR_LatentBatchSize,
+    "CR Seed": CR_Seed,
+    "CR Prompt Text": CR_PromptText,
+    "CR Split String": CR_SplitString,
     "CR Value": CR_Value,
-    "CR Conditioning Mixer":CR_ConditioningMixer,
+    "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel,
-    "CR Font File List": CR_FontFileList,  
 }
 '''
 

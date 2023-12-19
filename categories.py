@@ -10,6 +10,7 @@ icons = {
     "Comfyroll/ControlNet": "🧩 Comfyroll/🕹️ ControlNet",
     "Comfyroll/XY Grid": "🧩 Comfyroll/📉 XY Grid",
     "Comfyroll/SDXL": "🧩 Comfyroll/🌟 SDXL",
+    "Comfyroll/List": "🧩 Comfyroll/📜 List",
     "Comfyroll/Aspect Ratio": "🧩 Comfyroll/🔳 Aspect Ratio",
     "Comfyroll/Pipe/Module": "🧩 Comfyroll/🎷 Pipe/✈️ Module",
     "Comfyroll/Pipe/Image": "🧩 Comfyroll/🎷 Pipe/🛩️ Image",
