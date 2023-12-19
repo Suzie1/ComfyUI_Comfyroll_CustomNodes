@@ -154,6 +154,7 @@ class CR_LoRAList:
         return (loras, show_text, )
     
 #---------------------------------------------------------------------------------------------------------------------#
+'''
 class CR_TextList:
 
     @classmethod
@@ -221,7 +222,7 @@ class CR_TextList:
         show_text = "".join(showtext)
             
         return (texts, show_text, )
-
+'''
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_TextListSimple:
 

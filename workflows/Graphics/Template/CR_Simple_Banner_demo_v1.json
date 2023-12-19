@@ -1,0 +1,346 @@
+{
+  "last_node_id": 25,
+  "last_link_id": 21,
+  "nodes": [
+    {
+      "id": 19,
+      "type": "CR Simple Banner",
+      "pos": [
+        720,
+        -180
+      ],
+      "size": {
+        "0": 400,
+        "1": 290
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 16
+        },
+        {
+          "name": "banner_text",
+          "type": "STRING",
+          "link": 19,
+          "widget": {
+            "name": "banner_text"
+          }
+        },
+        {
+          "name": "font_name",
+          "type": "COMBO",
+          "link": 20,
+          "widget": {
+            "name": "font_name"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Banner",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "text",
+        "Roboto-Regular.ttf",
+        150,
+        "darkgray",
+        0,
+        "custom",
+        0,
+        "#000000",
+        "#000000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 21,
+      "type": "PreviewImage",
+      "pos": [
+        1180,
+        -180
+      ],
+      "size": {
+        "0": 420,
+        "1": 260
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 17
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 23,
+      "type": "Text Multiline",
+      "pos": [
+        10,
+        -160
+      ],
+      "size": {
+        "0": 210,
+        "1": 200
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Multiline",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "Leonardo da Vinci\nVincent van Gogh\nPablo Picasso\nMichelangelo Buonarroti\nClaude Monet\nRembrandt van Rijn\nFrida Kahlo\nGeorgia O'Keeffe\nSalvador Dalí"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 24,
+      "type": "CR Text List",
+      "pos": [
+        300,
+        -160
+      ],
+      "size": {
+        "0": 320,
+        "1": 130
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "multiline_text",
+          "type": 0,
+          "link": 18,
+          "widget": {
+            "name": "multiline_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            19
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text List"
+      },
+      "widgets_values": [
+        "text",
+        0,
+        9
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 11,
+      "type": "CR Font File List",
+      "pos": [
+        300,
+        20
+      ],
+      "size": [
+        320,
+        130
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LIST",
+          "type": "*",
+          "links": [
+            20
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Font File List",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "System",
+        0,
+        9
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 20,
+      "type": "CR Color Panel",
+      "pos": [
+        300,
+        -390
+      ],
+      "size": [
+        320,
+        150
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            16
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Color Panel",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        512,
+        256,
+        "cyan",
+        "#000000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      16,
+      20,
+      0,
+      19,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      19,
+      0,
+      21,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      23,
+      0,
+      24,
+      0,
+      "STRING"
+    ],
+    [
+      19,
+      24,
+      0,
+      19,
+      1,
+      "STRING"
+    ],
+    [
+      20,
+      11,
+      0,
+      19,
+      2,
+      "COMBO"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

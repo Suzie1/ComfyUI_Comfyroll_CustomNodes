@@ -31,6 +31,11 @@ __🔳 Aspect Ratio__
 * CR Aspect Ratio (new 27/11/2023)
 * CR Aspect Ratio Banners (new 18/12/2023)
 
+__📜 List Nodes__
+* CR Font File List (new 18/12/2023)
+* CR Text List (new 19/12/2023)
+
+
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets
 * CR SDXL Style Text
@@ -42,6 +47,8 @@ __💊 LoRA__
 * CR Random LoRA Stack (new 18/12/2023)
 * CR Random Weight LoRA (new 18/12/2023)
 * CR Apply LoRA Stack
+* CR Random LoRA Stack (new 18/12/2023)
+* CR Random Weight LoRA (new 18/12/2023)
 
 __🕹️ ControlNet__
 * CR Apply ControlNet

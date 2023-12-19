@@ -44,7 +44,10 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Split String":CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer":CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel, 
+    "CR Select Model": CR_SelectModel,
+    ### List Nodes
+    "CR Font File List": CR_FontFileList,
+    "CR Text List": CR_TextList,     
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
@@ -109,8 +112,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     #"CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
     #"CR System TrueType Font": CR_SystemTrueTypeFont,      
-    #"CR Display Font": CR_DisplayFont,
-    "CR Font File List": CR_FontFileList, 
+    #"CR Display Font": CR_DisplayFont, 
     ### Graphics Filter
     "CR Halftone Filter": CR_HalftoneFilter,
     "CR Color Tint": CR_ColorTint,    
@@ -199,7 +201,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     # Lists
     "CR Model List": CR_ModelList,
     "CR LoRA List": CR_LoRAList,
-    "CR Text List": CR_TextList,
+    #"CR Text List": CR_TextList,
     "CR Text List Simple": CR_TextListSimple,
     "CR Image List": CR_ImageList,
     "CR Image List Simple": CR_ImageListSimple,     
@@ -213,7 +215,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     # Utils   
     "CR Debatch Frames": CR_DebatchFrames,    
     "CR Current Frame": CR_CurrentFrame,
-    "CR Input Text List": CR_InputTextList,   
+    #"CR Input Text List": CR_InputTextList,   
     # IO
     "CR Load Animation Frames": CR_LoadAnimationFrames,
     "CR Load Flow Frames": CR_LoadFlowFrames,
@@ -231,6 +233,9 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Value": "⚙️ CR Value",
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
     "CR Select Model": "🔮 CR Select Model",
+    ### List Nodes
+    "CR Font File List": "📜 CR Font File List",
+    "CR Text List": "📜 CR Text List",     
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
@@ -383,7 +388,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     # Lists
     "CR Model List": "📃 CR Model List",
     "CR LoRA List": "📃 CR LoRA List",
-    "CR Text List": "📃 CR Text List",
+    #"CR Text List": "📃 CR Text List",
     "CR Text List Simple": "📃 CR Text List Simple",
     "CR Image List": "📃 CR Image List",
     "CR Image List Simple": "📃 CR Image List Simple", 
