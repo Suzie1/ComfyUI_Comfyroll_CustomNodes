@@ -115,12 +115,14 @@ LIVE_NODE_CLASS_MAPPINGS = {
     #"CR Display Font": CR_DisplayFont, 
     ### Graphics Filter
     "CR Halftone Filter": CR_HalftoneFilter,
-    "CR Color Tint": CR_ColorTint,    
+    "CR Color Tint": CR_ColorTint,
+    "CR Vignette Filter": CR_VignetteFilter,    
     ### Graphics Layout 
     "CR Page Layout": CR_PageLayout,
     "CR Image Panel": CR_ImagePanel,
     "CR Image Grid Panel": CR_ImageGridPanel,
     "CR Image Border": CR_ImageBorder,
+    "CR Feathered Border": CR_FeatheredBorder,    
     "CR Simple Text Panel": CR_SimpleTextPanel,    
     "CR Color Panel": CR_ColorPanel,
     "CR Overlay Transparent Image": CR_OverlayTransparentImage,
@@ -302,14 +304,16 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Font File List": "🔤️ CR Font File List",
     ### Graphics Filter
     "CR Halftone Filter": "🎨 Halftone Filter",
-    "CR Color Tint": "🎨 CR Color Tint",        
+    "CR Color Tint": "🎨 CR Color Tint", 
+    "CR Vignette Filter": "🎨 CR Vignette Filter",   
     ### Graphics Layout
     "CR Image Panel": "🌁 CR Image Panel",
     "CR Image Grid Panel": "🌁 CR Image Grid Panel",
     "CR Simple Text Panel": "🌁 CR Simple Text Panel",
     "CR Color Panel": "🌁 CR Color Panel",
     "CR Page Layout": "🌁 CR Page Layout",
-    "CR Image Border": "🌁 CR Image Border",      
+    "CR Image Border": "🌁 CR Image Border",
+    "CR Feathered Border": "🌁 CR Feathered Border",    
     "CR Overlay Transparent Image": "🌁 CR Overlay Transparent Image",
     #"CR Simple Titles": "🌁 CR Simple Titles",    
     ### Graphics Template
@@ -423,8 +427,10 @@ try:
 except ImportError:
     NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
     NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
-    
+
+print("\033[34m------------------------------")    
 print("\033[34mComfyroll Custom Nodes: \033[92mLoaded\033[0m")
+print("\033[34m------------------------------\033[0m")
 
 import shutil
 import folder_paths

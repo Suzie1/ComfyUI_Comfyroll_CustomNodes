@@ -1,0 +1,319 @@
+{
+  "last_node_id": 25,
+  "last_link_id": 21,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "CR Color Panel",
+      "pos": [
+        230,
+        590
+      ],
+      "size": {
+        "0": 315,
+        "1": 150
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Color Panel",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        512,
+        256,
+        "cyan",
+        "#000000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 18,
+      "type": "CR Text List",
+      "pos": [
+        220,
+        870
+      ],
+      "size": {
+        "0": 320,
+        "1": 130
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "multiline_text",
+          "type": 0,
+          "link": 14,
+          "widget": {
+            "name": "multiline_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            15
+          ],
+          "shape": 6
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text List"
+      },
+      "widgets_values": [
+        "text",
+        2,
+        4
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 14,
+      "type": "Text Multiline",
+      "pos": [
+        -70,
+        790
+      ],
+      "size": {
+        "0": 210,
+        "1": 200
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Multiline",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "Leonardo da Vinci\nVincent van Gogh\nPablo Picasso\nMichelangelo Buonarroti\nClaude Monet\nRembrandt van Rijn\nFrida Kahlo\nGeorgia O'Keeffe\nSalvador Dalí\nWassily Kandinsky"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 15,
+      "type": "CR Simple Banner",
+      "pos": [
+        600,
+        710
+      ],
+      "size": {
+        "0": 400,
+        "1": 290
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 12
+        },
+        {
+          "name": "banner_text",
+          "type": "STRING",
+          "link": 15,
+          "widget": {
+            "name": "banner_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Banner",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "text",
+        "Roboto-Regular.ttf",
+        150,
+        "darkgray",
+        0,
+        "custom",
+        0,
+        "#000000",
+        "#000000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 17,
+      "type": "PreviewImage",
+      "pos": [
+        1070,
+        710
+      ],
+      "size": {
+        "0": 420,
+        "1": 260
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 22,
+      "type": "Text Multiline",
+      "pos": [
+        -65,
+        795
+      ],
+      "size": {
+        "0": 210,
+        "1": 200
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Multiline",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "Leonardo da Vinci\nVincent van Gogh\nPablo Picasso\nMichelangelo Buonarroti\nClaude Monet\nRembrandt van Rijn\nFrida Kahlo\nGeorgia O'Keeffe\nSalvador Dalí\nWassily Kandinsky"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      12,
+      16,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ],
+    [
+      13,
+      15,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      14,
+      14,
+      0,
+      18,
+      0,
+      "STRING"
+    ],
+    [
+      15,
+      18,
+      0,
+      15,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
