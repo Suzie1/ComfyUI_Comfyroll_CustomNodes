@@ -63,6 +63,7 @@ __🔂 Process__
 __👓 Graphics - Filter__
 * CR Color Tint
 * CR Halftone Filter
+* CR Vignette Filter (new 21/12/2023)
 
 __🌈 Graphics - Pattern__
 * CR Halftone Grid
@@ -95,6 +96,7 @@ __🌁 Graphics - Layout__
 * CR Page Layout
 * CR Image Grid Panel
 * CR Image Border
+* CR Feathered Border (new 21/12/2023)
 * CR Color Panel
 * CR Simple Text Panel
 * CR Overlay Transparent Image
