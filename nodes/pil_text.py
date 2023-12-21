@@ -406,8 +406,8 @@ class CR_SimpleTextWatermark:
             draw = ImageDraw.Draw(textlayer)
             
             # Load the font
-            #font_file = "fonts\\" + str(font_name) 
-            font_file = os.path.join("fonts", str(font_name))             
+
+            font_file = os.path.join("fonts", str(font_name))   
             resolved_font_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), font_file)
             font = ImageFont.truetype(str(resolved_font_path), size=font_size)
             
@@ -538,20 +538,20 @@ class CR_DisplayFont:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-display-font"
         
         return (image_out, show_help,)       
-'''    
+'''        
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS = {
-    "CR Overlay Text":CR_OverlayText,
-    "CR Draw Text":CR_DrawText, 
-    "CR Mask Text":CR_MaskText,
-    "CR Composite Text":CR_CompositeText,
-    "CR Draw Perspective Text":CR_DrawPerspectiveText,
+    "CR Overlay Text": CR_OverlayText,
+    "CR Draw Text": CR_DrawText, 
+    "CR Mask Text": CR_MaskText,
+    "CR Composite Text": CR_CompositeText,
+    "CR Draw Perspective Text": CR_DrawPerspectiveText,
     "CR Arabic Text RTL": CR_ArabicTextRTL,
-    #"CR Simple Text Watermark": CR_SimpleTextWatermark,
+    "CR Simple Text Watermark": CR_SimpleTextWatermark,
     #"CR System TrueType Font": CR_SystemTrueTypeFont,
     #"CR Display Font": CR_DisplayFont,
 }
