@@ -35,7 +35,6 @@ __📜 List Nodes__
 * CR Font File List (new 18/12/2023)
 * CR Text List (new 19/12/2023)
 
-
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets
 * CR SDXL Style Text
@@ -44,8 +43,6 @@ __🌟 SDXL__
 __💊 LoRA__
 * CR Load LoRA
 * CR LoRA Stack
-* CR Random LoRA Stack (new 18/12/2023)
-* CR Random Weight LoRA (new 18/12/2023)
 * CR Apply LoRA Stack
 * CR Random LoRA Stack (new 18/12/2023)
 * CR Random Weight LoRA (new 18/12/2023)
@@ -174,7 +171,6 @@ __📦 Other__
 * CR Value
 * CR Conditioning Mixer (new 27/11/2023)
 * CR Select Model (new 27/11/2023)
-* CR Font File List (new 18/12/2023)
 
 __Deleted Nodes__
 * CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio

@@ -152,9 +152,11 @@ class CR_HalftoneGrid:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
+        image_out = pil2tensor(img.convert("RGB"))
+        
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-halftone-grid"
         
-        return(pil2tensor(img), show_help, )
+        return(image_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ColorBars:
@@ -252,10 +254,12 @@ class CR_ColorBars:
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
+        
+        image_out = pil2tensor(img.convert("RGB"))
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-color-bars"
 
-        return (pil2tensor(img), show_help, )
+        return (image_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_StyleBars:
@@ -320,10 +324,12 @@ class CR_StyleBars:
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
+        
+        image_out = pil2tensor(img.convert("RGB"))        
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-style-bars"
 
-        return (pil2tensor(img), show_help, )
+        return (image_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ColorGradient:
@@ -415,10 +421,12 @@ class CR_ColorGradient:
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
+        
+        image_out = pil2tensor(img.convert("RGB"))         
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-color-gradient"
 
-        return (pil2tensor(img), show_help, )
+        return (image_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_RadialGradient:
@@ -488,9 +496,11 @@ class CR_RadialGradient:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
+        image_out = pil2tensor(img.convert("RGB"))
+
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-radial-gradiant"
 
-        return (pil2tensor(img), show_help, )
+        return (image_out, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_CheckerPattern:
@@ -566,9 +576,11 @@ class CR_CheckerPattern:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
+        image_out = pil2tensor(img.convert("RGB"))         
+
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-checker-pattern"
 
-        return (pil2tensor(img), show_help, )
+        return (image_out, show_help, )
        
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_Polygons:
@@ -651,9 +663,11 @@ class CR_Polygons:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
+        image_out = pil2tensor(img.convert("RGB"))         
+
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-polygons"
 
-        return (pil2tensor(img), show_help, )
+        return (image_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_StarburstLines:
@@ -731,9 +745,11 @@ class CR_StarburstLines:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
+        image_out = pil2tensor(img.convert("RGB"))         
+
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-starburst-lines"
 
-        return (pil2tensor(img), show_help, ) 
+        return (image_out, show_help, ) 
         
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_StarburstColors:
@@ -824,9 +840,11 @@ class CR_StarburstColors:
         plt.savefig(img_buf, format='png')
         img = Image.open(img_buf)
 
+        image_out = pil2tensor(img.convert("RGB"))         
+
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-starburst-colors"
 
-        return (pil2tensor(img), show_help, )
+        return (image_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
