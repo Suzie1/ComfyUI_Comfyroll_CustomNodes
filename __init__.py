@@ -111,8 +111,6 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Composite Text": CR_CompositeText, 
     #"CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
-    #"CR System TrueType Font": CR_SystemTrueTypeFont,      
-    #"CR Display Font": CR_DisplayFont, 
     ### Graphics Filter
     "CR Halftone Filter": CR_HalftoneFilter,
     "CR Color Tint": CR_ColorTint,
@@ -428,9 +426,9 @@ except ImportError:
     NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
     NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
 
-print("\033[34m------------------------------")    
-print("\033[34mComfyroll Custom Nodes: \033[92mLoaded\033[0m")
-print("\033[34m------------------------------\033[0m")
+print("----------------------------------------")    
+print("\033[34mComfyroll Custom Nodes:\033[92m 148 Nodes Loaded\033[0m")
+print("----------------------------------------")
 
 import shutil
 import folder_paths
