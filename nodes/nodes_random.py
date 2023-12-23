@@ -70,7 +70,7 @@ class CR_RandomMultilineValues:
     @classmethod
     def INPUT_TYPES(cls):
     
-        types = ["binary", "decimal", "hexadecimal", "alphabetic", "alphanumeric"]
+        types = ["binary", "decimal", "natural", "hexadecimal", "alphabetic", "alphanumeric"]
         
         return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
                              "value_type": (types,),
@@ -92,7 +92,9 @@ class CR_RandomMultilineValues:
         if value_type == "binary":
             choice_str = '01'
         elif value_type == "decimal":
-            choice_str = '0123456789'             
+            choice_str = '0123456789'
+        elif value_type == "natural":
+            choice_str = '123456789'             
         elif value_type == "hexadecimal":
             choice_str = '0123456789abcdef'       
         elif value_type == "alphabetic":
@@ -107,7 +109,6 @@ class CR_RandomMultilineValues:
         return (multiline_text, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-
 class CR_RandomRGBGradient:
     
     @classmethod

@@ -10,6 +10,7 @@ import sys
 import folder_paths
 import re
 import comfy.sd
+import piexif
 from PIL import Image
 from pathlib import Path
 from ..categories import icons
@@ -31,7 +32,7 @@ def tensor2rgba(t: torch.Tensor) -> torch.Tensor:
         return torch.cat((t, alpha_tensor), dim=3)
     else:
         return t
-   
+
 #---------------------------------------------------------------------------------------------------------------------#
 # List Nodes                
 #---------------------------------------------------------------------------------------------------------------------#
@@ -52,13 +53,14 @@ class CR_FontFileList:
         comfyroll_font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
         comfyroll_file_list = [f for f in os.listdir(comfyroll_font_dir) if os.path.isfile(os.path.join(comfyroll_font_dir, f)) and f.lower().endswith(".ttf")]
 
-        sources = ["System", "Comfyroll"]
+        sources = ["system", "Comfyroll", "from folder"]
         
         return {"required": {"source_folder": (sources,),
-                             #"full_folder_path": 
                              "start_index": ("INT", {"default": 0, "min": 0, "max": 9999}),
                              "max_rows": ("INT", {"default": 1000, "min": 1, "max": 9999}),                            
-                            }
+                            },
+                "optional": {"folder_path": ("STRING", {"default": "C:\Windows\Fonts", "multiline": False}),
+                }
         }
 
     RETURN_TYPES = (any_type, "STRING", )
@@ -67,20 +69,27 @@ class CR_FontFileList:
     FUNCTION = "make_list"
     CATEGORY = icons.get("Comfyroll/List")
 
-    def make_list(self, source_folder, start_index, max_rows):
+    def make_list(self, source_folder, start_index, max_rows, folder_path="C:\Windows\Fonts"):
 
-        if source_folder == "System":
+        if source_folder == "system":
             system_root = os.environ.get('SystemRoot')
             system_font_dir = os.path.join(system_root, 'Fonts')   
             file_list = [f for f in os.listdir(system_font_dir) if os.path.isfile(os.path.join(system_font_dir, f)) and f.lower().endswith(".ttf")]
-            #print(len(file_list))
         elif source_folder == "Comfyroll":
             comfyroll_font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
             file_list = [f for f in os.listdir(comfyroll_font_dir) if os.path.isfile(os.path.join(comfyroll_font_dir, f)) and f.lower().endswith(".ttf")]
-            #print(len(comfyroll_file_list))
+        elif source_folder == "from folder":
+            if folder_path != '' and folder_path is not None:
+                if not os.path.exists(folder_path):
+                    print(f"[Warning] CR Font File List: The folder_path `{folder_path}` does not exist")
+                    return None
+                font_dir = folder_path     
+                file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+            else:    
+                print(f"[Warning] CR Font File List: No folder_path entered")
+                return None                
         else:
             pass
-        
         # Ensure start_index is within the bounds of the list
         start_index = max(0, min(start_index, len(file_list) - 1))
 
@@ -213,9 +222,9 @@ class CR_LoadImageListPlus:
                }
         }
 
-    RETURN_TYPES = ("IMAGE", "MASK", "INT", "INT", "INT", "INT", "STRING", )
-    RETURN_NAMES = ("IMAGE", "MASK", "index", "width", "height", "list_length", "show_help", )
-    OUTPUT_IS_LIST = (True, True, True, False, False, False, False)
+    RETURN_TYPES = ("IMAGE", "MASK", "INT", "STRING", "INT", "INT", "INT", "STRING", )
+    RETURN_NAMES = ("IMAGE", "MASK", "index", "filename", "width", "height", "list_length", "show_help", )
+    OUTPUT_IS_LIST = (True, True, True, True, False, False, False, False)
     FUNCTION = "make_list"
     CATEGORY = icons.get("Comfyroll/List")
 
@@ -239,8 +248,10 @@ class CR_LoadImageListPlus:
         file_list = sorted(os.listdir(in_path), key=lambda s: sum(((s, int(n)) for s, n in re.findall(r'(\D+)(\d+)', 'a%s0' % s)), ()))
         
         image_list = []
-        mask_list = []        
-        index_list = []
+        mask_list = []
+        index_list = []        
+        filename_list = []
+        exif_list = []         
         
         # Ensure start_index is within the bounds of the list
         start_index = max(0, min(start_index, len(file_list) - 1))
@@ -249,13 +260,19 @@ class CR_LoadImageListPlus:
         end_index = min(start_index + max_images, len(file_list) - 1)
                     
         for num in range(start_index, end_index):
-            img = Image.open(os.path.join(in_path, file_list[num]))
+            filename = file_list[num]
+            img_path = os.path.join(in_path, filename)
+            
+            img = Image.open(os.path.join(in_path, file_list[num]))            
             tensor_img = pil2tensor(img)
             image_list.append(pil2tensor(img.convert("RGB")))
             mask_list.append(tensor2rgba(tensor_img)[:,:,:,0])
            
-            # Get image index
+            # Populate the image index
             index_list.append(num)
+
+            # Populate the filename_list
+            filename_list.append(filename)
             
         if not image_list:
             # Handle the case where the list is empty
@@ -274,7 +291,7 @@ class CR_LoadImageListPlus:
         
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-list"
 
-        return (images_out, mask_out, index_list, width, height, list_length, show_help, )
+        return (images_out, mask_out, index_list, filename_list, index_list, width, height, list_length, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

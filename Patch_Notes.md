@@ -1,10 +1,11 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
-## v1.45 Dec 22, 2023
+## v1.47 Dec 23, 2023
 - added CR Load Image List
 - added CR Load Image List Plus
+- updated CR Font File List 
 
-## v1.45 Dec 22, 2023
+## v1.46 Dec 22, 2023
 - PR70 fixed issue #62 with RGB output from gradient nodes
 
 ## PR78 Dec 21, 2023
