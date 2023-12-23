@@ -6,20 +6,25 @@
 """
 
 from .live_node_mappings import LIVE_NODE_CLASS_MAPPINGS, LIVE_NODE_DISPLAY_NAME_MAPPINGS
-NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
-NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
-print("-----------------------------------------------")    
-print("\033[34mComfyroll Custom Nodes v1.47 : \033[92m 148 Nodes Loaded\033[0m")
-print("-----------------------------------------------")    
 
 INCLUDE_DEV_NODES = False
 
-from .dev_node_mappings import DEV_NODE_CLASS_MAPPINGS, DEV_NODE_DISPLAY_NAME_MAPPINGS
-if INCLUDE_DEV_NODES:
-    NODE_CLASS_MAPPINGS = {**DEV_NODE_CLASS_MAPPINGS, **LIVE_NODE_CLASS_MAPPINGS}
-    NODE_DISPLAY_NAME_MAPPINGS = {**DEV_NODE_DISPLAY_NAME_MAPPINGS, **LIVE_NODE_DISPLAY_NAME_MAPPINGS}
-    print("\033[92mComfyroll Dev Nodes Loaded\033[0m")
-    print("-----------------------------------------------")        
+try:
+    from .dev_node_mappings import DEV_NODE_CLASS_MAPPINGS, DEV_NODE_DISPLAY_NAME_MAPPINGS
+    if INCLUDE_DEV_NODES:
+        NODE_CLASS_MAPPINGS = {**DEV_NODE_CLASS_MAPPINGS, **LIVE_NODE_CLASS_MAPPINGS}
+        NODE_DISPLAY_NAME_MAPPINGS = {**DEV_NODE_DISPLAY_NAME_MAPPINGS, **LIVE_NODE_DISPLAY_NAME_MAPPINGS}
+        print("\033[34mComfyroll Custom Nodes: \033[92mDev Nodes Loaded\033[0m")
+    else:
+        NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
+        NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
+except ImportError:
+    NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
+    NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
+
+print("-----------------------------------------------")    
+print("\033[34mComfyroll Custom Nodes v1.47 : \033[92m 148 Nodes Loaded\033[0m")
+print("-----------------------------------------------")      
 
 import shutil
 import folder_paths
