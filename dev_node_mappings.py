@@ -1,5 +1,3 @@
-from .animation_nodes.prompt import *
-
 from .dev_nodes.dev_nodes import *
 from .dev_nodes.graphics_dev_nodes import *
 from .dev_nodes.dev_pil_3D import *

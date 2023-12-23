@@ -1,8 +1,12 @@
-# 🧩 Comfyroll Custom Nodes for SDXL and SD1.5
+# 🧩 Comfyroll Custom Nodes
 
 Co-authored by Suzie1 and RockOfFire
 
-These nodes can be used in any ComfyUI workflow.  
+# Wiki
+
+Please use our new wiki for info on the nodes and lots of examples of their use.
+
+https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
 
 # Installation
 
@@ -17,11 +21,6 @@ You can also install the nodes using the following methods:
 # Patch Notes
 
 https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
-
-
-# Wiki
-
-https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
 
 # List of Custom Nodes
 
@@ -62,6 +61,7 @@ __🔂 Process__
 __👓 Graphics - Filter__
 * CR Color Tint
 * CR Halftone Filter
+* CR Vignette Filter (new 21/12/2023)
 
 __🌈 Graphics - Pattern__
 * CR Halftone Grid
@@ -94,6 +94,7 @@ __🌁 Graphics - Layout__
 * CR Page Layout
 * CR Image Grid Panel
 * CR Image Border
+* CR Feathered Border (new 21/12/2023)
 * CR Color Panel
 * CR Simple Text Panel
 * CR Overlay Transparent Image
@@ -181,28 +182,6 @@ __Deleted Nodes__
 CR Animation Nodes are now included in the Comfyroll Custom Nodes pack.
 
 [Animation Nodes](https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/suzie_dev/Animation_Nodes.md)
-
-# Multi-ControlNet methodology
-
-The method used in CR Apply Multi-ControlNet is to chain the conditioning so that the output from the first Controlnet becomes the input to the second.
-
-For an example of this method see this link:
-
-https://comfyanonymous.github.io/ComfyUI_examples/controlnet/#mixing-controlnets
-
-# Multi-ControlNet compatability with Efficiency nodes
-
-![Custom Nodes](/images/Efficiency_Compability.JPG)
-
-CR LoRA Stack and CR Multi-ControlNet Stack are both compatible with the Efficient Loader node, in Efficiency nodes by LucianoCirino.
-
-CR Apply Multi-ControlNet Stack can accept inputs from the Control Net Stacker node in the Efficiency nodes (see diagram in Node Images below).
-
-# SDXL Prompt Mix Presets
-
-Preset mappings can be found in this CivitAI article:
-
-https://civitai.com/articles/1835
 
 # Comfyroll Workflow Templates
 
