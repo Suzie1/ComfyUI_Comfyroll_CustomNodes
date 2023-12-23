@@ -34,6 +34,8 @@ __🔳 Aspect Ratio__
 __📜 List Nodes__
 * CR Font File List (new 18/12/2023)
 * CR Text List (new 19/12/2023)
+* CR Load Image List (new 23/12/2023)
+* CR Load Image List Plus (new 23/12/2023)
 
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets

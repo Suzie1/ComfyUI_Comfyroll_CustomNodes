@@ -1,151 +1,88 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## v1.45 Dec 22, 2023
+- added CR Load Image List
+- added CR Load Image List Plus
+
+## v1.45 Dec 22, 2023
+- PR70 fixed issue #62 with RGB output from gradient nodes
+
+## PR78 Dec 21, 2023
+- added CR Feathered Border
+- added CR Vignette Filter
+
+## PR76 Dec 19, 2023
+- updated CR Font File List
+- added CR Text List
+
+## PR73 Dec 18, 2023
+- issue #72 fixed, make font path agnostic
+
+## PR70 Dec 18, 2023
+- updated CR String To Number
+- updated CR Image Output
+- added CR Aspect Ratio Banners
+- added CR Font File List
+- added CR Simple Image Compare
+- updated logic nodes to make inputs optional
+
+## PR67 Dec 18, 2023
+- added CR Simple Banner
+
+## PR65 Dec 18, 2023
+- added CR Random Multiline Values
+- added CR Random RGB Gradient
+- added CR Overlay Transparent Image
+- added CR Binary PatternSimple
+- added CR Binary Pattern
+
+## PR61 Dec 18, 2023
+- updated max images sizes on gradient nodes
+
+## PR60 Dec 18, 2023
+- added CR Random LoRA Stack and CR Random Weight LoRA
+
 ## PR59 Dec 6, 2023
-
-__Changed Nodes__
-
-	CR Aspect Ratio
-	
-	- added prescale_factor
+- updated CR Aspect Ratio
 
 ## PR55 Dec 2, 2023
+- updated CR Page Layout	
 
-__Other Changes__
-
-	- removed node images
-	- fixes to CR Page Layout	
-
-## PR54 Dec 2, 2023
-
-__Other Changes__
-	
-	- added show-help outputs on animation nodes with links to wiki
-	
 ## PR51, PR52 Dec 2, 2023	
-
-__Added Nodes__
-
-	CR Random RGB
-
-## PR50 Dec 1, 2023
-
-__Other Changes__
-	
-	- added show-help outputs with links to wiki
+- added CR Random RGB
 
 ## PR48 Nov 30, 2023
-
-__Other Changes__
-
-	- disabled CR Load Prompt Style
-	- rename classes on logic nodes
-	- increased max sizes on Aspect Ratio nodes
+- disabled CR Load Prompt Style
+- rename classes on logic nodes
+- increased max sizes on aspect ratio nodes
 
 ## PR45 Nov 29, 2023
-
-__Added Nodes__
-
-	CR Random Hex Color
-
-__Changed Nodes__
-
-    CR Color Tint 
-
-    - added custom color
-	
-	CR Simple Text Panel
-	
-	- added outline text
-	
-__Other Changes__
-	
-	- added demo workflows
+- added CR Random Hex Color
+- updated CR Color Tint 
+- updated CR Simple Text Panel
 	
 ## PR44 Nov 28, 2023
-
-__Changed Nodes__
-
-    CR Select Model
-
-    - added ckpt_name output
-	
-__Other Changes__
-
-    - added new Patch Notes page 	
+- updated CR Select Model
+- added new Patch Notes page 	
 
 ## PR40 Nov 27, 2023
-
-__Added Nodes__
-
-    CR Select Model
-
-    - allows selection of model from one of 5 preset models 
-
-__Changed Nodes__
-
-    CR Simple Text Watermark
-
-    - added batch support
-    - added custom font hex color
-
-    CR Aspect Ratio
-
-    - changed descriptions in aspect_ratios for issue 24
-	
-	CR Upscale Image
-
-    - fixed issue with batched images
-
-__Other Changes__
-
-    - changed preset RGB for brown to 160, 85, 15  
-
+- added CR Select Model
+- updated CR Simple Text Watermark
+- updated CR Aspect Ratio
+- updated CR Upscale Image
+- changed preset RGB for brown to 160, 85, 15  
 
 ## PR39 Nov 26, 2023
-
-__Changed Nodes__
-
-    CR Halftone Filter
-
-    - changed handling for RGBA inputs 
-
+- updated CR Halftone Filter
 
 ## PR38 Nov 26, 2023
-
- __Added Nodes__
-
-    CR Aspect Ratio
-
-    - combines aspect ratio options for both SD1.5 and SDXL
-    - includes empty_latent output
-
-__Changed Nodes__
-
-    CR Halftone Filter
-
-    - added resolution options 
-    - modified antialias_scale parameters
-
-    CR SDXL Aspect Ratio
-
-    - added empty_latent output  
-
-    CR SD1.5 Aspect Ratio
-
-    - added empty_latent output  
-
+- added CR Aspect Ratio
+- updated CR Halftone Filter
+- updated CR SDXL Aspect Ratio
+- updated CR SD1.5 Aspect Ratio
 
 ## PR37 Nov 19, 2023
-
-__Added Nodes__
-
-    CR Simple Text Watermark
-
-    - adds a text watermark to an image
-
-__Other Changes__
-
-    - merged CR Animation Nodes into Comfyroll custom Nodes
-    - added CR Animation Nodes demo workflows
-    - added reduce_opacity function in graphics_functions
+- added CR Simple Text Watermark
+- merged CR Animation Nodes into Comfyroll custom Nodes
+- added reduce_opacity function in graphics_functions
 

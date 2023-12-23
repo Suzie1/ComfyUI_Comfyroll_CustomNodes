@@ -457,11 +457,11 @@ class CR_SimpleTextWatermark:
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS = {
-    "CR Overlay Text":CR_OverlayText,
-    "CR Draw Text":CR_DrawText, 
-    "CR Mask Text":CR_MaskText,
-    "CR Composite Text":CR_CompositeText,
-    "CR Draw Perspective Text":CR_DrawPerspectiveText,
+    "CR Overlay Text": CR_OverlayText,
+    "CR Draw Text": CR_DrawText, 
+    "CR Mask Text": CR_MaskText,
+    "CR Composite Text": CR_CompositeText,
+    "CR Draw Perspective Text": CR_DrawPerspectiveText,
     "CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
 }
