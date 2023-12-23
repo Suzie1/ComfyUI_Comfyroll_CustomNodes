@@ -24,6 +24,8 @@ from .nodes.pil_filter import *
 from .nodes.pil_template import *
 from .nodes.pil_pattern import *
 from .nodes.nodes_random import *
+from .nodes.nodes_list import *
+from .nodes.nodes_aspect_ratio import *
 
 from .animation_nodes.interpolation import *
 from .animation_nodes.io import *
@@ -47,7 +49,9 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Select Model": CR_SelectModel,
     ### List Nodes
     "CR Font File List": CR_FontFileList,
-    "CR Text List": CR_TextList,     
+    "CR Text List": CR_TextList,
+    "CR Load Image List": CR_LoadImageList,
+    "CR Load Image List Plus": CR_LoadImageListPlus,  
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
@@ -203,7 +207,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR LoRA List": CR_LoRAList,
     #"CR Text List": CR_TextList,
     "CR Text List Simple": CR_TextListSimple,
-    "CR Image List": CR_ImageList,
+    #"CR Image List": CR_ImageList,
     "CR Image List Simple": CR_ImageListSimple,     
     # Cyclers
     "CR Cycle Models": CR_CycleModels,    
@@ -235,7 +239,9 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Select Model": "🔮 CR Select Model",
     ### List Nodes
     "CR Font File List": "📜 CR Font File List",
-    "CR Text List": "📜 CR Text List",     
+    "CR Text List": "📜 CR Text List",
+    "CR Load Image List": "📜 CR Load Image List",
+    "CR Load Image List Plus": "📜 CR Load Image List Plus",     
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
@@ -392,7 +398,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR LoRA List": "📃 CR LoRA List",
     #"CR Text List": "📃 CR Text List",
     "CR Text List Simple": "📃 CR Text List Simple",
-    "CR Image List": "📃 CR Image List",
+    #"CR Image List": "📃 CR Image List",
     "CR Image List Simple": "📃 CR Image List Simple", 
     "CR Input Text List": "📃 CR Input Text List", 
     # Cyclers
