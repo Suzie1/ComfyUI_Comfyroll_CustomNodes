@@ -35,19 +35,20 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Latent Batch Size": CR_LatentBatchSize,   
     "CR Seed": CR_Seed,
-    "CR Prompt Text":CR_PromptText,
-    "CR Split String":CR_SplitString,
+    "CR Prompt Text": CR_PromptText,
+    "CR Split String": CR_SplitString,
     "CR Value": CR_Value,
-    "CR Conditioning Mixer":CR_ConditioningMixer,
+    "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel,
+    "CR Multiline Text": CR_MultilineText,     
     ### List Nodes
     "CR Font File List": CR_FontFileList,
     "CR Text List": CR_TextList,
     "CR Load Image List": CR_LoadImageList,
     "CR Load Image List Plus": CR_LoadImageListPlus,  
     ### Aspect Ratio Nodes
-    "CR SD1.5 Aspect Ratio":CR_AspectRatioSD15,
-    "CR SDXL Aspect Ratio":CR_SDXLAspectRatio,
+    "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
+    "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
     "CR Aspect Ratio": CR_AspectRatio,
     "CR Aspect Ratio Banners": CR_AspectRatioBanners,      
     ### Legacy Nodes
@@ -101,6 +102,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Starburst Colors": CR_StarburstColors,
     "CR Simple Binary Pattern": CR_BinaryPatternSimple,     
     "CR Binary Pattern": CR_BinaryPattern,
+    "CR Draw Shape": CR_DrawShape,    
     ### Graphics Text
     "CR Overlay Text": CR_OverlayText,
     "CR Draw Text": CR_DrawText,
@@ -230,6 +232,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Value": "⚙️ CR Value",
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
     "CR Select Model": "🔮 CR Select Model",
+    "CR Multiline Text": "⚙️ CR Multiline Text", 
     ### List Nodes
     "CR Font File List": "📜 CR Font File List",
     "CR Text List": "📜 CR Text List",
@@ -288,9 +291,10 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Color Gradient": "🟨 CR Color Gradient",
     "CR Radial Gradient": "🟨 CR Radial Gradient",    
     "CR Starburst Lines": "🟧 CR Starburst Lines",
-    "CR Starburst Colors": "🟥 CR Starburst Colors",
+    "CR Starburst Colors": "🟧 CR Starburst Colors",
     "CR Simple Binary Pattern": "🟥 CR Simple Binary Pattern",
     "CR Binary Pattern": "🟥 CR Binary Pattern",
+    "CR Draw Shape": "🟥 CR Draw Shape", 
     ### Graphics Text
     "CR Overlay Text": "🔤 CR Overlay Text",
     "CR Draw Text": "🔤️ CR Draw Text",
@@ -298,7 +302,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Composite Text": "🔤️ CR Composite Text",
     #"CR Arabic Text RTL": "🔤️ CR Arabic Text RTL",
     "CR Simple Text Watermark": "🔤️ CR Simple Text Watermark",
-    "CR Font File List": "🔤️ CR Font File List",
     ### Graphics Filter
     "CR Halftone Filter": "🎨 Halftone Filter",
     "CR Color Tint": "🎨 CR Color Tint", 

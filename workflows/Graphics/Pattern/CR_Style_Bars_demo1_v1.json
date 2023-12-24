@@ -1,0 +1,603 @@
+{
+  "last_node_id": 55,
+  "last_link_id": 165,
+  "nodes": [
+    {
+      "id": 48,
+      "type": "CR Text List",
+      "pos": [
+        150,
+        260
+      ],
+      "size": [
+        320,
+        130
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "multiline_text",
+          "type": "STRING",
+          "link": 158,
+          "widget": {
+            "name": "multiline_text"
+          }
+        },
+        {
+          "name": "start_index",
+          "type": "INT",
+          "link": 159,
+          "widget": {
+            "name": "start_index"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            155
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text List",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "text",
+        2,
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 53,
+      "type": "ShowText|pysssss",
+      "pos": [
+        156.3616800000003,
+        -334.34621000000016
+      ],
+      "size": [
+        320,
+        110
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 160,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "'Accent\nAccent_r\nBlues\nBlues_r\nBrBG\nBrBG_r\nBuGn\nBuGn_r\nBuPu\nBuPu_r\nCMRmap\nCMRmap_r\nDark2\nDark2_r\nGnBu\nGnBu_r\nGreens\nGreens_r\nGreys\nGreys_r\nOrRd\nOrRd_r\nOranges\nOranges_r\nPRGn\nPRGn_r\nPaired\nPaired_r\nPastel1\nPastel1_r\nPastel2\nPastel2_r\nPiYG\nPiYG_r\nPuBu\nPuBuGn\nPuBuGn_r\nPuBu_r\nPuOr\nPuOr_r\nPuRd\nPuRd_r\nPurples\nPurples_r\nRdBu\nRdBu_r\nRdGy\nRdGy_r\nRdPu\nRdPu_r\nRdYlBu\nRdYlBu_r\nRdYlGn\nRdYlGn_r\nReds\nReds_r\nSet1\nSet1_r\nSet2\nSet2_r\nSet3\nSet3_r\nSpectral\nSpectral_r\nWistia\nWistia_r\nYlGn\nYlGnBu\nYlGnBu_r\nYlGn_r\nYlOrBr\nYlOrBr_r\nYlOrRd\nYlOrRd_r\nafmhot\nafmhot_r\nautumn\nautumn_r\nbinary\nbinary_r\nbone\nbone_r\nbrg\nbrg_r\nbwr\nbwr_r\ncividis\ncividis_r\ncool\ncool_r\ncoolwarm\ncoolwarm_r\ncopper\ncopper_r\ncubehelix\ncubehelix_r\nflag\nflag_r\ngist_earth\ngist_earth_r\ngist_gray\ngist_gray_r\ngist_heat\ngist_heat_r\ngist_ncar\ngist_ncar_r\ngist_rainbow\ngist_rainbow_r\ngist_stern\ngist_stern_r\ngist_yarg\ngist_yarg_r\ngnuplot\ngnuplot2\ngnuplot2_r\ngnuplot_r\ngray\ngray_r\nhot\nhot_r\nhsv\nhsv_r\ninferno\ninferno_r\njet\njet_r\nmagma\nmagma_r\nnipy_spectral\nnipy_spectral_r\nocean\nocean_r\npink\npink_r\nplasma\nplasma_r\nprism\nprism_r\nrainbow\nrainbow_r\nseismic\nseismic_r\nspring\nspring_r\nsummer\nsummer_r\ntab10\ntab10_r\ntab20\ntab20_r\ntab20b\ntab20b_r\ntab20c\ntab20c_r\nterrain\nterrain_r\nturbo\nturbo_r\ntwilight\ntwilight_r\ntwilight_shifted\ntwilight_shifted_r\nviridis\nviridis_r\nwinter\nwinter_r'"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 51,
+      "type": "Text Find and Replace",
+      "pos": [
+        -243.63832000000033,
+        -334.34621000000016
+      ],
+      "size": [
+        317.4000244140625,
+        166
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 163,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result_text",
+          "type": "STRING",
+          "links": [
+            158,
+            160,
+            164
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "replacement_count_number",
+          "type": "NUMBER",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "replacement_count_float",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "replacement_count_int",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Find and Replace",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "', '",
+        "\\n"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 54,
+      "type": "Text Find and Replace",
+      "pos": [
+        -243.63832000000033,
+        -124.34620999999996
+      ],
+      "size": [
+        317.4000244140625,
+        166
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 164,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result_text",
+          "type": "STRING",
+          "links": [
+            165
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "replacement_count_number",
+          "type": "NUMBER",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "replacement_count_float",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "replacement_count_int",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Find and Replace",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "'",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 50,
+      "type": "Text Multiline",
+      "pos": [
+        -670,
+        -330
+      ],
+      "size": [
+        360,
+        440
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            163
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Multiline",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "'Accent', 'Accent_r', 'Blues', 'Blues_r', 'BrBG', 'BrBG_r', 'BuGn', 'BuGn_r', 'BuPu', 'BuPu_r', 'CMRmap', 'CMRmap_r', 'Dark2', 'Dark2_r', 'GnBu', 'GnBu_r', 'Greens', 'Greens_r', 'Greys', 'Greys_r', 'OrRd', 'OrRd_r', 'Oranges', 'Oranges_r', 'PRGn', 'PRGn_r', 'Paired', 'Paired_r', 'Pastel1', 'Pastel1_r', 'Pastel2', 'Pastel2_r', 'PiYG', 'PiYG_r', 'PuBu', 'PuBuGn', 'PuBuGn_r', 'PuBu_r', 'PuOr', 'PuOr_r', 'PuRd', 'PuRd_r', 'Purples', 'Purples_r', 'RdBu', 'RdBu_r', 'RdGy', 'RdGy_r', 'RdPu', 'RdPu_r', 'RdYlBu', 'RdYlBu_r', 'RdYlGn', 'RdYlGn_r', 'Reds', 'Reds_r', 'Set1', 'Set1_r', 'Set2', 'Set2_r', 'Set3', 'Set3_r', 'Spectral', 'Spectral_r', 'Wistia', 'Wistia_r', 'YlGn', 'YlGnBu', 'YlGnBu_r', 'YlGn_r', 'YlOrBr', 'YlOrBr_r', 'YlOrRd', 'YlOrRd_r', 'afmhot', 'afmhot_r', 'autumn', 'autumn_r', 'binary', 'binary_r', 'bone', 'bone_r', 'brg', 'brg_r', 'bwr', 'bwr_r', 'cividis', 'cividis_r', 'cool', 'cool_r', 'coolwarm', 'coolwarm_r', 'copper', 'copper_r', 'cubehelix', 'cubehelix_r', 'flag', 'flag_r', 'gist_earth', 'gist_earth_r', 'gist_gray', 'gist_gray_r', 'gist_heat', 'gist_heat_r', 'gist_ncar', 'gist_ncar_r', 'gist_rainbow', 'gist_rainbow_r', 'gist_stern', 'gist_stern_r', 'gist_yarg', 'gist_yarg_r', 'gnuplot', 'gnuplot2', 'gnuplot2_r', 'gnuplot_r', 'gray', 'gray_r', 'hot', 'hot_r', 'hsv', 'hsv_r', 'inferno', 'inferno_r', 'jet', 'jet_r', 'magma', 'magma_r', 'nipy_spectral', 'nipy_spectral_r', 'ocean', 'ocean_r', 'pink', 'pink_r', 'plasma', 'plasma_r', 'prism', 'prism_r', 'rainbow', 'rainbow_r', 'seismic', 'seismic_r', 'spring', 'spring_r', 'summer', 'summer_r', 'tab10', 'tab10_r', 'tab20', 'tab20_r', 'tab20b', 'tab20b_r', 'tab20c', 'tab20c_r', 'terrain', 'terrain_r', 'turbo', 'turbo_r', 'twilight', 'twilight_r', 'twilight_shifted', 'twilight_shifted_r', 'viridis', 'viridis_r', 'winter', 'winter_r'"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 45,
+      "type": "CR Style Bars",
+      "pos": [
+        510,
+        320
+      ],
+      "size": [
+        320,
+        200
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "bar_style",
+          "type": "COMBO",
+          "link": 154,
+          "widget": {
+            "name": "bar_style"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            153
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Style Bars",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "sin wave",
+        256,
+        256,
+        "gist_gray",
+        "horizontal",
+        1
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 2,
+      "type": "PreviewImage",
+      "pos": [
+        890,
+        270
+      ],
+      "size": [
+        220,
+        250
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 153,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 55,
+      "type": "ShowText|pysssss",
+      "pos": [
+        160,
+        -120
+      ],
+      "size": [
+        320,
+        110
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 165,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "Accent\nAccent_r\nBlues\nBlues_r\nBrBG\nBrBG_r\nBuGn\nBuGn_r\nBuPu\nBuPu_r\nCMRmap\nCMRmap_r\nDark2\nDark2_r\nGnBu\nGnBu_r\nGreens\nGreens_r\nGreys\nGreys_r\nOrRd\nOrRd_r\nOranges\nOranges_r\nPRGn\nPRGn_r\nPaired\nPaired_r\nPastel1\nPastel1_r\nPastel2\nPastel2_r\nPiYG\nPiYG_r\nPuBu\nPuBuGn\nPuBuGn_r\nPuBu_r\nPuOr\nPuOr_r\nPuRd\nPuRd_r\nPurples\nPurples_r\nRdBu\nRdBu_r\nRdGy\nRdGy_r\nRdPu\nRdPu_r\nRdYlBu\nRdYlBu_r\nRdYlGn\nRdYlGn_r\nReds\nReds_r\nSet1\nSet1_r\nSet2\nSet2_r\nSet3\nSet3_r\nSpectral\nSpectral_r\nWistia\nWistia_r\nYlGn\nYlGnBu\nYlGnBu_r\nYlGn_r\nYlOrBr\nYlOrBr_r\nYlOrRd\nYlOrRd_r\nafmhot\nafmhot_r\nautumn\nautumn_r\nbinary\nbinary_r\nbone\nbone_r\nbrg\nbrg_r\nbwr\nbwr_r\ncividis\ncividis_r\ncool\ncool_r\ncoolwarm\ncoolwarm_r\ncopper\ncopper_r\ncubehelix\ncubehelix_r\nflag\nflag_r\ngist_earth\ngist_earth_r\ngist_gray\ngist_gray_r\ngist_heat\ngist_heat_r\ngist_ncar\ngist_ncar_r\ngist_rainbow\ngist_rainbow_r\ngist_stern\ngist_stern_r\ngist_yarg\ngist_yarg_r\ngnuplot\ngnuplot2\ngnuplot2_r\ngnuplot_r\ngray\ngray_r\nhot\nhot_r\nhsv\nhsv_r\ninferno\ninferno_r\njet\njet_r\nmagma\nmagma_r\nnipy_spectral\nnipy_spectral_r\nocean\nocean_r\npink\npink_r\nplasma\nplasma_r\nprism\nprism_r\nrainbow\nrainbow_r\nseismic\nseismic_r\nspring\nspring_r\nsummer\nsummer_r\ntab10\ntab10_r\ntab20\ntab20_r\ntab20b\ntab20b_r\ntab20c\ntab20c_r\nterrain\nterrain_r\nturbo\nturbo_r\ntwilight\ntwilight_r\ntwilight_shifted\ntwilight_shifted_r\nviridis\nviridis_r\nwinter\nwinter_r"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 49,
+      "type": "CR String To Combo",
+      "pos": [
+        230,
+        470
+      ],
+      "size": [
+        230,
+        50
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 155,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "links": [
+            154
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR String To Combo",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 52,
+      "type": "PrimitiveNode",
+      "pos": [
+        -140,
+        280
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            159
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "start_index"
+          }
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        2,
+        "increment"
+      ]
+    }
+  ],
+  "links": [
+    [
+      153,
+      45,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      154,
+      49,
+      0,
+      45,
+      0,
+      "COMBO"
+    ],
+    [
+      155,
+      48,
+      0,
+      49,
+      0,
+      "STRING"
+    ],
+    [
+      158,
+      51,
+      0,
+      48,
+      0,
+      "STRING"
+    ],
+    [
+      159,
+      52,
+      0,
+      48,
+      1,
+      "INT"
+    ],
+    [
+      160,
+      51,
+      0,
+      53,
+      0,
+      "STRING"
+    ],
+    [
+      163,
+      50,
+      0,
+      51,
+      0,
+      "STRING"
+    ],
+    [
+      164,
+      51,
+      0,
+      54,
+      0,
+      "STRING"
+    ],
+    [
+      165,
+      54,
+      0,
+      55,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
