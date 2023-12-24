@@ -10,7 +10,6 @@ import sys
 import folder_paths
 import re
 import comfy.sd
-import piexif
 from PIL import Image
 from pathlib import Path
 from ..categories import icons
