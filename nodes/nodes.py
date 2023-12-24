@@ -8,6 +8,7 @@ import numpy as np
 import os
 import sys
 import io
+import csv
 import comfy.sd
 import json
 import folder_paths
@@ -396,7 +397,80 @@ class CR_SelectModel:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-model"
             
         return (model, clip, vae, model_name, show_help, )
-       
+ 
+#---------------------------------------------------------------------------------------------------------------------#
+# based on WAS Text Multiline node
+class CR_MultilineText:
+
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "text": ("STRING", {"default": '', "multiline": True}),
+                "convert_from_csv": ("BOOLEAN", {"default": False}),
+                "csv_quote_char": ("STRING", {"default": "'", "choices": ["'", '"']}),
+                "remove_chars": ("BOOLEAN", {"default": False}),
+                "chars_to_remove": ("STRING", {"multiline": False, "default": ""}),
+                "split_string": ("BOOLEAN", {"default": False}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("multiline_text", "show_help", )
+    FUNCTION = "text_multiline"
+    CATEGORY = icons.get("Comfyroll/Other")
+
+    def text_multiline(self, text, chars_to_remove, split_string=False, remove_chars=False, convert_from_csv=False, csv_quote_char="'"):
+    
+        new_text = []
+
+        # Remove trailing commas
+        text = text.rstrip(',')
+
+        if convert_from_csv:
+            # Convert CSV to multiline text
+            csv_reader = csv.reader(io.StringIO(text), quotechar=csv_quote_char)
+            for row in csv_reader:
+                new_text.extend(row)       
+        if split_string: 
+            if text.startswith("'") and text.endswith("'"):
+                text = text[1:-1]  # Remove outer single quotes
+                values = [value.strip() for value in text.split("', '")]
+                new_text.extend(values)
+            elif text.startswith('"') and text.endswith('"'):
+                    text = text[1:-1]  # Remove outer single quotes
+                    values = [value.strip() for value in text.split('", "')]
+                    new_text.extend(values)   
+            elif ',' in text and text.count("'") % 2 == 0:
+                # Assume it's a list-like string and split accordingly
+                text = text.replace("'", '')  # Remove single quotes
+                values = [value.strip() for value in text.split(",")]
+                new_text.extend(values)
+            elif ',' in text and text.count('"') % 2 == 0:
+                    # Assume it's a list-like string and split accordingly
+                    text = text.replace('"', '')  # Remove single quotes
+                    values = [value.strip() for value in text.split(",")]
+                    new_text.extend(values)                 
+        if convert_from_csv == False and split_string == False:
+            # Process multiline text
+            for line in io.StringIO(text):    
+                if not line.strip().startswith('#'):
+                    if not line.strip().startswith("\n"):
+                        line = line.replace("\n", '')
+                    if remove_chars:
+                        # Remove quotes from each line
+                        line = line.replace(chars_to_remove, '')
+                    new_text.append(line)                
+
+        new_text = "\n".join(new_text)
+        
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-multiline-text"
+
+        return (new_text, show_help,)
+    
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -412,7 +486,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Split String": CR_SplitString,
     "CR Value": CR_Value,
     "CR Conditioning Mixer": CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel,    
+    "CR Select Model": CR_SelectModel,
+    "CR Multiline Text": CR_MultilineText,    
 }
 '''
 
