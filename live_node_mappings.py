@@ -46,7 +46,6 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Text List": CR_TextList,
     "CR Load Image List": CR_LoadImageList,
     "CR Load Image List Plus": CR_LoadImageListPlus, 
-    #"CR List Schedule": CR_ListSchedule,
     "CR Float Range List": CR_FloatRangeList,
     "CR Integer Range List": CR_IntegerRangeList,   
     ### Aspect Ratio Nodes
@@ -243,7 +242,9 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Font File List": "📜 CR Font File List",
     "CR Text List": "📜 CR Text List",
     "CR Load Image List": "📜 CR Load Image List",
-    "CR Load Image List Plus": "📜 CR Load Image List Plus",     
+    "CR Load Image List Plus": "📜 CR Load Image List Plus", 
+    "CR Float Range List": "📜 CR Float Range List",
+    "CR Integer Range List": "📜 CR Integer Range List",      
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
