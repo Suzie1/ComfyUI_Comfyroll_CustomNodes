@@ -2,6 +2,8 @@
 
 Co-authored by Suzie1 and RockOfFire
 
+Current version: 1.48
+
 # Wiki
 
 Please use our new wiki for info on the nodes and lots of examples of their use.
@@ -75,6 +77,7 @@ __🌈 Graphics - Pattern__
 * CR Starburst Colors
 * CR Simple Binary Pattern (new 8/12/2023)
 * CR Binary Pattern (new 8/12/2023)
+* CR Draw Shape (new 24/12/2023)
 
 __🔤 Graphics - Text__
 * CR Overlay Text
@@ -172,6 +175,7 @@ __📦 Other__
 * CR Value
 * CR Conditioning Mixer (new 27/11/2023)
 * CR Select Model (new 27/11/2023)
+* CR Multiline Text (new 24/12/2023)
 
 __Deleted Nodes__
 * CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
