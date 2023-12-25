@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi       https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
-# for ComfyUI                                             https://github.com/comfyanonymous/ComfyUI
+# Comfyroll Studio custom nodes by RockOfFire and Akatsuzi    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
 import torch
@@ -293,6 +293,117 @@ class CR_LoadImageListPlus:
         return (images_out, mask_out, index_list, filename_list, index_list, width, height, list_length, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_ListSchedule:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"schedule": ("STRING",
+                             {"multiline": True, "default": "frame_number, item_alias, [attr_value1, attr_value2]"}
+                             ),
+                             "end_index": ("INT", {"default": 1, "min": 1, "max": 9999}),
+                },
+        }
+    
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("LIST", "show_help", )
+    OUTPUT_IS_LIST = (True, False)
+    FUNCTION = "schedule"
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def schedule(self, schedule, end_index):
+
+        schedule_lines = []
+      
+        # Extend the list for each line in the schedule
+        if schedule != "":
+            lines = schedule.split('\n')
+            for line in lines:
+                # Skip empty lines
+                if not line.strip():
+                    print(f"[Warning] CR Simple Schedule. Skipped blank line: {line}")
+                    continue            
+                schedule_lines.append(line)
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-list-schedule"
+
+        return (schedule_lines, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_FloatRangeList:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"start": ("FLOAT", {"default": 0.00, "min": -99999.99, "step": -99999.99, "max": 99999.99}),
+                             "end": ("FLOAT", {"default": 1.00, "min": -99999.99, "step": -99999.99, "max": 99999.99}),
+                             "step": ("FLOAT", {"default": 1.00, "min": 0.00, "step": -99999.99, "max": 99999.99}),
+                             "loops": ("INT", {"default": 1, "min": 1, "max": 999}),
+                             "ping_pong": ("BOOLEAN", {"default": False}),
+                            },
+        }                        
+
+    RETURN_TYPES = ("FLOAT", "STRING",)
+    RETURN_NAMES = ("LIST", "show_help", )    
+    OUTPUT_IS_LIST = (True, False)    
+    FUNCTION = 'make_range'
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def make_range(self, start, end, step, loops, ping_pong):
+        
+        range_values = list()
+        for i in range(loops):
+            current_range = list(np.arange(start, end, step))
+            
+            if ping_pong:
+                # Reverse the direction of the range on even iterations
+                if i % 2 == 1:
+                    range_values += reversed(current_range)
+                else:
+                    range_values += current_range     
+            else:
+                range_values += current_range               
+            
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-list-schedule"      
+
+        return (range_values, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_IntegerRangeList:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"start": ("INT", {"default": 0, "min": -99999, "max": 99999}),
+                             "end": ("INT", {"default": 0, "min": -99999, "max": 99999}),
+                             "step": ("INT", {"default": 1, "min": 1, "max": 99999}),
+                             "loops": ("INT", {"default": 1, "min": 1, "max": 999}),
+                             "ping_pong": ("BOOLEAN", {"default": False}),
+                            },
+        }
+        
+    RETURN_TYPES = ("INT", "STRING",)
+    RETURN_NAMES = ("LIST", "show_help", )    
+    OUTPUT_IS_LIST = (True, False)    
+    FUNCTION = 'make_range'
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def make_range(self, start, end, step, loops, ping_pong):
+    
+        range_values = list()
+        for i in range(loops):
+            current_range = list(range(start, end, step))
+            
+            if ping_pong:
+                # Reverse the direction of the range on even iterations
+                if i % 2 == 1:
+                    range_values += reversed(current_range)
+                else:
+                    range_values += current_range     
+            else:
+                range_values += current_range           
+        
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-list-schedule"      
+
+        return (range_values, show_help, )
+        
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -303,6 +414,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Text List": CR_TextList, 
     "CR Load Image List": CR_LoadImageList,
     "CR Load Image List Plus": CR_LoadImageListPlus,
+    "CR List Schedule": CR_ListSchedule,
+    "CR Float Range List": CR_FloatRangeList,
+    "CR Integer Range List": CR_IntegerRangeList,
 }
 '''
-

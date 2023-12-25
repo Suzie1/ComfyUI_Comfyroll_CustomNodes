@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi       https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
-# for ComfyUI                                             https://github.com/comfyanonymous/ComfyUI
+# Comfyroll Studio custom nodes by RockOfFire and Akatsuzi    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
 import torch
@@ -35,7 +35,7 @@ class CR_ImageOutput:
     
         return {"required": 
                     {"images": ("IMAGE", ),
-                     "output_type": (["Preview", "Save", "Fast"],),
+                     "output_type": (["Preview", "Save", "UI (no batch)"],),
                      "filename_prefix": ("STRING", {"default": "CR"}),
                      "prefix_presets": (presets, ),
                      "file_format": (["png", "jpg", "webp", "tif"],),
@@ -104,8 +104,8 @@ class CR_ImageOutput:
             os.makedirs(full_output_folder, exist_ok=True)
             counter = 1
 
-        if output_type == "Fast":
-            # based on SendImageWebSocket by
+        if output_type == "UI (no batch)":
+            # based on ETN_SendImageWebSocket
             results = []
             for tensor in images:
                 array = 255.0 * tensor.cpu().numpy()

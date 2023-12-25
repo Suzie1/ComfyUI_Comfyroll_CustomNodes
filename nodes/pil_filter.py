@@ -1,7 +1,8 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
-# for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI
+# Comfyroll Studio custom nodes by RockOfFire and Akatsuzi    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
+
 import torch
 import numpy as np
 from PIL import Image, ImageDraw, ImageStat, ImageFilter

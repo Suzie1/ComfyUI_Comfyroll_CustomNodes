@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Custom Nodes by RockOfFire and Akatsuzi     https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
-# for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI                                               
+# Comfyroll Studio custom nodes by RockOfFire and Akatsuzi    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
 import numpy as np
@@ -203,6 +203,90 @@ class CR_DrawShape:
         center_y = height // 2 + y_offset         
         size = min(width - x_offset, height - y_offset) * zoom
         aspect_ratio = width / height
+        color = 'white'
+
+        shape_functions = {
+            'circle': draw_circle,
+            'oval': draw_oval,
+            'diamond': draw_diamond,
+            'square': draw_square,
+            'triangle': draw_triangle,
+            'hexagon': draw_hexagon,
+            'octagon': draw_octagon,
+            'quarter circle': draw_quarter_circle,
+            'half circle': draw_half_circle,
+            'starburst': draw_starburst,
+            'star': draw_star, 
+            'cross': draw_cross,
+        }
+
+        if shape in shape_functions:
+            shape_function = shape_functions.get(shape)
+            shape_function(draw, center_x, center_y, size, aspect_ratio, color)
+
+        if shape == "diagonal regions":
+            draw.polygon([(width, 0), (width, height), (0, height)], fill=color)
+
+        shape_mask = shape_mask.rotate(rotation, center=(center_x, center_y))
+        
+        result_image = Image.composite(shape_img, back_img, shape_mask) 
+
+        image_out = pil2tensor(result_image)
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes-2#cr-draw-shape"
+
+        return (image_out, show_help, )  
+
+#---------------------------------------------------------------------------------------------------------------------#class CR_DrawShape:
+'''
+class CR_ShapeScheduler:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+                
+        shapes = ["circle","oval","square","diamond","triangle","hexagon","octagon",
+                  "quarter circle","half circle","quarter circle","starburst","star","cross","diagonal regions"]
+        
+        return {"required": {
+                    "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
+                    "height": ("INT", {"default": 512, "min": 64, "max": 4096}),        
+                    "shape": (shapes,),
+                    "shape_color": (COLORS,), 
+                    "back_color": (COLORS,),                  
+                    "x_offset": ("INT", {"default": 0, "min": -2048, "max": 2048}),
+                    "y_offset": ("INT", {"default": 0, "min": -2048, "max": 2048}),
+                    "zoom": ("FLOAT", {"default": 1.00, "min": 0.00, "max": 10.00, "step": 0.05}),
+                    "rotation": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 3600.0, "step": 0.1}),
+                    "schedule": ("STRING", {"multiline": True, "default": "schedule"}),
+               },
+                "optional": {
+                    "shape_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                    "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
+                }
+        }
+
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
+    FUNCTION = "make_shape"
+    CATEGORY = icons.get("Comfyroll/Graphics/Shape")
+    
+    def make_shape(self, width, height, rotation,
+                      shape, shape_color, back_color, schedule,
+                      x_offset=0, y_offset=0, zoom=1.0,
+                      shape_color_hex='#000000', bg_color_hex='#000000'):
+
+        bg_color = get_color_values(back_color, bg_color_hex, color_mapping) 
+        shape_color = get_color_values(shape_color, shape_color_hex, color_mapping) 
+          
+        back_img = Image.new("RGB", (width, height), color=bg_color)
+        shape_img = Image.new("RGB", (width, height), color=shape_color)
+        shape_mask = Image.new('L', (width, height))
+        draw = ImageDraw.Draw(shape_mask)   
+
+        center_x = width // 2 + x_offset
+        center_y = height // 2 + y_offset         
+        size = min(width - x_offset, height - y_offset) * zoom
+        aspect_ratio = width / height
         num_rays = 16
         color = 'white'
 
@@ -223,7 +307,7 @@ class CR_DrawShape:
 
         if shape in shape_functions:
             shape_function = shape_functions.get(shape)
-            shape_function(draw, center_x, center_y, size, aspect_ratio, num_rays, color)
+            shape_function(draw, center_x, center_y, size, aspect_ratio, color)
 
         if shape == "diagonal regions":
             draw.polygon([(width, 0), (width, height), (0, height)], fill=color)
@@ -237,7 +321,7 @@ class CR_DrawShape:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes-2#cr-draw-shape"
 
         return (image_out, show_help, )  
-
+'''
 #---------------------------------------------------------------------------------------------------------------------#class CR_DrawShape:
 class CR_DrawPie:
 
@@ -315,7 +399,7 @@ class CR_RandomShapePattern:
                     "num_rows": ("INT", {"default": 5, "min": 1, "max": 128}),
                     "num_cols": ("INT", {"default": 5, "min": 1, "max": 128}),                    
                     "color1": (COLORS,), 
-                    "color2": (COLORS,),                  
+                    "color2": (COLORS,),
                },
                 "optional": {
                     "color1_hex": ("STRING", {"multiline": False, "default": "#000000"}),
@@ -358,12 +442,11 @@ class CR_RandomShapePattern:
                 color = random.choice([color1, color2])
                 size = random.uniform(20, min(width, height) / 2)
                 aspect_ratio = random.uniform(0.5, 2.0)  # For shapes that use aspect ratio
-                num_rays = random.randint(5, 12)  # For starburst
 
                 center_x = col * (width / num_cols) + (width / num_cols) / 2
                 center_y = row * (height / num_rows) + (height / num_rows) / 2
                 
-                shape_function(draw, center_x, center_y, size, aspect_ratio, num_rays, color)
+                shape_function(draw, center_x, center_y, size, aspect_ratio, color)
 
         image_out = pil2tensor(image)
 

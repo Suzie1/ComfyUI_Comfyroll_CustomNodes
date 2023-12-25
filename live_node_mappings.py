@@ -45,7 +45,10 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Font File List": CR_FontFileList,
     "CR Text List": CR_TextList,
     "CR Load Image List": CR_LoadImageList,
-    "CR Load Image List Plus": CR_LoadImageListPlus,  
+    "CR Load Image List Plus": CR_LoadImageListPlus, 
+    #"CR List Schedule": CR_ListSchedule,
+    "CR Float Range List": CR_FloatRangeList,
+    "CR Integer Range List": CR_IntegerRangeList,   
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,

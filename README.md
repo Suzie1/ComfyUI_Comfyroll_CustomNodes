@@ -1,12 +1,12 @@
-# 🧩 Comfyroll Custom Nodes
+# 🧩 Comfyroll Studio
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.48
+Current version: 1.50
 
 # Wiki
 
-Please use our new wiki for info on the nodes, and lots of examples of their use.
+Please use our new wiki for info on the custom nodes, and lots of examples of their use.
 
 https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
 
@@ -37,6 +37,8 @@ __📜 List Nodes__
 * CR Text List (new 19/12/2023)
 * CR Load Image List (new 23/12/2023)
 * CR Load Image List Plus (new 23/12/2023)
+* CR Float Range List (new 25/12/2023)
+* CR Integer Range List (new 25/12/2023)
 
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets

@@ -1,9 +1,8 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Pipe Nodes by Akatsuzi                      https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes
-# for ComfyUI                                           https://github.com/comfyanonymous/ComfyUI
+# Comfyroll Studio custom nodes by RockOfFire and Akatsuzi    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 # based on Tiny Terra nodes
-#---------------------------------------------------------------------------------------------------------------------#
 
 from ..categories import icons
 

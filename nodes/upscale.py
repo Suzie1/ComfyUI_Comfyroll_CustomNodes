@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/Suzie1/CR-Animation-Nodes
-# for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
+# Comfyroll Studio custom nodes by RockOfFire and Akatsuzi    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
 import torch
@@ -20,11 +20,11 @@ def pil2tensor(image):
 def tensor2pil(image):
     return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
 
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 # NODES
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 # These nodes are based on WAS nodes Image Resize and the Comfy Extras upscale with model nodes
-#---------------------------------------------------------------------------------------------------------------------
+
 class CR_UpscaleImage:
 
     @classmethod
