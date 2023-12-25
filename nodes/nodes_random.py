@@ -70,12 +70,13 @@ class CR_RandomMultilineValues:
     @classmethod
     def INPUT_TYPES(cls):
     
-        types = ["binary", "decimal", "natural", "hexadecimal", "alphabetic", "alphanumeric"]
+        types = ["binary", "decimal", "natural", "hexadecimal", "alphabetic", "alphanumeric", "custom"]
         
         return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
                              "value_type": (types,),
                              "rows": ("INT", {"default": 5, "min": 1, "max": 2048}),
                              "string_length": ("INT", {"default": 5, "min": 1, "max": 2048}),
+                             "custom_values": ("STRING", {"multiline": False, "default": "123ABC"}),
                }
         }
 
@@ -84,7 +85,7 @@ class CR_RandomMultilineValues:
     FUNCTION = "generate"
     CATEGORY = icons.get("Comfyroll/Utils/Random")
 
-    def generate(self, value_type, rows, string_length, seed):
+    def generate(self, value_type, rows, string_length, custom_values, seed):
     
         # Set the seed
         random.seed(seed)
@@ -101,6 +102,8 @@ class CR_RandomMultilineValues:
             choice_str = string.ascii_letters
         elif value_type == "alphanumeric":
             choice_str = string.ascii_letters + string.digits
+        elif value_type == "custom":
+            choice_str = custom_values            
        
         multiline_text = '\n'.join([''.join(random.choice(choice_str) for _ in range(string_length)) for _ in range(rows)])
     

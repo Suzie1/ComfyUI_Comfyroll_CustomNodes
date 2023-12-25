@@ -1,5 +1,15 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## v1.49 Dec 25, 2023
+- added CR Draw Pie
+- added CR_RandomShapePattern 
+- updated CR Random Multiline Values
+- updated CR Image Output
+
+## v1.48 Dec 24, 2023
+- added CR Draw Shape
+- added CR Multiline Text
+
 ## v1.47 Dec 23, 2023
 - added CR Load Image List
 - added CR Load Image List Plus

@@ -7,19 +7,18 @@ import torch
 import numpy as np
 import os
 import sys
-import io
 import csv
 import comfy.sd
 import json
 import folder_paths
 import typing as tg
 import datetime
+from io import BytesIO, StringIO
+from server import PromptServer, BinaryEventTypes
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 from pathlib import Path
 from ..categories import icons
-
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "comfy"))
 
 #---------------------------------------------------------------------------------------------------------------------#
 # Other Nodes
@@ -30,13 +29,13 @@ class CR_ImageOutput:
         self.type = "output"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
     
         presets = ["None", "yyyyMMdd"]
     
         return {"required": 
                     {"images": ("IMAGE", ),
-                     "output_type": (["Preview", "Save"],),
+                     "output_type": (["Preview", "Save", "Fast"],),
                      "filename_prefix": ("STRING", {"default": "CR"}),
                      "prefix_presets": (presets, ),
                      "file_format": (["png", "jpg", "webp", "tif"],),
@@ -55,6 +54,8 @@ class CR_ImageOutput:
 
     def save_images(self, images, file_format, prefix_presets, filename_prefix="CR",
         trigger=False, output_type="Preview", prompt=None, extra_pnginfo=None):
+              
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-output"
     
         def map_filename(filename):
             prefix_len = len(os.path.basename(filename_prefix))
@@ -102,45 +103,59 @@ class CR_ImageOutput:
         except FileNotFoundError:
             os.makedirs(full_output_folder, exist_ok=True)
             counter = 1
-      
-        results = list()
-        for image in images:
-            i = 255. * image.cpu().numpy()
-            img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-            metadata = PngInfo()
-            if prompt is not None:
-                metadata.add_text("prompt", json.dumps(prompt))
-            if extra_pnginfo is not None:
-                for x in extra_pnginfo:
-                    metadata.add_text(x, json.dumps(extra_pnginfo[x]))
 
-            file_name = f"{filename}_{counter:05}_.{file_format}"
-            
-            img_params = {'png': {'compress_level': 4}, 
-                          'webp': {'method': 6, 'lossless': False, 'quality': 80},
-                          'jpg': {'format': 'JPEG'},
-                          'tif': {'format': 'TIFF'}
-                         }
-            
-            resolved_image_path = os.path.join(full_output_folder, file_name)
-            
-            img.save(resolved_image_path, **img_params[file_format], pnginfo=metadata)
-            results.append({
-                "filename": file_name,
-                "subfolder": subfolder,
-                "type": self.type
-            })
-            counter += 1
+        if output_type == "Fast":
+            # based on SendImageWebSocket by
+            results = []
+            for tensor in images:
+                array = 255.0 * tensor.cpu().numpy()
+                image = Image.fromarray(np.clip(array, 0, 255).astype(np.uint8))
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-output"
+                server = PromptServer.instance
+                server.send_sync(
+                    BinaryEventTypes.UNENCODED_PREVIEW_IMAGE,
+                    ["PNG", image, None],
+                    server.client_id,
+                )
+                results.append(
+                    {"source": "websocket", "content-type": "image/png", "type": "output"}
+                )
+            return {"ui": {"images": results}}
+        else:           
+            results = list()
+            for image in images:
+                i = 255. * image.cpu().numpy()
+                img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+                metadata = PngInfo()
+                if prompt is not None:
+                    metadata.add_text("prompt", json.dumps(prompt))
+                if extra_pnginfo is not None:
+                    for x in extra_pnginfo:
+                        metadata.add_text(x, json.dumps(extra_pnginfo[x]))
 
-        return { "ui": { "images": results }, "result": (trigger,) }
-       
+                file_name = f"{filename}_{counter:05}_.{file_format}"
+                
+                img_params = {'png': {'compress_level': 4}, 
+                              'webp': {'method': 6, 'lossless': False, 'quality': 80},
+                              'jpg': {'format': 'JPEG'},
+                              'tif': {'format': 'TIFF'}
+                             }
+                
+                resolved_image_path = os.path.join(full_output_folder, file_name)
+                
+                img.save(resolved_image_path, **img_params[file_format], pnginfo=metadata)
+                results.append({
+                    "filename": file_name,
+                    "subfolder": subfolder,
+                    "type": self.type
+                })
+                counter += 1
+
+            return { "ui": { "images": results }, "result": (trigger,) }
+ 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_IntegerMultipleOf:
-    def __init__(self):
-        pass
-        
+       
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -164,11 +179,9 @@ class CR_IntegerMultipleOf:
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_Seed:
-    def __init__(self):
-        pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff})}}
 
     RETURN_TYPES = ("INT", "STRING", )
@@ -184,9 +197,6 @@ class CR_Seed:
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_LatentBatchSize:
-
-    def __init__(self):
-        pass
 
     @classmethod
     def INPUT_TYPES(s):
@@ -215,6 +225,7 @@ class CR_LatentBatchSize:
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_PromptText:
+
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {"prompt": ("STRING", {"default": "prompt", "multiline": True})}}
@@ -259,7 +270,7 @@ class CR_SplitString:
 class CR_Value:
 
     @classmethod
-    def INPUT_TYPES(s):  
+    def INPUT_TYPES(cls):  
         return {"required": {"value": ("FLOAT", {"default": 1.0,},)}}
 
     RETURN_TYPES = ("FLOAT", "INT", "STRING", )
@@ -275,7 +286,7 @@ class CR_Value:
 class CR_ConditioningMixer:
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
     
         mix_methods = ["Combine", "Average", "Concatenate"]
         
@@ -402,9 +413,6 @@ class CR_SelectModel:
 # based on WAS Text Multiline node
 class CR_MultilineText:
 
-    def __init__(self):
-        pass
-
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -470,7 +478,7 @@ class CR_MultilineText:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-multiline-text"
 
         return (new_text, show_help,)
-    
+ 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#

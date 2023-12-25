@@ -102,7 +102,10 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Starburst Colors": CR_StarburstColors,
     "CR Simple Binary Pattern": CR_BinaryPatternSimple,     
     "CR Binary Pattern": CR_BinaryPattern,
-    "CR Draw Shape": CR_DrawShape,    
+    ### Graphics Shape    
+    "CR Draw Shape": CR_DrawShape,
+    "CR Draw Pie": CR_DrawPie,    
+    "CR Random Shape Pattern": CR_RandomShapePattern,    
     ### Graphics Text
     "CR Overlay Text": CR_OverlayText,
     "CR Draw Text": CR_DrawText,
@@ -294,7 +297,10 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Starburst Colors": "🟧 CR Starburst Colors",
     "CR Simple Binary Pattern": "🟥 CR Simple Binary Pattern",
     "CR Binary Pattern": "🟥 CR Binary Pattern",
-    "CR Draw Shape": "🟥 CR Draw Shape", 
+    ### Graphics Shape    
+    "CR Draw Shape": "🟡 CR Draw Shape", 
+    "CR Draw Pie": "🟢 CR Draw Pie",    
+    "CR Random Shape Pattern": "🔵 CR Random Shape Pattern",   
     ### Graphics Text
     "CR Overlay Text": "🔤 CR Overlay Text",
     "CR Draw Text": "🔤️ CR Draw Text",
