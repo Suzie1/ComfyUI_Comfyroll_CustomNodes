@@ -2,7 +2,11 @@
 
 Co-authored by Suzie1 and RockOfFire
 
+<<<<<<< HEAD
 Current version: 1.50
+=======
+Current version: 1.49
+>>>>>>> b2ce0dd2c2e25ea66a33f001af359bebcdef4ae2
 
 # Wiki
 
