@@ -1,11 +1,11 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/Suzie1/CR-Animation-Nodes
-# for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
+# Comfyroll Studio custom nodes by RockOfFire and Akatsuzi    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
 from ..categories import icons
 
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_Trigger: 
 
     @classmethod
@@ -24,7 +24,7 @@ class CR_Trigger:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-trigger"
         return (index, index == trigger_value, show_help, )
 
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_Index: 
 
     @classmethod
@@ -47,7 +47,7 @@ class CR_Index:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index"
         return (index, show_help, )
 
-#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------#
 class CR_IncrementIndex:
 
     @classmethod

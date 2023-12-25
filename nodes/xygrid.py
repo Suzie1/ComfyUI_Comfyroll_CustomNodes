@@ -1,9 +1,8 @@
 #---------------------------------------------------------------------------------------------------------------------#
-# Comfyroll Nodes by RockOfFire and Akatsuzi      https://github.com/Suzie1/CR-Animation-Nodes
-# for ComfyUI                                     https://github.com/comfyanonymous/ComfyUI
+# Comfyroll Studio custom nodes by RockOfFire and Akatsuzi    https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes                             
+# for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 # based on https://github.com/LEv145/images-grid-comfy-plugin
-#---------------------------------------------------------------------------------------------------------------------#
 
 import os
 import folder_paths

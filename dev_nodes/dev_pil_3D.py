@@ -9,8 +9,7 @@ import torch
 import os 
 from PIL import Image, ImageDraw
 from ..categories import icons
-from ..config import color_mapping, COLORS
-from pywavefront import Wavefront    
+from ..config import color_mapping, COLORS  
     
 #---------------------------------------------------------------------------------------------------------------------#
 

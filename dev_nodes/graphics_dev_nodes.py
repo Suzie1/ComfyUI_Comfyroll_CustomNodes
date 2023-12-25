@@ -743,6 +743,92 @@ class CR_DisplayFont:
         return (image_out, show_help,) 
 '''        
 #---------------------------------------------------------------------------------------------------------------------#
+'''
+class CR_RadialGradientMap:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        gradient_stops = '''0:255,0,0
+25:255,255,255
+50:0,255,0
+75:0,0,255'''
+        return {
+            "required": {
+                "width": ("INT", {"default":512, "max": 4096, "min": 64, "step":1}),
+                "height": ("INT", {"default":512, "max": 4096, "min": 64, "step":1}),
+                "direction": (["horizontal", "vertical"],),
+                "tolerance": ("INT", {"default":0, "max": 255, "min": 0, "step":1}),
+                "rgb_stops": ("STRING", {"default": gradient_stops, "multiline": True}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    FUNCTION = "plot_radial_gradient"
+
+    CATEGORY = icons.get("Comfyroll/Graphics/Pattern")
+
+    def plot_radial_gradient(self, rgb_stops, width=512, height=512, direction='horizontal', tolerance=0):
+    
+        import io
+        from matplotlib.colors import LinearSegmentedColormap 
+    
+        try:
+            # Remove empty lines and lines with invalid format
+            stops = [line.strip() for line in rgb_stops.split('\n') if line.strip()]
+            sorted_stops = sorted(stops, key=lambda x: int(x.split(':')[0]))
+        except ValueError as e:
+            print(f"Error sorting stops: {e}")
+            sorted_stops = []
+        print(sorted_stops)    
+        # Extract sequential numbers and RGB values
+        positions, colors = zip(*[(int(stop.split(':')[0])/100, tuple(map(int, stop.split(':')[1].split(',')))) for stop in sorted_stops])
+        print(positions, colors) 
+        
+        # Normalize positions to be between 0 and 1
+        normalized_positions = [pos / 100 for pos in positions]
+
+        # Ensure that positions start with 0 and end with 1
+        if normalized_positions[0] != 0:
+            normalized_positions = [0] + normalized_positions
+        if normalized_positions[-1] != 1:
+            normalized_positions = normalized_positions + [1]
+        
+        # Create a colormap using LinearSegmentedColormap with custom positions
+        cmap_dict = {'red': [], 'green': [], 'blue': []}
+
+        for pos, color in zip(positions, colors):
+            cmap_dict['red'].append((pos, color[0]/255, color[0]/255))
+            cmap_dict['green'].append((pos, color[1]/255, color[1]/255))
+            cmap_dict['blue'].append((pos, color[2]/255, color[2]/255))
+
+        cmap = LinearSegmentedColormap('radial_gradient', cmap_dict, N=100)
+        
+        # Create a polar plot
+        theta = np.linspace(0, 2*np.pi, 100)
+        r = np.linspace(0, 1, 100)
+        R, Theta = np.meshgrid(r, theta)
+        X, Y = R * np.cos(Theta), R * np.sin(Theta)
+
+        # Plot the gradient
+        fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+        plt.axis('off')
+        im = ax.pcolormesh(Theta, R, np.ones_like(Theta), cmap=cmap, shading='auto')
+        #fig.colorbar(im, ax=ax, orientation='vertical', fraction=0.05, pad=0.1)
+
+        img_buf = io.BytesIO()
+        plt.savefig(img_buf, format='png')
+        img = Image.open(img_buf)
+
+        image_out = pil2tensor(img.convert("RGB"))         
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes#cr-radial-gradient-map"
+
+        return (image_out, show_help, )
+'''
+
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -757,8 +843,9 @@ NODE_CLASS_MAPPINGS = {
     "CR Simple Image Watermark": CR_SimpleImageWatermark,
     "CR Comic Panel Templates Advanced": CR_ComicPanelTemplatesAdvanced,
     "CR ASCII Pattern": CR_ASCIIPattern,
-    #"CR System TrueType Font": CR_SystemTrueTypeFont,
-    #"CR Display Font": CR_DisplayFont,    
+    "CR System TrueType Font": CR_SystemTrueTypeFont,
+    "CR Display Font": CR_DisplayFont,
+    "CR Radial Gradient Map": CR_RadialGradientMap,    
 }
 '''
 

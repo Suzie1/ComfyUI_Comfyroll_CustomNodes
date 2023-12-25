@@ -45,7 +45,9 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Font File List": CR_FontFileList,
     "CR Text List": CR_TextList,
     "CR Load Image List": CR_LoadImageList,
-    "CR Load Image List Plus": CR_LoadImageListPlus,  
+    "CR Load Image List Plus": CR_LoadImageListPlus, 
+    "CR Float Range List": CR_FloatRangeList,
+    "CR Integer Range List": CR_IntegerRangeList,   
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
@@ -102,7 +104,10 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Starburst Colors": CR_StarburstColors,
     "CR Simple Binary Pattern": CR_BinaryPatternSimple,     
     "CR Binary Pattern": CR_BinaryPattern,
-    "CR Draw Shape": CR_DrawShape,    
+    ### Graphics Shape    
+    "CR Draw Shape": CR_DrawShape,
+    "CR Draw Pie": CR_DrawPie,    
+    "CR Random Shape Pattern": CR_RandomShapePattern,    
     ### Graphics Text
     "CR Overlay Text": CR_OverlayText,
     "CR Draw Text": CR_DrawText,
@@ -237,7 +242,9 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Font File List": "📜 CR Font File List",
     "CR Text List": "📜 CR Text List",
     "CR Load Image List": "📜 CR Load Image List",
-    "CR Load Image List Plus": "📜 CR Load Image List Plus",     
+    "CR Load Image List Plus": "📜 CR Load Image List Plus", 
+    "CR Float Range List": "📜 CR Float Range List",
+    "CR Integer Range List": "📜 CR Integer Range List",      
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
@@ -294,7 +301,10 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Starburst Colors": "🟧 CR Starburst Colors",
     "CR Simple Binary Pattern": "🟥 CR Simple Binary Pattern",
     "CR Binary Pattern": "🟥 CR Binary Pattern",
-    "CR Draw Shape": "🟥 CR Draw Shape", 
+    ### Graphics Shape    
+    "CR Draw Shape": "🟡 CR Draw Shape", 
+    "CR Draw Pie": "🟢 CR Draw Pie",    
+    "CR Random Shape Pattern": "🔵 CR Random Shape Pattern",   
     ### Graphics Text
     "CR Overlay Text": "🔤 CR Overlay Text",
     "CR Draw Text": "🔤️ CR Draw Text",

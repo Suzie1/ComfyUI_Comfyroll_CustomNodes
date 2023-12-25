@@ -1,12 +1,12 @@
-# 🧩 Comfyroll Custom Nodes
+# 🧩 Comfyroll Studio
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.48
+Current version: 1.50
 
 # Wiki
 
-Please use our new wiki for info on the nodes and lots of examples of their use.
+Please use our new wiki for info on the custom nodes, and lots of examples of their use.
 
 https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki
 
@@ -29,7 +29,7 @@ https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
 __🔳 Aspect Ratio__
 * CR SDXL Aspect Ratio
 * CR SD1.5 Aspect Ratio
-* CR Aspect Ratio (new 27/11/2023)
+* CR Aspect Ratio
 * CR Aspect Ratio Banners (new 18/12/2023)
 
 __📜 List Nodes__
@@ -37,6 +37,8 @@ __📜 List Nodes__
 * CR Text List (new 19/12/2023)
 * CR Load Image List (new 23/12/2023)
 * CR Load Image List Plus (new 23/12/2023)
+* CR Float Range List (new 25/12/2023)
+* CR Integer Range List (new 25/12/2023)
 
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets
@@ -77,7 +79,11 @@ __🌈 Graphics - Pattern__
 * CR Starburst Colors
 * CR Simple Binary Pattern (new 8/12/2023)
 * CR Binary Pattern (new 8/12/2023)
+
+__🟡 Graphics - Pattern__
 * CR Draw Shape (new 24/12/2023)
+* CR Draw Pie" (new 25/12/2023)  
+* CR Random Shape Pattern" (new 25/12/2023)   
 
 __🔤 Graphics - Text__
 * CR Overlay Text
@@ -173,8 +179,8 @@ __📦 Other__
 * CR Integer Multiple
 * CR Seed
 * CR Value
-* CR Conditioning Mixer (new 27/11/2023)
-* CR Select Model (new 27/11/2023)
+* CR Conditioning Mixer
+* CR Select Model
 * CR Multiline Text (new 24/12/2023)
 
 __Deleted Nodes__
@@ -216,3 +222,9 @@ SeargeDP/[SeargeSDXL](https://github.com/SeargeDP) - ComfyUI custom nodes - Prom
 LucianoCirino/[efficiency-nodes-comfyui](https://github.com/LucianoCirino/efficiency-nodes-comfyui) - A collection of ComfyUI custom nodes.
 
 SLAPaper/[ComfyUI-Image-Selector](https://github.com/SLAPaper/ComfyUI-Image-Selector) - Select one or some of images from a batch
+
+pythongosssss/[ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) - Enhancements & experiments for ComfyUI, mostly focusing on UI features
+
+bash-j/[mikey_nodes](https://github.com/bash-j/mikey_nodes) - comfy nodes from mikey
+
+ltdrdata/[ComfyUI-Impact-Pack](https://github.com/ltdrdata/ComfyUI-Impact-Pack) - 
