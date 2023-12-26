@@ -329,11 +329,11 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Overlay Transparent Image": "🌁 CR Overlay Transparent Image",
     #"CR Simple Titles": "🌁 CR Simple Titles",    
     ### Graphics Template
-    "CR Simple Meme Template": "👽 CR Simple Meme Template",
-    "CR Simple Banner": "👽 CR Simple Banner",     
-    "CR Comic Panel Templates": "👽 CR Comic Panel Templates",
-    "CR Simple Image Compare": "👽 CR Simple Image Compare",
-    "CR Thumbnail Preview": "👽 CR Thumbnail Preview", 
+    "CR Simple Meme Template": "📱 CR Simple Meme Template",
+    "CR Simple Banner": "📱 CR Simple Banner",     
+    "CR Comic Panel Templates": "📱 CR Comic Panel Templates",
+    "CR Simple Image Compare": "📱 CR Simple Image Compare",
+    "CR Thumbnail Preview": "📱 CR Thumbnail Preview", 
     ### Utils Logic Nodes
     "CR Image Input Switch": "🔀 CR Image Input Switch",
     "CR Image Input Switch (4 way)": "🔀 CR Image Input Switch (4 way)",

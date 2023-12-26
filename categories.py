@@ -17,7 +17,7 @@ icons = {
     "Comfyroll/Pipe": "🧩 Comfyroll Studio/🎷 Pipe",
     "Comfyroll/Graphics/Text": "🧩 Comfyroll Studio/👾 Graphics/🔤 Text",
     "Comfyroll/Graphics/Layout": "🧩 Comfyroll Studio/👾 Graphics/🌁 Layout",
-    "Comfyroll/Graphics/Template": "🧩 Comfyroll Studio/👾 Graphics/👽 Template",
+    "Comfyroll/Graphics/Template": "🧩 Comfyroll Studio/👾 Graphics/📱 Template",
     "Comfyroll/Graphics/Filter": "🧩 Comfyroll Studio/👾 Graphics/🎨 Filter",
     "Comfyroll/Graphics/Pattern": "🧩 Comfyroll Studio/👾 Graphics/🌈 Pattern",
     "Comfyroll/Graphics/Shape": "🧩 Comfyroll Studio/👾 Graphics/🟣 Shape",

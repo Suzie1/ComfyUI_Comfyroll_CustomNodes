@@ -5,8 +5,8 @@
 - added CR_Random Panel Code
 
 ## v1.50 Dec 25, 2023
-- CR Float Range List
-- CR Integer Range List
+- added CR Float Range List
+- added CR Integer Range List
 
 ## v1.49 Dec 25, 2023
 - added CR Draw Pie
