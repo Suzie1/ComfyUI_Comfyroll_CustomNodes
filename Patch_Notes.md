@@ -1,8 +1,16 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## v1.51 Dec 26, 2023
+- added CR Thumbnail Template
+- added CR_Random Panel Code
+
+## v1.50 Dec 25, 2023
+- CR Float Range List
+- CR Integer Range List
+
 ## v1.49 Dec 25, 2023
 - added CR Draw Pie
-- added CR_RandomShapePattern 
+- added CR_Random Shape Pattern 
 - updated CR Random Multiline Values
 - updated CR Image Output
 

@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.50
+Current version: 1.51
 
 # Wiki
 
@@ -97,6 +97,7 @@ __👽 Graphics - Template__
 * CR Comic Panel Templates
 * CR Simple Banner (new 18/12/2023)
 * CR Simple Image Compare (new 18/12/2023)
+* CR Thumbnail Preview (new 26/12/2023)
 
 __🌁 Graphics - Layout__
 * CR Image Panel
@@ -168,8 +169,9 @@ __🔀 Logic__
 __🎲 Random__
 * CR Random Hex Color
 * CR Random RGB
-* CR Random Multiline Values (new 8/12/2023)
+* CR Random Multiline Values (updated 26/12/2023)
 * CR Random RGB Gradient (new 8/12/2023)
+* CR Random Panel Code (new 26/12/2023)
   
 __📦 Other__
 * CR Image Output (changed 18/12/2023)

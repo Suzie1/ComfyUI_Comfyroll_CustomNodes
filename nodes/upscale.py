@@ -192,7 +192,7 @@ class CR_ApplyMultiUpscale:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Upscale-Nodes#cr-apply-multi-upscale"
 
         return (image, show_help, )
-   
+
 #---------------------------------------------------------------------------------------------------------------------
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#

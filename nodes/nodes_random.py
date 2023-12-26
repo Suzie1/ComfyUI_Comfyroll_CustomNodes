@@ -70,13 +70,14 @@ class CR_RandomMultilineValues:
     @classmethod
     def INPUT_TYPES(cls):
     
-        types = ["binary", "decimal", "natural", "hexadecimal", "alphabetic", "alphanumeric", "custom"]
+        types = ["binary", "decimal", "natural", "hexadecimal", "alphabetic", "alphanumeric", "hex color", "custom"]
         
         return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
                              "value_type": (types,),
                              "rows": ("INT", {"default": 5, "min": 1, "max": 2048}),
-                             "string_length": ("INT", {"default": 5, "min": 1, "max": 2048}),
+                             "string_length": ("INT", {"default": 5, "min": 1, "max": 1024}),
                              "custom_values": ("STRING", {"multiline": False, "default": "123ABC"}),
+                             "prepend_text": ("STRING", {"multiline": False, "default": ""}),
                }
         }
 
@@ -85,8 +86,10 @@ class CR_RandomMultilineValues:
     FUNCTION = "generate"
     CATEGORY = icons.get("Comfyroll/Utils/Random")
 
-    def generate(self, value_type, rows, string_length, custom_values, seed):
+    def generate(self, value_type, rows, string_length, custom_values, seed, prepend_text):
     
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-multiline-values"
+        
         # Set the seed
         random.seed(seed)
         
@@ -97,18 +100,57 @@ class CR_RandomMultilineValues:
         elif value_type == "natural":
             choice_str = '123456789'             
         elif value_type == "hexadecimal":
-            choice_str = '0123456789abcdef'       
+            choice_str = '0123456789ABCDEF'       
         elif value_type == "alphabetic":
             choice_str = string.ascii_letters
         elif value_type == "alphanumeric":
             choice_str = string.ascii_letters + string.digits
+        elif value_type == "hex color":
+            choice_str = '0123456789ABCDEF'
         elif value_type == "custom":
             choice_str = custom_values            
-       
-        multiline_text = '\n'.join([''.join(random.choice(choice_str) for _ in range(string_length)) for _ in range(rows)])
+      
+        multiline_text = '\n'.join([prepend_text + ''.join(random.choice(choice_str) for _ in range(string_length)) for _ in range(rows)]) 
+                           
+        return (multiline_text, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_RandomPanelCodes:
     
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-multiline-values"
-             
+    @classmethod
+    def INPUT_TYPES(cls):
+            
+        return {"required": {"seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                             "rows": ("INT", {"default": 5, "min": 1, "max": 2048}),
+                             "string_length": ("INT", {"default": 5, "min": 1, "max": 1024}),
+                             "values": ("STRING", {"multiline": False, "default": "123"}),
+               }
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("multiline_text", "show_help", )
+    FUNCTION = "generate"
+    CATEGORY = icons.get("Comfyroll/Utils/Random")
+
+    def generate(self, rows, string_length, values, seed):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-panel-codes"
+        
+        # Set the seed
+        random.seed(seed)
+        
+        start_letter = random.choice('HV')
+        value_range = random.choice(values)
+            
+        codes = []
+        for _ in range(rows):
+            # Generate a random number within the specified range
+            number = ''.join(random.choice(values) for _ in range(string_length))
+            # Append the code to the list
+            codes.append(f"{start_letter}{number}")
+            
+        multiline_text = '\n'.join(codes)   
+                 
         return (multiline_text, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -129,6 +171,8 @@ class CR_RandomRGBGradient:
 
     def generate(self, rows, seed):
     
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-RGB-gradient"
+    
         # Set the seed
         random.seed(seed)
         
@@ -141,11 +185,9 @@ class CR_RandomRGBGradient:
                 upper_bound = min(99, temp + (99 - temp) // (rows - i + 1))
                 current_value = random.randint(temp, upper_bound)
                 multiline_text += f'{current_value}:{random.randint(0, 255)},{random.randint(0, 255)},{random.randint(0, 255)}\n'
-                print(multiline_text)
+                
                 temp = current_value + 1
-                            
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-random-RGB-gradient"
-             
+
         return (multiline_text, show_help, )
                      
 #---------------------------------------------------------------------------------------------------------------------#
@@ -158,7 +200,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Random Hex Color": CR_RandomHexColor, 
     "CR Random RGB": CR_RandomRGB,
     "CR Random Multiline Values": CR_RandomMultilineValues,
-    "CR Random RGB Gradient": CR_RandomRGBGradient,   
+    "CR Random RGB Gradient": CR_RandomRGBGradient,
+    "CR Random Panel Codes": CR_RandomPanelCodes,    
 }
 '''
 

@@ -9,13 +9,7 @@ import os
 from PIL import Image, ImageDraw, ImageOps, ImageFont, ImageFilter
 from ..categories import icons
 from ..config import color_mapping, COLORS
-from .graphics_functions import (hex_to_rgb,
-                                 get_color_values,
-                                 text_panel,
-                                 combine_images,
-                                 apply_outline_and_border,
-                                 get_font_size,
-                                 draw_text_on_image) 
+from .graphics_functions import * 
 
 #---------------------------------------------------------------------------------------------------------------------#
         
@@ -24,14 +18,6 @@ ROTATE_OPTIONS = ["text center", "image center"]
 JUSTIFY_OPTIONS = ["left", "center", "right"]
 PERSPECTIVE_OPTIONS = ["top", "bottom", "left", "right"]
 
-#---------------------------------------------------------------------------------------------------------------------#
-
-def tensor2pil(image):
-    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
-
-def pil2tensor(image):
-    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0) 
- 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_PageLayout:
 
@@ -301,8 +287,6 @@ class CR_ImageGridPanel:
     @classmethod
     def INPUT_TYPES(s):
 
-        directions = ["horizontal", "vertical"]               
-        
         return {"required": {
                     "images": ("IMAGE",),
                     "border_thickness": ("INT", {"default": 0, "min": 0, "max": 1024}),
@@ -326,6 +310,8 @@ class CR_ImageGridPanel:
                    outline_thickness, outline_color, 
                    max_columns, border_color_hex='#000000'):
 
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-grid-panel"
+
         border_color = get_color_values(border_color, border_color_hex, color_mapping)
 
         # Convert PIL images to NumPy arrays
@@ -334,23 +320,7 @@ class CR_ImageGridPanel:
         # Apply borders and outlines to each image
         images = apply_outline_and_border(images, outline_thickness, outline_color, border_thickness, border_color)
 
-        # Calculate dimensions for the grid
-        num_images = len(images)
-        num_rows = (num_images - 1) // max_columns + 1
-        combined_width = max(image.width for image in images) * min(max_columns, num_images)
-        combined_height = max(image.height for image in images) * num_rows
-
-        combined_image = Image.new('RGB', (combined_width, combined_height))
-
-        x_offset, y_offset = 0, 0  # Initialize offsets
-        for image in images:
-            combined_image.paste(image, (x_offset, y_offset))
-            x_offset += image.width
-            if x_offset >= max_columns * image.width:
-                x_offset = 0
-                y_offset += image.height
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-image-grid-panel"
+        combined_image = make_grid_panel(images, max_columns)
 
         return (pil2tensor(combined_image), show_help, )   
 
@@ -534,26 +504,8 @@ class CR_OverlayTransparentImage:
     def overlay_image(self, back_image, overlay_image, 
                       transparency, offset_x, offset_y, rotation_angle, overlay_scale_factor=1.0):
 
-        """
-        Overlay an image onto another image with transparency, rotation, and scaling.
-
-        Args:
-            back_image (torch.Tensor): Background image tensor.
-            overlay_image (torch.Tensor): Overlay image tensor.
-            transparency (float): Transparency level for the overlay image (0.0 to 1.0).
-            offset_x (int): X-coordinate relative to the center of the back image.
-            offset_y (int): Y-coordinate relative to the center of the back image.
-            rotation_angle (float): Rotation angle in degrees.
-            scale_factor (float): Scaling factor for the overlay image.
-
-        Returns:
-            torch.Tensor: Resulting image tensor.
-        """
-        
-        # Convert tensor images
-        #back_image = back_image[0, :, :, :]
-        #overlay_image = overlay_image[0, :, :, :]
-
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-overlay-transparent-image"
+       
         # Create PIL images for the text and background layers and text mask
         back_image = tensor2pil(back_image)
         overlay_image = tensor2pil(overlay_image)
@@ -611,6 +563,8 @@ class CR_FeatheredBorder:
                    left_thickness, right_thickness, border_color,
                    feather_amount,
                    border_color_hex='#000000'):
+                   
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-feathered-border"                   
 
         images = []
 
@@ -650,8 +604,6 @@ class CR_FeatheredBorder:
             images.append(pil2tensor(img))
         
         images = torch.cat(images, dim=0)                
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-feathered-border"
 
         return (images, show_help, )
 

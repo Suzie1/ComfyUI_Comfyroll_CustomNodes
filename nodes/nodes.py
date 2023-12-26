@@ -13,7 +13,7 @@ import json
 import folder_paths
 import typing as tg
 import datetime
-from io import BytesIO, StringIO
+import io
 from server import PromptServer, BinaryEventTypes
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo

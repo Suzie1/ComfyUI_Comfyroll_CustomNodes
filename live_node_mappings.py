@@ -30,7 +30,7 @@ from .animation_nodes.utils import *
 from .animation_nodes.cyclers import *
 
 LIVE_NODE_CLASS_MAPPINGS = {
-    ### Misc Nodes
+    ### Other Nodes
     "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Latent Batch Size": CR_LatentBatchSize,   
@@ -40,7 +40,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Value": CR_Value,
     "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel,
-    "CR Multiline Text": CR_MultilineText,     
+    "CR Multiline Text": CR_MultilineText,   
     ### List Nodes
     "CR Font File List": CR_FontFileList,
     "CR Text List": CR_TextList,
@@ -134,6 +134,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Simple Banner": CR_SimpleBanner,    
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
     "CR Simple Image Compare": CR_SimpleImageCompare,
+    "CR Thumbnail Preview": CR_ThumbnailPreview, 
     ### Utils Logic Nodes
     "CR Image Input Switch": CR_ImageInputSwitch,
     "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
@@ -168,7 +169,8 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Random Hex Color": CR_RandomHexColor, 
     "CR Random RGB": CR_RandomRGB,
     "CR Random Multiline Values": CR_RandomMultilineValues,
-    "CR Random RGB Gradient": CR_RandomRGBGradient,    
+    "CR Random RGB Gradient": CR_RandomRGBGradient,
+    "CR Random Panel Codes": CR_RandomPanelCodes,  
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  
@@ -227,7 +229,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
 }
 
 LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
-    ### Misc Nodes
+    ### Other Nodes
     "CR Image Output": "💾 CR Image Output",
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Latent Batch Size": "⚙️ CR Latent Batch Size", 
@@ -331,6 +333,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Simple Banner": "👽 CR Simple Banner",     
     "CR Comic Panel Templates": "👽 CR Comic Panel Templates",
     "CR Simple Image Compare": "👽 CR Simple Image Compare",
+    "CR Thumbnail Preview": "👽 CR Thumbnail Preview", 
     ### Utils Logic Nodes
     "CR Image Input Switch": "🔀 CR Image Input Switch",
     "CR Image Input Switch (4 way)": "🔀 CR Image Input Switch (4 way)",
@@ -365,7 +368,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Random Hex Color": "🎲 CR Random Hex Color", 
     "CR Random RGB": "🎲 CR Random RGB",
     "CR Random Multiline Values": "🎲 CR Random Multiline Values",
-    "CR Random RGB Gradient": "🎲 CR Random RGB Gradient", 
+    "CR Random RGB Gradient": "🎲 CR Random RGB Gradient",
+    "CR Random Panel Codes": "🎲 CR Random Panel Codes", 
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  

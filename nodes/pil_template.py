@@ -7,16 +7,11 @@ import numpy as np
 import torch
 import os 
 from PIL import Image, ImageDraw, ImageOps, ImageFont
+from server import PromptServer, BinaryEventTypes
 from ..categories import icons
 from ..config import color_mapping, COLORS
-from .graphics_functions import (hex_to_rgb,
-                                 get_color_values,
-                                 get_font_size,
-                                 draw_text_on_image,
-                                 crop_and_resize_image,
-                                 create_and_paste_panel,
-                                 text_panel,
-                                 combine_images)                                                       
+from .graphics_functions import *                            
+from .upscale_functions import apply_resize_image                                 
 
 font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
 file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
@@ -28,14 +23,6 @@ ROTATE_OPTIONS = ["text center", "image center"]
 JUSTIFY_OPTIONS = ["left", "center", "right"]
 PERSPECTIVE_OPTIONS = ["top", "bottom", "left", "right"]
 
-#---------------------------------------------------------------------------------------------------------------------#
-
-def tensor2pil(image):
-    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
-
-def pil2tensor(image):
-    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0) 
-  
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SimpleMemeTemplate:
     
@@ -69,7 +56,7 @@ class CR_SimpleMemeTemplate:
     }
 
     RETURN_TYPES = ("IMAGE", "STRING", )
-    RETURN_NAMES = ("image", "show_help", )
+    RETURN_NAMES = ("image", "show_help", )  
     FUNCTION = "make_meme"
     CATEGORY = icons.get("Comfyroll/Graphics/Template")
 
@@ -509,7 +496,60 @@ class CR_SimpleImageCompare:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple_image_compare"
 
         return (pil2tensor(result_img), show_help, )  
+
+#---------------------------------------------------------------------------------------------------------------------
+class CR_ThumbnailPreview:
+
+    @classmethod
+    def INPUT_TYPES(s):
+     
+        return {"required":
+                    {"image": ("IMAGE",),
+                     "rescale_factor": ("FLOAT", {"default": 0.25, "min": 0.10, "max": 1.00, "step": 0.01}),
+                     "max_columns": ("INT", {"default": 5, "min": 0, "max": 256}), 
+                     }
+                }           
+
+    RETURN_TYPES = ("STRING", )
+    RETURN_NAMES = ("show_help", )
+    OUTPUT_NODE = True    
+    FUNCTION = "thumbnail"
+    CATEGORY = icons.get("Comfyroll/Graphics/Template")
+    
+    def thumbnail(self, image, rescale_factor, max_columns):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-thumbnail-preview"
         
+        result_images = []
+        outline_thickness = 1
+      
+        for img in image:
+            pil_img = tensor2pil(img)
+            original_width, original_height = pil_img.size        
+            rescaled_img = apply_resize_image(tensor2pil(img), original_width, original_height, 8, "rescale", "false", rescale_factor, 256, "lanczos")
+            outlined_img = ImageOps.expand(rescaled_img, outline_thickness, fill="black")
+            result_images.append(outlined_img)
+ 
+        combined_image = make_grid_panel(result_images, max_columns)
+        images_out = pil2tensor(combined_image)
+ 
+        # based on ETN_SendImageWebSocket
+        results = []
+        
+        for tensor in images_out:
+            array = 255.0 * tensor.cpu().numpy()
+            image = Image.fromarray(np.clip(array, 0, 255).astype(np.uint8))
+
+            server = PromptServer.instance
+            server.send_sync(
+                BinaryEventTypes.UNENCODED_PREVIEW_IMAGE,
+                ["PNG", image, None],
+                server.client_id,
+            )
+            results.append({"source": "websocket", "content-type": "image/png", "type": "output"})
+            
+        return {"ui": {"images": results}}
+
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -520,6 +560,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Simple Banner": CR_SimpleBanner,
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
     "CR Simple Image Compare": CR_SimpleImageCompare,
+    "CR Thumbnail Preview": CR_ThumbnailPreview,
 }
 '''
 

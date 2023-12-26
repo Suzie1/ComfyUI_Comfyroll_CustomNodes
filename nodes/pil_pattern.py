@@ -162,7 +162,9 @@ class CR_DrawShape:
     def INPUT_TYPES(cls):
                 
         shapes = ["circle","oval","square","diamond","triangle","hexagon","octagon",
-                  "quarter circle","half circle","quarter circle","starburst","star","cross","diagonal regions"]
+                  "quarter circle","half circle","quarter circle",
+                  "starburst","star","cross",
+                  "diagonal regions"]
         
         return {"required": {
                     "width": ("INT", {"default": 512, "min": 64, "max": 4096}),
@@ -380,7 +382,7 @@ class CR_DrawPie:
 
         image_out = pil2tensor(result_image.convert("RGB"))
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes-2#cr-draw-shape"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pattern-Nodes-2#cr-draw-pie"
 
         return (image_out, show_help, )  
 
@@ -391,7 +393,8 @@ class CR_RandomShapePattern:
     def INPUT_TYPES(cls):
                 
         shapes = ["circle","oval","square","diamond","triangle",
-                  "hexagon","octagon","half circle","quarter circle","starburst","star"]
+                  "hexagon","octagon","half circle","quarter circle",
+                  "starburst","star", "cross"]
         
         return {"required": {
                     "width": ("INT", {"default": 512, "min": 64, "max": 4096}),

@@ -3,6 +3,8 @@
 # for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
+import numpy as np
+import torch
 import os
 import random
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageEnhance
@@ -10,6 +12,14 @@ from ..config import color_mapping
 
 font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
 file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+
+
+def tensor2pil(image):
+    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
+
+
+def pil2tensor(image):
+    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0) 
 
 
 def align_text(align, img_height, text_height, text_pos_y, margins):
@@ -443,3 +453,24 @@ def random_rgb():
     rgb_string = "{},{},{}".format(r, g, b)
 
     return rgb_string
+
+
+def make_grid_panel(images, max_columns):
+
+    # Calculate dimensions for the grid
+    num_images = len(images)
+    num_rows = (num_images - 1) // max_columns + 1
+    combined_width = max(image.width for image in images) * min(max_columns, num_images)
+    combined_height = max(image.height for image in images) * num_rows
+
+    combined_image = Image.new('RGB', (combined_width, combined_height))
+
+    x_offset, y_offset = 0, 0  # Initialize offsets
+    for image in images:
+        combined_image.paste(image, (x_offset, y_offset))
+        x_offset += image.width
+        if x_offset >= max_columns * image.width:
+            x_offset = 0
+            y_offset += image.height
+
+    return combined_image   
