@@ -1,5 +1,9 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## v1.52 Dec 27, 2023
+- added CR Load Text List
+- added CR Save Text To File
+
 ## v1.51 Dec 26, 2023
 - added CR Thumbnail Template
 - added CR_Random Panel Code

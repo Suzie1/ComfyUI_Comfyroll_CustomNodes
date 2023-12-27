@@ -10,6 +10,7 @@ import sys
 import folder_paths
 import re
 import comfy.sd
+import csv
 from PIL import Image
 from pathlib import Path
 from ..categories import icons
@@ -330,6 +331,7 @@ class CR_ListSchedule:
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_FloatRangeList:
+
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {"start": ("FLOAT", {"default": 0.00, "min": -99999.99, "step": -99999.99, "max": 99999.99}),
@@ -368,6 +370,7 @@ class CR_FloatRangeList:
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_IntegerRangeList:
+
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {"start": ("INT", {"default": 0, "min": -99999, "max": 99999}),
@@ -402,6 +405,105 @@ class CR_IntegerRangeList:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-list-schedule"      
 
         return (range_values, show_help, )
+
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_LoadTextList:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                        "input_file_path": ("STRING", {"multiline": False, "default": ""}),
+                        "file_name": ("STRING", {"multiline": False, "default": ""}),
+                        "file_extension": (["txt", "csv"],),
+                        }
+        }
+        
+    RETURN_TYPES = ("STRING", "STRING",)
+    RETURN_NAMES = ("STRING", "show_help", ) 
+    OUTPUT_IS_LIST = (True, False)    
+    FUNCTION = 'load_list'
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def load_list(self, input_file_path, file_name, file_extension):
+           
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-load-value-list"      
+
+        filepath = input_file_path + "\\" + file_name + "." + file_extension
+        print(f"CR Load Values: Loading {filepath}")
+
+        list = []
+            
+        if file_extension == "csv":
+            with open(filepath, "r") as csv_file:
+                for row in csv_file:
+                    list.append(row)
+                    
+        elif file_extension == "txt":
+            with open(filepath, "r") as txt_file:
+                for row in txt_file:
+                    list.append(row)
+        else:
+            pass
+        
+        return(list, show_help, )        
+
+#---------------------------------------------------------------------------------------------------------------------# 
+class CR_SaveTextToFile:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                        "multiline_text": ("STRING", {"multiline": True, "default": ""}),
+                        "output_file_path": ("STRING", {"multiline": False, "default": ""}),
+                        "file_name": ("STRING", {"multiline": False, "default": ""}),
+                        "file_extension": (["txt", "csv"],),
+                        }
+        }
+        
+    RETURN_TYPES = ("STRING", )
+    RETURN_NAMES = ("show_help", ) 
+    OUTPUT_NODE= True
+    FUNCTION = 'save_list'
+    CATEGORY = icons.get("Comfyroll/Other")
+
+    def save_list(self, multiline_text, output_file_path, file_name, file_extension):
+    
+        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-save-text-list" 
+    
+        filepath = output_file_path + "\\" + file_name + "." + file_extension
+ 
+        index = 1
+
+        if(output_file_path == "" or file_name == ""):
+            print(f"[Warning] CR Save Text List. No file details found. No file output.") 
+            return ()
+
+        while os.path.exists(filepath):
+            if os.path.exists(filepath):
+                filepath = output_file_path + "\\" + file_name + "_" + str(index) + "." + file_extension
+                index = index + 1
+            else:
+                break            
+        
+        print(f"[Info] CR Save Text List: Saving to {filepath}")        
+        
+        if file_extension == "csv":
+            text_list = []
+            for i in multiline_text.split("\n"):
+                text_list.append(i.strip())
+        
+            with open(filepath, "w", newline="") as csv_file:
+                csv_writer = csv.writer(csv_file)
+                # Write each line as a separate row in the CSV file
+                for line in text_list:           
+                    csv_writer.writerow([line])    
+        else:
+            with open(filepath, "w", newline="") as text_file:
+                for line in multiline_text:
+                    text_file.write(line)
+        
+        return (show_help, )      
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -416,6 +518,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Load Image List Plus": CR_LoadImageListPlus,
     "CR List Schedule": CR_ListSchedule,
     "CR Float Range List": CR_FloatRangeList,
-    "CR Integer Range List": CR_IntegerRangeList,
+    "CR Load Text List": CR_LoadTextList,
+    "CR Save Text To File": CR_SaveTextToFile,
 }
 '''

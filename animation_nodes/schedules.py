@@ -231,7 +231,7 @@ class CR_OutputScheduleToFile:
             else:
                 break            
         
-        print(f"[Info] CR_Output Schedule To File: Saving to {filepath}")        
+        print(f"[Info] CR Output Schedule To File: Saving to {filepath}")        
         
         if file_extension == "csv":
             with open(filepath, "w", newline="") as csv_file:
@@ -265,7 +265,7 @@ class CR_LoadScheduleFromFile:
     
     def csvinput(self, input_file_path, file_name, file_extension):
         filepath = input_file_path + "\\" + file_name + "." + file_extension
-        print(f"CR_Load Schedule From File: Loading {filepath}")
+        print(f"CR Load Schedule From File: Loading {filepath}")
         
         lists = []
             
@@ -285,7 +285,8 @@ class CR_LoadScheduleFromFile:
                         second_part = parts[1].strip('"')
                         lists.append([parts[0], second_part])
 
-        print(lists)
+        #print(lists)
+        
         return(lists,str(lists),)
             
 #---------------------------------------------------------------------------------------------------------------------#

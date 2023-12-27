@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.51
+Current version: 1.52
 
 # Wiki
 
@@ -39,6 +39,7 @@ __📜 List Nodes__
 * CR Load Image List Plus (new 23/12/2023)
 * CR Float Range List (new 25/12/2023)
 * CR Integer Range List (new 25/12/2023)
+* CR Load Text List (new 27/12/2023)
 
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets
@@ -184,6 +185,7 @@ __📦 Other__
 * CR Conditioning Mixer
 * CR Select Model
 * CR Multiline Text (new 24/12/2023)
+* CR Save Text To File (new 27/12/2023)
 
 __Deleted Nodes__
 * CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
