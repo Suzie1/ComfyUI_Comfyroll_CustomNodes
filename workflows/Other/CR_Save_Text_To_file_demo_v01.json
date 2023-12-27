@@ -1,70 +1,18 @@
 {
-  "last_node_id": 70,
-  "last_link_id": 93,
+  "last_node_id": 3,
+  "last_link_id": 2,
   "nodes": [
     {
-      "id": 38,
-      "type": "CR Random Multiline Values",
-      "pos": [
-        180,
-        160
-      ],
-      "size": {
-        "0": 315,
-        "1": 222
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "multiline_text",
-          "type": "STRING",
-          "links": [
-            46,
-            92
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "show_help",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Random Multiline Values",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        514037159792307,
-        "randomize",
-        "decimal",
-        10,
-        10,
-        "123ABC",
-        ""
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 39,
+      "id": 2,
       "type": "ShowText|pysssss",
       "pos": [
-        590,
-        240
+        660,
+        330
       ],
-      "size": [
-        220,
-        190
-      ],
+      "size": {
+        "0": 220,
+        "1": 190
+      },
       "flags": {},
       "order": 1,
       "mode": 0,
@@ -72,7 +20,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 46,
+          "link": 1,
           "widget": {
             "name": "text"
           }
@@ -96,22 +44,22 @@
         }
       },
       "widgets_values": [
-        "6537370253\n1700485219\n2102346282\n2512024475\n3858374483\n9769042828\n2679138287\n7530202955\n4731323633\n1515684524"
+        "1269032729\n7832901139\n1115170537\n3348908481\n0353269039\n4847886073\n7724841225\n0967657948\n8958564044\n0914626417"
       ],
       "color": "#222",
       "bgcolor": "#000"
     },
     {
-      "id": 69,
+      "id": 3,
       "type": "CR Save Text To File",
       "pos": [
-        870,
-        160
+        940,
+        250
       ],
-      "size": [
-        350,
-        130
-      ],
+      "size": {
+        "0": 350,
+        "1": 130
+      },
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -119,7 +67,7 @@
         {
           "name": "multiline_text",
           "type": "STRING",
-          "link": 92,
+          "link": 2,
           "widget": {
             "name": "multiline_text"
           }
@@ -149,239 +97,80 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 1,
+      "type": "CR Random Multiline Values",
+      "pos": [
+        250,
+        250
+      ],
+      "size": {
+        "0": 315,
+        "1": 222
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "multiline_text",
+          "type": "STRING",
+          "links": [
+            1,
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Random Multiline Values",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        962887500264270,
+        "randomize",
+        "decimal",
+        10,
+        10,
+        "123ABC",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
     }
   ],
   "links": [
     [
-      46,
-      38,
+      1,
+      1,
       0,
-      39,
+      2,
       0,
       "STRING"
     ],
     [
-      92,
-      38,
+      2,
+      1,
       0,
-      69,
+      3,
       0,
       "STRING"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {
-    "groupNodes": {
-      "Load and Draw Text": {
-        "nodes": [
-          {
-            "type": "CR Load Value List",
-            "pos": [
-              180,
-              270
-            ],
-            "size": {
-              "0": 315,
-              "1": 146
-            },
-            "flags": {},
-            "order": 2,
-            "mode": 0,
-            "outputs": [
-              {
-                "name": "INT",
-                "type": "INT",
-                "links": [],
-                "shape": 6,
-                "slot_index": 0
-              },
-              {
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": null,
-                "shape": 6,
-                "slot_index": 1
-              },
-              {
-                "name": "show_help",
-                "type": "STRING",
-                "links": null,
-                "shape": 3
-              }
-            ],
-            "properties": {
-              "Node name for S&R": "CR Load Value List",
-              "ttNbgOverride": {
-                "color": "#222",
-                "bgcolor": "#000",
-                "groupcolor": "#444"
-              }
-            },
-            "widgets_values": [
-              "F:\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\input\\Value Lists",
-              "Test1",
-              "csv"
-            ],
-            "color": "#222",
-            "bgcolor": "#000",
-            "index": 0
-          },
-          {
-            "type": "CR Integer To String",
-            "pos": [
-              570,
-              270
-            ],
-            "size": {
-              "0": 320,
-              "1": 80
-            },
-            "flags": {},
-            "order": 4,
-            "mode": 0,
-            "inputs": [
-              {
-                "name": "int_",
-                "type": "INT",
-                "link": null,
-                "widget": {
-                  "name": "int_"
-                }
-              }
-            ],
-            "outputs": [
-              {
-                "name": "STRING",
-                "type": "STRING",
-                "links": [],
-                "shape": 3,
-                "slot_index": 0
-              },
-              {
-                "name": "show_help",
-                "type": "STRING",
-                "links": null,
-                "shape": 3
-              }
-            ],
-            "properties": {
-              "Node name for S&R": "CR Integer To String",
-              "ttNbgOverride": {
-                "color": "#222",
-                "bgcolor": "#000",
-                "groupcolor": "#444"
-              }
-            },
-            "widgets_values": [
-              0
-            ],
-            "color": "#222",
-            "bgcolor": "#000",
-            "index": 1
-          },
-          {
-            "type": "CR Draw Text",
-            "pos": [
-              970,
-              270
-            ],
-            "size": {
-              "0": 400,
-              "1": 480
-            },
-            "flags": {},
-            "order": 6,
-            "mode": 0,
-            "inputs": [
-              {
-                "name": "text",
-                "type": "STRING",
-                "link": null,
-                "widget": {
-                  "name": "text"
-                }
-              }
-            ],
-            "outputs": [
-              {
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": [],
-                "shape": 3,
-                "slot_index": 0
-              },
-              {
-                "name": "show_help",
-                "type": "STRING",
-                "links": null,
-                "shape": 3
-              }
-            ],
-            "properties": {
-              "Node name for S&R": "CR Draw Text",
-              "ttNbgOverride": {
-                "color": "#222",
-                "bgcolor": "#000",
-                "groupcolor": "#444"
-              }
-            },
-            "widgets_values": [
-              1024,
-              512,
-              "text",
-              "Roboto-Regular.ttf",
-              100,
-              "white",
-              "custom",
-              "center",
-              "center",
-              0,
-              0,
-              0,
-              0,
-              0,
-              "text center",
-              "#000000",
-              "#000000"
-            ],
-            "color": "#222",
-            "bgcolor": "#000",
-            "index": 2
-          }
-        ],
-        "links": [
-          [
-            0,
-            0,
-            1,
-            0,
-            35,
-            "INT"
-          ],
-          [
-            1,
-            0,
-            2,
-            0,
-            33,
-            "STRING"
-          ]
-        ],
-        "external": [
-          [
-            1,
-            0,
-            "STRING"
-          ],
-          [
-            2,
-            0,
-            "IMAGE"
-          ]
-        ]
-      }
-    }
-  },
+  "extra": {},
   "version": 0.4
 }

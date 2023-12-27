@@ -1,13 +1,13 @@
 {
-  "last_node_id": 68,
-  "last_link_id": 92,
+  "last_node_id": 3,
+  "last_link_id": 2,
   "nodes": [
     {
-      "id": 37,
+      "id": 2,
       "type": "PreviewImage",
       "pos": [
-        1038.0210000000009,
-        311.9090000000005
+        999.0210000000009,
+        313.9090000000005
       ],
       "size": {
         "0": 470,
@@ -20,7 +20,7 @@
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 53
+          "link": 2
         }
       ],
       "properties": {
@@ -35,10 +35,57 @@
       "bgcolor": "#000"
     },
     {
-      "id": 36,
+      "id": 3,
+      "type": "CR Load Text List",
+      "pos": [
+        111,
+        312
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            1
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Load Text List",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "F:\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\input\\Value Lists",
+        "test4",
+        "txt"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 1,
       "type": "CR Draw Text",
       "pos": [
-        540,
+        500,
         310
       ],
       "size": {
@@ -52,7 +99,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 92,
+          "link": 1,
           "widget": {
             "name": "text"
           }
@@ -63,7 +110,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            53
+            2
           ],
           "shape": 3,
           "slot_index": 0
@@ -104,286 +151,28 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
-    },
-    {
-      "id": 68,
-      "type": "CR Load Text List",
-      "pos": [
-        150,
-        310
-      ],
-      "size": {
-        "0": 315,
-        "1": 126
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            92
-          ],
-          "shape": 6,
-          "slot_index": 0
-        },
-        {
-          "name": "show_help",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Load Text List",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        "F:\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\input\\Value Lists",
-        "test4",
-        "txt"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
     }
   ],
   "links": [
     [
-      53,
-      36,
+      1,
+      3,
       0,
-      37,
-      0,
-      "IMAGE"
-    ],
-    [
-      92,
-      68,
-      0,
-      36,
+      1,
       0,
       "STRING"
+    ],
+    [
+      2,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
     ]
   ],
   "groups": [],
   "config": {},
-  "extra": {
-    "groupNodes": {
-      "Load and Draw Text": {
-        "nodes": [
-          {
-            "type": "CR Load Value List",
-            "pos": [
-              180,
-              270
-            ],
-            "size": {
-              "0": 315,
-              "1": 146
-            },
-            "flags": {},
-            "order": 2,
-            "mode": 0,
-            "outputs": [
-              {
-                "name": "INT",
-                "type": "INT",
-                "links": [],
-                "shape": 6,
-                "slot_index": 0
-              },
-              {
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": null,
-                "shape": 6,
-                "slot_index": 1
-              },
-              {
-                "name": "show_help",
-                "type": "STRING",
-                "links": null,
-                "shape": 3
-              }
-            ],
-            "properties": {
-              "Node name for S&R": "CR Load Value List",
-              "ttNbgOverride": {
-                "color": "#222",
-                "bgcolor": "#000",
-                "groupcolor": "#444"
-              }
-            },
-            "widgets_values": [
-              "F:\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\input\\Value Lists",
-              "Test1",
-              "csv"
-            ],
-            "color": "#222",
-            "bgcolor": "#000",
-            "index": 0
-          },
-          {
-            "type": "CR Integer To String",
-            "pos": [
-              570,
-              270
-            ],
-            "size": {
-              "0": 320,
-              "1": 80
-            },
-            "flags": {},
-            "order": 4,
-            "mode": 0,
-            "inputs": [
-              {
-                "name": "int_",
-                "type": "INT",
-                "link": null,
-                "widget": {
-                  "name": "int_"
-                }
-              }
-            ],
-            "outputs": [
-              {
-                "name": "STRING",
-                "type": "STRING",
-                "links": [],
-                "shape": 3,
-                "slot_index": 0
-              },
-              {
-                "name": "show_help",
-                "type": "STRING",
-                "links": null,
-                "shape": 3
-              }
-            ],
-            "properties": {
-              "Node name for S&R": "CR Integer To String",
-              "ttNbgOverride": {
-                "color": "#222",
-                "bgcolor": "#000",
-                "groupcolor": "#444"
-              }
-            },
-            "widgets_values": [
-              0
-            ],
-            "color": "#222",
-            "bgcolor": "#000",
-            "index": 1
-          },
-          {
-            "type": "CR Draw Text",
-            "pos": [
-              970,
-              270
-            ],
-            "size": {
-              "0": 400,
-              "1": 480
-            },
-            "flags": {},
-            "order": 6,
-            "mode": 0,
-            "inputs": [
-              {
-                "name": "text",
-                "type": "STRING",
-                "link": null,
-                "widget": {
-                  "name": "text"
-                }
-              }
-            ],
-            "outputs": [
-              {
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": [],
-                "shape": 3,
-                "slot_index": 0
-              },
-              {
-                "name": "show_help",
-                "type": "STRING",
-                "links": null,
-                "shape": 3
-              }
-            ],
-            "properties": {
-              "Node name for S&R": "CR Draw Text",
-              "ttNbgOverride": {
-                "color": "#222",
-                "bgcolor": "#000",
-                "groupcolor": "#444"
-              }
-            },
-            "widgets_values": [
-              1024,
-              512,
-              "text",
-              "Roboto-Regular.ttf",
-              100,
-              "white",
-              "custom",
-              "center",
-              "center",
-              0,
-              0,
-              0,
-              0,
-              0,
-              "text center",
-              "#000000",
-              "#000000"
-            ],
-            "color": "#222",
-            "bgcolor": "#000",
-            "index": 2
-          }
-        ],
-        "links": [
-          [
-            0,
-            0,
-            1,
-            0,
-            35,
-            "INT"
-          ],
-          [
-            1,
-            0,
-            2,
-            0,
-            33,
-            "STRING"
-          ]
-        ],
-        "external": [
-          [
-            1,
-            0,
-            "STRING"
-          ],
-          [
-            2,
-            0,
-            "IMAGE"
-          ]
-        ]
-      }
-    }
-  },
+  "extra": {},
   "version": 0.4
 }
