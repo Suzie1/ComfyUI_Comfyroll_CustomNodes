@@ -1,6 +1,11 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
 ## v1.52 Dec 27, 2023
+- added CR Random Multiline Colors
+- updated CR Random Multiline Values, removed hex color option
+- changed naming convention on nodes files
+
+## v1.52 Dec 27, 2023
 - added CR Load Text List
 - added CR Save Text To File
 
@@ -15,8 +20,8 @@
 ## v1.49 Dec 25, 2023
 - added CR Draw Pie
 - added CR_Random Shape Pattern 
-- updated CR Random Multiline Values
-- updated CR Image Output
+- updated CR Random Multiline Values, added natural numbers and hex color options
+- updated CR Image Output, added UI (no batch) preview mode
 
 ## v1.48 Dec 24, 2023
 - added CR Draw Shape
@@ -25,7 +30,7 @@
 ## v1.47 Dec 23, 2023
 - added CR Load Image List
 - added CR Load Image List Plus
-- updated CR Font File List 
+- updated CR Font File List, added select from path
 
 ## v1.46 Dec 22, 2023
 - PR70 fixed issue #62 with RGB output from gradient nodes
@@ -35,7 +40,7 @@
 - added CR Vignette Filter
 
 ## PR76 Dec 19, 2023
-- updated CR Font File List
+- updated CR Font File List, added from folder options
 - added CR Text List
 
 ## PR73 Dec 18, 2023
@@ -47,7 +52,7 @@
 - added CR Aspect Ratio Banners
 - added CR Font File List
 - added CR Simple Image Compare
-- updated logic nodes to make inputs optional
+- updated logic nodes to make all inputs optional
 
 ## PR67 Dec 18, 2023
 - added CR Simple Banner

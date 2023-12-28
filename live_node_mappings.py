@@ -1,24 +1,24 @@
 from .nodes.nodes import *
-from .nodes.legacy_nodes import *
-from .nodes.lora import *
-from .nodes.controlnet import *
-from .nodes.pipe import *
-from .nodes.sdxl import *
-from .nodes.logic import *
-from .nodes.model_merge import *
-from .nodes.upscale import *
-from .nodes.xygrid import *
-from .nodes.index import *
-from .nodes.conversion import *
-from .nodes.matplot import *
-from .nodes.pil_text import *
-from .nodes.pil_layout import *
-from .nodes.pil_filter import *
-from .nodes.pil_template import *
-from .nodes.pil_pattern import *
-from .nodes.nodes_random import *
-from .nodes.nodes_list import *
 from .nodes.nodes_aspect_ratio import *
+from .nodes.nodes_list import *
+from .nodes.nodes_lora import *
+from .nodes.nodes_controlnet import *
+from .nodes.nodes_pipe import *
+from .nodes.nodes_sdxl import *
+from .nodes.nodes_model_merge import *
+from .nodes.nodes_upscale import *
+from .nodes.nodes_xygrid import *
+from .nodes.nodes_graphics_matplot import *
+from .nodes.nodes_graphics_text import *
+from .nodes.nodes_graphics_layout import *
+from .nodes.nodes_graphics_filter import *
+from .nodes.nodes_graphics_template import *
+from .nodes.nodes_graphics_pattern import *
+from .nodes.nodes_utils_logic import *
+from .nodes.nodes_utils_index import *
+from .nodes.nodes_utils_conversion import *
+from .nodes.nodes_utils_random import *
+from .nodes.nodes_legacy import *
 
 from .animation_nodes.interpolation import *
 from .animation_nodes.io import *
@@ -172,6 +172,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Random Hex Color": CR_RandomHexColor, 
     "CR Random RGB": CR_RandomRGB,
     "CR Random Multiline Values": CR_RandomMultilineValues,
+    "CR Random Multiline Colors": CR_RandomMultilineColors,    
     "CR Random RGB Gradient": CR_RandomRGBGradient,
     "CR Random Panel Codes": CR_RandomPanelCodes,  
     #------------------------------------------------------
@@ -374,6 +375,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Random Hex Color": "🎲 CR Random Hex Color", 
     "CR Random RGB": "🎲 CR Random RGB",
     "CR Random Multiline Values": "🎲 CR Random Multiline Values",
+    "CR Random Multiline Colors": "🎲 CR Random Multiline Colors",
     "CR Random RGB Gradient": "🎲 CR Random RGB Gradient",
     "CR Random Panel Codes": "🎲 CR Random Panel Codes", 
     #------------------------------------------------------

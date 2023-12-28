@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.52
+Current version: 1.53
 
 # Wiki
 
@@ -170,7 +170,7 @@ __🔀 Logic__
 __🎲 Random__
 * CR Random Hex Color
 * CR Random RGB
-* CR Random Multiline Values (updated 26/12/2023)
+* CR Random Multiline Values (updated 28/12/2023)
 * CR Random RGB Gradient (new 8/12/2023)
 * CR Random Panel Code (new 26/12/2023)
   
