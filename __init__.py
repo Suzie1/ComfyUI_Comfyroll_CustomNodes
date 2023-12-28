@@ -13,9 +13,9 @@
 
 """
 @author: Suzie1
-@title: Comfyroll Custom Nodes
-@nickname: Comfyroll Custom Nodes
-@description: 150 custom nodes for Graphics, Animation, IO, Aspect Ratio, Model Merge, ControlNet, LoRA, XY Grid, and Utilities.
+@title: Comfyroll Studio
+@nickname: Comfyroll Studio
+@description: 160 custom nodes for Graphics, Animation, IO, Aspect Ratio, Model Merge, ControlNet, LoRA, XY Grid, and Utilities.
 """
 
 from .live_node_mappings import LIVE_NODE_CLASS_MAPPINGS, LIVE_NODE_DISPLAY_NAME_MAPPINGS

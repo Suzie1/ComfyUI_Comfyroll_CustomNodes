@@ -109,7 +109,7 @@ class CR_TextList:
     @classmethod
     def INPUT_TYPES(s):
     
-        return {"required": {"multiline_text": ("STRING", {"multiline": False, "default": "text"}),
+        return {"required": {"multiline_text": ("STRING", {"multiline": True, "default": "text"}),
                              "start_index": ("INT", {"default": 0, "min": 0, "max": 9999}),
                              "max_rows": ("INT", {"default": 1000, "min": 1, "max": 9999}),
                             }
@@ -343,7 +343,7 @@ class CR_FloatRangeList:
         }                        
 
     RETURN_TYPES = ("FLOAT", "STRING",)
-    RETURN_NAMES = ("LIST", "show_help", )    
+    RETURN_NAMES = ("FLOAT", "show_help", )    
     OUTPUT_IS_LIST = (True, False)    
     FUNCTION = 'make_range'
     CATEGORY = icons.get("Comfyroll/List")
@@ -382,7 +382,7 @@ class CR_IntegerRangeList:
         }
         
     RETURN_TYPES = ("INT", "STRING",)
-    RETURN_NAMES = ("LIST", "show_help", )    
+    RETURN_NAMES = ("INT", "show_help", )    
     OUTPUT_IS_LIST = (True, False)    
     FUNCTION = 'make_range'
     CATEGORY = icons.get("Comfyroll/List")
@@ -519,6 +519,6 @@ NODE_CLASS_MAPPINGS = {
     "CR List Schedule": CR_ListSchedule,
     "CR Float Range List": CR_FloatRangeList,
     "CR Load Text List": CR_LoadTextList,
-    "CR Save Text To File": CR_SaveTextToFile,
+    You will need at least v1.53. CR_SaveTextToFile,
 }
 '''

@@ -253,7 +253,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Load Image List Plus": "📜 CR Load Image List Plus", 
     "CR Float Range List": "📜 CR Float Range List",
     "CR Integer Range List": "📜 CR Integer Range List", 
-    "CR Load Value List": "📜 CR Load Value List",    
+    "CR Load Value List": "📜 CR Load Value List",   
+    "CR Load Text List": "📜 CR Load Text List",
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
