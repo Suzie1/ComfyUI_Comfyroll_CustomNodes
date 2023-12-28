@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.53
+Current version: 1.54
 
 # Wiki
 
@@ -40,6 +40,8 @@ __📜 List Nodes__
 * CR Float Range List (new 25/12/2023)
 * CR Integer Range List (new 25/12/2023)
 * CR Load Text List (new 27/12/2023)
+* Intertwine_Lists (new 29/12/2023)
+* Binary To List (new 29/12/2023)
 
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets
@@ -171,6 +173,7 @@ __🎲 Random__
 * CR Random Hex Color
 * CR Random RGB
 * CR Random Multiline Values (updated 28/12/2023)
+* CR Random Multiline Colors (added 28/12/2023)
 * CR Random RGB Gradient (new 8/12/2023)
 * CR Random Panel Code (new 26/12/2023)
   

@@ -406,7 +406,6 @@ class CR_IntegerRangeList:
 
         return (range_values, show_help, )
 
-
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_LoadTextList:
 
@@ -503,7 +502,65 @@ class CR_SaveTextToFile:
                 for line in multiline_text:
                     text_file.write(line)
         
-        return (show_help, )      
+        return (show_help, )    
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_IntertwineLists:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                            "list1": ("STRING", {"multiline": True, "default": ""}),
+                            "list2": ("STRING", {"multiline": True, "default": ""}),
+                            }              
+        }
+        
+    RETURN_TYPES = ("STRING", "STRING",)
+    RETURN_NAMES = ("STRING", "show_help", )  
+    OUTPUT_IS_LIST = (True, False)      
+    FUNCTION = 'make_list'
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def make_list(self, list1, list2):
+           
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-intertwine-list"      
+
+        # Ensure both lists have the same length
+        min_length = min(len(list1), len(list2))
+
+         # Initialize an empty list to store the combined elements
+        combined_lists = []
+
+        # Use a loop to combine elements from both lists
+        for i in range(min_length):
+            combined_element = str(list1) + ", " + str(list2)
+            combined_lists.append(combined_element)
+                
+        return(combined_lists, show_help, )            
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_BinaryToList:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                        "bit_string": ("STRING", {"multiline": True, "default": ""}),
+                        }
+        }
+        
+    RETURN_TYPES = ("STRING", "STRING",)
+    RETURN_NAMES = ("STRING", "show_help", )  
+    OUTPUT_IS_LIST = (True, False)    
+    FUNCTION = 'make_list'
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def make_list(self, bit_string):
+           
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-binary-to-list" 
+        
+        list_out = [str(bit) for bit in bit_string]
+
+        return(list_out, show_help, ) 
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -519,6 +576,8 @@ NODE_CLASS_MAPPINGS = {
     "CR List Schedule": CR_ListSchedule,
     "CR Float Range List": CR_FloatRangeList,
     "CR Load Text List": CR_LoadTextList,
-    You will need at least v1.53. CR_SaveTextToFile,
+    #"CR Save Text To File": CR_SaveTextToFile,
+    "CR Intertwine Lists" : CR_IntertwineLists,
+    "CR Binary To List": CR_BinaryToList,
 }
 '''

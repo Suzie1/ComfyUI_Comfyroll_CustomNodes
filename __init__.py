@@ -15,7 +15,7 @@
 @author: Suzie1
 @title: Comfyroll Studio
 @nickname: Comfyroll Studio
-@description: 160 custom nodes for Graphics, Animation, IO, Aspect Ratio, Model Merge, ControlNet, LoRA, XY Grid, and Utilities.
+@description: 162 custom nodes for Graphics, Animation, IO, Aspect Ratio, Model Merge, ControlNet, LoRA, XY Grid, and Utilities.
 """
 
 from .live_node_mappings import LIVE_NODE_CLASS_MAPPINGS, LIVE_NODE_DISPLAY_NAME_MAPPINGS
@@ -36,7 +36,7 @@ except ImportError:
     NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
 
 print("------------------------------------------------")    
-print("\033[34mComfyroll Custom Nodes v1.53 : \033[92m 160 Nodes Loaded\033[0m")
+print("\033[34mComfyroll Custom Nodes v1.54 : \033[92m 162 Nodes Loaded\033[0m")
 print("------------------------------------------------")  
 
 import shutil

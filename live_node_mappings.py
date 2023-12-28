@@ -29,7 +29,7 @@ from .animation_nodes.lists import *
 from .animation_nodes.utils import *
 from .animation_nodes.cyclers import *
 
-LIVE_NODE_CLASS_MAPPINGS = {
+LIVE_NODE_CLASS_MAPPINGS = { 
     ### Other Nodes
     "CR Image Output": CR_ImageOutput,
     "CR Integer Multiple": CR_IntegerMultipleOf,
@@ -50,7 +50,9 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Load Image List Plus": CR_LoadImageListPlus, 
     "CR Float Range List": CR_FloatRangeList,
     "CR Integer Range List": CR_IntegerRangeList,
-    "CR Load Text List": CR_LoadTextList,    
+    "CR Load Text List": CR_LoadTextList, 
+    "CR Intertwine Lists" : CR_IntertwineLists,
+    "CR Binary To List": CR_BinaryToList,     
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
@@ -255,6 +257,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Integer Range List": "📜 CR Integer Range List", 
     "CR Load Value List": "📜 CR Load Value List",   
     "CR Load Text List": "📜 CR Load Text List",
+    "CR Intertwine Lists" : "📜 CR Intertwine Lists",
+    "CR Binary To List": "📜 CR Binary To List",       
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    

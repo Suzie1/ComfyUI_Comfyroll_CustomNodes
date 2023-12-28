@@ -1,0 +1,330 @@
+{
+  "last_node_id": 37,
+  "last_link_id": 44,
+  "nodes": [
+    {
+      "id": 27,
+      "type": "CR Integer Range List",
+      "pos": [
+        120,
+        200
+      ],
+      "size": {
+        "0": 280,
+        "1": 174
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            34
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer Range List",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        1,
+        32,
+        1,
+        1,
+        false
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 28,
+      "type": "CR Integer To String",
+      "pos": [
+        210,
+        430
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int_",
+          "type": "INT",
+          "link": 34,
+          "widget": {
+            "name": "int_"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Integer To String",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        0
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 25,
+      "type": "CR Binary To List",
+      "pos": [
+        110,
+        490
+      ],
+      "size": {
+        "0": 290,
+        "1": 96
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            43
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Binary To List",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "10110100 10110100 10110100"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 35,
+      "type": "CR Intertwine Lists",
+      "pos": [
+        480,
+        450
+      ],
+      "size": [
+        270,
+        86.0000114440918
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "list1",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "list1"
+          }
+        },
+        {
+          "name": "list2",
+          "type": "STRING",
+          "link": 43,
+          "widget": {
+            "name": "list2"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Intertwine Lists",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 33,
+      "type": "ShowText|pysssss",
+      "pos": [
+        840,
+        240
+      ],
+      "size": {
+        "0": 320,
+        "1": 1580
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "1, 1",
+        "2, 0",
+        "3, 1",
+        "4, 1",
+        "5, 0",
+        "6, 1",
+        "7, 0",
+        "8, 0",
+        "9,  ",
+        "1, 1",
+        "1, 0",
+        "1, 1",
+        "1, 1",
+        "1, 0",
+        "1, 1",
+        "1, 0",
+        "1, 0",
+        "1,  ",
+        "1, 1",
+        "2, 0",
+        "2, 1",
+        "2, 1",
+        "2, 0",
+        "2, 1",
+        "2, 0",
+        "2, 0",
+        "2, 0",
+        "2, 0",
+        "2, 0",
+        "3, 0",
+        "3, 0"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      34,
+      27,
+      0,
+      28,
+      0,
+      "INT"
+    ],
+    [
+      42,
+      28,
+      0,
+      35,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      25,
+      0,
+      35,
+      1,
+      "STRING"
+    ],
+    [
+      44,
+      35,
+      0,
+      33,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

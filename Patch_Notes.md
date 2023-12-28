@@ -1,5 +1,9 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## v1.54 Dec 29, 2023
+- added CR Intertwine_Lists
+- added CR Binary To List
+
 ## v1.53 Dec 28, 2023
 - added CR Random Multiline Colors
 - updated CR Random Multiline Values, removed hex color option
