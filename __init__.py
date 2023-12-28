@@ -1,4 +1,4 @@
-# By Akatsuzi (Github: Suzie1, Discord: akatsuzi_)
+# By Suzie1 and RockOfFire
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to
 # deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -36,7 +36,7 @@ except ImportError:
     NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
 
 print("------------------------------------------------")    
-print("\033[34mComfyroll Custom Nodes v1.50 : \033[92m 150 Nodes Loaded\033[0m")
+print("\033[34mComfyroll Custom Nodes v1.50 : \033[92m 160 Nodes Loaded\033[0m")
 print("------------------------------------------------")  
 
 import shutil
