@@ -1,6 +1,6 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
-## v1.52 Dec 27, 2023
+## v1.53 Dec 28, 2023
 - added CR Random Multiline Colors
 - updated CR Random Multiline Values, removed hex color option
 - changed naming convention on nodes files
