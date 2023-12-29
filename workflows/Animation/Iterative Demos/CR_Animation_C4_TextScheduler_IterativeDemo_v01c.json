@@ -498,7 +498,7 @@
     },
     {
       "id": 130,
-      "type": "MileHighStyler",
+      "type": "MilehighStyler",
       "pos": [
         1590,
         760
@@ -2064,7 +2064,7 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "MileHighStyler"
+        "Node name for S&R": "MilehighStyler"
       },
       "widgets_values": [
         "1girl, period costume",

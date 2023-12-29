@@ -1,46 +1,7 @@
 {
-  "last_node_id": 40,
-  "last_link_id": 51,
+  "last_node_id": 44,
+  "last_link_id": 58,
   "nodes": [
-    {
-      "id": 22,
-      "type": "Text Multiline",
-      "pos": [
-        -120,
-        840
-      ],
-      "size": {
-        "0": 210,
-        "1": 200
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            22
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Text Multiline",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        "Leonardo da Vinci\nVincent van Gogh\nPablo Picasso\nMichelangelo Buonarroti\nClaude Monet\nRembrandt van Rijn\nFrida Kahlo\nGeorgia O'Keeffe\nSalvador Dalí\nWassily Kandinsky"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
     {
       "id": 16,
       "type": "CR Color Panel",
@@ -48,10 +9,10 @@
         160,
         590
       ],
-      "size": [
-        320,
-        150
-      ],
+      "size": {
+        "0": 320,
+        "1": 150
+      },
       "flags": {},
       "order": 6,
       "mode": 0,
@@ -111,13 +72,13 @@
         "1": 130
       },
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
           "name": "multiline_text",
           "type": 0,
-          "link": 40,
+          "link": 52,
           "widget": {
             "name": "multiline_text"
           }
@@ -152,323 +113,16 @@
       "bgcolor": "#000"
     },
     {
-      "id": 33,
-      "type": "CR Random Multiline Values",
-      "pos": [
-        -640,
-        590
-      ],
-      "size": {
-        "0": 315,
-        "1": 222
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "multiline_text",
-          "type": "STRING",
-          "links": [
-            40,
-            45
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "show_help",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Random Multiline Values",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        160888614208361,
-        "randomize",
-        "hex color",
-        10,
-        6,
-        "123ABC",
-        "#"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 36,
-      "type": "ShowText|pysssss",
-      "pos": [
-        -630,
-        880
-      ],
-      "size": [
-        300,
-        180
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 45,
-          "widget": {
-            "name": "text"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": null,
-          "shape": 6
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        "#D32F4E\n#DCCC16\n#914EA3\n#9652F0\n#56B0FF\n#5A633C\n#B0E7F0\n#582307\n#8F738C\n#633991"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 37,
-      "type": "CR Image Grid Panel",
-      "pos": [
-        1340,
-        590
-      ],
-      "size": {
-        "0": 315,
-        "1": 198
-      },
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 49
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            47
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "show_help",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Image Grid Panel",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        0,
-        "custom",
-        5,
-        "white",
-        2,
-        "#000000"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 38,
-      "type": "PreviewImage",
-      "pos": [
-        1720,
-        590
-      ],
-      "size": [
-        500,
-        630
-      ],
-      "flags": {},
-      "order": 11,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 47
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 39,
-      "type": "ImageListToImageBatch",
-      "pos": [
-        1080,
-        590
-      ],
-      "size": {
-        "0": 210,
-        "1": 26
-      },
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 48
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            49,
-            51
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ImageListToImageBatch",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 15,
-      "type": "CR Simple Banner",
-      "pos": [
-        590,
-        590
-      ],
-      "size": [
-        400,
-        290
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 41
-        },
-        {
-          "name": "banner_text",
-          "type": "STRING",
-          "link": 15,
-          "widget": {
-            "name": "banner_text"
-          }
-        },
-        {
-          "name": "font_name",
-          "type": "COMBO",
-          "link": 44,
-          "widget": {
-            "name": "font_name"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            48
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "show_help",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Simple Banner",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        "text",
-        "Roboto-Regular.ttf",
-        150,
-        "black",
-        0,
-        "white",
-        5,
-        "#000000",
-        "#000000"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 40,
       "type": "CR Thumbnail Preview",
       "pos": [
         1050,
         850
       ],
-      "size": [
-        320,
-        430
-      ],
+      "size": {
+        "0": 320,
+        "1": 430
+      },
       "flags": {},
       "order": 10,
       "mode": 0,
@@ -476,7 +130,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 51
+          "link": 58
         }
       ],
       "outputs": [
@@ -514,13 +168,13 @@
         "1": 130
       },
       "flags": {},
-      "order": 3,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
           "name": "multiline_text",
           "type": 0,
-          "link": 22,
+          "link": 55,
           "widget": {
             "name": "multiline_text"
           }
@@ -565,7 +219,7 @@
         "1": 150
       },
       "flags": {},
-      "order": 2,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
@@ -600,6 +254,375 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 36,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -630,
+        800
+      ],
+      "size": {
+        "0": 300,
+        "1": 180
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 53,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "#B0EFA5\n#D70AE5\n#E88653\n#F70A70\n#6566B5\n#34B1EF\n#71AADC\n#EE248F\n#DED730\n#4CCEFF"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 41,
+      "type": "CR Random Multiline Colors",
+      "pos": [
+        -640,
+        590
+      ],
+      "size": {
+        "0": 315,
+        "1": 150
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "multiline_text",
+          "type": "STRING",
+          "links": [
+            52,
+            53
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Random Multiline Colors",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        842286588666143,
+        "randomize",
+        "hex color",
+        10
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 37,
+      "type": "CR Image Grid Panel",
+      "pos": [
+        1340,
+        590
+      ],
+      "size": {
+        "0": 315,
+        "1": 198
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 57
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Image Grid Panel",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        0,
+        "custom",
+        5,
+        "white",
+        2,
+        "#000000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 42,
+      "type": "CR Image Output",
+      "pos": [
+        1740,
+        590
+      ],
+      "size": {
+        "0": 440,
+        "1": 690
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 54
+        }
+      ],
+      "outputs": [
+        {
+          "name": "trigger",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Image Output",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "Save",
+        "CR",
+        "None",
+        "png",
+        false
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 43,
+      "type": "CR Multiline Text",
+      "pos": [
+        -210,
+        840
+      ],
+      "size": {
+        "0": 300,
+        "1": 340
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "multiline_text",
+          "type": "STRING",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Multiline Text",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "Leonardo da Vinci\nVincent van Gogh\nPablo Picasso\nMichelangelo Buonarroti\nClaude Monet\nRembrandt van Rijn\nFrida Kahlo\nGeorgia O'Keeffe\nSalvador Dalí\nWassily Kandinsky",
+        false,
+        "'",
+        false,
+        "",
+        false
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 15,
+      "type": "CR Simple Banner",
+      "pos": [
+        590,
+        590
+      ],
+      "size": {
+        "0": 400,
+        "1": 290
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 41
+        },
+        {
+          "name": "banner_text",
+          "type": "STRING",
+          "link": 15,
+          "widget": {
+            "name": "banner_text"
+          }
+        },
+        {
+          "name": "font_name",
+          "type": "COMBO",
+          "link": 44,
+          "widget": {
+            "name": "font_name"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            56
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Banner",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "text",
+        "Roboto-Regular.ttf",
+        150,
+        "black",
+        0,
+        "white",
+        5,
+        "#000000",
+        "#000000"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 44,
+      "type": "CR Batch Images From List",
+      "pos": [
+        1060,
+        590
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 56
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            57,
+            58
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Batch Images From List",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "color": "#222",
+      "bgcolor": "#000"
     }
   ],
   "links": [
@@ -609,22 +632,6 @@
       0,
       15,
       1,
-      "STRING"
-    ],
-    [
-      22,
-      22,
-      0,
-      18,
-      0,
-      "STRING"
-    ],
-    [
-      40,
-      33,
-      0,
-      32,
-      0,
       "STRING"
     ],
     [
@@ -652,40 +659,56 @@
       "COMBO"
     ],
     [
-      45,
-      33,
+      52,
+      41,
+      0,
+      32,
+      0,
+      "STRING"
+    ],
+    [
+      53,
+      41,
       0,
       36,
       0,
       "STRING"
     ],
     [
-      47,
+      54,
       37,
       0,
-      38,
+      42,
       0,
       "IMAGE"
     ],
     [
-      48,
+      55,
+      43,
+      0,
+      18,
+      0,
+      "STRING"
+    ],
+    [
+      56,
       15,
       0,
-      39,
+      44,
       0,
       "IMAGE"
     ],
     [
-      49,
-      39,
+      57,
+      44,
       0,
       37,
       0,
       "IMAGE"
     ],
     [
-      51,
-      39,
+      58,
+      44,
       0,
       40,
       0,
