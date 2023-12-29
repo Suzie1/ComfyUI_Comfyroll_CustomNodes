@@ -154,30 +154,6 @@ class CR_ImageOutput:
             return { "ui": { "images": results }, "result": (trigger,) }
  
 #---------------------------------------------------------------------------------------------------------------------#
-class CR_IntegerMultipleOf:
-       
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "integer": ("INT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),
-                "multiple": ("FLOAT", {"default": 8, "min": 1, "max": 18446744073709551615}),
-            }
-        }
-    
-    RETURN_TYPES =("INT", "STRING", )
-    RETURN_NAMES =("INT", "show_help", )
-    FUNCTION = "int_multiple_of"    
-    CATEGORY = icons.get("Comfyroll/Other")
-    
-    def int_multiple_of(self, integer, multiple=8):
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-integer-multiple"
-        if multiple == 0:
-            return (int(integer), show_help, )
-        integer = integer * multiple        
-        return (int(integer), show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
 class CR_Seed:
 
     @classmethod
@@ -265,22 +241,6 @@ class CR_SplitString:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-split-string"
 
         return (string_1, string_2, string_3, string_4, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_Value:
-
-    @classmethod
-    def INPUT_TYPES(cls):  
-        return {"required": {"value": ("FLOAT", {"default": 1.0,},)}}
-
-    RETURN_TYPES = ("FLOAT", "INT", "STRING", )
-    RETURN_NAMES = ("FLOAT", "INT", "show_help", )
-    CATEGORY = icons.get("Comfyroll/Other")
-    FUNCTION = "get_value"
-
-    def get_value(self, value):
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-value"
-        return (float(value), int(value), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ConditioningMixer:
@@ -487,12 +447,10 @@ class CR_MultilineText:
 NODE_CLASS_MAPPINGS = {
     ### Other
     "CR Image Output": CR_ImageOutput,
-    "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Latent Batch Size": CR_LatentBatchSize,
     "CR Seed": CR_Seed,
     "CR Prompt Text": CR_PromptText,
     "CR Split String": CR_SplitString,
-    "CR Value": CR_Value,
     "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel,
     "CR Multiline Text": CR_MultilineText,    

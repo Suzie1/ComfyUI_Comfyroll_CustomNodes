@@ -18,6 +18,7 @@ from .nodes.nodes_utils_logic import *
 from .nodes.nodes_utils_index import *
 from .nodes.nodes_utils_conversion import *
 from .nodes.nodes_utils_random import *
+from .nodes.nodes_utils_other import *
 from .nodes.nodes_legacy import *
 
 from .animation_nodes.interpolation import *
@@ -32,12 +33,10 @@ from .animation_nodes.cyclers import *
 LIVE_NODE_CLASS_MAPPINGS = { 
     ### Other Nodes
     "CR Image Output": CR_ImageOutput,
-    "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Latent Batch Size": CR_LatentBatchSize,   
-    "CR Seed": CR_Seed,
-    "CR Value": CR_Value,
     "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel,
+    "CR Seed": CR_Seed,    
     ### Text Nodes    
     "CR Prompt Text": CR_PromptText,
     "CR Split String": CR_SplitString,    
@@ -52,7 +51,8 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Integer Range List": CR_IntegerRangeList,
     "CR Load Text List": CR_LoadTextList, 
     "CR Intertwine Lists" : CR_IntertwineLists,
-    "CR Binary To List": CR_BinaryToList,     
+    "CR Binary To List": CR_BinaryToList,
+    "CR Batch Images From List": CR_BatchImagesFromList,    
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
@@ -140,7 +140,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
     "CR Simple Image Compare": CR_SimpleImageCompare,
     "CR Thumbnail Preview": CR_ThumbnailPreview, 
-    ### Utils Logic Nodes
+    ### Utils Logic
     "CR Image Input Switch": CR_ImageInputSwitch,
     "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
     "CR Latent Input Switch": CR_LatentInputSwitch,
@@ -152,17 +152,17 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Text Input Switch": CR_TextInputSwitch,
     "CR Text Input Switch (4 way)": CR_TextInputSwitch4way,
     "CR Switch Model and CLIP": CR_ModelAndCLIPInputSwitch,  
-    ### Utils Process Nodes
+    ### Utils Process
     "CR Batch Process Switch": CR_BatchProcessSwitch,    
     "CR Img2Img Process Switch": CR_Img2ImgProcessSwitch,
     "CR Hires Fix Process Switch": CR_HiResFixProcessSwitch,    
-    ### Utils Index Nodes
+    ### Utils Index
     "CR Index": CR_Index,    
     "CR Index Increment": CR_IncrementIndex,
     "CR Index Multiply": CR_MultiplyIndex,
     "CR Index Reset": CR_IndexReset,
     "CR Trigger": CR_Trigger,
-    ### Utils Conversion Nodes  
+    ### Utils Conversion
     "CR String To Number": CR_StringToNumber,
     "CR String To Combo": CR_StringToCombo,    
     "CR Float To String": CR_FloatToString,
@@ -170,6 +170,12 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Integer To String": CR_IntegerToString,    
     "CR Text List To String": CR_TextListToString,
     "CR Seed to Int": CR_SeedToInt,
+    ### Utils Other    
+    "CR Integer Multiple": CR_IntegerMultipleOf,    
+    "CR Value": CR_Value,
+    "CR Integer Multiple": CR_IntegerMultipleOf,
+    "CR Clamp Value": CR_ClampValue,
+    "CR Set Value On Boolean": CR_SetValueOnBoolean,    
     ### Utils Random Nodes
     "CR Random Hex Color": CR_RandomHexColor, 
     "CR Random RGB": CR_RandomRGB,
@@ -383,6 +389,11 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Random Multiline Colors": "🎲 CR Random Multiline Colors",
     "CR Random RGB Gradient": "🎲 CR Random RGB Gradient",
     "CR Random Panel Codes": "🎲 CR Random Panel Codes", 
+    ### Utils Other    
+    "CR Integer Multiple": "⚙️ CR Integer Multiple",
+    "CR Value": "⚙️ CR Value",
+    "CR Clamp Value": "⚙️ CR Clamp Value",
+    "CR Set Value On Boolean": "⚙️ CR Set Value On Boolean",      
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  

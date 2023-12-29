@@ -5,7 +5,7 @@
 
 import random
 import string
-from .graphics_functions import random_hex_color, random_rgb
+from .functions_graphics import random_hex_color, random_rgb
 from ..categories import icons
 
 try:

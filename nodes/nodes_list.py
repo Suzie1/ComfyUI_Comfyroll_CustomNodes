@@ -561,6 +561,28 @@ class CR_BinaryToList:
         list_out = [str(bit) for bit in bit_string]
 
         return(list_out, show_help, ) 
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_BatchImagesFromList:
+# based on ImageListToImageBatch by DrLtData
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {"images": ("IMAGE", ),}}
+
+    RETURN_TYPES = ("IMAGE", )
+    INPUT_IS_LIST = True
+    FUNCTION = "make_batch"
+    CATEGORY = "Comfyroll/List"
+   
+    def make_batch(self, images):
+    
+        if len(images) <= 1:
+            return (images,)
+            
+        batched_images = torch.cat(images, dim=0)    
+
+        return (batched_images, )            
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -579,5 +601,6 @@ NODE_CLASS_MAPPINGS = {
     #"CR Save Text To File": CR_SaveTextToFile,
     "CR Intertwine Lists" : CR_IntertwineLists,
     "CR Binary To List": CR_BinaryToList,
+    "CR Batch Images From List": CR_BatchImagesFromList,  
 }
 '''

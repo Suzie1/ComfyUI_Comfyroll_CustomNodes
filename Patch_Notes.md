@@ -1,5 +1,10 @@
 # 🧩 Comfyroll Custom Nodes - Patch Notes
 
+## v1.55 Dec 29, 2023
+- added CR Batch Images From List
+- added CR Clamp Value,
+- added CR Set Value On Boolean
+
 ## v1.54 Dec 29, 2023
 - added CR Intertwine_Lists
 - added CR Binary To List
