@@ -6,7 +6,8 @@
 import torch
 import numpy as np
 from PIL import Image, ImageDraw, ImageStat, ImageFilter
-from .graphics_functions import get_color_values
+
+from .functions_graphics import get_color_values
 from ..config import color_mapping, COLORS
 from ..categories import icons
 

@@ -9,13 +9,7 @@ import os
 from PIL import Image, ImageDraw, ImageOps, ImageFont
 from ..categories import icons
 from ..config import color_mapping, COLORS
-from .graphics_functions import (draw_masked_text,
-                                 hex_to_rgb,
-                                 draw_text_on_image,
-                                 get_font_size,
-                                 get_text_size,
-                                 get_color_values,
-                                 reduce_opacity)
+from .functions_graphics import *
 
 '''
 try:
@@ -44,15 +38,7 @@ ALIGN_OPTIONS = ["center", "top", "bottom"]
 ROTATE_OPTIONS = ["text center", "image center"]
 JUSTIFY_OPTIONS = ["center", "left", "right"]
 PERSPECTIVE_OPTIONS = ["top", "bottom", "left", "right"]
-
-#---------------------------------------------------------------------------------------------------------------------#
-
-def tensor2pil(image):
-    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
-
-def pil2tensor(image):
-    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0) 
-    
+  
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_OverlayText:
 

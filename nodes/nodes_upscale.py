@@ -8,17 +8,9 @@ import numpy as np
 import folder_paths
 from PIL import Image
 from ..categories import icons
-from .upscale_functions import load_model, upscale_with_model, apply_resize_image
+from .functions_upscale import *
 
 #MAX_RESOLUTION=8192
-
-# PIL to Tensor
-def pil2tensor(image):
-    return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
-
-# Tensor to PIL
-def tensor2pil(image):
-    return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
 
 #---------------------------------------------------------------------------------------------------------------------#
 # NODES

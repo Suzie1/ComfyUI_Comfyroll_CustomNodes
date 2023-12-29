@@ -10,7 +10,7 @@ import os
 import math
 from PIL import Image, ImageDraw
 
-from .graphics_functions import get_color_values
+from .functions_graphics import get_color_values
 from .shapes import (
     draw_circle, draw_oval, draw_diamond, draw_square,
     draw_triangle, draw_hexagon, draw_octagon,

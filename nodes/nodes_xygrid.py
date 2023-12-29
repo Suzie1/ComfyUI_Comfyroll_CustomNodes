@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 import typing as t
 from dataclasses import dataclass
-from .xygrid_functions import create_images_grid_by_columns, Annotation
+from .functions_xygrid import create_images_grid_by_columns, Annotation
 from ..categories import icons
     
 def tensor_to_pillow(image: t.Any) -> Image.Image:

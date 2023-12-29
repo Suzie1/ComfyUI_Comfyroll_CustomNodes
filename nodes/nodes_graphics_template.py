@@ -8,10 +8,11 @@ import torch
 import os 
 from PIL import Image, ImageDraw, ImageOps, ImageFont
 from server import PromptServer, BinaryEventTypes
+
 from ..categories import icons
 from ..config import color_mapping, COLORS
-from .graphics_functions import *                            
-from .upscale_functions import apply_resize_image                                 
+from .functions_graphics import *                            
+from .functions_upscale import apply_resize_image                                 
 
 font_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "fonts")       
 file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]

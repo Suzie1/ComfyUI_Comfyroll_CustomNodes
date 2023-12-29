@@ -9,7 +9,7 @@ import os
 from PIL import Image, ImageDraw, ImageOps, ImageFont, ImageFilter
 from ..categories import icons
 from ..config import color_mapping, COLORS
-from .graphics_functions import * 
+from .functions_graphics import * 
 
 #---------------------------------------------------------------------------------------------------------------------#
         
