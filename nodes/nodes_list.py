@@ -523,20 +523,24 @@ class CR_IntertwineLists:
 
     def make_list(self, list1, list2):
            
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-intertwine-list"      
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-intertwine-lists"      
 
         # Ensure both lists have the same length
         min_length = min(len(list1), len(list2))
-
+        #print(list1,list2)
+        
          # Initialize an empty list to store the combined elements
-        combined_lists = []
-
+        combined_list = []
+        #print(min_length)
+        
         # Use a loop to combine elements from both lists
         for i in range(min_length):
+            #print(str(list1),str(list2))
             combined_element = str(list1) + ", " + str(list2)
-            combined_lists.append(combined_element)
+            #print(combined_element)
+            combined_list.append(combined_element)
                 
-        return(combined_lists, show_help, )            
+        return(combined_list, show_help, )            
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_BinaryToList:
