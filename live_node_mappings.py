@@ -22,14 +22,14 @@ from .nodes.nodes_utils_other import *
 from .nodes.nodes_legacy import *
 
 try:
-    from .animation_nodes.interpolation import *
-    from .animation_nodes.io import *
-    from .animation_nodes.prompt import *
-    from .animation_nodes.schedulers import *
-    from .animation_nodes.schedules import *
-    from .animation_nodes.lists import *
-    from .animation_nodes.utils import *
-    from .animation_nodes.cyclers import *
+    from .animation_nodes.nodes_interpolation import *
+    from .animation_nodes.nodes_io import *
+    from .animation_nodes.nodes_prompt import *
+    from .animation_nodes.nodes_schedulers import *
+    from .animation_nodes.nodes_schedules import *
+    from .animation_nodes.nodes_lists import *
+    from .animation_nodes.nodes_utils import *
+    from .animation_nodes.nodes_cyclers import *
 except ImportError:
     print("\033[34mComfyroll Studio: \033[92mFailed to load Animation nodes\033[0m")
 

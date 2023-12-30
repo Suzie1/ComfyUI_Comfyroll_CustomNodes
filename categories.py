@@ -32,9 +32,7 @@ icons = {
     "Comfyroll/Animation/Schedule": "🧩 Comfyroll Studio/🎥 Animation/📋 Schedule",
     "Comfyroll/Animation/Schedulers": "🧩 Comfyroll Studio/🎥 Animation/📑 Schedulers",
     "Comfyroll/Animation/Prompt": "🧩 Comfyroll Studio/🎥 Animation/📝 Prompt",
-    "Comfyroll/Animation/List": "🧩 Comfyroll Studio/🎥 Animation/📃 List",
-    "Comfyroll/Animation/Cyclers": "🧩 Comfyroll Studio/🎥 Animation/♻️ Cyclers",
+    "Comfyroll/Animation/Legacy": "🧩 Comfyroll Studio/🎥 Animation/💀 Legacy",
     "Comfyroll/Animation/Interpolate": "🧩 Comfyroll Studio/🎥 Animation/🔢 Interpolate",
     "Comfyroll/Animation/IO": "🧩 Comfyroll Studio/🎥 Animation/⌨️ IO",
-    "Comfyroll/Animation/Other": "🧩 Comfyroll Studio/🎥 Animation/📦 Other",
 }
