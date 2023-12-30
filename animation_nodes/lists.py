@@ -274,7 +274,6 @@ class CR_TextListSimple:
         return (texts, show_help, )
  
 #---------------------------------------------------------------------------------------------------------------------#
-'''
 class CR_ImageList:
 
     @classmethod
@@ -335,7 +334,7 @@ class CR_ImageList:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list"          
 
         return (images, show_help, )   
-'''
+        
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ImageListSimple:
 

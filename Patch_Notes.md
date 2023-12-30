@@ -5,6 +5,7 @@
 - updated CR Text List to String, changed inputs to list
 - fixed issue on CR Intertwine_Lists
 - added CR Maths Operation
+- added back CR Prompt Mixer as a legacy node 
 
 ## v1.55 Dec 29, 2023
 - added CR Batch Images From List

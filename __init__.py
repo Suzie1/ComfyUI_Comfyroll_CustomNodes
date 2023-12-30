@@ -27,7 +27,7 @@ try:
         from .dev_node_mappings import DEV_NODE_CLASS_MAPPINGS, DEV_NODE_DISPLAY_NAME_MAPPINGS
         NODE_CLASS_MAPPINGS = {**DEV_NODE_CLASS_MAPPINGS, **LIVE_NODE_CLASS_MAPPINGS}
         NODE_DISPLAY_NAME_MAPPINGS = {**DEV_NODE_DISPLAY_NAME_MAPPINGS, **LIVE_NODE_DISPLAY_NAME_MAPPINGS}
-        print("\033[34mComfyroll Custom Nodes: \033[92mDev Nodes Loaded\033[0m")
+        print("\033[34mComfyroll Studio: \033[92mDev Nodes Loaded\033[0m")
     else:
         NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
         NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
@@ -35,9 +35,9 @@ except ImportError:
     NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
     NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
 
-print("------------------------------------------------")    
-print("\033[34mComfyroll Custom Nodes v1.56 : \033[92m 165 Nodes Loaded\033[0m")
-print("------------------------------------------------")  
+print("------------------------------------------")    
+print("\033[34mComfyroll Studio v1.56 : \033[92m 165 Nodes Loaded\033[0m")
+print("------------------------------------------")  
 
 import shutil
 import folder_paths

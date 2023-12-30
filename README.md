@@ -40,8 +40,9 @@ __📜 List Nodes__
 * CR Float Range List (new 25/12/2023)
 * CR Integer Range List (new 25/12/2023)
 * CR Load Text List (new 27/12/2023)
-* Intertwine_Lists (new 29/12/2023)
-* Binary To List (new 29/12/2023)
+* CR Intertwine_Lists (new 29/12/2023)
+* CR Binary To List (new 29/12/2023)
+* CR Text List To String (updated 30/12/2023)
 
 __🌟 SDXL__
 * CR SDXL Prompt Mix Presets
@@ -140,23 +141,21 @@ __📉 XY Grid__
 * CR XY Save Grid Image
 * CR Image Output
 
-__🔢 Index__
+__🔢 Utils Index__
 * CR Index
 * CR Index Increment
 * CR Index Multiply
 * CR Index Reset
 * CR Trigger
 
-__🔧 Conversion__    
+__🔧 Utils Conversion__    
 * CR String To Number (changed 18/12/2023)
 * CR String To Combo    
 * CR Float To String
 * CR Float To Integer
 * CR Integer To String    
-* CR Text List To String
-* CR Seed to Int
 
-__🔀 Logic__
+__🔀 Utils Logic__
 * CR Image Input Switch
 * CR Image Input Switch (4 way)
 * CR Latent Input Switch
@@ -169,29 +168,39 @@ __🔀 Logic__
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
 
-__🎲 Random__
+__🎲 Utils Random__
 * CR Random Hex Color
 * CR Random RGB
 * CR Random Multiline Values (updated 28/12/2023)
 * CR Random Multiline Colors (added 28/12/2023)
 * CR Random RGB Gradient (new 8/12/2023)
 * CR Random Panel Code (new 26/12/2023)
+
+__⚙️ Utils Other__
+* CR Integer Multiple   
+* CR Value
+* CR Integer Multiple
+* CR Clamp Value (new 29/12/2023)
+* CR Set Value On Boolean (new 29/12/2023)
+* CR Math Operation (new 31/12/2023)  
   
-__📦 Other__
+__📦 Other Nodes__
 * CR Image Output (changed 18/12/2023)
 * CR Latent Batch Size
 * CR Prompt Text
 * CR Split String
-* CR Integer Multiple
 * CR Seed
-* CR Value
 * CR Conditioning Mixer
 * CR Select Model
 * CR Multiline Text (new 24/12/2023)
 * CR Save Text To File (new 27/12/2023)
 
+__Legacy Nodes__
+* CR Seed to Int
+* CR Aspect Ratio SDXL, replaced by CR SDXL Aspect Ratio
+* CR Image Size, replaced by CR Aspect Ratio
+
 __Deleted Nodes__
-* CR Aspect Ratio SDXL replaced by CR SDXL Aspect Ratio
 * CR SDXL Prompt Mixer replaced by CR SDXL Prompt Mix Presets
 
 # CR Animation Nodes

@@ -21,14 +21,17 @@ from .nodes.nodes_utils_random import *
 from .nodes.nodes_utils_other import *
 from .nodes.nodes_legacy import *
 
-from .animation_nodes.interpolation import *
-from .animation_nodes.io import *
-from .animation_nodes.prompt import *
-from .animation_nodes.schedulers import *
-from .animation_nodes.schedules import *
-from .animation_nodes.lists import *
-from .animation_nodes.utils import *
-from .animation_nodes.cyclers import *
+try:
+    from .animation_nodes.interpolation import *
+    from .animation_nodes.io import *
+    from .animation_nodes.prompt import *
+    from .animation_nodes.schedulers import *
+    from .animation_nodes.schedules import *
+    from .animation_nodes.lists import *
+    from .animation_nodes.utils import *
+    from .animation_nodes.cyclers import *
+except ImportError:
+    print("\033[34mComfyroll Studio: \033[92mFailed to load Animation nodes\033[0m")
 
 LIVE_NODE_CLASS_MAPPINGS = { 
     ### Other Nodes
@@ -62,11 +65,12 @@ LIVE_NODE_CLASS_MAPPINGS = {
     ### Legacy Nodes
     "CR Image Size": CR_ImageSize,
     "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,
+    "CR SDXL Prompt Mixer": CR_PromptMixer,    
     "CR Seed to Int": CR_SeedToInt,    
     ### ControlNet Nodes
     "CR Apply ControlNet": CR_ApplyControlNet,    
     "CR Multi-ControlNet Stack": CR_ControlNetStack,
-    "CR Apply Multi-ControlNet": CR_ApplyControlNetStack,   
+    "CR Apply Multi-ControlNet": CR_ApplyControlNetStack, 
     ### LoRA Nodes    
     "CR Load LoRA": CR_LoraLoader,    
     "CR LoRA Stack": CR_LoRAStack,
@@ -215,21 +219,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Gradient Integer": CR_GradientInteger,
     "CR Increment Float": CR_IncrementFloat,    
     "CR Increment Integer": CR_IncrementInteger,
-    "CR Interpolate Latents": CR_InterpolateLatents,    
-    # Lists
-    "CR Model List": CR_ModelList,
-    "CR LoRA List": CR_LoRAList,
-    #"CR Text List": CR_TextList,
-    "CR Text List Simple": CR_TextListSimple,
-    #"CR Image List": CR_ImageList,
-    "CR Image List Simple": CR_ImageListSimple,     
-    # Cyclers
-    "CR Cycle Models": CR_CycleModels,    
-    "CR Cycle LoRAs": CR_CycleLoRAs,
-    "CR Cycle Text": CR_CycleText,
-    "CR Cycle Text Simple": CR_CycleTextSimple,
-    "CR Cycle Images": CR_CycleImages,
-    "CR Cycle Images Simple": CR_CycleImagesSimple,        
+    "CR Interpolate Latents": CR_InterpolateLatents,        
     # Utils   
     "CR Debatch Frames": CR_DebatchFrames,    
     "CR Current Frame": CR_CurrentFrame,
@@ -237,7 +227,19 @@ LIVE_NODE_CLASS_MAPPINGS = {
     # IO
     "CR Load Animation Frames": CR_LoadAnimationFrames,
     "CR Load Flow Frames": CR_LoadFlowFrames,
-    "CR Output Flow Frames": CR_OutputFlowFrames,       
+    "CR Output Flow Frames": CR_OutputFlowFrames,
+    ### Legacy
+    "CR Cycle Models": CR_CycleModels,    
+    "CR Cycle LoRAs": CR_CycleLoRAs,
+    "CR Cycle Text": CR_CycleText,
+    "CR Cycle Text Simple": CR_CycleTextSimple,
+    "CR Cycle Images": CR_CycleImages,
+    "CR Cycle Images Simple": CR_CycleImagesSimple,       
+    "CR Model List": CR_ModelList,
+    "CR LoRA List": CR_LoRAList,
+    "CR Text List Simple": CR_TextListSimple,
+    "CR Image List": CR_ImageList,
+    "CR Image List Simple": CR_ImageListSimple,    
 }
 
 LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
@@ -275,6 +277,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     ### Legacy Nodes
     "CR Image Size": "CR Image Size (Legacy)",
     "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",
+    "CR SDXL Prompt Mixer": "CR SDXL Prompt Mixer (Legacy)",    
     "CR Seed to Int": "CR Seed to Int (Legacy)",    
     ### ControlNet Nodes
     "CR Apply ControlNet": "🕹️ CR Apply ControlNet",    
@@ -427,27 +430,25 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Gradient Integer": "🔢 CR Gradient Integer",
     "CR Increment Float": "🔢 CR Increment Float",    
     "CR Increment Integer": "🔢 CR Increment Integer",
-    "CR Interpolate Latents": "🔢 CR Interpolate Latents",    
-    # Lists
-    "CR Model List": "📃 CR Model List",
-    "CR LoRA List": "📃 CR LoRA List",
-    #"CR Text List": "📃 CR Text List",
-    "CR Text List Simple": "📃 CR Text List Simple",
-    #"CR Image List": "📃 CR Image List",
-    "CR Image List Simple": "📃 CR Image List Simple", 
-    "CR Input Text List": "📃 CR Input Text List", 
-    # Cyclers
-    "CR Cycle Models": "♻️ CR Cycle Models",    
-    "CR Cycle LoRAs": "♻️ CR Cycle LoRAs",
-    "CR Cycle Text": "♻️ CR Cycle Text",
-    "CR Cycle Text Simple": "♻️ CR Cycle Text Simple",
-    "CR Cycle Images": "♻️ CR Cycle Images",
-    "CR Cycle Images Simple": "♻️ CR Cycle Images Simple",        
+    "CR Interpolate Latents": "🔢 CR Interpolate Latents",     
     # Utils   
     "CR Debatch Frames": "🛠️ CR Debatch Frames",    
     "CR Current Frame": "🛠️ CR Current Frame",
     # IO
     "CR Load Animation Frames": "⌨️ CR Load Animation Frames",
     "CR Load Flow Frames": "⌨️ CR Load Flow Frames",
-    "CR Output Flow Frames": "⌨️ CR Output Flow Frames",  
+    "CR Output Flow Frames": "⌨️ CR Output Flow Frames", 
+    ### Legacy
+    "CR Cycle Models": "CR Cycle Models (Legacy)",    
+    "CR Cycle LoRAs": "CR Cycle LoRAs (Legacy)",
+    "CR Cycle Text": "CR Cycle Text (Legacy)",
+    "CR Cycle Text Simple": "CR Cycle Text Simple (Legacy)",
+    "CR Cycle Images": "CR Cycle Images (Legacy)",
+    "CR Cycle Images Simple": "CR Cycle Images Simple (Legacy)",
+    "CR Model List": "CR Model List (Legacy)",
+    "CR LoRA List": "CR LoRA List (Legacy)",
+    "CR Text List Simple": "CR Text List Simple (Legacy)",
+    "CR Image List": "CR Image List (Legacy)",
+    "CR Image List Simple": "CR Image List Simple (Legacy)", 
+    "CR Input Text List": "CR Input Text List (Legacy)",      
 }
