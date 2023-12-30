@@ -604,7 +604,7 @@ class CR_BatchImagesFromList:
     RETURN_NAMES = ("image_batch", "show_help", ) 
     INPUT_IS_LIST = True
     FUNCTION = "make_batch"
-    CATEGORY = "Comfyroll/List"
+    CATEGORY = icons.get("Comfyroll/List")
    
     def make_batch(self, image_list):
     

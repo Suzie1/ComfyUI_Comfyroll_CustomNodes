@@ -137,29 +137,7 @@ class CR_FloatToInteger:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-integer"
         return (int(_float), show_help, )
         
-#---------------------------------------------------------------------------------------------------------------------------------------------------#
-# This node is used to convert type Seed to type INT
-class CR_SeedToInt:
-    def __init__(self):
-        pass
 
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "seed": ("SEED", ),
-            }
-        }
-
-    RETURN_TYPES = ("INT", "STRING", )
-    RETURN_NAMES = ("INT", "show_help", )
-    FUNCTION = "seed_to_int"
-    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
-
-    def seed_to_int(self, seed):
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-seed-to-int"
-        return (seed.get('seed'), show_help, )
- 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -172,7 +150,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Float To String":CR_FloatToString,
     "CR Float To Integer":CR_FloatToInteger,
     "CR Integer To String":CR_IntegerToString,    
-    "CR Seed to Int": CR_SeedToInt, 
 }
 '''    
      

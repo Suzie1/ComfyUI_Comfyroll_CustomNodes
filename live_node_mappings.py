@@ -52,7 +52,8 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Load Text List": CR_LoadTextList, 
     "CR Intertwine Lists" : CR_IntertwineLists,
     "CR Binary To List": CR_BinaryToList,
-    "CR Batch Images From List": CR_BatchImagesFromList,    
+    "CR Batch Images From List": CR_BatchImagesFromList,
+    "CR Text List To String": CR_TextListToString,    
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
@@ -60,7 +61,8 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Aspect Ratio Banners": CR_AspectRatioBanners,      
     ### Legacy Nodes
     "CR Image Size": CR_ImageSize,
-    "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,    
+    "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,
+    "CR Seed to Int": CR_SeedToInt,    
     ### ControlNet Nodes
     "CR Apply ControlNet": CR_ApplyControlNet,    
     "CR Multi-ControlNet Stack": CR_ControlNetStack,
@@ -168,8 +170,6 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Float To String": CR_FloatToString,
     "CR Float To Integer": CR_FloatToInteger,
     "CR Integer To String": CR_IntegerToString,    
-    "CR Text List To String": CR_TextListToString,
-    "CR Seed to Int": CR_SeedToInt,
     ### Utils Random Nodes
     "CR Random Hex Color": CR_RandomHexColor, 
     "CR Random RGB": CR_RandomRGB,
@@ -208,7 +208,6 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Simple Prompt List": CR_SimplePromptList,    
     "CR Simple Prompt List Keyframes": CR_SimplePromptListKeyframes,
     "CR Keyframe List": CR_KeyframeList,    
-    "CR Prompt Text": CR_PromptText,
     #"CR Load Prompt Style": CR_LoadPromptStyle,
     "CR Encode Scheduled Prompts": CR_EncodeScheduledPrompts,      
     # Interpolation
@@ -265,7 +264,9 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Load Value List": "📜 CR Load Value List",   
     "CR Load Text List": "📜 CR Load Text List",
     "CR Intertwine Lists" : "📜 CR Intertwine Lists",
-    "CR Binary To List": "📜 CR Binary To List",       
+    "CR Binary To List": "📜 CR Binary To List", 
+    "CR Batch Images From List": "📜 CR Batch Images From List",
+    "CR Text List To String": "📜 CR Text List To String",    
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
@@ -273,7 +274,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Aspect Ratio Banners": "🔳 CR Aspect Ratio Banners",
     ### Legacy Nodes
     "CR Image Size": "CR Image Size (Legacy)",
-    "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",     
+    "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",
+    "CR Seed to Int": "CR Seed to Int (Legacy)",    
     ### ControlNet Nodes
     "CR Apply ControlNet": "🕹️ CR Apply ControlNet",    
     "CR Multi-ControlNet Stack": "🕹️ CR Multi-ControlNet Stack",
@@ -381,8 +383,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Float To String": "🔧 CR Float To String",
     "CR Float To Integer": "🔧 CR Float To Integer",
     "CR Integer To String": "🔧 CR Integer To String",    
-    "CR Text List To String": "🔧 CR Text List To String",
-    "CR Seed to Int": "🔧 CR Seed to Int",
     ### Utils Random Nodes
     "CR Random Hex Color": "🎲 CR Random Hex Color", 
     "CR Random RGB": "🎲 CR Random RGB",
@@ -420,7 +420,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Simple Prompt List": "📝 CR Simple Prompt List",    
     "CR Simple Prompt List Keyframes": "📝 CR Simple Prompt List Keyframes",
     "CR Keyframe List": "📝 CR Keyframe List",    
-    "CR Prompt Text": "📝 CR Prompt Text",
     #"CR Load Prompt Style": "📝 CR Load Prompt Style",
     "CR Encode Scheduled Prompts": "📝 CR Encode Scheduled Prompts",      
     # Interpolation

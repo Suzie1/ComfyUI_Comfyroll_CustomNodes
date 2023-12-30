@@ -81,6 +81,28 @@ class CR_AspectRatio_SDXL:
         else:
             return(width, height, upscale_factor1, upscale_factor2, batch_size,show_help,)        
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------#
+class CR_SeedToInt:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "seed": ("SEED", ),
+            }
+        }
+
+    RETURN_TYPES = ("INT", "STRING", )
+    RETURN_NAMES = ("INT", "show_help", )
+    FUNCTION = "seed_to_int"
+    CATEGORY = icons.get("Comfyroll/Other/Legacy")
+
+    def seed_to_int(self, seed):
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-seed-to-int"
+        return (seed.get('seed'), show_help, )
+ 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -89,6 +111,7 @@ class CR_AspectRatio_SDXL:
 NODE_CLASS_MAPPINGS = {
     "CR Image Size": CR_ImageSize,
     "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,
+    "CR Seed to Int": CR_SeedToInt,     
 }
 '''
 
