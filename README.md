@@ -195,13 +195,11 @@ __📦 Other Nodes__
 * CR Multiline Text (new 24/12/2023)
 * CR Save Text To File (new 27/12/2023)
 
-__Legacy Nodes__
+__💀 Legacy Nodes__
 * CR Seed to Int
 * CR Aspect Ratio SDXL, replaced by CR SDXL Aspect Ratio
 * CR Image Size, replaced by CR Aspect Ratio
-
-__Deleted Nodes__
-* CR SDXL Prompt Mixer replaced by CR SDXL Prompt Mix Presets
+* CR SDXL Prompt Mixer, replaced by CR SDXL Prompt Mix Presets
 
 # CR Animation Nodes
 
