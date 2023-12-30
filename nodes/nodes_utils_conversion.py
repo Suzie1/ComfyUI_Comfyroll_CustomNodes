@@ -56,28 +56,6 @@ class CR_StringToNumber:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-number"
         return (int_out, float_out, show_help,)
         
-#---------------------------------------------------------------------------------------------------------------------# 
-class CR_TextListToString:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {
-                "text_list": ("STRING", {"forceInput": True}),
-                    },
-                }
-
-    RETURN_TYPES = ("STRING", "STRING", )
-    RETURN_NAMES = ("STRING", "show_help", )
-    FUNCTION = "joinlist"
-    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
-
-    def joinlist(self, text_list):
-    
-        string_out = " ".join(text_list)
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-text-list-to-string"
-
-        return (string_out, show_help, )
-
 #---------------------------------------------------------------------------------------------------------------------#  
 # based on Repeater node by pythongosssss 
 class CR_StringToCombo:
@@ -194,7 +172,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Float To String":CR_FloatToString,
     "CR Float To Integer":CR_FloatToInteger,
     "CR Integer To String":CR_IntegerToString,    
-    "CR Text List To String":CR_TextListToString,
     "CR Seed to Int": CR_SeedToInt, 
 }
 '''    

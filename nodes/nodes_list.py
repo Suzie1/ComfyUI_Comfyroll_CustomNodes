@@ -616,6 +616,29 @@ class CR_BatchImagesFromList:
         batched_images = torch.cat(image_list, dim=0)    
 
         return (batched_images, show_help, )            
+
+#---------------------------------------------------------------------------------------------------------------------# 
+class CR_TextListToString:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                "text_list": ("STRING", {"forceInput": True}),
+                    },
+                }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
+    INPUT_IS_LIST = True    
+    FUNCTION = "joinlist"
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def joinlist(self, text_list):
+    
+        string_out = "\n".join(text_list)
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-text-list-to-string"
+
+        return (string_out, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -634,6 +657,7 @@ NODE_CLASS_MAPPINGS = {
     #"CR Save Text To File": CR_SaveTextToFile,
     "CR Intertwine Lists" : CR_IntertwineLists,
     "CR Binary To List": CR_BinaryToList,
-    "CR Batch Images From List": CR_BatchImagesFromList,  
+    "CR Batch Images From List": CR_BatchImagesFromList,
+    "CR Text List To String":CR_TextListToString,    
 }
 '''

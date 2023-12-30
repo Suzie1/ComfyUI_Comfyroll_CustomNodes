@@ -1,7 +1,8 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
 ## v1.56 Dec 30, 2023
-- updated CR Float Range List added operation, decimal_places, ignore_first_value, and max_value_per_loop parameter
+- updated CR Float Range List, added operation, decimal_places, ignore_first_value, and max_value_per_loop parameter
+- updated CR Text List to String, changed inputs to list
 - fixed issue on CR Intertwine_Lists
 - added CR Maths Operation
 
