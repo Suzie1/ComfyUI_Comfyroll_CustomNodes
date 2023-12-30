@@ -36,7 +36,7 @@ except ImportError:
     NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
 
 print("------------------------------------------------")    
-print("\033[34mComfyroll Custom Nodes v1.55 : \033[92m 165 Nodes Loaded\033[0m")
+print("\033[34mComfyroll Custom Nodes v1.56 : \033[92m 165 Nodes Loaded\033[0m")
 print("------------------------------------------------")  
 
 import shutil

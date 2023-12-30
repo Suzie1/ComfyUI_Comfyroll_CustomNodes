@@ -1,4 +1,9 @@
-# 🧩 Comfyroll Custom Nodes - Patch Notes
+# 🧩 Comfyroll Studio - Patch Notes
+
+## v1.56 Dec 30, 2023
+- updated CR Float Range List added operation, decimal_places, ignore_first_value, and max_value_per_loop parameter
+- fixed issue on CR Intertwine_Lists
+- added CR Maths Operation
 
 ## v1.55 Dec 29, 2023
 - added CR Batch Images From List

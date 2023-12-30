@@ -1,133 +1,30 @@
 {
-  "last_node_id": 37,
-  "last_link_id": 44,
+  "last_node_id": 10,
+  "last_link_id": 9,
   "nodes": [
     {
-      "id": 27,
-      "type": "CR Integer Range List",
+      "id": 8,
+      "type": "CR Text List",
       "pos": [
-        120,
-        200
+        1598.2039038186992,
+        480.8330981449062
       ],
       "size": {
-        "0": 280,
-        "1": 174
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "INT",
-          "type": "INT",
-          "links": [
-            34
-          ],
-          "shape": 6,
-          "slot_index": 0
-        },
-        {
-          "name": "show_help",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Integer Range List",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        1,
-        32,
-        1,
-        1,
-        false
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 28,
-      "type": "CR Integer To String",
-      "pos": [
-        210,
-        430
-      ],
-      "size": {
-        "0": 320,
-        "1": 80
+        "0": 380,
+        "1": 200
       },
       "flags": {
-        "collapsed": true
+        "collapsed": false
       },
-      "order": 2,
+      "order": 0,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "int_",
-          "type": "INT",
-          "link": 34,
-          "widget": {
-            "name": "int_"
-          }
-        }
-      ],
+      "inputs": [],
       "outputs": [
         {
           "name": "STRING",
           "type": "STRING",
           "links": [
-            42
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "show_help",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CR Integer To String",
-        "ttNbgOverride": {
-          "color": "#222",
-          "bgcolor": "#000",
-          "groupcolor": "#444"
-        }
-      },
-      "widgets_values": [
-        0
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 25,
-      "type": "CR Binary To List",
-      "pos": [
-        110,
-        490
-      ],
-      "size": {
-        "0": 290,
-        "1": 96
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            43
+            7
           ],
           "shape": 6,
           "slot_index": 0
@@ -140,7 +37,7 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "CR Binary To List",
+        "Node name for S&R": "CR Text List",
         "ttNbgOverride": {
           "color": "#222",
           "bgcolor": "#000",
@@ -148,41 +45,95 @@
         }
       },
       "widgets_values": [
-        "10110100 10110100 10110100"
+        "circle\ndiamond\nsquare",
+        0,
+        1000
       ],
       "color": "#222",
       "bgcolor": "#000"
     },
     {
-      "id": 35,
+      "id": 9,
+      "type": "CR Text List",
+      "pos": [
+        1588.2039038186992,
+        190.83309814490622
+      ],
+      "size": {
+        "0": 390,
+        "1": 230
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            6
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text List",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "11\n12\n13",
+        0,
+        1000
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 7,
       "type": "CR Intertwine Lists",
       "pos": [
-        480,
-        450
+        2040,
+        340
       ],
       "size": [
-        270,
-        86.0000114440918
+        210,
+        70
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
           "name": "list1",
           "type": "STRING",
-          "link": 42,
+          "link": 6,
           "widget": {
             "name": "list1"
-          }
+          },
+          "slot_index": 0
         },
         {
           "name": "list2",
           "type": "STRING",
-          "link": 43,
+          "link": 7,
           "widget": {
             "name": "list2"
-          }
+          },
+          "slot_index": 1
         }
       ],
       "outputs": [
@@ -190,7 +141,7 @@
           "name": "STRING",
           "type": "STRING",
           "links": [
-            44
+            8
           ],
           "shape": 6,
           "slot_index": 0
@@ -218,24 +169,24 @@
       "bgcolor": "#000"
     },
     {
-      "id": 33,
+      "id": 10,
       "type": "ShowText|pysssss",
       "pos": [
-        840,
-        240
+        2290,
+        340
       ],
-      "size": {
-        "0": 320,
-        "1": 1580
-      },
+      "size": [
+        210,
+        180
+      ],
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
           "name": "text",
           "type": "STRING",
-          "link": 44,
+          "link": 8,
           "widget": {
             "name": "text"
           }
@@ -250,40 +201,17 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "ShowText|pysssss"
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
       },
       "widgets_values": [
-        "1, 1",
-        "2, 0",
-        "3, 1",
-        "4, 1",
-        "5, 0",
-        "6, 1",
-        "7, 0",
-        "8, 0",
-        "9,  ",
-        "1, 1",
-        "1, 0",
-        "1, 1",
-        "1, 1",
-        "1, 0",
-        "1, 1",
-        "1, 0",
-        "1, 0",
-        "1,  ",
-        "1, 1",
-        "2, 0",
-        "2, 1",
-        "2, 1",
-        "2, 0",
-        "2, 1",
-        "2, 0",
-        "2, 0",
-        "2, 0",
-        "2, 0",
-        "2, 0",
-        "3, 0",
-        "3, 0"
+        "11, circle",
+        "12, diamond",
+        "13, square"
       ],
       "color": "#222",
       "bgcolor": "#000"
@@ -291,34 +219,26 @@
   ],
   "links": [
     [
-      34,
-      27,
+      6,
+      9,
       0,
-      28,
-      0,
-      "INT"
-    ],
-    [
-      42,
-      28,
-      0,
-      35,
+      7,
       0,
       "STRING"
     ],
     [
-      43,
-      25,
+      7,
+      8,
       0,
-      35,
+      7,
       1,
       "STRING"
     ],
     [
-      44,
-      35,
+      8,
+      7,
       0,
-      33,
+      10,
       0,
       "STRING"
     ]

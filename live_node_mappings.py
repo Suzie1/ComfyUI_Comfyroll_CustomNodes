@@ -170,12 +170,6 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Integer To String": CR_IntegerToString,    
     "CR Text List To String": CR_TextListToString,
     "CR Seed to Int": CR_SeedToInt,
-    ### Utils Other    
-    "CR Integer Multiple": CR_IntegerMultipleOf,    
-    "CR Value": CR_Value,
-    "CR Integer Multiple": CR_IntegerMultipleOf,
-    "CR Clamp Value": CR_ClampValue,
-    "CR Set Value On Boolean": CR_SetValueOnBoolean,    
     ### Utils Random Nodes
     "CR Random Hex Color": CR_RandomHexColor, 
     "CR Random RGB": CR_RandomRGB,
@@ -183,6 +177,13 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Random Multiline Colors": CR_RandomMultilineColors,    
     "CR Random RGB Gradient": CR_RandomRGBGradient,
     "CR Random Panel Codes": CR_RandomPanelCodes,  
+    ### Utils Other    
+    "CR Integer Multiple": CR_IntegerMultipleOf,    
+    "CR Value": CR_Value,
+    "CR Integer Multiple": CR_IntegerMultipleOf,
+    "CR Clamp Value": CR_ClampValue,
+    "CR Set Value On Boolean": CR_SetValueOnBoolean, 
+    "CR Math Operation": CR_MathOperation,       
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  
@@ -393,7 +394,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Value": "⚙️ CR Value",
     "CR Clamp Value": "⚙️ CR Clamp Value",
-    "CR Set Value On Boolean": "⚙️ CR Set Value On Boolean",      
+    "CR Set Value On Boolean": "⚙️ CR Set Value On Boolean",
+    "CR Math Operation": "⚙️ CR Math Operation",   
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  

@@ -3,6 +3,7 @@
 # for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
+import math
 from ..categories import icons
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -106,6 +107,55 @@ class CR_Value:
         return (float(value), int(value), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_MathOperation:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+    
+        operations = ["sin", "cos", "tan", "sqrt", "exp", "log", "neg", "abs"]
+        
+        return {
+            "required": {
+                "a": ("FLOAT", {"default": 1.0},), 
+                "operation": (operations, ),
+                "decimal_places": ("INT", {"default": 2, "min": 0, "max": 10}),
+            }
+        }
+    
+    RETURN_TYPES =("FLOAT", "STRING", )
+    RETURN_NAMES =("a", "show_help", )
+    FUNCTION = "do_math"    
+    CATEGORY = icons.get("Comfyroll/Utils/Other")
+
+    def do_math(self, a, operation, decimal_places):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-math-operation"    
+
+        #Apply the specified operation on the input value 'a'.
+        if operation == 'sin':
+            result = math.sin(a)
+        elif operation == 'cos':
+            result = math.cos(a)
+        elif operation == 'tan':
+            result = math.cos(a)        
+        elif operation == 'sqrt':
+            result = math.sqrt(a)
+        elif operation == 'exp':
+            result = math.exp(a)
+        elif operation == 'log':
+            result = math.log(a)            
+        elif operation == 'neg':
+            result = -a
+        elif operation == 'abs':
+            result = abs(a)
+        else:
+            raise ValueError("CR Math Operation: Unsupported operation.")
+            
+        result = round(result, decimal_places)   
+            
+        return (result, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -115,7 +165,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Clamp Value": CR_ClampValue,
     "CR Set Value On Boolean": CR_SetValueOnBoolean,
-    "CR Value": CR_Value,    
+    "CR Value": CR_Value,
+    "CR Math Operation": CR_MathOperation, 
 }
 '''
 

@@ -11,6 +11,7 @@ import folder_paths
 import re
 import comfy.sd
 import csv
+import math
 from PIL import Image
 from pathlib import Path
 from ..categories import icons
@@ -289,7 +290,7 @@ class CR_LoadImageListPlus:
         
         list_length = end_index - start_index
         
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-list"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-list-plus"
 
         return (images_out, mask_out, index_list, filename_list, index_list, width, height, list_length, show_help, )
 
@@ -325,7 +326,7 @@ class CR_ListSchedule:
                     continue            
                 schedule_lines.append(line)
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-list-schedule"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-integer-range-list"
 
         return (schedule_lines, show_help, )
 
@@ -334,9 +335,16 @@ class CR_FloatRangeList:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"start": ("FLOAT", {"default": 0.00, "min": -99999.99, "step": -99999.99, "max": 99999.99}),
-                             "end": ("FLOAT", {"default": 1.00, "min": -99999.99, "step": -99999.99, "max": 99999.99}),
-                             "step": ("FLOAT", {"default": 1.00, "min": 0.00, "step": -99999.99, "max": 99999.99}),
+    
+        operations = ["none","sin","cos","tan"]
+        
+        return {"required": {"start": ("FLOAT", {"default": 0.00, "min": -99999.99, "max": 99999.99, "step": 0.01}),
+                             "end": ("FLOAT", {"default": 1.00, "min": -99999.99, "max": 99999.99, "step": 0.01}),
+                             "step": ("FLOAT", {"default": 1.00, "min": -99999.99, "max": 99999.99, "step": 0.01}),
+                             "operation": (operations, ),
+                             "decimal_places": ("INT", {"default": 2, "min": 0, "max": 10}),
+                             "ignore_first_value": ("BOOLEAN", {"default": True}),
+                             "max_values_per_loop": ("INT", {"default": 128, "min": 1, "max": 99999}),                              
                              "loops": ("INT", {"default": 1, "min": 1, "max": 999}),
                              "ping_pong": ("BOOLEAN", {"default": False}),
                             },
@@ -348,23 +356,47 @@ class CR_FloatRangeList:
     FUNCTION = 'make_range'
     CATEGORY = icons.get("Comfyroll/List")
 
-    def make_range(self, start, end, step, loops, ping_pong):
+    def make_range(self, start, end, step, max_values_per_loop, operation, decimal_places, ignore_first_value, loops, ping_pong):
         
         range_values = list()
+        
         for i in range(loops):
-            current_range = list(np.arange(start, end, step))
+        
+            if end < start and step > 0:
+                step = -step
+                
+            current_range = list(np.arange(start, end + step, step))
+
+            # Apply math operations to each value in the range
+            if operation == "sin":
+                current_range = [math.sin(value) for value in current_range]
+            elif operation == "cos":
+                current_range = [math.cos(value) for value in current_range]    
+            elif operation == "tan":
+                current_range = [math.tan(value) for value in current_range]  
+            
+            current_range = [round(value, decimal_places) for value in current_range]  
             
             if ping_pong:
                 # Reverse the direction of the range on even iterations
                 if i % 2 == 1:
+                    if ignore_first_value:
+                        current_range = current_range[:-1]
+                    current_range = current_range[:max_values_per_loop]
                     range_values += reversed(current_range)
                 else:
-                    range_values += current_range     
+                    if ignore_first_value:
+                        current_range = current_range[1:]
+                    current_range = current_range[:max_values_per_loop]
+                    range_values += current_range  
             else:
-                range_values += current_range               
+                if ignore_first_value:
+                    current_range = current_range[1:]
+                current_range = current_range[:max_values_per_loop]
+                range_values += current_range
+                    
             
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-list-schedule"      
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-float-range-list"      
 
         return (range_values, show_help, )
 
@@ -527,19 +559,13 @@ class CR_IntertwineLists:
 
         # Ensure both lists have the same length
         min_length = min(len(list1), len(list2))
-        #print(list1,list2)
         
          # Initialize an empty list to store the combined elements
         combined_list = []
-        #print(min_length)
         
-        # Use a loop to combine elements from both lists
-        for i in range(min_length):
-            #print(str(list1),str(list2))
-            combined_element = str(list1) + ", " + str(list2)
-            #print(combined_element)
-            combined_list.append(combined_element)
-                
+        combined_element = str(list1) + ", " + str(list2)
+        combined_list.append(combined_element)
+        
         return(combined_list, show_help, )            
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -572,21 +598,24 @@ class CR_BatchImagesFromList:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"images": ("IMAGE", ),}}
+        return {"required": {"image_list": ("IMAGE", ),}}
 
-    RETURN_TYPES = ("IMAGE", )
+    RETURN_TYPES = ("IMAGE", "STRING",)
+    RETURN_NAMES = ("image_batch", "show_help", ) 
     INPUT_IS_LIST = True
     FUNCTION = "make_batch"
     CATEGORY = "Comfyroll/List"
    
-    def make_batch(self, images):
+    def make_batch(self, image_list):
     
-        if len(images) <= 1:
-            return (images,)
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-binary-to-list" 
+    
+        if len(image_list) <= 1:
+            return (image_list,)
             
-        batched_images = torch.cat(images, dim=0)    
+        batched_images = torch.cat(image_list, dim=0)    
 
-        return (batched_images, )            
+        return (batched_images, show_help, )            
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
