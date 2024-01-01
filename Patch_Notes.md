@@ -1,5 +1,10 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.57 Jan 1, 2024
+- added CR Prompt List
+- moved animation prompt nodes to legacy
+- reanmed CR Binary To List to CR Binary To Bit List
+
 ## v1.56 Dec 30, 2023
 - updated CR Float Range List, added operation, decimal_places, ignore_first_value, and max_value_per_loop parameter
 - updated CR Text List to String, changed inputs to list

@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.56
+Current version: 1.57
 
 # Wiki
 
@@ -35,6 +35,7 @@ __🔳 Aspect Ratio__
 __📜 List Nodes__
 * CR Font File List (new 18/12/2023)
 * CR Text List (new 19/12/2023)
+* CR Prompt List (new 1/1/2024)
 * CR Load Image List (new 23/12/2023)
 * CR Load Image List Plus (new 23/12/2023)
 * CR Float Range List (new 25/12/2023)

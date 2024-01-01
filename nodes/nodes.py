@@ -177,7 +177,7 @@ class CR_LatentBatchSize:
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {"latent": ("LATENT", ),
-                             "batch_size": ("INT", {"default": 2, "min": 1, "max": 16, "step": 1}),
+                             "batch_size": ("INT", {"default": 2, "min": 1, "max": 999, "step": 1}),
                             }
                }
 

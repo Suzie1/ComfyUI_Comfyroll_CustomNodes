@@ -12,6 +12,7 @@ import re
 import comfy.sd
 import csv
 import math
+import random
 from PIL import Image
 from pathlib import Path
 from ..categories import icons
@@ -138,6 +139,45 @@ class CR_TextList:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-text-list"
 
         return (selected_rows, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_PromptList:
+
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        return {"required": {"prepend_text": ("STRING", {"multiline": False, "default": ""}),
+                             "multiline_text": ("STRING", {"multiline": True, "default": "body_text"}),
+                             "append_text": ("STRING", {"multiline": False, "default": ""}),
+                             "start_index": ("INT", {"default": 0, "min": 0, "max": 9999}),
+                             "max_rows": ("INT", {"default": 1000, "min": 1, "max": 9999}),
+                            }
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", )
+    RETURN_NAMES = ("prompt", "body_text", "show_help", )
+    OUTPUT_IS_LIST = (True, True, False)
+    FUNCTION = "make_list"
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def make_list(self, multiline_text, prepend_text="", append_text="", start_index=0, max_rows=9999):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-prompt-list"
+
+        lines = multiline_text.split('\n')
+
+        # Ensure start_index is within the bounds of the list
+        start_index = max(0, min(start_index, len(lines) - 1))
+
+        # Calculate the end index based on max_rows
+        end_index = min(start_index + max_rows, len(lines))
+
+        # Extract the desired portion of the list
+        selected_rows = lines[start_index:end_index]
+        prompt_list_out = [prepend_text + line + append_text for line in selected_rows]
+        body_list_out = selected_rows          
+
+        return (prompt_list_out, body_list_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_LoadImageList:
@@ -569,7 +609,7 @@ class CR_IntertwineLists:
         return(combined_list, show_help, )            
 
 #---------------------------------------------------------------------------------------------------------------------#
-class CR_BinaryToList:
+class CR_BinaryToBitList:
 
     @classmethod
     def INPUT_TYPES(s):
@@ -647,8 +687,8 @@ class CR_TextListToString:
 '''
 NODE_CLASS_MAPPINGS = {
     ### List nodes
-    "CR Font File List": CR_FontFileList,  
-    "CR Text List": CR_TextList, 
+    "CR Text List": CR_TextList,
+    "CR Prompt List": CR_PromptList,     
     "CR Load Image List": CR_LoadImageList,
     "CR Load Image List Plus": CR_LoadImageListPlus,
     "CR List Schedule": CR_ListSchedule,
@@ -656,8 +696,9 @@ NODE_CLASS_MAPPINGS = {
     "CR Load Text List": CR_LoadTextList,
     #"CR Save Text To File": CR_SaveTextToFile,
     "CR Intertwine Lists" : CR_IntertwineLists,
-    "CR Binary To List": CR_BinaryToList,
     "CR Batch Images From List": CR_BatchImagesFromList,
-    "CR Text List To String":CR_TextListToString,    
+    "CR Text List To String":CR_TextListToString,
+    "CR Font File List": CR_FontFileList,
+    "CR Binary To Bit List": CR_BinaryToBitList,    
 }
 '''
