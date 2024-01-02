@@ -474,3 +474,11 @@ def make_grid_panel(images, max_columns):
             y_offset += image.height
 
     return combined_image   
+
+
+def interpolate_color(color0, color1, t):
+    """
+    Interpolate between two colors.
+    """
+    return tuple(int(c0 * (1 - t) + c1 * t) for c0, c1 in zip(color0, color1))
+    

@@ -15,6 +15,7 @@ import math
 import random
 from PIL import Image
 from pathlib import Path
+from itertools import product
 from ..categories import icons
 
 def tensor2pil(image):
@@ -35,9 +36,6 @@ def tensor2rgba(t: torch.Tensor) -> torch.Tensor:
     else:
         return t
 
-#---------------------------------------------------------------------------------------------------------------------#
-# List Nodes                
-#---------------------------------------------------------------------------------------------------------------------#
 class AnyType(str):
     """A special type that can be connected to any other types. Credit to pythongosssss"""
 
@@ -46,6 +44,8 @@ class AnyType(str):
 
 any_type = AnyType("*")
 
+#---------------------------------------------------------------------------------------------------------------------#
+# List Nodes                
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_FontFileList:
 
@@ -519,63 +519,6 @@ class CR_LoadTextList:
         
         return(list, show_help, )        
 
-#---------------------------------------------------------------------------------------------------------------------# 
-class CR_SaveTextToFile:
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {
-                        "multiline_text": ("STRING", {"multiline": True, "default": ""}),
-                        "output_file_path": ("STRING", {"multiline": False, "default": ""}),
-                        "file_name": ("STRING", {"multiline": False, "default": ""}),
-                        "file_extension": (["txt", "csv"],),
-                        }
-        }
-        
-    RETURN_TYPES = ("STRING", )
-    RETURN_NAMES = ("show_help", ) 
-    OUTPUT_NODE= True
-    FUNCTION = 'save_list'
-    CATEGORY = icons.get("Comfyroll/Other")
-
-    def save_list(self, multiline_text, output_file_path, file_name, file_extension):
-    
-        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-save-text-list" 
-    
-        filepath = output_file_path + "\\" + file_name + "." + file_extension
- 
-        index = 1
-
-        if(output_file_path == "" or file_name == ""):
-            print(f"[Warning] CR Save Text List. No file details found. No file output.") 
-            return ()
-
-        while os.path.exists(filepath):
-            if os.path.exists(filepath):
-                filepath = output_file_path + "\\" + file_name + "_" + str(index) + "." + file_extension
-                index = index + 1
-            else:
-                break            
-        
-        print(f"[Info] CR Save Text List: Saving to {filepath}")        
-        
-        if file_extension == "csv":
-            text_list = []
-            for i in multiline_text.split("\n"):
-                text_list.append(i.strip())
-        
-            with open(filepath, "w", newline="") as csv_file:
-                csv_writer = csv.writer(csv_file)
-                # Write each line as a separate row in the CSV file
-                for line in text_list:           
-                    csv_writer.writerow([line])    
-        else:
-            with open(filepath, "w", newline="") as text_file:
-                for line in multiline_text:
-                    text_file.write(line)
-        
-        return (show_help, )    
-
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_IntertwineLists:
 
@@ -591,7 +534,7 @@ class CR_IntertwineLists:
     RETURN_NAMES = ("STRING", "show_help", )  
     OUTPUT_IS_LIST = (True, False)      
     FUNCTION = 'make_list'
-    CATEGORY = icons.get("Comfyroll/List")
+    CATEGORY = icons.get("Comfyroll/List/Utils")
 
     def make_list(self, list1, list2):
            
@@ -644,7 +587,7 @@ class CR_BatchImagesFromList:
     RETURN_NAMES = ("image_batch", "show_help", ) 
     INPUT_IS_LIST = True
     FUNCTION = "make_batch"
-    CATEGORY = icons.get("Comfyroll/List")
+    CATEGORY = icons.get("Comfyroll/List/Utils")
    
     def make_batch(self, image_list):
     
@@ -670,7 +613,7 @@ class CR_TextListToString:
     RETURN_NAMES = ("STRING", "show_help", )
     INPUT_IS_LIST = True    
     FUNCTION = "joinlist"
-    CATEGORY = icons.get("Comfyroll/List")
+    CATEGORY = icons.get("Comfyroll/List/Utils")
 
     def joinlist(self, text_list):
     
@@ -679,7 +622,62 @@ class CR_TextListToString:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-text-list-to-string"
 
         return (string_out, show_help, )
+ 
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_SimpleList:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required":{
+                    "list_values": ("STRING", {"multiline": True, "default": "text"}),              
+                    }
+        }
+
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("LIST", "show_help", ) 
+    OUTPUT_IS_LIST = (True, False)
+    FUNCTION = "cross_join"
+    CATEGORY = icons.get("Comfyroll/List") 
+    
+    def cross_join(self, list_values):
+
+        lines = list_values.split('\n')
+
+        list_out = [i.strip() for i in lines if i.strip()]
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-simple-list"
+
+        return (list_out, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_XYProduct:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required":{
+                    "text_x": ("STRING", {"multiline": True}),              
+                    "text_y": ("STRING", {"multiline": True}),
+                    }
+        }
+
+    RETURN_TYPES = (any_type, any_type, "STRING", )
+    RETURN_NAMES = ("x_values", "y_values", "show_help", ) 
+    OUTPUT_IS_LIST = (True, True, False)
+    FUNCTION = "cross_join"
+    CATEGORY = icons.get("Comfyroll/List/Utils") 
+    
+    def cross_join(self, text_x, text_y):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-product"
         
+        list1 = text_x.strip().split('\n')
+        list2 = text_y.strip().split('\n')
+
+        cartesian_product = list(product(list1, list2))
+        x_values, y_values = zip(*cartesian_product)
+        
+        return (list(x_values), list(y_values), show_help, )
+
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -688,17 +686,19 @@ class CR_TextListToString:
 NODE_CLASS_MAPPINGS = {
     ### List nodes
     "CR Text List": CR_TextList,
-    "CR Prompt List": CR_PromptList,     
+    "CR Prompt List": CR_PromptList,   
+    "CR Simple List": CR_SimpleList,    
     "CR Load Image List": CR_LoadImageList,
     "CR Load Image List Plus": CR_LoadImageListPlus,
     "CR List Schedule": CR_ListSchedule,
     "CR Float Range List": CR_FloatRangeList,
     "CR Load Text List": CR_LoadTextList,
-    #"CR Save Text To File": CR_SaveTextToFile,
-    "CR Intertwine Lists" : CR_IntertwineLists,
-    "CR Batch Images From List": CR_BatchImagesFromList,
-    "CR Text List To String":CR_TextListToString,
     "CR Font File List": CR_FontFileList,
     "CR Binary To Bit List": CR_BinaryToBitList,    
+    ### List Utils
+    "CR Batch Images From List": CR_BatchImagesFromList,    
+    "CR Intertwine Lists" : CR_IntertwineLists,
+    "CR XY Product": CR_XYProduct,
+    "CR Text List To String":CR_TextListToString,    
 }
 '''

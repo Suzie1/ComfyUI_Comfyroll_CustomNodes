@@ -15,7 +15,7 @@
 @author: Suzie1
 @title: Comfyroll Studio
 @nickname: Comfyroll Studio
-@description: 150 custom nodes for Graphics, Animation, IO, Aspect Ratio, Model Merge, ControlNet, LoRA, XY Grid, and Utilities.
+@description: 152 custom nodes for artists, designers and animators.
 """
 
 from .live_node_mappings import LIVE_NODE_CLASS_MAPPINGS, LIVE_NODE_DISPLAY_NAME_MAPPINGS
@@ -36,7 +36,7 @@ except ImportError:
     NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
 
 print("------------------------------------------")    
-print("\033[34mComfyroll Studio v1.57 : \033[92m 150 Nodes Loaded\033[0m")
+print("\033[34mComfyroll Studio v1.58 : \033[92m 152 Nodes Loaded\033[0m")
 print("------------------------------------------") 
 print("** For changes, please see patch notes at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md") 
 print("** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki") 

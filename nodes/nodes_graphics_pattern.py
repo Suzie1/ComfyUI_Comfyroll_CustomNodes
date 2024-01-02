@@ -91,6 +91,7 @@ class CR_BinaryPattern:
                     "outline_thickness": ("INT", {"default": 0, "min": 0, "max": 1024}), 
                     "outline_color": (COLORS,),
                     "jitter_distance": ("INT", {"default": 0, "min": 0, "max": 1024}),
+                    "bias": ("FLOAT", {"default": 0.50, "min": 0.00, "max": 1.00, "step": 0.05}),
                 },
                 "optional": {
                     "bg_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),
@@ -110,7 +111,7 @@ class CR_BinaryPattern:
                      color_0="white", color_1="black", outline_thickness=0,
                      color0_hex='#000000', color1_hex='#000000',
                      bg_color_hex='#000000', outline_color_hex='#000000',
-                     jitter_distance = 0):
+                     jitter_distance = 0, bias=0.5):
                      
         # Get RGB values
         color0 = get_color_values(color_0, color0_hex, color_mapping)         
@@ -123,8 +124,8 @@ class CR_BinaryPattern:
         grid = [[int(bit) for bit in row.strip()] for row in rows]
 
         # Calculate the size of each square
-        square_width = width // len(rows[0])
-        square_height = height // len(rows)
+        square_width = width / len(rows[0])
+        square_height = height / len(rows)
 
         # Create a new image
         image = Image.new("RGB", (width, height), color=bg_color)
@@ -145,7 +146,14 @@ class CR_BinaryPattern:
                 y2 = y1 + square_height + y_jitter 
 
                 # Draw black square if bit is 1, else draw white square
-                color = color1 if bit == 1 else color0
+                #color = color1 if bit == 1 else color0
+                
+                # Adjust color based on bias
+                if random.uniform(0, 1) < abs(bias):
+                    color = color1
+                else:
+                    color = color0
+
                 draw.rectangle([x1, y1, x2, y2], fill=color, outline=outline_color, width=outline_thickness)
 
         image_out = pil2tensor(image)

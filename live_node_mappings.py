@@ -1,25 +1,27 @@
-from .nodes.nodes import *
-from .nodes.nodes_aspect_ratio import *
-from .nodes.nodes_list import *
-from .nodes.nodes_lora import *
-from .nodes.nodes_controlnet import *
-from .nodes.nodes_pipe import *
-from .nodes.nodes_sdxl import *
-from .nodes.nodes_model_merge import *
-from .nodes.nodes_upscale import *
-from .nodes.nodes_xygrid import *
-from .nodes.nodes_graphics_matplot import *
-from .nodes.nodes_graphics_text import *
-from .nodes.nodes_graphics_layout import *
-from .nodes.nodes_graphics_filter import *
-from .nodes.nodes_graphics_template import *
-from .nodes.nodes_graphics_pattern import *
-from .nodes.nodes_utils_logic import *
-from .nodes.nodes_utils_index import *
-from .nodes.nodes_utils_conversion import *
-from .nodes.nodes_utils_random import *
-from .nodes.nodes_utils_other import *
-from .nodes.nodes_legacy import *
+try:
+    from .nodes.nodes import *
+    from .nodes.nodes_aspect_ratio import *
+    from .nodes.nodes_list import *
+    from .nodes.nodes_lora import *
+    from .nodes.nodes_controlnet import *
+    from .nodes.nodes_pipe import *
+    from .nodes.nodes_sdxl import *
+    from .nodes.nodes_model_merge import *
+    from .nodes.nodes_upscale import *
+    from .nodes.nodes_xygrid import *
+    from .nodes.nodes_legacy import *
+except ImportError:
+    print("\033[34mComfyroll Studio: \033[92mFailed to load Core nodes\033[0m")
+
+try:
+    from .nodes.nodes_graphics_matplot import *
+    from .nodes.nodes_graphics_text import *
+    from .nodes.nodes_graphics_layout import *
+    from .nodes.nodes_graphics_filter import *
+    from .nodes.nodes_graphics_template import *
+    from .nodes.nodes_graphics_pattern import *
+except ImportError:
+    print("\033[34mComfyroll Studio: \033[92mFailed to load Graphics nodes\033[0m")
 
 try:
     from .animation_nodes.nodes_interpolation import *
@@ -32,6 +34,16 @@ try:
     from .animation_nodes.nodes_cyclers import *
 except ImportError:
     print("\033[34mComfyroll Studio: \033[92mFailed to load Animation nodes\033[0m")
+    
+try:
+    from .nodes.nodes_utils_logic import *
+    from .nodes.nodes_utils_index import *
+    from .nodes.nodes_utils_conversion import *
+    from .nodes.nodes_utils_random import *
+    from .nodes.nodes_utils_text import *
+    from .nodes.nodes_utils_other import *
+except ImportError:
+    print("\033[34mComfyroll Studio: \033[92mFailed to load Utility nodes\033[0m")
 
 LIVE_NODE_CLASS_MAPPINGS = { 
     ### Other Nodes
@@ -39,25 +51,23 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Latent Batch Size": CR_LatentBatchSize,   
     "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel,
-    "CR Seed": CR_Seed,    
-    ### Text Nodes    
-    "CR Prompt Text": CR_PromptText,
-    "CR Split String": CR_SplitString,    
-    "CR Multiline Text": CR_MultilineText,
-    "CR Save Text To File": CR_SaveTextToFile,    
+    "CR Seed": CR_Seed, 
+    "CR Prompt Text": CR_PromptText,   
     ### List Nodes
     "CR Text List": CR_TextList,
-    "CR Prompt List": CR_PromptList,    
+    "CR Prompt List": CR_PromptList, 
+    "CR Simple List": CR_SimpleList,    
     "CR Load Image List": CR_LoadImageList,
     "CR Load Image List Plus": CR_LoadImageListPlus, 
     "CR Float Range List": CR_FloatRangeList,
     "CR Integer Range List": CR_IntegerRangeList,
     "CR Load Text List": CR_LoadTextList, 
     "CR Intertwine Lists" : CR_IntertwineLists,
+    "CR XY Product": CR_XYProduct,     
     "CR Batch Images From List": CR_BatchImagesFromList,
     "CR Text List To String": CR_TextListToString,      
     "CR Font File List": CR_FontFileList,
-    "CR Binary To Bit List": CR_BinaryToBitList,
+    "CR Binary To Bit List": CR_BinaryToBitList,  
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
@@ -181,7 +191,11 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Random Multiline Values": CR_RandomMultilineValues,
     "CR Random Multiline Colors": CR_RandomMultilineColors,    
     "CR Random RGB Gradient": CR_RandomRGBGradient,
-    "CR Random Panel Codes": CR_RandomPanelCodes,  
+    "CR Random Panel Codes": CR_RandomPanelCodes, 
+    ### Text Nodes    
+    "CR Split String": CR_SplitString,    
+    "CR Multiline Text": CR_MultilineText,
+    "CR Save Text To File": CR_SaveTextToFile,      
     ### Utils Other    
     "CR Integer Multiple": CR_IntegerMultipleOf,    
     "CR Value": CR_Value,
@@ -262,15 +276,18 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Font File List": "📜 CR Font File List",
     "CR Text List": "📜 CR Text List",
     "CR Prompt List": "📜 CR Prompt List",
+    "CR Simple List": "📜 CR Simple List",  
     "CR Load Image List": "📜 CR Load Image List",
     "CR Load Image List Plus": "📜 CR Load Image List Plus", 
     "CR Float Range List": "📜 CR Float Range List",
     "CR Integer Range List": "📜 CR Integer Range List", 
     "CR Load Value List": "📜 CR Load Value List",   
     "CR Load Text List": "📜 CR Load Text List",
-    "CR Intertwine Lists" : "📜 CR Intertwine Lists",
-    "CR Binary To Bit List": "📜 CR Binary To Bit List", 
+    "CR Binary To Bit List": "📜 CR Binary To Bit List",
+    ### List Utils
     "CR Batch Images From List": "📜 CR Batch Images From List",
+    "CR Intertwine Lists" : "📜 CR Intertwine Lists",
+    "CR XY Product": "📜 CR XY Product",      
     "CR Text List To String": "📜 CR Text List To String",   
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",

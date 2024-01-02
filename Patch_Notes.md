@@ -1,5 +1,11 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.58 Jan 2, 2024
+- updated CR Binary Pattern, added bias parameter and fixed a problem with the swaure size calculation
+- added CR Simple List
+- added CR XY Product
+- moved text utility nodes to a new file and menu category
+
 ## v1.57 Jan 1, 2024
 - added CR Prompt List
 - moved animation prompt nodes to legacy

@@ -15,6 +15,7 @@ import typing as tg
 import datetime
 import io
 from server import PromptServer, BinaryEventTypes
+#from nodes import common_ksampler
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 from pathlib import Path
@@ -216,6 +217,7 @@ class CR_PromptText:
         return (prompt, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+'''
 class CR_SplitString:
 
     @classmethod
@@ -229,7 +231,7 @@ class CR_SplitString:
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
     RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4", "show_help", )    
     FUNCTION = "split"
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Utils/Text")
 
     def split(self, text, delimiter):
 
@@ -241,7 +243,7 @@ class CR_SplitString:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-split-string"
 
         return (string_1, string_2, string_3, string_4, show_help, )
-
+'''
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ConditioningMixer:
 
@@ -317,7 +319,7 @@ class CR_ConditioningMixer:
                 n = [tw, conditioning_to[i][1].copy()]
                 out.append(n)
             return (out, show_help, )
-            
+         
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SelectModel:
     
@@ -368,77 +370,34 @@ class CR_SelectModel:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-model"
             
         return (model, clip, vae, model_name, show_help, )
- 
+
 #---------------------------------------------------------------------------------------------------------------------#
-# based on WAS Text Multiline node
-class CR_MultilineText:
-
+'''
+class CR_KSampler:
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "text": ("STRING", {"default": '', "multiline": True}),
-                "convert_from_csv": ("BOOLEAN", {"default": False}),
-                "csv_quote_char": ("STRING", {"default": "'", "choices": ["'", '"']}),
-                "remove_chars": ("BOOLEAN", {"default": False}),
-                "chars_to_remove": ("STRING", {"multiline": False, "default": ""}),
-                "split_string": ("BOOLEAN", {"default": False}),
-            }
-        }
+    def INPUT_TYPES(s):
+        return {"required":
+                    {"model": ("MODEL",),
+                    "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                    "steps": ("INT", {"default": 20, "min": 1, "max": 10000, "forceInput": True}),
+                    "cfg": ("FLOAT", {"default": 8.0, "min": 0.0, "max": 100.0, "step":0.1, "round": 0.01, "forceInput": True}),
+                    "sampler_name": (comfy.samplers.KSampler.SAMPLERS, ),
+                    "scheduler": (comfy.samplers.KSampler.SCHEDULERS, ),
+                    "positive": ("CONDITIONING", ),
+                    "negative": ("CONDITIONING", ),
+                    "latent_image": ("LATENT", ),
+                    "denoise": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
+                     }
+                }
 
-    RETURN_TYPES = ("STRING", "STRING", )
-    RETURN_NAMES = ("multiline_text", "show_help", )
-    FUNCTION = "text_multiline"
-    CATEGORY = icons.get("Comfyroll/Other")
+    RETURN_TYPES = ("LATENT",)
+    FUNCTION = "sample"
 
-    def text_multiline(self, text, chars_to_remove, split_string=False, remove_chars=False, convert_from_csv=False, csv_quote_char="'"):
-    
-        new_text = []
+    CATEGORY = "sampling"
 
-        # Remove trailing commas
-        text = text.rstrip(',')
-
-        if convert_from_csv:
-            # Convert CSV to multiline text
-            csv_reader = csv.reader(io.StringIO(text), quotechar=csv_quote_char)
-            for row in csv_reader:
-                new_text.extend(row)       
-        if split_string: 
-            if text.startswith("'") and text.endswith("'"):
-                text = text[1:-1]  # Remove outer single quotes
-                values = [value.strip() for value in text.split("', '")]
-                new_text.extend(values)
-            elif text.startswith('"') and text.endswith('"'):
-                    text = text[1:-1]  # Remove outer single quotes
-                    values = [value.strip() for value in text.split('", "')]
-                    new_text.extend(values)   
-            elif ',' in text and text.count("'") % 2 == 0:
-                # Assume it's a list-like string and split accordingly
-                text = text.replace("'", '')  # Remove single quotes
-                values = [value.strip() for value in text.split(",")]
-                new_text.extend(values)
-            elif ',' in text and text.count('"') % 2 == 0:
-                    # Assume it's a list-like string and split accordingly
-                    text = text.replace('"', '')  # Remove single quotes
-                    values = [value.strip() for value in text.split(",")]
-                    new_text.extend(values)                 
-        if convert_from_csv == False and split_string == False:
-            # Process multiline text
-            for line in io.StringIO(text):    
-                if not line.strip().startswith('#'):
-                    if not line.strip().startswith("\n"):
-                        line = line.replace("\n", '')
-                    if remove_chars:
-                        # Remove quotes from each line
-                        line = line.replace(chars_to_remove, '')
-                    new_text.append(line)                
-
-        new_text = "\n".join(new_text)
-        
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-multiline-text"
-
-        return (new_text, show_help,)
- 
+    def sample(self, model, seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise=1.0):
+        return common_ksampler(model, seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise=denoise)
+'''     
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -450,10 +409,9 @@ NODE_CLASS_MAPPINGS = {
     "CR Latent Batch Size": CR_LatentBatchSize,
     "CR Seed": CR_Seed,
     "CR Prompt Text": CR_PromptText,
-    "CR Split String": CR_SplitString,
     "CR Conditioning Mixer": CR_ConditioningMixer,
-    "CR Select Model": CR_SelectModel,
-    "CR Multiline Text": CR_MultilineText,    
+    "CR Select Model": CR_SelectModel, 
+    #"CR KSampler": CR_KSampler,
 }
 '''
 
