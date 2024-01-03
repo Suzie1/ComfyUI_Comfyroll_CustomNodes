@@ -42,8 +42,8 @@ class CR_SetValueOnBinary:
         return {
             "required": {
                 "binary": ("INT", {"default": 1, "min": 0, "max": 1, "forceInput": True}),
-                "value_if_true": ("FLOAT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),   
-                "value_if_false": ("FLOAT", {"default": 0, "min": -18446744073709551615, "max": 18446744073709551615}),   
+                "value_if_1": ("FLOAT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),   
+                "value_if_0": ("FLOAT", {"default": 0, "min": -18446744073709551615, "max": 18446744073709551615}),   
             }
         }
     
@@ -52,14 +52,14 @@ class CR_SetValueOnBinary:
     FUNCTION = "set_value"    
     CATEGORY = icons.get("Comfyroll/Utils/Other")
     
-    def set_value(self, binary, value_if_true, value_if_false):
+    def set_value(self, binary, value_if_1, value_if_0):
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-set-value-on-boolean"
 
         if binary == 1:
-            return (int(value_if_true), value_if_true, show_help, )   
+            return (int(value_if_1), value_if_1, show_help, )   
         else:
-            return (int(value_if_false), value_if_false, show_help, )
+            return (int(value_if_0), value_if_0, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SetValueOnBoolean:
