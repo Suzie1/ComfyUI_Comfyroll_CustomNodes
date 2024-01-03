@@ -48,7 +48,29 @@ class CR_SplitString:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-split-string"
 
         return (string_1, string_2, string_3, string_4, show_help, )
- 
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_Text:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "text": ("STRING", {"default": '', "multiline": True}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("text", "show_help", )
+    FUNCTION = "text_multiline"
+    CATEGORY = icons.get("Comfyroll/Utils/Text")
+
+    def text_multiline(self, text):
+            
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-text"
+
+        return (text, show_help,)
+
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_MultilineText:
 
@@ -174,7 +196,29 @@ class CR_SaveTextToFile:
                     text_file.write(line)
         
         return (show_help, )  
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_TextConcatenate:
+
+    @ classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {
+                "text1": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
+                "text2": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
+                "separator": ("STRING", {"multiline": False, "default": ""}),
+        }}
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
+    FUNCTION = "concat_text"
+    CATEGORY = icons.get("Comfyroll/Utils/Text")
+
+    def concat_text(self, text1, text2, separator, ):
+    
+        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-save-text-to-file" 
         
+        return (text1 + separator + text2, )
+   
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -182,9 +226,11 @@ class CR_SaveTextToFile:
 '''
 NODE_CLASS_MAPPINGS = {
     ### Utils Text
+    "CR Text": CR_Text,
     "CR Multiline Text": CR_MultilineText,
-    "CR Save Text To File": CR_SaveTextToFile, 
-    "CR Split String": CR_SplitString,    
+    "CR Split String": CR_SplitString,
+    "CR Text Concatenate": CR_TextConcatenate,
+    "CR Save Text To File": CR_SaveTextToFile,     
 }
 '''
 

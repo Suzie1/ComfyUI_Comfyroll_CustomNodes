@@ -35,13 +35,13 @@ class CR_ClampValue:
         return (a, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-class CR_SetValueOnBoolean:
+class CR_SetValueOnBinary:
        
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "boolean_number": ("INT", {"default": 1, "min": 0, "max": 1}),
+                "binary": ("INT", {"default": 1, "min": 0, "max": 1, "forceInput": True}),
                 "value_if_true": ("FLOAT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),   
                 "value_if_false": ("FLOAT", {"default": 0, "min": -18446744073709551615, "max": 18446744073709551615}),   
             }
@@ -52,11 +52,38 @@ class CR_SetValueOnBoolean:
     FUNCTION = "set_value"    
     CATEGORY = icons.get("Comfyroll/Utils/Other")
     
-    def set_value(self, boolean_number, value_if_true, value_if_false):
+    def set_value(self, binary, value_if_true, value_if_false):
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-set-value-on-boolean"
 
-        if boolean_number == 1:
+        if binary == 1:
+            return (int(value_if_true), value_if_true, show_help, )   
+        else:
+            return (int(value_if_false), value_if_false, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_SetValueOnBoolean:
+       
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "boolean": ("BOOLEAN", {"default": True, "forceInput": True}),
+                "value_if_true": ("FLOAT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),   
+                "value_if_false": ("FLOAT", {"default": 0, "min": -18446744073709551615, "max": 18446744073709551615}),   
+            }
+        }
+    
+    RETURN_TYPES =("INT", "FLOAT", "STRING", )
+    RETURN_NAMES =("INT", "FLOAT", "show_help", )
+    FUNCTION = "set_value"    
+    CATEGORY = icons.get("Comfyroll/Utils/Other")
+    
+    def set_value(self, boolean, value_if_true, value_if_false):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-set-value-on-boolean"
+
+        if boolean == True:
             return (int(value_if_true), value_if_true, show_help, )   
         else:
             return (int(value_if_false), value_if_false, show_help, )
@@ -97,7 +124,7 @@ class CR_Value:
 
     RETURN_TYPES = ("FLOAT", "INT", "STRING", )
     RETURN_NAMES = ("FLOAT", "INT", "show_help", )
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Utils/Other")
     FUNCTION = "get_value"
 
     def get_value(self, value):
@@ -162,10 +189,11 @@ class CR_MathOperation:
 '''
 NODE_CLASS_MAPPINGS = {
     ### Utility Other
-    "CR Integer Multiple": CR_IntegerMultipleOf,
+    "CR Value": CR_Value,    
     "CR Clamp Value": CR_ClampValue,
     "CR Set Value On Boolean": CR_SetValueOnBoolean,
-    "CR Value": CR_Value,
+    "CR Set Value On Binary": CR_SetValueOnBinary,     
+    "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Math Operation": CR_MathOperation, 
 }
 '''

@@ -1,9 +1,16 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.59 Jan 3, 2024
+- added CR Text
+- updated original CR Set Value On Boolean, changed name to CR Set Value On Binary
+- added new CR Set Value On Boolean
+- updated index nodes to make the index an input (force input)
+
 ## v1.58 Jan 2, 2024
 - updated CR Binary Pattern, added bias parameter and fixed a problem with the swaure size calculation
 - added CR Simple List
 - added CR XY Product
+- added CR Text Concatenate
 - moved text utility nodes to a new file and menu category
 
 ## v1.57 Jan 1, 2024

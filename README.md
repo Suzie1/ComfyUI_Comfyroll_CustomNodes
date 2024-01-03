@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.57
+Current version: 1.59
 
 # Wiki
 
@@ -25,11 +25,19 @@ You can also install the nodes using the following methods:
 https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
 
 # List of Custom Nodes
+  
+__📦 Core Nodes__
+* CR Image Output (changed 18/12/2023)
+* CR Latent Batch Size
+* CR Prompt Text
+* CR Seed
+* CR Conditioning Mixer
+* CR Select Model
 
 __🔳 Aspect Ratio__
+* CR Aspect Ratio
 * CR SDXL Aspect Ratio
 * CR SD1.5 Aspect Ratio
-* CR Aspect Ratio
 * CR Aspect Ratio Banners (new 18/12/2023)
 
 __📜 List Nodes__
@@ -173,28 +181,24 @@ __🎲 Utils Random__
 * CR Random Hex Color
 * CR Random RGB
 * CR Random Multiline Values (updated 28/12/2023)
-* CR Random Multiline Colors (added 28/12/2023)
+* CR Random Multiline Colors (new 28/12/2023)
 * CR Random RGB Gradient (new 8/12/2023)
 * CR Random Panel Code (new 26/12/2023)
 
+__🔤 Utils Text__
+* CR Text (new 3/1/2024)
+* CR Multiline Text (new 24/12/2023)
+* CR Split String
+* CR Text Concatenate (new 2/1/2024)
+* CR Save Text To File (new 27/12/2023)
+
 __⚙️ Utils Other__
-* CR Integer Multiple   
 * CR Value
 * CR Integer Multiple
 * CR Clamp Value (new 29/12/2023)
 * CR Set Value On Boolean (new 29/12/2023)
+* CR Set Value On Binary (new 3/1/2024)
 * CR Math Operation (new 31/12/2023)  
-  
-__📦 Other Nodes__
-* CR Image Output (changed 18/12/2023)
-* CR Latent Batch Size
-* CR Prompt Text
-* CR Split String
-* CR Seed
-* CR Conditioning Mixer
-* CR Select Model
-* CR Multiline Text (new 24/12/2023)
-* CR Save Text To File (new 27/12/2023)
 
 __💀 Legacy Nodes__
 * CR Seed to Int

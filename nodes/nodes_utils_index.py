@@ -53,7 +53,7 @@ class CR_IncrementIndex:
     @classmethod
     def INPUT_TYPES(s):
         return {"required":{
-                    "index": ("INT", {"default": 1, "min": -10000, "max": 10000}),
+                    "index": ("INT", {"default": 1, "min": -10000, "max": 10000, "forceInput": True}),
                     "interval": ("INT", {"default": 1, "min": -10000, "max": 10000}),
                     }
         }
@@ -74,7 +74,7 @@ class CR_MultiplyIndex:
     @classmethod
     def INPUT_TYPES(s):
         return {"required":{
-                    "index": ("INT", {"default": 1, "min": 0, "max": 10000}),
+                    "index": ("INT", {"default": 1, "min": 0, "max": 10000, "forceInput": True}),
                     "factor": ("INT", {"default": 1, "min": 0, "max": 10000}),
                     }
         }
@@ -96,7 +96,7 @@ class CR_IndexReset:
     @classmethod
     def INPUT_TYPES(s):
         return {"required":{
-                    "index": ("INT", {"default": 1, "min": 0, "max": 10000}),
+                    "index": ("INT", {"default": 1, "min": 0, "max": 10000, "forceInput": True}),
                     "reset_to": ("INT", {"default": 1, "min": 0, "max": 10000}),
                     }
         }

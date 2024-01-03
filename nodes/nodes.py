@@ -22,7 +22,7 @@ from pathlib import Path
 from ..categories import icons
 
 #---------------------------------------------------------------------------------------------------------------------#
-# Other Nodes
+# Core Nodes
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ImageOutput:
     def __init__(self):
@@ -51,12 +51,12 @@ class CR_ImageOutput:
     RETURN_NAMES = ("trigger", )
     FUNCTION = "save_images"
     OUTPUT_NODE = True
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Core")
 
     def save_images(self, images, file_format, prefix_presets, filename_prefix="CR",
         trigger=False, output_type="Preview", prompt=None, extra_pnginfo=None):
               
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-output"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-image-output"
     
         def map_filename(filename):
             prefix_len = len(os.path.basename(filename_prefix))
@@ -165,11 +165,11 @@ class CR_Seed:
     RETURN_NAMES = ("seed", "show_help", )
     FUNCTION = "seedint"
     OUTPUT_NODE = True
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Core")
 
     @staticmethod
     def seedint(seed):
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-seed"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-seed"
         return (seed, show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -184,7 +184,7 @@ class CR_LatentBatchSize:
 
     RETURN_TYPES = ("LATENT", )
     FUNCTION = "batchsize"
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Core")
 
     def batchsize(self, latent: tg.Sequence[tg.Mapping[tg.Text, torch.Tensor]], batch_size: int):
         samples = latent['samples']
@@ -194,7 +194,7 @@ class CR_LatentBatchSize:
             torch.clone(samples) for _ in range(batch_size - 1)
         ]
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-latent-batch-size"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-latent-batch-size"
 
         return ({
             'samples': torch.cat(sample_list),
@@ -210,40 +210,12 @@ class CR_PromptText:
     RETURN_TYPES = ("STRING", "STRING", )
     RETURN_NAMES = ("prompt", "show_help", )
     FUNCTION = "get_value"
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Core")
 
     def get_value(self, prompt):
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-prompt-text"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-prompt-text"
         return (prompt, show_help, )
 
-#---------------------------------------------------------------------------------------------------------------------#
-'''
-class CR_SplitString:
-
-    @classmethod
-    def INPUT_TYPES(s):  
-    
-        return {"required": {"text": ("STRING", {"multiline": False, "default": "text"}),
-                             "delimiter": ("STRING", {"multiline": False, "default": ","}), 
-                }
-        }
-
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", )
-    RETURN_NAMES = ("string_1", "string_2", "string_3", "string_4", "show_help", )    
-    FUNCTION = "split"
-    CATEGORY = icons.get("Comfyroll/Utils/Text")
-
-    def split(self, text, delimiter):
-
-        # Split the text string
-        parts = text.split(delimiter)
-        strings = [part.strip() for part in parts[:4]]
-        string_1, string_2, string_3, string_4 = strings + [""] * (4 - len(strings))            
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-split-string"
-
-        return (string_1, string_2, string_3, string_4, show_help, )
-'''
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ConditioningMixer:
 
@@ -263,7 +235,7 @@ class CR_ConditioningMixer:
     RETURN_TYPES = ("CONDITIONING", "STRING", )
     RETURN_NAMES = ("CONDITIONING", "show_help", )
     FUNCTION = "conditioning"
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Core")
     
     def conditioning(self, mix_method, conditioning_1, conditioning_2, average_strength):
 
@@ -271,7 +243,7 @@ class CR_ConditioningMixer:
         conditioning_to = conditioning_2
         conditioning_to_strength = average_strength
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-conditioning-mixer"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-conditioning-mixer"
     
         if mix_method == "Combine":
             return (conditioning_1 + conditioning_2, show_help, )
@@ -341,7 +313,7 @@ class CR_SelectModel:
     RETURN_TYPES = ("MODEL", "CLIP", "VAE", "STRING", "STRING", )
     RETURN_NAMES = ("MODEL", "CLIP", "VAE", "ckpt_name", "show_help", )
     FUNCTION = "select_model"
-    CATEGORY = icons.get("Comfyroll/Other")
+    CATEGORY = icons.get("Comfyroll/Core")
 
     def select_model(self, ckpt_name1, ckpt_name2, ckpt_name3, ckpt_name4, ckpt_name5, select_model):
     
@@ -367,7 +339,7 @@ class CR_SelectModel:
         model, clip, vae, clipvision = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True,
                                                      embedding_directory=folder_paths.get_folder_paths("embeddings"))
             
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-model"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-select-model"
             
         return (model, clip, vae, model_name, show_help, )
 

@@ -22,7 +22,7 @@ class CR_ImageSize:
     RETURN_TYPES = ("INT", "INT", "FLOAT", "STRING", )
     RETURN_NAMES = ("Width", "Height", "upscale_factor", "show_help", )
     FUNCTION = "ImageSize"
-    CATEGORY = icons.get("Comfyroll/Other/Legacy")
+    CATEGORY = icons.get("Comfyroll/Legacy")
 
     def ImageSize(self, width, height, upscale_factor):
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Legacy-Nodes#cr-image-size"
@@ -52,7 +52,7 @@ class CR_AspectRatio_SDXL:
     #RETURN_NAMES = ("Width", "Height")
     FUNCTION = "Aspect_Ratio"
 
-    CATEGORY = icons.get("Comfyroll/Other/Legacy")
+    CATEGORY = icons.get("Comfyroll/Legacy")
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor1, upscale_factor2, batch_size):
        
@@ -105,7 +105,7 @@ class CR_PromptMixer:
     RETURN_NAMES = ("pos_g", "pos_l", "pos_r", "neg_g", "neg_l", "neg_r", )
     FUNCTION = "mixer"
 
-    CATEGORY = icons.get("Comfyroll/Other/Legacy")
+    CATEGORY = icons.get("Comfyroll/Legacy")
 
     def mixer(self, prompt_positive, prompt_negative, style_positive, style_negative, preset):
     
@@ -164,7 +164,7 @@ class CR_SeedToInt:
     RETURN_TYPES = ("INT", "STRING", )
     RETURN_NAMES = ("INT", "show_help", )
     FUNCTION = "seed_to_int"
-    CATEGORY = icons.get("Comfyroll/Other/Legacy")
+    CATEGORY = icons.get("Comfyroll/Legacy")
 
     def seed_to_int(self, seed):
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-seed-to-int"

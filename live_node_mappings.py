@@ -46,7 +46,7 @@ except ImportError:
     print("\033[34mComfyroll Studio: \033[92mFailed to load Utility nodes\033[0m")
 
 LIVE_NODE_CLASS_MAPPINGS = { 
-    ### Other Nodes
+    ### Core Nodes
     "CR Image Output": CR_ImageOutput,
     "CR Latent Batch Size": CR_LatentBatchSize,   
     "CR Conditioning Mixer": CR_ConditioningMixer,
@@ -185,23 +185,26 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Float To String": CR_FloatToString,
     "CR Float To Integer": CR_FloatToInteger,
     "CR Integer To String": CR_IntegerToString,    
-    ### Utils Random Nodes
+    ### Utils Random
     "CR Random Hex Color": CR_RandomHexColor, 
     "CR Random RGB": CR_RandomRGB,
     "CR Random Multiline Values": CR_RandomMultilineValues,
     "CR Random Multiline Colors": CR_RandomMultilineColors,    
     "CR Random RGB Gradient": CR_RandomRGBGradient,
     "CR Random Panel Codes": CR_RandomPanelCodes, 
-    ### Text Nodes    
-    "CR Split String": CR_SplitString,    
+    ### Utils Text 
+    "CR Text": CR_Text,    
     "CR Multiline Text": CR_MultilineText,
-    "CR Save Text To File": CR_SaveTextToFile,      
+    "CR Split String": CR_SplitString,     
+    "CR Text Concatenate": CR_TextConcatenate,    
+    "CR Save Text To File": CR_SaveTextToFile,    
     ### Utils Other    
     "CR Integer Multiple": CR_IntegerMultipleOf,    
     "CR Value": CR_Value,
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Clamp Value": CR_ClampValue,
-    "CR Set Value On Boolean": CR_SetValueOnBoolean, 
+    "CR Set Value On Boolean": CR_SetValueOnBoolean,
+    "CR Set Value On Binary": CR_SetValueOnBinary,  
     "CR Math Operation": CR_MathOperation,       
     #------------------------------------------------------
     ### Animation Nodes
@@ -259,7 +262,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
 }
 
 LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
-    ### Other Nodes
+    ### Core Nodes
     "CR Image Output": "💾 CR Image Output",
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Latent Batch Size": "⚙️ CR Latent Batch Size", 
@@ -267,11 +270,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Value": "⚙️ CR Value",
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
     "CR Select Model": "🔮 CR Select Model",
-    ### Text Nodes
-    "CR Prompt Text": "⚙️ CR Prompt Text",
-    "CR Split String": "⚙️ CR Split String",
-    "CR Save Text To File": "⚙️ CR Save Text To File",     
-    "CR Multiline Text": "⚙️ CR Multiline Text", 
+    "CR Prompt Text": "⚙️ CR Prompt Text",    
     ### List Nodes
     "CR Font File List": "📜 CR Font File List",
     "CR Text List": "📜 CR Text List",
@@ -378,7 +377,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Comic Panel Templates": "📱 CR Comic Panel Templates",
     "CR Simple Image Compare": "📱 CR Simple Image Compare",
     "CR Thumbnail Preview": "📱 CR Thumbnail Preview", 
-    ### Utils Logic Nodes
+    ### Utils Logic
     "CR Image Input Switch": "🔀 CR Image Input Switch",
     "CR Image Input Switch (4 way)": "🔀 CR Image Input Switch (4 way)",
     "CR Latent Input Switch": "🔀 CR Latent Input Switch",
@@ -390,34 +389,41 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Text Input Switch": "🔀 CR Text Input Switch",
     "CR Text Input Switch (4 way)": "🔀 CR Text Input Switch (4 way)",
     "CR Switch Model and CLIP": "🔀 CR Switch Model and CLIP",
-    ### Utils Process Nodes
+    ### Utils Process
     "CR Batch Process Switch": "🔂 CR Batch Process Switch",    
     "CR Img2Img Process Switch": "🔂 CR Img2Img Process Switch",
     "CR Hires Fix Process Switch": "🔂 CR Hires Fix Process Switch",    
-    ### Utils Index Nodes
+    ### Utils Index
     "CR Index":"🔢 CR Index",    
     "CR Index Increment": "🔢 CR Index Increment",
     "CR Index Multiply": "🔢 CR Index Multiply",
     "CR Index Reset": "🔢 CR Index Reset",
     "CR Trigger": "🔢 CR Trigger",
-    ### Utils Conversion Nodes
+    ### Utils Conversions
     "CR String To Number": "🔧 CR String To Number",
     "CR String To Combo": "🔧 CR String To Combo",    
     "CR Float To String": "🔧 CR Float To String",
     "CR Float To Integer": "🔧 CR Float To Integer",
     "CR Integer To String": "🔧 CR Integer To String",    
-    ### Utils Random Nodes
+    ### Utils Random
     "CR Random Hex Color": "🎲 CR Random Hex Color", 
     "CR Random RGB": "🎲 CR Random RGB",
     "CR Random Multiline Values": "🎲 CR Random Multiline Values",
     "CR Random Multiline Colors": "🎲 CR Random Multiline Colors",
     "CR Random RGB Gradient": "🎲 CR Random RGB Gradient",
-    "CR Random Panel Codes": "🎲 CR Random Panel Codes", 
+    "CR Random Panel Codes": "🎲 CR Random Panel Codes",
+    ### Utils Text
+    "CR Text": "🔤 CR Text",
+    "CR Split String": "🔤 CR Split String",
+    "CR Save Text To File": "🔤 CR Save Text To File",     
+    "CR Multiline Text": "🔤 CR Multiline Text",     
+    "CR Text Concatenate": "🔤 CR Text Concatenate",
     ### Utils Other    
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Value": "⚙️ CR Value",
     "CR Clamp Value": "⚙️ CR Clamp Value",
     "CR Set Value On Boolean": "⚙️ CR Set Value On Boolean",
+    "CR Set Value On Binary": "⚙️ CR Set Value On Binary",
     "CR Math Operation": "⚙️ CR Math Operation",   
     #------------------------------------------------------
     ### Animation Nodes
