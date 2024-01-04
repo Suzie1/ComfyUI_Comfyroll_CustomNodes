@@ -16,7 +16,7 @@ class CR_StringToNumber:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"text": ("STRING", {"multiline": False, "default": "text"}),
+        return {"required": {"text": ("STRING", {"multiline": False, "default": "text", "forceInput": True}),
                 "round_integer": (["round", "round down","round up"],),
                 },
         }
@@ -91,7 +91,7 @@ class CR_StringToCombo:
 class CR_IntegerToString:
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"int_": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+        return {"required": {"int_": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "forceInput": True}),
                 }
         }
 
@@ -105,11 +105,12 @@ class CR_IntegerToString:
         return (f'{int_}', show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
-# Cloned from Mikey Nodes
+# based on Mikey Nodes
 class CR_FloatToString:
+
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"float_": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1000000.0}),
+        return {"required": {"float_": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1000000.0, "forceInput": True}),
                 }        
         }
 
@@ -123,10 +124,14 @@ class CR_FloatToString:
         return (f'{float_}', show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
+# based on Mikey Nodes
 class CR_FloatToInteger:
+
     @classmethod
     def INPUT_TYPES(cls):
-        return {"required": {"_float": ("FLOAT", {"default": 0.0})}}
+        return {"required": {"_float": ("FLOAT", {"default": 0.0, "forceInput": True, "forceInput": True}),
+                }
+        }
 
     RETURN_TYPES = ("INT", "STRING", )
     RETURN_NAMES = ("INT", "show_help", )
@@ -137,7 +142,6 @@ class CR_FloatToInteger:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-integer"
         return (int(_float), show_help, )
         
-
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#

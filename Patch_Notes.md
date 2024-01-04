@@ -1,5 +1,12 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.60 Jan 4, 2024
+- added CR Bit Scheduler
+- added CR Loops
+- added CR Text Cycler
+- added CR Value Cycler
+- updated conversion nodes to make the index an input (force input)
+
 ## v1.59 Jan 3, 2024
 - added CR Text
 - updated original CR Set Value On Boolean, changed name to CR Set Value On Binary

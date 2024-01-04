@@ -264,6 +264,9 @@ class CR_LoadScheduleFromFile:
     CATEGORY = icons.get("Comfyroll/Animation/Schedule")    
     
     def csvinput(self, input_file_path, file_name, file_extension):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-load-schedule-from-file"
+        
         filepath = input_file_path + "\\" + file_name + "." + file_extension
         print(f"CR Load Schedule From File: Loading {filepath}")
         
@@ -288,7 +291,54 @@ class CR_LoadScheduleFromFile:
         #print(lists)
         
         return(lists,str(lists),)
-            
+
+def binary_string_to_schedule(binary_string):
+    schedule = []
+    for i, bit in enumerate(binary_string):
+        schedule.append(f"{i},{int(bit)}")
+    return '\n'.join(schedule)
+ 
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_BitSchedule:
+    
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+            "binary_string": ("STRING", {"multiline": True, "default": ""}),
+            "interval": ("INT", {"default": 1, "min": 1, "max": 99999}),
+            "loops": ("INT", {"default": 1, "min": 1, "max": 99999}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("SCHEDULE", "show_text", )
+    FUNCTION = "bit_schedule"
+    CATEGORY = icons.get("Comfyroll/Animation/Schedule")    
+
+    def bit_schedule(self, binary_string, interval, loops=1):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-bit-schedule"
+    
+        schedule = []
+
+        # Remove spaces and line returns from the input
+        binary_string = binary_string.replace(" ", "").replace("\n", "")
+        '''
+        for i in range(len(binary_string) * loops):
+            index = i % len(binary_string)  # Use modulo to ensure the index continues in a single sequence
+            bit = int(binary_string[index])
+            schedule.append(f"{i},{bit}")
+        '''    
+        for i in range(len(binary_string) * loops):
+            schedule_index = i * interval
+            bit_index = i % len(binary_string)
+            bit = int(binary_string[bit_index])
+            schedule.append(f"{schedule_index},{bit}")            
+                
+        schedule_out = '\n'.join(schedule)
+        
+        return (schedule_out, show_help,)
+    
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -303,7 +353,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Schedule To ScheduleList":CR_ScheduleToScheduleList,  
     "CR Schedule Input Switch": Comfyroll_ScheduleInputSwitch, 
     "CR Output Schedule To File":CR_OutputScheduleToFile,
-    "CR Load Schedule From File":CR_LoadScheduleFromFile,    
+    "CR Load Schedule From File":CR_LoadScheduleFromFile,
+    "CR Bit Schedule": CR_BitCyclicSchedule,
 }
 '''
 

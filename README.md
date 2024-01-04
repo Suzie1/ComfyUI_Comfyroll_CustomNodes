@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.59
+Current version: 1.60
 
 # Wiki
 
@@ -26,7 +26,8 @@ https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md
 
 # List of Custom Nodes
   
-__📦 Core Nodes__
+## Core Nodes
+__📦 Essential Nodes__
 * CR Image Output (changed 18/12/2023)
 * CR Latent Batch Size
 * CR Prompt Text
@@ -49,8 +50,16 @@ __📜 List Nodes__
 * CR Float Range List (new 25/12/2023)
 * CR Integer Range List (new 25/12/2023)
 * CR Load Text List (new 27/12/2023)
-* CR Intertwine_Lists (new 29/12/2023)
 * CR Binary To List (new 29/12/2023)
+* CR Text List To String (updated 30/12/2023)
+* CR Text Cycler (new 4/1/2024)
+* CR Value Cycler (new 4/1/2024)
+
+    ### List Utils
+* CR Batch Images From List (new 29/12/2023)    
+* CR Intertwine_Lists (new 29/12/2023)
+* CR Loop List (new 4/1/2024)   
+* CR XY Product (new 2/1/2024)
 * CR Text List To String (updated 30/12/2023)
 
 __🌟 SDXL__
@@ -70,10 +79,35 @@ __🕹️ ControlNet__
 * CR Multi-ControlNet Stack
 * CR Apply Multi-ControlNet Stack
 
-__🔂 Process__
-* CR Img2Img Process Switch
-* CR Hires Fix Process Switch
-* CR Batch Process Switch
+__✈️ Module__
+* CR Module Pipe Loader
+* CR Module Input
+* CR Module Output
+
+__🛩️ Pipe__
+* CR Image Pipe In
+* CR Image Pipe Edit
+* CR Image Pipe Out
+* CR Pipe Switch
+
+__⛏️ Model Merge__
+* CR Model Stack
+* CR Apply Model Merge
+
+__🔍 Upscale__
+* CR Multi Upscale Stack
+* CR Upscale Image
+* CR Apply Multi Upscale
+
+__📉 XY Grid__
+* CR XY List
+* CR XY Interpolate   
+* CR XY Index
+* CR XY From Folder
+* CR XY Save Grid Image
+* CR Image Output
+
+## 👾 Graphics Nodes
 
 __👓 Graphics - Filter__
 * CR Color Tint
@@ -122,33 +156,48 @@ __🌁 Graphics - Layout__
 * CR Simple Text Panel
 * CR Overlay Transparent Image
 
-__✈️ Module__
-* CR Module Pipe Loader
-* CR Module Input
-* CR Module Output
+## 🎥 Animation
 
-__🛩️ Pipe__
-* CR Image Pipe In
-* CR Image Pipe Edit
-* CR Image Pipe Out
-* CR Pipe Switch
+__📋 Schedules__
+* CR Simple Schedule
+* CR Central Schedule
+* CR Combine Schedules
+* CR Output Schedule To File
+* CR Load Schedule From File
+* CR Schedule Input Switch
 
-__⛏️ Model Merge__
-* CR Model Stack
-* CR Apply Model Merge
+__📑 Schedulers__
+* CR Simple Value Scheduler
+* CR Simple Text Scheduler
+* CR Value Scheduler
+* CR Text Scheduler
+* CR Load Scheduled Models
+* CR Load Scheduled LoRAs
+* CR Prompt Scheduler
+* CR Simple Prompt Scheduler
 
-__🔍 Upscale__
-* CR Multi Upscale Stack
-* CR Upscale Image
-* CR Apply Multi Upscale
+__📝 Prompt__
+* CR Keyframe List
+* CR Load Prompt Style
+* CR Encode Scheduled Prompts
 
-__📉 XY Grid__
-* CR XY List
-* CR XY Interpolate   
-* CR XY Index
-* CR XY From Folder
-* CR XY Save Grid Image
-* CR Image Output
+__🔢 Interpolation__
+* CR Gradient Float
+* CR Gradient Integer
+* CR Increment Float
+* CR Increment Integer
+* CR Interpolate Latents
+
+__🛠️ Utils__
+* CR Debatch Frames
+* CR Current Frame
+
+__⌨️ IO__
+* CR Load Animation Frames
+* CR Load Flow Frames
+* CR Output Flow Frames
+
+## 🛠️ Utility Nodes
 
 __🔢 Utils Index__
 * CR Index
@@ -177,6 +226,11 @@ __🔀 Utils Logic__
 * CR Text Input Switch (4 way)
 * CR Switch Model and CLIP
 
+__🔂 Utils Process__
+* CR Img2Img Process Switch
+* CR Hires Fix Process Switch
+* CR Batch Process Switch
+
 __🎲 Utils Random__
 * CR Random Hex Color
 * CR Random RGB
@@ -200,17 +254,12 @@ __⚙️ Utils Other__
 * CR Set Value On Binary (new 3/1/2024)
 * CR Math Operation (new 31/12/2023)  
 
+## Legacy
 __💀 Legacy Nodes__
 * CR Seed to Int
 * CR Aspect Ratio SDXL, replaced by CR SDXL Aspect Ratio
 * CR Image Size, replaced by CR Aspect Ratio
 * CR SDXL Prompt Mixer, replaced by CR SDXL Prompt Mix Presets
-
-# CR Animation Nodes
-
-CR Animation Nodes are now included in the Comfyroll Custom Nodes pack.
-
-[Animation Nodes](https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/suzie_dev/Animation_Nodes.md)
 
 # Comfyroll Workflow Templates
 

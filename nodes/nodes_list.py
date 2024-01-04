@@ -525,8 +525,8 @@ class CR_IntertwineLists:
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {
-                            "list1": ("STRING", {"multiline": True, "default": ""}),
-                            "list2": ("STRING", {"multiline": True, "default": ""}),
+                            "list1": ("STRING", {"multiline": True, "default": "", "forceInput": True}),
+                            "list2": ("STRING", {"multiline": True, "default": "", "forceInput": True}),
                             }              
         }
         
@@ -679,6 +679,103 @@ class CR_XYProduct:
         return (list(x_values), list(y_values), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_LoopList:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required":{
+                    "list": ("STRING", {"multiline": True, "default": "", "forceInput": True}),             
+                    "loops": ("INT", {"default": 1, "min": 1, "max": 99999}),
+                    }
+        }
+
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("*", "show_help", ) 
+    OUTPUT_IS_LIST = (True, False)
+    FUNCTION = "loop_list"
+    CATEGORY = icons.get("Comfyroll/List/Utils") 
+        
+    def loop_list(self, list, loops):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-product"
+        
+        looped_list = []
+        
+        for _ in range(loops):
+            looped_list.append(str(list))
+        
+        return (looped_list, show_help, )   
+        
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_TextCycler:
+    
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+            "text": ("STRING", {"multiline": True, "default": ""}),
+            "repeats": ("INT", {"default": 1, "min": 1, "max": 99999}),
+            "loops": ("INT", {"default": 1, "min": 1, "max": 99999}),
+            }
+        }
+
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("STRING", "show_text", )
+    OUTPUT_IS_LIST = (True, False)
+    FUNCTION = "cycle"
+    CATEGORY = icons.get("Comfyroll/List")    
+
+    def cycle(self, text, repeats, loops=1):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-text-cycler"
+    
+        lines = text.split('\n')
+        list_out = []
+
+        for i in range(loops):
+            for text_item in lines:
+                for _ in range(repeats):
+                    list_out.append(text_item)
+        
+        return (list_out, show_help,)
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_ValueCycler:
+    
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+            "values": ("STRING", {"multiline": True, "default": ""}),
+            "repeats": ("INT", {"default": 1, "min": 1, "max": 99999}),
+            "loops": ("INT", {"default": 1, "min": 1, "max": 99999}),
+            }
+        }
+
+    RETURN_TYPES = ("FLOAT", "INT", "STRING", )
+    RETURN_NAMES = ("FLOAT", "INT", "show_text", )
+    OUTPUT_IS_LIST = (True, True, False)
+    FUNCTION = "cycle"
+    CATEGORY = icons.get("Comfyroll/List")    
+
+    def cycle(self, values, repeats, loops=1):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-value-cycler"
+    
+        lines = values.split('\n')
+        float_list_out = []
+        int_list_out = []
+
+        # add check if valid number
+
+        for i in range(loops):
+            for _ in range(repeats):
+                for text_item in lines:
+                    if all(char.isdigit() or char == '.' for char in text_item.strip()):
+                        float_list_out.append(float(text_item))
+                        int_list_out.append(int(float(text_item)))  # Convert to int after parsing as float
+
+        return (float_list_out, int_list_out, show_help, )    
+
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -694,11 +791,14 @@ NODE_CLASS_MAPPINGS = {
     "CR Float Range List": CR_FloatRangeList,
     "CR Load Text List": CR_LoadTextList,
     "CR Font File List": CR_FontFileList,
-    "CR Binary To Bit List": CR_BinaryToBitList,    
+    "CR Binary To Bit List": CR_BinaryToBitList,
+    "CR Text Cycler": CR_TextCycler,
+    "CR Value Cycler": CR_ValueCycler,     
     ### List Utils
     "CR Batch Images From List": CR_BatchImagesFromList,    
     "CR Intertwine Lists" : CR_IntertwineLists,
+    "CR Loop List": CR_LoopList,    
     "CR XY Product": CR_XYProduct,
-    "CR Text List To String":CR_TextListToString,    
+    "CR Text List To String":CR_TextListToString,  
 }
 '''
