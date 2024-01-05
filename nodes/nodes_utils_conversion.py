@@ -129,7 +129,7 @@ class CR_FloatToInteger:
 
     @classmethod
     def INPUT_TYPES(cls):
-        return {"required": {"_float": ("FLOAT", {"default": 0.0, "forceInput": True, "forceInput": True}),
+        return {"required": {"float": ("FLOAT", {"default": 0.0, "forceInput": True, "forceInput": True}),
                 }
         }
 
@@ -138,9 +138,9 @@ class CR_FloatToInteger:
     FUNCTION = "convert"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
-    def convert(self, _float):
+    def convert(self, float):
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-integer"
-        return (int(_float), show_help, )
+        return (int(float), show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
