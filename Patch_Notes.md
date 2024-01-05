@@ -1,5 +1,8 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.61 Jan 5, 2024
+- added CR Get Parameter From Prompt
+
 ## v1.60 Jan 4, 2024
 - added CR Bit Scheduler
 - added CR Loops

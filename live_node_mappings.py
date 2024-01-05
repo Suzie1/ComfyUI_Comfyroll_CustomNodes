@@ -209,7 +209,8 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Clamp Value": CR_ClampValue,
     "CR Set Value On Boolean": CR_SetValueOnBoolean,
     "CR Set Value On Binary": CR_SetValueOnBinary,  
-    "CR Math Operation": CR_MathOperation,       
+    "CR Math Operation": CR_MathOperation,
+    "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,     
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  
@@ -432,7 +433,8 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Clamp Value": "⚙️ CR Clamp Value",
     "CR Set Value On Boolean": "⚙️ CR Set Value On Boolean",
     "CR Set Value On Binary": "⚙️ CR Set Value On Binary",
-    "CR Math Operation": "⚙️ CR Math Operation",   
+    "CR Math Operation": "⚙️ CR Math Operation",
+    "CR Get Parameter From Prompt": "⚙️ CR Get Parameter From Prompt",   
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  

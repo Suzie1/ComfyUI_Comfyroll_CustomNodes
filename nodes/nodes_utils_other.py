@@ -183,6 +183,65 @@ class CR_MathOperation:
         return (result, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_GetParameterFromPrompt:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+           
+        return {
+            "required": {
+                "prompt": ("STRING", {"multiline": True, "default": "prompt"}),
+                "search_string": ("STRING", {"multiline": False, "default": "!findme"}),
+            }
+        }
+    
+    RETURN_TYPES =("STRING", "STRING", "FLOAT", "BOOLEAN", "STRING", )
+    RETURN_NAMES =("prompt",  "text", "float", "boolean", "show_help", )
+    FUNCTION = "get_string"    
+    CATEGORY = icons.get("Comfyroll/Utils/Other")
+
+    def get_string(self, prompt, search_string):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-find-string-in-prompt"    
+
+        return_string = ""
+        return_value = 0
+        return_boolean = False
+        return_prompt = prompt
+        
+        index = prompt.find(search_string)
+        if index != -1:
+            space_index = prompt.find(" ", index)
+            return_string = prompt[index + len(search_string):space_index] if space_index != -1 else prompt[index + len(search_string):]
+
+        print(return_string)
+        if return_string == "":
+            return (return_prompt, return_string, return_value, return_boolean, show_help, )
+        
+        if return_string.startswith("="):
+            return_string = return_string[1:]
+        else:
+            return_string = ""
+ 
+        return_boolean = return_string.lower() == "true"    
+
+        # Check if return_string is an integer or a float
+        try:
+            return_value = int(return_string)
+        except ValueError:
+            try:
+                return_value = float(return_string)
+            except ValueError:
+                return_value = 0
+
+        remove_string = " " + search_string + "=" + return_string
+        
+        # The return_prompt should have the search_string and the return_text removed
+        return_prompt = prompt.replace(remove_string, "")
+         
+        return (return_prompt, return_string, return_value, return_boolean, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -194,7 +253,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Set Value On Boolean": CR_SetValueOnBoolean,
     "CR Set Value On Binary": CR_SetValueOnBinary,     
     "CR Integer Multiple": CR_IntegerMultipleOf,
-    "CR Math Operation": CR_MathOperation, 
+    "CR Math Operation": CR_MathOperation,
+    "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,
 }
 '''
 

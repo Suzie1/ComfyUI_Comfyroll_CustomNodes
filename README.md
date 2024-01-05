@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.60
+Current version: 1.61
 
 # Wiki
 
@@ -253,6 +253,7 @@ __⚙️ Utils Other__
 * CR Set Value On Boolean (new 29/12/2023)
 * CR Set Value On Binary (new 3/1/2024)
 * CR Math Operation (new 31/12/2023)  
+* CR Get Parameter From Prompt (new 5/1/2024)
 
 ## Legacy
 __💀 Legacy Nodes__
