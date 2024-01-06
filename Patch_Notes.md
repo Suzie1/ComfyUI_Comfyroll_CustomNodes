@@ -1,5 +1,9 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.62 Jan 6, 2024
+- added CR Load GIF as List
+- menu restructure
+
 ## v1.61 Jan 5, 2024
 - added CR Get Parameter From Prompt
 

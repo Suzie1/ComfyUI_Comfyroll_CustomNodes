@@ -42,11 +42,8 @@ __🔳 Aspect Ratio__
 * CR Aspect Ratio Banners (new 18/12/2023)
 
 __📜 List Nodes__
-* CR Font File List (new 18/12/2023)
 * CR Text List (new 19/12/2023)
 * CR Prompt List (new 1/1/2024)
-* CR Load Image List (new 23/12/2023)
-* CR Load Image List Plus (new 23/12/2023)
 * CR Float Range List (new 25/12/2023)
 * CR Integer Range List (new 25/12/2023)
 * CR Load Text List (new 27/12/2023)
@@ -54,6 +51,12 @@ __📜 List Nodes__
 * CR Text List To String (updated 30/12/2023)
 * CR Text Cycler (new 4/1/2024)
 * CR Value Cycler (new 4/1/2024)
+
+__📜 List IO__
+* CR Load Image List (new 23/12/2023)
+* CR Load Image List Plus (new 23/12/2023)
+* CR Load GIF As List (new 6/1/2024)
+* CR Font File List (new 18/12/2023)
 
 __📜 List Utils__
 * CR Batch Images From List (new 29/12/2023)    

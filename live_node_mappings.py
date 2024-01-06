@@ -1,5 +1,5 @@
 try:
-    from .nodes.nodes import *
+    from .nodes.nodes_essential import *
     from .nodes.nodes_aspect_ratio import *
     from .nodes.nodes_list import *
     from .nodes.nodes_lora import *
@@ -58,7 +58,8 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Prompt List": CR_PromptList, 
     "CR Simple List": CR_SimpleList,    
     "CR Load Image List": CR_LoadImageList,
-    "CR Load Image List Plus": CR_LoadImageListPlus, 
+    "CR Load Image List Plus": CR_LoadImageListPlus,
+    "CR Load GIF As List": CR_LoadGIFAsList,        
     "CR Float Range List": CR_FloatRangeList,
     "CR Integer Range List": CR_IntegerRangeList,
     "CR Load Text List": CR_LoadTextList,
@@ -67,7 +68,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Text Cycler": CR_TextCycler,
     "CR Value Cycler": CR_ValueCycler,    
     ## List Utils
-    "CR Batch Images From List": CR_BatchImagesFromList,    
+    "CR Batch Images From List": CR_MakeBatchFromImageList,    
     "CR Intertwine Lists" : CR_IntertwineLists,
     "CR Loop List": CR_LoopList, 
     "CR XY Product": CR_XYProduct,  
@@ -278,25 +279,27 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Select Model": "🔮 CR Select Model",
     "CR Prompt Text": "⚙️ CR Prompt Text",    
     ### List Nodes
-    "CR Font File List": "📜 CR Font File List",
     "CR Text List": "📜 CR Text List",
     "CR Prompt List": "📜 CR Prompt List",
     "CR Simple List": "📜 CR Simple List",  
-    "CR Load Image List": "📜 CR Load Image List",
-    "CR Load Image List Plus": "📜 CR Load Image List Plus", 
     "CR Float Range List": "📜 CR Float Range List",
     "CR Integer Range List": "📜 CR Integer Range List", 
     "CR Load Value List": "📜 CR Load Value List",   
     "CR Load Text List": "📜 CR Load Text List",
     "CR Binary To Bit List": "📜 CR Binary To Bit List",
     "CR Text Cycler": "📜 CR Text Cycler",
-    "CR Value Cycler": "📜 CR Value Cycler",     
+    "CR Value Cycler": "📜 CR Value Cycler",
+    ### List IO
+    "CR Load Image List": "⌨️ CR Load Image List",
+    "CR Load Image List Plus": "⌨️ CR Load Image List Plus", 
+    "CR Load GIF As List": "⌨️ CR Load GIF As List",
+    "CR Font File List": "⌨️ CR Font File List",    
     ### List Utils
-    "CR Batch Images From List": "📜 CR Batch Images From List",
-    "CR Intertwine Lists" : "📜 CR Intertwine Lists",
-    "CR Loop List": "📜 CR Loop List",    
-    "CR XY Product": "📜 CR XY Product",      
-    "CR Text List To String": "📜 CR Text List To String",   
+    "CR Batch Images From List": "🛠️ CR Batch Images From List",
+    "CR Intertwine Lists" : "🛠️ CR Intertwine Lists",
+    "CR Loop List": "🛠️ CR Loop List",    
+    "CR XY Product": "🛠️ CR XY Product",      
+    "CR Text List To String": "🛠️ CR Text List To String",   
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
