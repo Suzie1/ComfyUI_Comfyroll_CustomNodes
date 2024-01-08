@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.61
+Current version: 1.63
 
 # Wiki
 
@@ -247,6 +247,7 @@ __🔤 Utils Text__
 * CR Multiline Text (new 24/12/2023)
 * CR Split String
 * CR Text Concatenate (new 2/1/2024)
+* CR Text Replace (new 8/1/2024) 
 * CR Save Text To File (new 27/12/2023)
 
 __⚙️ Utils Other__

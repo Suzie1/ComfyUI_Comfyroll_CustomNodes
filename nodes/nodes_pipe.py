@@ -163,14 +163,16 @@ class CR_ImagePipeEdit:
     
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"pipe": ("PIPE_LINE",)},
-                "optional": {
-                    "image": ("IMAGE",),
-                    "width": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "height": ("INT", {"default": 512, "min": 64, "max": 2048}),
-                    "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000})
-                },
-            }
+        return {
+            "required": {"pipe": ("PIPE_LINE",)
+            },
+            "optional": {
+                "image": ("IMAGE",),
+                "width": ("INT", {"default": 512, "min": 64, "max": 2048, "forceInput": True}),
+                "height": ("INT", {"default": 512, "min": 64, "max": 2048, "forceInput": True}),
+                "upscale_factor": ("FLOAT", {"default": 1, "min": 1, "max": 2000, "forceInput": True}),
+            },
+        }
 
     RETURN_TYPES = ("PIPE_LINE", "STRING", )
     RETURN_NAMES = ("pipe", "show_help", )

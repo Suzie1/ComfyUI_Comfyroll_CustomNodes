@@ -190,7 +190,7 @@ class CR_GetParameterFromPrompt:
            
         return {
             "required": {
-                "prompt": ("STRING", {"multiline": True, "default": "prompt"}),
+                "prompt": ("STRING", {"multiline": True, "default": "prompt", "forceInput": True}),
                 "search_string": ("STRING", {"multiline": False, "default": "!findme"}),
             }
         }
@@ -214,7 +214,6 @@ class CR_GetParameterFromPrompt:
             space_index = prompt.find(" ", index)
             return_string = prompt[index + len(search_string):space_index] if space_index != -1 else prompt[index + len(search_string):]
 
-        print(return_string)
         if return_string == "":
             return (return_prompt, return_string, return_value, return_boolean, show_help, )
         

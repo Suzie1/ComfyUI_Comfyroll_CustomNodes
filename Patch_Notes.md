@@ -1,5 +1,8 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.63 Jan 8, 2024
+- added CR Text Replace
+
 ## v1.62 Jan 6, 2024
 - added CR Load GIF as List
 - menu restructure

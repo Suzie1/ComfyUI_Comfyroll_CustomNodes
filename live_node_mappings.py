@@ -201,8 +201,9 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Text": CR_Text,    
     "CR Multiline Text": CR_MultilineText,
     "CR Split String": CR_SplitString,     
-    "CR Text Concatenate": CR_TextConcatenate,    
-    "CR Save Text To File": CR_SaveTextToFile,    
+    "CR Text Concatenate": CR_TextConcatenate, 
+    "CR Text Replace": CR_TextReplace,        
+    "CR Save Text To File": CR_SaveTextToFile,
     ### Utils Other    
     "CR Integer Multiple": CR_IntegerMultipleOf,    
     "CR Value": CR_Value,
@@ -426,10 +427,11 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Random Panel Codes": "🎲 CR Random Panel Codes",
     ### Utils Text
     "CR Text": "🔤 CR Text",
+    "CR Multiline Text": "🔤 CR Multiline Text",       
     "CR Split String": "🔤 CR Split String",
-    "CR Save Text To File": "🔤 CR Save Text To File",     
-    "CR Multiline Text": "🔤 CR Multiline Text",     
     "CR Text Concatenate": "🔤 CR Text Concatenate",
+    "CR Text Replace": "🔤 CR Text Replace", 
+    "CR Save Text To File": "🔤 CR Save Text To File",       
     ### Utils Other    
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Value": "⚙️ CR Value",
