@@ -202,7 +202,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Multiline Text": CR_MultilineText,
     "CR Split String": CR_SplitString,     
     "CR Text Concatenate": CR_TextConcatenate, 
-    "CR Text Replace": CR_TextReplace,        
+    "CR Text Replace": CR_TextReplace,
     "CR Save Text To File": CR_SaveTextToFile,
     ### Utils Other    
     "CR Integer Multiple": CR_IntegerMultipleOf,    
@@ -210,7 +210,8 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Clamp Value": CR_ClampValue,
     "CR Set Value On Boolean": CR_SetValueOnBoolean,
-    "CR Set Value On Binary": CR_SetValueOnBinary,  
+    "CR Set Value On Binary": CR_SetValueOnBinary, 
+    "CR Set Value on String": CR_SetValueOnString,       
     "CR Math Operation": CR_MathOperation,
     "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,     
     #------------------------------------------------------
@@ -438,6 +439,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Clamp Value": "⚙️ CR Clamp Value",
     "CR Set Value On Boolean": "⚙️ CR Set Value On Boolean",
     "CR Set Value On Binary": "⚙️ CR Set Value On Binary",
+    "CR Set Value on String": "⚙️ CR Set Value on String",
     "CR Math Operation": "⚙️ CR Math Operation",
     "CR Get Parameter From Prompt": "⚙️ CR Get Parameter From Prompt",   
     #------------------------------------------------------
