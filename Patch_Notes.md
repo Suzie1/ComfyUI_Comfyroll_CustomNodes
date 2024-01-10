@@ -1,5 +1,10 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.65 Jan 10, 2024
+- added CR Text Length   
+- added CR Text Operation
+- updated CR Text Concatenate, output is now any_type
+
 ## v1.64 Jan 9, 2024
 - added CR Set Value on String
 

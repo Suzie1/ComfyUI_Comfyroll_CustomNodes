@@ -247,7 +247,9 @@ __🔤 Utils Text__
 * CR Multiline Text (new 24/12/2023)
 * CR Split String
 * CR Text Concatenate (new 2/1/2024)
-* CR Text Replace (new 8/1/2024) 
+* CR Text Replace (new 8/1/2024)
+* CR Text Length (new 10/1/2024)    
+* CR Text Operation (new 10/1/2024)
 * CR Save Text To File (new 27/12/2023)
 
 __⚙️ Utils Other__

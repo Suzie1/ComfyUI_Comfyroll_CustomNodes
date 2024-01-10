@@ -203,7 +203,7 @@ class CR_TextConcatenate:
                 }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_TYPES = (any_type, "STRING", )
     RETURN_NAMES = ("STRING", "show_help", )
     FUNCTION = "concat_text"
     CATEGORY = icons.get("Comfyroll/Utils/Text")
@@ -281,7 +281,75 @@ class CR_SetValueOnString:
             text_out = value_if_false
         
         return (text_out, show_help)
-   
+  
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_TextOperation:
+
+    @ classmethod
+    def INPUT_TYPES(cls):
+      
+        operations = ["uppercase", "lowercase", "capitalize", "invert_case", "reverse", "trim", "remove_spaces"]
+    
+        return {
+            "required": {
+                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),            
+                "operation": (operations,),
+            },
+        }
+
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
+    FUNCTION = "text_operation"
+    CATEGORY = icons.get("Comfyroll/Utils/Text")
+
+    def text_operation(self, text, operation):
+    
+        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text_operation" 
+  
+        if operation == "uppercase":
+            text_out = text.upper()
+        elif operation == "lowercase":
+            text_out = text.lower()
+        elif operation == "capitalize":
+            text_out = text.capitalize()
+        elif operation == "invert_case":
+            text_out = text.swapcase()
+        elif operation == "reverse":
+            text_out = text[::-1]
+        elif operation == "trim":
+            text_out = text.strip()
+        elif operation == "remove_spaces":
+            text_out = text.replace(" ", "")
+        else:
+            return "CR Text Operation: Invalid operation."
+
+        return (text_out, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_TextLength:
+
+    @ classmethod
+    def INPUT_TYPES(cls):
+         
+        return {
+            "required": {
+                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),            
+            },
+        }
+
+    RETURN_TYPES = ("INT", "STRING", )
+    RETURN_NAMES = ("INT", "show_help", )
+    FUNCTION = "len_text"
+    CATEGORY = icons.get("Comfyroll/Utils/Text")
+
+    def len_text(self, text):
+    
+        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text-length" 
+  
+        int_out = len(text)
+
+        return (int_out, show_help, )
+  
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -294,8 +362,10 @@ NODE_CLASS_MAPPINGS = {
     "CR Split String": CR_SplitString,
     "CR Text Concatenate": CR_TextConcatenate,
     "CR Text Replace": CR_TextReplace,
-    "CR Save Text To File": CR_SaveTextToFile,
-    "CR Set Value on String": CR_SetValueOnString,
+    "CR Text Length": CR_TextLength,    
+    "CR Text Operation": CR_TextOperation,
+    "CR Set Value on String": CR_SetValueOnString,    
+    "CR Save Text To File": CR_SaveTextToFile,    
 }
 '''
 

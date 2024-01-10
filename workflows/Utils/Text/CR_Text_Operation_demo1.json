@@ -1,0 +1,940 @@
+{
+  "last_node_id": 20,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "ShowText|pysssss",
+      "pos": [
+        940,
+        160
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "TEXT ABC 123"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 5,
+      "type": "ShowText|pysssss",
+      "pos": [
+        940,
+        310
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "text abc 123"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 7,
+      "type": "ShowText|pysssss",
+      "pos": [
+        940,
+        470
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 4,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "tEXT abc 123"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 4,
+      "type": "CR Text Operation",
+      "pos": [
+        580,
+        310
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 9,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "*",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Operation",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "lowercase"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 6,
+      "type": "CR Text Operation",
+      "pos": [
+        580,
+        470
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 10,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "*",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Operation",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "invert_case"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 9,
+      "type": "ShowText|pysssss",
+      "pos": [
+        940,
+        630
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 5,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "Text abc 123"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 8,
+      "type": "CR Text Operation",
+      "pos": [
+        580,
+        630
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 11,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "*",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Operation",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "capitalize"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 10,
+      "type": "CR Text Operation",
+      "pos": [
+        580,
+        790
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "*",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Operation",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "reverse"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 11,
+      "type": "ShowText|pysssss",
+      "pos": [
+        940,
+        790
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 6,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "321 CBA txeT"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 13,
+      "type": "ShowText|pysssss",
+      "pos": [
+        940,
+        950
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 7,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "Text ABC 123"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 12,
+      "type": "CR Text Operation",
+      "pos": [
+        580,
+        950
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 18,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "*",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Operation",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "trim"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 2,
+      "type": "CR Text Operation",
+      "pos": [
+        580,
+        160
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "*",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Operation",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "uppercase"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 19,
+      "type": "CR Text",
+      "pos": [
+        130,
+        950
+      ],
+      "size": {
+        "0": 370,
+        "1": 140
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            18,
+            19
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "  Text ABC 123  "
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 15,
+      "type": "ShowText|pysssss",
+      "pos": [
+        940,
+        1110
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "TextABC123"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 1,
+      "type": "CR Text",
+      "pos": [
+        140,
+        160
+      ],
+      "size": {
+        "0": 370,
+        "1": 140
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            1,
+            9,
+            10,
+            11,
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "Text ABC 123"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 14,
+      "type": "CR Text Operation",
+      "pos": [
+        580,
+        1110
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 19,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "*",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text Operation",
+        "ttNbgOverride": {
+          "color": "#222",
+          "bgcolor": "#000",
+          "groupcolor": "#444"
+        }
+      },
+      "widgets_values": [
+        "",
+        "remove_spaces"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      4,
+      0,
+      5,
+      0,
+      "STRING"
+    ],
+    [
+      4,
+      6,
+      0,
+      7,
+      0,
+      "STRING"
+    ],
+    [
+      5,
+      8,
+      0,
+      9,
+      0,
+      "STRING"
+    ],
+    [
+      6,
+      10,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      7,
+      12,
+      0,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      8,
+      14,
+      0,
+      15,
+      0,
+      "STRING"
+    ],
+    [
+      9,
+      1,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      10,
+      1,
+      0,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      11,
+      1,
+      0,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      12,
+      1,
+      0,
+      10,
+      0,
+      "STRING"
+    ],
+    [
+      18,
+      19,
+      0,
+      12,
+      0,
+      "STRING"
+    ],
+    [
+      19,
+      19,
+      0,
+      14,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
