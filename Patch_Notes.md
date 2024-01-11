@@ -1,5 +1,9 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.66 Jan 11, 2024
+- added CR Select Font
+- updated CR Get Parameter From Prompt, added handling for quotes
+
 ## v1.65 Jan 10, 2024
 - added CR Text Length   
 - added CR Text Operation

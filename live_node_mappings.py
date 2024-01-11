@@ -142,6 +142,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Composite Text": CR_CompositeText, 
     #"CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
+    "CR Select Font": CR_SelectFont,    
     ### Graphics Filter
     "CR Halftone Filter": CR_HalftoneFilter,
     "CR Color Tint": CR_ColorTint,
@@ -373,6 +374,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Composite Text": "🔤️ CR Composite Text",
     #"CR Arabic Text RTL": "🔤️ CR Arabic Text RTL",
     "CR Simple Text Watermark": "🔤️ CR Simple Text Watermark",
+    "CR Select Font":  "🔤️ CR Select Font",
     ### Graphics Filter
     "CR Halftone Filter": "🎨 Halftone Filter",
     "CR Color Tint": "🎨 CR Color Tint", 

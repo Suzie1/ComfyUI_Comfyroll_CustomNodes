@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.64
+Current version: 1.66
 
 # Wiki
 
@@ -140,6 +140,7 @@ __🔤 Graphics - Text__
 * CR Draw Text
 * CR Mask Text
 * CR Composite Text
+* CR Select Font
 
 __👽 Graphics - Template__
 * CR Simple Meme Template

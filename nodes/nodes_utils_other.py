@@ -6,6 +6,14 @@
 import math
 from ..categories import icons
 
+class AnyType(str):
+    """A special type that can be connected to any other types. Credit to pythongosssss"""
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+any_type = AnyType("*")
+
 #---------------------------------------------------------------------------------------------------------------------#
 # Maths Nodes
 #---------------------------------------------------------------------------------------------------------------------#
@@ -87,6 +95,40 @@ class CR_SetValueOnBoolean:
             return (int(value_if_true), value_if_true, show_help, )   
         else:
             return (int(value_if_false), value_if_false, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_SetValueOnString:
+
+    @ classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),            
+                },
+            "optional": {
+                "test_string": ("STRING", {"multiline": False, "default": ""}),
+                "value_if_true": ("STRING", {"multiline": False, "default": ""}),
+                "value_if_false": ("STRING", {"multiline": False, "default": ""}), 
+            },
+        }
+
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
+    FUNCTION = "replace_text"
+    CATEGORY = icons.get("Comfyroll/Utils/Other")
+
+    def replace_text(self, text, test_string, value_if_true, value_if_false):
+    
+        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-set-value-on-string" 
+        
+        if test_string in text:
+            # Test condition is true, replace with value_if_true
+            text_out = value_if_true
+        else:
+            # Test condition is false, replace with value_if_false
+            text_out = value_if_false
+        
+        return (text_out, show_help)
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_IntegerMultipleOf:
@@ -195,7 +237,7 @@ class CR_GetParameterFromPrompt:
             }
         }
     
-    RETURN_TYPES =("STRING", "STRING", "FLOAT", "BOOLEAN", "STRING", )
+    RETURN_TYPES =("STRING", any_type, "FLOAT", "BOOLEAN", "STRING", )
     RETURN_NAMES =("prompt",  "text", "float", "boolean", "show_help", )
     FUNCTION = "get_string"    
     CATEGORY = icons.get("Comfyroll/Utils/Other")
@@ -211,16 +253,30 @@ class CR_GetParameterFromPrompt:
         
         index = prompt.find(search_string)
         if index != -1:
-            space_index = prompt.find(" ", index)
-            return_string = prompt[index + len(search_string):space_index] if space_index != -1 else prompt[index + len(search_string):]
+            # Check if there is a quote after the search_string
+            if prompt[index + len(search_string)] == '=':
+                if prompt[index + len(search_string) + 1] == '"':
+                    # Extract text between quotes
+                    start_quote = index + len(search_string) + 2
+                    end_quote = prompt.find('"', start_quote + 1)
+                    if end_quote != -1:
+                        return_string = prompt[start_quote:end_quote]
+                        print(return_string)
+                else:        
+                    # Find the next space after the search_string
+                    space_index = prompt.find(" ", index + len(search_string))
+                    if space_index != -1:
+                        return_string = prompt[index + len(search_string):space_index]
+                    else:
+                        return_string = prompt[index + len(search_string):]
+            else:
+                return_string = search_string[1:]
 
         if return_string == "":
             return (return_prompt, return_string, return_value, return_boolean, show_help, )
         
         if return_string.startswith("="):
             return_string = return_string[1:]
-        else:
-            return_string = ""
  
         return_boolean = return_string.lower() == "true"    
 
@@ -250,7 +306,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Value": CR_Value,    
     "CR Clamp Value": CR_ClampValue,
     "CR Set Value On Boolean": CR_SetValueOnBoolean,
-    "CR Set Value On Binary": CR_SetValueOnBinary,     
+    "CR Set Value On Binary": CR_SetValueOnBinary,
+    "CR Set Value on String": CR_SetValueOnString,       
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Math Operation": CR_MathOperation,
     "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,

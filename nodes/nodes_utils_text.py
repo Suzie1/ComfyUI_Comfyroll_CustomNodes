@@ -249,40 +249,6 @@ class CR_TextReplace:
         return (text, show_help)    
 
 #---------------------------------------------------------------------------------------------------------------------#
-class CR_SetValueOnString:
-
-    @ classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),            
-                },
-            "optional": {
-                "test_string": ("STRING", {"multiline": False, "default": ""}),
-                "value_if_true": ("STRING", {"multiline": False, "default": ""}),
-                "value_if_false": ("STRING", {"multiline": False, "default": ""}), 
-            },
-        }
-
-    RETURN_TYPES = (any_type, "STRING", )
-    RETURN_NAMES = ("STRING", "show_help", )
-    FUNCTION = "replace_text"
-    CATEGORY = icons.get("Comfyroll/Utils/Other")
-
-    def replace_text(self, text, test_string, value_if_true, value_if_false):
-    
-        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-set-value-on-string" 
-        
-        if test_string in text:
-            # Test condition is true, replace with value_if_true
-            text_out = value_if_true
-        else:
-            # Test condition is false, replace with value_if_false
-            text_out = value_if_false
-        
-        return (text_out, show_help)
-  
-#---------------------------------------------------------------------------------------------------------------------#
 class CR_TextOperation:
 
     @ classmethod
@@ -363,8 +329,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Text Concatenate": CR_TextConcatenate,
     "CR Text Replace": CR_TextReplace,
     "CR Text Length": CR_TextLength,    
-    "CR Text Operation": CR_TextOperation,
-    "CR Set Value on String": CR_SetValueOnString,    
+    "CR Text Operation": CR_TextOperation, 
     "CR Save Text To File": CR_SaveTextToFile,    
 }
 '''

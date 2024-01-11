@@ -32,6 +32,15 @@ def get_offset_for_true_mm(text, draw, font):
     mask_center = (mask_bbox[0] + mask_bbox[2]) // 2, (mask_bbox[1] + mask_bbox[3]) // 2
     return anchor_center[0] - mask_center[0], anchor_center[1] - mask_center[1]
 
+
+class AnyType(str):
+    """A special type that can be connected to any other types. Credit to pythongosssss"""
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+any_type = AnyType("*")
+
 #---------------------------------------------------------------------------------------------------------------------#
           
 ALIGN_OPTIONS = ["center", "top", "bottom"]                 
@@ -436,6 +445,34 @@ class CR_SimpleTextWatermark:
  
         # Convert the PIL image back to a torch tensor
         return (images_out, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#        
+class CR_SelectFont:
+    def __init__(self):
+        pass
+        
+    @classmethod
+    def INPUT_TYPES(cls):
+
+        system_root = os.environ.get('SystemRoot')
+        font_dir = os.path.join(system_root, 'Fonts')   
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+                        
+        return {"required": {
+                "font_name": (file_list,),
+                }       
+    }
+
+    RETURN_TYPES = (any_type, "STRING",)
+    RETURN_NAMES = ("font_name", "show_help",)
+    FUNCTION = "select_font"
+    CATEGORY = icons.get("Comfyroll/Graphics/Text")
+
+    def select_font(self, font_name):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-select-font"    
+       
+        return (font_name, show_help,)     
   
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -450,6 +487,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Draw Perspective Text": CR_DrawPerspectiveText,
     "CR Arabic Text RTL": CR_ArabicTextRTL,
     "CR Simple Text Watermark": CR_SimpleTextWatermark,
+    "CR Select Font": CR_SelectFont,
 }
 '''
 
