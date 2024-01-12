@@ -79,7 +79,7 @@ class CR_DataBusOut:
             
         new_any1, new_any2, new_any3, new_any4 = pipe
         
-        return (pipe, image, width, height, upscale_factor, show_help, )
+        return (pipe, new_any1, new_any2, new_any3, new_any4, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#        
 class CR_8ChannelIn:
