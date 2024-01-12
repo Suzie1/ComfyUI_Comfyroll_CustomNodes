@@ -7,7 +7,7 @@ import math
 from ..categories import icons
 
 class AnyType(str):
-    """A special type that can be connected to any other types. Credit to pythongosssss"""
+    # Credit to pythongosssss    
 
     def __ne__(self, __value: object) -> bool:
         return False

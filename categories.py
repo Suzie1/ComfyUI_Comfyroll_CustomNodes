@@ -18,6 +18,7 @@ icons = {
     "Comfyroll/Aspect Ratio": "🧩 Comfyroll Studio/✨ Essential/🔳 Aspect Ratio",
     "Comfyroll/Pipe/Module": "🧩 Comfyroll Studio/✨ Essential/🎷 Pipe/✈️ Module",
     "Comfyroll/Pipe/Image": "🧩 Comfyroll Studio/✨ Essential/🎷 Pipe/🛩️ Image",
+    "Comfyroll/Pipe/Bus": "🧩 Comfyroll Studio/✨ Essential/🎷 Pipe/🚌 Bus",    
     "Comfyroll/Pipe": "🧩 Comfyroll Studio/✨ Essential/🎷 Pipe",
     "Comfyroll/Graphics/Text": "🧩 Comfyroll Studio/👾 Graphics/🔤 Text",
     "Comfyroll/Graphics/Layout": "🧩 Comfyroll Studio/👾 Graphics/🌁 Layout",

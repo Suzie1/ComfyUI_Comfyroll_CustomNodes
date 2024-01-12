@@ -18,6 +18,14 @@ except ImportError:
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
+class AnyType(str):
+    # Credit to pythongosssss    
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+any_type = AnyType("*")
+
 #---------------------------------------------------------------------------------------------------------------------#
 # Random values
 #---------------------------------------------------------------------------------------------------------------------#
@@ -91,7 +99,7 @@ class CR_RandomMultilineValues:
                }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_TYPES = (any_type, "STRING", )
     RETURN_NAMES = ("multiline_text", "show_help", )
     FUNCTION = "generate"
     CATEGORY = icons.get("Comfyroll/Utils/Random")

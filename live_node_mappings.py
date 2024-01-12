@@ -97,6 +97,10 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Apply Model Merge": CR_ApplyModelMerge,
     "CR Model Merge Stack": CR_ModelMergeStack,
     ### Pipe Nodes
+    "CR Data Bus In":CR_DataBusIn,
+    "CR Data Bus Out":CR_DataBusOut,
+    "CR 8 Channel In":CR_8ChannelIn,
+    "CR 8 Channel Out":CR_8ChannelOut,    
     "CR Module Pipe Loader": CR_ModulePipeLoader,
     "CR Module Input": CR_ModuleInput,
     "CR Module Output": CR_ModuleOutput,
@@ -329,6 +333,10 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Apply Model Merge": "⛏️ CR Apply Model Merge",
     "CR Model Merge Stack": "⛏️ CR Model Merge Stack",
     ### Pipe Nodes
+    "CR Data Bus In": "🚌 CR Data Bus In",
+    "CR Data Bus Out": "🚌 CR Data Bus Out",
+    "CR 8 Channel In": "🚌 CR 8 Channel In",
+    "CR 8 Channel Out": "🚌 CR 8 Channel Out",     
     "CR Module Pipe Loader": "✈️ CR Module Pipe Loader",
     "CR Module Input": "✈️ CR Module Input",
     "CR Module Output": "✈️ CR Module Output",

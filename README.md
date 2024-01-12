@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.66
+Current version: 1.67
 
 # Wiki
 
@@ -81,6 +81,12 @@ __🕹️ ControlNet__
 * CR Apply ControlNet
 * CR Multi-ControlNet Stack
 * CR Apply Multi-ControlNet Stack
+
+__🚌 Bus__
+* CR Data Bus In (new 12/1/2024)
+* CR Data Bus Out (new 12/1/2024)
+* CR 8 Channel In (new 12/1/2024)
+* CR 8 Channel Out (new 12/1/2024)
 
 __✈️ Module__
 * CR Module Pipe Loader

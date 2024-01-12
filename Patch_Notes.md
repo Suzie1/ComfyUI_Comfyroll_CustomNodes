@@ -1,5 +1,12 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.67 Jan 12, 2024
+- added CR Data Bus In
+- added CR Data Bus Out
+- added CR 8 Channel In
+- added CR 8 Channel
+- updated CR Random Multiline Values, output is now any_type
+
 ## v1.66 Jan 11, 2024
 - added CR Select Font
 - updated CR Get Parameter From Prompt, added handling for quotes

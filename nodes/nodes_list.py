@@ -76,7 +76,9 @@ class CR_TextList:
     FUNCTION = "make_list"
     CATEGORY = icons.get("Comfyroll/List")
 
-    def make_list(self, multiline_text, start_index, max_rows):
+    def make_list(self, multiline_text, start_index, max_rows, loops):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-text-list"
 
         lines = multiline_text.split('\n')
 
@@ -88,9 +90,7 @@ class CR_TextList:
 
         # Extract the desired portion of the list
         selected_rows = lines[start_index:end_index]
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-text-list"
-
+          
         return (selected_rows, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#

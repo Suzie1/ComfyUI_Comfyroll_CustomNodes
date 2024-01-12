@@ -6,19 +6,161 @@
 
 from ..categories import icons
 
+class AnyType(str):
+    # Credit to pythongosssss    
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+any_type = AnyType("*")
+
 #---------------------------------------------------------------------------------------------------------------------#
 # MODULE NODES
 #---------------------------------------------------------------------------------------------------------------------#
-
-class CR_ModulePipeLoader:
-    def __init__(self):
-        pass
+class CR_DataBusIn:
 
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                #"model": ("MODEL",),
+            },
+            "optional": {
+                "pipe": (any_type,),
+                "any1": (any_type,),
+                "any2": (any_type,),
+                "any3": (any_type,),
+                "any4": (any_type,),          
+            },
+        }
+
+    RETURN_TYPES = ("PIPE_LINE", "STRING", )
+    RETURN_NAMES = ("pipe", "show_help", )
+    FUNCTION = "load_data"
+    CATEGORY = icons.get("Comfyroll/Pipe/Bus")
+
+    def load_data(self, any1=None, any2=None, any3=None, any4=None, pipe=None):
+ 
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-data-bus-in"
+
+        # Initialize with default values
+        new_any1, new_any2, new_any3, new_any4 = None, None, None, None
+     
+        if pipe is not None:
+            new_any1, new_any2, new_any3, new_any4 = pipe
+
+        new_any1 = any1 if any1 is not None else new_any1
+        new_any2 = any2 if any2 is not None else new_any2
+        new_any3 = any3 if any3 is not None else new_any3
+        new_any4 = any4 if any4 is not None else new_any4
+
+        new_pipe = new_any1, new_any2, new_any3, new_any4
+              
+        return (new_pipe, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_DataBusOut:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "pipe": ("PIPE_LINE",)
+            }
+        }
+
+    RETURN_TYPES = ("PIPE_LINE", any_type, any_type, any_type, any_type, "STRING", )
+    RETURN_NAMES = ("pipe", "any1", "any2", "any3", "any4", "show_help", )
+    FUNCTION = "data_out"
+    CATEGORY = icons.get("Comfyroll/Pipe/Bus")
+
+    def data_out(self, any1=None, any2=None, any3=None, any4=None, pipe=None):
+        
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-data-bus-out"
+            
+        new_any1, new_any2, new_any3, new_any4 = pipe
+        
+        return (pipe, image, width, height, upscale_factor, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#        
+class CR_8ChannelIn:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+            },
+            "optional": {
+                "pipe": (any_type,),
+                "ch1": (any_type,),
+                "ch2": (any_type,),
+                "ch3": (any_type,),
+                "ch4": (any_type,),
+                "ch5": (any_type,),
+                "ch6": (any_type,),
+                "ch7": (any_type,),
+                "ch8": (any_type,),                 
+            },
+        }
+
+    RETURN_TYPES = ("PIPE_LINE", "STRING", )
+    RETURN_NAMES = ("pipe", "show_help", )
+    FUNCTION = "load_data"
+    CATEGORY = icons.get("Comfyroll/Pipe/Bus")
+
+    def load_data(self, ch1=None, ch2=None, ch3=None, ch4=None, ch5=None, ch6=None, ch7=None, ch8=None, pipe=None):
+ 
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-8-channel-in"
+
+        # Initialize with default values
+        new_ch1, new_ch2, new_ch3, new_ch4, new_ch5, new_ch6, new_ch7, new_ch8 = None, None, None, None, None, None, None, None
+     
+        if pipe is not None:
+            new_ch1, new_ch2, new_ch3, new_ch4, new_ch5, new_ch6, new_ch7, new_ch8 = pipe
+
+        new_ch1 = ch1 if ch1 is not None else new_ch1
+        new_ch2 = ch2 if ch2 is not None else new_ch2
+        new_ch3 = ch3 if ch3 is not None else new_ch3
+        new_ch4 = ch4 if ch4 is not None else new_ch4
+        new_ch5 = ch5 if ch5 is not None else new_ch5
+        new_ch6 = ch6 if ch6 is not None else new_ch6
+        new_ch7 = ch7 if ch7 is not None else new_ch7
+        new_ch8 = ch8 if ch8 is not None else new_ch8        
+
+        new_pipe = new_ch1, new_ch2, new_ch3, new_ch4, new_ch5, new_ch6, new_ch7, new_ch8
+              
+        return (new_pipe, show_help, )      
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_8ChannelOut:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "pipe": ("PIPE_LINE",)
+            }
+        }
+
+    RETURN_TYPES = ("PIPE_LINE", any_type, any_type, any_type, any_type, any_type, any_type, any_type, any_type, "STRING", )
+    RETURN_NAMES = ("pipe", "ch1", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8", "show_help", )
+    FUNCTION = "data_out"
+    CATEGORY = icons.get("Comfyroll/Pipe/Bus")
+
+    def data_out(self, ch1=None, ch2=None, ch3=None, ch4=None, ch5=None, ch6=None, ch7=None, ch8=None, pipe=None):
+        
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-8-channel-out"
+            
+        new_ch1, new_ch2, new_ch3, new_ch4, new_ch5, new_ch6, new_ch7, new_ch8 = pipe
+        
+        return (pipe, new_ch1, new_ch2, new_ch3, new_ch4, new_ch5, new_ch6, new_ch7, new_ch8, show_help, ) 
+        
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_ModulePipeLoader:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
             },
             "optional": {
                 "model": ("MODEL",),
@@ -35,18 +177,19 @@ class CR_ModulePipeLoader:
 
     RETURN_TYPES = ("PIPE_LINE", "STRING", )
     RETURN_NAMES = ("pipe", "show_help", )
-    FUNCTION = "flush"
+    FUNCTION = "pipe_input"
     CATEGORY = icons.get("Comfyroll/Pipe/Module")
 
-    def flush(self, model=0, pos=0, neg=0, latent=0, vae=0, clip=0, controlnet=0, image=0, seed=0):
+    def pipe_input(self, model=0, pos=0, neg=0, latent=0, vae=0, clip=0, controlnet=0, image=0, seed=0):
+        
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-pipe-loader"   
+        
         pipe_line = (model, pos, neg, latent, vae, clip, controlnet, image, seed)
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-pipe-loader"
+
         return (pipe_line, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ModuleInput:
-    def __init__(self):
-        pass
     
     @classmethod
     def INPUT_TYPES(s):
@@ -57,18 +200,18 @@ class CR_ModuleInput:
     RETURN_TYPES = ("PIPE_LINE", "MODEL", "CONDITIONING", "CONDITIONING", "LATENT", "VAE", "CLIP", "CONTROL_NET", "IMAGE", "INT", "STRING", )
     RETURN_NAMES = ("pipe", "model", "pos", "neg", "latent", "vae", "clip", "controlnet", "image", "seed", "show_help", )
     FUNCTION = "flush"
-
     CATEGORY = icons.get("Comfyroll/Pipe/Module")
     
     def flush(self, pipe):
-        model, pos, neg, latent, vae, clip, controlnet, image, seed = pipe
+
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-input"
+
+        model, pos, neg, latent, vae, clip, controlnet, image, seed = pipe
+        
         return (pipe, model, pos, neg, latent, vae, clip, controlnet, image, seed, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ModuleOutput:
-    def __init__(self):
-        pass
     
     @classmethod
     def INPUT_TYPES(s):
@@ -88,10 +231,13 @@ class CR_ModuleOutput:
 
     RETURN_TYPES = ("PIPE_LINE", "STRING", )
     RETURN_NAMES = ("pipe", "show_help", )
-    FUNCTION = "flush"
+    FUNCTION = "pipe_output"
     CATEGORY = icons.get("Comfyroll/Pipe/Module")
 
-    def flush(self, pipe, model=None, pos=None, neg=None, latent=None, vae=None, clip=None, controlnet=None, image=None, seed=None):
+    def pipe_output(self, pipe, model=None, pos=None, neg=None, latent=None, vae=None, clip=None, controlnet=None, image=None, seed=None):
+       
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-output"   
+    
         new_model, new_pos, new_neg, new_latent, new_vae, new_clip, new_controlnet, new_image, new_seed = pipe
 
         if model is not None:
@@ -122,21 +268,18 @@ class CR_ModuleOutput:
             new_seed = seed
        
         pipe = new_model, new_pos, new_neg, new_latent, new_vae, new_clip, new_controlnet, new_image, new_seed
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-module-output"
+       
         return (pipe, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 # PIPE NODES
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ImagePipeIn:
-    def __init__(self):
-        pass
 
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                #"model": ("MODEL",),
             },
             "optional": {
                 "image": ("IMAGE",),
@@ -148,12 +291,15 @@ class CR_ImagePipeIn:
 
     RETURN_TYPES = ("PIPE_LINE", "STRING", )
     RETURN_NAMES = ("pipe", "show_help", )
-    FUNCTION = "flush"
+    FUNCTION = "pipe_in"
     CATEGORY = icons.get("Comfyroll/Pipe/Image")
 
-    def flush(self, image=0, width=0, height=0, upscale_factor=0):
-        pipe_line = (image, width, height, upscale_factor)
+    def pipe_in(self, image=0, width=0, height=0, upscale_factor=0):
+        
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-in"
+        
+        pipe_line = (image, width, height, upscale_factor)
+
         return (pipe_line, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -176,10 +322,13 @@ class CR_ImagePipeEdit:
 
     RETURN_TYPES = ("PIPE_LINE", "STRING", )
     RETURN_NAMES = ("pipe", "show_help", )
-    FUNCTION = "flush"
+    FUNCTION = "pipe_edit"
     CATEGORY = icons.get("Comfyroll/Pipe/Image")
 
-    def flush(self, pipe, image=None, width=None, height=None, upscale_factor=None):
+    def pipe_edit(self, pipe, image=None, width=None, height=None, upscale_factor=None):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-edit"
+            
         new_image, new_width, new_height, new_upscale_factor = pipe
 
         if image is not None:
@@ -195,13 +344,11 @@ class CR_ImagePipeEdit:
             new_upscale_factor = upscale_factor
             
         pipe = new_image, new_width, new_height, new_upscale_factor
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-edit"
+        
         return (pipe, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ImagePipeOut:
-    def __init__(self):
-        pass
     
     @classmethod
     def INPUT_TYPES(s):
@@ -211,16 +358,16 @@ class CR_ImagePipeOut:
 
     RETURN_TYPES = ("PIPE_LINE", "IMAGE", "INT", "INT", "FLOAT", "STRING", )
     RETURN_NAMES = ("pipe", "image", "width", "height", "upscale_factor", "show_help", )
-    FUNCTION = "flush"
+    FUNCTION = "pipe_out"
     CATEGORY = icons.get("Comfyroll/Pipe/Image")
     
-    def flush(self, pipe):
-        #if switch == "Off":
-            #return (pipe, )
-        #else:  
-            show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-out"
-            image, width, height, upscale_factor = pipe
-            return (pipe, image, width, height, upscale_factor, show_help, )
+    def pipe_out(self, pipe):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-image-pipe-out"
+
+        image, width, height, upscale_factor = pipe
+        
+        return (pipe, image, width, height, upscale_factor, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_InputSwitchPipe:
@@ -240,11 +387,13 @@ class CR_InputSwitchPipe:
     RETURN_TYPES = ("PIPE_LINE", "STRING", )
     RETURN_NAMES = ("PIPE_LINE", "show_help", )
     OUTPUT_NODE = True
-    FUNCTION = "InputSwitchPipe"
+    FUNCTION = "switch_pipe"
     CATEGORY = icons.get("Comfyroll/Pipe")
 
-    def InputSwitchPipe(self, Input, pipe1, pipe2):
+    def switch_pipe(self, Input, pipe1, pipe2):
+    
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Pipe-Nodes#cr-pipe-switch"
+        
         if Input == 1:
             return (pipe1, show_help, )
         else:
@@ -256,6 +405,10 @@ class CR_InputSwitchPipe:
 # For reference only, actual mappings are in __init__.py
 '''
 NODE_CLASS_MAPPINGS_2 = {
+    "CR Data Bus In":CR_DataBusIn,
+    "CR Data Bus Out":CR_DataBusOut,
+    "CR 8 Channel In":CR_8ChannelIn,
+    "CR 8 Channel Out":CR_8ChannelOut,
     "CR Module Pipe Loader":CR_ModulePipeLoader,
     "CR Module Input":CR_ModuleInput,
     "CR Module Output":CR_ModuleOutput,
