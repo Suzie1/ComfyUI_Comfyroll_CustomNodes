@@ -1,5 +1,9 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.68 Jan 13, 2024
+- added CR Text Blacklist
+- removed loading for dev node mappings
+
 ## v1.67 Jan 12, 2024
 - added CR Data Bus In
 - added CR Data Bus Out

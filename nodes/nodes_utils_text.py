@@ -221,7 +221,7 @@ class CR_TextReplace:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),            
+                "text": ("STRING", {"multiline": True, "default": "", "forceInput": True}),            
                 },
             "optional": {
                 "find1": ("STRING", {"multiline": False, "default": ""}),
@@ -247,6 +247,35 @@ class CR_TextReplace:
         text = text.replace(find3, replace3)
         
         return (text, show_help)    
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_TextBlacklist:
+
+    @ classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "text": ("STRING", {"multiline": True, "default": "", "forceInput": True}),
+                "blacklist_words": ("STRING", {"multiline": True, "default": ""}),            
+                },
+            "optional": {
+                "replacement_text": ("STRING", {"multiline": False, "default": ""}),    
+            },
+        }
+
+    RETURN_TYPES = (any_type, "STRING", )
+    RETURN_NAMES = ("STRING", "show_help", )
+    FUNCTION = "replace_text"
+    CATEGORY = icons.get("Comfyroll/Utils/Text")
+
+    def replace_text(self, text, blacklist_words, replacement_text=""):
+    
+        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text-blacklist" 
+        
+        for word in blacklist_words.split('\n'):  # Splitting based on line return
+            text_out = text.replace(word.strip(), replacement_text)
+    
+        return (text_out, show_help)   
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_TextOperation:
@@ -328,6 +357,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Split String": CR_SplitString,
     "CR Text Concatenate": CR_TextConcatenate,
     "CR Text Replace": CR_TextReplace,
+    "CR Text Blacklist": CR_TextBlacklist,   
     "CR Text Length": CR_TextLength,    
     "CR Text Operation": CR_TextOperation, 
     "CR Save Text To File": CR_SaveTextToFile,    

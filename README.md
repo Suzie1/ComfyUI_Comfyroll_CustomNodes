@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.67
+Current version: 1.68
 
 # Wiki
 
@@ -255,6 +255,7 @@ __🔤 Utils Text__
 * CR Split String
 * CR Text Concatenate (new 2/1/2024)
 * CR Text Replace (new 8/1/2024)
+* CR Text Blacklist (new 13/1/2024)
 * CR Text Length (new 10/1/2024)    
 * CR Text Operation (new 10/1/2024)
 * CR Save Text To File (new 27/12/2023)

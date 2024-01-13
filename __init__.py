@@ -15,28 +15,16 @@
 @author: Suzie1
 @title: Comfyroll Studio
 @nickname: Comfyroll Studio
-@description: 169 custom nodes for artists, designers and animators.
+@description: 170 custom nodes for artists, designers and animators.
 """
 
 from .live_node_mappings import LIVE_NODE_CLASS_MAPPINGS, LIVE_NODE_DISPLAY_NAME_MAPPINGS
 
-INCLUDE_DEV_NODES = False
-
-try:
-    if INCLUDE_DEV_NODES:
-        from .dev_node_mappings import DEV_NODE_CLASS_MAPPINGS, DEV_NODE_DISPLAY_NAME_MAPPINGS
-        NODE_CLASS_MAPPINGS = {**DEV_NODE_CLASS_MAPPINGS, **LIVE_NODE_CLASS_MAPPINGS}
-        NODE_DISPLAY_NAME_MAPPINGS = {**DEV_NODE_DISPLAY_NAME_MAPPINGS, **LIVE_NODE_DISPLAY_NAME_MAPPINGS}
-        print("\033[34mComfyroll Studio: \033[92mDev Nodes Loaded\033[0m")
-    else:
-        NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
-        NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
-except ImportError:
-    NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
-    NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
+NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
+NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
 
 print("------------------------------------------")    
-print("\033[34mComfyroll Studio v1.67 : \033[92m 169 Nodes Loaded\033[0m")
+print("\033[34mComfyroll Studio v1.68 : \033[92m 170 Nodes Loaded\033[0m")
 print("------------------------------------------") 
 print("** For changes, please see patch notes at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md") 
 print("** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki") 
