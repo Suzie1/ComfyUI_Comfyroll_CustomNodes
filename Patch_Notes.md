@@ -1,5 +1,8 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.71 Jan 15, 2024
+- changed string outputs to any_type on text util nodes
+
 ## v1.70 Jan 15, 2024
 - added CR Aspect Ratio Social Media
 
