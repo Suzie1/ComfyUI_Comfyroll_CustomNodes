@@ -115,7 +115,7 @@ class CR_PromptList:
 
     def make_list(self, multiline_text, prepend_text="", append_text="", start_index=0, max_rows=9999):
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-prompt-list"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-prompt-list"
 
         lines = multiline_text.split('\n')
 
@@ -157,6 +157,8 @@ class CR_LoadImageList:
 
     def make_list(self, start_index, max_images, input_folder, input_path=None):
 
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list"
+
         # Set the input path
         if input_path != '' and input_path is not None:
             if not os.path.exists(input_path):
@@ -195,8 +197,6 @@ class CR_LoadImageList:
         images = torch.cat(image_list, dim=0)
         images_out = [images[i:i + 1, ...] for i in range(images.shape[0])]
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-list"
-
         return (images_out, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -223,6 +223,8 @@ class CR_LoadImageListPlus:
     CATEGORY = icons.get("Comfyroll/List/IO")
 
     def make_list(self, start_index, max_images, input_folder, input_path=None, vae=None):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-image-list-plus"
 
         # Set the input path
         if input_path != '' and input_path is not None:
@@ -284,8 +286,6 @@ class CR_LoadImageListPlus:
         
         list_length = end_index - start_index
         
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-image-list-plus"
-
         return (images_out, mask_out, index_list, filename_list, index_list, width, height, list_length, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -392,6 +392,8 @@ class CR_FontFileList:
 
     def make_list(self, source_folder, start_index, max_rows, folder_path="C:\Windows\Fonts"):
 
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-font-file-list"
+
         if source_folder == "system":
             system_root = os.environ.get('SystemRoot')
             system_font_dir = os.path.join(system_root, 'Fonts')   
@@ -420,45 +422,7 @@ class CR_FontFileList:
         # Extract the desired portion of the list
         selected_files = file_list[start_index:end_index]
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-font-file-list"
-
         return (selected_files, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_ListSchedule:
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {"schedule": ("STRING",
-                             {"multiline": True, "default": "frame_number, item_alias, [attr_value1, attr_value2]"}
-                             ),
-                             "end_index": ("INT", {"default": 1, "min": 1, "max": 9999}),
-                },
-        }
-    
-    RETURN_TYPES = (any_type, "STRING", )
-    RETURN_NAMES = ("LIST", "show_help", )
-    OUTPUT_IS_LIST = (True, False)
-    FUNCTION = "schedule"
-    CATEGORY = icons.get("Comfyroll/List")
-
-    def schedule(self, schedule, end_index):
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-integer-range-list"
-        
-        schedule_lines = []
-      
-        # Extend the list for each line in the schedule
-        if schedule != "":
-            lines = schedule.split('\n')
-            for line in lines:
-                # Skip empty lines
-                if not line.strip():
-                    print(f"[Warning] CR Simple Schedule. Skipped blank line: {line}")
-                    continue            
-                schedule_lines.append(line)
-
-        return (schedule_lines, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_FloatRangeList:
@@ -487,6 +451,8 @@ class CR_FloatRangeList:
     CATEGORY = icons.get("Comfyroll/List")
 
     def make_range(self, start, end, step, max_values_per_loop, operation, decimal_places, ignore_first_value, loops, ping_pong):
+            
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-float-range-list"      
         
         range_values = list()
         
@@ -525,9 +491,6 @@ class CR_FloatRangeList:
                 current_range = current_range[:max_values_per_loop]
                 range_values += current_range
                     
-            
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-float-range-list"      
-
         return (range_values, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -550,6 +513,8 @@ class CR_IntegerRangeList:
     CATEGORY = icons.get("Comfyroll/List")
 
     def make_range(self, start, end, step, loops, ping_pong):
+        
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-list-schedule"      
     
         range_values = list()
         for i in range(loops):
@@ -563,8 +528,6 @@ class CR_IntegerRangeList:
                     range_values += current_range     
             else:
                 range_values += current_range           
-        
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-list-schedule"      
 
         return (range_values, show_help, )
 
@@ -709,7 +672,7 @@ class CR_TextListToString:
     
         string_out = "\n".join(text_list)
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-text-list-to-string"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text-list-to-string"
 
         return (string_out, show_help, )
  
@@ -735,7 +698,7 @@ class CR_SimpleList:
 
         list_out = [i.strip() for i in lines if i.strip()]
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-simple-list"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-simple-list"
 
         return (list_out, show_help, )
 
@@ -758,7 +721,7 @@ class CR_XYProduct:
     
     def cross_join(self, text_x, text_y):
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-product"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-xy-product"
         
         list1 = text_x.strip().split('\n')
         list2 = text_y.strip().split('\n')
@@ -769,33 +732,36 @@ class CR_XYProduct:
         return (list(x_values), list(y_values), show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-class CR_LoopList:
+class CR_Repeater:
 
     @classmethod
     def INPUT_TYPES(s):
         return {"required":{
-                    "list": ("STRING", {"multiline": True, "default": "", "forceInput": True}),             
-                    "loops": ("INT", {"default": 1, "min": 1, "max": 99999}),
+                    "input_data": (any_type, ),             
+                    "repeats": ("INT", {"default": 1, "min": 1, "max": 99999}),
                     }
         }
 
     RETURN_TYPES = (any_type, "STRING", )
-    RETURN_NAMES = ("*", "show_help", ) 
+    RETURN_NAMES = ("list", "show_help", ) 
     OUTPUT_IS_LIST = (True, False)
-    FUNCTION = "loop_list"
+    FUNCTION = "repeat_list_items"
     CATEGORY = icons.get("Comfyroll/List/Utils") 
         
-    def loop_list(self, list, loops):
+    def repeat_list_items(self, input_data, repeats):
     
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/XY-Grid-Nodes#cr-xy-product"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-repeater"
         
-        looped_list = []
+        new_list = []
         
-        for _ in range(loops):
-            looped_list.append(str(list))
-        
-        return (looped_list, show_help, )   
-        
+        if isinstance(input_data, list):
+            new_list = []
+            for item in input_data:
+                new_list.extend([item] * repeats)
+            return (new_list, show_help, )
+        else:
+            return ([input_data] * repeats, show_help, )
+
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_TextCycler:
     
@@ -816,7 +782,7 @@ class CR_TextCycler:
 
     def cycle(self, text, repeats, loops=1):
     
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-text-cycler"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text-cycler"
     
         lines = text.split('\n')
         list_out = []
@@ -848,7 +814,7 @@ class CR_ValueCycler:
 
     def cycle(self, values, repeats, loops=1):
     
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-value-cycler"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-value-cycler"
     
         lines = values.split('\n')
         float_list_out = []
@@ -878,7 +844,6 @@ NODE_CLASS_MAPPINGS = {
     "CR Load Image List": CR_LoadImageList,
     "CR Load Image List Plus": CR_LoadImageListPlus,
     "CR Load GIF As List": CR_LoadGIFAsList,    
-    "CR List Schedule": CR_ListSchedule,
     "CR Float Range List": CR_FloatRangeList,
     "CR Load Text List": CR_LoadTextList,
     "CR Font File List": CR_FontFileList,
@@ -888,8 +853,9 @@ NODE_CLASS_MAPPINGS = {
     ### List Utils
     "CR Batch Images From List": CR_MakeBatchFromImageList,
     "CR Intertwine Lists" : CR_IntertwineLists,
-    "CR Loop List": CR_LoopList,    
+    "CR Loop List": CR_LoopList,
+    "CR Repeater": CR_Repeater,    
     "CR XY Product": CR_XYProduct,
-    "CR Text List To String":CR_TextListToString,
+    "CR Text List To String": CR_TextListToString,
 }
 '''

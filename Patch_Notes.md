@@ -1,5 +1,10 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.69 Jan 15, 2024
+- added CR Repeater
+- deleted CR Loop List, replaced by CR Repeater
+- removed dev nodes
+
 ## v1.68 Jan 13, 2024
 - added CR Text Blacklist
 - removed loading for dev node mappings
@@ -35,7 +40,7 @@
 
 ## v1.60 Jan 4, 2024
 - added CR Bit Scheduler
-- added CR Loops
+- added CR Loop List
 - added CR Text Cycler
 - added CR Value Cycler
 - updated conversion nodes to make the index an input (force input)

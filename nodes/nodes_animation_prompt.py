@@ -7,7 +7,7 @@ import os
 import folder_paths
 import json
 import torch
-from .json_functions import load_styles_from_directory
+from .functions_json import load_styles_from_directory
 from ..categories import icons
 
 '''

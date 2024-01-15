@@ -18,10 +18,7 @@
 @description: 170 custom nodes for artists, designers and animators.
 """
 
-from .live_node_mappings import LIVE_NODE_CLASS_MAPPINGS, LIVE_NODE_DISPLAY_NAME_MAPPINGS
-
-NODE_CLASS_MAPPINGS = LIVE_NODE_CLASS_MAPPINGS
-NODE_DISPLAY_NAME_MAPPINGS = LIVE_NODE_DISPLAY_NAME_MAPPINGS
+from .node_mappings import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 
 print("------------------------------------------")    
 print("\033[34mComfyroll Studio v1.68 : \033[92m 170 Nodes Loaded\033[0m")
@@ -30,19 +27,4 @@ print("** For changes, please see patch notes at https://github.com/Suzie1/Comfy
 print("** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki") 
 print("------------------------------------------") 
 
-import shutil
-import folder_paths
-import os
-
-comfy_path = os.path.dirname(folder_paths.__file__)
-comfyroll_nodes_path = os.path.join(os.path.dirname(__file__))
-
-js_dest_path = os.path.join(comfy_path, "web", "extensions", "Comfyroll")
-os.makedirs(js_dest_path, exist_ok=True)
-
-files_to_copy = ["test.js"]
-
-for file in files_to_copy:
-    js_src_path = os.path.join(comfyroll_nodes_path, "js", file)
-    shutil.copy(js_src_path, js_dest_path)
 

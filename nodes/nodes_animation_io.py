@@ -100,7 +100,7 @@ class CR_LoadFlowFrames:
         return {"required":
                     {"input_folder": (sorted(input_folders), ),
                      "sort_by": (sort_methods, ),
-                     "current_frame": ("INT", {"default": 0, "min": 0, "max": 10000}),
+                     "current_frame": ("INT", {"default": 0, "min": 0, "max": 10000, "forceInput": True}),
                      "skip_start_frames": ("INT", {"default": 0, "min": 0, "max": 10000}),
                      },
                 "optional":
@@ -184,7 +184,7 @@ class CR_OutputFlowFrames:
             "required": {"output_folder": (sorted(output_folders), ),
                          "current_image": ("IMAGE", ),
                          "filename_prefix": ("STRING", {"default": "CR"}),
-                         "current_frame": ("INT", {"default": 0, "min": 0, "max": 9999999}),
+                         "current_frame": ("INT", {"default": 0, "min": 0, "max": 9999999, "forceInput": True}),
             },
             "optional": {"interpolated_img": ("IMAGE", ),
                          "output_path": ("STRING", {"default": '', "multiline": False}),           
@@ -236,9 +236,9 @@ class CR_OutputFlowFrames:
             img0.save(resolved_image_path0, pnginfo="", compress_level=4)
             print(f"[Info] CR Output Flow Frames: Saved {filename_prefix}_{current_frame:05}.png")
 
-        c = {"ui": {"images": [{"filename": output_filename0,"subfolder": out_path,"type": self.type,}]}}
+        result = {"ui": {"images": [{"filename": output_filename0,"subfolder": out_path,"type": self.type,}]}}
         
-        return c
+        return result
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

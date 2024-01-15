@@ -1,5 +1,5 @@
 try:
-    from .nodes.nodes_essential import *
+    from .nodes.nodes_core import *
     from .nodes.nodes_aspect_ratio import *
     from .nodes.nodes_list import *
     from .nodes.nodes_lora import *
@@ -11,7 +11,7 @@ try:
     from .nodes.nodes_xygrid import *
     from .nodes.nodes_legacy import *
 except ImportError:
-    print("\033[34mComfyroll Studio: \033[92mFailed to load Core nodes\033[0m")
+    print("\033[34mComfyroll Studio: \033[92mFailed to load Essential nodes\033[0m")
 
 try:
     from .nodes.nodes_graphics_matplot import *
@@ -24,14 +24,14 @@ except ImportError:
     print("\033[34mComfyroll Studio: \033[92mFailed to load Graphics nodes\033[0m")
 
 try:
-    from .animation_nodes.nodes_interpolation import *
-    from .animation_nodes.nodes_io import *
-    from .animation_nodes.nodes_prompt import *
-    from .animation_nodes.nodes_schedulers import *
-    from .animation_nodes.nodes_schedules import *
-    from .animation_nodes.nodes_lists import *
-    from .animation_nodes.nodes_utils import *
-    from .animation_nodes.nodes_cyclers import *
+    from .nodes.nodes_animation_interpolation import *
+    from .nodes.nodes_animation_io import *
+    from .nodes.nodes_animation_prompt import *
+    from .nodes.nodes_animation_schedulers import *
+    from .nodes.nodes_animation_schedules import *
+    from .nodes.nodes_animation_lists import *
+    from .nodes.nodes_animation_utils import *
+    from .nodes.nodes_animation_cyclers import *
 except ImportError:
     print("\033[34mComfyroll Studio: \033[92mFailed to load Animation nodes\033[0m")
     
@@ -45,7 +45,7 @@ try:
 except ImportError:
     print("\033[34mComfyroll Studio: \033[92mFailed to load Utility nodes\033[0m")
 
-LIVE_NODE_CLASS_MAPPINGS = { 
+NODE_CLASS_MAPPINGS = { 
     ### Core Nodes
     "CR Image Output": CR_ImageOutput,
     "CR Latent Batch Size": CR_LatentBatchSize,   
@@ -56,23 +56,24 @@ LIVE_NODE_CLASS_MAPPINGS = {
     ### List Nodes
     "CR Text List": CR_TextList,
     "CR Prompt List": CR_PromptList, 
-    "CR Simple List": CR_SimpleList,    
-    "CR Load Image List": CR_LoadImageList,
-    "CR Load Image List Plus": CR_LoadImageListPlus,
-    "CR Load GIF As List": CR_LoadGIFAsList,        
+    "CR Simple List": CR_SimpleList,          
     "CR Float Range List": CR_FloatRangeList,
     "CR Integer Range List": CR_IntegerRangeList,
     "CR Load Text List": CR_LoadTextList,
-    "CR Font File List": CR_FontFileList,
     "CR Binary To Bit List": CR_BinaryToBitList,
     "CR Text Cycler": CR_TextCycler,
-    "CR Value Cycler": CR_ValueCycler,    
-    ## List Utils
+    "CR Value Cycler": CR_ValueCycler, 
+    ### List IO
+    "CR Load Image List": CR_LoadImageList,
+    "CR Load Image List Plus": CR_LoadImageListPlus,
+    "CR Load GIF As List": CR_LoadGIFAsList,  
+    "CR Font File List": CR_FontFileList,      
+    ### List Utils
     "CR Batch Images From List": CR_MakeBatchFromImageList,    
     "CR Intertwine Lists" : CR_IntertwineLists,
-    "CR Loop List": CR_LoopList, 
+    "CR Repeater": CR_Repeater,     
     "CR XY Product": CR_XYProduct,  
-    "CR Text List To String": CR_TextListToString,      
+    "CR Text List To String": CR_TextListToString,   
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
@@ -278,7 +279,7 @@ LIVE_NODE_CLASS_MAPPINGS = {
     "CR Image List Simple": CR_ImageListSimple,    
 }
 
-LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
+NODE_DISPLAY_NAME_MAPPINGS = {
     ### Core Nodes
     "CR Image Output": "💾 CR Image Output",
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
@@ -307,7 +308,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     ### List Utils
     "CR Batch Images From List": "🛠️ CR Batch Images From List",
     "CR Intertwine Lists" : "🛠️ CR Intertwine Lists",
-    "CR Loop List": "🛠️ CR Loop List",    
+    "CR Repeater": "🛠️ CR Repeater",    
     "CR XY Product": "🛠️ CR XY Product",      
     "CR Text List To String": "🛠️ CR Text List To String",   
     ### Aspect Ratio Nodes
@@ -359,7 +360,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR XY Index": "📉 CR XY Index",
     "CR XY From Folder": "📉 CR XY From Folder",
     "CR XY Save Grid Image": "📉 CR XY Save Grid Image",
-    #"CR XYZ Index": "📉 CR XYZ Index",
     ### Graphics Pattern
     "CR Halftone Grid" : "🟫 CR Halftone Grid",    
     "CR Color Bars" : "🟫 CR Color Bars",
@@ -381,7 +381,6 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Draw Text": "🔤️ CR Draw Text",
     "CR Mask Text": "🔤️ CR Mask Text",
     "CR Composite Text": "🔤️ CR Composite Text",
-    #"CR Arabic Text RTL": "🔤️ CR Arabic Text RTL",
     "CR Simple Text Watermark": "🔤️ CR Simple Text Watermark",
     "CR Select Font":  "🔤️ CR Select Font",
     ### Graphics Filter
@@ -396,8 +395,7 @@ LIVE_NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Page Layout": "🌁 CR Page Layout",
     "CR Image Border": "🌁 CR Image Border",
     "CR Feathered Border": "🌁 CR Feathered Border",    
-    "CR Overlay Transparent Image": "🌁 CR Overlay Transparent Image",
-    #"CR Simple Titles": "🌁 CR Simple Titles",    
+    "CR Overlay Transparent Image": "🌁 CR Overlay Transparent Image",    
     ### Graphics Template
     "CR Simple Meme Template": "📱 CR Simple Meme Template",
     "CR Simple Banner": "📱 CR Simple Banner",     
