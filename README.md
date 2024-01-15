@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.68
+Current version: 1.69
 
 # Wiki
 
@@ -61,7 +61,7 @@ __📜 List IO__
 __📜 List Utils__
 * CR Batch Images From List (new 29/12/2023)    
 * CR Intertwine_Lists (new 29/12/2023)
-* CR Loop List (new 4/1/2024)   
+* CR Repeater (new 15/1/2024)   
 * CR XY Product (new 2/1/2024)
 * CR Text List To String (updated 30/12/2023)
 
