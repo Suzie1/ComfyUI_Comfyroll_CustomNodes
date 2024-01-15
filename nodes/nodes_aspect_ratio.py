@@ -316,6 +316,79 @@ class CR_AspectRatioBanners:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio-banners"
            
         return(width, height, upscale_factor, prescale_factor, batch_size, {"samples":latent}, show_help, ) 
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_AspectRatioSocialMedia:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        aspect_ratios = ["custom",
+                         "Instagram Landscape - 1080x608",
+                         "Instagram Square - 1080x1080",
+                         "Instagram Portrait - 1080x1350", 
+                         "Instagram Stories - 1080x1920",
+                         "Instagram Reels - 1080x1920",
+                         "Facebook Landscape - 1080x1350",
+                         "Facebook Marketplace - 1200x1200",
+                         "Facebook Stories - 1080x1920",
+                         "LinkedIn Background - 1584x396",
+                         "Pinterest Pin Image - 1000x1500"
+                        ]
+                                 
+        return {
+            "required": {
+                "width": ("INT", {"default": 1024, "min": 64, "max": 8192}),
+                "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
+                "aspect_ratio": (aspect_ratios,),
+                "swap_dimensions": (["Off", "On"],),
+                "upscale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "prescale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
+            }
+        }
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT", "LATENT", "STRING", )
+    RETURN_NAMES = ("width", "height", "upscale_factor", "prescale_factor", "batch_size", "empty_latent", "show_help", )
+    FUNCTION = "Aspect_Ratio"
+    CATEGORY = icons.get("Comfyroll/Aspect Ratio")
+
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, prescale_factor, batch_size):
+        
+        # Banner sizes
+        if aspect_ratio == "Instagram Landscape - 1080x608":
+            width, height = 1080, 608
+        elif aspect_ratio == "Instagram Square - 1080x1080":
+            width, height = 1080, 1080
+        elif aspect_ratio == "Instagram Portrait - 1080x1350":
+            width, height = 1080, 1350
+        elif aspect_ratio == "Instagram Stories - 1080x1920":
+            width, height = 1080, 1920
+        elif aspect_ratio == "Instagram Reels - 1080x1920":
+            width, height = 1080, 1920
+        elif aspect_ratio == "Facebook Landscape - 1080x1350":
+            width, height = 1080, 1350
+        elif aspect_ratio == "Facebook Marketplace - 1200x1200":
+            width, height = 1200, 1200
+        elif aspect_ratio == "Facebook Stories - 1080x1920":
+            width, height = 1080, 1920
+        elif aspect_ratio == "LinkedIn Background - 1584x396":
+            width, height = 1584, 396
+        elif aspect_ratio == "Pinterest Pin Image - 1000x1500":
+            width, height = 1000, 1500          
+        
+        if swap_dimensions == "On":
+            width, height = height, width
+        
+        width = int(width*prescale_factor)
+        height = int(height*prescale_factor)
+        
+        latent = torch.zeros([batch_size, 4, height // 8, width // 8])
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio-scial-media"
+           
+        return(width, height, upscale_factor, prescale_factor, batch_size, {"samples":latent}, show_help, ) 
   
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
@@ -327,7 +400,8 @@ NODE_CLASS_MAPPINGS = {
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
     "CR Aspect Ratio": CR_AspectRatio,
-    "CR Aspect Ratio Banners":CR_AspectRatioBanners,   
+    "CR Aspect Ratio Banners": CR_AspectRatioBanners,
+    "CR Aspect Ratio Social Media": CR_AspectRatioSocialMedia,    
 }
 '''
 

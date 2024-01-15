@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.69
+Current version: 1.70
 
 # Wiki
 
@@ -40,6 +40,7 @@ __🔳 Aspect Ratio__
 * CR SDXL Aspect Ratio
 * CR SD1.5 Aspect Ratio
 * CR Aspect Ratio Banners (new 18/12/2023)
+* CR Aspect Ratio Social Media (new 15/1/2024)  
 
 __📜 List Nodes__
 * CR Text List (new 19/12/2023)
@@ -133,8 +134,8 @@ __🌈 Graphics - Pattern__
 * CR Radial Gradiant
 * CR Starburst Lines
 * CR Starburst Colors
-* CR Simple Binary Pattern (new 8/12/2023)
-* CR Binary Pattern (new 8/12/2023)
+* CR Simple Binary Pattern
+* CR Binary Pattern
 
 __🟡 Graphics - Pattern__
 * CR Draw Shape (new 24/12/2023)
@@ -246,7 +247,7 @@ __🎲 Utils Random__
 * CR Random RGB
 * CR Random Multiline Values (updated 28/12/2023)
 * CR Random Multiline Colors (new 28/12/2023)
-* CR Random RGB Gradient (new 8/12/2023)
+* CR Random RGB Gradient
 * CR Random Panel Code (new 26/12/2023)
 
 __🔤 Utils Text__

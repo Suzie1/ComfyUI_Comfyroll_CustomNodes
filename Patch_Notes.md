@@ -1,6 +1,9 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
-## v1.69 Jan 15, 2024
+## v1.70 Jan 15, 2024
+- added CR Aspect Ratio Social Media
+
+## v1.69 Jan 14, 2024
 - added CR Repeater
 - deleted CR Loop List, replaced by CR Repeater
 - removed dev nodes

@@ -78,7 +78,8 @@ NODE_CLASS_MAPPINGS = {
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
     "CR Aspect Ratio": CR_AspectRatio,
-    "CR Aspect Ratio Banners": CR_AspectRatioBanners,      
+    "CR Aspect Ratio Banners": CR_AspectRatioBanners, 
+    "CR Aspect Ratio Social Media": CR_AspectRatioSocialMedia,      
     ### Legacy Nodes
     "CR Image Size": CR_ImageSize,
     "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,
@@ -316,6 +317,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
     "CR Aspect Ratio": "🔳 CR Aspect Ratio",
     "CR Aspect Ratio Banners": "🔳 CR Aspect Ratio Banners",
+    "CR Aspect Ratio Social Media": "🔳 CR Aspect Ratio Social Media",      
     ### Legacy Nodes
     "CR Image Size": "CR Image Size (Legacy)",
     "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",
@@ -507,5 +509,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Text List Simple": "CR Text List Simple (Legacy)",
     "CR Image List": "CR Image List (Legacy)",
     "CR Image List Simple": "CR Image List Simple (Legacy)", 
-    "CR Input Text List": "CR Input Text List (Legacy)",      
+    "CR Input Text List": "CR Input Text List (Legacy)",   
 }
