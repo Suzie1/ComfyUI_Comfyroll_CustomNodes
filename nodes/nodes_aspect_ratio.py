@@ -326,9 +326,9 @@ class CR_AspectRatioSocialMedia:
     def INPUT_TYPES(s):
     
         aspect_ratios = ["custom",
-                         "Instagram Landscape - 1080x608",
+                         "Instagram Portrait - 1080x1350",
                          "Instagram Square - 1080x1080",
-                         "Instagram Portrait - 1080x1350", 
+                         "Instagram Landscape - 1080x608", 
                          "Instagram Stories - 1080x1920",
                          "Instagram Reels - 1080x1920",
                          "Facebook Landscape - 1080x1350",
@@ -357,12 +357,12 @@ class CR_AspectRatioSocialMedia:
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, prescale_factor, batch_size):
         
         # Banner sizes
-        if aspect_ratio == "Instagram Landscape - 1080x608":
-            width, height = 1080, 608
+        if aspect_ratio == "Instagram Portrait - 1080x1350":
+            width, height = 1080, 1350
         elif aspect_ratio == "Instagram Square - 1080x1080":
             width, height = 1080, 1080
-        elif aspect_ratio == "Instagram Portrait - 1080x1350":
-            width, height = 1080, 1350
+        elif aspect_ratio == "Instagram Landscape - 1080x608":
+            width, height = 1080, 608
         elif aspect_ratio == "Instagram Stories - 1080x1920":
             width, height = 1080, 1920
         elif aspect_ratio == "Instagram Reels - 1080x1920":

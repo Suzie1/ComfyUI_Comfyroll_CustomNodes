@@ -1,5 +1,9 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.71.2 Jan 16, 2024
+- added CR Select Resize Method
+- added CR Set Switch From String
+
 ## v1.71.1 Jan 16, 2024
 - fix for issue 101 CR Select Font
 - fix for issue 103 CR Overlay Transparent Image

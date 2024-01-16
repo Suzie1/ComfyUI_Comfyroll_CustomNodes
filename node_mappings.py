@@ -223,7 +223,9 @@ NODE_CLASS_MAPPINGS = {
     "CR Set Value On Binary": CR_SetValueOnBinary, 
     "CR Set Value on String": CR_SetValueOnString,       
     "CR Math Operation": CR_MathOperation,
-    "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,     
+    "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,
+    "CR Select Resize Method": CR_SelectResizeMethod,
+    "CR Set Switch From String": CR_SetSwitchFromString,    
     #------------------------------------------------------
     ### Animation Nodes
     # Schedules  

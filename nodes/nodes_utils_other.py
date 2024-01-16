@@ -112,8 +112,8 @@ class CR_SetValueOnString:
             },
         }
 
-    RETURN_TYPES = (any_type, "STRING", )
-    RETURN_NAMES = ("STRING", "show_help", )
+    RETURN_TYPES = (any_type, "BOOLEAN", "STRING", )
+    RETURN_NAMES = ("STRING", "BOOLEAN","show_help", )
     FUNCTION = "replace_text"
     CATEGORY = icons.get("Comfyroll/Utils/Other")
 
@@ -124,11 +124,13 @@ class CR_SetValueOnString:
         if test_string in text:
             # Test condition is true, replace with value_if_true
             text_out = value_if_true
+            bool_out = True
         else:
             # Test condition is false, replace with value_if_false
             text_out = value_if_false
+            bool_out = False
         
-        return (text_out, show_help)
+        return (text_out, bool_out, show_help)
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_IntegerMultipleOf:
@@ -297,6 +299,73 @@ class CR_GetParameterFromPrompt:
         return (return_prompt, return_string, return_value, return_boolean, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_SelectResizeMethod:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+    
+        methods = ["Fit", "Crop"]
+        
+        return {
+            "required": {
+                "method": (methods, ),
+            }
+        }
+    
+    RETURN_TYPES =(any_type, "STRING", )
+    RETURN_NAMES =("method", "show_help", )
+    FUNCTION = "set_switch"    
+    CATEGORY = icons.get("Comfyroll/Utils/Other")
+
+    def set_switch(self, method):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-resize-method"    
+      
+        return (method, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#        
+class CR_SetSwitchFromString:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+    
+        methods = ["Fit", "Crop"]
+        
+        return {
+            "required": {
+                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
+            },
+            "optional": {
+                "switch_1": ("STRING", {"multiline": False, "default": ""}),
+                "switch_2": ("STRING", {"multiline": False, "default": ""}),
+                "switch_3": ("STRING", {"multiline": False, "default": ""}),
+                "switch_4": ("STRING", {"multiline": False, "default": ""}),                
+            },            
+        }
+    
+    RETURN_TYPES =("INT", "STRING", )
+    RETURN_NAMES =("switch", "show_help", )
+    FUNCTION = "set_switch"
+    CATEGORY = icons.get("Comfyroll/Utils/Other")
+
+    def set_switch(self, text, switch_1="", switch_2="", switch_3="", switch_4=""):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-set-switch-from-string"    
+      
+        if text == switch_1:
+            switch = 1
+        elif text == switch_2:
+            switch = 2
+        elif text == switch_3:
+            switch = 3
+        elif text == switch_4:
+            switch = 4
+        else:
+            pass
+        
+        return (switch, show_help, )        
+        
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -311,6 +380,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Math Operation": CR_MathOperation,
     "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,
+    "CR Select Resize Method": CR_SelectResizeMethod,
+    "CR Set Switch From String": CR_SetSwitchFromString,
 }
 '''
 
