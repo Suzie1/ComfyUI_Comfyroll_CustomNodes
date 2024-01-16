@@ -5,7 +5,8 @@
 
 import numpy as np
 import torch
-import os 
+import os
+import platform
 from PIL import Image, ImageDraw, ImageOps, ImageFont
 from ..categories import icons
 from ..config import color_mapping, COLORS
@@ -453,9 +454,16 @@ class CR_SelectFont:
         
     @classmethod
     def INPUT_TYPES(cls):
-
-        system_root = os.environ.get('SystemRoot')
-        font_dir = os.path.join(system_root, 'Fonts')   
+    
+        if platform.system() == "Windows":
+            system_root = os.environ.get("SystemRoot")
+            font_dir = os.path.join(system_root, "Fonts") if system_root else None
+       # Default debian-based Linux & MacOS font dirs
+        elif platform.system() == "Linux":
+            font_dir = "/usr/share/fonts/truetype"
+        elif platform.system() == "Darwin":
+            font_dir = "/System/Library/Fonts"    
+ 
         file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
                         
         return {"required": {

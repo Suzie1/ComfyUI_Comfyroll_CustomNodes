@@ -1,5 +1,9 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.71.1 Jan 16, 2024
+- fix for issue 101 CR Select Font
+- fix for issue 103 CR Overlay Transparent Image
+
 ## v1.71 Jan 15, 2024
 - changed string outputs to any_type on text util nodes
 

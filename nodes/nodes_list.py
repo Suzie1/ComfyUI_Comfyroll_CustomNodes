@@ -413,6 +413,7 @@ class CR_FontFileList:
                 return None                
         else:
             pass
+
         # Ensure start_index is within the bounds of the list
         start_index = max(0, min(start_index, len(file_list) - 1))
 

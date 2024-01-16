@@ -519,7 +519,7 @@ class CR_OverlayTransparentImage:
         # Scale overlay image
         overlay_width, overlay_height = overlay_image.size
         new_size = (int(overlay_width * overlay_scale_factor), int(overlay_height * overlay_scale_factor))
-        overlay_image = overlay_image.resize(new_size, Image.ANTIALIAS)
+        overlay_image = overlay_image.resize(new_size, Image.Resampling.LANCZOS)
 
         # Calculate centered position relative to the center of the background image
         center_x = back_image.width // 2
