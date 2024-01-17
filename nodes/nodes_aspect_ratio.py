@@ -329,13 +329,17 @@ class CR_AspectRatioSocialMedia:
                          "Instagram Portrait - 1080x1350",
                          "Instagram Square - 1080x1080",
                          "Instagram Landscape - 1080x608", 
-                         "Instagram Stories - 1080x1920",
-                         "Instagram Reels - 1080x1920",
+                         "Instagram Stories/Reels - 1080x1920",
                          "Facebook Landscape - 1080x1350",
                          "Facebook Marketplace - 1200x1200",
-                         "Facebook Stories - 1080x1920",
-                         "LinkedIn Background - 1584x396",
-                         "Pinterest Pin Image - 1000x1500"
+                         "Facebook Stories - 1080x1920",                         
+                         "TikTok - 1080x1920",
+                         "YouTube Banner - 2560×1440",
+                         "LinkedIn Profile Banner - 1584x396",
+                         "LinkedIn Page Cover - 1128x191",
+                         "LinkedIn Post - 1200x627",                        
+                         "Pinterest Pin Image - 1000x1500",
+                         "OpenArt App - 1500x1000"
                         ]
                                  
         return {
@@ -363,20 +367,30 @@ class CR_AspectRatioSocialMedia:
             width, height = 1080, 1080
         elif aspect_ratio == "Instagram Landscape - 1080x608":
             width, height = 1080, 608
-        elif aspect_ratio == "Instagram Stories - 1080x1920":
-            width, height = 1080, 1920
-        elif aspect_ratio == "Instagram Reels - 1080x1920":
-            width, height = 1080, 1920
+        elif aspect_ratio == "Instagram Stories/Reels - 1080x1920":
+            width, height = 1080, 1920          
         elif aspect_ratio == "Facebook Landscape - 1080x1350":
             width, height = 1080, 1350
         elif aspect_ratio == "Facebook Marketplace - 1200x1200":
             width, height = 1200, 1200
         elif aspect_ratio == "Facebook Stories - 1080x1920":
             width, height = 1080, 1920
-        elif aspect_ratio == "LinkedIn Background - 1584x396":
+        elif aspect_ratio == "TikTok - 1080x1920":
+            width, height = 1080, 1920
+        elif aspect_ratio == "YouTube Banner - 2560×1440":
+            width, height = 2560, 1440             
+        elif aspect_ratio == "LinkedIn Profile Banner - 1584x396":
             width, height = 1584, 396
+        elif aspect_ratio == "LinkedIn Page Cover - 1128x191":
+            width, height = 1584, 396
+        elif aspect_ratio == "LinkedIn Post - 1200x627":
+            width, height = 1200, 627            
         elif aspect_ratio == "Pinterest Pin Image - 1000x1500":
-            width, height = 1000, 1500          
+            width, height = 1000, 1500
+        elif aspect_ratio == "Pinterest Cover Image - 1920x1080":
+            width, height = 1920, 1080            
+        elif aspect_ratio == "OpenArt App - 1500x1000":
+            width, height = 1500, 1000             
         
         if swap_dimensions == "On":
             width, height = height, width

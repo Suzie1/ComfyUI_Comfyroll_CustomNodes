@@ -58,7 +58,7 @@ class CR_SetValueOnBinary:
     RETURN_TYPES =("INT", "FLOAT", "STRING", )
     RETURN_NAMES =("INT", "FLOAT", "show_help", )
     FUNCTION = "set_value"    
-    CATEGORY = icons.get("Comfyroll/Utils/Other")
+    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
     
     def set_value(self, binary, value_if_1, value_if_0):
 
@@ -85,7 +85,7 @@ class CR_SetValueOnBoolean:
     RETURN_TYPES =("INT", "FLOAT", "STRING", )
     RETURN_NAMES =("INT", "FLOAT", "show_help", )
     FUNCTION = "set_value"    
-    CATEGORY = icons.get("Comfyroll/Utils/Other")
+    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
     
     def set_value(self, boolean, value_if_true, value_if_false):
 
@@ -115,7 +115,7 @@ class CR_SetValueOnString:
     RETURN_TYPES = (any_type, "BOOLEAN", "STRING", )
     RETURN_NAMES = ("STRING", "BOOLEAN","show_help", )
     FUNCTION = "replace_text"
-    CATEGORY = icons.get("Comfyroll/Utils/Other")
+    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
 
     def replace_text(self, text, test_string, value_if_true, value_if_false):
     
@@ -346,7 +346,7 @@ class CR_SetSwitchFromString:
     RETURN_TYPES =("INT", "STRING", )
     RETURN_NAMES =("switch", "show_help", )
     FUNCTION = "set_switch"
-    CATEGORY = icons.get("Comfyroll/Utils/Other")
+    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
 
     def set_switch(self, text, switch_1="", switch_2="", switch_3="", switch_4=""):
     

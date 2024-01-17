@@ -489,11 +489,11 @@ class CR_OverlayTransparentImage:
         return {"required": {
                 "back_image": ("IMAGE",),
                 "overlay_image": ("IMAGE",),
-                "transparency": ("FLOAT", {"default": 0, "min": 0, "max": 1, "step": 0.1}),
+                "transparency": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.1}),
                 "offset_x": ("INT", {"default": 0, "min": -4096, "max": 4096}),
                 "offset_y": ("INT", {"default": 0, "min": -4096, "max": 4096}),
                 "rotation_angle": ("FLOAT", {"default": 0.0, "min": -360.0, "max": 360.0, "step": 0.1}),
-                "overlay_scale_factor": ("FLOAT", {"default": 1.0, "min": -0.1, "max": 100.0, "step": 0.1}),
+                "overlay_scale_factor": ("FLOAT", {"default": 1.000, "min": 0.000, "max": 100.000, "step": 0.001}),
                 }        
         }
 

@@ -27,17 +27,16 @@ class CR_ColorTint:
     def INPUT_TYPES(s):
     
         #tints = COLORS.append('sepia')
-        '''
+        
         tints = ["custom", "white", "black", "sepia", "red", "green", "blue",
             "cyan", "magenta", "yellow", "purple", "orange", "warm",
             "cool",  "lime", "navy", "vintage", "rose", "teal",
             "maroon", "peach", "lavender", "olive"]
-        '''    
-            
+           
         return {
             "required": {"image": ("IMAGE",),
                          "strength": ("FLOAT", {"default": 1.0,"min": 0.1,"max": 1.0,"step": 0.1}),
-                         "mode": (COLORS,),
+                         "mode": (tints,),
                         },
             "optional": {"tint_color_hex": ("STRING", {"multiline": False, "default": "#000000"}),} 
         }

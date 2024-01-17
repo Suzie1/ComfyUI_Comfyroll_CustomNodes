@@ -196,7 +196,8 @@ NODE_CLASS_MAPPINGS = {
     "CR String To Combo": CR_StringToCombo,    
     "CR Float To String": CR_FloatToString,
     "CR Float To Integer": CR_FloatToInteger,
-    "CR Integer To String": CR_IntegerToString,    
+    "CR Integer To String": CR_IntegerToString,
+    "CR String To Boolean": CR_StringToBoolean,     
     ### Utils Random
     "CR Random Hex Color": CR_RandomHexColor, 
     "CR Random RGB": CR_RandomRGB,
@@ -210,23 +211,22 @@ NODE_CLASS_MAPPINGS = {
     "CR Split String": CR_SplitString,     
     "CR Text Concatenate": CR_TextConcatenate, 
     "CR Text Replace": CR_TextReplace,
-    "CR Text Blacklist": CR_TextBlacklist,     
     "CR Text Length": CR_TextLength,
-    "CR Text Operation": CR_TextOperation,    
+    "CR Text Operation": CR_TextOperation,  
+    "CR Text Blacklist": CR_TextBlacklist,      
     "CR Save Text To File": CR_SaveTextToFile,
-    ### Utils Other    
-    "CR Integer Multiple": CR_IntegerMultipleOf,    
-    "CR Value": CR_Value,
-    "CR Integer Multiple": CR_IntegerMultipleOf,
-    "CR Clamp Value": CR_ClampValue,
+    ### Utils Conditional
     "CR Set Value On Boolean": CR_SetValueOnBoolean,
     "CR Set Value On Binary": CR_SetValueOnBinary, 
-    "CR Set Value on String": CR_SetValueOnString,       
+    "CR Set Value on String": CR_SetValueOnString,
+    "CR Set Switch From String": CR_SetSwitchFromString,        
+    ### Utils Other     
+    "CR Value": CR_Value,
+    "CR Integer Multiple": CR_IntegerMultipleOf,
+    "CR Clamp Value": CR_ClampValue,     
     "CR Math Operation": CR_MathOperation,
     "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,
     "CR Select Resize Method": CR_SelectResizeMethod,
-    "CR Set Switch From String": CR_SetSwitchFromString,    
-    #------------------------------------------------------
     ### Animation Nodes
     # Schedules  
     "CR Simple Schedule": CR_SimpleSchedule,
@@ -428,12 +428,13 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Index Multiply": "🔢 CR Index Multiply",
     "CR Index Reset": "🔢 CR Index Reset",
     "CR Trigger": "🔢 CR Trigger",
-    ### Utils Conversions
+    ### Utils Conversion
     "CR String To Number": "🔧 CR String To Number",
     "CR String To Combo": "🔧 CR String To Combo",    
     "CR Float To String": "🔧 CR Float To String",
     "CR Float To Integer": "🔧 CR Float To Integer",
-    "CR Integer To String": "🔧 CR Integer To String",    
+    "CR Integer To String": "🔧 CR Integer To String", 
+    "CR String To Boolean": "🔧 CR String To Boolean",     
     ### Utils Random
     "CR Random Hex Color": "🎲 CR Random Hex Color", 
     "CR Random RGB": "🎲 CR Random RGB",
@@ -450,17 +451,19 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Text Blacklist": "🔤 Text Blacklist",    
     "CR Text Length": "🔤 CR Text Length",
     "CR Text Operation": "🔤 CR Text Operation", 
-    "CR Save Text To File": "🔤 CR Save Text To File",       
+    "CR Save Text To File": "🔤 CR Save Text To File",
+    ### Utils Conditional
+    "CR Set Value On Boolean": "⚙️ CR Set Value On Boolean",
+    "CR Set Value On Binary": "⚙️ CR Set Value On Binary",
+    "CR Set Value on String": "⚙️ CR Set Value on String",
+    "CR Set Switch From String": "⚙️ CR Set Switch From String",     
     ### Utils Other    
     "CR Integer Multiple": "⚙️ CR Integer Multiple",
     "CR Value": "⚙️ CR Value",
     "CR Clamp Value": "⚙️ CR Clamp Value",
-    "CR Set Value On Boolean": "⚙️ CR Set Value On Boolean",
-    "CR Set Value On Binary": "⚙️ CR Set Value On Binary",
-    "CR Set Value on String": "⚙️ CR Set Value on String",
     "CR Math Operation": "⚙️ CR Math Operation",
-    "CR Get Parameter From Prompt": "⚙️ CR Get Parameter From Prompt",   
-    #------------------------------------------------------
+    "CR Get Parameter From Prompt": "⚙️ CR Get Parameter From Prompt",
+    "CR Select Resize Method": "⚙️ CR Select Resize Method",  
     ### Animation Nodes
     # Schedules  
     "CR Simple Schedule": "📋 CR Simple Schedule",

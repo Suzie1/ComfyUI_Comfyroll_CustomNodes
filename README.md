@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.72
+Current version: 1.73
 
 # Wiki
 
@@ -222,7 +222,8 @@ __🔧 Utils Conversion__
 * CR String To Combo    
 * CR Float To String
 * CR Float To Integer
-* CR Integer To String    
+* CR Integer To String  
+* CR String To Boolean (new 17/1/2024)  
 
 __🔀 Utils Logic__
 * CR Image Input Switch
@@ -261,17 +262,19 @@ __🔤 Utils Text__
 * CR Text Operation (new 10/1/2024)
 * CR Save Text To File (new 27/12/2023)
 
+__⚙️ Conditional__
+* CR Set Value On Boolean (new 29/12/2023)
+* CR Set Value On Binary (new 3/1/2024)
+* CR Set Value On String (new 9/1/2024)
+* CR Set Switch From String (new 17/1/2024)
+
 __⚙️ Utils Other__
 * CR Value
 * CR Integer Multiple
 * CR Clamp Value (new 29/12/2023)
-* CR Set Value On Boolean (new 29/12/2023)
-* CR Set Value On Binary (new 3/1/2024)
-* CR Set Value on String (new 9/1/2024)
 * CR Math Operation (new 31/12/2023)  
 * CR Get Parameter From Prompt (new 5/1/2024)
 * CR Select Resize Method (new 16/1/2024)
-* CR Set Switch From String (new 16/1/2024)
 
 ## Legacy
 __💀 Legacy Nodes__

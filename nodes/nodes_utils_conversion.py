@@ -85,6 +85,36 @@ class CR_StringToCombo:
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-combo"
 
         return (text_list, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#  
+# based on Repeater node by pythongosssss 
+class CR_StringToBoolean:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
+            },
+        }
+
+    RETURN_TYPES = ("BOOLEAN", "STRING", )
+    RETURN_NAMES = ("BOOLEAN", "show_help", )
+    FUNCTION = "convert"
+    CATEGORY = icons.get("Comfyroll/Utils/Conversion")
+
+    def convert(self, text):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-string-to-boolean"
+
+        if text == "True" or text == "true":
+            boolean_out = True
+        if text == "False" or text == "false":
+            boolean_out = False
+        else:
+            pass
+
+        return (boolean_out, show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # Cloned from Mikey Nodes
@@ -149,11 +179,12 @@ class CR_FloatToInteger:
 # 10 nodes published
 '''
 NODE_CLASS_MAPPINGS = {   
-    "CR String To Number":CR_StringToNumber,
-    "CR String To Combo":CR_StringToCombo,    
-    "CR Float To String":CR_FloatToString,
-    "CR Float To Integer":CR_FloatToInteger,
-    "CR Integer To String":CR_IntegerToString,    
+    "CR String To Number": CR_StringToNumber,
+    "CR String To Combo": CR_StringToCombo,    
+    "CR Float To String": CR_FloatToString,
+    "CR Float To Integer": CR_FloatToInteger,
+    "CR Integer To String": CR_IntegerToString,
+    "CR String To Boolean": CR_StringToBoolean,    
 }
 '''    
      

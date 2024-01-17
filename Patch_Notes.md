@@ -1,6 +1,11 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
-## v1.71.2 Jan 16, 2024
+## v1.73 Jan 17, 2024
+- added CR String to Boolean
+- updated CR Aspect Ratio Social Media, added more options
+- updated CR Color Tint, fixed issue with colors
+
+## v1.72 Jan 16, 2024
 - added CR Select Resize Method
 - added CR Set Switch From String
 

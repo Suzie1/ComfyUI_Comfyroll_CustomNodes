@@ -2,6 +2,7 @@ icons = {
     "Comfyroll/Upscale": "🧩 Comfyroll Studio/✨ Essential/🔍 Upscale",
     "Comfyroll/Model Merge": "🧩 Comfyroll Studio/✨ Essential/⛏️ Model Merge",
     "Comfyroll/Utils/Logic": "🧩 Comfyroll Studio/🛠️ Utils/🔀 Logic",
+    "Comfyroll/Utils/Conditional": "🧩 Comfyroll Studio/🛠️ Utils/🔀 Conditional", 
     "Comfyroll/Utils/Process": "🧩 Comfyroll Studio/🛠️ Utils/🔂 Process",
     "Comfyroll/Utils/Index": "🧩 Comfyroll Studio/🛠️ Utils/🔢 Index",
     "Comfyroll/Utils/Conversion": "🧩 Comfyroll Studio/🛠️ Utils/🔧 Conversion",
