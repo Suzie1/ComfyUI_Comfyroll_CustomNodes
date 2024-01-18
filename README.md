@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.73
+Current version: 1.74
 
 # Wiki
 
@@ -40,7 +40,8 @@ __🔳 Aspect Ratio__
 * CR SDXL Aspect Ratio
 * CR SD1.5 Aspect Ratio
 * CR Aspect Ratio Banners (new 18/12/2023)
-* CR Aspect Ratio Social Media (new 15/1/2024)  
+* CR Aspect Ratio Social Media (new 15/1/2024)
+* CR Aspect Ratio For Print (new 18/1/2024)
 
 __📜 List Nodes__
 * CR Text List (new 19/12/2023)
@@ -156,6 +157,7 @@ __👽 Graphics - Template__
 * CR Simple Banner (new 18/12/2023)
 * CR Simple Image Compare (new 18/12/2023)
 * CR Thumbnail Preview (new 26/12/2023)
+* CR Seamless Checker (new 18/1/2023)
 
 __🌁 Graphics - Layout__
 * CR Image Panel
@@ -166,6 +168,7 @@ __🌁 Graphics - Layout__
 * CR Color Panel
 * CR Simple Text Panel
 * CR Overlay Transparent Image
+* CR Select ISO Size (new 18/1/2023)
 
 ## 🎥 Animation
 

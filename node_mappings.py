@@ -79,7 +79,8 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
     "CR Aspect Ratio": CR_AspectRatio,
     "CR Aspect Ratio Banners": CR_AspectRatioBanners, 
-    "CR Aspect Ratio Social Media": CR_AspectRatioSocialMedia,      
+    "CR Aspect Ratio Social Media": CR_AspectRatioSocialMedia,  
+    "CR_Aspect Ratio For Print": CR_AspectRatioForPrint,
     ### Legacy Nodes
     "CR Image Size": CR_ImageSize,
     "CR Aspect Ratio SDXL": CR_AspectRatio_SDXL,
@@ -168,7 +169,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Simple Banner": CR_SimpleBanner,    
     "CR Comic Panel Templates": CR_ComicPanelTemplates,
     "CR Simple Image Compare": CR_SimpleImageCompare,
-    "CR Thumbnail Preview": CR_ThumbnailPreview, 
+    "CR Thumbnail Preview": CR_ThumbnailPreview,
+    "CR Seamless Checker": CR_SeamlessChecker,    
     ### Utils Logic
     "CR Image Input Switch": CR_ImageInputSwitch,
     "CR Image Input Switch (4 way)": CR_ImageInputSwitch4way,
@@ -227,6 +229,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Math Operation": CR_MathOperation,
     "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,
     "CR Select Resize Method": CR_SelectResizeMethod,
+    "CR Select ISO Size": CR_SelectISOSize,
     ### Animation Nodes
     # Schedules  
     "CR Simple Schedule": CR_SimpleSchedule,
@@ -319,7 +322,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
     "CR Aspect Ratio": "🔳 CR Aspect Ratio",
     "CR Aspect Ratio Banners": "🔳 CR Aspect Ratio Banners",
-    "CR Aspect Ratio Social Media": "🔳 CR Aspect Ratio Social Media",      
+    "CR Aspect Ratio Social Media": "🔳 CR Aspect Ratio Social Media",
+    "CR_Aspect Ratio For Print": "🔳 CR_Aspect Ratio For Print",
     ### Legacy Nodes
     "CR Image Size": "CR Image Size (Legacy)",
     "CR Aspect Ratio SDXL": "CR Aspect Ratio SDXL (Legacy)",
@@ -405,7 +409,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Simple Banner": "📱 CR Simple Banner",     
     "CR Comic Panel Templates": "📱 CR Comic Panel Templates",
     "CR Simple Image Compare": "📱 CR Simple Image Compare",
-    "CR Thumbnail Preview": "📱 CR Thumbnail Preview", 
+    "CR Thumbnail Preview": "📱 CR Thumbnail Preview",
+    "CR Seamless Checker": "📱 CR Seamless Checker",
     ### Utils Logic
     "CR Image Input Switch": "🔀 CR Image Input Switch",
     "CR Image Input Switch (4 way)": "🔀 CR Image Input Switch (4 way)",
@@ -463,7 +468,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Clamp Value": "⚙️ CR Clamp Value",
     "CR Math Operation": "⚙️ CR Math Operation",
     "CR Get Parameter From Prompt": "⚙️ CR Get Parameter From Prompt",
-    "CR Select Resize Method": "⚙️ CR Select Resize Method",  
+    "CR Select Resize Method": "⚙️ CR Select Resize Method",
+    "CR Select ISO Size": "⚙️ CR Select ISO Size",    
     ### Animation Nodes
     # Schedules  
     "CR Simple Schedule": "📋 CR Simple Schedule",

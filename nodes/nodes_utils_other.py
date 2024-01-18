@@ -43,96 +43,6 @@ class CR_ClampValue:
         return (a, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-class CR_SetValueOnBinary:
-       
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "binary": ("INT", {"default": 1, "min": 0, "max": 1, "forceInput": True}),
-                "value_if_1": ("FLOAT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),   
-                "value_if_0": ("FLOAT", {"default": 0, "min": -18446744073709551615, "max": 18446744073709551615}),   
-            }
-        }
-    
-    RETURN_TYPES =("INT", "FLOAT", "STRING", )
-    RETURN_NAMES =("INT", "FLOAT", "show_help", )
-    FUNCTION = "set_value"    
-    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
-    
-    def set_value(self, binary, value_if_1, value_if_0):
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-set-value-on-boolean"
-
-        if binary == 1:
-            return (int(value_if_1), value_if_1, show_help, )   
-        else:
-            return (int(value_if_0), value_if_0, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_SetValueOnBoolean:
-       
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "boolean": ("BOOLEAN", {"default": True, "forceInput": True}),
-                "value_if_true": ("FLOAT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),   
-                "value_if_false": ("FLOAT", {"default": 0, "min": -18446744073709551615, "max": 18446744073709551615}),   
-            }
-        }
-    
-    RETURN_TYPES =("INT", "FLOAT", "STRING", )
-    RETURN_NAMES =("INT", "FLOAT", "show_help", )
-    FUNCTION = "set_value"    
-    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
-    
-    def set_value(self, boolean, value_if_true, value_if_false):
-
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-set-value-on-boolean"
-
-        if boolean == True:
-            return (int(value_if_true), value_if_true, show_help, )   
-        else:
-            return (int(value_if_false), value_if_false, show_help, )
-
-#---------------------------------------------------------------------------------------------------------------------#
-class CR_SetValueOnString:
-
-    @ classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),            
-                },
-            "optional": {
-                "test_string": ("STRING", {"multiline": False, "default": ""}),
-                "value_if_true": ("STRING", {"multiline": False, "default": ""}),
-                "value_if_false": ("STRING", {"multiline": False, "default": ""}), 
-            },
-        }
-
-    RETURN_TYPES = (any_type, "BOOLEAN", "STRING", )
-    RETURN_NAMES = ("STRING", "BOOLEAN","show_help", )
-    FUNCTION = "replace_text"
-    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
-
-    def replace_text(self, text, test_string, value_if_true, value_if_false):
-    
-        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-set-value-on-string" 
-        
-        if test_string in text:
-            # Test condition is true, replace with value_if_true
-            text_out = value_if_true
-            bool_out = True
-        else:
-            # Test condition is false, replace with value_if_false
-            text_out = value_if_false
-            bool_out = False
-        
-        return (text_out, bool_out, show_help)
-
-#---------------------------------------------------------------------------------------------------------------------#
 class CR_IntegerMultipleOf:
        
     @classmethod
@@ -323,6 +233,98 @@ class CR_SelectResizeMethod:
       
         return (method, show_help, )
 
+#---------------------------------------------------------------------------------------------------------------------#
+# Conditional Nodes
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_SetValueOnBinary:
+       
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "binary": ("INT", {"default": 1, "min": 0, "max": 1, "forceInput": True}),
+                "value_if_1": ("FLOAT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),   
+                "value_if_0": ("FLOAT", {"default": 0, "min": -18446744073709551615, "max": 18446744073709551615}),   
+            }
+        }
+    
+    RETURN_TYPES =("INT", "FLOAT", "STRING", )
+    RETURN_NAMES =("INT", "FLOAT", "show_help", )
+    FUNCTION = "set_value"    
+    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
+    
+    def set_value(self, binary, value_if_1, value_if_0):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-set-value-on-boolean"
+
+        if binary == 1:
+            return (int(value_if_1), value_if_1, show_help, )   
+        else:
+            return (int(value_if_0), value_if_0, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_SetValueOnBoolean:
+       
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "boolean": ("BOOLEAN", {"default": True, "forceInput": True}),
+                "value_if_true": ("FLOAT", {"default": 1, "min": -18446744073709551615, "max": 18446744073709551615}),   
+                "value_if_false": ("FLOAT", {"default": 0, "min": -18446744073709551615, "max": 18446744073709551615}),   
+            }
+        }
+    
+    RETURN_TYPES =("INT", "FLOAT", "STRING", )
+    RETURN_NAMES =("INT", "FLOAT", "show_help", )
+    FUNCTION = "set_value"    
+    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
+    
+    def set_value(self, boolean, value_if_true, value_if_false):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-set-value-on-boolean"
+
+        if boolean == True:
+            return (int(value_if_true), value_if_true, show_help, )   
+        else:
+            return (int(value_if_false), value_if_false, show_help, )
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_SetValueOnString:
+
+    @ classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "text": ("STRING", {"multiline": False, "default": "", "forceInput": True}),            
+                },
+            "optional": {
+                "test_string": ("STRING", {"multiline": False, "default": ""}),
+                "value_if_true": ("STRING", {"multiline": False, "default": ""}),
+                "value_if_false": ("STRING", {"multiline": False, "default": ""}), 
+            },
+        }
+
+    RETURN_TYPES = (any_type, "BOOLEAN", "STRING", )
+    RETURN_NAMES = ("STRING", "BOOLEAN","show_help", )
+    FUNCTION = "replace_text"
+    CATEGORY = icons.get("Comfyroll/Utils/Conditional")
+
+    def replace_text(self, text, test_string, value_if_true, value_if_false):
+    
+        show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-set-value-on-string" 
+        
+        if test_string in text:
+            # Test condition is true, replace with value_if_true
+            text_out = value_if_true
+            bool_out = True
+        else:
+            # Test condition is false, replace with value_if_false
+            text_out = value_if_false
+            bool_out = False
+        
+        return (text_out, bool_out, show_help)
+
 #---------------------------------------------------------------------------------------------------------------------#        
 class CR_SetSwitchFromString:
 
@@ -373,14 +375,15 @@ class CR_SetSwitchFromString:
 NODE_CLASS_MAPPINGS = {
     ### Utility Other
     "CR Value": CR_Value,    
-    "CR Clamp Value": CR_ClampValue,
-    "CR Set Value On Boolean": CR_SetValueOnBoolean,
-    "CR Set Value On Binary": CR_SetValueOnBinary,
-    "CR Set Value on String": CR_SetValueOnString,       
+    "CR Clamp Value": CR_ClampValue,   
     "CR Integer Multiple": CR_IntegerMultipleOf,
     "CR Math Operation": CR_MathOperation,
     "CR Get Parameter From Prompt": CR_GetParameterFromPrompt,
     "CR Select Resize Method": CR_SelectResizeMethod,
+    ### Conditional Nodes
+    "CR Set Value On Boolean": CR_SetValueOnBoolean,
+    "CR Set Value On Binary": CR_SetValueOnBinary,
+    "CR Set Value on String": CR_SetValueOnString,      
     "CR Set Switch From String": CR_SetSwitchFromString,
 }
 '''

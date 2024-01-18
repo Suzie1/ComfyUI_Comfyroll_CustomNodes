@@ -421,6 +421,8 @@ class CR_SimpleImageCompare:
                footer_height, font_name, font_size, mode,
                border_thickness, image1=None, image2=None):
 
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple-image-compare"
+
         # Get RGB values for the text and background colors
         if mode == "normal":
             font_color = "black"
@@ -433,10 +435,12 @@ class CR_SimpleImageCompare:
 
             img1 = tensor2pil(image1)  
             img2 = tensor2pil(image2)
-        
+            
             # Get image width and height        
-            image_width = img1.width
-            image_height = img1.height 
+            image_width, image_height = img1.width, img1.height
+          
+            if img2.width != img1.width or img2.height  != img1.height:
+                img2 = apply_resize_image(img2, image_width, image_height, 8, "rescale", "false", 1, 256, "lanczos")          
 
             # Set defaults
             margins = 50
@@ -494,8 +498,6 @@ class CR_SimpleImageCompare:
         if border_thickness > 0:
             result_img = ImageOps.expand(result_img, border_thickness, bg_color)
           
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-simple_image_compare"
-
         return (pil2tensor(result_img), show_help, )  
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -560,7 +562,7 @@ class CR_SeamlessChecker:
         return {"required":
                     {"image": ("IMAGE",),
                      "rescale_factor": ("FLOAT", {"default": 0.25, "min": 0.10, "max": 1.00, "step": 0.01}),
-                     "max_columns": ("INT", {"default": 5, "min": 0, "max": 256}), 
+                     "grid_options": (["2x2", "3x3", "4x4", "5x5", "6x6"],), 
                      }
                 }           
 
@@ -570,21 +572,21 @@ class CR_SeamlessChecker:
     FUNCTION = "thumbnail"
     CATEGORY = icons.get("Comfyroll/Graphics/Template")
     
-    def thumbnail(self, image, rescale_factor, max_columns):
+    def thumbnail(self, image, rescale_factor, grid_options):
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-seamless-checker"
         
-        result_images = []
         outline_thickness = 0
       
-        for img in image:
-            pil_img = tensor2pil(img)
-            original_width, original_height = pil_img.size        
-            rescaled_img = apply_resize_image(tensor2pil(img), original_width, original_height, 8, "rescale", "false", rescale_factor, 256, "lanczos")
-            outlined_img = ImageOps.expand(rescaled_img, outline_thickness, fill="black")
-            result_images.append(outlined_img)
+        pil_img = tensor2pil(image)
+        original_width, original_height = pil_img.size        
+        rescaled_img = apply_resize_image(tensor2pil(image), original_width, original_height, 8, "rescale", "false", rescale_factor, 256, "lanczos")
+        outlined_img = ImageOps.expand(rescaled_img, outline_thickness, fill="black")
+        
+        max_columns = int(grid_options[0])
+        repeat_images = [outlined_img] * max_columns ** 2
  
-        combined_image = make_grid_panel(result_images, max_columns)
+        combined_image = make_grid_panel(repeat_images, max_columns)
         images_out = pil2tensor(combined_image)
  
         # based on ETN_SendImageWebSocket

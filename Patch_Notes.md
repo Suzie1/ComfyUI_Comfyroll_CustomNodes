@@ -1,5 +1,14 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.74 Jan 18, 2024
+- changed  CR Simple Image Compare to automatically resize the second image if the size is different
+- added CR Aspect Ratio For Print
+- added CR Seamless Checker
+- added CR Select ISO Size
+
+## v1.73.1 Jan 17, 2024
+- fix for issue 104
+
 ## v1.73 Jan 17, 2024
 - added CR String to Boolean
 - updated CR Aspect Ratio Social Media, added more options

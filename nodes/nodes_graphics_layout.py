@@ -9,6 +9,7 @@ import os
 from PIL import Image, ImageDraw, ImageOps, ImageFont, ImageFilter
 from ..categories import icons
 from ..config import color_mapping, COLORS
+from ..config import iso_sizes
 from .functions_graphics import * 
 
 #---------------------------------------------------------------------------------------------------------------------#
@@ -608,6 +609,36 @@ class CR_FeatheredBorder:
         return (images, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
+class CR_SelectISOSize:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+     
+        sizes = list(iso_sizes.keys()) 
+        
+        return {
+            "required": {
+                "iso_size": (sizes, ),
+            }
+        }
+    
+    RETURN_TYPES =("INT", "INT","STRING", )
+    RETURN_NAMES =("width", "height","show_help", )
+    FUNCTION = "get_size"    
+    CATEGORY = icons.get("Comfyroll/Utils/Other")
+
+    def get_size(self, iso_size):
+    
+        if iso_size in iso_sizes:
+            width, height = iso_sizes[iso_size]
+        else:
+            print("Size not found.")
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-select-iso-size"    
+      
+        return (width, height, show_help, )
+        
+#---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
 # For reference only, actual mappings are in __init__.py
@@ -621,7 +652,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Color Panel": CR_ColorPanel,
     "CR Simple Text Panel": CR_SimpleTextPanel,
     "CR Overlay Transparent Image": CR_OverlayTransparentImage,
-    "CR Simple Titles": CR_SimpleTitles,
+    #"CR Simple Titles": CR_SimpleTitles,
+    "CR Select ISO Size": CR_SelectISOSize,    
 }
 '''
 

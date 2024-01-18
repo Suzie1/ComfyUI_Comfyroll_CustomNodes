@@ -6,6 +6,32 @@
 import torch
 from ..categories import icons
 
+PRINT_SIZES = {
+    "A4 - 2480x3508": (2480, 3508),
+    "A5 - 1748x2480": (1748, 2480),
+    "A6 - 1240x1748": (1240, 1748),
+    "A7 - 874x1240": (874, 1240),
+    "A8 - 614x874": (614, 874),
+    "A9 - 437x614": (437, 614),
+    "A10 - 307x437": (307, 437),
+    "B4 - 2953x4169": (2953, 4169),
+    "B5 - 2079x2953": (2079, 2953),
+    "B6 - 1476x2079": (1476, 2079),
+    "B7 - 1039x1476": (1039, 1476),
+    "B8 - 732x1039": (732, 1039),
+    "B9 - 520x732": (520, 732),
+    "B10 - 366x520": (366, 520),
+    "C4 - 2705x3827": (2705, 3827),
+    "C5 - 1913x2705": (1913, 2705),
+    "C6 - 1346x1913": (1346, 1913),
+    "C7 - 957x1346": (957, 1346),
+    "C8 - 673x957": (673, 957),
+    "C9 - 472x673": (472, 673),
+    "C10 - 331x472": (331, 472),
+    "Letter (8.5 x 11 inches) - 2550x3300": (2550, 3300),
+    "Legal (8.5 x 14 inches) - 2550x4200": (2550, 4200)
+} 
+
 #---------------------------------------------------------------------------------------------------------------------#
 # Aspect Ratio Nodes
 #---------------------------------------------------------------------------------------------------------------------#
@@ -319,8 +345,6 @@ class CR_AspectRatioBanners:
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_AspectRatioSocialMedia:
-    def __init__(self):
-        pass
 
     @classmethod
     def INPUT_TYPES(s):
@@ -339,6 +363,7 @@ class CR_AspectRatioSocialMedia:
                          "LinkedIn Page Cover - 1128x191",
                          "LinkedIn Post - 1200x627",                        
                          "Pinterest Pin Image - 1000x1500",
+                         "CivitAI Cover - 1600x400",
                          "OpenArt App - 1500x1000"
                         ]
                                  
@@ -360,7 +385,7 @@ class CR_AspectRatioSocialMedia:
 
     def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, prescale_factor, batch_size):
         
-        # Banner sizes
+        # Social media sizes
         if aspect_ratio == "Instagram Portrait - 1080x1350":
             width, height = 1080, 1350
         elif aspect_ratio == "Instagram Square - 1080x1080":
@@ -388,7 +413,9 @@ class CR_AspectRatioSocialMedia:
         elif aspect_ratio == "Pinterest Pin Image - 1000x1500":
             width, height = 1000, 1500
         elif aspect_ratio == "Pinterest Cover Image - 1920x1080":
-            width, height = 1920, 1080            
+            width, height = 1920, 1080    
+        elif aspect_ratio == "CivitAI Cover - 1600x400":
+            width, height = 1600, 400      
         elif aspect_ratio == "OpenArt App - 1500x1000":
             width, height = 1500, 1000             
         
@@ -397,6 +424,50 @@ class CR_AspectRatioSocialMedia:
         
         width = int(width*prescale_factor)
         height = int(height*prescale_factor)
+        
+        latent = torch.zeros([batch_size, 4, height // 8, width // 8])
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Aspect-Ratio-Nodes#cr-aspect-ratio-scial-media"
+           
+        return(width, height, upscale_factor, prescale_factor, batch_size, {"samples":latent}, show_help, ) 
+ 
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_AspectRatioForPrint:
+
+    @classmethod
+    def INPUT_TYPES(cls):
+
+        aspect_ratios = list(PRINT_SIZES.keys())
+                             
+        return {
+            "required": {
+                "width": ("INT", {"default": 1024, "min": 64, "max": 8192}),
+                "height": ("INT", {"default": 1024, "min": 64, "max": 8192}),
+                "aspect_ratio": (aspect_ratios,),
+                "swap_dimensions": (["Off", "On"],),
+                "upscale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "prescale_factor": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 100.0, "step":0.1}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 64})
+            }
+        }
+    RETURN_TYPES = ("INT", "INT", "FLOAT", "FLOAT", "INT", "LATENT", "STRING", )
+    RETURN_NAMES = ("width", "height", "upscale_factor", "prescale_factor", "batch_size", "empty_latent", "show_help", )
+    FUNCTION = "Aspect_Ratio"
+    CATEGORY = icons.get("Comfyroll/Aspect Ratio")
+
+    def Aspect_Ratio(self, width, height, aspect_ratio, swap_dimensions, upscale_factor, prescale_factor, batch_size):
+
+        # Iso sizes
+        if aspect_ratio in PRINT_SIZES:
+            width, height = PRINT_SIZES[aspect_ratio] 
+        
+        if swap_dimensions == "On":
+            width, height = height, width
+        
+        width = int(width*prescale_factor)
+        height = int(height*prescale_factor)
+        
+        print(f"Width: {width}, Height: {height}")
         
         latent = torch.zeros([batch_size, 4, height // 8, width // 8])
 
@@ -415,7 +486,8 @@ NODE_CLASS_MAPPINGS = {
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
     "CR Aspect Ratio": CR_AspectRatio,
     "CR Aspect Ratio Banners": CR_AspectRatioBanners,
-    "CR Aspect Ratio Social Media": CR_AspectRatioSocialMedia,    
+    "CR Aspect Ratio Social Media": CR_AspectRatioSocialMedia, 
+    "CR_Aspect Ratio For Print": CR_AspectRatioForPrint,    
 }
 '''
 

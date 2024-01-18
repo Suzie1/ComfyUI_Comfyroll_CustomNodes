@@ -15,13 +15,13 @@
 @author: Suzie1
 @title: Comfyroll Studio
 @nickname: Comfyroll Studio
-@description: 170 custom nodes for artists, designers and animators.
+@description: 175 custom nodes for artists, designers and animators.
 """
 
 from .node_mappings import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 
 print("------------------------------------------")    
-print("\033[34mComfyroll Studio v1.73 : \033[92m 170 Nodes Loaded\033[0m")
+print("\033[34mComfyroll Studio v1.74 : \033[92m 175 Nodes Loaded\033[0m")
 print("------------------------------------------") 
 print("** For changes, please see patch notes at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/blob/main/Patch_Notes.md") 
 print("** For help, please see the wiki at https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki") 
