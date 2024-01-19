@@ -521,7 +521,7 @@ class CR_ThumbnailPreview:
     
     def thumbnail(self, image, rescale_factor, max_columns):
 
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Other-Nodes#cr-thumbnail-preview"
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Template-Nodes#cr-thumbnail-preview"
         
         result_images = []
         outline_thickness = 1
@@ -551,7 +551,7 @@ class CR_ThumbnailPreview:
             )
             results.append({"source": "websocket", "content-type": "image/png", "type": "output"})
             
-        return {"ui": {"images": results}}
+        return {"ui": {"images": results}, "result": (show_help,) }
 
 #---------------------------------------------------------------------------------------------------------------------
 class CR_SeamlessChecker:
@@ -604,7 +604,7 @@ class CR_SeamlessChecker:
             )
             results.append({"source": "websocket", "content-type": "image/png", "type": "output"})
             
-        return {"ui": {"images": results}}
+        return {"ui": {"images": results}, "result": (show_help,) }
 
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS

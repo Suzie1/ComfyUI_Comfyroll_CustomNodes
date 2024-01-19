@@ -1,5 +1,8 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.74.1 Jan 19, 2024
+- fixed CR Thumbnail Preview show_help
+
 ## v1.74 Jan 18, 2024
 - changed  CR Simple Image Compare to automatically resize the second image if the size is different
 - added CR Aspect Ratio For Print
