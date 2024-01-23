@@ -1,5 +1,8 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.75 Jan 23, 2024
+- added CR Half Drop Panel
+
 ## v1.74.1 Jan 19, 2024
 - fixed CR Thumbnail Preview show_help
 

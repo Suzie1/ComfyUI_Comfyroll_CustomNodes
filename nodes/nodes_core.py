@@ -316,6 +316,8 @@ class CR_SelectModel:
     CATEGORY = icons.get("Comfyroll/Essential/Core")
 
     def select_model(self, ckpt_name1, ckpt_name2, ckpt_name3, ckpt_name4, ckpt_name5, select_model):
+            
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-select-model"
     
         # Initialise the list
         model_list = list()
@@ -339,37 +341,39 @@ class CR_SelectModel:
         model, clip, vae, clipvision = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True,
                                                      embedding_directory=folder_paths.get_folder_paths("embeddings"))
             
-        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-select-model"
-            
         return (model, clip, vae, model_name, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#
-'''
-class CR_KSampler:
+# based on Jags111 CircularVAEDecode
+class CR_VAEDecode:
+
     @classmethod
     def INPUT_TYPES(s):
-        return {"required":
-                    {"model": ("MODEL",),
-                    "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
-                    "steps": ("INT", {"default": 20, "min": 1, "max": 10000, "forceInput": True}),
-                    "cfg": ("FLOAT", {"default": 8.0, "min": 0.0, "max": 100.0, "step":0.1, "round": 0.01, "forceInput": True}),
-                    "sampler_name": (comfy.samplers.KSampler.SAMPLERS, ),
-                    "scheduler": (comfy.samplers.KSampler.SCHEDULERS, ),
-                    "positive": ("CONDITIONING", ),
-                    "negative": ("CONDITIONING", ),
-                    "latent_image": ("LATENT", ),
-                    "denoise": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                     }
-                }
+    
+        padding_modes = ["zeros", "replicate", "circular"]
+    
+        return {"required": {
+                    "samples": ("LATENT", ),
+                    "vae": ("VAE", ),
+                    "padding_mode": (padding_modes,),
+                    }
+        }
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("IMAGE", "show_help", )
+    FUNCTION = "vae_decode"
+    CATEGORY = icons.get("Comfyroll/Essential/Core")
 
-    RETURN_TYPES = ("LATENT",)
-    FUNCTION = "sample"
-
-    CATEGORY = "sampling"
-
-    def sample(self, model, seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise=1.0):
-        return common_ksampler(model, seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise=denoise)
-'''     
+    def vae_decode(self, samples, vae, padding_mode):
+            
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-vae-decode"    
+    
+        for layer in [layer for layer in vae.first_stage_model.modules() if isinstance(layer, torch.nn.Conv2d)]:
+            layer.padding_mode = padding_mode       
+            
+        c = vae.decode(samples["samples"])
+        
+        return (c, show_help, )
+    
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -383,7 +387,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Prompt Text": CR_PromptText,
     "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel, 
-    #"CR KSampler": CR_KSampler,
+    #"CR VAE Decode": CR_VAEDecode,
 }
 '''
 

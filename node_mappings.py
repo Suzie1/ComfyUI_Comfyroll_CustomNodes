@@ -52,7 +52,8 @@ NODE_CLASS_MAPPINGS = {
     "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel,
     "CR Seed": CR_Seed, 
-    "CR Prompt Text": CR_PromptText,   
+    "CR Prompt Text": CR_PromptText, 
+    #"CR VAE Decode": CR_VAEDecode,    
     ### List Nodes
     "CR Text List": CR_TextList,
     "CR Prompt List": CR_PromptList, 
@@ -163,6 +164,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Simple Text Panel": CR_SimpleTextPanel,    
     "CR Color Panel": CR_ColorPanel,
     "CR Overlay Transparent Image": CR_OverlayTransparentImage,
+    "CR Half Drop Panel": CR_HalfDropPanel,    
     #"CR Simple Titles": CR_SimpleTitles,    
     ### Graphics Template
     "CR Simple Meme Template": CR_SimpleMemeTemplate,
@@ -294,7 +296,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Value": "⚙️ CR Value",
     "CR Conditioning Mixer": "⚙️ CR Conditioning Mixer",
     "CR Select Model": "🔮 CR Select Model",
-    "CR Prompt Text": "⚙️ CR Prompt Text",    
+    "CR Prompt Text": "⚙️ CR Prompt Text", 
+    #"CR VAE Decode": "⚙️ CR VAE Decode",     
     ### List Nodes
     "CR Text List": "📜 CR Text List",
     "CR Prompt List": "📜 CR Prompt List",
@@ -400,6 +403,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Image Grid Panel": "🌁 CR Image Grid Panel",
     "CR Simple Text Panel": "🌁 CR Simple Text Panel",
     "CR Color Panel": "🌁 CR Color Panel",
+    "CR Half Drop Panel": "🌁 CR Half Drop Panel",     
     "CR Page Layout": "🌁 CR Page Layout",
     "CR Image Border": "🌁 CR Image Border",
     "CR Feathered Border": "🌁 CR Feathered Border",    

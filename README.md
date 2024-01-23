@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.74
+Current version: 1.75
 
 # Wiki
 
@@ -167,6 +167,7 @@ __🌁 Graphics - Layout__
 * CR Feathered Border (new 21/12/2023)
 * CR Color Panel
 * CR Simple Text Panel
+* CR Half Drop Panel
 * CR Overlay Transparent Image
 * CR Select ISO Size (new 18/1/2023)
 
