@@ -616,7 +616,7 @@ class CR_HalfDropPanel:
     @classmethod
     def INPUT_TYPES(s):
     
-        patterns = ["none", "half drop", "quarter drop", "diamond", "custom drop %"]
+        patterns = ["none", "half drop", "quarter drop", "custom drop %"]
 
         return {"required": {
                     "image": ("IMAGE",),
@@ -660,8 +660,55 @@ class CR_HalfDropPanel:
             panel_image.paste(pil_img, (0, y))
             panel_image.paste(pil_img, (x, -3*y//4))
             panel_image.paste(pil_img, (x, y//4))
-            panel_image.paste(pil_img, (x, 5*y//4))   
-        elif pattern == "diamond":
+            panel_image.paste(pil_img, (x, 5*y//4))        
+        elif pattern == "custom drop %":     
+            panel_image.paste(pil_img, (0, 0))
+            panel_image.paste(pil_img, (0, y))
+            panel_image.paste(pil_img, (x, (d-100)*y//100))
+            panel_image.paste(pil_img, (x, d*y//100))
+            panel_image.paste(pil_img, (x, y + d*y//100))   
+             
+        image_out = pil2tensor(panel_image.convert('RGB'))
+
+        return (image_out, show_help, )   
+
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_DiamondPanel:
+
+    @classmethod
+    def INPUT_TYPES(s):
+    
+        patterns = ["none", "diamond"]
+
+        return {"required": {
+                    "image": ("IMAGE",),
+                    "pattern": (patterns,),
+                }
+        }
+
+    RETURN_TYPES = ("IMAGE", "STRING", )
+    RETURN_NAMES = ("image", "show_help", )
+    FUNCTION = "make_panel"
+    CATEGORY = icons.get("Comfyroll/Graphics/Layout")
+    
+    def make_panel(self, image, pattern, drop_percentage=0.5):
+
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Layout-Nodes#cr-diamond-panel"
+
+        if pattern == "none":
+            return (image, show_help, )
+
+        # Convert to PIL image
+        pil_img = tensor2pil(image) 
+        pil_img = pil_img.convert('RGBA')
+        
+        x, y = pil_img.size
+        aspect_ratio = x / y
+        d = int(drop_percentage * 100)
+
+        panel_image = Image.new('RGBA', (x*2, y*2))
+  
+        if pattern == "diamond":
 
             diamond_size = min(x, y)
             diamond_width = min(x, y * aspect_ratio)
@@ -693,19 +740,12 @@ class CR_HalfDropPanel:
             panel_image.paste(diamond_image, (x, y), diamond_image)
             panel_image.paste(diamond_image, (3*x//2, (d-100)*y//100), diamond_image)
             panel_image.paste(diamond_image, (3*x//2, d*y//100), diamond_image)
-            panel_image.paste(diamond_image, (3*x//2, y + d*y//100), diamond_image)            
-            
-        elif pattern == "custom drop %":     
-            panel_image.paste(pil_img, (0, 0))
-            panel_image.paste(pil_img, (0, y))
-            panel_image.paste(pil_img, (x, (d-100)*y//100))
-            panel_image.paste(pil_img, (x, d*y//100))
-            panel_image.paste(pil_img, (x, y + d*y//100))   
+            panel_image.paste(diamond_image, (3*x//2, y + d*y//100), diamond_image)             
              
         image_out = pil2tensor(panel_image.convert('RGB'))
 
-        return (image_out, show_help, )   
-
+        return (image_out, show_help, ) 
+        
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_SelectISOSize:
 
@@ -745,6 +785,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Page Layout": CR_PageLayout,
     "CR Image Grid Panel": CR_ImageGridPanel,
     "CR Half Drop Panel": CR_HalfDropPanel,
+    "CR Diamond Panel": CR_DiamondPanel,
     "CR Image Border": CR_ImageBorder,
     "CR Feathered Border": CR_FeatheredBorder,
     "CR Color Panel": CR_ColorPanel,

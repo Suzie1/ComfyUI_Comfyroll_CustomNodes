@@ -2,7 +2,7 @@
 
 Co-authored by Suzie1 and RockOfFire
 
-Current version: 1.75
+Current version: 1.76
 
 # Wiki
 
@@ -31,9 +31,11 @@ __📦 Essential Nodes__
 * CR Image Output (changed 18/12/2023)
 * CR Latent Batch Size
 * CR Prompt Text
+* CR Combine Prompt
 * CR Seed
 * CR Conditioning Mixer
-* CR Select Model
+* CR Select Model (new 24/1/2024)
+* CR VAE Decode (new 24/1/2024)
 
 __🔳 Aspect Ratio__
 * CR Aspect Ratio
@@ -167,7 +169,8 @@ __🌁 Graphics - Layout__
 * CR Feathered Border (new 21/12/2023)
 * CR Color Panel
 * CR Simple Text Panel
-* CR Half Drop Panel
+* CR Half Drop Panel (new 23/1/2024)
+* CR Diamond Panel (new 24/1/2024)
 * CR Overlay Transparent Image
 * CR Select ISO Size (new 18/1/2023)
 

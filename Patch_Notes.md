@@ -1,5 +1,10 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.76 Jan 24, 2024
+- added CR VAE Decode
+- added CR Combine Prompt
+- added CR Diamond Pattern
+
 ## v1.75.1 Jan 24, 2024
 - fix for issue 112 CR Text Blacklist, added handling for blank lines and fixed issue with finding multiple keywords
 - PR108, fix for missing import in nodes_utils_text.py

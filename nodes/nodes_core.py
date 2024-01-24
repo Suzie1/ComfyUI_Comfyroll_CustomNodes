@@ -205,7 +205,10 @@ class CR_PromptText:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"prompt": ("STRING", {"default": "prompt", "multiline": True})}}
+        return {"required": {
+        "prompt": ("STRING", {"default": "prompt", "multiline": True})
+            }
+        }
 
     RETURN_TYPES = ("STRING", "STRING", )
     RETURN_NAMES = ("prompt", "show_help", )
@@ -213,9 +216,40 @@ class CR_PromptText:
     CATEGORY = icons.get("Comfyroll/Essential/Core")
 
     def get_value(self, prompt):
+    
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-prompt-text"
+        
         return (prompt, show_help, )
 
+#---------------------------------------------------------------------------------------------------------------------#
+class CR_CombinePrompt:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+                },
+                "optional": {
+                    "part1": ("STRING", {"default": "", "multiline": True}),
+                    "part2": ("STRING", {"default": "", "multiline": True}),
+                    "part3": ("STRING", {"default": "", "multiline": True}),
+                    "part4": ("STRING", {"default": "", "multiline": True}),               
+                    "separator": ("STRING", {"default": ",", "multiline": False}),
+                }
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", )
+    RETURN_NAMES = ("prompt", "show_help", )
+    FUNCTION = "get_value"
+    CATEGORY = icons.get("Comfyroll/Essential/Core")
+
+    def get_value(self, part1="", part2="", part3="", part4="", separator=""):
+    
+        show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-prompt-parts"
+        
+        prompt = part1 + separator + part2 + separator + part3 + separator + part4
+        
+        return (prompt, show_help, )
+        
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_ConditioningMixer:
 
@@ -350,12 +384,11 @@ class CR_VAEDecode:
     @classmethod
     def INPUT_TYPES(s):
     
-        padding_modes = ["zeros", "replicate", "circular"]
-    
         return {"required": {
                     "samples": ("LATENT", ),
                     "vae": ("VAE", ),
-                    "padding_mode": (padding_modes,),
+                    "tiled": ("BOOLEAN", {"default": False}),
+                    "circular": ("BOOLEAN", {"default": False}),                     
                     }
         }
     RETURN_TYPES = ("IMAGE", "STRING", )
@@ -363,14 +396,18 @@ class CR_VAEDecode:
     FUNCTION = "vae_decode"
     CATEGORY = icons.get("Comfyroll/Essential/Core")
 
-    def vae_decode(self, samples, vae, padding_mode):
+    def vae_decode(self, samples, vae, circular=False, tiled=False):
             
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Core-Nodes#cr-vae-decode"    
-    
-        for layer in [layer for layer in vae.first_stage_model.modules() if isinstance(layer, torch.nn.Conv2d)]:
-            layer.padding_mode = padding_mode       
-            
-        c = vae.decode(samples["samples"])
+
+        if circular == True:
+            for layer in [layer for layer in vae.first_stage_model.modules() if isinstance(layer, torch.nn.Conv2d)]:
+                layer.padding_mode = "circular"       
+        
+        if tiled == True:
+            c = vae.decode_tiled(samples["samples"], tile_x=512, tile_y=512, )
+        else:
+            c = vae.decode(samples["samples"])
         
         return (c, show_help, )
     
@@ -385,9 +422,10 @@ NODE_CLASS_MAPPINGS = {
     "CR Latent Batch Size": CR_LatentBatchSize,
     "CR Seed": CR_Seed,
     "CR Prompt Text": CR_PromptText,
+    "CR Combine Prompt": CR_CombinePrompt,
     "CR Conditioning Mixer": CR_ConditioningMixer,
     "CR Select Model": CR_SelectModel, 
-    #"CR VAE Decode": CR_VAEDecode,
+    "CR VAE Decode": CR_VAEDecode,
 }
 '''
 
