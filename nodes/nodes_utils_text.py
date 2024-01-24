@@ -3,6 +3,7 @@
 # for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
+import os
 import csv
 import io
 from ..categories import icons
