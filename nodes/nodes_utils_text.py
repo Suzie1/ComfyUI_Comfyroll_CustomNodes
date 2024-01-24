@@ -3,6 +3,7 @@
 # for ComfyUI                                                 https://github.com/comfyanonymous/ComfyUI                                               
 #---------------------------------------------------------------------------------------------------------------------#
 
+import os
 import csv
 import io
 from ..categories import icons
@@ -262,7 +263,7 @@ class CR_TextBlacklist:
         return {
             "required": {
                 "text": ("STRING", {"multiline": True, "default": "", "forceInput": True}),
-                "blacklist_words": ("STRING", {"multiline": True, "default": ""}),            
+                "blacklist_words": ("STRING", {"multiline": True, "default": ""}),
                 },
             "optional": {
                 "replacement_text": ("STRING", {"multiline": False, "default": ""}),    
@@ -277,9 +278,12 @@ class CR_TextBlacklist:
     def replace_text(self, text, blacklist_words, replacement_text=""):
     
         show_help =  "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-text-blacklist" 
+         
+        text_out = text 
         
-        for word in blacklist_words.split('\n'):  # Splitting based on line return
-            text_out = text.replace(word.strip(), replacement_text)
+        for line in blacklist_words.split('\n'):  # Splitting based on line return
+            if line.strip():
+                text_out = text_out.replace(line.strip(), replacement_text)       
     
         return (text_out, show_help)   
 

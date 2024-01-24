@@ -1,5 +1,9 @@
 # 🧩 Comfyroll Studio - Patch Notes
 
+## v1.75.1 Jan 24, 2024
+- fix for issue 112 CR Text Blacklist, added handling for blank lines and fixed issue with finding multiple keywords
+- PR108, fix for missing import in nodes_utils_text.py
+
 ## v1.75 Jan 23, 2024
 - added CR Half Drop Panel
 
@@ -7,7 +11,7 @@
 - fixed CR Thumbnail Preview show_help
 
 ## v1.74 Jan 18, 2024
-- changed  CR Simple Image Compare to automatically resize the second image if the size is different
+- updated CR Simple Image Compare to automatically resize the second image if the size is different
 - added CR Aspect Ratio For Print
 - added CR Seamless Checker
 - added CR Select ISO Size
