@@ -121,7 +121,7 @@ class CR_StringToBoolean:
 class CR_IntegerToString:
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"int_": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "forceInput": True}),
+        return {"required": {"int": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "forceInput": True}),
                 }
         }
 
@@ -130,9 +130,9 @@ class CR_IntegerToString:
     FUNCTION = 'convert'
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
-    def convert(self, int_):
+    def convert(self, int):
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-integer-to-string"
-        return (f'{int_}', show_help, )
+        return (f'{int}', show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------#
 # based on Mikey Nodes
@@ -140,7 +140,7 @@ class CR_FloatToString:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"float_": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1000000.0, "forceInput": True}),
+        return {"required": {"float": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1000000.0, "forceInput": True}),
                 }        
         }
 
@@ -149,9 +149,9 @@ class CR_FloatToString:
     FUNCTION = 'convert'
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
-    def convert(self, float_):
+    def convert(self, float):
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-string"
-        return (f'{float_}', show_help, )
+        return (f'{float}', show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------
 # based on Mikey Nodes
@@ -159,7 +159,7 @@ class CR_FloatToInteger:
 
     @classmethod
     def INPUT_TYPES(cls):
-        return {"required": {"_float": ("FLOAT", {"default": 0.0, "forceInput": True, "forceInput": True}),
+        return {"required": {"float": ("FLOAT", {"default": 0.0, "forceInput": True, "forceInput": True}),
                 }
         }
 
@@ -168,9 +168,9 @@ class CR_FloatToInteger:
     FUNCTION = "convert"
     CATEGORY = icons.get("Comfyroll/Utils/Conversion")
 
-    def convert(self, _float):
+    def convert(self, float):
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Conversion-Nodes#cr-float-to-integer"
-        return (int(_float), show_help, )
+        return (int(float), show_help, )
         
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
