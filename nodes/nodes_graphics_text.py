@@ -461,6 +461,8 @@ class CR_SelectFont:
        # Default debian-based Linux & MacOS font dirs
         elif platform.system() == "Linux":
             font_dir = "/usr/share/fonts/truetype"
+            if not os.path.exists(font_dir):
+                font_dir = "/usr/share/fonts/TTF"
         elif platform.system() == "Darwin":
             font_dir = "/System/Library/Fonts"    
  
