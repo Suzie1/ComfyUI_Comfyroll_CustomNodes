@@ -9,6 +9,8 @@
 import typing as t
 from dataclasses import dataclass
 from contextlib import suppress
+from typing import List
+from typing import Tuple
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -18,13 +20,13 @@ WIDEST_LETTER = "W"
 
 @dataclass
 class Annotation():
-    column_texts: list[str]
-    row_texts: list[str]
+    column_texts: List[str]
+    row_texts: List[str]
     font: ImageFont.FreeTypeFont
 
 
 def create_images_grid_by_columns(
-    images: list[Image.Image],
+    images: List[Image.Image],
     gap: int,
     max_columns: int,
     annotation: t.Optional[Annotation] = None,
@@ -34,7 +36,7 @@ def create_images_grid_by_columns(
 
 
 def create_images_grid_by_rows(
-    images: list[Image.Image],
+    images: List[Image.Image],
     gap: int,
     max_rows: int,
     annotation: t.Optional[Annotation] = None,
@@ -47,11 +49,11 @@ def create_images_grid_by_rows(
 class _GridInfo():
     image: Image.Image
     gap: int
-    one_image_size: tuple[int, int]
+    one_image_size: Tuple[int, int]
 
 
 def _create_images_grid(
-    images: list[Image.Image],
+    images: List[Image.Image],
     gap: int,
     max_columns: int,
     max_rows: int,
@@ -82,8 +84,8 @@ def _create_images_grid(
 def _arrange_images_on_grid(
     grid_image: Image.Image,
     /,
-    images: list[Image.Image],
-    size: tuple[int, int],
+    images: List[Image.Image],
+    size: Tuple[int, int],
     max_columns: int,
     gap: int,
 ):
@@ -96,8 +98,8 @@ def _arrange_images_on_grid(
 
 def _create_grid_annotation(
     grid_info: _GridInfo,
-    column_texts: list[str],
-    row_texts: list[str],
+    column_texts: List[str],
+    row_texts: List[str],
     font: ImageFont.FreeTypeFont,
 ) -> Image.Image:
     if not column_texts and not row_texts:
@@ -151,7 +153,7 @@ def _create_grid_annotation(
 
 def _draw_column_text(
     draw: ImageDraw.ImageDraw,
-    texts: list[str],
+    texts: List[str],
     grid_info: _GridInfo,
     left_padding: int,
     top_padding: int,
@@ -169,7 +171,7 @@ def _draw_column_text(
 
 def _draw_row_text(
     draw: ImageDraw.ImageDraw,
-    texts: list[str],
+    texts: List[str],
     grid_info: _GridInfo,
     left_padding: int,
     top_padding: int,
@@ -186,11 +188,11 @@ def _draw_row_text(
 
 
 def _draw_text_by_xy(
-    xy: tuple[int, int, int, int],
+    xy: Tuple[int, int, int, int],
     index: int,
     \
     draw: ImageDraw.ImageDraw,
-    texts: list[str],
+    texts: List[str],
 ) -> int:
     with suppress(IndexError):
         _draw_center_text(draw, xy, texts[index])
@@ -199,7 +201,7 @@ def _draw_text_by_xy(
 
 def _draw_center_text(
     draw: ImageDraw.ImageDraw,
-    xy: tuple[int, int, int, int],
+    xy: Tuple[int, int, int, int],
     text: str,
     fill: t.Any = "black",
 ) -> None:

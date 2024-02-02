@@ -15,6 +15,7 @@ import typing as t
 from dataclasses import dataclass
 from .functions_xygrid import create_images_grid_by_columns, Annotation
 from ..categories import icons
+from typing import Dict
     
 def tensor_to_pillow(image: t.Any) -> Image.Image:
     return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
@@ -204,7 +205,7 @@ class CR_XYIndex:
 class CR_XYFromFolder:
 
     @classmethod
-    def INPUT_TYPES(cls) -> dict[str, t.Any]:
+    def INPUT_TYPES(cls) -> Dict[str, t.Any]:
     
         input_dir = folder_paths.output_directory
         image_folder = [name for name in os.listdir(input_dir) if os.path.isdir(os.path.join(input_dir,name))] 
