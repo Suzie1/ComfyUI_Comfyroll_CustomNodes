@@ -67,6 +67,7 @@ class CR_TextList:
         return {"required": {"multiline_text": ("STRING", {"multiline": True, "default": "text"}),
                              "start_index": ("INT", {"default": 0, "min": 0, "max": 9999}),
                              "max_rows": ("INT", {"default": 1000, "min": 1, "max": 9999}),
+                             "loops": ("INT", {"default": 1, "min": 1, "max": 999}),
                             }
         }
 
