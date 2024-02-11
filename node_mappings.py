@@ -76,6 +76,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Repeater": CR_Repeater,     
     "CR XY Product": CR_XYProduct,  
     "CR Text List To String": CR_TextListToString,   
+    "CR List Product": CR_ListProduct,
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": CR_AspectRatioSD15,
     "CR SDXL Aspect Ratio": CR_SDXLAspectRatio,
@@ -323,6 +324,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "CR Repeater": "🛠️ CR Repeater",    
     "CR XY Product": "🛠️ CR XY Product",      
     "CR Text List To String": "🛠️ CR Text List To String",   
+    "CR List Product": "🛠️ CR List Product",
     ### Aspect Ratio Nodes
     "CR SD1.5 Aspect Ratio": "🔳 CR SD1.5 Aspect Ratio",
     "CR SDXL Aspect Ratio": "🔳 CR SDXL Aspect Ratio",    
