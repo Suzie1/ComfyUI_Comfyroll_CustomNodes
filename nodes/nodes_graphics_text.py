@@ -5,6 +5,7 @@
 
 import numpy as np
 import torch
+import glob
 import os
 import platform
 from PIL import Image, ImageDraw, ImageOps, ImageFont
@@ -460,12 +461,12 @@ class CR_SelectFont:
             font_dir = os.path.join(system_root, "Fonts") if system_root else None
        # Default debian-based Linux & MacOS font dirs
         elif platform.system() == "Linux":
-            font_dir = "/usr/share/fonts/truetype"
+            font_dir = "/usr/share/fonts"
         elif platform.system() == "Darwin":
             font_dir = "/System/Library/Fonts"    
  
-        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
-                        
+        file_list = glob.glob(os.path.join(font_dir, "**", "*.ttf"))
+
         return {"required": {
                 "font_name": (file_list,),
                 }       

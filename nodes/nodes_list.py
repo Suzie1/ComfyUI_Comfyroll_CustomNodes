@@ -67,6 +67,7 @@ class CR_TextList:
         return {"required": {"multiline_text": ("STRING", {"multiline": True, "default": "text"}),
                              "start_index": ("INT", {"default": 0, "min": 0, "max": 9999}),
                              "max_rows": ("INT", {"default": 1000, "min": 1, "max": 9999}),
+                             "loops": ("INT", {"default": 1, "min": 1, "max": 999}),
                             }
         }
 
@@ -832,6 +833,27 @@ class CR_ValueCycler:
 
         return (float_list_out, int_list_out, show_help, )    
 
+class CR_ListProduct:
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+            "x": (any_type, ),
+            "y": (any_type, ),
+            }
+        }
+
+    INPUT_IS_LIST = (True, True,)
+    RETURN_TYPES = (any_type, any_type, "INT")
+    RETURN_NAMES = ("out x", "out y", "Span")
+    OUTPUT_IS_LIST = (True, True, False)
+    FUNCTION = "cycle"
+    CATEGORY = icons.get("Comfyroll/List")
+
+    def cycle(self, x, y):
+        y_values, x_values = zip(*product(y, x))
+        return list(x_values), list(y_values), len(x)
+
 #---------------------------------------------------------------------------------------------------------------------#
 # MAPPINGS
 #---------------------------------------------------------------------------------------------------------------------#
@@ -856,6 +878,7 @@ NODE_CLASS_MAPPINGS = {
     "CR Batch Images From List": CR_MakeBatchFromImageList,
     "CR Intertwine Lists" : CR_IntertwineLists,
     "CR Repeater": CR_Repeater,    
+    "CR List Product": CR_ListProduct,
     "CR XY Product": CR_XYProduct,
     "CR Text List To String": CR_TextListToString,
 }
