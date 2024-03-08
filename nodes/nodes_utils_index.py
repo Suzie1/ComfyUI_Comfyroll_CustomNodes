@@ -66,7 +66,7 @@ class CR_IncrementIndex:
     def increment(self, index, interval):
         index+=interval
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Index-Nodes#cr-index-increment"
-        return (index, show_help, )
+        return (index, interval, show_help, )
 
 #---------------------------------------------------------------------------------------------------------------------#   
 class CR_MultiplyIndex:
