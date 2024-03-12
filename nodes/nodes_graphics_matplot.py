@@ -150,6 +150,7 @@ class CR_HalftoneGrid:
             
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
 
         image_out = pil2tensor(img.convert("RGB"))
@@ -253,6 +254,7 @@ class CR_ColorBars:
 
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
         
         image_out = pil2tensor(img.convert("RGB"))
@@ -323,6 +325,7 @@ class CR_StyleBars:
 
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
         
         image_out = pil2tensor(img.convert("RGB"))        
@@ -420,6 +423,7 @@ class CR_ColorGradient:
 
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
         
         image_out = pil2tensor(img.convert("RGB"))         
@@ -494,6 +498,7 @@ class CR_RadialGradient:
 
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
 
         image_out = pil2tensor(img.convert("RGB"))
@@ -574,6 +579,7 @@ class CR_CheckerPattern:
 
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
 
         image_out = pil2tensor(img.convert("RGB"))         
@@ -661,6 +667,7 @@ class CR_Polygons:
                  
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
 
         image_out = pil2tensor(img.convert("RGB"))         
@@ -743,6 +750,7 @@ class CR_StarburstLines:
    
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
 
         image_out = pil2tensor(img.convert("RGB"))         
@@ -838,6 +846,7 @@ class CR_StarburstColors:
 
         img_buf = io.BytesIO()
         plt.savefig(img_buf, format='png')
+        plt.close()
         img = Image.open(img_buf)
 
         image_out = pil2tensor(img.convert("RGB"))         
