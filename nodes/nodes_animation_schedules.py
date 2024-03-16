@@ -215,7 +215,7 @@ class CR_OutputScheduleToFile:
     CATEGORY = icons.get("Comfyroll/Animation/Schedule") 
     
     def csvoutput(self, output_file_path, file_name, schedule, file_extension):
-        filepath = output_file_path + "\\" + file_name + "." + file_extension
+        filepath = os.path.join(output_file_path, file_name + "." + file_extension)
         
         index = 2
 
@@ -225,7 +225,7 @@ class CR_OutputScheduleToFile:
 
         while os.path.exists(filepath):
             if os.path.exists(filepath):
-                filepath = output_file_path + "\\" + file_name + str(index) + "." + file_extension
+                filepath = os.path.join(output_file_path, file_name + str(index) + "." + file_extension)
 
                 index = index + 1
             else:
@@ -267,7 +267,7 @@ class CR_LoadScheduleFromFile:
     
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Schedule-Nodes#cr-load-schedule-from-file"
         
-        filepath = input_file_path + "\\" + file_name + "." + file_extension
+        filepath = os.path.join(input_file_path, file_name + "." + file_extension)
         print(f"CR Load Schedule From File: Loading {filepath}")
         
         lists = []
