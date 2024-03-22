@@ -464,8 +464,9 @@ class CR_SelectFont:
         elif platform.system() == "Darwin":
             font_dir = "/System/Library/Fonts"    
  
-        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
-                        
+        # file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and (f.lower().endswith(".ttf") or f.lower().endswith(".otf"))]
+        
         return {"required": {
                 "font_name": (file_list,),
                 }       
