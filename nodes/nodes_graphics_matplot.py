@@ -12,6 +12,10 @@ import folder_paths
 from PIL import Image
 from ..categories import icons
 
+# Set the matplotlib backend to Agg (non-GUI) to avoid NSWindow thread issues on macOS
+import matplotlib
+matplotlib.use('Agg')
+
 try:
     import matplotlib.pyplot as plt
 except ImportError:

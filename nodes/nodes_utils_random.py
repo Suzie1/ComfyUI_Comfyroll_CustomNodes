@@ -8,6 +8,10 @@ import string
 from .functions_graphics import random_hex_color, random_rgb
 from ..categories import icons
 
+# Set the matplotlib backend to Agg (non-GUI) to avoid NSWindow thread issues on macOS
+import matplotlib
+matplotlib.use('Agg')
+
 try:
     import matplotlib.pyplot as plt
     import matplotlib.colors as mcolors
