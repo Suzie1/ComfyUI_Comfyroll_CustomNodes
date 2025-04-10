@@ -54,7 +54,7 @@ def upscale_with_model(upscale_model, image):
             if tile < 128:
                 raise e
 
-    upscale_model.cpu()
+    upscale_model.to(device)
     s = torch.clamp(s.movedim(-3,-1), min=0, max=1.0)
     return s        
 
