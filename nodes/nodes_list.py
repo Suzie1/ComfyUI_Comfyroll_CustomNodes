@@ -554,7 +554,7 @@ class CR_LoadTextList:
            
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-load-value-list"      
 
-        filepath = input_file_path + "\\" + file_name + "." + file_extension
+        filepath = input_file_path + os.path.sep + file_name + os.path.extsep + file_extension
         print(f"CR Load Values: Loading {filepath}")
 
         list = []
