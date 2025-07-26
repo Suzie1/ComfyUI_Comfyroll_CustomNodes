@@ -460,6 +460,11 @@ class CR_SelectFont:
             font_dir = os.path.join(system_root, "Fonts") if system_root else None
        # Default debian-based Linux & MacOS font dirs
         elif platform.system() == "Linux":
+            # Arch-based CachyOS uses 'TTF' instead of 'truetype' for TrueType fonts
+            if "cachyos" in platform.release().lower():
+                font_dir = "usr/share/fonts/TTF"
+            else:
+                font_dir = "usr/share/fonts/truetype"
             font_dir = "/usr/share/fonts/truetype"
         elif platform.system() == "Darwin":
             font_dir = "/System/Library/Fonts"    
