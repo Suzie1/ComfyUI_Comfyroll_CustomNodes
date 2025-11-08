@@ -380,7 +380,7 @@ class CR_FontFileList:
                              "start_index": ("INT", {"default": 0, "min": 0, "max": 9999}),
                              "max_rows": ("INT", {"default": 1000, "min": 1, "max": 9999}),                            
                             },
-                "optional": {"folder_path": ("STRING", {"default": "C:\Windows\Fonts", "multiline": False}),
+                "optional": {"folder_path": ("STRING", {"default": "C:\\Windows\\Fonts", "multiline": False}),
                 }
         }
 
@@ -390,7 +390,7 @@ class CR_FontFileList:
     FUNCTION = "make_list"
     CATEGORY = icons.get("Comfyroll/List/IO")
 
-    def make_list(self, source_folder, start_index, max_rows, folder_path="C:\Windows\Fonts"):
+    def make_list(self, source_folder, start_index, max_rows, folder_path="C:\\Windows\\Fonts"):
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/List-Nodes#cr-font-file-list"
 
