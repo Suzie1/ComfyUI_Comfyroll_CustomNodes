@@ -92,28 +92,24 @@ class CR_OverlayText:
         # Get RGB values for the text color  
         text_color = get_color_values(font_color, font_color_hex, color_mapping)
       
-        # Convert tensor images
-        image_3d = image[0, :, :, :]
+        images_out = []
+        for image_3d in image:
+            back_image = tensor2pil(image_3d)
+            text_image = Image.new('RGB', back_image.size, text_color)
+            text_mask = Image.new('L', back_image.size)
 
-        # Create PIL images for the text and background layers and text mask
-        back_image = tensor2pil(image_3d)
-        text_image = Image.new('RGB', back_image.size, text_color)
-        text_mask = Image.new('L', back_image.size)
-        
-        # Draw the text on the text mask
-        rotated_text_mask = draw_masked_text(text_mask, text, font_name, font_size,
-                                             margins, line_spacing, 
-                                             position_x, position_y,
-                                             align, justify,
-                                             rotation_angle, rotation_options)
+            rotated_text_mask = draw_masked_text(text_mask, text, font_name, font_size,
+                                                 margins, line_spacing,
+                                                 position_x, position_y,
+                                                 align, justify,
+                                                 rotation_angle, rotation_options)
 
-        # Composite the text image onto the background image using the rotated text mask       
-        image_out = Image.composite(text_image, back_image, rotated_text_mask)       
+            image_out = Image.composite(text_image, back_image, rotated_text_mask)
+            images_out.append(pil2tensor(image_out))
 
         show_help = "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/wiki/Text-Nodes#cr-overlay-text"
         
-        # Convert the PIL image back to a torch tensor
-        return (pil2tensor(image_out), show_help,)
+        return (torch.cat(images_out, dim=0), show_help,)
 
 #---------------------------------------------------------------------------------------------------------------------#
 class CR_DrawText:
