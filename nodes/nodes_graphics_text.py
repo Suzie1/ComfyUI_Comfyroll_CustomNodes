@@ -461,10 +461,17 @@ class CR_SelectFont:
        # Default debian-based Linux & MacOS font dirs
         elif platform.system() == "Linux":
             font_dir = "/usr/share/fonts/truetype"
+            if not os.path.isdir(font_dir):
+                font_dir = "/usr/share/fonts"
         elif platform.system() == "Darwin":
-            font_dir = "/System/Library/Fonts"    
- 
-        file_list = [f for f in os.listdir(font_dir) if os.path.isfile(os.path.join(font_dir, f)) and f.lower().endswith(".ttf")]
+            font_dir = "/System/Library/Fonts"
+
+        file_list = []
+        if font_dir and os.path.isdir(font_dir):
+            for _root, _dirs, _files in os.walk(font_dir):
+                for _f in _files:
+                    if _f.lower().endswith((".ttf", ".ttc", ".otf")):
+                        file_list.append(os.path.join(_root, _f))
                         
         return {"required": {
                 "font_name": (file_list,),
