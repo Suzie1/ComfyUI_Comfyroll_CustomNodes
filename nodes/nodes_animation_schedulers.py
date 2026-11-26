@@ -98,7 +98,7 @@ class CR_TextScheduler:
         if params == "":
             if current_frame == 0:
                 print(f"[Warning] CR Text Scheduler. No frame 0 found in schedule. Starting with default value at frame 0")
-            text_out = default_value,
+            text_out = default_text
         else:
             # Try the params
             try:
@@ -150,7 +150,7 @@ class CR_PromptScheduler:
                 return ()
             else:
                 lines = keyframe_list.split('\n')
-                for line in lines:
+                for i, line in enumerate(lines):
                     # If deforum, convert to CR format
                     if schedule_format == "Deforum":
                         line = line.replace(":", ",")
@@ -226,7 +226,7 @@ class CR_SimplePromptScheduler:
             print(f"[Error] CR Simple Prompt Scheduler. No lines in keyframe list") 
             return ()   
         lines = keyframe_list.split('\n')
-        for line in lines:
+        for i, line in enumerate(lines):
             # If deforum, convert to CR format
             if keyframe_format == "Deforum":
                 line = line.replace(":", ",")
@@ -458,7 +458,7 @@ class CR_LoadScheduledLoRAs:
             if strength_model == 0 and strength_clip == 0:
                 return (model, clip, show_help, )                   
             model, clip = LoraLoader().load_lora(model, clip, default_lora, strength_model, strength_clip)  
-            print(f"[Info] CR Load Scheduled LoRAs. Loading default LoRA {lora_name}.")    
+            print(f"[Info] CR Load Scheduled LoRAs. Loading default LoRA {default_lora}.")    
             return (model, clip, show_help, )           
         
         # Get params
@@ -478,7 +478,7 @@ class CR_LoadScheduledLoRAs:
                 s_strength_model = float(parts[1].strip())
                 s_strength_clip = float(parts[1].strip())    
             else:
-                print(f"[Warning] CR Simple Value Scheduler. Skipped invalid line: {line}")
+                print(f"[Warning] CR Simple Value Scheduler. Skipped invalid line: {params}")
                 return()
 
         # Iterate through the LoRA list to get the LoRA name
